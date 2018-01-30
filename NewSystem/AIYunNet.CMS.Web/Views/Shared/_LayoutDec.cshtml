@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
-
+@{ 
+    AIYunNet.CMS.BLL.Service.All_NavService Ser = new AIYunNet.CMS.BLL.Service.All_NavService();
+    List<AIYunNet.CMS.Domain.Model.Nav> list = Ser.GetAll_NavList();
+    int i = 0;
+}
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -39,55 +43,49 @@
             <div class="top_menu">
                 <!--整站主导航-->
                 <ul>
-                    <li class="cur" id="homeindex"><a href="/index/homeindex" class="on onindex">首页</a></li>
+                    @foreach (var item in list)
+                    {
+                        if (i == list.Count - 1)
+                        {
+                            <li id="nav_@item.firstNav.id"  class="last">
+                                <a href="@item.firstNav.url">@item.firstNav.navtitle</a>
+                                <div class="inner_menu">
+                                    @foreach (var ite in item.list)
+                                    {
+                                        <a href="@ite.url" class="on onindex">@ite.navtitle</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li id="nav_@item.firstNav.id">
+                                <a href="@item.firstNav.url">@item.firstNav.navtitle</a>
+                                <div class="inner_menu">
+                                    @foreach (var ite in item.list)
+                                    {
+                                        <a href="@ite.url" class="on onindex">@ite.navtitle</a>
+                                    }
+                                </div>
+                            </li>
+                        }
 
-                    <li class="cur" id="">
-                        <a href="/case/DecCaseList?DecType=1">设计案例</a>
-                        <div class="inner_menu">
-                            <a href="/case/DecCaseList?DecType=1"  class="on onindex">精选家装</a>
-                            <a href="/case/DecCaseList?DecType=2">精选工装</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/Imglist/DecImagelist">设计图库</a>
-                        <div class="inner_menu">
-                            <a href="/Imglist/DecImagelist?DecType=1">家装图库</a>
-                            <a href="/Imglist/DecImagelist?DecType=2">工装图库</a>
-                        </div>
-                    </li>
-                    <li><a href="/DecorationCompany/DecCompanyList">装修公司</a></li>
-                    <li><a href="/workers/DecDesignerList">找设计师</a></li>
-                    <li>
-                        <a href="/workers/DecWorkLeaderList">找装修</a>
-                        <div class="inner_menu">
-                            <a href="/workers/DecWorkLeaderList">找工长</a>
-                            <a href="/Workers/DecWorkerList">找工人</a>
-                        </div>
-                    </li>
-
-                    <li style="display:none;">
-                        <a href="http://www.shejiben.com/mingjiahui/">名家汇</a>
-                        <div class="inner_menu">
-                            <a href="http://www.shejiben.com/images/jiexi/">案例解析</a>
-                            <a href="http://www.shejiben.com/zt/">人物专访</a>
-                        </div>
-                    </li>
-                    <li style="display:none;"><a href="http://ask.shejiben.com/">有问必答</a></li>
-                    <li class="last">
-                        <a href="/Download/DownLoadList">下载专区</a>
-                        @*<div class="inner_menu">
-                            <a href="http://mx.shejiben.com/?from=nav">3DMAX模型下载</a>
-                            <a href="http://www.shejiben.com/news/">设计资讯</a>
-                            <a href="http://www.shejiben.com/renmai/?from=nav">人脉广场</a>
-                            <a href="http://www.shejiben.com/space/">空间谈</a>
-                        </div>*@
-                    </li>
+                        i++;
+                    }
                 </ul>
                 <script>
                     $(function () {
+                         var navid= $.session.get('top_menu');
                         $(".top_menu > ul > li > a").click(function () {
-                            $.session.set('top_menu', 'value')
+                            var indexid = $(this).parent("li").index();
+                            $.session.set('top_menu', indexid);
                         })
+                        $(".top_menu > ul > li").eq(navid).addClass("cur");
+                        $(".onindex").click(function () {
+                            var indexid = $(this).parent(".inner_menu").parent("li").index();
+                            $.session.set('top_menu', indexid);
+                        })
+
                     })
                 </script>
                 <!--整站主导航 End-->

@@ -13,20 +13,28 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class All_NavService
     {
-        public List<All_Nav> GetAll_NavList(int lookupid, int firstid)
+        public List<Nav> GetAll_NavList()
         {
-            List<DownLoad> list = new List<DownLoad>();
+            List<Nav> list = new List<Nav>();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                if (firstid != 0)
-                {
-                    list = context.DownLoad.Where(c => c.LookupCode == lookupid && c.firstID == firstid && c.IsDelete == false).ToList();
-                }
-                else
-                {
-                    list = context.DownLoad.Where(c => c.LookupCode == lookupid && c.IsDelete == false).ToList();
-                }
 
+                 List<All_Nav> Navlist = context.All_Nav.Where(c => c.isdelete == false && c.fatherid == 0).OrderBy(c=>c.orderid).ToList();
+                foreach (var item in Navlist)
+                {
+                    Nav nav = new Nav();
+                    nav.firstNav = item;
+                    List<All_Nav> Nlist = context.All_Nav.Where(c => c.isdelete == false && c.fatherid == item.id).OrderBy(c => c.orderid).ToList();
+                    if (Nlist.Count > 0)
+                    {
+                        nav.list = Nlist;
+                    }
+                    else
+                    {
+                        nav.list = new List<All_Nav>();
+                    }
+                    list.Add(nav);
+                }
                 return list;
             }
         }

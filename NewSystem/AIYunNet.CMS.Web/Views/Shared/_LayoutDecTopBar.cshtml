@@ -7,6 +7,9 @@
 
 
     List<t_City> list = areaService.GetHotCityList();
+
+    AIYunNet.CMS.BLL.Service.All_NavService Ser = new AIYunNet.CMS.BLL.Service.All_NavService();
+    List<AIYunNet.CMS.Domain.Model.Nav> listNav = Ser.GetAll_NavList();
 }
 <style>
         .nav-first-left{
@@ -546,28 +549,23 @@
             <div class="navigation">
                 <div class="title">网站导航<span class="ico_arrow_bottom_grey"></span></div>
                 <div class="navigation_content">
-                    <ul>
-                        <li class="tit">设计案例</li>
-                        <li><a href="/case/DecCaseList?DecType=1">精选家装</a></li>
-                        <li><a href="/case/DecCaseList?DecType=2">精选工装</a></li>
-                    </ul>
-                    <ul>
-                        <li class="tit">装修图库</li>
-                        <li><a href="/Imglist/DecImagelist?DecType=1">家装图库</a></li>
-                        <li><a href="/Imglist/DecImagelist?DecType=2">工装图库</a></li>
-                    </ul>
-                    <ul>
-                        <li class="tit">装修公司</li>
-                        <li><a href="/DecorationCompany/DecCompanyList">全国装修公司</a></li>
-                    </ul>
-                    <ul>
-                        <li class="tit">找设计师</li>
-                        <li><a href="/workers/DecDesignerList">全国设计师</a></li>
-                    </ul>
-                    <ul>
-                        <li class="tit">首页</li>
-                        <li><a href="/index/homeindex">网站首页</a></li>
-                    </ul>
+                    @foreach (var item in listNav)
+                    {
+                        <ul>
+                            <li class="tit">@item.firstNav.navtitle</li>
+                            @if (item.list.Count > 0)
+                            {
+                                foreach (var ite in item.list)
+                                {
+                                    <li><a href="@ite.url">@ite.navtitle</a></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><a href="@item.firstNav.url">@item.firstNav.navtitle</a></li>
+                            }
+                        </ul>
+                    }
                     @*<ul>
                             <li class="tit">设计相关</li>
                             <li><a href="http://mall.shejiben.com/">逛商品</a></li>

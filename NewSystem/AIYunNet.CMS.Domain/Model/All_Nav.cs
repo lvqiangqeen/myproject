@@ -43,4 +43,10 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("isdelete")]
         public bool isdelete { get; set; }
     }
+
+    public class Nav
+    {
+        public All_Nav firstNav { get; set; }
+        public List<All_Nav> list { get; set; }
+    }
 }
