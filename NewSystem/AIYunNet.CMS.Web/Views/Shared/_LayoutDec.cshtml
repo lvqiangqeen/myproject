@@ -39,12 +39,12 @@
             <div class="top_menu">
                 <!--整站主导航-->
                 <ul>
-                    <li class="cur"><a href="/index/homeindex" class="on onindex">首页</a></li>
+                    <li class="cur" id="homeindex"><a href="/index/homeindex" class="on onindex">首页</a></li>
 
-                    <li>
+                    <li class="cur" id="">
                         <a href="/case/DecCaseList?DecType=1">设计案例</a>
                         <div class="inner_menu">
-                            <a href="/case/DecCaseList?DecType=1">精选家装</a>
+                            <a href="/case/DecCaseList?DecType=1"  class="on onindex">精选家装</a>
                             <a href="/case/DecCaseList?DecType=2">精选工装</a>
                         </div>
                     </li>
@@ -64,7 +64,7 @@
                             <a href="/Workers/DecWorkerList">找工人</a>
                         </div>
                     </li>
-                    
+
                     <li style="display:none;">
                         <a href="http://www.shejiben.com/mingjiahui/">名家汇</a>
                         <div class="inner_menu">
@@ -74,7 +74,7 @@
                     </li>
                     <li style="display:none;"><a href="http://ask.shejiben.com/">有问必答</a></li>
                     <li class="last">
-                        <a href="/Download/DownLoadList">模型下载专区</a>
+                        <a href="/Download/DownLoadList">下载专区</a>
                         @*<div class="inner_menu">
                             <a href="http://mx.shejiben.com/?from=nav">3DMAX模型下载</a>
                             <a href="http://www.shejiben.com/news/">设计资讯</a>
@@ -83,6 +83,13 @@
                         </div>*@
                     </li>
                 </ul>
+                <script>
+                    $(function () {
+                        $(".top_menu > ul > li > a").click(function () {
+                            $.session.set('top_menu', 'value')
+                        })
+                    })
+                </script>
                 <!--整站主导航 End-->
                 <!--首页面包屑导航-->
                 @RenderSection("IndexNav", required: false)

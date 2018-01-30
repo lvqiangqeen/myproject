@@ -48,6 +48,8 @@ namespace AIYunNet.CMS.Domain
         public virtual DbSet<WebBuidingTimeStages> WebBuidingTimeStages { get; set; }
         public virtual DbSet<DownLoad> DownLoad { get; set; }
         public virtual DbSet<DownLoadType> DownLoadType { get; set; }
+        public virtual DbSet<All_Nav> All_Nav { get; set; }
+        
 
     }
 }

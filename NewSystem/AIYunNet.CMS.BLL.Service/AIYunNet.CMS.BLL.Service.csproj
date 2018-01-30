@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="All_NavService.cs" />
     <Compile Include="DownLoadService.cs" />
     <Compile Include="OtherService.cs" />
     <Compile Include="PageList.cs" />
