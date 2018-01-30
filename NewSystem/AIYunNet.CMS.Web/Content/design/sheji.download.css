@@ -730,9 +730,9 @@ a:hover{ text-decoration: none;}
 .reveal_detail_l .detail_info .fenxiang .jiathis{width:65px;height:36px;float:left;background:url(http://img.shejiben.com/front_end/bg/fenxiang.gif) no-repeat -252px 0;text-align:center;font-weight:700;}
 .reveal_detail_r{width:266px;float:right;} 
 .reveal_detail_r .same_source{width:264px;border:1px solid #e4e4e4; margin-top:10px;background:#fff;}
-.reveal_detail_r .same_source dd{width:88px;height:90px;float:left;margin:10px 2px 10px 13px;display:inline;}
-.reveal_detail_r .same_source .img{padding:2px;width:80px;height:60px;border:1px solid #e4e4e4;}
-.reveal_detail_r .same_source img{width:80px;height:60px;}
+.reveal_detail_r .same_source dd{width:88px;height:107px;float:left;margin:10px 2px 10px 13px;display:inline;}
+.reveal_detail_r .same_source .img{padding:2px;width:80px;height:80px;border:1px solid #e4e4e4;}
+.reveal_detail_r .same_source img{width:80px;height:80px;}
 .reveal_detail_r .same_source .txt{width:84px;margin-top:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center; }
 .reveal_detail_r .same_source .txt a{color:#333;} 
 .reveal_detail_r .same_source .txt a:hover{color:#dd4f50;text-decoration:underline;}
