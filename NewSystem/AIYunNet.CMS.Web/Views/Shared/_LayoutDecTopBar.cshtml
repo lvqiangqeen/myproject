@@ -1,0 +1,602 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    Layout = null;
+    t_AreaService areaService = new t_AreaService();
+
+
+    List<t_City> list = areaService.GetHotCityList();
+}
+<style>
+        .nav-first-left{
+            float: left;
+        height: 14px;
+        margin: 8px 0 0;
+        border-right: 1px #ddd solid;
+        }.nav-change, .nav-first-right a:hover {
+        color: #0cb46a;
+    }
+        .icon-coordinate {
+        left: 5px;
+        top: 9px;
+        width: 11px;
+        height: 15px;
+        background-position: -192px -180px;
+    }
+        .iconcity {
+        position: absolute;
+        background-image: url(/Content/design/img/common_bg_s.png);
+        background-image: -webkit-image-set(url(/Content/design/img/common_bg_s.png) 1x,url(/Content/design/img/common_bg_l.png) 2x);
+        font-size: 0;
+    }
+        .nav-first-left .city-switchover {
+        top: 0;
+        left: 0;
+        padding: 0 11px 0 24px;
+        border: 1px solid #f5f5f5;
+        border-top: none;
+        border-bottom: none;
+        overflow: hidden;
+    }
+        .city-option-box {
+        position: absolute;
+        top: 27px;
+        z-index: 7047;
+        width: 406px;
+        height: auto;
+        border: 1px solid #d8d8d8;
+    }
+        .city-option-box {
+        left: 0;
+        background-color: #fff;
+    }
+        .city-option-box .city-option-list {
+        width: 100%;
+        height: 38px;
+        border-bottom: 1px #d8d8d8 solid;
+        background-color: #f4f4f4;
+    }
+        .city-option-box .city-option-list span.on {
+            height: 37px;
+            color: #00af63;
+        border-bottom: 2px #00af63 solid;
+    }
+        .city-option-box .city-option-list span {
+        float: left;
+            width: 60px;
+            height: 38px;
+            margin-right: 2px;
+            line-height: 38px;
+            color: #333;
+        text-align: center;
+            cursor: pointer;
+        }
+        .city-option-box .city-option-hot {
+        margin-left: 26px;
+    }
+    .city-option-ul-box {
+        position: relative;
+    }.city-option-content div ul li.row-end {
+            width: 60px;
+        }
+    .city-option-content div ul {
+            margin:0px;
+        padding: 0;
+        width: 100%;
+    }.city-option-content div ul li {
+        float: left;
+            width: 62px;
+            overflow: hidden;
+            color: #666;
+        text-align: left;
+            height: 28px;
+            line-height: 28px;
+        }.city-option-content div ul li a {
+        font-size: 12px;
+        color: #666;
+    }.city-option-ul-box .city-option-logogram {
+        position: absolute;
+        top: 8px;
+        left: -26px;
+        font-size: 12px;
+        color: #ff4900;
+    }.city-option-content .city-content-warp {
+        padding: 10px 0 6px 36px;
+
+    }.header a, .header-nav a{
+            text-decoration: none;
+            outline: 0;
+            font-family: "Source Han Sans SC","HanHei SC","PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+            cursor: pointer;
+        }.city-option-content div ul {
+        width: 100%;
+    }
+</style>
+@if (SessionHelper.GetSession("mkjcitycode") != null)
+{
+    <input type="hidden" value="@SessionHelper.GetSession("mkjcitycode").ToString()" id="mkjcitycode" />
+    <input type="hidden" value="@SessionHelper.GetSession("mkjcityname").ToString()" id="mkjcityname" />
+}
+<div class="sjb_new_top_bar" id="sjbNewTopBar">
+    <div class="new_top_bar">
+        <div class="new_top_bar_left">
+            <div class="nav-first-left" style="display: block;">
+                <div class="city-switchover">
+                    <i class="iconcity icon-coordinate"></i>
+                    <span class="nav-city"></span>
+                    <a class="nav-change" href="javascript:void(0);" rel="nofollow">
+                        [切换]
+                    </a>
+                </div>
+                <div class="city-option-box" style="display:none;">
+                    <div class="city-option-list">
+                        <span class="city-option-hot on">热门城市</span>
+                        <!--<span class="city-option-a-e">ABCD</span>
+                        <span class="city-option-f-j">FGHJ</span>
+                        <span class="city-option-k-p">KLMN</span>
+                        <span class="city-option-q-w">QSTW</span>
+                        <span class="city-option-x-z">XYZ</span>-->
+                    </div>
+                    <div class="city-option-content">
+                        <div class="city-hot-content city-content-warp" style="display: block;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    @{ int i = 0;}
+                                    @foreach (t_City item in list)
+                                    {
+                                        if ((i + 1) % 6 == 0)
+                                        {
+                                            <li class="row-end"><a href="javascript:void(0);" city_code="@item.cityID" title="@item.city">@item.city</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0);" city_code="@item.cityID" title="@item.city">@item.city</a></li>
+                                        }
+                                        i++;
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!--                            <div class="city-a-e-content city-content-warp" style="display: none;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="as" title="鞍山装修网">鞍山市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="anqing" title="安庆装修网">安庆市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">A</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="bj" title="北京装修网">北京市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="baoding" title="保定装修网">保定市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="baoji" title="宝鸡装修网">宝鸡市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="bengbu" title="蚌埠装修网">蚌埠市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="bijie" title="毕节装修网">毕节市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">B</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="cd" title="成都装修网">成都市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="cq" title="重庆装修网">重庆市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="cs" title="长沙装修网">长沙市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="cz" title="常州装修网">常州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="cc" title="长春装修网">长春市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="cangzhou" title="沧州装修网">沧州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="chuzhou" title="滁州装修网">滁州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="chenzhou" title="郴州装修网">郴州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="chengde" title="承德装修网">承德市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">C</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="dl" title="大连装修网">大连市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="dg" title="东莞装修网">东莞市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="dezhou" title="德州装修网">德州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="deyang" title="德阳装修网">德阳市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">D</span>
+                            </div>
+                            <div class="city-option-ul-box">
+                                <ul class="clearfix">
+                                    <li><a href="http://www.to8to.com/index.html" class="city-option-a-more" rel="nofollow">更多&nbsp;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="city-f-j-content city-content-warp" style="display: none;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="fs" title="佛山装修网">佛山市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="fz" title="福州装修网">福州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="fuyang" title="阜阳装修网">阜阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="fuzhou" title="抚州装修网">抚州市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">F</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="gz" title="广州装修网">广州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="gy" title="贵阳装修网">贵阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="ganzhou" title="赣州装修网">赣州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="guilin" title="桂林装修网">桂林市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">G</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="hz" title="杭州装修网">杭州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="hf" title="合肥装修网">合肥市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="heb" title="哈尔滨装修网">哈尔滨市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="huizhou" title="惠州装修网">惠州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="hhht" title="呼和浩特装修网">呼和浩特</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="hengyang" title="衡阳装修网">衡阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="handan" title="邯郸装修网">邯郸市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="huaian" title="淮安装修网">淮安市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="haikou" title="海口装修网">海口市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="heze" title="菏泽装修网">菏泽市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="huainan" title="淮南装修网">淮南市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="hengshui" title="衡水装修网">衡水市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="hanzhong" title="汉中装修网">汉中市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="heyuan" title="河源装修网">河源市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="huzhou" title="湖州装修网">湖州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="haunggang" title="黄冈装修网">黄冈市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="huangshi" title="黄石装修网">黄石市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="huaihua" title="怀化装修网">怀化市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">H</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="jining" title="济宁装修网">济宁市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jh" title="金华装修网">金华市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jn" title="济南装修网">济南市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jiujiang" title="九江装修网">九江市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jx" title="嘉兴装修网">嘉兴市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="jiangmen" title="江门装修网">江门市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jz" title="焦作装修网">焦作市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="jian" title="吉安装修网">吉安市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">J</span>
+                            </div>
+                            <div class="city-option-ul-box">
+                                <ul class="clearfix">
+                                    <li><a href="http://www.to8to.com/index.html" class="city-option-a-more" rel="nofollow">更多&nbsp;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="city-k-p-content city-content-warp" style="display: none;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="km" title="昆明装修网">昆明市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="kaifeng" title="开封装修网">开封市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="kunshan" title="昆山装修网">昆山市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">K</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="lanzhou" title="兰州装修网">兰州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="lf" title="廊坊装修网">廊坊市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="ly" title="洛阳装修网">洛阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="linyi" title="临沂装修网">临沂市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="lianyungang" title="连云港装修网">连云港市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="liuan" title="六安装修网">六安市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="linfen" title="临汾装修网">临汾市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="lz" title="柳州装修网">柳州市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">L</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="mianyang" title="绵阳装修网">绵阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="maoming" title="茂名装修网">茂名市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="meizhou" title="梅州装修网">梅州市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">M</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="nj" title="南京装修网">南京市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="nn" title="南宁装修网">南宁市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="nb" title="宁波装修网">宁波市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="nc" title="南昌装修网">南昌市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="nt" title="南通装修网">南通市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="nanchong" title="南充装修网">南充市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="ny" title="南阳装修网">南阳市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">N</span>
+                            </div>
+                            <div class="city-option-ul-box">
+                                <ul class="clearfix">
+                                    <li><a href="http://www.to8to.com/index.html" class="city-option-a-more" rel="nofollow">更多&nbsp;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="city-q-w-content city-content-warp" style="display: none;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="qd" title="青岛装修网">青岛市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="qz" title="泉州装修网">泉州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="qingyuan" title="清远装修网">清远市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="qinhuangdao" title="秦皇岛装修网">秦皇岛市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="qujing" title="曲靖装修网">曲靖市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">Q</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="sh" title="上海装修网">上海市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="sz" title="深圳装修网">深圳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="sy" title="沈阳装修网">沈阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="suzhou" title="苏州装修网">苏州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="sjz" title="石家庄装修网">石家庄市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="suqian" title="宿迁装修网">宿迁市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="shaoyang" title="邵阳装修网">邵阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="shangqiu" title="商丘装修网">商丘市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="shantou" title="汕头装修网">汕头市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="shaoxing" title="绍兴装修网">绍兴市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="shangrao" title="上饶装修网">上饶市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="shaoguan" title="韶关装修网">韶关市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">S</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="tj" title="天津装修网">天津市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="ty" title="太原装修网">太原市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="ts" title="唐山装修网">唐山市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="taizhou" title="泰州装修网">泰州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="taian" title="泰安装修网">泰安市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="tz" title="台州装修网">台州市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">T</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="wh" title="武汉装修网">武汉市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="wx" title="无锡装修网">无锡市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="wlmq" title="乌鲁木齐装修网">乌鲁木齐</a></li>
+                                    <li><a href="javascript:void(0);" city_code="wz" title="温州装修网">温州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="weihai" title="威海装修网">威海市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="wf" title="潍坊装修网">潍坊市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="wuhu" title="芜湖装修网">芜湖市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">W</span>
+                            </div>
+                            <div class="city-option-ul-box">
+                                <ul class="clearfix">
+                                    <li><a href="http://www.to8to.com/index.html" class="city-option-a-more" rel="nofollow">更多&nbsp;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="city-x-z-content city-content-warp" style="display: none;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="xa" title="西安装修网">西安市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xz" title="徐州装修网">徐州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xining" title="西宁装修网">西宁市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xiangyang" title="襄阳装修网">襄阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xm" title="厦门装修网">厦门市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="xuchang" title="许昌装修网">许昌市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xingtai" title="邢台装修网">邢台市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xianyang" title="咸阳装修网">咸阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xinyang" title="信阳装修网">信阳市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xinxiang" title="新乡装修网">新乡市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="xiaogan" title="孝感装修网">孝感市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">X</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="yangzhou" title="扬州装修网">扬州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yt" title="烟台装修网">烟台市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yancheng" title="盐城装修网">盐城市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yinchuan" title="银川装修网">银川市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yichang" title="宜昌装修网">宜昌市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="yichun" title="宜春装修网">宜春市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yongzhou" title="永州装修网">永州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yuncheng" title="运城装修网">运城市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="yiyang" title="益阳装修网">益阳市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">Y</span>
+                            </div>
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    <li><a href="javascript:void(0);" city_code="zz" title="郑州装修网">郑州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhongshan" title="中山装修网">中山市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zunyi" title="遵义装修网">遵义市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhenjiang" title="镇江装修网">镇江市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhumadian" title="驻马店装修网">驻马店市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="zhangjiakou" title="张家口装修网">张家口市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhoukou" title="周口装修网">周口市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhanjiang" title="湛江装修网">湛江市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhangzhou" title="漳州装修网">漳州市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhuhai" title="珠海装修网">珠海市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zaozhuang" title="枣庄装修网">枣庄市</a></li>
+                                    <li class="row-end"><a href="javascript:void(0);" city_code="zhuzhou" title="株洲装修网">株洲市</a></li>
+                                    <li><a href="javascript:void(0);" city_code="zhaoqing" title="肇庆装修网">肇庆市</a></li>
+                                </ul>
+                                <span class="city-option-logogram">Z</span>
+                            </div>
+                            <div class="city-option-ul-box">
+                                <ul class="clearfix">
+                                    <li><a href="http://www.to8to.com/index.html" class="city-option-a-more" rel="nofollow">更多&nbsp;&gt;</a></li>
+                                </ul>
+                            </div>
+                        </div>-->
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <script>
+                $(function () {
+                    function citybox()
+                    {
+                        $('.city-option-box').show();
+                        $(".city-option-list").find("span").mouseover(function () {
+                            $(this).addClass("on");
+                            $(this).prevAll("span").removeClass("on");
+                            $(this).nextAll("span").removeClass("on");
+                            var index = $(this).index();
+                            $(".city-option-content").find(".city-content-warp").eq(index).show();
+                            $(".city-option-content").find(".city-content-warp").eq(index).prevAll("div").hide();
+                            $(".city-option-content").find(".city-content-warp").eq(index).nextAll("div").hide();
+                        })
+
+                    }
+                    function GetCitySession(mkjcitycode, mkjcityname) {
+                        $.ajax({
+                            async: false,
+                            type: "post",
+                            url: "/Session/GetCitySession",
+                            data: {
+                                mkjcitycode: mkjcitycode,
+                                mkjcityname: mkjcityname
+                            },
+                            success: function (data) {
+                            },
+                            error: function (xhr, type) {
+                                alert('城市改变没有记录。');
+                            }
+                        });
+                    }
+
+                    $(".nav-change").hover(function () {
+                        citybox();
+                    }, function () {
+                    });
+                    $(".nav-city").hover(function () {
+                        $(".city-option-box").hide();
+                    }, function () { });
+                    $(".weixin").hover(function () {
+                        $(".city-option-box").hide();
+                    }, function () { }); 
+                    $(".city-option-box").hover(function () { }, function () {
+                        $(".city-option-box").hide();
+                    });
+                    $(document).click(function () {
+                        $(".city-option-box").hide();
+                    });
+                    $(".city-option-ul-box > .clearfix > li").click(function () {
+                        var cityname = $(this).find("a").html();
+                        //$(".nav-city").html(cityname);
+                        var mkjcitycode = $(this).find("a").attr("city_code");
+                        //$.session.set('mkjcitycode', mkjcitycode);
+                        //$.session.set('mkjcityname', cityname);
+                        GetCitySession(mkjcitycode, cityname);
+                        window.location.reload();
+                    });
+                    var mkjcitycode = $("#mkjcitycode").val();
+                    var cityname = $("#mkjcityname").val();
+                    $(".nav-city").html(cityname);
+                })
+            </script>
+            <div class="weixin halving_line">
+                <span class="ico_weixin_code"></span>
+                <a href="http://www.shejiben.com/weixin" rel="nofollow" target="_blank">脉空间官方微信</a>
+                <div class="weixin_code">
+                    <span class="ico_arrow_top_white"></span>
+                    <a href="http://www.shejiben.com/weixin" target="_blank" rel="nofollow">
+                        <img src="http://img.shejiben.com/my/popularize_center/se_code.png?v=1456423480">
+                    </a>
+                    <span class="msg">扫一扫，加微信<br>更多金币等你拿！</span>
+                </div>
+            </div>
+            <div class="app">
+                <a href="http://www.shejiben.com/app" target="_blank" rel="nofollow">
+                    <span class="ico_app_code"></span>
+                    设计本手机版
+                </a>
+            </div>
+        </div>
+        <div class="new_top_bar_right">
+            <div class="login_status" id="nav_login">
+                <a href="/CompanyCenter/CompanyLogin/CompanyLogin" rel="nofollow" class="login">装修公司登录</a>
+                <a href="/PeopleCenter/UserCenter/LoginOn" rel="nofollow" class="register">设计师登录</a>
+            </div>
+            <!-- 申请定制设计 -->
+            <div class="zb_entrance">
+                <a href="javascript:void(0);" target="_blank" rel="nofollow">申请定制设计</a>
+            </div>
+            <!--客服服务 -->
+            <div class="customer_service" style="display:none;">
+                <div class="title">客服服务<span class="ico_arrow_bottom_grey"></span></div>
+                <ul>
+                    <li><a href="javascript:void(0);" class="kflive800" lim_company="235802" lim_skill="3012" rel="nofollow">在线客服</a></li>
+                    <li><a href="http://www.shejiben.com/about/feedback.php" rel="nofollow" target="_blank">意见反馈</a></li>
+                    <li><a href="http://www.shejiben.com/about/helpcenter.php" rel="nofollow">帮助中心</a></li>
+                </ul>
+            </div>
+            <!--设计师中心 -->
+            <div class="designer_center" style="display:none;">
+                <div class="title">设计师中心<span class="ico_arrow_bottom_grey"></span></div>
+                <ul>
+                    <!-- <li><a href="http://www.shejiben.com/account/register.php">免费入住</a></li> -->
+                    <li><a href="http://www.shejiben.com/order_lobby/" rel="nofollow">接单大厅</a></li>
+                    <li><a href="http://www.shejiben.com/renmai/?from=topbar" rel="nofollow">社交广场</a></li>
+                    <li><a href="http://mx.shejiben.com/?from=topbar" rel="nofollow">模型下载</a></li>
+                    <li><a href="http://www.shejiben.com/about/cooperation.php" rel="nofollow">推广中心</a></li>
+                </ul>
+            </div>
+            <!--网站导航 -->
+            <div class="navigation">
+                <div class="title">网站导航<span class="ico_arrow_bottom_grey"></span></div>
+                <div class="navigation_content">
+                    <ul>
+                        <li class="tit">设计案例</li>
+                        <li><a href="/case/DecCaseList?DecType=1">精选家装</a></li>
+                        <li><a href="/case/DecCaseList?DecType=2">精选工装</a></li>
+                    </ul>
+                    <ul>
+                        <li class="tit">装修图库</li>
+                        <li><a href="/Imglist/DecImagelist?DecType=1">家装图库</a></li>
+                        <li><a href="/Imglist/DecImagelist?DecType=2">工装图库</a></li>
+                    </ul>
+                    <ul>
+                        <li class="tit">装修公司</li>
+                        <li><a href="/DecorationCompany/DecCompanyList">全国装修公司</a></li>
+                    </ul>
+                    <ul>
+                        <li class="tit">找设计师</li>
+                        <li><a href="/workers/DecDesignerList">全国设计师</a></li>
+                    </ul>
+                    <ul>
+                        <li class="tit">首页</li>
+                        <li><a href="/index/homeindex">网站首页</a></li>
+                    </ul>
+                    @*<ul>
+                            <li class="tit">设计相关</li>
+                            <li><a href="http://mall.shejiben.com/">逛商品</a></li>
+                            <li><a href="http://www.shejiben.com/news/">设计资讯</a></li>
+                            <li><a href="http://www.shejiben.com/space/">空间谈</a></li>
+                        </ul>
+                        <ul>
+                            <li class="tit">设计师中心</li>
+                            <li><a href="http://www.shejiben.com/my/" rel="nofollow">个人中心</a></li>
+                            <li><a href="http://www.shejiben.com/order_lobby/" rel="nofollow">接单大厅</a></li>
+                            <li><a href="http://www.shejiben.com/renmai/?from=webnav" rel="nofollow">社交广场</a></li>
+                            <li><a href="http://mx.shejiben.com/?from=webnav" rel="nofollow">模型下载</a></li>
+                            <li><a href="http://www.shejiben.com/about/cooperation.php" rel="nofollow">推广中心</a></li>
+                        </ul>*@
+                    @*<ul>
+                            <li class="tit">其他</li>
+                            <li><a href="http://www.shejiben.com/app/" rel="nofollow">设计本App</a><em class="icon icon_hot icon_hot_app"></em></li>
+                            <li><a href="http://www.shejiben.com/about/aboutus.php" rel="nofollow">关于我们</a></li>
+                            <li><a href="http://www.shejiben.com/about/contact.php" rel="nofollow">联系我们</a></li>
+                            <li><a href="http://www.shejiben.com/about/helpcenter.php" rel="nofollow">帮助中心</a></li>
+                            <li><a href="http://www.shejiben.com/about/feedback.php" rel="nofollow" target="_blank">意见反馈</a></li>
+                        </ul>*@
+                </div>
+            </div>
+        </div>
+        <div id="newMessage" class="newMessage">
+            <div class="closeNewMessage" id="closeNewMessage"></div>
+            <div class="messageItem" id="messageItem"></div>
+            <p class="clear"></p>
+        </div>
+    </div>
+</div>

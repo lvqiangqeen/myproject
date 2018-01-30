@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{F9F399C9-5E02-41AF-8E05-CC523815597B}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Dos.ORM.dll = Lib\Dos.ORM.dll
+		Lib\EntityFramework.BulkInsert.dll = Lib\EntityFramework.BulkInsert.dll
+		Lib\EntityFramework.dll = Lib\EntityFramework.dll
+		Lib\EntityFramework.SqlServer.dll = Lib\EntityFramework.SqlServer.dll
+		Lib\log4net.dll = Lib\log4net.dll
+		Lib\System.Web.Helpers.dll = Lib\System.Web.Helpers.dll
+		Lib\System.Web.Helpers.xml = Lib\System.Web.Helpers.xml
+		Lib\System.Web.Mvc.dll = Lib\System.Web.Mvc.dll
+		Lib\System.Web.Razor.dll = Lib\System.Web.Razor.dll
+		Lib\System.Web.Razor.xml = Lib\System.Web.Razor.xml
+		Lib\System.Web.WebPages.Deployment.dll = Lib\System.Web.WebPages.Deployment.dll
+		Lib\System.Web.WebPages.Deployment.xml = Lib\System.Web.WebPages.Deployment.xml
+		Lib\System.Web.WebPages.dll = Lib\System.Web.WebPages.dll
+		Lib\System.Web.WebPages.Razor.dll = Lib\System.Web.WebPages.Razor.dll
+		Lib\System.Web.WebPages.Razor.xml = Lib\System.Web.WebPages.Razor.xml
+		Lib\System.Web.WebPages.xml = Lib\System.Web.WebPages.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIYunNet.CMS.Web", "AIYunNet.CMS.Web\AIYunNet.CMS.Web.csproj", "{600D8A6C-4D4E-46D6-83D2-17666C415461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIYunNet.CMS.Domain", "AIYunNet.CMS.Domain\AIYunNet.CMS.Domain.csproj", "{694F646E-126E-4DC1-91FE-CBDF0649D9F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIYunNet.CMS.BLL.IService", "AIYunNet.CMS.BLL.IService\AIYunNet.CMS.BLL.IService.csproj", "{88F2530C-9637-41F9-94C3-84D96B0E266D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIYunNet.CMS.BLL.Service", "AIYunNet.CMS.BLL.Service\AIYunNet.CMS.BLL.Service.csproj", "{E33CCE68-B85C-4A15-AE5E-8C622E4C1B2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIYunNet.CMS.Common.Utility", "AIYunNet.CMS.Common.Utility\AIYunNet.CMS.Common.Utility.csproj", "{1DDF7E0D-2727-418C-B2AD-4D01CADDD647}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{600D8A6C-4D4E-46D6-83D2-17666C415461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600D8A6C-4D4E-46D6-83D2-17666C415461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600D8A6C-4D4E-46D6-83D2-17666C415461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600D8A6C-4D4E-46D6-83D2-17666C415461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694F646E-126E-4DC1-91FE-CBDF0649D9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694F646E-126E-4DC1-91FE-CBDF0649D9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694F646E-126E-4DC1-91FE-CBDF0649D9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694F646E-126E-4DC1-91FE-CBDF0649D9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88F2530C-9637-41F9-94C3-84D96B0E266D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88F2530C-9637-41F9-94C3-84D96B0E266D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88F2530C-9637-41F9-94C3-84D96B0E266D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88F2530C-9637-41F9-94C3-84D96B0E266D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33CCE68-B85C-4A15-AE5E-8C622E4C1B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33CCE68-B85C-4A15-AE5E-8C622E4C1B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33CCE68-B85C-4A15-AE5E-8C622E4C1B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33CCE68-B85C-4A15-AE5E-8C622E4C1B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DDF7E0D-2727-418C-B2AD-4D01CADDD647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DDF7E0D-2727-418C-B2AD-4D01CADDD647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DDF7E0D-2727-418C-B2AD-4D01CADDD647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DDF7E0D-2727-418C-B2AD-4D01CADDD647}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

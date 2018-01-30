@@ -1,0 +1,119 @@
+﻿#top_add{ height: 60px; width: 100%; overflow: hidden;}
+#top_add ul li{ height: 60px;}
+#top_add ul li a{ width: 100%; height: 60px; display: block;}
+#top_add #top_add_close {display: block;background:#fff url(http://img.shejiben.com/front_new/bg/sjb_index_bg.gif?20131011) repeat-x -70px -231px;width:14px;height:14px;position:absolute;top:8px;right:10px;cursor:pointer;}
+/*topbar*/
+.sjb_new_top_bar{width: 100%; height: 30px; background: #EFEFEF;}
+.new_top_bar{width: 990px; margin: 0 auto; color: #999; font-size: 12px; position:relative; z-index: 1080;}
+.new_top_bar .new_top_bar_left .halving_line{ border-right: 1px #ddd solid; padding-left: 15px;}
+
+.new_top_bar_left{ width: auto; float: left;}
+.new_top_bar_left .weixin ,.new_top_bar_left .app{ float: left; height: 14px; margin: 8px 0 0;}
+.new_top_bar_left .weixin a ,.new_top_bar_left .app a,.new_top_bar_left .link_index a{ color: #999;padding-right: 15px;}
+.new_top_bar_left .app { padding-left: 15px;}
+.new_top_bar_left .weixin .ico_weixin_code , .new_top_bar_left .app .ico_app_code { width: 15px; height: 15px; display: block; float: left;background: url(http://img.shejiben.com/my/popularize_center/back.png?20160414) no-repeat;}
+.new_top_bar_left .weixin .ico_weixin_code {background-position: -213px -106px;}
+.new_top_bar_left .app .ico_app_code {background-position: -230px -105px;}
+.new_top_bar_left .weixin .weixin_code{ width: 120px; height: auto; margin-top: 8px; z-index: 1005;position: absolute;border: 1px #ddd solid;background: #fff; display: none;}
+.new_top_bar_left .weixin .weixin_code .ico_arrow_top_white{position: absolute;top: -5px;left: 50%;margin-left: -10px;width:0;height:0;border-width: 0 5px 5px;border-style: solid;border-color: transparent transparent #fff;position: absolute;}
+.new_top_bar_left .weixin .weixin_code a{ width: 120px; height: 120px; padding: 0;}
+.new_top_bar_left .weixin .weixin_code img{width: 120px; height: 120px;}
+.new_top_bar_left .weixin .weixin_code .msg{width: 105px;margin: 0 auto;display: block;text-align: center; padding-bottom: 10px;}
+.new_top_bar_left .weixin:hover .weixin_code{ display: block;}
+.new_top_bar_left .link_index{ float: left; margin: 8px 0 0 15px;}
+.new_top_bar_left a:hover{ color: #dd4f50;}
+
+.new_top_bar_right{ width: auto; float: right;}
+.new_top_bar_right .login_status,.new_top_bar_right .customer_service,.new_top_bar_right .designer_center,.new_top_bar_right .navigation{ height: 30px;  cursor: pointer;}
+.new_top_bar_right .login_status .title,.new_top_bar_right .customer_service .title,.new_top_bar_right .designer_center .title,.new_top_bar_right .navigation .title{ display: inline-block; padding: 0 15px 0;margin: 8px 0; border-right: 1px #ddd solid;}
+.new_top_bar_right .login_status .title{ display: inline-block; padding:0;margin: 8px 0; border-right: 1px #ddd solid}
+.new_top_bar_right a{ color: #999;} 
+.new_top_bar_right .ico_arrow_bottom_grey{display: inline-block;margin-bottom: -2px;width: 10px;height: 9px;background: url(http://img.shejiben.com/my/popularize_center/back.png) no-repeat;background-position: -242px -106px;}
+.new_top_bar_right .login_status{ float: left; width: 172px;}
+.new_top_bar_right .login_status .title{width: 82px; text-align: center;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+.new_top_bar_right .login_status .login,.new_top_bar_right .login_status .register{ padding-right: 15px; margin-top: 8px;display: inline-block; float: left;}
+.new_top_bar_right .login_status .register{border-right: 1px #ddd solid; }
+.new_top_bar_right .zb_entrance{ float: left;width: 92px;height: 14px;border-right: 1px #ddd solid;margin: 7px 2px 0 5px;padding-right: 5px; position: relative;}
+.new_top_bar_right .zb_entrance a{position: absolute;top:-4px;left: 0;width:92px; height: 24px;line-height: 24px;text-align: center;border-radius: 4px;color: #fff;display: block; background: #dd4f50;}
+.new_top_bar_right .zb_entrance a:hover{background: #f77071; color: #fff;}
+.new_top_bar_right .customer_service{ float: left;}
+.new_top_bar_right .designer_center{ float: left;}
+.new_top_bar_right .login_status ul,.new_top_bar_right .customer_service ul ,.new_top_bar_right .designer_center ul{ display:none; background: #fff; border: 1px #ddd solid; position: relative; border-top: none; z-index: 1200;}
+.new_top_bar_right .login_status ul li,.new_top_bar_right .customer_service ul li,.new_top_bar_right .designer_center ul li{ height: 14px; padding: 8px 0;}
+.new_top_bar_right .login_status ul li a,.new_top_bar_right .customer_service ul li a,.new_top_bar_right .designer_center ul li a{ text-align: center;display: block;}
+.new_top_bar_right .login_status:hover .title,.new_top_bar_right .customer_service:hover .title ,.new_top_bar_right .designer_center:hover .title,.new_top_bar_right .navigation:hover .title{margin: 0; border-right: 1px #ddd solid; padding-top: 8px; padding-bottom: 8px; background: #fff;  border-left: 1px #ddd solid; margin-left: -1px;}
+.new_top_bar_right .login_status:hover ul,.new_top_bar_right .customer_service:hover ul ,.new_top_bar_right .designer_center:hover ul{ display: block; margin-left: -1px;} 
+.new_top_bar_right .login_status:hover ul{ width: 82px; text-indent: 3px; z-index: 14;}
+.new_top_bar_right .customer_service:hover ul{ width: 88px;}
+.new_top_bar_right .designer_center:hover ul{ width: 100px;}
+.new_top_bar_right .navigation{ float: left; position: relative;}
+.new_top_bar_right .navigation .title{ border-right:1px #efefef solid;}
+.new_top_bar_right .navigation .navigation_content {display: none; position:absolute;top:30px;right:0;margin-left: -513px;*margin-left: -596px;padding: 15px 0px;width:600px;border-left: 1px solid #ddd;border-right: 1px solid #ddd;border-bottom: 1px solid #ddd;background: #fff; z-index: 1200;}
+.navigation .navigation_content  ul li{border:none; width: auto; height: 30px; }
+.navigation .navigation_content  li.tit{font-size: 12px;color: #333;cursor:default;}
+.navigation .navigation_content  li.tit:hover{color:#333;}
+.navigation .navigation_content  ul {float:left;padding: 0px 15px; font-size: 12px;}
+.navigation .navigation_content  ul li a:hover{color:#e94c3d;}
+.navigation .navigation_content  ul li .icon{position:relative; margin-top: -10px;}
+.navigation .navigation_content  ul li .icon_hot{ width: 9px; height: 14px; display: block; top:0; left: 0;  background:url(http://img.shejiben.com/my/popularize_center/hot.gif) no-repeat;}
+.navigation .navigation_content ul li .icon_hot_demand{top: -20px; left: 60px; *left:35px;}
+.navigation .navigation_content  ul li .icon_hot_app{top: -20px; left: 57px; *left:33px;}
+.new_top_bar_right .navigation:hover .navigation_content{ display: block;}
+.new_top_bar_right a:hover{ color: #dd4f50;}
+
+/*æ–°å¤´éƒ¨æ˜¾ç¤ºæ¶ˆæ¯start*/
+.sjb_new_top_bar .newMessage {position:absolute;width:170px;border:1px solid #333;top:31px;background:#fff;display:none;right:0px;z-index:1100;}
+.sjb_new_top_bar .closeNewMessage {margin-top:5px;width:9px;height:9px;background:url(http://img.shejiben.com/front_new/bg/menubar.gif?20131119) no-repeat -112px -165px;cursor:pointer;float:right;margin-right:3px;}
+.sjb_new_top_bar .messageItem {width:160px;margin:0px 10px 5px 10px;float:left;}
+.sjb_new_top_bar .messageItem ul {float:left;height:auto;}
+.sjb_new_top_bar .messageItem li {font-size:12px;width:170px;float:left;height:20px;line-height:20px;margin-bottom:3px;font-weight: normal;}
+.sjb_new_top_bar .messageItem li a {color:#3a8b00;float:none;padding:0;height:20px;line-height:20px;}
+.sjb_new_top_bar .messageItem li a:hover {background:none;text-decoration: underline;}
+
+
+/*å¤´éƒ¨log \ æœç´¢æ */
+.top_search{ background: #fff;}
+.index_logo{ width: 990px; height:36px; padding:30px 0; margin: 0 auto;}
+.index_logo .logo{ width: 236px; height: 35px; float: left; background:url(http://img.shejiben.com/global.png?20160326) -3px -3px; display: block; }
+.index_logo .or{ width: auto; float: left; line-height: 36px; padding: 0 20px; font-size: 14px; color: #999;}
+.index_logo .edit{ width: 120px; float: left; height: 36px; line-height: 36px; line-height: 36px; background: #dd4f50; color: #fff; font-size: 14px; text-align: center; }
+.wrap_top_menu a:hover{text-decoration: none;}
+
+/*æœç´¢*/
+.index_logo #search_case { width:460px; margin-left: 118px; height: 32px; float: left; border: 2px #dd4f50 solid; border-right:0; background: #fff; position: relative;}
+.index_logo .header_upload_button{float:left;margin:40px 0px 0px 80px;}
+.index_logo .header_upload_button span{color:red;font-size:16px;font-weight: bold}
+.index_logo .header_upload_button a{font-size:12px;}
+.index_logo .header_upload_button a:hover{color:red;}
+.index_logo form{ float:right; }
+.index_logo form label{ float:left;margin:5px 5px; color:#000;}
+.index_logo #search_case .key{ width:256px;height:32px; line-height:32px; border: 0; outline: none; padding-left:25px; color:#bbb;float:left;}
+.index_logo form span{ width:94px; position:relative; z-index:300;background:#fff; border:none; line-height:33px;float:left;padding-right:5px;color:#c9cbc8;font-size:12px;}
+.index_logo #search_span #search_title{width: 94px; height: 20px; text-indent: 10px; color: #666; padding: 6px 0; line-height: 20px; border-right:1px #efefef solid; background: none; float: left;}
+.index_logo #search_case em.arrow{width: 10px; height: 6px; display:block; margin:14px 0 0 10px; position: absolute; cursor: pointer; top:0; left: 64px; background:url(http://img.shejiben.com/front_new/bg/menubar.gif?20131119) no-repeat right -106px;}
+.index_logo #search_case{ float:left;}
+.index_logo .head_menubar #search_zsj label{ cursor:pointer;position:absolute;left:-4px; top:28px; background:#fff; display:block; width:110px; border:1px solid #C7C9C6; border-top:0;}
+.index_logo #search_case #s_zsj{ position: absolute; top:27px; left: -5px; width: 93px; height: auto; background: #fff; border: 1px #efefef solid; border-top:none; }
+.index_logo #s_zsj a{ display:block;padding:0px 8px;}
+.index_logo #s_zsj .search_tags{height:25px;line-height:25px;}
+.index_logo #s_zsj a:hover { background:#e4e4e4;color:#df3132;text-decoration:none;}
+.index_logo form .submit{width: 80px; float: right; text-align: center; color: #fff; line-height: 32px; border: 0; cursor: pointer; outline: none; background: #dd4f50; height: 32px;font-size: 14px;}
+.index_logo #search_case .icon_search{width: 12px; height: 10px; margin: 10px 3px 0 10px; display:block; position: absolute; top:1px; left: 94px; background:url(http://img.shejiben.com/index/sprite.png?20160326) -311px -9px;}
+
+/*å¤´éƒ¨èœå•*/
+.wrap_top_menu{ height: 40px; background: #333; }
+.top_menu{ width: 990px; height: 40px; margin:0 auto; position: relative; z-index: 110;}
+.top_menu li{ width: auto; height: 40px; line-height: 40px; text-align: center; padding: 0 35px 0 35px; float: left; display: inline-block; position: relative; z-index:100;}
+.top_menu li a{ height: 40px; display:inline-block; color: #fff; font-size: 14px; font-weight: bold; }
+.top_menu li.cur{ background: #dd4f50;}
+.top_menu li:hover{background: #dd4f50;}
+.top_menu li:hover a{ color: #fff;}
+.top_menu li .inner_menu{ width: 100%; height: auto; background: #dd4f50; position: absolute; top: 40px; left: 0; z-index: 100; display: none;}
+.top_menu li .inner_menu a{ width: 100%; height: 40px; display: block; line-height: 40px; font-weight:normal;}
+.top_menu li:hover .inner_menu{ display: block;}
+.top_menu li:hover .inner_menu a:hover{ background: #D04142;}
+.top_menu li.last{float: right;}
+.top_menu li.last .inner_menu a{width: 142px; padding: 0; text-indent: 5px;}
+
+
+

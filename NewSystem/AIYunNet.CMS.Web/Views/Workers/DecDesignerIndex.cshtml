@@ -1,0 +1,862 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.BLL.IService;
+@model AIYunNet.CMS.Domain.Model.WebPeople
+@{
+    ViewBag.Title = "DecDesignerIndex";
+    Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
+    int peopleID = Convert.ToInt32(Request["peopleID"]);
+    WebCommonService webCommen = new WebCommonService();
+}
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<link href="~/Content/design/sheji.designerindex.css" rel="stylesheet" />
+<script src="~/Content/design/js/jquery.paginationNo.js"></script>
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+
+    .case_description {
+        position: absolute;
+        width: 272px;
+        padding-top: 149px;
+    }
+
+    .opus_span a {
+        position: relative;
+        float: left;
+        height: 272px;
+        width: 272px;
+        margin-right: 22px;
+        display: block;
+    }
+
+    dl dt {
+        color: #fefefe;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 43px;
+        background: #de4527;
+        text-align: center;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    dl dd {
+        background: black;
+        height: 73px;
+        padding: 6px 16px 0 36px;
+        line-height: 24px;
+        font-size: 14px;
+        opacity: 0.78;
+        overflow: hidden;
+    }
+</style>
+<style>
+    .owner_comment ul li {
+        padding: 20px 0;
+        border-top: solid 1px #eee;
+    }
+
+        .owner_comment ul li a.com_a {
+            display: block;
+            width: 40px;
+            height: 40px;
+            float: left;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+            .owner_comment ul li a.com_a img {
+                width: 40px;
+                height: 40px;
+            }
+
+    .owner_comment ul .li_01 .com_div {
+        float: right;
+        margin: 0;
+    }
+
+    .owner_comment ul li .com_div {
+        width: 598px;
+        height: 26px;
+        border: solid 1px #e3e3e3;
+        padding: 6px;
+        position: relative;
+        margin-top: 10px;
+    }
+
+        .owner_comment ul li .com_div input.input_text {
+            width: 530px;
+            border: 0;
+            margin-left: 3px;
+        }
+
+        .owner_comment ul li .com_div input.sub_btn {
+            width: 44px;
+            height: 26px;
+            border: 0;
+            background: #f79b9c;
+            color: #fff;
+            font-size: 14px;
+            margin-left: 14px;
+            disabled: true;
+            cursor: pointer;
+        }
+</style>
+<style type="text/css">
+
+    a {
+        color: #333;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    * {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .clearfix {
+        *height: 1%;
+    }
+
+    #list {
+        /*margin: 0 auto;*/
+        text-align: left;
+        width: 865px;
+    }
+
+    .box {
+        border-top: 1px solid #eee;
+        position: relative;
+        width: 800px;
+        padding: 20px 0;
+    }
+
+        .box:hover .close {
+            display: block;
+        }
+
+    .close {
+        display: none;
+        top: 0px;
+        right: 0px;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #eee;
+        position: absolute;
+        background: #f2f4f7;
+        line-height: 27px;
+        text-align: center;
+    }
+
+        .close:hover {
+            background: #c8d2e2;
+            text-decoration: none;
+        }
+
+    .head {
+        float: left;
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+    }
+
+    .contentcomment {
+        float: left;
+        width: 700px;
+    }
+
+    .main {
+        margin-bottom: 10px;
+    }
+
+    .txt {
+        margin-bottom: 10px;
+    }
+
+    .user {
+        color: #369;
+    }
+
+    .pic {
+        margin-right: 5px;
+        width: 200px;
+        border: 1px solid #eee;
+    }
+
+    .info {
+        height: 20px;
+        line-height: 19px;
+        font-size: 12px;
+        margin: 0 0 10px 0;
+    }
+
+        .info .time {
+            color: #ccc;
+            float: left;
+            height: 20px;
+            padding-left: 20px;
+            background: url("/content/comment/images/bg1.jpg") no-repeat left top;
+        }
+
+        .info .praise {
+            color: #369;
+            float: right;
+            height: 20px;
+            padding-left: 18px;
+            background: url("/content/comment/images/bg2.jpg") no-repeat left top;
+        }
+
+            .info .praise:hover {
+                text-decoration: underline;
+                background: url("/content/comment/images/bg3.jpg") no-repeat left top;
+            }
+
+    .praises-total {
+        margin: 0 0 10px 0;
+        height: 20px;
+        background: url("/content/comment/images/praise.png") no-repeat 5px 5px rgb(247, 247, 247);
+        padding: 5px 0 5px 25px;
+        line-height: 19px;
+    }
+
+    .comment-box {
+        padding: 10px 0;
+        border-top: 1px solid #eee;
+    }
+
+        .comment-box:hover {
+            background: rgb(247, 247, 247);
+        }
+
+        .comment-box .myhead {
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .comment-box .comment-content {
+            float: left;
+            width: 650px;
+        }
+
+            .comment-box .comment-content .comment-time {
+                color: #ccc;
+                margin-top: 3px;
+                line-height: 16px;
+                position: relative;
+            }
+
+            .comment-box .comment-content .comment-praise {
+                display: none;
+                color: #369;
+                padding-left: 17px;
+                height: 20px;
+                background: url("/content/comment/images/praise.png") no-repeat;
+                position: absolute;
+                bottom: 0px;
+                right: 44px;
+            }
+
+            .comment-box .comment-content .comment-operate {
+                display: none;
+                color: #369;
+                height: 20px;
+                position: absolute;
+                bottom: 0px;
+                right: 10px;
+            }
+
+            .comment-box .comment-content:hover .comment-praise {
+                display: inline-block;
+            }
+
+            .comment-box .comment-content:hover .comment-operate {
+                display: inline-block;
+            }
+
+    .text-box .comment {
+        border: 1px solid #eee;
+        display: block;
+        height: 15px;
+        width: 650px;
+        padding: 5px;
+        resize: none;
+        color: #ccc;
+    }
+
+    .text-box .btn {
+        font-size: 12px;
+        font-weight: bold;
+        display: none;
+        float: right;
+        width: 65px;
+        height: 25px;
+        border: 1px solid #0C528D;
+        color: #fff;
+        background: #4679AC;
+    }
+
+    .text-box .btn-off {
+        border: 1px solid #ccc;
+        color: #ccc;
+        background: #F7F7F7;
+    }
+
+    .text-box .word {
+        display: none;
+        float: right;
+        margin: 7px 10px 0 0;
+        color: #666;
+    }
+
+    .text-box-on .comment {
+        height: 50px;
+        color: #333;
+    }
+
+    .text-box-on .btn {
+        display: inline;
+    }
+
+    .text-box-on .word {
+        display: inline;
+    }
+</style>
+<script type="text/javascript" src="/content/comment/demo.js"></script>
+<script>
+    // 导航条定位
+    function setMenuBar() {
+        var scrollTop = $(window).scrollTop();
+        if (scrollTop >= 450) {
+            $('.designer_navs').css({ 'position': 'fixed', 'top': '0' });
+        }
+        else {
+            $('.designer_navs').css({ 'position': 'absolute', 'top': '450px' });
+        }
+    }
+
+    var setMenuPosition = {
+        opusTop: 0,
+        commentTop: 0,
+        //recordTop: 0,
+        aboutTop: 0,
+        init: function (setting) {
+            var _this = this;
+            _this.opusTop = setting.opusTop;
+            _this.commentTop = setting.commentTop;
+            // _this.recordTop = setting.recordTop;$('.deal_record').length < 1 &&
+            _this.aboutTop = setting.aboutTop;
+            if ($('.designer_opus').length < 1 && $('.owner_comment').length < 1 && $('.about_he').length < 1) {
+                return false;
+            }
+            var url = window.location.href;
+            if (url.indexOf('#') > -1) {
+                var index = url.indexOf('#');
+                _this.showCase(url.charAt(index + 1) - 1);
+            }
+            _this.bindClick();
+            _this.bindScroll();
+
+        },
+        bindClick: function () {
+            var _this = this;
+            $('.designer_navs .designer_nav_ul .designer_nav_li').click(function () {
+                index = $(this).index();
+                _this.showCase(index);
+            });
+        },
+        showCase: function (index) {
+            var _this = this;
+            if (index == 0) {
+                $(document).scrollTop(_this.opusTop - 40);
+            }
+            else if (index == 1) {
+                $(document).scrollTop(_this.commentTop - 40);
+            }
+                //else if (index == 2) {
+                //    $(document).scrollTop(_this.recordTop - 40);
+                //}
+            else if (index == 2) {
+                $(document).scrollTop(_this.aboutTop - 40);
+            }
+            $(this).addClass('cur').siblings().removeClass('cur');
+        },
+        bindScroll: function () {
+            var _this = this;
+            var scrollTop = $(document).scrollTop();
+            //if (scrollTop < _this.commentTop - 40) {
+            //    $('.designer_navs .designer_nav_ul .designer_nav_li').eq(0).addClass('cur').siblings().removeClass('cur');
+            //}
+            //else if (scrollTop >= _this.commentTop - 40 && scrollTop < _this.recordTop - 40) {
+            //    $('.designer_navs .designer_nav_ul .designer_nav_li').eq(1).addClass('cur').siblings().removeClass('cur');
+            //}
+            //else if (scrollTop >= _this.recordTop - 40 && scrollTop < _this.aboutTop - 40) {
+            //    $('.designer_navs .designer_nav_ul .designer_nav_li').eq(2).addClass('cur').siblings().removeClass('cur');
+            //}
+            //else if (scrollTop >= _this.aboutTop - 40) {
+            //    $('.designer_navs .designer_nav_ul .designer_nav_li').eq(3).addClass('cur').siblings().removeClass('cur');
+            //}
+
+            if (scrollTop < _this.commentTop - 40) {
+                $('.designer_navs .designer_nav_ul .designer_nav_li').eq(0).addClass('cur').siblings().removeClass('cur');
+            }
+            else if (scrollTop >= _this.commentTop - 40 && scrollTop < _this.aboutTop - 40) {
+                $('.designer_navs .designer_nav_ul .designer_nav_li').eq(1).addClass('cur').siblings().removeClass('cur');
+            }
+            else if (scrollTop >= _this.aboutTop - 40) {
+                $('.designer_navs .designer_nav_ul .designer_nav_li').eq(2).addClass('cur').siblings().removeClass('cur');
+            }
+        }
+
+    }
+
+    //$(window).bind('scroll', function () {
+    //    setMenuBar();
+    //    setMenuPosition.bindScroll();
+    //});
+
+    //$(function () {
+    //    //数据加载成功后重新获取各模块的top值
+    //    setMenuPosition.init({
+    //        opusTop: $('.designer_opus').length < 1 ? false : $('.designer_opus').offset().top,
+    //        commentTop: $('.owner_comment').length < 1 ? false : $('.owner_comment').offset().top,
+    //        recordTop: $('.deal_record').length < 1 ? false : $('.deal_record').offset().top,
+    //        aboutTop: $('.about_he').length < 1 ? false : $('.about_he').offset().top
+    //    });
+
+    //})
+
+</script>
+
+
+@{Html.RenderPartial("_GetAllSessions"); }
+<div class="designer_header" style="background:url(@AppSettingsHelper.ImgUrl@Model.DesignerImage) repeat scroll center center #fff;">
+    <div class="font_bg">
+        <p class="head_portrait">
+            <span class="head_portrait_img">
+                <img src="@AppSettingsHelper.ImgUrl@Model.PeopleImage">
+            </span>
+            @if (Model.IsBond)
+            {
+                <em class="auth_icon icon_jy" title="服务保障"></em>
+            }
+            @if (Model.IsAuthentication)
+            {
+                <em class="famous_icon icon_rz" title="个人身份认证"></em>
+            }
+            
+
+        </p>
+        <p class="desinger_name">@Model.PeopleName</p>
+        <p class="company_name">
+            @Model.PeopleMotto
+        </p>
+
+        <p class="company_addr">
+            <span><a href="http://www.shejiben.com/zsj/beijing/" target="_blank">@Model.ProvinceName @Model.CityName</a></span>
+        </p>
+        <a href="javascript:void(0)" class="add_care" id="followBtn" rev="6574789" rel="0">
+            <span class="care_icon"></span>
+            <span class="care_font">关注</span>
+        </a>
+
+    </div>
+</div>
+
+<div class="designer_navs">
+    <div class="designer_nav">
+        <ul class="designer_nav_ul">
+            <li class="designer_nav_li cur"><a href="javascript:void(0)">设计作品</a></li>
+            <li class="designer_nav_li"><a href="javascript:void(0)">问答专区</a></li>
+            @*<li class="designer_nav_li"><a href="javascript:void(0)">成交记录</a></li>*@
+            <li class="designer_nav_li"><a href="javascript:void(0)">关于TA</a></li>
+            <li class="more_li" style="display:none;">
+                <a href="javascript:void(0)" class="nav_more">更多</a>
+                <div class="more_con">
+                    <a href="http://www.shejiben.com/sjs/6574789/case/" target="_blank" class="more_con_a">TA的作品</a>
+                    <a href="http://www.shejiben.com/sjs/6574789/log/" target="_blank" class="more_con_a">TA的博文</a>
+                    <a href="http://www.shejiben.com/sjs/6574789/ideabooks/" rel="nofollow" target="_blank" class="more_con_a">TA的收藏</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="consult_box">
+            <p class="consult_tlt">
+                <span class="money_icon"></span>
+                <span class="price">@webCommen.GetLookupDesc("People_Dec_price", Model.PriceID.ToString())</span>
+                <span class="square"></span>
+            </p>
+            <div class="consult_con">
+                <a href="javascript:void(0)" id="sjsblog_yyzx" class="consult" data-id="6574789">预约咨询(<em>67</em>)</a>
+                <div class="phone_box">
+                    <div class="notice">
+                        <p>找设计师？一个电话搞定！</p>
+                        <span></span>
+                    </div>
+                    <a href="javascript:void(0)" class="c_phone"><em class="phone_icon"></em>@Model.PeoplePhone</a>
+                </div>
+                <p class="assure">原创作品</p>
+                <p class="assure">真实评价</p>
+                <p class="assure assure_last">资金托管</p>
+                <p class="clear"></p>
+            </div>
+            <!-- 人物专访 -->
+        </div>
+    </div>
+</div>
+
+<div class="deigner_body">
+    <div class="deigner_mains">
+        <div class="deigner_main">
+            <div class="designer_opus designer_opus_test">
+                <div class="opus_nav">
+                    <a href="javascript:void(0)" class="cls_fication cls_on" data-type="case_all" data-count="26">全部&nbsp;(<em>26</em>)</a>
+                    @*<a href="javascript:void(0)" class="cls_fication" data-type="case_home" data-count="24">家装&nbsp;(<em>24</em>)</a>
+                        <a href="javascript:void(0)" class="cls_fication" data-type="case_work" data-count="2">工装&nbsp;(<em>2</em>)</a>*@
+                    <div class="clear"></div>
+                </div>
+                <div class="tab_content">
+                    <ul class="opus_main case_page"></ul>
+                </div>
+                <a href="javascript:void(0)" target="_blank" class="more_opus" style="display: block;">更多作品&nbsp;&gt;</a>
+            </div>
+
+            <div class="owner_comment">
+                <p class="desc_tlt desc_tltle">问答专区&nbsp;(<em>12</em>)</p>
+                <div class="owner_has_comment">
+
+                    <div class="tab_content assess_page">
+                        <ul>
+
+                            <li class="li_01 clearfix" id="commentBox" style="width: 675px;">
+                                <p class="clear"></p>
+                                <a href="javascript:void(0)" target="_blank" class="com_a">
+                                    <img src="/Content/comment/images/noheadphoto.gif">
+                                </a>
+                                <div class="com_div" style="border-color: rgb(227, 227, 227);">
+                                    <input class="input_text" id="comment-message" type="text" autocomplete="off" placeholder="说点什么吧！">
+                                    <input class="sub_btn btn_submit_comment" value="提交" type="submit" id="submit">
+                                </div>
+                            </li>
+                        </ul>
+                        <!--相关评论-->
+                        <div id="list">
+                            <div class="box clearfix" v-for="item in pageList">
+                                <a class="close" href="javascript:;">×</a>
+                                <img class="head" alt="" v-bind:src="'@AppSettingsHelper.ImgUrl'+item.comment.thum" style="border-radius:50%; overflow:hidden;"/>
+                                <div class="contentcomment">
+                                    <div class="main">
+                                        <p class="txt">
+                                            <span class="user">{{item.comment.from_uname}}：</span>
+                                        <p v-html="item.comment.content"></p>
+                                        </p>
+                                    </div>
+                                    <div class="info clearfix">
+                                        <span class="time">{{item.comment.addtime}}</span>
+                                        <a class="praise" href="javascript:;">赞</a>
+                                        <input type="hidden" v-bind:value="item.comment.comment_guid" />
+                                    </div>
+
+                                    <div v-if="item.comment.ZanCount=='0'" class="praises-total" total="0" style="display: none;"></div>
+
+                                    <div v-else class="praises-total" v-bind:total="item.comment.ZanCount" style="display: block;">{{item.comment.ZanCount}}个人觉得很赞</div>
+
+
+                                    <div class="comment-list" v-for="ite in item.reCommentList">
+                                        <div v-if="ite.from_account=='@SessionHelper.Get("UserAccount")'" class="comment-box clearfix" user="self">
+                                            <img class="myhead" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+                                            <div class="comment-content">
+                                                <p class="comment-text"><span class="user">{{ite.from_uname}} ：</span>{{ite.content}}</p>
+                                                <p class="comment-time">
+                                                    {{ite.addtime}}
+                                                    <a href="javascript:;" class="comment-operate">删除</a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div v-else class="comment-box clearfix" user="other">
+                                            <img class="myhead" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+                                            <div class="comment-content">
+                                                <p class="comment-text"><span class="user">{{ite.from_uname}} ：</span>{{ite.content}}</p>
+                                                <p class="comment-time">
+                                                    {{ite.addtime}}
+                                                    <a href="javascript:;" class="comment-operate" style="display:none;">回复</a>
+                                                    <input type="hidden" class="to_account" v-bind:value="ite.from_account" />
+                                                    <input type="hidden" class="to_uid_type" v-bind:value="ite.from_uid_type" />
+                                                    <input type="hidden" class="to_uname" v-bind:value="ite.from_uname" />
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-box" style="display:none;">
+                                        <textarea class="comment" autocomplete="off">评论…</textarea>
+                                        <button class="btn ">回 复</button>
+                                        <input type="hidden" class="comment_guid" v-bind:value="item.comment.comment_guid" />
+                                        <span class="word"><span class="length">0</span>/140</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 页码开始 -->
+
+                        <div class="page">
+                            <div class="team_page">
+                                <div class="M-box1" style="text-align:center;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about_he">
+                <div class="about_he_head">
+                    <p class="desc_tlt">关于TA</p>
+
+                </div>
+                <div class="about_he_main">
+                    <div class="about_he_pic">
+                        <p class="about_he_img"><img src="@AppSettingsHelper.ImgUrl@Model.PeopleImage"></p>
+                        <p class="popularity">
+                            <span class="popularity_fans">
+                                <em class="total_num">101</em><em class="total_txt">粉丝</em>
+                            </span>
+                            <span class="attention">
+                                <em class="total_num">1</em><em class="total_txt">关注</em>
+                            </span>
+                        </p>
+
+                        <p class="popularity">
+                            <em class="total_num" id="popularily">@Model.PageViewCount</em><em class="total_txt">人气</em>
+                        </p>
+                    </div>
+                    <div class="about_he_con">
+                        <p class="a_tlt">你好！我是<span>@Model.PeopleName</span></p>
+
+                        <div class="a_info">
+                            <!-- <p class="a_info_txt"><span>设计经验：</span>13年</p> -->
+                            <p class="a_info_txt no_con"><span>设计经验：</span>@webCommen.GetLookupDesc("people_workyear", Model.WorkYearsID.ToString())</p>
+                            <!-- <p class="a_info_txt"><span>擅长空间：</span>家居住宅 别墅</p> -->
+                            <p class="a_info_txt no_con"><span>擅长空间：</span>@Model.GoodAtStyle</p>
+                            <!-- <p class="a_info_txt"><span>所在地：</span>广东 深圳</p> -->
+                            <p class="a_info_txt no_con"><span>所在地：</span>@Model.ProvinceName @Model.CityName</p>
+                        </div>
+                        <div class="intro_award">
+                            <p class="intro_award_tlt">个人简介</p>
+
+                             <p class="intro_award_con">
+                                            &nbsp;&nbsp;@Model.PeopleInfo
+                                            </p> 
+                        </div>
+                        @*<div class="intro_award">
+                            <p class="intro_award_tlt">证书与奖励</p>
+                            <p class="intro_award_con">
+                                2012年中国春季室内美化家居设计优秀奖<br>
+                                2013年为瑞丽，时尚家居的优秀嘉宾<br>
+                                2013年第三季度全国“优秀设计师”<br>
+                                2014年曾荣获北京优秀设计师<br>
+                                2016年第十届风采大赛--家装设计项目优秀奖
+                            </p>
+                        </div>*@
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p class="clear"></p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<input id="topic_id" value="@Model.PeopleID" type="hidden" />
+<input id="topic_type" value="WebPeople" type="hidden" />
+<input id="urlthum" value="@AppSettingsHelper.ImgUrl" type="hidden" />
+<script>
+    $(function () {
+        GetPageList(1);
+        //分页查询
+        function GetPageList(pageIndex) {
+            var PageSize = 9;
+            var peopleID = '@peopleID';
+            //案例分页Ajax
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "../Handler/GetPageListAjax.ashx",
+                data: {
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    peopleID: peopleID,
+                    methodname: "GetDecCaseList"
+                },
+                success: function (data) {
+                    if (data) {
+                        var html = '';
+                        var pagebar = '';
+                        var datajson = eval('(' + data + ')');
+                        if (datajson.list != null) {
+                            $.each(datajson.list, function (i, ite) {
+                                if (i % 3 == 0) {
+                                    html += '<li>'
+                                    + '<div class="opus_head"></div>'
+                                    + '<div class="opus_img">'
+                                    + '<span class="opus_span">';
+                                }
+                                html += '<a href="/Case/DecCaseDetail?CaseID=' + ite.webcase.CaseID + '&DecType=' + ite.webcase.DecType + '" target="_blank" style="position: relative;">'
+                                       + '<img src="@AppSettingsHelper.ImgUrl' + ite.webcase.CaseImageBig + '" alt="' + ite.webcase.CaseTitle + '">'
+                                       + '<div  class="case_description" style="display:none;">'
+                                       + '<dl>'
+                                       + '<dt>' + ite.webcase.CaseTitle + '</dt>'
+                                       + '<dd style="color: #0EE;">' + ite.webcase.StyleName + '|' + ite.webcase.HouseTypeName + '|' + ite.webcase.HouseAreaName + '|' + ite.webcase.CostAreaName + '</dd>'
+                                       + '</dl>'
+                                       + '</div>'
+                                       + '</a>';
+                                if ((i - 2) % 3 == 0) {
+                                    html += '</span>'
+                                    + '</div>'
+                                    + '</li>';
+                                }
+                            });
+                            $(".opus_nav").find("a").eq(0).find("em").html(datajson.recordcount);
+                            $(".opus_main").append(html);
+                            if (pageIndex + 1 <= datajson.pageCount) {
+                                $(".more_opus").click(function () {
+                                    GetPageList(pageIndex + 1);
+                                })
+                            } else {
+                                $(".more_opus").remove();
+                                var button = '<a href="javascript:void(0)" target="_blank" class="more_opus" style="display: block;">没有更多了</a>'
+                                $(".designer_opus").append(button);
+                            }
+                            $(".opus_span > a").hover(function () {
+                                $(this).find('.case_description').show(300)//.stop(true,true);
+                            }, function () {
+                                $(this).find('.case_description').hide(300)//.stop(true,true);
+                            });
+                            $(window).bind('scroll', function () {
+                                setMenuBar();
+                                setMenuPosition.bindScroll();
+                            });
+                            //数据加载成功后重新获取各模块的top值
+                            setMenuPosition.init({
+                                opusTop: $('.designer_opus').length < 1 ? false : $('.designer_opus').offset().top,
+                                commentTop: $('.owner_comment').length < 1 ? false : $('.owner_comment').offset().top,
+                                recordTop: $('.deal_record').length < 1 ? false : $('.deal_record').offset().top,
+                                aboutTop: $('.about_he').length < 1 ? false : $('.about_he').offset().top
+                            });
+
+                        } else {
+                            $(".opus_main").empty();
+                        }
+                    } else {
+                        $(".opus_main").empty();
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+                }
+            });
+
+        }
+    })
+</script>
+<script>
+    var noticeVue = new Vue({
+        el: '#list',
+        data: {
+            pageList: []
+        },
+        mounted: function () {
+            this.GetPageList(1);
+        },
+        methods: {
+            //分页查询
+            GetPageList: function (pageIndex) {
+                var _self = this;
+                var PageSize = 10;
+                var topic_id = $("#topic_id").val();
+                var topic_type = $("#topic_type").val();
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "../Handler/GetPageListAjax.ashx",
+                    data: {
+                        pageIndex: pageIndex,
+                        PageSize: PageSize,
+                        topic_id: topic_id,
+                        topic_type: topic_type,
+                        methodname: "GetCommentList"
+                    },
+                    success: function (data) {
+                        if (data) {
+                            var datajson = eval('(' + data + ')');
+                            _self.pageList = datajson.list;
+
+                            //列出页码,jq分页控件
+                            $('.M-box1').pagination({
+                                totalData: datajson.recordcount,
+                                showData: PageSize,
+                                coping: true,
+                                current: pageIndex,
+                                callback: _self.pageselectCallback
+                            });
+
+                            Vue.nextTick(function () {
+                                $(".desc_tlt").find("em").html(datajson.recordcount);
+                                //bindonclick();
+                                $(window).bind('scroll', function () {
+                                    setMenuBar();
+                                    setMenuPosition.bindScroll();
+                                });
+                                //数据加载成功后重新获取各模块的top值
+                                setMenuPosition.init({
+                                    opusTop: $('.designer_opus').length < 1 ? false : $('.designer_opus').offset().top,
+                                    commentTop: $('.owner_comment').length < 1 ? false : $('.owner_comment').offset().top,
+                                    recordTop: $('.deal_record').length < 1 ? false : $('.deal_record').offset().top,
+                                    aboutTop: $('.about_he').length < 1 ? false : $('.about_he').offset().top
+                                });
+                            });
+
+                        } else {
+                            _self.pageList = [];
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!');
+                    }
+                });
+
+            },
+            //分页回调函数
+            pageselectCallback: function (pageIndex) {
+                var _self = this;
+                //获取当前页码
+                _self.GetPageList(pageIndex.getCurrent());
+            },
+            //js获取Url参数
+            GetQueryString: function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+
+        }
+    });
+</script>

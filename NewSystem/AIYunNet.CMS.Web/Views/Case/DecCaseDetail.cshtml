@@ -1,0 +1,393 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebCase
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecCaseDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebCommonService webCommen = new WebCommonService();
+    WebPeople peo = ViewBag.peo;
+    WebCompany com = ViewBag.com;
+    int DecType = string.IsNullOrEmpty(Request["DecType"]) ? 1 : Convert.ToInt32(Request["DecType"]);
+}
+<link href="~/Content/design/sheji.casedetail.css" rel="stylesheet" />
+<link href="~/Content/comment/comment.css" rel="stylesheet" />
+<script type="text/javascript" src="/content/comment/demo.js"></script>
+<script>
+    $(function () {
+        //隐藏链接
+        $(".wrap_link").hide();
+        // ======== 右侧设计师信息悬浮定位 ===========
+        initHeight();
+        function initHeight() {
+            var getHeight = $('.caseInfo').height() + $('.image_comment').height();
+            var wHeight = $(window).height();
+            if (getHeight < wHeight) {
+                $('.sjsInfo_box').css('height', (w_height - $('.wrap_cppyright').height() - $('.caseInfo').offset().top) + 'px');
+            }
+            else {
+                $('.sjsInfo_box').css('height', (getHeight - 10) + 'px');
+            }
+        }
+        $(window).scroll(function () {
+            scrollWindow();
+            initHeight();
+        });
+        function scrollWindow() {
+            var scrollTop = $(document).scrollTop();
+            var documentH = $(document).height();
+            var windowH = $(window).height();
+            var offSetTop = $('.caseInfo').offset().top;
+            if (scrollTop >= offSetTop) {
+                if ((scrollTop > documentH - windowH - $('.sjsInfo').height()) && ($('.sjsInfo').height() + 60 + $('.wrap_cppyright').height() > windowH)) {
+                    $('.sjsInfo').css({ 'bottom': '40px', 'top': 'auto' });
+                }
+                else {
+                    var targetTop = scrollTop - 200, adTop = 0;
+                    if ($('#top_add').length) {
+                        adTop = $('#top_add')[0].clientHeight;
+                    }
+                    targetTop -= adTop;
+                    $('.sjsInfo').css({ 'top': targetTop + 'px', 'bottom': 'auto' });
+                }
+            }
+            else {
+                $('.sjsInfo').css({ 'top': '0', 'bottom': 'auto' });
+            }
+        }
+        //移动显示
+        //$(".pageTag > a").hover(function () {
+        //    $(".otherTag").show();
+        //}, function () {
+        //    $(".otherTag").hover(function () { }, function () {
+        //        $(".otherTag").hide();
+        //    })
+        //});
+    })
+
+</script>
+
+<div class="container">
+    <div class="content clearfix">
+        <div class="pageTag">
+            我的位置：<a href="/Index/HomeIndex">脉空间</a>
+            ＞
+            @{
+                string titleZX = "精选家装";
+                if (DecType == 2)
+                {
+                    titleZX = "精选工装";
+                }
+                }
+            <a href="/Case/DecCaseList?DecType=@DecType">@titleZX</a>
+            <!--<i></i>
+            <ul class="otherTag" style="display: none;">
+                <li>
+                    <dl>
+                        <dt>风格：</dt>
+                        <dd class="left">
+
+                            <a href="/works/home/s2k0m0a0/" class="">欧式</a>
+                            <a href="/works/home/s4k0m0a0/" class="">中式</a>
+                            <a href="/works/home/s6k0m0a0/" class="">新古典</a>
+                            <a href="/works/home/s8k0m0a0/" class="">东南亚</a>
+                            <a href="/works/home/s9k0m0a0/" class="">美式</a>
+                            <a href="/works/home/s11k0m0a0/" class="">田园</a>
+                            <a href="/works/home/s12k0m0a0/" class="">地中海</a>
+                            <a href="/works/home/s15k0m0a0/" class="">现代</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>户型：</dt>
+                        <dd class="left">
+
+                            <a href="/works/home/s0k1m0a0/" class="">小户型</a>
+                            <a href="/works/home/s0k2m0a0/" class="">二居</a>
+                            <a href="/works/home/s0k3m0a0/" class="">三居</a>
+                            <a href="/works/home/s0k4m0a0/" class="">四居</a>
+                            <a href="/works/home/s0k5m0a0/" class="">复式</a>
+                            <a href="/works/home/s0k6m0a0/" class="">样板房</a>
+                            <a href="/works/home/s0k7m0a0/" class="">别墅豪宅</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>造价：</dt>
+                        <dd class="left">
+
+                            <a href="/works/home/s0k0m1a0/" class="" rel="nofollow">0-5万</a>
+                            <a href="/works/home/s0k0m2a0/" class="" rel="nofollow">5-10万</a>
+                            <a href="/works/home/s0k0m3a0/" class="" rel="nofollow">10-15万</a>
+                            <a href="/works/home/s0k0m4a0/" class="" rel="nofollow">15-30万</a>
+                            <a href="/works/home/s0k0m5a0/" class="" rel="nofollow">30-50万</a>
+                            <a href="/works/home/s0k0m6a0/" class="" rel="nofollow">50-100万</a>
+                            <a href="/works/home/s0k0m7a0/" class="" rel="nofollow">100万以上</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li>
+                    <dl>
+                        <dt>面积：</dt>
+                        <dd class="left">
+
+                            <a href="/works/home/" class="" rel="nofollow">30-60平米</a>
+                            <a href="/works/home/" class="" rel="nofollow">60-90平米</a>
+                            <a href="/works/home/" class="" rel="nofollow">90-120平米</a>
+                            <a href="/works/home/" class="" rel="nofollow">120-140平米</a>
+                            <a href="/works/home/" class="" rel="nofollow">140-200平米</a>
+                            <a href="/works/home/" class="" rel="nofollow">200平米以上</a>
+                        </dd>
+                    </dl>
+                </li>
+
+            </ul>-->
+            ＞@Model.CaseTitle<p class="clear"></p>
+        </div>
+        <input type="hidden" id="blogUid">
+        <div class="caseInfo">
+            <div class="caseDetail">
+                <h4 class="caseTitle">@Model.CaseTitle</h4>
+                <div class="caseProperty">
+                    <span>参考造价：<em class="red">@webCommen.GetLookupDesc("Case_cost_area", Model.CostArea.ToString())</em></span><span class="del">|</span>
+                    @if (DecType == 1)
+                    {
+                        <span>风格：@webCommen.GetLookupDesc("Case_style", Model.Style.ToString())</span><span class="del">|</span>
+                        <span>空间：@webCommen.GetLookupDesc("Case_house_type", Model.HouseType.ToString())</span><span class="del">|</span>
+                    }
+                    else
+                    {
+                        <span>空间：@webCommen.GetLookupDesc("Case_gz_style", Model.GzStyle.ToString())</span><span class="del">|</span>
+                    }
+                    <span>面积：@webCommen.GetLookupDesc("Case_house_area", Model.HouseArea.ToString())</span><span class="del">|</span>
+                    <span>浏览数：@Model.PageViewCount</span>
+                </div>
+                <div class="caseDescription">
+                    <div class="desTitle"><strong>案例简介</strong> Case description</div>
+                    <div class="desIcon"></div>
+                    @Html.Raw(Model.CaseBrief)
+                </div>
+
+                <div class="imgContent">
+                    @Html.Raw(Model.CaseInfo)
+                </div>
+
+                <!--  ta的相关作品 -->
+                <div class="otherCase">
+                    <h4>TA的其他作品</h4>
+                    <div class="otherCaseContent">
+                        @foreach (WebCase item in ViewBag.caselist)
+                        {
+                            <div class="otherCaseList">
+                                <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@item.DecType"><img src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" width="320" height="320" alt="@item.CaseTitle"></a>
+                                <div class="caseName">@item.CaseTitle</div>
+                            </div>
+                        }
+                        <p class="clear"></p>
+                    </div>
+                </div>
+                <!--  ta的相关作品 END -->
+            </div>
+        </div>
+        <!-- 设计师信息 -->
+        @if (com != null)
+        {
+            <div class="sjsInfo_box">
+                <div class="sjsInfo" bottom 40px;">
+                    <div class="author_info">
+                        <a href="/DecorationCompany/CompanyTuBa?companyID=@com.CompanyID" class="author_head"><img src="@AppSettingsHelper.ImgUrl@com.thumbnailImage"></a>
+                        <span class="author_name">
+                            <a href="/DecorationCompany/CompanyTuBa?companyID=@com.CompanyID" class="name">@com.CompanyName</a>
+                            <span class="icon_renzhen">
+                                @if (com.IsAuthentication)
+                                {
+                                    <em class="icon_rz_qy" title="公司认证"></em>
+                                }
+                                @if (com.IsBond)
+                                {
+                                    <em class="icon_xr" title="服务保障"></em>
+                                }
+
+                            </span>
+                            <p class="city">@com.ProvinceName<a href="javascript:void(0)" target="_blank">@com.CityName</a></p>
+                        </span>
+                    </div>
+                    <div class="order_total">
+                        <ul>
+                            <li><em>119</em><label>预约</label></li>
+                            <li><em>@com.CaseCount</em><label>作品</label></li>
+                            <li><em>@com.CommentCount</em><label>评论</label></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="price" style="display:none;">￥<em>100-200</em>/ ㎡</div>
+                    <a class="btn reservation" id="sjs_case_r" href="javascript:void(0)" data-id="6574309">找TA设计</a>
+                    <a class="btn tel_400" href="javascript:void(0)">
+                        <span class="center_400"><em></em><label>@com.CompanyPhone</label></span>
+                        <div class="notice">
+                            <p>需要装修？需要设计？一个电话搞定！</p>
+                            <span></span>
+                        </div>
+                    </a>
+                </div><a class="btn tel_400" href="javascript:void(0)">
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="sjsInfo_box">
+                <div class="sjsInfo" bottom 40px;">
+                    <div class="author_info">
+                        <a href="/Workers/DecDesignerIndex?peopleID=@peo.PeopleID" class="author_head"><img src="@AppSettingsHelper.ImgUrl@peo.thumbnailImage"></a>
+                        <span class="author_name">
+                            <a href="/Workers/DecDesignerIndex?peopleID=@peo.PeopleID" class="name">@peo.PeopleName</a>
+                            <span class="icon_renzhen">
+                                @if (peo.IsAuthentication)
+                                {
+                                    <em class="icon_rz_qy" title="身份认证"></em>
+                                }
+                                @if (peo.IsBond)
+                                {
+                                    <em class="icon_xr" title="服务保障"></em>
+                                }
+
+                            </span>
+                            <p class="city">@peo.ProvinceName<a href="javascript:void(0)" target="_blank">@peo.CityName</a></p>
+                        </span>
+                    </div>
+                    <div class="order_total">
+                        <ul>
+                            <li><em>119</em><label>预约</label></li>
+                            <li><em>@peo.CaseCount</em><label>作品</label></li>
+                            <li><em>@peo.CommentCount</em><label>评论</label></li>
+                            <div class="clear"></div>
+                        </ul>
+                    </div>
+                    <div class="price"><em>@webCommen.GetLookupDesc("People_Dec_price", peo.PriceID.ToString())</em></div>
+                    <a class="btn reservation" id="sjs_case_r" href="javascript:void(0)" data-id="6574309">找TA设计</a>
+                    <a class="btn tel_400" href="javascript:void(0)">
+                        <span class="center_400"><em></em><label>@peo.PeoplePhone</label></span>
+                        <div class="notice">
+                            <p>找设计师？一个电话搞定！</p>
+                            <span></span>
+                        </div>
+                    </a>
+                </div><a class="btn tel_400" href="javascript:void(0)">
+                </a>
+                <!--<a class="guide" href="javascript:void(0)">如何进行设计本担保交易？</a>-->
+            </div>
+        }
+        
+        <!-- 评论开始 -->
+        <div class="image_comment" id="image_comment">
+            <p class="p_tlt">所有评论&nbsp;(@ViewBag.commentList.Count)</p>
+            <ul>
+                <li class="li_01 clearfix" id="commentBox">
+                    <a href="javascript:void(0)" target="_blank" class="com_a">
+                        <img src="~/Content/comment/images/noheadphoto.gif">
+                    </a>
+                    <div class="com_div" style="border-color: rgb(227, 227, 227);">
+                        <input class="input_text" id="comment-message" type="text" autocomplete="off" placeholder="说点什么吧！">
+                        <input class="sub_btn btn_submit_comment" value="提交" type="submit" id="submit">
+                    </div>
+                </li>
+            </ul>
+            <div id="list">
+                @foreach (PeopleComments item in ViewBag.commentList)
+                {
+                    string name = "";
+                    if (item.comment.from_uname != "")
+                    {
+                        name = item.comment.from_uname;
+                    }
+                    else
+                    {
+                        name = item.comment.from_account;
+                    }
+                    <div class="box clearfix">
+                        <a class="close" href="javascript:;">×</a>
+                        <img class="head" src="@AppSettingsHelper.ImgUrl@item.comment.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+                        <div class="contentcomment">
+                            <div class="main">
+                                <p class="txt">
+                                    <span class="user">@name ：</span>@Html.Raw(item.comment.content)
+                                </p>
+                            </div>
+                            <div class="info clearfix">
+                                <span class="time">@item.comment.addtime</span>
+                                <a class="praise" href="javascript:;">赞</a>
+                                <input type="hidden" value="@item.comment.comment_guid" />
+                            </div>
+                            @if (item.comment.ZanCount == 0)
+                            {
+                                <div class="praises-total" total="0" style="display: none;"></div>
+                            }
+                            else
+                            {
+                                <div class="praises-total" total="@item.comment.ZanCount" style="display: block;">@item.comment.ZanCount 个人觉得很赞</div>
+                            }
+
+                            <div class="comment-list">
+                                @foreach (var arr in item.reCommentList)
+                                {
+                                    if (arr.from_account == SessionHelper.Get("UserAccount"))
+                                    {
+                                        <div class="comment-box clearfix" user="self">
+                                            <img class="myhead" src="@AppSettingsHelper.ImgUrl@arr.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+                                            <div class="comment-content">
+                                                <p class="comment-text"><span class="user">@arr.from_uname ：</span>@Html.Raw(arr.content)</p>
+                                                <p class="comment-time">
+                                                    @arr.addtime
+                                                    <a href="javascript:;" class="comment-operate">删除</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="comment-box clearfix" user="other">
+                                            <img class="myhead" src="@AppSettingsHelper.ImgUrl@arr.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+                                            <div class="comment-content">
+                                                <p class="comment-text"><span class="user">@arr.from_uname ：</span>@Html.Raw(arr.content)</p>
+                                                <p class="comment-time">
+                                                    @arr.addtime
+                                                    <a href="javascript:;" class="comment-operate">回复</a>
+                                                    <input type="hidden" class="to_account" value="@arr.from_account" />
+                                                    <input type="hidden" class="to_uid_type" value="@arr.from_uid_type" />
+                                                    <input type="hidden" class="to_uname" value="@arr.from_uname" />
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+
+
+                            </div>
+                            <div class="text-box">
+                                <textarea class="comment" autocomplete="off">评论…</textarea>
+                                <button class="btn ">回 复</button>
+                                <input type="hidden" class="comment_guid" value="@item.comment.comment_guid" />
+                                <span class="word"><span class="length">0</span>/140</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <!-- 评论 end -->
+    </div>
+</div>
+@{Html.RenderPartial("_GetAllSessions"); }
+<input id="urlthum" value="@AppSettingsHelper.ImgUrl" type="hidden" />
+<input id="topic_id" value="@Model.CaseID" type="hidden" />
+<input id="topic_type" value="WebCase" type="hidden" />
+
+

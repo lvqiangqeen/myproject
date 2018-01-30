@@ -1,0 +1,173 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@model AIYunNet.CMS.Domain.Model.WebCompany
+@{
+    ViewBag.Title = "CompanyTuBaCaseDetail";
+    Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
+    WebCaseService webCaseService = new WebCaseService();
+    WebPeopleService webPeopleService = new WebPeopleService();
+    int caseID = Convert.ToInt32(Request["caseID"]);
+    WebCase ca = webCaseService.GetWebCaseByID(caseID);
+    WebPeople peo = webPeopleService.GetWebPeopleByID(ca.PeopleID);
+    WebCommonService webCommonService = new WebCommonService();
+    t_AreaService t_AreaService = new t_AreaService();
+}
+@{ Html.RenderPartial("_CompanyTuBaHead");}
+<div class="zgs_nav_div">
+    <div class="znd">
+        <ul>
+            <li>
+                <a href="/DecorationCompany/CompanyTuBa?companyID=@Model.CompanyID">
+                    <span>@Model.CompanyName</span><em></em>
+                </a>
+            </li>
+            <li>
+                <a href="/DecorationCompany/CompanyTuBaCaseList?companyID=@Model.CompanyID">
+                    <span>装修案例</span><em></em>
+                </a>
+            </li>
+            <li class="on">@ca.CaseTitle</li>
+        </ul>
+    </div>
+</div>
+<div class="main_content clearfix zgs_design">
+    <div class="case_main clearfix">
+        <div class="case_pics">
+            <a href="#"><img width="200" height="200" title="@ca.CaseTitle" alt="@ca.CaseTitle" src="@AppSettingsHelper.ImgUrl@ca.CaseImageBig"></a>
+        </div>
+        <div class="case_details">
+            <div class="case_name">
+                <a href="javascript:void(0);" class="case_details_name" title="@ca.CaseTitle">@ca.CaseTitle</a>
+                <!--<span class="case_check"><em>365</em>人已查看</span>-->
+            </div>
+            <div class="case_tag clearfix">
+                <span>@t_AreaService.GetCityByID(Model.CityID).city</span>
+                @*<span class="case_tag_span">@ca.CaseTitle</span>*@
+                <span>@webCommonService.GetLookupDesc("Case_cost_area", ca.CostArea.ToString())</span>
+                <span>@webCommonService.GetLookupDesc("Case_house_type", ca.HouseType.ToString())</span>
+                <span>@webCommonService.GetLookupDesc("Case_house_area", ca.HouseArea.ToString())</span>
+                <span>@webCommonService.GetLookupDesc("Case_style", ca.Style.ToString())</span>
+            </div>
+            <div class="case_progress" style="display:none;">
+                <ul class="clearfix">
+                    <li><em class="progress_dot"></em>准备开工</li>
+                    <li><em class="progress_dot"></em>水电阶段</li>
+                    <li><em class="progress_dot"></em>泥木阶段</li>
+                    <li><em class="progress_dot"></em>油漆阶段</li>
+                    <li><em class="progress_dot"></em>竣工阶段</li>
+                </ul>
+                <script>
+                    $(function () {
+                        var jobsh = "4";
+                        for (var i = 0; i <= jobsh; i++)
+                        {
+                            $(".case_progress > .clearfix > li:eq(" + i + ")").attr("class", "on_li");
+                        }
+                    })
+                </script>
+            </div>
+        </div>
+        <input class="case_btn" type="submit" value="免费预约参观" onclick="freeOrderSite({toid:478250, ptag:'1_5_2_4'}, this);return false;">
+
+    </div>
+    <div class="zgs_design_nav">
+        <ul class="clearfix">
+            <li><a href="javascript:;" class="on">设计方案</a></li>
+
+            @*<li><a href="javascript:;" class="">施工案例</a></li>*@
+
+
+        </ul>
+        <a href="javascript:;" class="zgs_design_nav_free" onclick="freeOrder2({toid:478250,gid:4357342, ptag:'1_5_2_8'});return false;">找Ta帮我设计</a>
+    </div>
+
+
+
+    <div class="design_nav_sheji" style="display: block;">
+        <div class="design_ins">
+            <a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@peo.CompanyID&peopleID=@peo.PeopleID" class="design_ins_avt"><img src="@AppSettingsHelper.ImgUrl@peo.thumbnailImage" alt="@peo.PeopleName" width="60" height="60"></a>
+            <div class="design_ins_text">
+                <p class="design_ins_er"><a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@peo.CompanyID&peopleID=@peo.PeopleID" target="_blank">@peo.PeopleName</a>&nbsp;&nbsp;@webCommonService.GetLookupDesc("people_position", peo.PeoplePositionID.ToString())</p>
+                <div>
+                </div>
+            </div>
+        </div>
+        <div class="design_detail">
+            <p>
+                @Html.Raw(ca.CaseInfo)
+            </p>
+        </div>
+    </div>
+
+    <div class="relative_spot">
+        <div class="spot_hd">相关案例</div>
+        <div class="spot_bd clearfix">
+            @{ int i = 0;}
+            @foreach (var item in ViewBag.CaseList as List<WebCase>)
+            {
+                if (i == 0)
+                {
+                    <div class="spot_item spot_item_l">
+                        <div class="case_main case_main_s">
+                            <div class="case_pics">
+                                <a target="_blank" href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@Model.CompanyID">
+                                    <img width="98" height="98" title="@item.CaseTitle" alt="@item.CaseTitle" src="@AppSettingsHelper.ImgUrl@item.thumbnailImage">
+                                </a>
+                            </div>
+                            <div class="case_details">
+                                <div class="case_name">
+                                    <a href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@Model.CompanyID" title="@item.CaseTitle" class="case_details_name">@item.CaseTitle</a>
+                                </div>
+                                <div class="case_tag clearfix">
+                                    <span>@t_AreaService.GetCityByID(Model.CityID).city</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_cost_area", item.CostArea.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_house_type", item.HouseType.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_house_area", item.HouseArea.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_style", item.Style.ToString())</span>
+                                </div>
+                                @*<div class="case_info">
+                                    <ul class="clearfix">
+                                        <li><a class="case_info_lnk" href="/zs/478250/4282796visit1-display-1.html#0">设计图<span class="case_info_num">6</span></a></li>
+                                        <li class="sep"><em></em></li>
+                                        <li><a class="case_info_lnk" href="/zs/478250/4282796visit1-display-1.html#1">施工图<span class="case_info_num">0</span></a></li>
+                                    </ul>
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="spot_item spot_item_r">
+                        <div class="case_main case_main_s">
+                            <div class="case_pics">
+                                <a target="_blank" href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@Model.CompanyID">
+                                    <img width="98" height="98" title="@item.CaseTitle" alt="@item.CaseTitle" src="@AppSettingsHelper.ImgUrl@item.thumbnailImage">
+                                </a>
+                            </div>
+                            <div class="case_details">
+                                <div class="case_name">
+                                    <a href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@Model.CompanyID" title="@item.CaseTitle" class="case_details_name">@item.CaseTitle</a>
+                                </div>
+                                <div class="case_tag clearfix">
+                                    <span>@t_AreaService.GetCityByID(Model.CityID).city</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_cost_area", item.CostArea.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_house_type", item.HouseType.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_house_area", item.HouseArea.ToString())</span>
+                                    <span>@webCommonService.GetLookupDesc("Case_style", item.Style.ToString())</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                i++;
+            }
+
+
+
+        </div>
+    </div>
+</div>
+

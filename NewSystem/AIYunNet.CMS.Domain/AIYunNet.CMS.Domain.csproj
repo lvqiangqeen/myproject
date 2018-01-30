@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{694F646E-126E-4DC1-91FE-CBDF0649D9F0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIYunNet.CMS.Domain</RootNamespace>
+    <AssemblyName>AIYunNet.CMS.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dos.ORM, Version=1.10.7.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dos.ORM.1.10.7.1\lib\net40\Dos.ORM.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Lib\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AIYunNetContext.cs" />
+    <Compile Include="AIYunDbSession.cs" />
+    <Compile Include="DataHelper\EntityHelper.cs" />
+    <Compile Include="DataHelper\MsSqlDataSource.cs" />
+    <Compile Include="Model\DownLoad.cs" />
+    <Compile Include="Model\DownLoadType.cs" />
+    <Compile Include="Model\PeopleJian.cs" />
+    <Compile Include="Model\SinglePage.cs" />
+    <Compile Include="Model\SysAdminUser.cs" />
+    <Compile Include="Model\SysUser.cs" />
+    <Compile Include="Model\t_Area.cs" />
+    <Compile Include="Model\t_City.cs" />
+    <Compile Include="Model\t_Province.cs" />
+    <Compile Include="Model\t_rms_region.cs" />
+    <Compile Include="Model\WebBuiding.cs" />
+    <Compile Include="Model\WebBuidingStages.cs" />
+    <Compile Include="Model\WebBuidingTimeStages.cs" />
+    <Compile Include="Model\WebCase.cs" />
+    <Compile Include="Model\WebCasePage.cs" />
+    <Compile Include="Model\WebCaseRelationship.cs" />
+    <Compile Include="Model\WebCompany.cs" />
+    <Compile Include="Model\WebCompanyAuthentication.cs" />
+    <Compile Include="Model\WebCompanyGuarantMoney.cs" />
+    <Compile Include="Model\WebCompanyUser.cs" />
+    <Compile Include="Model\WebFile.cs" />
+    <Compile Include="Model\WebFriendLink.cs" />
+    <Compile Include="Model\WebGoods.cs" />
+    <Compile Include="Model\WebImg.cs" />
+    <Compile Include="Model\WebLookup.cs" />
+    <Compile Include="Model\WebMenu.cs" />
+    <Compile Include="Model\WebNews.cs" />
+    <Compile Include="Model\WebPeople.cs" />
+    <Compile Include="Model\WebPeopleAuthentication.cs" />
+    <Compile Include="Model\WebPeopleGuarantMoney.cs" />
+    <Compile Include="Model\WebPicture.cs" />
+    <Compile Include="Model\WebRecommend.cs" />
+    <Compile Include="Model\WebUser.cs" />
+    <Compile Include="Model\WebWorker.cs" />
+    <Compile Include="Model\Z_Comment.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SupportFile\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
