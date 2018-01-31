@@ -1,0 +1,257 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecImagelist";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebCommonService webCommen = new WebCommonService();
+    WebPeopleService webpeopleSer = new WebPeopleService();
+    List<WebLookup> stylelist = webCommen.GetLookupList("Case_style");//风格
+    List<WebLookup> gzStylelist = webCommen.GetLookupList("Case_gz_style");//工装风格
+    List<WebLookup> jzSpacelist = webCommen.GetLookupList("Case_Img_Jzspace");//家装风格
+    int DecType = string.IsNullOrEmpty(Request["DecType"]) ? 1 : Convert.ToInt32(Request["DecType"]);
+}
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+        .fiter .fiter_line .list {
+    width: 1045px;
+}
+</style>
+
+<link href="~/Content/design/sheji.caselist.css" rel="stylesheet" />
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+    <!-- Animate.css -->
+<link rel="stylesheet" href="/content/pbl/css/animate.css">
+
+<link rel="stylesheet" href="/content/pbl/css/magnific-popup.css">
+
+<link rel="stylesheet" href="/content/pbl/css/salvattore.css">
+
+<link rel="stylesheet" href="/content/pbl/css/style.css">
+<script>
+    //加入缓存不执行
+    function cachejs(script_filename) {
+        var cache = document.createElement('object');
+        cache.data = script_filename;
+        cache.id = "coolshell_script_cache_id";
+        cache.width = 0;
+        cache.height = 0;
+        document.body.appendChild(cache);
+    }
+    cachejs("/content/pbl/js/salvattore.min.js");
+    cachejs("/content/pbl/js/main.js");
+    
+</script>
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    @if (DecType == 1)
+                    {
+                        <a href="#">家装图库</a>
+                    }
+                    else
+                    {<a href="#">工装图库</a> }
+                </li>
+            </ul>
+        </div>
+        <!-- 筛选框 -->
+        <div class="fiter" style="width: 1195px;">
+            @if (DecType == 1)
+            {
+                <div class="fiter_line">
+                    <span class="column">风格筛选：</span>
+                    <div class="list" id="stylelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in stylelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="fiter_line">
+                    <span class="column">家装空间：</span>
+                    <div class="list" id="jzSpacelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in jzSpacelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="fiter_line">
+                    <span class="column">工装空间：</span>
+                    <div class="list" id="gzStylelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in gzStylelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- 筛选框 END -->
+        <!-- 列表 -->
+        <div id="fh5co-main">
+            <div class="container">
+
+                <div class="row">
+
+                    <div id="fh5co-board" data-columns>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="case-list-box clearfix">
+            
+        </div>
+        <div class="page">
+            <p class="page_num">
+
+                <div class="M-box1" style="text-align:center;"></div>
+
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modernizr JS -->
+<script src="/content/pbl/js/modernizr-2.6.2.min.js"></script>
+    <!-- jQuery Easing -->
+<script src="/content/pbl/js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="/content/pbl/js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="/content/pbl/js/jquery.waypoints.min.js"></script>
+<!-- Magnific Popup -->
+<script src="/content/pbl/js/jquery.magnific-popup.min.js"></script>
+
+<script>
+    $(function () {
+        GetPageList(1);
+
+        //点击分类改变样式
+        $(".list  > a").click(function () {
+            $(this).addClass("onselect").prevAll("a").removeClass();
+            $(this).nextAll("a").removeClass();
+            GetPageList(1);
+        });
+        //执行js
+        function loadjs(script_filename) {
+            var script = document.createElement('script');
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('src', script_filename);
+            script.setAttribute('id', 'coolshell_script_id');
+
+            script_id = document.getElementById('coolshell_script_id');
+            if (script_id) {
+                document.getElementsByTagName('head')[0].removeChild(script_id);
+            }
+            document.getElementsByTagName('head')[0].appendChild(script);
+        }
+        //分页查询
+        function GetPageList(pageIndex) {
+            var PageSize = 40;
+            var ImgJzstyle = $("#stylelist  >  .onselect > input").val();
+            var ImgJzspce = $("#jzSpacelist  > .onselect > input").val();
+            var ImgGzspace = $("#gzStylelist  >  .onselect > input").val();
+            var DecType = "@DecType";
+            var SortOrder = $("#SortOrder").val();
+            //案例分页Ajax
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "../Handler/GetPageListAjax.ashx",
+                data: {
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    ImgJzstyle: ImgJzstyle,
+                    ImgJzspce: ImgJzspce,
+                    ImgGzspace: ImgGzspace,
+                    DecType: DecType,
+                    SortOrder: SortOrder,
+                    methodname: "GetDecImgList"
+                },
+                success: function (data) {
+                    if (data) {
+                        var html = '';
+                        var pagebar = '';
+                        var datajson = eval('(' + data + ')');
+                        if (datajson.list != null) {
+                            $.each(datajson.list, function (i, ite) {
+                                html += '<div class="item">'
+                                + '<div class="animate-box">'
+                                + '<a href="@AppSettingsHelper.ImgUrl' + ite.PictureImg + '" class="image-popup fh5co-board-img"><img src="@AppSettingsHelper.ImgUrl' + ite.PictureImg + '" alt="' + ite.PictureName + '"></a>'
+                                + '<div class="fh5co-desc">' + ite.PictureName + '</div>'
+                                + '</div>'
+                                + '</div>';
+                            });
+                            $("#fh5co-board").empty();
+                            $("#fh5co-board").append(html);
+                            //列出页码,jq分页控件
+                            $('.M-box1').pagination({
+                                totalData: datajson.recordcount,
+                                showData: PageSize,
+                                coping: true,
+                                current: pageIndex,
+                                callback: pageselectCallback
+                            });
+                            loadjs("/content/pbl/js/salvattore.min.js");
+                            loadjs("/content/pbl/js/main.js");
+
+                        } else {
+                            $("#fh5co-board").empty();
+                        }
+                    } else {
+                        $("#fh5co-board").empty();
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+                }
+            });
+
+        }
+        //分页回调函数
+        function pageselectCallback(pageIndex) {
+            var _self = this;
+            //获取当前页码
+            GetPageList(pageIndex.getCurrent());
+        }
+    })
+</script>

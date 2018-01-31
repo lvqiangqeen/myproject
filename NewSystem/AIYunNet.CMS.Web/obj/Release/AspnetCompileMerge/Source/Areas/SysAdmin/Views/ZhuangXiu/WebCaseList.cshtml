@@ -1,0 +1,143 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "WebCaseList";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    IWebCommon commonService = new WebCommonService();
+    IWebCompany companyService = new WebCompanyService();
+    IWebPeople peopleService = new WebPeopleService();
+}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">
+            <a class="btn btn-primary" href="/SysAdmin/ZhuangXiu/AddOrEditWebCase?caseID=0"><i class="fa fa-pencil"></i>添加案例</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" id="caseList">
+        <table id="webCaseDt" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+                <tr class="header-style" role="row">
+                    <th class="text-center">
+                        <input id="chkAll" type="checkbox">
+                    </th>
+                    <th>名称</th>
+                    <th>简介</th>
+                    <th>所属公司</th>
+                    <th>所属人员</th>
+                    <th>图片个数</th>
+                    <th>置首</th>
+                    <th>价格</th>
+                    <th>风格</th>
+                    <th>户型</th>
+                    <th>面积</th>
+                    <th>添加时间</th>
+                    <th>操作 </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WebCase webCase in ViewBag.WebCaseList as List<WebCase>)
+                {
+                    <tr>
+                        <td><input class="chkWebCase" type="checkbox" value="@webCase.CaseID"></td>
+                        <td>@webCase.CaseTitle</td>
+                        <td>@StringHelper.StringTruncat(webCase.CaseBrief,16,"...")</td>
+                        @if (webCase.CompanyID == 0)
+                        {
+                            <td>无装修公司</td>
+                        }
+                        else
+                        {
+                            <td>@companyService.GetWebCompanyByID(webCase.CompanyID).CompanyName</td>
+                        }
+                        @if (webCase.PeopleID == 0)
+                        {
+                            <td>无装修人员</td>
+                        }
+                        else
+                        {
+                            <td>@peopleService.GetWebPeopleByID(webCase.PeopleID).PeopleName</td>
+                        }
+                        
+                        <td></td>
+                        <td>
+                            @if (webCase.IsTop)
+                            {
+                                @:<span style="color:red">是</span>
+                            }
+                            else
+                            {
+                                @:否
+                            }
+                        </td>
+                        <td>@commonService.GetLookupDesc("Case_cost_area", webCase.CostArea != 0 ? ((int)webCase.CostArea).ToString() : "-1")</td>
+                        <td>@commonService.GetLookupDesc("Case_style", webCase.Style != 0 ? ((int)webCase.Style).ToString() : "-1")</td>
+                        <td>@commonService.GetLookupDesc("Case_house_type", webCase.HouseType != 0 ? ((int)webCase.HouseType).ToString() : "-1")</td>
+                        <td>@commonService.GetLookupDesc("Case_house_area", webCase.HouseArea != 0 ? ((int)webCase.HouseArea).ToString() : "-1")</td>
+                        <td>@webCase.AddOn</td>
+                        <td>
+                            <a class="btn1 btn-stroke" href="/SysAdmin/ZhuangXiu/AddOrEditWebCase?caseID=@webCase.CaseID"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                            <a class="btn1 btn-stroke" href="javascript:deleteCase(@webCase.CaseID)"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $(function () {
+            sessionStorage.setItem('url', '@Request.Url.ToString()');
+
+            $("#webCaseDt").DataTable({
+                "language": {
+                    "emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+                    "info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+                    "infoEmpty": "没有记录",
+                    "infoFiltered": "",
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "search": "搜索:",
+                    "zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>"
+                },
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "order": [[11, "desc"]]
+            });
+        })
+
+        function deleteCase(caseID) {
+
+            swal({
+                title: "你确定?",
+                text: "你将删除这个记录!",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "不,取消",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是, 删除",
+                closeOnConfirm: false
+            },
+    function () {
+        $.ajax({
+            type: "post",
+            url: "/SysAdmin/ZhuangXiu/DeleteWebCase",
+            data: { "caseID": caseID },
+            success: function (data) {
+                if (data.RetCode = 1) {
+                    window.location.href = window.location.href;
+                }
+            }
+        });
+    });
+        }
+    </script>
+}
+

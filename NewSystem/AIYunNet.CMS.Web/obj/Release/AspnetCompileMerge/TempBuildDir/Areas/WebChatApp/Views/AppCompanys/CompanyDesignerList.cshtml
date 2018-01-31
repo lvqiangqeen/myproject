@@ -1,0 +1,72 @@
+﻿@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "CompanyDesignerList";
+    Layout = "~/Areas/WebChatApp/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("~/Areas/WebChatApp/Views/AppCompanys/CompanyTitle.cshtml")
+<div class="header-clear"></div>
+<div class="content">
+
+    <div class="container no-bottom">
+        <h3>公司签约设计师</h3>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="one-third-responsive">
+    </div>
+
+</div>
+<div class="header-clear"></div>
+@section Scripts{
+    <script>
+        $(function () {
+            var companyid=getQueryString("CompanyID");
+            GetPageList(1,companyid);
+            });
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+            function GetPageList(page,companyid) {
+
+                $.ajax({
+                    type: 'GET',
+                    async: true,
+                    url: '/WebChatApp/AppCompanys/GetDesignersListByCompanyID?pageIndex=' + page + '&PageSize=' + 8 + '&CompanyID=' + companyid,
+                    dataType: 'json',
+                    success: function (data) {
+                        //var datajson = eval('(' + data + ')');
+                        page++;
+                        var result = "";
+                        var arrLen = 0;
+                        if (data.list != null) {
+                            arrLen = data.list.length;
+                        }
+                        $(".listcom").remove();
+                        if (arrLen > 0) {
+                            for (var i = 0; i < arrLen; i++) {
+                                result += '<a href="/WebChatApp/AppPeoples/DesignerDetail?PeopleID=' + data.list[i].PeopleID + '" class="user-list-item">'
+                                    + '<img src="@AppSettingsHelper.thumbnailImage' + data.list[i].thumbnailImage + '" alt="img" style="border-radius:50%;">'
+                                    + ' <strong>'+data.list[i].PeopleName+'<br></strong>'
+                                    + '<em>' + data.list[i].BelongArea + ' | 擅长：' + data.list[i].GoodAtStyle + ' | 年限：' + data.list[i].WorkYears + '年   </em>'
+                                    + '<i class="fa fa-chevron-right"></i>'
+                                    + '</a><div class="decoration"></div>';
+                            }
+                            result += '<div class="content"><a class="listcom" href="javascript:void(0);" onclick="GetPageList(' + page + ',' + companyid + ')">下一页</a></div>';
+                            $(".one-third-responsive").append(result);
+
+                        } else {
+                            result += '<div class="content"><a class="listcom" href="javascript:void(0);">没有更多了。。。</a></div>';
+                            $(".one-third-responsive").append(result);
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!');
+
+                    }
+                });
+            }
+
+</script>
+}

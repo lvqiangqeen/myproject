@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Mobile Specific Metas
+    +++++++++++++++++++++++++++ -->
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" href="/content/BootStrap_Yellow/images/favicon.ico">
+    <title>脉装修</title>
+    <script type="text/javascript">
+
+        var mobileAgent = new Array("iphone", "ipod", "ipad", "android", "mobile", "blackberry", "webos", "incognito", "webmate", "bada", "nokia", "lg", "ucweb", "skyfire");
+
+        var browser = navigator.userAgent.toLowerCase();
+
+        var isMobile = false;
+
+        for (var i = 0; i < mobileAgent.length; i++) {
+            if (browser.indexOf(mobileAgent[i]) != -1) {
+                isMobile = true;
+
+                location.href = 'http://m.51mkj.com:8080/index/index';
+
+                break;
+            }
+        }
+
+    </script>
+    <link rel="stylesheet" type="text/css" href="/content/BootStrap_Yellow/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/content/BootStrap_Yellow/css/bootstrap-responsive.css">
+
+    <link rel="stylesheet" type="text/css" href="/content/BootStrap_Yellow/css/theme.css">
+    <link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+    <script src="/content/BootStrap_Yellow/js/jquery-1.9.1.js"></script>
+    <script src="/content/BootStrap_Yellow/js/jquery-ui.min.js" type="text/javascript"></script>
+
+    <!-- Demo Panel -->
+    <script type="text/javascript" src="/content/BootStrap_Yellow/js/color_panel.js"></script>
+    <script src="~/Content/Scripts/vue/vue.min.js"></script>
+    <script src="~/Content/Scripts/jquery.pagination.js"></script>
+    <script>
+        function scrolled_menu() {
+            if ($(window).scrollTop() > $('header').height()) {
+                $('header').addClass('fixed_type');
+                $('html').addClass('fixed_type_html');
+            } else {
+                $('header').removeClass('fixed_type');
+                $('html').removeClass('fixed_type_html');
+            }
+        }
+
+        $(document).ready(function () {
+            var fixd_menu = setInterval(scrolled_menu, 100);
+            //$('head').append('<link rel="stylesheet" type="text/css" href="css/colors/color-default.css" id="theme_color">');
+            if ($('.custom_bg_cont').size() > 0) {
+                $('html').addClass('user_bg_layout');
+                $('.header_wrapper').wrap('<div class="header_layout"/>');
+                if ($('.custom_bg_cont').hasClass('bg_pic')) {
+                    $('html').addClass('user_pic_layout');
+                }
+            }
+            //Menu SetUp and animation
+            $('.menu').find('li:has(ul)').addClass('has-menu');
+            $('.menu').children('li.has-menu').addClass('level1');
+            $('.menu').children('li').append('<span class="menu_marker"/>')
+            $('.menu').find('li.level1').find('ul.sub-menu').children('li.has-menu').addClass('level2');
+            $('.menu').children('li:last').addClass('last');
+            $('ul.sub-menu').each(function () {
+                $(this).prepend('<div class="menu_arrow"></div>');
+            });
+
+            //MobileMenu
+            $('.header_wrapper').append('<a href="javascript:void(0)" class="menu_toggler"/>');
+            $('header').append('<div class="mobile_menu_wrapper"><ul class="mobile_menu container"/></div>');
+            $('.mobile_menu').html($('header').find('.menu').html());
+            $('.menu_toggler').click(function () {
+                $('.mobile_menu_wrapper').slideToggle(300);
+            });
+            $('header .menu').find('li').each(function () {
+                cur_link = $(this).children("a");
+            });
+
+            $('#mobile_select').change(function () {
+                select_val = $(this).val();
+                window.location = select_val;
+            });
+
+            //Input and Textarea Click-Clear
+            $('input[type=text]').focus(function () {
+                if ($(this).attr('readonly') || $(this).attr('readonly') == 'readonly') return false;
+                if ($(this).val() === $(this).attr('title')) {
+                    $(this).val('');
+                }
+            }).blur(function () {
+                if ($(this).attr('readonly') || $(this).attr('readonly') == 'readonly') return false;
+                if ($(this).val().length === 0) {
+                    $(this).val($(this).attr('title'));
+                }
+            });
+        });
+
+    </script>
+        <style>
+                #header .top {
+                   background-color: #f6f6f6;
+                       border-top: solid 2px #fff;
+    border-bottom: solid 1px #e5e5e5;    
+            width: 100%;
+            height: 29px;
+            line-height: 29px;
+            font-size: 12px;
+            color: #999;
+        }
+                .top .top_l .city {
+            padding: 0 45px 0 20px;
+            float: left;
+            background: url(/content/images/icon_01.jpg) no-repeat left center;
+        }
+                .top .top_l .switch {
+    float: left;
+    padding: 0 14px 0 0;
+    background: url(/content/images/icon_02.jpg) no-repeat right center;
+}
+                .top .top_l .lead {
+    float: left;
+    padding: 0 0 0 14px;
+}
+                .top .top_l .lead span {
+    padding-left: 14px;
+}
+                .top .top_m span {
+    padding-right: 20px;
+}
+                .top .top_r .app {
+    float: left;
+    padding-right: 24px;
+    background: url(/content/images/icon_03.jpg) no-repeat 25px center;
+}
+                .top .top_r .app span {
+    padding-right: 40px;
+}
+                .top .top_r .wechart {
+    float: left;
+    padding: 0 4px 0 0;
+    background: url(/content/images/icon_13.jpg) no-repeat 25px center;
+}
+                .top .top_r .wechart span {
+    padding-right: 40px;
+}
+                .top .top_l {
+            float: left;
+        }
+                .top .top_m {
+            float: left;
+            padding-left: 395px;
+        }
+                .top .top_r {
+            float: right;
+        }
+            </style>
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <!--header-->
+    <header>
+        @*<div id="header">
+            <div class="top">
+                <div class="w" style="width: 1100px; margin: 5px auto;">
+                    <div class="top_l">
+                        <div class="city">杭州</div>
+                        <div class="switch">切换城市</div>
+                    </div>
+                    <div class="top_r">
+                        <div class="app"><span></span>手机版</div>
+                        <div class="wechart"><span>｜</span>官方微信</div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="header_wrapper container">
+            <a href="/index/HomePage" class="logo"><img src="/content/BootStrap_Yellow/images/logo.png" alt="" width="222" height="43" class="logo_def"><img src="/content/BootStrap_Yellow/images/retina/logo.png" alt="" width="222" height="43" class="logo_retina"></a>
+            <div class="slogan"><span></span><hr></div>
+            <nav>
+                <script>
+                    $(document).ready(function () {
+                        var value = sessionStorage.getItem("key");
+                        $("#" + value).parent("li").addClass("current-menu-parent");
+                        $("#" + value).parent("li").prevAll("li").removeClass();
+                        $("#" + value).parent("li").nextAll("li").removeClass();
+                        if (value == 'namewoklead' || value == 'namewok' || value == 'UserCenter' || value == 'CompanyCenter') {
+                            $("#" + value).parent("li").addClass("current-menu-item");
+                            $(".menu").children("li").removeClass();
+                            $("#" + value).parent("li").parent("ul").parent("li").addClass("current-menu-parent");
+                        }
+                    });
+                </script>
+                <ul class="menu">
+                    <li class="current-menu-parent">
+                        <a href="/index/HomePage" id="nameshou" onclick="sessionStorage.setItem('key',$(this).attr('id'));">首页</a>
+                        @*<ul class="sub-menu">
+                                <div class="menu_arrow"></div>
+                                <li class="current-menu-item"><a href="index.html">Layout1</a></li>
+
+                                <li><a href="home2.html">Layout2</a></li>
+                                <li><a href="home3.html">Layout3</a></li>
+                            </ul>*@
+                        <span class="menu_marker"></span>
+                    </li>
+                    <li><a href="/DecorationCompany/CompanyList" id="namecompany" onclick="sessionStorage.setItem('key',$(this).attr('id'));">装修公司</a><span class="menu_marker"></span></li>
+                    <li>
+                        <a href="/Workers/WorkersDesignerList" id="namedes" onclick="sessionStorage.setItem('key',$(this).attr('id'));">设计师</a>
+                        @*<ul class="sub-menu">
+                                <div class="menu_arrow"></div>
+                                <li><a href="typography.html">Typography</a></li>
+                                <li><a href="shortcodes.html">Shortcodes</a></li>
+                            </ul>*@
+                        <span class="menu_marker"></span>
+                    </li>
+                    <li class="has-menu level1">
+                        <a href="javascript:void(0)">装修工</a>
+                        <ul class="sub-menu">
+                            <div class="menu_arrow"></div>
+                            <li><a href="/Workers/WorkersLeaderList" id="namewoklead" onclick="sessionStorage.setItem('key',$(this).attr('id'));">装修工长</a></li>
+                            <li><a href="/Workers/WorkersPeopleList" id="namewok" onclick="sessionStorage.setItem('key',$(this).attr('id'));">装修工人</a></li>
+                        </ul>
+                        <span class="menu_marker"></span>
+                    </li>
+                    <li>
+                        <a href="/case/caseList" id="namecase" onclick="sessionStorage.setItem('key',$(this).attr('id'));">装修案例</a>
+                        <span class="menu_marker"></span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">个人中心</a>
+                        <ul class="sub-menu">
+                            <div class="menu_arrow"></div>
+                            <li><a href="/PeopleCenter/UserCenter/PeopleCenterIndex" id="UserCenter" onclick="sessionStorage.setItem('key',$(this).attr('id'));" target="_blank">用户中心</a></li>
+                            <li><a href="/CompanyCenter/CompanyCenter/CompanyCenterIndex" id="CompanyCenter" onclick="sessionStorage.setItem('key',$(this).attr('id'));" target="_blank">商户中心</a></li>
+                        </ul>
+                        <span class="menu_marker"></span>
+                    </li>
+                </ul><!-- .menu -->
+            </nav>
+            <nav class="mobile_header">
+                <select id="mobile_select"></select>
+            </nav>
+            <a href="javascript:void(0)" class="menu_toggler"></a>
+        </div>
+        <div class="clear"></div>
+    </header>
+
+    @RenderBody()
+
+    <!-- .content_wrapper -->
+
+
+
+    @Html.Partial("~/Views/Shared/footer.cshtml")
+
+    <!--浮窗样式-->
+    <link href="~/Content/fuchuang/fuchuang.css" rel="stylesheet" />
+    <div class="slide">
+        <ul class="icon">
+            <li class="up" title="上一页"></li>
+            <li class="qq"></li>
+            <li class="tel"></li>
+            <li class="wx"></li>
+            <li class="down" title="下一页"></li>
+        </ul>
+        <ul class="info">
+            <li class="qq">
+                <p>在线沟通，请点我<a href="http://wpa.qq.com/msgrd?v=3&uin=595215839&site=qq&menu=yes" target="_blank">在线咨询</a></p>
+            </li>
+            <li class="tel">
+                <p>咨询热线：<br>400-800-8888<br>客服qq：<br>862164018</p>
+            </li>
+            <li class="wx">
+                <div class="img"><img src="/content/fuchuang/img/qrcode_for_gh_fc7db3f4e9d5_258.jpg" /></div>
+            </li>
+        </ul>
+    </div>
+    <div id="btn" class="index_cy"></div>
+
+    <script type="text/javascript">
+	$(function(){
+
+		$('.slide .icon li').not('.up,.down').mouseenter(function(){
+			$('.slide .info').addClass('hover');
+			$('.slide .info li').hide();
+			$('.slide .info li.'+$(this).attr('class')).show();//.slide .info li.qq
+		});
+		$('.slide').mouseleave(function(){
+			$('.slide .info').removeClass('hover');
+		});
+
+		$('#btn').click(function(){
+			$('.slide').toggle();
+			if($(this).hasClass('index_cy')){
+				$(this).removeClass('index_cy');
+				$(this).addClass('index_cy2');
+			}else{
+				$(this).removeClass('index_cy2');
+				$(this).addClass('index_cy');
+			}
+
+		});
+
+	});
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

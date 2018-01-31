@@ -1,0 +1,165 @@
+#wikipedia{
+ 	margin-top: 53px;
+}
+#wikipedia img{
+vertical-align: top;
+
+}
+#wikipedia span{
+	font-size: 33px;
+	font-family: "黑体";
+	line-height: 29px;
+	color: #d2d2d2;
+	padding-left: 30px;
+	font-weight: 700;
+}
+
+#main{
+	margin-top: 23px;
+}
+#main .classify{
+	float: left;
+}
+#main .classify .dt{
+	width: 121px;
+	height: 121px;
+	background-color: #f2f2f2;
+	border: 1px solid #979797;
+	text-align: center;
+	margin-bottom: 11px;
+}
+#main .classify .dt img{
+	padding-top: 24px;
+}
+#main .classify .dt p{
+	font-size: 17px;
+	line-height: 42px;
+	color: #595656;
+	font-family: "黑体";
+}
+#main > div > div.classify > div:nth-child(4){
+	border: 1px solid #ff6a03;
+}
+#main > div > div.classify > div:nth-child(4) p{
+	color: #ff6a03;	
+}
+#main .qalist{
+	float: left;
+	margin-left: 30px;
+}
+#main .qalist>p{
+	font-size: 17px;
+	line-height: 36px;
+	color: #595656;
+	font-family: "黑体";
+}
+#main .qalist .qacard{
+	width: 615px;
+	height: 232px;
+	background-color: #f2f2f2;
+	margin-bottom: 12px;
+}
+#main .qalist .qacard h2{
+	font-size: 18px;
+	line-height: 50px;
+	color: #595656;
+	font-family: "微软雅黑";
+	padding-left: 24px;
+}
+#main .qalist .qacard img{
+	float: left;
+	padding-left: 23px;
+}
+#main .qalist .qacard>p{
+	float: left;
+	padding-left: 21px;
+	width: 436px;
+	line-height: 22px;
+}
+#main .qalist .qacard>p span a{
+	font-size: 13px;
+	color: #ec6813;
+	cursor: pointer;
+}
+#main .qalist .tool{
+	margin-top: 18px;
+	padding-left: 24px;
+	line-height: 45px;
+	font-size: 13px;
+	color: #595656;
+}
+#main .qalist .tool .num1{
+	background:url(../images/good_27.png) no-repeat 3px top;
+	padding-left: 28px;
+	padding-right: 34px;
+}
+#main .qalist .tool .num2{
+	background:url(../images/share_30.png) no-repeat 0 2px;
+	padding-left: 28px;
+	padding-right: 190px;
+}
+#main .qalist .tool .num3{
+	padding-right: 20px;
+}
+#main .qalist .tool .num4{
+	padding-right: 20px;
+}
+
+#main .others{
+	float: right;
+}
+#main .others .dtcard{
+	width: 305px;
+	background-color: #f2f2f2;
+	margin-bottom: 12px;
+}
+#main .others .dtcard h2{
+	font-size: 17px;
+	line-height: 31px;
+	color: #595656;
+	font-family: "黑体";
+	margin: 0 8px;
+	border-bottom: 1px solid #cfcfcf;
+}
+#main .others .dtcard .aticle{
+	padding: 8px 0;
+	margin: 0 8px;
+	border-bottom: 1px solid #cfcfcf;
+}
+#main .others .dtcard .aticle img{
+	float: left;
+	padding-right: 4px;
+}
+#main .others .dtcard .aticle p{
+	float: left;
+	width: 216px;
+}
+#main .others .dtcard h3{
+	text-align: right;
+	margin-right: 30px;
+	font-size: 17px;
+	line-height: 31px;
+	color: #595656;
+}
+#main .others>img{
+	margin-bottom: 12px;
+}
+
+#main .w .team_page{
+	line-height: 292px;
+	text-align: center;
+	padding-bottom: 40px;
+}
+#main .w .team_page span a{
+	color: #000;
+	font-size: 12px;
+	padding: 11px;
+	border-radius: 2px;
+}
+#main .w .team_page span .now{
+	background-color: #ee5500;
+	color: #fff;
+}
+
+
+

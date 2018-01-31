@@ -1,0 +1,30 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility
+
+@{  int id= Convert.ToInt32(Request["companyID"]);
+    
+    IWebCompany webCompanyService = new WebCompanyService();
+    WebCompany company = webCompanyService.GetWebCompanyByID(id);
+}
+<div class="bar">
+    <div class="bar_inner">
+        <div class="logo"><img src="@AppSettingsHelper.ImgUrl@company.CompanyImage" alt="" style="width:100px;height:100px;"></div>
+        <div class="nav">
+            <ul>
+                <li class="nav_active"><a href="/DecorationCompany/SecondCompanyIndex?companyID=@id">首页</a></li>
+                <li><a href="#" disabled='disabled'>公司简介</a></li>
+                <li><a href="/DecorationCompany/SecondCaseList?companyID=@id">装修案例</a></li>
+                <li><a href="/DecorationCompany/SecondPeopleList?companyID=@id">设计团队</a></li>
+                <li><a href="#" disabled='disabled'>活动资讯</a></li>
+            </ul>
+        </div>
+        <div class="tel">
+            <p>
+                24小时家装咨询电话：<br />
+                <span>400-6600-598</span>
+            </p>
+        </div>
+    </div>
+</div>

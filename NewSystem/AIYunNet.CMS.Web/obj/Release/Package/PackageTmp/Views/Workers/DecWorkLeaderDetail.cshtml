@@ -1,0 +1,252 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecWorkLeaderDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+}
+<link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<script src="~/Content/design/js/jquery.paginationNo.js"></script>
+<style>
+    .page {
+    margin: 42px 0 20px;
+    height: 18px;
+    margin-top: 16px;
+}
+</style>
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/workers/DecWorkLeaderList">找工长</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="#">@Model.WorkerName</a>
+                </li>
+            </ul>
+        </div>
+        <div class="gz-layout clear" style="background:#fff;border: 1px solid #d6d6d6;">
+            <div class="gz-250">
+                <div class="ngz-gzphoto"><img src="@AppSettingsHelper.ImgUrl@Model.WorkerImage"></div>
+                <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-token="hnqi3IR3pa5_fHGrs3aslQ" data-foremanid="6689" data-foremanname="@Model.WorkerName">预约我免费报价</a>
+                <i class="ngz-call">@Model.WorkerPhone</i>
+            </div>
+            <div class="gz-716">
+                <div class="ngz-about-w" style="width:290px;">
+                    <div class="ngz-xm-w">
+                        <h1>工长：@Model.WorkerName</h1>
+                        @if (Model.IsAuthentication)
+                        {<i class="rz"></i>@:已认证
+                            }
+                        @if (Model.IsBond)
+                        {<i class="level-03"></i>@:保证金
+                            }
+                    </div>
+                    <p style="width: 135px;margin-top:10px;">所在地：@Model.CityName</p>
+                    <p style="width: 135px;margin-left:5px;margin-top:10px;">从业：@Model.WorkYears</p>
+                    <p style="width: 135px;">入驻时间：@StringHelper.ToDateTimeother(Model.AddOn)</p>
+                    <p class="ellipsis" style="width: 135px;margin-left:5px;" title="@Model.AreasName">服务区域：@Model.AreasName</p>
+                </div>
+                <div class="ngz-about-w" style="width: 245px;">
+                    <p style="width: 125px;"><i class="ngz-ico-qd"></i>签单总数：<span>3</span></p>
+                    <p style="width: 120px;"><i class="ngz-ico-yy"></i>预约总数：<span>57</span></p>
+                    <p style="width: 125px;"><i class="ngz-ico-pj"></i>业主评价：<span>@Model.CommentCount</span></p>
+                    <p style="width: 120px;"><i class="ngz-ico-zjgd"></i>在建工地：<span>@Model.IsBuildingCount</span></p>
+                    <p>&nbsp;&nbsp;擅长领域:&nbsp;&nbsp;<span title="@Model.GoodAtStyle">@StringHelper.StringTruncat(Model.GoodAtStyle, 14, "...")</span></p>
+                </div>
+                <div class="ngz-about-w" style="width: 175px;border: 0;">
+                    <p style="width: 170px;"><i class="ngz-ico-jl"></i>接受装修第三方监管</p>
+                    <p style="width: 170px;"><i class="ngz-ico-bzj"></i>由网站托管20%装修款</p>
+                    <p style="width: 175px;"><i class="ngz-ico-zb"></i>售后：整体2年，水电5年</p>
+                </div>
+                <h3 class="clear">工长简介</h3>
+                <p class="about">@Model.WorkerInfo</p>
+            </div>
+        </div>
+        <div class="gz-layout clear" style="margin-top: 22px;">
+            <div class="gz-250">
+                <div class="ngz-border clear">
+                    <div class="ngz-tit"><h2>预约我的业主</h2><span>共<i>57</i>人</span></div>
+                    <ul class="ngz-my-yz">
+                        <li><div class="name">薄先生</div><div class="address ellipsis">保密</div><div class="date">01-16</div></li>
+                        <li><div class="name">吕先生</div><div class="address ellipsis">保密</div><div class="date">01-11</div></li>
+                        <li><div class="name">陈先生</div><div class="address ellipsis">保密</div><div class="date">01-06</div></li>
+                        <li><div class="name">陈先生</div><div class="address ellipsis">天津</div><div class="date">01-05</div></li>
+                        <li><div class="name">A先生</div><div class="address ellipsis">水溪苑</div><div class="date">01-03</div></li>
+                        <li><div class="name">金先生</div><div class="address ellipsis">保密</div><div class="date">01-02</div></li>
+                        <li><div class="name">蔡先生</div><div class="address ellipsis">保密</div><div class="date">01-02</div></li>
+                        <li><div class="name">张先生</div><div class="address ellipsis">海泰生产基地</div><div class="date">12-31</div></li>
+                        <li><div class="name">陆先生</div><div class="address ellipsis">民生大厦</div><div class="date">12-24</div></li>
+                    </ul>
+                </div>
+                <div class="ngz-border" style="margin-top: 22px;">
+                    <div class="ngz-tit"><h2>业主评价</h2><span>共<i>0</i>人</span></div>
+                    <ul class="ngz-pj-w">
+                        <li>
+                            <div class="name-w"><img src="/Public/images/home/mrtx.gif">李先生<i class="star-05"></i></div>
+                            <p> 活很好，我挺满意的，对于我提出的要求，能立马给改，沟通的很及时，下次有活还找徐工</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="gz-716">
+                <div class="ngz-border clear" >
+                    <div class="ngz-tit"><h2>我的最新订单</h2><a href="/foreman-6689/tender">更多&gt;&gt;</a> </div>
+                    <dl class="ngz-new-dd">
+                        <dt style="width: 80px;">业主</dt>
+                        <dt style="width: 296px;">小区</dt>
+                        <dt style="width: 90px;">面积</dt>
+                        <dt style="width: 100px;">户型</dt>
+                        <dt style="width: 120px;">报价</dt>
+                        <!--<dt style="width: 80px;">时间</dt>-->
+                        <!--循环区域-->
+                        <dd style="width: 80px;">李女士</dd>
+                        <dd style="width: 296px;">广云花园</dd>
+                        <dd style="width: 90px;">100㎡</dd>
+                        <dd style="width: 100px;">2室1厅1卫</dd>
+                        <dd style="width: 120px;">2-3万</dd>
+                        <!--<dd style="width: 80px;">2017-11-10</dd>-->
+                        <dd style="width: 80px;">张先生</dd>
+                        <dd style="width: 296px;">河西</dd>
+                        <dd style="width: 90px;">100㎡</dd>
+                        <dd style="width: 100px;">3室0厅0卫</dd>
+                        <dd style="width: 120px;">2-3万</dd>
+                        <!--<dd style="width: 80px;">2017-10-26</dd>-->
+                        <dd style="width: 80px;">任女士</dd>
+                        <dd style="width: 296px;">河东区御景家园</dd>
+                        <dd style="width: 90px;">52㎡</dd>
+                        <dd style="width: 100px;">1室0厅0卫</dd>
+                        <dd style="width: 120px;">2-3万</dd>
+                        <!--<dd style="width: 80px;">2017-10-25</dd>-->                
+                        <!--循环区域-->
+
+                    </dl>
+                </div>
+                <div class="ngz-border" style="padding-bottom: 20px; margin-top: 22px;">
+                    <motempty name="construction">
+
+                        <div class="ngz-tit"><h2>工地案例</h2></div>
+                        <!--工地案例循环部分开始-->
+                        <!--<dl class="ngz-case">
+                            <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
+                            <dd>
+                                <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
+                                <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
+                                <ul class="c-jd clear">
+                                    <li><i></i>水电阶段</li>
+                                    <li><i></i>泥木阶段</li>
+                                    <li><i></i>油漆阶段</li>
+                                    <li class="fns"><i></i>完美竣工</li>
+                                </ul>
+                                <div class="btn-w">
+                                    <a href="/foreman-6689/sites/12570" class="btn1">查看工地详情</a>
+                                    <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="物美超市底商">申请参观工地</a>
+                                    <span class="btn3">已有<em>81</em>人查看</span>
+                                </div>
+                            </dd>
+                        </dl>-->
+                        
+                    </motempty>
+
+                    <div class="page">
+                        <!-- 页码开始 -->
+                        <div class="M-box1" style="text-align:center;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        GetPageList(1);
+        function GetPageList(pageIndex) {
+            var PageSize = 8;
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "../Handler/GetPageListAjax.ashx",
+                data: {
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    WorkerID: "@Model.WorkerID",
+                    methodname: "GetDecBuidingList"
+                },
+                success: function (data) {
+                    if (data) {
+                        var datajson = eval('(' + data + ')');
+                        var html = "";
+                        $.each(datajson.list, function (i,item) {
+                            html += '<dl class="ngz-case">'
+                            + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                            + '<dd>'
+                            + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                            + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
+                            + '<ul class="c-jd clear">';
+                            var stagelist = item.constructionstage.split(',');
+                            var length = stagelist.length - 1;
+                            if (length > 6) {
+                                length = 6;
+                            }
+                            var Stage = item.StageNow;
+                            if (Stage >5)
+                            {
+                                Stage = 5;
+                            }
+                            for (var i = 0; i < length; i++)
+                            {
+                                if (i == Stage) {
+                                    html += '<li class="fns"><i></i>' + stagelist[i].replace("工","") + '阶段</li>';
+                                } else
+                                {
+                                    html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                }
+                            }
+                            html+='</ul>'
+                            +'<div class="btn-w">'
+                            +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                            + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
+                            + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
+                            +'</div>'
+                            +'</dd>'
+                            +'</dl>';
+                        })
+                        $(".ngz-case").remove();
+                        $("motempty").append(html);
+                        //列出页码,jq分页控件
+                        $('.M-box1').pagination({
+                            totalData: datajson.recordcount,
+                            showData: PageSize,
+                            coping: true,
+                            current: pageIndex,
+                            callback: pageselectCallback
+                        });
+
+                    } else {
+                        $(".designer").empty();
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+                }
+            });
+
+        }
+
+        //分页回调函数
+        function pageselectCallback(pageIndex) {
+            //获取当前页码
+            GetPageList(pageIndex.getCurrent());
+        }
+    })
+</script>

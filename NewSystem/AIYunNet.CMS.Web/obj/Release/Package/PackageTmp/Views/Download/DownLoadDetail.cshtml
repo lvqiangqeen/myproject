@@ -1,0 +1,160 @@
+﻿@model AIYunNet.CMS.Domain.Model.DownLoad
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DownLoadDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    DownLoadService dser = new DownLoadService();
+    string type = dser.GetDownloadtitle(Model.LookupCode, Model.firstID, Model.secondID);
+}
+<link href="~/Content/design/sheji.download.css" rel="stylesheet" />
+<div class="content_width" id="content">
+    <div class="content_width clearfix ">
+        
+        <style type="text/css">
+            /*内页是窄版*/
+            .index_logo, .top_menu {
+                width: 990px;
+            }
+
+                .index_logo #search_case {
+                    margin-left: 100px !important;
+                }
+        </style>
+        <div id="sjb_content" class="w990 vr_content">
+            <div class="y_weizhi">
+                <span class="fl">您的位置：<a href="/Index/HomeIndex">脉空间</a> &gt; <a href="/Download/DownLoadList">下载专区</a> &gt; @Model.title</span>
+            </div>
+            <div class="reveal_detail_l">
+                <div class="detail_info">
+                    <div class="line_img">
+                        <img src="@AppSettingsHelper.ImgUrl@Model.DownLoadImage" alt="@Model.title" height="300">
+                    </div>
+                    <div class="line_info">
+                        <table cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td>文件格式：</td>
+                                    <td>@Model.form</td>
+                                    <td width="36">名称：</td>
+                                    <td><strong>@StringHelper.StringTruncat(Model.title,19,"...")</strong></td>
+                                    <td width="60">需要积点：</td>
+                                    <td><span class="fb">@Model.score</span></td>
+                                </tr>
+                                <tr class="bg">
+                                    <td>资源大小：</td>
+                                    <td>@Model.Size</td>
+                                    <td>类别：</td>
+                                    <td title="@type">@StringHelper.StringTruncat(type, 20, "...")</td>
+                                    <td>下载量：</td>
+                                    <td><span class="fb red">@Model.DownloadCount</span></td>
+                                </tr>
+                                <tr class="bg">
+                                    <td colspan="5">
+                                        简介：<strong>@Model.Info</strong>
+                                    </td>
+                                    <td>
+                                        <span style=" width:120px; overflow:hidden; float:left;">
+                                            <a href="http://weibo.com/" class="icon icon_weibo" title="关注微博" target="_blank"></a>
+                                            <a href="http://user.qzone.qq.com/" class="icon icon_qq" title="关注空间" target="_blank"></a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="uploader">
+                        @*<div class="t"><span>上传者</span></div>*@
+                        <ul class="mx_sjs">
+                            @if (Model.userid != 0)
+                            {
+                                if (Model.usertype == "WebCompanyUser")
+                                {
+                                    <li class="img">
+                                        <a href="/DecorationCompany/CompanyTuBa?companyID=@ViewBag.webCompany.CompanyID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@ViewBag.webCompany.thumbnailImage" width="60" height="60"></a>
+                                    </li>
+                                    <li class="n">
+                                        <span>
+                                            <a href="/DecorationCompany/CompanyTuBa?companyID=@ViewBag.webCompany.CompanyID" target="_blank" class="rz">@ViewBag.webCompany.CompanyName</a>
+                                        </span>
+                                        <span class="city">@ViewBag.webCompany.ProvinceName,@ViewBag.webCompany.CityName</span>
+                                        
+                                    </li>
+                                    <li class="fx">
+                                        <span>喜欢我的分享</span>
+                                        <span class="tel none">@ViewBag.webCompany.CompanyPhone</span>
+                                    </li>
+                                }
+                                else if (Model.usertype == "WebUser")
+                                {
+                                    <li class="img">
+                                        <a href="/Workers/DecDesignerIndex?peopleID=@ViewBag.webpeople.PeopleID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@ViewBag.webpeople.thumbnailImage" width="60" height="60"></a>
+                                    </li>
+                                    <li class="n">
+                                        <span>
+                                            <a href="/Workers/DecDesignerIndex?peopleID=@ViewBag.webpeople.PeopleID" target="_blank" class="rz">@ViewBag.webpeople.PeopleName</a>
+                                        </span>
+                                        <span class="city">@ViewBag.webpeople.ProvinceName,@ViewBag.webpeople.CityName</span>
+
+                                    </li>
+                                    <li class="fx">
+                                        <span>喜欢我的分享</span>
+                                        <span class="tel none">@ViewBag.webpeople.PeoplePhone</span>
+                                    </li>
+                                }
+                            }
+
+                            <li class="dlod">
+                                <input type="button" class="down_btn" name="download" id="down_btn" value="&nbsp;">
+                                <div class="add_share_left">
+                                    同步到：
+                                    <a href="javascript:;" class="add_qq_share outshare" title="未同步到QQ空间" id="add_qq_share">
+                                    </a>
+                                    <input type="hidden" name="isShare" id="isShare" value="0">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="fenxiang">
+                        <span class="jiathis_txt"></span>
+                        <!-- Baidu Button BEGIN -->
+                        <div id="bdshare" class="bdsharebuttonbox bdshare_t  get-codes-bdshare bdshare-button-style0-32" style=" margin-left:5px;" data-tag="share_1" data-bd-bind="1516678561583" >
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                            <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                        </div>
+                        <!-- Baidu Button END -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="reveal_detail_r">
+                <h2 class="dweizhi" style="margin:0;"><b class="fontb fsizeb">其他同类下载资源</b></h2>
+                <dl class="same_source clearfix">
+                    @foreach (DownLoad item in ViewBag.list)
+                    {
+                        <dd>
+                            <div class="img"><a href="/Download/DownLoadDetail?id=@item.ID"><img src="@AppSettingsHelper.ImgUrl@item.thumbnailImage" alt="@item.title"></a></div>
+                            <div class="txt"><a href="/Download/DownLoadDetail?id=@item.ID">@StringHelper.StringTruncat(item.title, 6, "...")</a></div>
+                        </dd>
+                    }
+                </dl>
+                <div class="mx_new_tj_c">
+                    <h2 class="new_t"><span>免责声明</span></h2>
+                    <img src="http://img.shejiben.com/sjs_area/model_notice.png?v=1465202606" class="disclaimer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function (){
+        $("#down_btn").click(function () {
+            window.location.href = "/Download/DownLoadSth?url="+"@Model.fileurl";
+        });
+    })
+</script>

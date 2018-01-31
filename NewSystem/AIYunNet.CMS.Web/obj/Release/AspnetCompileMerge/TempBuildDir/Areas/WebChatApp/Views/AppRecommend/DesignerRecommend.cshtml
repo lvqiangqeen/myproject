@@ -1,0 +1,56 @@
+﻿@using AIYunNet.CMS.Common.Utility
+@{
+    Layout = null;
+}
+
+<div class="container no-bottom">
+    <h4>推荐设计师</h4>
+</div>
+<div class="container no-bottom" id="DesignerRecommend">
+</div>
+
+<script>
+        $(function () {
+            GetDesignerPageList();
+        });
+        function GetDesignerPageList() {
+
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/WebChatApp/AppRecommend/GetRecommendList?RecommendType=3&num=3',
+                dataType: 'json',
+                success: function (data) {
+                    //var datajson = eval('(' + data + ')');
+                    var result = "";
+                    var arrLen = 0;
+                    if (data != null) {
+                        arrLen = data.length;
+                    }
+                    if (arrLen > 0) {
+                        for (var i = 0; i < arrLen; i++) {
+                           
+                            result += '<div class="one-half-responsive no-bottom last-column"><p class="thumb-right no-bottom">';
+
+                            result += '<a href="' + data[i].RecWechartUrl + '"><img src="@AppSettingsHelper.thumbnailImage' + data[i].thumbnailImage + '" alt="img"></a>'
+                                +'<strong>'+data[i].RecommendName+'</strong>'
+                                +' <em><br>'+data[i].RecommendInfo+'</em>'
+                                + '</p><div class="thumb-clear"></div></div>'
+                                + '<div class="decoration"></div>';
+                        }
+
+                        $('#DesignerRecommend').append(result);
+
+                    } else {
+                        $('#DesignerRecommend').append(result);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+
+                }
+            });
+        }
+
+</script>
+

@@ -6,7 +6,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\adminstrate\Desktop\shejiben</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\lvqiang\Desktop\MKJ设计本</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/CompanyCenter/Views/CompanyCases/AddAndUpdateCase.cshtml">
@@ -352,28 +352,28 @@
       <publishTime>05/23/2017 19:54:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>01/29/2018 22:07:18</publishTime>
+      <publishTime>01/30/2018 15:21:57</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>01/29/2018 22:07:18</publishTime>
+      <publishTime>01/30/2018 15:21:57</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>01/29/2018 22:07:18</publishTime>
+      <publishTime>01/30/2018 15:21:57</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>01/29/2018 22:07:17</publishTime>
+      <publishTime>01/30/2018 15:21:57</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>01/29/2018 22:09:17</publishTime>
+      <publishTime>01/30/2018 15:21:58</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/29/2018 22:44:18</publishTime>
+      <publishTime>01/30/2018 15:22:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/29/2018 22:44:18</publishTime>
+      <publishTime>01/30/2018 15:22:31</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -6595,10 +6595,10 @@
       <publishTime>12/25/2017 17:13:55</publishTime>
     </File>
     <File Include="Content/design/sheji.designerlist.css">
-      <publishTime>12/22/2017 11:36:11</publishTime>
+      <publishTime>01/30/2018 13:44:56</publishTime>
     </File>
     <File Include="Content/design/sheji.download.css">
-      <publishTime>01/24/2018 14:28:15</publishTime>
+      <publishTime>01/30/2018 13:31:33</publishTime>
     </File>
     <File Include="Content/design/sheji.footer.css">
       <publishTime>11/29/2017 09:00:34</publishTime>
@@ -13468,7 +13468,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/29/2018 22:44:12</publishTime>
+      <publishTime>01/30/2018 15:22:19</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -13708,7 +13708,7 @@
       <publishTime>10/25/2017 20:01:33</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDec.cshtml">
-      <publishTime>01/24/2018 17:30:12</publishTime>
+      <publishTime>01/30/2018 15:07:00</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDecCompany.cshtml">
       <publishTime>12/01/2017 16:04:35</publishTime>
@@ -13720,7 +13720,7 @@
       <publishTime>12/01/2017 16:16:18</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDecTopBar.cshtml">
-      <publishTime>01/16/2018 11:45:00</publishTime>
+      <publishTime>01/30/2018 15:13:09</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutNoJs.cshtml">
       <publishTime>04/29/2017 17:22:13</publishTime>
@@ -13795,7 +13795,7 @@
       <publishTime>02/07/2017 23:33:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/29/2018 22:07:55</publishTime>
+      <publishTime>01/30/2018 15:22:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

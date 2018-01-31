@@ -1,0 +1,105 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@model AIYunNet.CMS.Domain.Model.WebCompany
+@{
+    Layout = null;
+}
+<link href="~/Content/CompanyTuBa/Tuba.CompanyIndex.css" rel="stylesheet" />
+<link href="~/Content/CompanyTuBa/Tuba.CompanyDetal.css" rel="stylesheet" />
+<style>
+    .zgs_header {
+        border-bottom: 2px solid #00af63;
+    }
+</style>
+
+<div class="zgs_header">
+    <div class="zgsh_center">
+        <div class="zgshc_company">
+            <span class="zc_bg">
+                <img alt="@Model.CompanyName" src="@AppSettingsHelper.ImgUrl@Model.CompanyImage">
+            </span>
+            <div class="zd_name">
+                <h1>@Model.CompanyName</h1>
+            </div>
+            <div class="zd_qualification">
+                <dl>
+                    <dd>
+                        @if (Model.IsAuthentication)
+                        {
+                            <i class="zdq_3" title="该公司营业执照已认证"> </i>
+                        }
+                        @if (Model.IsFamousEnterprise)
+                        {
+                            <i class="zdq_4" title="认证公司"></i>
+                        }
+                        @if (Model.IsPreferentialActivity)
+                        {
+                            <i class="zdq_5_no"></i>
+                        }
+                        @if (Model.IsBond)
+                        {
+                            <span title="该公司已缴纳保障金">
+                                <i class="zdq_2"></i>
+                                @*<em>120000元</em>*@
+                            </span>
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div class="share_sns">
+                <dl>
+                    <dt>分享到：</dt>
+                    <dd class="bdsharebuttonbox bdshare-button-style0-16" data-tag="share_1" data-bd-bind="1510888327479">
+                        <a href="javascript:void(0)" class="sina_sns" data-cmd="tsina" title="分享到新浪微博"></a>
+                        <a href="javascript:void(0)" class="qzone_sns" data-cmd="qzone" title="分享到QQ空间"></a>
+                        <!-- <a href="javascript:void(0)" class="wechat_sns" data-cmd="weixin">
+                            <div id="" class="wechat_ewm"></div>
+                        </a> -->
+                        <a href="javascript:void(0)" class="txwb_sns" data-cmd="tqq" title="分享到腾讯微博"></a>
+                    </dd>
+                </dl>
+            </div>
+            <div id="weixin_container"></div>
+        </div>
+    </div>
+    <div class="zgsh_bottom">
+        <div class="zgshb_menu">
+            <ul>
+                <li id="shouye">
+                    <a href="/DecorationCompany/CompanyTuBa?companyID=@Model.CompanyID">首页</a>
+                </li>
+                <li id="jianjie">
+                    <a href="/DecorationCompany/CompanyTuBaDetail?companyID=@Model.CompanyID">公司介绍</a>
+                </li>
+                <li id="anli">
+                    <a href="/DecorationCompany/CompanyTuBaCaseList?companyID=@Model.CompanyID">装修案例</a>
+                </li>
+                @*<li>
+                        <a href="/zs/visit478250/">装修工地</a>
+                    </li>*@
+                <li id="shequ">
+                    <a href="/DecorationCompany/CompanyTuBaRemark?companyID=@Model.CompanyID" rel="nofollow">交流社区</a>
+                </li>
+                <li id="tuandui">
+                    <a href="/DecorationCompany/CompanyTuBaDesignerList?companyID=@Model.CompanyID">设计团队</a>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" class="zgs_freeDesignAndPrice">
+                <label>预约热线</label>
+                @Model.CompanyPhone<b></b>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var companyvalue = sessionStorage.getItem("companykey");
+        $("#" + companyvalue).addClass("on");
+        $(".zgshb_menu > ul > li > a").click(function () {
+
+            $(this).parent("li").addClass("on").prevAll("li").removeClass();
+            $(this).parent("li").nextAll("li").removeClass();
+            sessionStorage.setItem('companykey', $(this).parent("li").attr('id'));
+        });
+    })
+</script>

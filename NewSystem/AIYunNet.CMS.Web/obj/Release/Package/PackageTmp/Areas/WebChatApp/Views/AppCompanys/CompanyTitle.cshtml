@@ -1,0 +1,9 @@
+﻿@using AIYunNet.CMS.Common.Utility
+<div class="portfolio-wide full-bottom" style="margin-top: 0px;">
+    <a href="#" class="swipebox portfolio-wide-item" title="Your caption here!">
+        <h3>@Model.CompanyName</h3>
+        <p>@Model.BelongArea | 工程：@Model.InBuildingCount 件 | 案例：@Model.CaseCount 件</p>
+        <div class="overlay"></div>
+        <img class="responsive-image" src="@AppSettingsHelper.thumbnailImage@Model.thumbnailImage" alt="img"  style="height:211px;">
+    </a>
+</div>

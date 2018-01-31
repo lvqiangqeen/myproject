@@ -1,0 +1,207 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebRecommendService webreser = new WebRecommendService();
+    List<WebRecommend> webaboutus = webreser.GetWebRecommendListPc(13, 1);
+    List<WebRecommend> weblinkus = webreser.GetWebRecommendListPc(14, 1);
+
+}
+@section head{
+    <link href="~/Content/snncar/css/home.css" rel="stylesheet" />
+    <style>
+        .fr {
+    float: right;
+}
+        .fl {
+    float: left;
+}
+    </style>
+}
+<div class="content_wrapper">
+    <div class="container" style="text-align: left;">
+        <div class="aboutcon">
+            <div class="mainbox">
+                <div class="aside fl" id="J_m_nav">
+                    <!--side-nav-->
+                    <ul class="side-nav">
+                        <li id="aboutus"><a href="#">关于我们</a></li>
+                        <li id="linkus"><a href="#">联系我们</a></li>
+                        <li id="helpcenter"><a href="#">帮助中心</a></li>
+                    </ul>
+                    
+                </div>
+                <div class="section_about bdr fr" style="display:none;" id="helpcenterdetail">
+                    <div class="main_con">
+                        <div class="crumbs"><span>帮助中心</span></div>
+                        <ul class="newlist cicle clearfix" id="newlist">
+                            @*<li><span>2014-12-19</span><a href="newsinfor.htm">有钱返现超任性——安捷财富“双蛋”大狂欢</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">安捷财富11月份风险准备金/本息保障金月度报告</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">安捷财富双十二活动圆满结束</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">史上最高返现来袭——双十二返现嗨翻天</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">网站推荐好友功能已恢复</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">关于新手标活动和推荐奖励公告</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">感恩大回馈 安捷财富感恩节多重奖励盛大开启</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">安捷财富新手标持续发放每天两标（上午10点下午2点） 50起投最低返利5元</a></li>
+                            <li><span>2014-12-19</span><a href="newsinfor.htm">热烈祝贺安捷财富交易量突破一个亿 成立北京、深圳、合肥运营中心</a></li>*@
+                        </ul>
+                        
+                            <div class="team_page">
+                                <div class="M-box1" style="text-align:center;"></div>
+                            </div>
+                       
+                        <!-- 页码开始 -->
+
+                    </div>
+                </div>
+                <div class="section_about bdr fr" id="aboutusdetail"  style="display:none;">
+                    <div class="main_con">
+                        <div class="crumbs"><span>关于我们</span></div>
+                        @if (webaboutus.Count != 0)
+                        {
+                            <div class="containers clearfix">
+                                <div class="news-title tc">
+                                    <div class="title">@webaboutus[0].RecommendName</div>
+                                </div>
+                                <p>&nbsp;</p>                                
+                                @Html.Raw(webaboutus[0].RecommendContent)
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="section_about bdr fr" id="linkusdetail"  style="display:none;">
+                    <div class="main_con">
+                        <div class="crumbs"><span>联系我们</span></div>
+                        @if (weblinkus.Count != 0)
+                        {
+                            <div class="containers clearfix">
+                                <div class="news-title tc">
+                                    <div class="title">@weblinkus[0].RecommendName</div>
+                                </div>
+
+                                <p>&nbsp;</p>
+                                @Html.Raw(weblinkus[0].RecommendContent)
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="section_about bdr fr" id="helpcenterdetail1"  style="display:none;">
+                    <div class="main_con">
+                        <div class="crumbs"><span>关于我们</span></div>
+                        <div class="containers clearfix">
+                            <div class="news-title tc">
+                                <div class="title">有钱返现超任性——安捷财富“双蛋”大狂欢</div>
+                            </div>
+                            <p>&nbsp;</p>
+                            @Html.Raw("sadsdsdsd")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+@section Scripts{
+    <script>
+        $(function () {
+            //获取key显示样式和内容
+            var key = sessionStorage.getItem("key");
+            $("#" + key).addClass("active");
+            $("#" + key + "detail").attr("style", "display:;");
+
+            //帮助中心
+            GetPageList(1);
+
+        })
+        //点击导航
+        $(".side-nav > li").click(function () {
+            $(this).addClass("active").prevAll("li").removeClass();
+            $(this).nextAll("li").removeClass();
+            //取出id
+            var id = $(this).attr("id");
+            //显示内容
+            if (id == 'aboutus')
+            {
+                $("#aboutusdetail").attr("style", "display:;");
+                $("#linkusdetail").attr("style", "display:none;");
+                $("#helpcenterdetail").attr("style", "display:none;");
+                $("#helpcenterdetail1").attr("style", "display:none;");
+
+            } else if (id == 'linkus') {
+                $("#linkusdetail").attr("style", "display:;");
+                $("#aboutusdetail").attr("style", "display:none;");
+                $("#helpcenterdetail").attr("style", "display:none;");
+                $("#helpcenterdetail1").attr("style", "display:none;");
+            } else
+            {
+                GetPageList(1);
+                $("#helpcenterdetail").attr("style", "display:;");
+                $("#linkusdetail").attr("style", "display:none;");
+                $("#aboutusdetail").attr("style", "display:none;");
+                $("#helpcenterdetail1").attr("style", "display:none;");
+            }
+
+        });
+
+
+        function GetPageList(page) {
+            var pagesize = 20;
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/AboutUs/HelpCenterList?pageIndex=' + page + '&PageSize=' + pagesize,
+                dataType: 'json',
+                success: function (data) {
+                    //var datajson = eval('(' + data + ')');
+                    var result = "";
+                    var arrLen = 0;
+                    if (data.list != null) {
+                        arrLen = data.list.length;
+                    }
+                    $("#newlist").empty();
+                    if (arrLen > 0) {
+                        for (var i = 0; i < arrLen; i++) {
+                            result += '<li><span>' + (data.list[i].EditOn).ToString("yyyy年MM月dd日") + '</span><a href="newsinfor.htm">' + data.list[i].RecommendName + '</a></li>';
+                        }
+                        $("#newlist").append(result);
+
+                        $('.M-box1').pagination({
+                            totalData: data.recordcount,
+                            showData: pagesize,
+                            coping: true,
+                            current: page,
+                            callback: pageselectCallback
+                        });
+
+                    } else {
+
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+
+                }
+            });
+        }
+        //分页回调函数
+        function pageselectCallback(pageIndex) {
+            //获取当前页码
+            GetPageList(pageIndex.getCurrent());
+        }
+        String.prototype.ToString=function(format) {
+            var dateTime = new Date(parseInt(this.substring(6, this.length - 2)));
+            format = format.replace("yyyy", dateTime.getFullYear());
+            format = format.replace("yy", dateTime.getFullYear().toString().substr(2));
+            format = format.replace("MM", dateTime.getMonth() + 1)
+            format = format.replace("dd", dateTime.getDate());
+            format = format.replace("hh", dateTime.getHours());
+            format = format.replace("mm", dateTime.getMinutes());
+            format = format.replace("ss", dateTime.getSeconds());
+            format = format.replace("ms", dateTime.getMilliseconds())
+            return format;
+        };
+    </script>
+    }

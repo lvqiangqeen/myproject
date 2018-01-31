@@ -1,0 +1,35 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@{
+    Layout = null;
+    string companyuserAcount = SessionHelper.Get("companyUserName");
+    string CompanyName = SessionHelper.Get("CompanyName");
+    string companyID = SessionHelper.Get("companyID");
+    string companyUserID = SessionHelper.Get("companyUserID");
+    string PeopleuserAcount = SessionHelper.Get("userName");
+    string peopleNickName = SessionHelper.Get("NickName");
+    string PeopleID = SessionHelper.Get("PeopleID");
+    string PeopleUserID = SessionHelper.Get("UserID");
+    string UserType = "";
+    string UserAccount = "";
+    string UserNickName = "";
+    if (companyuserAcount != null)
+    {
+        UserType = "WebCompanyUser";
+        UserAccount = companyuserAcount;
+        UserNickName = CompanyName;
+    }
+    if (PeopleuserAcount != null)
+    {
+        UserType = "WebUser";
+        UserAccount = PeopleuserAcount;
+        UserNickName = peopleNickName;
+    }
+    SessionHelper.SetSession("UserType", UserType);
+    SessionHelper.SetSession("UserAccount", UserAccount);
+    SessionHelper.SetSession("UserNickName", UserNickName);
+
+}
+
+<input type="hidden" value="@UserAccount" id="UserAccount" />
+<input type="hidden" value="@UserNickName" id="UserNickName" />
+<input type="hidden" value="@UserType" id="UserType" />

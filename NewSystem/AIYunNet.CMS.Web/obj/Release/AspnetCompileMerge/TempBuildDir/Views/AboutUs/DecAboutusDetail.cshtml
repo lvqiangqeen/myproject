@@ -1,0 +1,49 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebRecommend
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecAboutusDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+}
+<link href="~/Content/design/sheji.about.css" rel="stylesheet" />
+<div class="content_width" id="content">
+    <div class="content_width clearfix ">
+        
+        <style type="text/css">
+            /*内页是窄版*/
+            .index_logo, .top_menu {
+                width: 990px;
+            }
+
+                .index_logo #search_case {
+                    margin-left: 100px !important;
+                }
+        </style>
+        <div class="centent">
+            <b class="b1 mt20"></b>
+            <div class="setup">
+                <h4 class="us">@ViewBag.Abouttitle</h4>
+                <dl class="about" data-id="1">
+                    @Model.RecommendName
+                    @Html.Raw(Model.RecommendContent)
+                </dl>
+
+                <p class="u_height"></p>
+                <p class="cl"></p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <b class="b2"></b>
+        </div>
+
+        <!--底部模版 闭合标签配对-->
+        <!--底部模版 闭合标签配对 End-->
+    </div>
+</div>
+

@@ -1,0 +1,68 @@
+﻿@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "CaseList";
+    Layout = "~/Areas/WebChatApp/Views/Shared/_Layout.cshtml";
+}
+<div class="header-clear"></div>
+<div class="content">
+        <div class="container no-bottom">
+            <h3>装修案例</h3>
+            <p>
+               各种风格的装修成功案例，在这里你能看到你想要的效果。
+            </p>
+        </div>
+    </div>
+<div class="decoration"></div>
+<div class="portfolio-wide full-bottom">
+</div>
+
+<div class="content">
+    <div class="decoration"></div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            GetPageList(1);
+        });
+        function GetPageList(page) {
+
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/WebChatApp/AppCase/GetCasesList?pageIndex=' + page + '&PageSize=' + 8,
+                dataType: 'json',
+                success: function (data) {
+                    //var datajson = eval('(' + data + ')');
+                    page++;
+                    var result = "";
+                    var arrLen = 0;
+                    if (data.list != null) {
+                        arrLen = data.list.length;
+                    }
+                    $(".listcom").remove();
+                    if (arrLen > 0) {
+                        for (var i = 0; i < arrLen; i++) {
+                            result += '<a href="/WebChatApp/AppCase/CaseDetail?caseID=' + data.list[i].CaseID + '" class="swipebox portfolio-wide-item" title="Your caption here!">'
+                                + '<h3>' + data.list[i].CaseTitle + '</h3>'
+                                + '<p>' + data.list[i].CaseBrief + '</p>'
+                                + '<div class="overlay"></div>'
+                                + '<img class="responsive-image" style="height:169.64px" src="@AppSettingsHelper.thumbnailImage' + data.list[i].thumbnailImage + '" alt="img" >'
+                                + ' </a>';
+                        }
+                        result += '<div class="content"><a class="listcom" href="javascript:void(0);" onclick="GetPageList(' + page + ')">下一页</a></div>';
+                        $('.portfolio-wide.full-bottom').append(result);
+
+                    } else {
+                        result += '<div class="content"><a class="listcom" href="javascript:void(0);">没有更多了。。。</a></div>';
+                        $('.portfolio-wide.full-bottom').append(result);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+
+                }
+            });
+        }
+    </script>
+}

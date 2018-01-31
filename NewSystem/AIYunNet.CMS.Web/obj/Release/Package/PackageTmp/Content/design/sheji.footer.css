@@ -1,0 +1,79 @@
+﻿/**
+ * CSS File,created by hyolee.wang, on 09.02 2016
+ * 
+ * 新版纯黑风格的底部,默认适配990px的页面
+ * 
+ * 1180的页面需手动配置宽度，用法：外层容器增加wrap_1180
+ *
+ */
+
+/* ======990px纯黑新底部  开始===========*/
+
+
+/*底部友情链接*/
+.wrap_link { background: #f8f8f8;}
+.link_content{ width: 990px; height: auto; margin: 0 auto;}
+.link_detail { width: 100%; height: auto; padding-top: 20px;}
+.link_content .link_column_name{ width: 100%; height: 14px; line-height: 14px; padding: 23px 0 12px 0; border-bottom:1px #eee solid; }
+.link_content .link_column_name p{ width: auto; float: left; margin-right:23px; cursor: pointer;}
+.link_content .link_column_name p.cur{ height: 25px; border-bottom: 2px #dd4f50 solid;}
+.link_content .link_list{ padding: 0 0 14px;}
+.link_content .link_list a{ width: auto; height: 12px; display:inline-block; float: left; padding: 0 20px 10px 0; color: #999;}
+
+/*版权声明*/
+.wrap_cppyright{ background: #1c1c1c; height:auto; margin-top: 20px;}
+.cppyright_content{ width: 990px; margin: 0 auto; padding: 27px 0 20px;}
+.cppyright_content .top{width:auto; height: 68px; overflow: hidden; float: left; padding-bottom: 40px;}
+.cppyright_content .cloumn_01{ width: 235px;}
+.cppyright_content .cloumn_02{ width: 245px; margin-left: 20px;}
+.cppyright_content .cloumn_03{ width: 235px; margin-left: 20px;}
+.cppyright_content .cloumn_04{ width: 235px; float:right;}
+
+.cppyright_content .top .icon_code{ width: 65px; height: 65px; float: left;}
+.cppyright_content .top .icon_code_app{ background-position: -247px -2px;}
+.cppyright_content .top .icon_code_weixin{ background-position: -319px -2px;}
+.cppyright_content .top .detail{ width: auto; float: left; margin-left: 8px; color: #b3b3b3;}
+.cppyright_content .top .detail .title{  height: 14px; font-weight: bold; padding:0 0 3px 0;}
+.cppyright_content .top .detail .msg{ line-height: 20px;}
+.cppyright_content .cloumn_01 a{ width: 75px; height: 21px; display: block; float: left; margin:6px 0 0 0; cursor: pointer;}
+.cppyright_content .cloumn_01 a.icon_app{  background-position: -239px -100px; margin-right: 5px;}
+.cppyright_content .cloumn_01 a.icon_Android{ background-position: -324px -100px;}
+.cppyright_content .cloumn_01 a.icon_app:hover{  background-position: -239px -74px;}
+.cppyright_content .cloumn_01 a.icon_Android:hover{ background-position:-324px -74px;}
+.cppyright_content .cloumn_02 .detail{ width: 169px;}
+.cppyright_content .cloumn_02 .msg{ padding-top: 10px;}
+
+.cppyright_content .cloumn_03 .icon_email{ width: 68px; height: 68px; float: left; background-position: -323px -125px;}
+.cppyright_content .cloumn_03 .detail{ width: 154px;}
+.cppyright_content .cloumn_03 .detail .msg{ padding-top: 12px;}
+
+.cppyright_content .cloumn_04 .title{color: #b3b3b3; height: 14px; font-weight: bold;}
+.cppyright_content .cloumn_04 a{ width: 75px; height: 22px; display: block; float: left; margin:28px 5px 0 0; cursor: pointer;}
+.cppyright_content .cloumn_04 .icon_xinlang_wb{ background-position: -1px -74px;}
+.cppyright_content .cloumn_04 .icon_qq_wb{ background-position: -81px -74px;}
+.cppyright_content .cloumn_04 .icon_qq_kj{ background-position: -161px -74px; margin-right: 0;}
+.cppyright_content .cloumn_04 .icon_xinlang_wb:hover{ background-position:-1px -101px;}
+.cppyright_content .cloumn_04 .icon_qq_wb:hover{ background-position:-81px -101px;}
+.cppyright_content .cloumn_04 .icon_qq_kj:hover{ background-position: -161px -101px;}
+
+.string{ height: 1px; width: 100%; background: #000; filter:alpha(opacity=11);-moz-opacity:0.11;-khtml-opacity: 0.11;opacity:0.11;}
+.cppyright_content .aboutus_link{ width: auto; height: 12px; margin: 20px 0 0 0; text-align: center;}
+.cppyright_content .aboutus_link a{ width: auto; padding: 0 20px; height: 12px; line-height: 14px; border-right:1px #484848 solid; }
+.cppyright_content .aboutus_link a:hover{color: #e94c3d;}
+.cppyright_content .aboutus_link a.no_border{ border: none;}
+p.statement{width: 100%;line-height: 22px;text-align: center;margin: 22px auto 0;color: #666;}
+p.bottom_bah{ width: 100%; height: auto; display: block; text-align: center; padding: 22px 0 20px 0;color: #666;font-family: "微软雅黑";}
+
+.bottom_icon{width: 100%; height: 18px; text-align: center;}
+.bottom_icon label{ width: 19px; height: 18px; float: left; display: block; margin-right: 16px;background:url(http://img.shejiben.com/index/sprite.png) no-repeat;}
+.bottom_icon label.icon_gongan{ background-position:-325px -114px; }
+.bottom_icon label.icon_falv{ background-position:-359px -114px; }
+.bottom_icon a{ width:20px; height: 20px; display: inline-block; cursor: pointer;}
+/* ====== 新版990像素，纯黑风格的底部 结束===========*/
+
+/*兼容1180px的页面*/
+.wrap_1180 .cppyright_content{ width: 1180px;}
+.wrap_1180 .cppyright_content .cloumn_03{ width: 250px;}
+.wrap_1180 .cppyright_content .cloumn_03 .detail{ width: 170px;}
+.wrap_1180 .cppyright_content .cloumn_02 ,.wrap_1180 .cppyright_content .cloumn_03{ margin-left: 72px;}
+.wrap_1180 .link_content{ width: 1180px;}

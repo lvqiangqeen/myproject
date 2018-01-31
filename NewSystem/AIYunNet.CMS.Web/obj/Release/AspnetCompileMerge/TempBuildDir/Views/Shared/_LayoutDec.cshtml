@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+@{ 
+    AIYunNet.CMS.BLL.Service.All_NavService Ser = new AIYunNet.CMS.BLL.Service.All_NavService();
+    List<AIYunNet.CMS.Domain.Model.Nav> list = Ser.GetAll_NavList();
+    int i = 0;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>脉空间</title>
+    @Html.Partial("_headCssJs")
+    @RenderSection("head", required: false)
+</head>
+<body style="position: relative;">
+    <div class="wrap_1180">
+        
+        @Html.Partial("_LayoutDecTopBar")
+        <!--头部搜索-->
+        <div class="top_search">
+            <div class="index_logo">
+                <a href="http://www.shejiben.com" title="美国知名风险投资机构投资的设计交易平台 - 设计本"><div class="logo"></div></a>
+
+                <div id="search_case">
+                    <form id="quicksearch" method="get" action="http://www.shejiben.com/search.php" target="_blank">
+                        <input type="hidden" name="searchType" value="1" id="searchType">
+                        <span id="search_span">
+                            <div id="search_title">找图片　　</div><em class="arrow"></em>
+                            <label id="s_zsj" style="display:none;"><a class="search_tags clickToSearch" href="javascript:;" data-id="2">找图集</a><a class="search_tags clickToSearch" href="javascript:;" data-id="10">找案例</a><a class="search_tags clickToSearch" href="javascript:;" data-id="7">找设计师</a><a class="search_tags clickToSearch" href="javascript:;" data-id="9">找问答</a><a class="search_tags clickToSearch" href="javascript:;" data-id="3">找模型　</a></label>
+                        </span>
+                        <input type="text" value="请输入搜索关键词" class="key" name="q" id="search_val">
+                        <em class="icon_search"></em>
+                        <input type="submit" value="搜索" class="submit">
+                    </form>
+                </div>
+                <span class="or">或</span>
+                <a href="http://www.shejiben.com/zb/?from=nav" target="_blank" class="edit">提交设计需求<em></em></a>
+            </div>
+        </div>
+        <!--头部搜索end-->
+        <p class="clear"></p>
+        <!--主导航-->
+        <div class="wrap wrap_top_menu">
+            <div class="top_menu">
+                <!--整站主导航-->
+                <ul>
+                    @foreach (var item in list)
+                    {
+                        if (i == list.Count - 1)
+                        {
+                            <li id="nav_@item.firstNav.id"  class="last">
+                                <a href="@item.firstNav.url">@item.firstNav.navtitle</a>
+                                <div class="inner_menu">
+                                    @foreach (var ite in item.list)
+                                    {
+                                        <a href="@ite.url" class="on onindex">@ite.navtitle</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li id="nav_@item.firstNav.id">
+                                <a href="@item.firstNav.url">@item.firstNav.navtitle</a>
+                                <div class="inner_menu">
+                                    @foreach (var ite in item.list)
+                                    {
+                                        <a href="@ite.url" class="on onindex">@ite.navtitle</a>
+                                    }
+                                </div>
+                            </li>
+                        }
+
+                        i++;
+                    }
+                </ul>
+                <script>
+                    $(function () {
+                         var navid= $.session.get('top_menu');
+                        $(".top_menu > ul > li > a").click(function () {
+                            var indexid = $(this).parent("li").index();
+                            $.session.set('top_menu', indexid);
+                        })
+                        $(".top_menu > ul > li").eq(navid).addClass("cur");
+                        $(".onindex").click(function () {
+                            var indexid = $(this).parent(".inner_menu").parent("li").index();
+                            $.session.set('top_menu', indexid);
+                        })
+
+                    })
+                </script>
+                <!--整站主导航 End-->
+                <!--首页面包屑导航-->
+                @RenderSection("IndexNav", required: false)
+                <!--首页面包屑导航 end-->
+
+            </div>
+        </div>
+        <!--主导航-->
+        @RenderBody()
+        <!--友情链接-->
+        @Html.Partial("_LayoutDecFriendLink")
+    </div>
+    <!--版权等-->
+    @Html.Partial("_LayoutDecCopyRight")
+    <!--版权等 End-->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

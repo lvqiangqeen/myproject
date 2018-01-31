@@ -1,0 +1,211 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecorateNewsDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebCompanyService companyservice = new WebCompanyService();
+}
+<link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+<style>
+    .module_blog .blog_info {
+        padding-left: 0px;
+    }
+
+    #respond {
+        border-bottom: #e3e3e3 0px solid;
+        padding-bottom: 27px;
+        margin: 0 0 35px 0;
+    }
+</style>
+<div class="content_wrapper">
+    <div class="container">
+        <div class="content_block left-sidebar row">
+            <div class="fl-container span12">
+                <div class="row">
+                    <div class="posts-block span9">
+                        <div class="contentarea">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <h2 class="title">@Model.ClassName</h2>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12 module_cont module_blog">
+                                    <div class="blog_post_preview" id="newdetail">
+                                        <div class="blogpost_title">
+                                            <a href="#" class="mainTitlePermalink"><h4>@Model.Title</h4></a>
+                                        </div><!-- .blogpost_title -->
+                                        <div class="blog_info">
+                                            @*<span class="blog_posttype blog_slider"></span>*@
+                                            <div class="blog_info_block">
+                                                <span class="author_name">
+                                                    发布者：
+                                                    <a rel="author" title="Posts by admin" href="#">
+                                                        @if (Model.CompanyID == 0)
+                                                        {
+                                                        }
+                                                        else
+                                                        {
+                                                            @companyservice.GetWebCompanyByID(Model.CompanyID).CompanyName
+                                                        }
+                                                    </a>
+                                                </span>
+                                                <span class="category">
+                                                    浏览量：
+                                                    <a rel="category tag" title="View all posts in Lorem ipsum" href="#">
+                                                        @Model.PageViewCount
+                                                    </a>
+                                                </span>
+                                                <span class="date">@StringHelper.ToDateTime(Model.CreatedDate)</span>
+                                                <span class="comments"><a href="#comments">6评论</a></span>
+                                                @*<span class="blog_tags">Tags: <a rel="tag" href="#">lorem,</a> <a rel="tag" href="#">ipsum,</a> <a rel="tag" href="#">dolor,</a> <a rel="tag" href="#">sit amet</a></span>*@
+                                                <div class="portfolio_share">
+                                                    <a href="#" class="ico_socialize_facebook2 ico_socialize type2"></a>
+                                                    <a href="#" class="ico_socialize_twitter2 ico_socialize type2"></a>
+                                                    <a href="#" class="ico_socialize_pinterest ico_socialize type2"></a>
+                                                    <a href="#" class="ico_socialize_google2 ico_socialize type2"></a>
+                                                    <div class="clear"><!-- ClearFix --></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <article class="contentarea">
+                                            <p>
+                                                @Html.Raw(Model.Description)
+                                            </p>
+                                        </article>
+                                    </div>
+                                    <div id="comments">
+                                        <h4 class="reply-title">相关评论</h4>
+                                        <ol class="commentlist">
+                                            <li class="comment depth-1">
+                                                <div class="stand_comment">
+                                                    <div class="commentava"><img class="avatar photo" width="80" height="80" src="/content/BootStrap_Yellow/images/avatars/avatar2.jpg" alt=""></div>
+                                                    <div class="thiscommentbody">
+                                                        <div class="comment_info">
+                                                            <span class="author_name"><a class="url" rel="external nofollow" href="#">Tom Sawyer</a></span>
+                                                            <span class="web_site"><a href="#">www.companyname.com</a></span>
+                                                            <span class="date">26 april 2019</span>
+                                                            <span class="comments"><a href="#respond" class="comment-reply-link">Reply</a></span>
+                                                        </div>
+                                                        <p>Duis iaculis gravida dolor quis interdum ac massa varius?</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <ul>
+                                                    <li class="comment depth-2">
+                                                        <div class="stand_comment">
+                                                            <div class="commentava"><img class="avatar photo" width="80" height="80" src="/content/BootStrap_Yellow/images/avatars/avatar2.jpg" alt=""></div>
+                                                            <div class="thiscommentbody">
+                                                                <div class="comment_info">
+                                                                    <span class="author_name"><a class="url" rel="external nofollow" href="#">Tom Sawyer</a></span>
+                                                                    <span class="web_site"><a href="#">www.companyname.com</a></span>
+                                                                    <span class="date">26 april 2019</span>
+                                                                    <span class="comments"><a href="#respond" class="comment-reply-link">Reply</a></span>
+                                                                </div>
+                                                                <p>Duis iaculis gravida dolor quis interdum ac massa varius?</p>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                        </ol>
+                                    </div><!-- #comments -->
+                                    <div id="respond">
+                                        <h4 id="reply-title">我要评论 <small><a style="display:none;" href="#respond" id="cancel-comment-reply-link" rel="nofollow">Cancel reply</a></small></h4>
+                                        <form id="commentform" method="post" action="">
+                                            <p class="comment-notes">All fields marked with an asterisk<span class="required">*</span> are required.</p>
+                                            <textarea class="form_field" id="comment-message" title="Comment*" rows="5" cols="45" name="comment" style="width: 838px;"></textarea>
+                                            <p class="form-submit">
+                                                <input type="reset" value="清空 " id="reset" name="reset">
+                                                <input type="submit" value="提交" id="submit" name="submit">
+                                                <input type="hidden" id="comment_post_ID" value="754" name="comment_post_ID">
+                                                <input type="hidden" value="0" id="comment_parent" name="comment_parent">
+                                            </p>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+                            </div><!-- .row-fluid -->
+                        </div><!-- .contentarea -->
+                    </div>
+                    <div class="left-sidebar-block span3">
+                        <aside class="sidebar">
+                            <div class="sidepanel widget_nav_menu">
+                                <ul class="menu">
+                                    <li class="menu-item"><a href="#newdetail">新闻详情</a></li>
+                                    <li class="menu-item"><a href="#comments">相关评论</a></li>
+                                    <li class="menu-item"><a href="#respond">我要评论</a></li>
+                                </ul>
+                            </div>
+                            <div class="sidepanel widget_posts">
+                                <h4 class="sidebar_header">Featured Posts</h4>
+                                <ul class="recent_posts">
+                                    <li>
+                                        <div class="img_wrapper">
+                                            <img src="/content/BootStrap_Yellow/images/pictures/featured_widget1.jpg" width="88" height="88" class="alignleft" />
+                                        </div>
+                                        <div class="recent_posts_content">
+                                            <span class="post_date">25 april 2019</span>
+                                            <p>Quisque ut nisl et neque ndilt mollis duis iaculis gravida.</p>
+                                            <span class="read_more"><a href="#">Read more...</a></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="recent_posts_content">
+                                            <span class="post_date">25 april 2019</span>
+                                            <p>Quisque ut nisl et neque ndilt mollis duis.<br>Lorem Ipsum Vestibulum Molesqu</p>
+                                            <span class="read_more"><a href="#">Read more...</a></span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="img_wrapper">
+                                            <img src="/content/BootStrap_Yellow/images/pictures/featured_widget2.jpg" width="88" height="88" class="alignleft" />
+                                        </div>
+                                        <div class="recent_posts_content">
+                                            <span class="post_date">15 april 2019</span>
+                                            <p>Quisque ut nisl et neque ndilt mollis duis iaculis gravida.</p>
+                                            <span class="read_more"><a href="#">Read more...</a></span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div><!-- .left-sidebar -->
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
+    <script>
+        $(function () {
+            var editor = new wangEditor('comment-message');
+
+            // 上传图片
+            editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+            // 配置自定义参数
+            editor.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            // 设置 headers
+            editor.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            editor.create();
+
+        })
+
+    </script>
+
+
+}

@@ -1,0 +1,109 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "CertificStatic";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    string userAccount = SessionHelper.Get("userName");
+    string PeopleID = SessionHelper.Get("PeopleID");
+    string UserID = SessionHelper.Get("UserID");
+    WebUserService webuserservice = new WebUserService();
+    WebUser webuser = webuserservice.GetWebUserByID(Convert.ToInt32(UserID));
+    WebPeopleAuthenticationService webauthenservice = new WebPeopleAuthenticationService();
+    WebPeopleAuthentication webAuthentication = new WebPeopleAuthentication();
+    if (webauthenservice.GetWebPeopleAuthenticationByUserID(Convert.ToInt32(UserID)) != null)
+    {
+        webAuthentication = webauthenservice.GetWebPeopleAuthenticationByUserID(Convert.ToInt32(UserID));
+    }
+
+    WebPeopleGuarantMoneyService WebPeopleGuarantMoneyservice = new WebPeopleGuarantMoneyService();
+    WebPeopleGuarantMoney WebPeopleGuarant = new WebPeopleGuarantMoney();
+    if (WebPeopleGuarantMoneyservice.GetWebPeopleGuarantMoneyByUserID(Convert.ToInt32(UserID)) != null)
+    {
+        WebPeopleGuarant = WebPeopleGuarantMoneyservice.GetWebPeopleGuarantMoneyByUserID(Convert.ToInt32(UserID));
+    }
+}
+<style>
+    .xiaoxi-txt {
+    width:initial; 
+}
+</style>
+<div class="centers_mr">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active">审核状态</a>
+        </div>
+        <div class="items-con">
+            <div class="public_m1 u-xiaoxi">
+                <div class="public_m5"> 
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr style=" border-bottom:1px solid #000">
+                                <th class="xx-checkbtn">选择</th>
+                                <th class="olist1">发信人</th>
+                                <th class="olist2">状态</th>
+                                <th class="olist3">时间</th>
+                                @*<th class="olist4">操作</th>*@
+                            </tr>
+                            @if (webauthenservice.GetWebPeopleAuthenticationByUserID(Convert.ToInt32(UserID)) != null)
+                            {
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><a href="#">系统</a></td>
+                                    <td>
+                                        <div class="xiaoxi-txt">
+                                            @if (webAuthentication.IsAuthentication == 1)
+                                            {
+                                                @:你的身份审核成功
+                                            }
+                                            else if (webAuthentication.IsAuthentication == 0)
+                                            {
+                                                @:你的身份正在审核，请等待一到两个工作日
+                                            }
+                                            else
+                                            {
+                                                @:您的身份未通过审核，请重新提交审核材料
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>@StringHelper.ToDateTime(webAuthentication.EditOn)</td>
+                                    @*<td><a href="#">删除</a></td>*@
+                                </tr>
+                            }
+                            @if (WebPeopleGuarantMoneyservice.GetWebPeopleGuarantMoneyByUserID(Convert.ToInt32(UserID)) != null)
+                            {
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td><a href="#">系统</a></td>
+                                    <td>
+                                        <div class="xiaoxi-txt">
+                                            @if (WebPeopleGuarant.IsGuarantMoney == 1)
+                                            {
+                                                @:保证金申请成功
+                                            }
+                                            else if (WebPeopleGuarant.IsGuarantMoney == 0)
+                                            {
+                                                @:保证金正在申请，一到两个工作日内我们会和您电话联系，请保持电话通畅
+                                            }
+                                            else
+                                            {
+                                                @:保证金申请未成功
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>@StringHelper.ToDateTime(WebPeopleGuarant.EditOn)</td>
+                                    @*<td><a href="#">删除</a></td>*@
+                                </tr>
+                            }
+
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
