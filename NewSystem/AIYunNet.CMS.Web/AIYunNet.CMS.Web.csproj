@@ -102,6 +102,7 @@
     <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DecorationCompanyController.cs" />
+    <Compile Include="Controllers\DemandController.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -3892,7 +3893,6 @@
     <Content Include="Views\Imglist\Imagelist.cshtml" />
     <Content Include="Views\News\NewsList.cshtml" />
     <Content Include="Views\Imglist\PictureList.cshtml" />
-    <Content Include="Views\Shared\_LayoutNoJs.cshtml" />
     <Content Include="Views\AboutUs\AboutUs.cshtml" />
     <Content Include="Views\AboutUs\AboutUsDetail.cshtml" />
     <Content Include="Views\AboutUs\SinglePageDetail.cshtml" />
@@ -3932,6 +3932,7 @@
     <Content Include="Views\Download\DownLoadList.cshtml" />
     <Content Include="Views\Download\DownLoadDetail.cshtml" />
     <Content Include="Views\Download\DownLoadSth.cshtml" />
+    <Content Include="Views\Demand\DemandList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3951,16 +3952,10 @@
     <Content Include="Content\Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Handler\GetPageListAjax.ashx" />
     <None Include="Properties\PublishProfiles\cofig.pubxml" />
-    <Content Include="Views\Shared\_CompanyLayout.cshtml" />
-    <Content Include="Views\Shared\bar.cshtml" />
-    <Content Include="Views\Shared\footer.cshtml" />
-    <Content Include="Views\Shared\top.cshtml" />
-    <Content Include="Views\Shared\_SecondbarCompany.cshtml" />
     <Content Include="Views\Imglist\ImgDetail.cshtml" />
     <None Include="Properties\PublishProfiles\config.pubxml" />
   </ItemGroup>
