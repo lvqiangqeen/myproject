@@ -1678,6 +1678,7 @@
     <Content Include="Content\Css\workers\workerLeader.css" />
     <Content Include="Content\Css\workers\workerLeaDetail.css" />
     <Content Include="Content\Css\workers\workerList.css" />
+    <Content Include="Content\design\sheji.demand.css" />
     <Content Include="Content\design\img\about_dian.gif" />
     <Content Include="Content\design\img\common_bg_l.png" />
     <Content Include="Content\design\img\common_bg_s.png" />

@@ -53,10 +53,15 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("workTime")]
         public int workTime { get; set; }
         /// <summary>
+        /// WorkTimeName
+        /// </summary>
+        [Column("WorkTimeName")]
+        public string WorkTimeName { get; set; }
+        /// <summary>
         /// buidingSpace
         /// </summary>
         [Column("buidingSpace")]
-        public decimal buidingSpace { get; set; }
+        public double buidingSpace { get; set; }
         /// <summary>
         /// buidingtype
         /// </summary>
@@ -88,6 +93,17 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("AddOn")]
         public DateTime AddOn { get; set; }
         /// <summary>
+        /// EndOn
+        /// </summary>
+        [Column("EndOn")]
+        public DateTime EndOn { get; set; }
+        /// <summary>
+        /// IsEnd
+        /// </summary>
+        [Column("IsEnd")]
+        public bool IsEnd { get; set; }
+        
+        /// <summary>
         /// EditOn
         /// </summary>
         [Column("EditOn")]
@@ -96,7 +112,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// DeleteOn
         /// </summary>
         [Column("DeleteOn")]
-        public DateTime DeleteOn { get; set; }
+        public DateTime? DeleteOn { get; set; }
         /// <summary>
         /// IsDelete
         /// </summary>
@@ -107,5 +123,65 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsVerrify")]
         public int IsVerrify { get; set; }
+        /// <summary>
+        /// 一句话描述需求
+        /// </summary>
+        [Column("OneSentence")]
+        public string OneSentence { get; set; }
+        /// <summary>
+        /// 参与要求
+        /// </summary>
+        [Column("Demandneed")]
+        public string Demandneed { get; set; }
+        /// <summary>
+        /// 需求说明
+        /// </summary>
+        [Column("Info")]
+        public string Info { get; set; }
+        /// <summary>
+        /// DemandType
+        /// </summary>
+        [Column("DemandType")]
+        public int DemandType { get; set; }
+        /// <summary>
+        /// 需求类型
+        /// </summary>
+        [Column("DemandTypeName")]
+        public string DemandTypeName { get; set; }
+        /// <summary>
+        /// 需求状态
+        /// </summary>
+        [Column("DemandState")]
+        public int DemandState { get; set; }
+        /// <summary>
+        /// 浏览量
+        /// </summary>
+        [Column("PageViewCount")]
+        public int PageViewCount { get; set; }
+        /// <summary>
+        /// 投标量
+        /// </summary>
+        [Column("bidCount")]
+        public int bidCount { get; set; }
+        public DecDemand()
+        {
+            ProvinceID = 0;
+            CityID = 0;
+            workTime = 0;
+            buidingSpace = 0;
+            buidingtype = 0;
+            PublishuserID = 0;
+            GetUserID = 0;
+            AddOn = DateTime.Now;
+            EditOn = DateTime.Now;
+            EndOn = DateTime.Now.AddDays(7);
+            IsDelete = false;
+            IsVerrify = 0;
+            DemandType = 0;
+            DemandState = 0;
+            PageViewCount = 0;
+            bidCount = 0;
+            IsEnd = false;
+        }
     }
 }

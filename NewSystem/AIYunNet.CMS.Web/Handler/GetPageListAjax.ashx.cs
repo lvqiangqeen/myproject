@@ -33,6 +33,45 @@ namespace AIYunNet.CMS.Web.Handler
         /// <summary>
         /// 获取下载文件
         /// </summary>
+        public void GetDecDemandList()
+        {
+            int pageIndex = string.IsNullOrEmpty(context.Request["pageIndex"]) ? 1 : Convert.ToInt32(context.Request["pageIndex"]);
+            int PageSize = Convert.ToInt32(context.Request["PageSize"]);
+            string mkjcitycode = context.Request["mkjcitycode"];
+            string DemandType = context.Request["DemandType"];
+            string SortOrder = context.Request["SortOrder"];
+            string SortParameters = "";
+            int pageCount = 0;
+            int recordcount = 0;
+            string SelectParameters = string.Format("[id],[ownername],[ownertel],[ProvinceID],[ProvinceName],[CityID],[CityName],[workTime],[WorkTimeName]"
+                + ",[buidingSpace],[buidingtype],[buidingname],[PublishuserID],[GetUserID],[GetUserType],[AddOn],[EndOn],[IsEnd],[EditOn],[OneSentence]"
+                + ",[DeleteOn],[IsDelete],[IsVerrify],[Demandneed],[Info],[DemandType],[DemandTypeName],[DemandState],[PageViewCount],[bidCount]");
+
+            SortParameters = string.Format(" IsDelete=0 and IsVerrify=1 {0} {1} ",
+                "and CityID='" + mkjcitycode + "'",
+                 DemandType == "0" || string.IsNullOrEmpty(DemandType) ? "" : "and DemandType=" + DemandType);
+
+            Pagination paginfo = new Pagination();
+            paginfo.SelectParameters = SelectParameters;
+            paginfo.PageIndex = pageIndex;
+            paginfo.PageSize = PageSize;
+            paginfo.EntityName = "DecDemand";
+            paginfo.SortParameters = SortParameters;
+            paginfo.SortOrder = SortOrder + " IsEnd asc,AddOn desc,id desc";
+            var result = PageList.GetPageListBySQL<DecDemand>(paginfo, out recordcount, out pageCount);
+
+            var obj = new
+            {
+                list = result,
+                recordcount = recordcount,
+                pageCount = pageCount
+            };
+            string msg = JsonConvert.SerializeObject(obj);
+            context.Response.Write(msg);
+        }
+        /// <summary>
+        /// 获取下载文件
+        /// </summary>
         public void GetDecDownLoadList()
         {
             int pageIndex = string.IsNullOrEmpty(context.Request["pageIndex"]) ? 1 : Convert.ToInt32(context.Request["pageIndex"]);
