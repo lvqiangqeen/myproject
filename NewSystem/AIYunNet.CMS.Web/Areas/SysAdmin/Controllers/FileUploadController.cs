@@ -343,7 +343,31 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             }
             return result;
         }
+        //案例图片分解
+        public ActionResult DecUploadFileForEditorByCase()
+        {
+            var files = Request.Files;
+            if (files.Count <= 0)
+            {
+                return Content("error|file is null");
+            }
+            HttpPostedFileBase file = files[0];
 
-
+            if (file == null)
+            {
+                return Content("error|file is null");
+            }
+            else
+            {
+                string path = Server.MapPath("~/UploadFiles/EditorFiles/");  //存储图片的文件夹
+                string originalFileName = file.FileName;
+                string fileExtension = originalFileName.Substring(originalFileName.LastIndexOf('.'), originalFileName.Length - originalFileName.LastIndexOf('.'));
+                string currentFileName = (new Random()).Next() + fileExtension;  //文件名中不要带中文，否则会出错
+                string imagePath = path + currentFileName;
+                file.SaveAs(imagePath);
+                string imgUrl = "http://" + Request.Url.Authority + "/UploadFiles/EditorFiles/" + currentFileName;
+                return Content(imgUrl);
+            }
+        }
     }
 }

@@ -100,10 +100,10 @@
                             <div class="wrid1">
                                 <h3 class="a2">
                                     <b class="red">{{item.DemandTypeName}}</b>
-                                    <a urlshare="urlshare" href="" class="font14" target="_blank">                                        
+                                    <a urlshare="urlshare" v-bind:href="'/Demand/DemandIndex?id='+item.id" class="font14" target="_blank">                                        
                                         {{item.buidingname}}
                                     </a>
-                                    <span class="mywork">{{item.OneSentence}}</span>
+                                    <span class="mywork" v-bind:title="item.OneSentence">{{item.OneSentence}}</span>
                                 </h3>
                                 <samp class="c999">{{item.PageViewCount}}人浏览 / <font class="red">{{item.bidCount}}</font> 人已经投标</samp>
                             </div>

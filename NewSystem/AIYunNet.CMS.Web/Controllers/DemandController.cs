@@ -14,12 +14,25 @@ namespace AIYunNet.CMS.Web.Controllers
     public class DemandController : Controller
     {
         WebCommonService comser = new WebCommonService();
+        DemandService demandSer = new DemandService();
+        WebUserService UserSer = new WebUserService();
         // GET: Demand
         public ActionResult DemandList()
         {
             List<WebLookup> list = comser.GetLookupList("Demand_type");
             ViewBag.Typelist = list;
             return View();
+        }
+
+        public ActionResult DemandIndex(int id=0)
+        {
+            DecDemand demand = demandSer.GetDecDemandByID(id);
+            if (demand.PublishuserID != 0)
+            {
+                WebUser user = UserSer.GetWebUserByID(demand.PublishuserID);
+                ViewBag.user = user;
+            }
+            return View(demand);
         }
     }
 }

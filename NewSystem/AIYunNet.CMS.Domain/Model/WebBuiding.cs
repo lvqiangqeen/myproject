@@ -135,6 +135,9 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("superviseName")]
         public string superviseName { get; set; }
 
+        [Column("UserID")]
+        public int UserID { get; set; }
+
         public WebBuiding()
         {
             CompanyID = 0;
@@ -153,6 +156,7 @@ namespace AIYunNet.CMS.Domain.Model
             Space = 0;
             ResultID = 0;
             StageNow = 0;
+            UserID = 0;
         }
     }
 }

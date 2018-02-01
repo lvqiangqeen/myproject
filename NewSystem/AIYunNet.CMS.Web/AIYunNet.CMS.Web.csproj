@@ -1678,6 +1678,8 @@
     <Content Include="Content\Css\workers\workerLeader.css" />
     <Content Include="Content\Css\workers\workerLeaDetail.css" />
     <Content Include="Content\Css\workers\workerList.css" />
+    <Content Include="Content\design\commencss.css" />
+    <Content Include="Content\design\img\task_conduct.jpg" />
     <Content Include="Content\design\sheji.demand.css" />
     <Content Include="Content\design\img\about_dian.gif" />
     <Content Include="Content\design\img\common_bg_l.png" />
@@ -1714,6 +1716,7 @@
     <Content Include="Content\design\sheji.about.css" />
     <Content Include="Content\design\sheji.casedetail.css" />
     <Content Include="Content\design\sheji.caselist.css" />
+    <Content Include="Content\design\sheji.DemandIndex.css" />
     <Content Include="Content\design\sheji.designerindex.css" />
     <Content Include="Content\design\sheji.designerlist.css" />
     <Content Include="Content\design\sheji.download.css" />
@@ -3934,6 +3937,7 @@
     <Content Include="Views\Download\DownLoadDetail.cshtml" />
     <Content Include="Views\Download\DownLoadSth.cshtml" />
     <Content Include="Views\Demand\DemandList.cshtml" />
+    <Content Include="Views\Demand\DemandIndex.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

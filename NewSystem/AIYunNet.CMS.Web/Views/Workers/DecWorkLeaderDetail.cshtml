@@ -16,6 +16,10 @@
     height: 18px;
     margin-top: 16px;
 }
+    .buiding {
+     margin-bottom: 0px;
+    white-space: normal;
+    }
 </style>
 <div class="container">
     <div class="content clearfix">
@@ -137,11 +141,12 @@
 
                         <div class="ngz-tit"><h2>工地案例</h2></div>
                         <!--工地案例循环部分开始-->
-                        <!--<dl class="ngz-case">
+                        @*<dl class="ngz-case">
                             <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
                             <dd>
                                 <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
                                 <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
+                               
                                 <ul class="c-jd clear">
                                     <li><i></i>水电阶段</li>
                                     <li><i></i>泥木阶段</li>
@@ -154,7 +159,7 @@
                                     <span class="btn3">已有<em>81</em>人查看</span>
                                 </div>
                             </dd>
-                        </dl>-->
+                        </dl>*@
                         
                     </motempty>
 
@@ -186,42 +191,61 @@
                     if (data) {
                         var datajson = eval('(' + data + ')');
                         var html = "";
-                        $.each(datajson.list, function (i,item) {
-                            html += '<dl class="ngz-case">'
-                            + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
-                            + '<dd>'
-                            + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
-                            + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
-                            + '<ul class="c-jd clear">';
-                            var stagelist = item.constructionstage.split(',');
-                            var length = stagelist.length - 1;
-                            if (length > 6) {
-                                length = 6;
+                        $.each(datajson.list, function (i, item) {
+                            if (item.UserID == 0) {
+                                html += '<dl class="ngz-case">'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dd>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<p style="margin-bottom: 10px;">&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
+                                + '<p style="margin-bottom: 0px;white-space: normal;">&nbsp;&nbsp;简介&nbsp;&nbsp;' + item.BuidingBrief + '</p>'
+                                + '<div class="btn-w">'
+                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
+                                + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
+                                +'</div>'
+                                +'</dd>'
+                                +'</dl>';
                             }
-                            var Stage = item.StageNow;
-                            if (Stage >5)
+                            else
                             {
-                                Stage = 5;
-                            }
-                            for (var i = 0; i < length; i++)
-                            {
-                                if (i == Stage) {
-                                    html += '<li class="fns"><i></i>' + stagelist[i].replace("工","") + '阶段</li>';
-                                } else
-                                {
-                                    html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                html += '<dl class="ngz-case">'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dd>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
+                                + '<ul class="c-jd clear">';
+                                var stagelist = item.constructionstage.split(',');
+                                var length = stagelist.length - 1;
+                                if (length > 6) {
+                                    length = 6;
                                 }
+                                var Stage = item.StageNow;
+                                if (Stage >5)
+                                {
+                                    Stage = 5;
+                                }
+                                for (var i = 0; i < length; i++)
+                                {
+                                    if (i == Stage) {
+                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工","") + '阶段</li>';
+                                    } else
+                                    {
+                                        html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                    }
+                                }
+                                html+='</ul>'
+                                +'<div class="btn-w">'
+                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
+                                + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
+                                +'</div>'
+                                +'</dd>'
+                                +'</dl>';
                             }
-                            html+='</ul>'
-                            +'<div class="btn-w">'
-                            +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
-                            + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
-                            + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
-                            +'</div>'
-                            +'</dd>'
-                            +'</dl>';
+
                         })
-                        $(".ngz-case").remove();
+                        //$(".ngz-case").remove();
                         $("motempty").append(html);
                         //列出页码,jq分页控件
                         $('.M-box1').pagination({

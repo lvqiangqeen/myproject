@@ -8,6 +8,9 @@ using System.Text;
 using System.Web;
 using ImageProcessor;
 using ImageProcessor.Imaging.Formats;
+using System.Text.RegularExpressions;
+using System.Net;
+using AIYunNet.CMS.Common.Utility.Model;
 
 namespace AIYunNet.CMS.Common.Utility
 {
@@ -326,5 +329,50 @@ namespace AIYunNet.CMS.Common.Utility
         }
 
         #endregion
+
+
+
+
+        /// <summary> 
+        /// 取得HTML中所有图片的 URL。 
+        /// </summary> 
+        /// <param name="sHtmlText">HTML代码</param> 
+        /// <returns>图片的URL列表</returns> 
+        public static string[] GetHvtImgUrls(string sHtmlText)
+        {
+            // 定义正则表达式用来匹配 img 标签 
+            Regex m_hvtRegImg = new Regex(@"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>", RegexOptions.IgnoreCase);
+
+
+            // 搜索匹配的字符串 
+            MatchCollection matches = m_hvtRegImg.Matches(sHtmlText);
+            int m_i = 0;
+            string[] sUrlList = new string[matches.Count];
+
+            // 取得匹配项列表 
+            foreach (Match match in matches)
+                sUrlList[m_i++] = match.Groups["imgUrl"].Value;
+            return sUrlList;
+        }
+
+        public static string GetthumImgByUrl(string url)
+        {
+            string ret = "";
+            string pathForSaving = ImagePathInfo.ProcessBeginOfThePath
+                        ("/UploadFiles/Files");
+            //缩略图处理
+            var thumbnailPathInfo = new ImagePathInfo(url, pathForSaving);
+            System.Net.WebRequest webreq = System.Net.WebRequest.Create(url);
+            System.Net.WebResponse webres = webreq.GetResponse();
+            System.IO.Stream stream = webres.GetResponseStream();
+            using (var thumbNail = GetThumbnail(stream, 100, 100, 50))
+            {
+                thumbnailPathInfo.CreateDirectory();
+                thumbNail.Save(thumbnailPathInfo.FileAbsolutePath);
+            }
+            ret = thumbnailPathInfo.FileRelativePath;
+            return ret;
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Domain;
+using AIYunNet.CMS.Common.Utility;
 
 namespace AIYunNet.CMS.BLL.Service
 {
@@ -116,6 +117,12 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 context.WebCase.Add(webCase);
                 context.SaveChanges();
+                string[] list = ImageHelper.GetHvtImgUrls(webCase.CaseInfo);
+                foreach (var item in list)
+                {
+                    ImageHelper.GetthumImgByUrl(item);
+                }
+
                 return 1;
             }
         }

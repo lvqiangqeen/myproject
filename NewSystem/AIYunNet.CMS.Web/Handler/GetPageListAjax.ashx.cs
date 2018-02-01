@@ -132,7 +132,7 @@ namespace AIYunNet.CMS.Web.Handler
             string SelectParameters = string.Format("[BuidingID],[BuidingTitle],[BuidingBrief],[BuidingInfo],[CompanyID],[WorkerID]"
                      +",[thumbnailImage],[BuidingImage],[ShowOrder],[AddOn],[EditOn],[DeleteOn],[FlagDelete],[PageViewCount]"
                      + ",[CollectCount],[ZanCount],[CommentCount],[IsHot],[IsTop],[Price],[Space],[constructionstageID]"
-                     +",[constructionstage],[ResultID],[StartTime],[StageNow],[EndTime],[superviseName]");
+                     +",[constructionstage],[ResultID],[StartTime],[StageNow],[EndTime],[superviseName],[UserID]");
 
             SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} ",
                 CompanyID == "0" || string.IsNullOrEmpty(CompanyID) ? "" : "and CompanyID="+ CompanyID,

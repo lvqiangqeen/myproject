@@ -53,16 +53,6 @@ namespace AIYunNet.CMS.Web.Controllers
         [Description("设计图库列表")]
         public ActionResult DecImagelist()
         {
-            List<WebLookup> softcoverstylelist = webCommonService.GetLookupList("Img_softcoverstyle");
-            List<WebLookup> hotalstylelist = webCommonService.GetLookupList("Img_hotalstyle");
-            List<WebLookup> designerrstylelist = webCommonService.GetLookupList("Img_designerrstyle");
-            List<WebLookup> commercialstylelist = webCommonService.GetLookupList("Img_commercialstyle");
-            List<WebLookup> housestylelist = webCommonService.GetLookupList("Img_housestyle");
-            ViewBag.softcoverstylelist = softcoverstylelist;
-            ViewBag.hotalstylelist = hotalstylelist;
-            ViewBag.designerrstylelist = designerrstylelist;
-            ViewBag.commercialstylelist = commercialstylelist;
-            ViewBag.housestylelist = housestylelist;
             return View();
         }
         public ActionResult DecPictureList()
