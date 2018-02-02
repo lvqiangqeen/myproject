@@ -216,9 +216,11 @@
                             $.each(datajson.list, function (i, ite) {
                                 html += '<div class="item">'
                                 + '<div class="animate-box">'
-                                + '<a href="@AppSettingsHelper.ImgUrl' + ite.PictureImg + '" class="image-popup fh5co-board-img"><img src="@AppSettingsHelper.ImgUrl' + ite.PictureImg + '" alt="' + ite.PictureName + '"></a>'
-                                + '<div class="fh5co-desc">' + ite.PictureName + '</div>'
-                                + '</div>'
+                                + '<a href="' + ite.Img + '" class="image-popup fh5co-board-img"><img src="@AppSettingsHelper.ImgUrl' + ite.thumbnailImage + '" alt="' + ite.imgName + '"></a>'
+                                if (ite.CompanyID == 0) {
+                                    html += '<div class="fh5co-desc"><a href="/Workers/DecDesignerIndex?peopleID=' + ite.PeopleID + '">设计师：' + ite.PeopleName + '</a></div>';
+                                } else { html += '<div class="fh5co-desc"><a href="/DecorationCompany/CompanyTuBa?companyID=' + ite.CompanyID + '">装修公司：' + ite.CompanyName + '</a></div>'; }
+                                html+= '</div>'
                                 + '</div>';
                             });
                             $("#fh5co-board").empty();

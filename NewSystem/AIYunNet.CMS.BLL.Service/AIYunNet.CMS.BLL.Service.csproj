@@ -60,6 +60,7 @@
     <Compile Include="WebBuidingService.cs" />
     <Compile Include="WebBuidingStagesService.cs" />
     <Compile Include="WebBuidingTimeStagesService.cs" />
+    <Compile Include="WebCaseImgService.cs" />
     <Compile Include="WebCaseService.cs" />
     <Compile Include="WebCommonService.cs" />
     <Compile Include="WebCompanyAuthenticationService.cs" />

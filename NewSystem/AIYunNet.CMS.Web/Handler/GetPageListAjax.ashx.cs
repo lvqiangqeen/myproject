@@ -359,21 +359,22 @@ namespace AIYunNet.CMS.Web.Handler
             string SelectParameters = "";
             int pageCount = 0;
             int recordcount = 0;
-            SelectParameters = string.Format("PictureID,PictureName,PictureImg,WebPicture.thumbnailImage as thumbnailImage,WebImg.ImgGzspace as ImgGzspace,WebImg.ImgJzspce as ImgJzspce,WebImg.ImgJzstyle as ImgJzstyle,WebImg.DecType as DecType");
-            SortParameters = string.Format(" WebPicture.FlagDelete=0 {0} {1} {2} {3}",
-                ImgJzspce == "0" || string.IsNullOrEmpty(ImgJzspce) ? "" : "and ImgJzspce =" + Convert.ToInt32(ImgJzspce),
-                ImgGzspace == "0" || string.IsNullOrEmpty(ImgGzspace) ? "" : "and ImgGzspace =" + Convert.ToInt32(ImgGzspace),
-                ImgJzstyle == "0" || string.IsNullOrEmpty(ImgJzstyle) ? "" : "and ImgJzstyle =" + Convert.ToInt32(ImgJzstyle),
+            SelectParameters = string.Format("[imgID],[imgName],[Img],[thumbnailImage],[AddOn],[EditOn],[DeleteOn],[FlagDelete],[WebCaseID],[DecType]"
+                    +",[GzStyle],[JzStyle],[JzSpace],[PeopleID],[PeopleName],[CompanyID],[CompanyName]");
+            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3}",
+                ImgJzspce == "0" || string.IsNullOrEmpty(ImgJzspce) ? "" : "and JzSpace =" + Convert.ToInt32(ImgJzspce),
+                ImgGzspace == "0" || string.IsNullOrEmpty(ImgGzspace) ? "" : "and GzStyle =" + Convert.ToInt32(ImgGzspace),
+                ImgJzstyle == "0" || string.IsNullOrEmpty(ImgJzstyle) ? "" : "and JzStyle =" + Convert.ToInt32(ImgJzstyle),
                 "and DecType =" + Convert.ToInt32(DecType));
 
             Pagination paginfo = new Pagination();
             paginfo.PageIndex = pageIndex;
             paginfo.PageSize = PageSize;
             paginfo.SelectParameters = SelectParameters;
-            paginfo.EntityName = "WebPicture INNER JOIN WebImg on WebPicture.WebImgID=WebImg.ImgId";
+            paginfo.EntityName = "WebCaseImg";
             paginfo.SortParameters = SortParameters;
-            paginfo.SortOrder = SortOrder + "PictureID desc";
-            var result = PageList.GetPageListBySQL<WebPicturesPage>(paginfo, out recordcount, out pageCount);
+            paginfo.SortOrder = SortOrder + "imgID desc";
+            var result = PageList.GetPageListBySQL<WebCaseImg>(paginfo, out recordcount, out pageCount);
             var obj = new
             {
                 list = result,

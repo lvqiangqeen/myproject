@@ -3856,6 +3856,8 @@
     <Content Include="Areas\SysAdmin\Views\DownLoadSys\DownloadSysDetail.cshtml" />
     <Content Include="Areas\SysAdmin\Views\Shared\_UploadDownLoadFile.cshtml" />
     <Content Include="Areas\SysAdmin\Views\DownLoadSys\Downloadtype.cshtml" />
+    <Content Include="Areas\SysAdmin\Views\ImageList\DecWebImageList.cshtml" />
+    <Content Include="Areas\SysAdmin\Views\ImageList\AddOrEditWebCaseImg.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

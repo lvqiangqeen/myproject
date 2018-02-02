@@ -110,19 +110,36 @@ namespace AIYunNet.CMS.BLL.Service
                 return context.WebCase.Find(caseID);
             }
         }
-
+        //添加案例同时添加缩略图
         public int AddWebCase(WebCase webCase)
         {
+            WebCompanyService comSer = new WebCompanyService();
+            WebPeopleService peoSer = new WebPeopleService();
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 context.WebCase.Add(webCase);
-                context.SaveChanges();
+                
                 string[] list = ImageHelper.GetHvtImgUrls(webCase.CaseInfo);
                 foreach (var item in list)
                 {
-                    ImageHelper.GetthumImgByUrl(item);
+                    string thum = ImageHelper.GetthumImgByUrl(item);
+                    WebCaseImg img = new WebCaseImg
+                    {
+                        CompanyID = webCase.CompanyID,
+                        CompanyName= webCase.CompanyID==0?"":comSer.GetWebCompanyByID(webCase.CompanyID).CompanyName,
+                        PeopleID = webCase.PeopleID,
+                        PeopleName= webCase.PeopleID==0?"":peoSer.GetWebPeopleByID(webCase.PeopleID).PeopleName,
+                        imgName = webCase.CaseTitle,
+                        Img= item,
+                        thumbnailImage = thum,
+                        WebCaseID= webCase.CaseID,
+                        DecType= webCase.DecType,
+                        GzStyle= webCase.GzStyle,
+                        JzStyle=webCase.Style
+                    };
+                    context.WebCaseImg.Add(img);
                 }
-
+                context.SaveChanges();
                 return 1;
             }
         }

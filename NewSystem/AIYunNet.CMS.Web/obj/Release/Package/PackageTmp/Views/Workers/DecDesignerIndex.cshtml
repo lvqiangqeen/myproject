@@ -724,8 +724,10 @@
                                        + '<div  class="case_description" style="display:none;">'
                                        + '<dl>'
                                        + '<dt>' + ite.webcase.CaseTitle + '</dt>'
-                                       + '<dd style="color: #0EE;">' + ite.webcase.StyleName + '|' + ite.webcase.HouseTypeName + '|' + ite.webcase.HouseAreaName + '|' + ite.webcase.CostAreaName + '</dd>'
-                                       + '</dl>'
+                                if (ite.webcase.DecType == 1) {
+                                    html += '<dd style="color: #0EE;">' + ite.webcase.StyleName + '|' + ite.webcase.HouseTypeName + '|' + ite.webcase.HouseAreaName + '|' + ite.webcase.CostAreaName + '</dd>';
+                                } else { html += '<dd style="color: #0EE;">' + ite.webcase.GzStyleName + '|' + ite.webcase.HouseAreaName + '|' + ite.webcase.CostAreaName + '</dd>'; }
+                                       html +='</dl>'
                                        + '</div>'
                                        + '</a>';
                                 if ((i - 2) % 3 == 0) {

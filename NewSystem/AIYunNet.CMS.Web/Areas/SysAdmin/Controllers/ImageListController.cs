@@ -17,6 +17,7 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         IWebImg webImgService = new WebImgService();
         IWebCommon webCommonService = new WebCommonService();
         IWebPicture webPictureService = new WebPictureService();
+        WebCaseImgService WebSerImg = new WebCaseImgService();
         [HttpGet]
         public ActionResult WebImageList(int DecType)
         {
@@ -118,5 +119,58 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             return Json(new { RetCode = 1 }, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpGet]
+        public ActionResult DecWebImageList(int DecType)
+        {
+            List<WebCaseImg> imglist = WebSerImg.GetWebCaseImgList(DecType);
+            ViewBag.imglist = imglist;
+            return View();
+        }
+
+        public ActionResult DeleteWebCseImg(int imgID)
+        {
+            WebSerImg.DeleteWebCseImg(imgID);
+            return Json(new { RetCode = 1 }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult AddOrEditWebCaseImg(int ImgID)
+        {
+            WebCaseImg webimg = WebSerImg.GetWebCaseImgbyID(ImgID);
+            if (webimg == null)
+            {
+                webimg = new WebCaseImg();
+            }
+
+            List<WebLookup> Case_DecTypelist = webCommonService.GetLookupList("Case_DecType");
+            List<WebLookup> Case_stylelist = webCommonService.GetLookupList("Case_style");
+            List<WebLookup> Case_gz_stylelist = webCommonService.GetLookupList("Case_gz_style");
+            List<WebLookup> Case_Img_Jzspacelist = webCommonService.GetLookupList("Case_Img_Jzspace");
+            //List<WebLookup> housestylelist = webCommonService.GetLookupList("Img_housestyle");
+
+            IEnumerable<SelectListItem> Case_DecType = Case_DecTypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            IEnumerable<SelectListItem> Case_style = Case_stylelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            IEnumerable<SelectListItem> Case_gz_style = Case_gz_stylelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            IEnumerable<SelectListItem> Case_Img_Jzspace = Case_Img_Jzspacelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            //IEnumerable<SelectListItem> housestyle = housestylelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+
+            ViewBag.Case_DecType = Case_DecType;
+            ViewBag.Case_style = Case_style;
+            ViewBag.Case_gz_style = Case_gz_style;
+            ViewBag.Case_Img_Jzspace = Case_Img_Jzspace;
+            //ViewBag.housestylelist = housestyle;
+            return View(webimg);
+        }
+
+        [HttpPost]
+        public ActionResult AddOrEditWebCaseImg(WebCaseImg img)
+        {
+            int result = 0;
+
+            result = WebSerImg.updateWebCaseImgType(img);
+            
+            return Json(new { RetCode = result }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

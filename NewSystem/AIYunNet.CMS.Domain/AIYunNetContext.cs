@@ -50,5 +50,6 @@ namespace AIYunNet.CMS.Domain
         public virtual DbSet<DownLoadType> DownLoadType { get; set; }
         public virtual DbSet<All_Nav> All_Nav { get; set; }
         public virtual DbSet<DecDemand> DecDemand { get; set; }
+        public virtual DbSet<WebCaseImg> WebCaseImg { get; set; }
     }
 }

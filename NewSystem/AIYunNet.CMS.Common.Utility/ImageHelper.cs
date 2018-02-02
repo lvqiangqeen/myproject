@@ -354,18 +354,72 @@ namespace AIYunNet.CMS.Common.Utility
                 sUrlList[m_i++] = match.Groups["imgUrl"].Value;
             return sUrlList;
         }
+        /// <summary>
+        /// 将 byte[] 转成 Stream
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static Stream BytesToStream(byte[] bytes)
+        {
+            Stream stream = new MemoryStream(bytes);
+            return stream;
+        }
+        /// <summary>
+        ///  图片转换成字节流 
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        public static byte[] ImageToByteArray(Image img)
+        {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return b;
+        }
+        /// <summary>
+        /// 把图片Url转化成Image对象
+        /// </summary>
+        /// <param name="imageUrl"></param>
+        /// <returns></returns>
+        public static Image Url2Img(string imageUrl)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(imageUrl))
+                {
+                    return null;
+                }
 
+                WebRequest webreq = WebRequest.Create(imageUrl);
+                WebResponse webres = webreq.GetResponse();
+                Stream stream = webres.GetResponseStream();
+                Image image;
+                image = Image.FromStream(stream);
+                stream.Close();
+
+                return image;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return null;
+        }
         public static string GetthumImgByUrl(string url)
         {
             string ret = "";
+            string filename = url.Substring(url.LastIndexOf('/')+1, url.Length - url.LastIndexOf('/')-1);
             string pathForSaving = ImagePathInfo.ProcessBeginOfThePath
                         ("/UploadFiles/Files");
+            Image img = Url2Img(url);
+            byte[] bit = ImageToByteArray(img);
+            Stream stream = BytesToStream(bit);
             //缩略图处理
-            var thumbnailPathInfo = new ImagePathInfo(url, pathForSaving);
-            System.Net.WebRequest webreq = System.Net.WebRequest.Create(url);
-            System.Net.WebResponse webres = webreq.GetResponse();
-            System.IO.Stream stream = webres.GetResponseStream();
-            using (var thumbNail = GetThumbnail(stream, 100, 100, 50))
+            var thumbnailPathInfo = new ImagePathInfo(filename, pathForSaving);
+            double hei = 290 * (Math.Round((img.Height * 1.0 / img.Width) * 1.0, 2));
+            int height = Convert.ToInt32(Math.Round(hei, 0)); 
+
+            using (var thumbNail = GetThumbnail(stream, 290, height, 100))
             {
                 thumbnailPathInfo.CreateDirectory();
                 thumbNail.Save(thumbnailPathInfo.FileAbsolutePath);

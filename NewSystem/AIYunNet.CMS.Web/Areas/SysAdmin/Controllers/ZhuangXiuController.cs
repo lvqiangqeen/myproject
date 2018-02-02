@@ -378,7 +378,7 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             {
                 result = webCaseService.AddWebCase(webCase);
             }
-            return Json(new { RetCode = result }, JsonRequestBehavior.AllowGet);
+            return Json(new { RetCode = result });
         }
 
         [HttpPost]

@@ -71,6 +71,7 @@
     <Compile Include="Model\WebBuidingStages.cs" />
     <Compile Include="Model\WebBuidingTimeStages.cs" />
     <Compile Include="Model\WebCase.cs" />
+    <Compile Include="Model\WebCaseImg.cs" />
     <Compile Include="Model\WebCasePage.cs" />
     <Compile Include="Model\WebCaseRelationship.cs" />
     <Compile Include="Model\WebCompany.cs" />
