@@ -18,6 +18,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         WebUserService webUserservice = new WebUserService();
         WebPeopleService webpeopleservice = new WebPeopleService();
         WebWorkerService webWorkerService = new WebWorkerService();
+        t_AreaService areaService = new t_AreaService();
         // GET: PeopleCenter/UserCenter
         [HttpGet]
         public ActionResult LoginOn()
@@ -126,7 +127,9 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         [AuthorityFilter]
         public ActionResult PeopleDetail()
         {
-
+            //省份
+            List<t_Province> provinceList = areaService.GetProvinceList();
+            ViewBag.provinceList = provinceList;
             return View();
         }
         //修改资料
@@ -141,7 +144,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                 Email = Request["Email"],
                 Address = Request["Address"],
                 Sex=Request["Sex"],
-                UserType=Request["UserType"]
+
             };
             webUserservice.UpdateWebUserFromCenter(webuser);
             if (webpeopleservice.IsHaveuser(Convert.ToInt32(Request["UserID"])))

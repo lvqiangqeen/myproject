@@ -109,7 +109,7 @@ namespace AIYunNet.CMS.BLL.Service
                 if (originalUser != null)
                 {
                     originalUser.TrueName = newWebUser.TrueName;
-                    originalUser.UserType = newWebUser.UserType;
+                    //originalUser.UserType = newWebUser.UserType;
                     originalUser.NickName = newWebUser.NickName;
                     //originalUser.Telephone = newWebUser.Telephone;
                     originalUser.Sex = newWebUser.Sex;
