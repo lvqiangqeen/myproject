@@ -137,7 +137,8 @@ namespace AIYunNet.CMS.Domain.Model
 
         [Column("UserID")]
         public int UserID { get; set; }
-
+        [NotMapped]
+        public string StageNowDesc { get; set; }
         public WebBuiding()
         {
             CompanyID = 0;

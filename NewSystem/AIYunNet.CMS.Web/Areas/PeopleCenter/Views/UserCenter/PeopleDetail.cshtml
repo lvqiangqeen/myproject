@@ -40,11 +40,11 @@
     .zp_nrm_r em {
         display: block;
         float: left;
-        width: 61px;
+        width: 95px;
         float: left;
         height: 51px;
         line-height: 51px;
-        text-align: right;
+        text-align: left;
         font-family: Microsoft YaHei;
         margin-right: 10px;
     }
@@ -98,17 +98,11 @@
                 </div>
                 <!--right-->
                 <div class="zp_nrm_r">
-                    <p><em>用&nbsp;户&nbsp;名：</em><i><input type="text" class="u-ipt-txt" value="@webuser.NickName" style="margin-top:11px; width:100px;" name="NickName" /></i></p>
+                    <p><em>用户名(昵称)：</em><i><input type="text" class="u-ipt-txt" value="@webuser.NickName" style="margin-top:11px; width:100px;" name="NickName" /></i></p>
                     <p>
-                        <em>类&nbsp;&nbsp;&nbsp;&nbsp;别：</em><i>
-                            <select name="UserType" class="u-ipt-txt" style="margin-top:11px; width:180px;height:30px;" id="UserType">
-                                <option value="">请选择类别</option>
-                                @foreach (WebLookup lo in Peopletypelist)
-                                {
-                                    <option value="@lo.Code">@lo.Description</option>
-                                }
-                            </select>
-                        </i><a href="/PeopleCenter/Certification/Authentication" class="renzheng-btn">身份认证</a><a href="/PeopleCenter/Certification/GuarantMoney" class="renzheng-btn">申请缴纳质保金</a><span class="ts">认证后可以发布作品吸引设计订单哦</span>
+                        <em>类&nbsp;&nbsp;&nbsp;&nbsp;别：</em>
+                        <i></i>
+                        <a href="/PeopleCenter/Certification/Authentication" class="renzheng-btn">身份认证</a><a href="/PeopleCenter/Certification/GuarantMoney" class="renzheng-btn">申请缴纳质保金</a><span class="ts">认证后可以发布作品吸引设计订单哦</span>
                     </p>
                     @*<p><em>邮箱：</em>@if (webuser.Email == null || webuser.Email == "")
                         { <i>未设置</i> }

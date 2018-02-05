@@ -8,13 +8,13 @@
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
     //装修流程
     string constructionstage = ViewBag.buiding.constructionstage.ToString();
-    string constructionstageid= ViewBag.buiding.constructionstageID.ToString();
+    string constructionstageid = ViewBag.buiding.constructionstageID.ToString();
     List<string> stagelist = new List<string>();
     List<string> stageidlist = new List<string>();
     if (constructionstage != "")
     {
         stagelist = constructionstage.Split(',').Where(c => c != "").ToList<string>();
-        stageidlist= constructionstageid.Split(',').Where(c => c != "").ToList<string>();
+        stageidlist = constructionstageid.Split(',').Where(c => c != "").ToList<string>();
     }
     //装修阶段
     int stageNow = Convert.ToInt32(ViewBag.buiding.StageNow);
@@ -51,58 +51,80 @@
                     <div class="jl-left">
                         工长：<span>@Model.WorkerName</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
                         合同价：<span>@ViewBag.buiding.Price 元</span>&nbsp;&nbsp;&nbsp;&nbsp;装修面积：<span>@ViewBag.buiding.Space m²</span><br />
-                        开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;监工：<strong>@ViewBag.buiding.superviseName</strong><br>
+                        开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        @if (ViewBag.buiding.UserID != 0)
+                        {
+                            @:监工：<strong>@ViewBag.buiding.superviseName</strong>
+                        }<br>
                     </div>
                     <div class="jl-right">
                         <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="@ViewBag.buiding.BuidingTitle">预约参观</a>
                         <!--<p>已有<span>0</span>人预约参观</p>-->
                     </div>
-                    <dl class="ngz-stage">
-                        <dd>
-                            <ul class="c-jd clear">
-                                @{ int i = 0;}
-                                @foreach (string item in stagelist)
-                                {
-                                    if (i == stageNow)
+                    @if (ViewBag.buiding.UserID != 0)
+                    {
+                        <dl class="ngz-stage">
+                            <dd>
+                                <ul class="c-jd clear">
+                                    @{ int i = 0;}
+                                    @foreach (string item in stagelist)
                                     {
-                                        <li class="fns"><i></i>@item.Replace("工", "")阶段</li>
+                                        if (i == stageNow)
+                                        {
+                                            <li class="fns"><i></i>@item.Replace("工", "")阶段</li>
+                                        }
+                                        else
+                                        {
+                                            <li><i></i>@item.Replace("工", "")阶段</li>
+                                        }
+                                        i++;
                                     }
-                                    else
-                                    {
-                                        <li><i></i>@item.Replace("工", "")阶段</li>
-                                    }
-                                    i++;
-                                }
-                            </ul>
-                        </dd>
+                                </ul>
+                            </dd>
+                        </dl>
+                                        }
+                                        else
+                                        { <dl class="ngz-stage" style="padding-top: 0px;font-size: 13px;">简介：@ViewBag.buiding.BuidingBrief</dl>
 
-                    </dl>
+                                        }
+
+
                 </div>
 
                 <div class="ngz-jl-tit clear">
-                    @{ int j = 0;}
-                    @foreach (string item in stagelist)
+                    @if (ViewBag.buiding.UserID != 0)
                     {
-                        if (j <= stageNow)
+                        int j = 0;
+                        foreach (string item in stagelist)
                         {
-                            if (j == stageNow)
+                            if (j <= stageNow)
                             {
-                                <a class="cur" href="javascript:void(0)">
-                                    @item.Replace("工", "")阶段
-                                    <input type="hidden" value="@stageidlist[j]"/>
-                                </a>
+                                if (j == stageNow)
+                                {
+                                    <a class="cur" href="javascript:void(0)">
+                                        @item.Replace("工", "")阶段
+                                        <input type="hidden" value="@stageidlist[j]" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0)">@item.Replace("工", "")阶段<input type="hidden" value="@stageidlist[j]" /></a>
+                                }
                             }
                             else
                             {
-                                <a href="javascript:void(0)">@item.Replace("工", "")阶段<input type="hidden" value="@stageidlist[j]" /></a>
+                                break;
                             }
+                            j++;
                         }
-                        else
-                        {
-                            break;
-                        }
-                        j++;
                     }
+                    else
+                    {
+                        <a class="cur" href="javascript:void(0)">
+                            工地详情
+                        </a>
+                    }
+
                 </div>
                 <script>
                     $(function () {
@@ -113,8 +135,7 @@
                             getStageByID();
                         });
 
-                        function getStageByID()
-                        {
+                        function getStageByID() {
                             var StageID = $(".ngz-jl-tit > .cur").find("input").val();
                             $.ajax({
                                 async: false,
@@ -141,13 +162,11 @@
                     })
                 </script>
                 <!--监理描述时间及评级-->
-                @*<div class="ngz-jl-txt">
-                </div>*@
                 <!--图片循环-->
                 <div class="ngz-jl-pic-w">
+                    @Html.Raw(ViewBag.buiding.BuidingInfo)
                 </div>
             </div>
         </div>
     </div>
 </div>
-

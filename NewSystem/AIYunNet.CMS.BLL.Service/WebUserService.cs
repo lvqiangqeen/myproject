@@ -32,8 +32,15 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                WebUser user = context.WebUser.FirstOrDefault(us => us.UserName == userAccount && us.Password == userPwd);
-                return user != null ? true : false;
+                try
+                {
+                    WebUser user = context.WebUser.FirstOrDefault(us => us.UserName == userAccount && us.Password == userPwd);
+                    return user != null ? true : false;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
             }
         }
 

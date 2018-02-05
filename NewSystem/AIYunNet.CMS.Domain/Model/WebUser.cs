@@ -13,231 +13,155 @@ namespace AIYunNet.CMS.Domain.Model
     {
         /// <summary>
         /// UserID
-        /// </summary>	
+        /// </summary>
         [Key]
         [Column("UserID")]
-        public int UserID
-        {
-            get;
-            set;
-        }
+        public int UserID { get; set; }
         /// <summary>
-        /// UserName
-        /// </summary>	
+        /// 登录账号（Account）全部用手机
+        /// </summary>
         [Column("UserName")]
-        public string UserName
-        {
-            get;
-            set;
-        }
+        public string UserName { get; set; }
         /// <summary>
         /// Password
-        /// </summary>	
+        /// </summary>
         [Column("Password")]
-        public string Password
-        {
-            get;
-            set;
-        }
+        public string Password { get; set; }
         /// <summary>
-        /// NickName
-        /// </summary>	
+        /// 昵称
+        /// </summary>
         [Column("NickName")]
-        public string NickName
-        {
-            get;
-            set;
-        }
+        public string NickName { get; set; }
         /// <summary>
-        /// TrueName
-        /// </summary>	
+        /// 真实姓名
+        /// </summary>
         [Column("TrueName")]
-        public string TrueName
-        {
-            get;
-            set;
-        }
+        public string TrueName { get; set; }
         /// <summary>
         /// Sex
-        /// </summary>	
+        /// </summary>
         [Column("Sex")]
-        public string Sex
-        {
-            get;
-            set;
-        }
+        public string Sex { get; set; }
         /// <summary>
         /// Email
-        /// </summary>	
+        /// </summary>
         [Column("Email")]
-        public string Email
-        {
-            get;
-            set;
-        }
+        public string Email { get; set; }
         /// <summary>
         /// IsActivity
-        /// </summary>	
+        /// </summary>
         [Column("IsActivity")]
-        public bool IsActivity
-        {
-            get;
-            set;
-        }
+        public bool IsActivity { get; set; }
         /// <summary>
         /// UserType
-        /// </summary>	
+        /// </summary>
         [Column("UserType")]
-        public string UserType
-        {
-            get;
-            set;
-        }
+        public string UserType { get; set; }
         /// <summary>
         /// InTime
-        /// </summary>	
+        /// </summary>
         [Column("InTime")]
-        public DateTime? InTime
-        {
-            get;
-            set;
-        }
+        public DateTime? InTime { get; set; }
         /// <summary>
         /// InIp
-        /// </summary>	
+        /// </summary>
         [Column("InIp")]
-        public string InIp
-        {
-            get;
-            set;
-        }
+        public string InIp { get; set; }
         /// <summary>
         /// InUser
-        /// </summary>	
+        /// </summary>
         [Column("InUser")]
-        public int InUser
-        {
-            get;
-            set;
-        }
+        public int InUser { get; set; }
         /// <summary>
         /// IsLock
-        /// </summary>	
+        /// </summary>
         [Column("IsLock")]
-        public bool IsLock
-        {
-            get;
-            set;
-        }
+        public bool IsLock { get; set; }
         /// <summary>
-        /// Telephone
-        /// </summary>	
+        /// 登录手机号
+        /// </summary>
         [Column("Telephone")]
-        public string Telephone
-        {
-            get;
-            set;
-        }
+        public string Telephone { get; set; }
         /// <summary>
         /// Cellphone
-        /// </summary>	
+        /// </summary>
         [Column("Cellphone")]
-        public string Cellphone
-        {
-            get;
-            set;
-        }
+        public string Cellphone { get; set; }
         /// <summary>
         /// ZipCode
-        /// </summary>	
+        /// </summary>
         [Column("ZipCode")]
-        public string ZipCode
-        {
-            get;
-            set;
-        }
+        public string ZipCode { get; set; }
         /// <summary>
         /// Fax
-        /// </summary>	
+        /// </summary>
         [Column("Fax")]
-        public string Fax
-        {
-            get;
-            set;
-        }
+        public string Fax { get; set; }
         /// <summary>
         /// Score
-        /// </summary>	
+        /// </summary>
         [Column("Score")]
-        public int Score
-        {
-            get;
-            set;
-        }
+        public int Score { get; set; }
         /// <summary>
         /// Position
-        /// </summary>	
+        /// </summary>
         [Column("Position")]
-        public string Position
-        {
-            get;
-            set;
-        }
+        public string Position { get; set; }
         /// <summary>
         /// Company
-        /// </summary>	
+        /// </summary>
         [Column("Company")]
-        public string Company
-        {
-            get;
-            set;
-        }
+        public string Company { get; set; }
         /// <summary>
         /// Address
-        /// </summary>	
+        /// </summary>
         [Column("Address")]
-        public string Address
-        {
-            get;
-            set;
-        }
-
+        public string Address { get; set; }
         /// <summary>
         /// EditOn
-        /// </summary>	
+        /// </summary>
         [Column("EditOn")]
-        public DateTime EditOn
-        {
-            get;
-            set;
-        }
+        public DateTime EditOn { get; set; }
         /// <summary>
         /// AddOn
-        /// </summary>	
+        /// </summary>
         [Column("AddOn")]
-        public DateTime AddOn
-        {
-            get;
-            set;
-        }
+        public DateTime AddOn { get; set; }
         /// <summary>
         /// DeleteOn
-        /// </summary>	
+        /// </summary>
         [Column("DeleteOn")]
-        public DateTime? DeleteOn
-        {
-            get;
-            set;
-        }
+        public DateTime? DeleteOn { get; set; }
         /// <summary>
         /// IsDelete
-        /// </summary>	
+        /// </summary>
         [Column("IsDelete")]
-        public bool IsDelete
-        {
-            get;
-            set;
-        }
+        public bool IsDelete { get; set; }
+        /// <summary>
+        /// Img
+        /// </summary>
+        [Column("Img")]
+        public string Img { get; set; }
+        /// <summary>
+        /// thumbnailImage
+        /// </summary>
+        [Column("thumbnailImage")]
+        public string thumbnailImage { get; set; }
+        /// <summary>
+        /// 职位类别ID
+        /// </summary>
+        [Column("PositionID")]
+        public int PositionID { get; set; }
+        /// <summary>
+        /// 职位区分
+        /// </summary>
+        [Column("PositionCode")]
+        public string PositionCode { get; set; }
+        /// <summary>
+        /// 职位类别
+        /// </summary>
+        [Column("PositionType")]
+        public int PositionType { get; set; }
 
         public WebUser()
         {
@@ -246,6 +170,8 @@ namespace AIYunNet.CMS.Domain.Model
             IsActivity = false;
             AddOn = DateTime.Now;
             EditOn = DateTime.Now;
+            PositionID = 0;
+            PositionType = 0;
         }
 
     }

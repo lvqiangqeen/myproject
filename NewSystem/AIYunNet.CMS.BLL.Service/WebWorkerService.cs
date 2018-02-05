@@ -18,5 +18,25 @@ namespace AIYunNet.CMS.BLL.Service
                 return context.WebWorker.Find(id);
             }
         }
+        public bool IsHaveWorker(int UserID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebWorker WebWorker = context.WebWorker.FirstOrDefault(us => us.UserID == UserID);
+                return WebWorker != null ? true : false;
+            }
+        }
+
+        /// <summary>
+        /// 通过UserID获取单个人员
+        /// </summary>
+        public WebWorker GetWebWorkerByUserID(int userID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                return context.WebWorker.FirstOrDefault(c => c.UserID == userID);
+            }
+        }
+
     }
 }

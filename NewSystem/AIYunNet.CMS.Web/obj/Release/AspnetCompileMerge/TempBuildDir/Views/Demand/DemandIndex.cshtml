@@ -1,0 +1,718 @@
+﻿@model AIYunNet.CMS.Domain.Model.DecDemand
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DemandIndex";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebUser user = new WebUser();
+    if (Model.PublishuserID != 0)
+    {
+        user = ViewBag.user as WebUser;
+    }
+}
+
+<link href="~/Content/design/sheji.DemandIndex.css" rel="stylesheet" />
+<link href="~/Content/design/commencss.css" rel="stylesheet" />
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+
+    .content_width {
+        width: 100%;
+        margin: 0 auto;
+    }
+</style>
+<div class="content_width" id="content" style="background: #f4f4f4;">
+    <div class="content_width clearfix ">
+        <div class="backgrey pt_30">
+            <div class="container">
+                <div class="wid920 f_l">
+                    <div class="y_weizhi">
+                        <span class="fl">您的位置：<a href="/Index/HomeIndex">脉空间</a> &gt; <a href="/Demand/DemandList">需求大厅</a> &gt; @Model.buidingname</span>
+                    </div>
+                    <div class="taskend clearfix">
+                        <!--未登录时，如果圆满完成的多悬赏任务输出滚动-->
+                        <div class="f_l" style="width: 310px;">
+                            <img src="~/Content/design/img/task_conduct.jpg" />
+                        </div>
+                        <div style="padding-left:30px;width: 510px;float:left;">
+                            <div class="clearfix font25 font_bold pb_20" style="line-height: 30px;"><a href="http://www.epwk.com/task/579181/">@Model.buidingname</a></div>
+                            <div class="font16 pb_30">
+                                需求类型：<span class="ceb2">@Model.DemandTypeName</span>&nbsp;&nbsp;房屋面积：<span class="ceb2">@Model.buidingSpace m²</span>
+                                <br>@Model.OneSentence
+                            </div>
+                            <div class="clearfix font20 pb_20">
+                                任务共收到 <span class="red">@Model.bidCount</span> 份投稿
+                            </div>
+                            @if (!Model.IsEnd)
+                            {
+                                <div class="font25 pb_20" style="line-height: 30px;">
+                                    任务<span class="c065">进行中</span>,您可<span class="ceb2">参与投稿</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="font25 pb_20" style="line-height: 30px;">
+                                    招标任务已经结束
+                                </div>
+                            }
+
+
+                            <div class="clearfix">
+                                @if (!Model.IsEnd)
+                                {
+                                    <button type="button" class="button btn-lg mr_40  red" data="1" onclick="task_user_check('#submitwork',this)">投标</button>
+                                }
+                                <button type="button" class="button btn-lg" onclick="release_onekey(0, 579181)">发布类似需求</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blk20"></div>
+                    <div class="tasktopdet">
+                        <div class="tasktodetail clearfix">
+                            <div class="clearfix">
+                                <span class="nummoney f_l">
+                                    需求类型
+                                    <span>@Model.DemandTypeName</span>
+                                </span>
+                            </div>
+                            <h1>@Model.buidingname</h1>
+                            <div class="clearfix pt_5">
+                                <span class="icon_clock"></span>
+                                <span class="span_state c666">
+                                    截止日期：<span class="ceb2" id="TimeCountdown">@Model.EndOn.ToString("yyyy年MM月dd日")</span>
+                                </span>
+                                <span class="icon_reward"></span>
+                                <span class="span_state">
+                                    <a class="tipsys-n" href="javascript:void(0);" >业主姓名：@Model.ownername</a>
+                                </span>
+                                <span class="icon_reward"></span>
+                                <span class="span_state">
+                                    <a class="tipsys-n" href="javascript:void(0);">房屋面积：@Model.buidingSpace m²</a>
+                                </span>
+                            </div>
+                        </div>                        
+                        <div class="clearfix pl_30 pr_30 pt_20 pb_30">
+                            <div class="task-user-info">
+                                <em>
+                                    <a href="javascript:void(0);" target="_blank">
+                                        <img src="@AppSettingsHelper.ImgUrl" uid="@user.UserID"  width="80" height="80">
+                                    </a>
+                                </em>
+                                <span>
+                                    <a href="javascript:void(0);" target="_blank">
+                                       @user.NickName
+                                    </a>
+                                </span>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="task-info-wrap">
+                                <div class="taskinfo-title"><i></i><span>详细描述</span></div>
+                                <div class="task-info-content">
+                                    @Html.Raw(Model.Info)
+                                </div>
+                                <div class="task-info-tipsy mt_10">
+                                    温馨提示：请不要轻信需要交钱（报名费、抵押金之类）才能承接的任务。如有遇到请第一时间联系客服。
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div id="task-delayTab-wrap">
+                        <div class="task-wrap" data-tab="task" style="">
+                            <div class="clearfix">
+                                <div class="blk20"></div>
+                                <div class="clearfix" id="task_page">
+                                    <div class="task-work-wrap">
+                                        <div class="task-work-element" id="3466430" status="0">
+                                            <div class="task-work-element-info">
+                                                <div class="task-work-element-info-head">
+                                                    <em>
+                                                        <a href="http://shop.epwk.com/4080067/" target="_blank">
+                                                            <img src="http://img11.weikeimg.com/data/avatar/000/08/12/36_avatar_middle.jpg" uid="81236" class=" " width="80" height="80">
+                                                        </a>
+                                                    </em>
+                                                    <samp>
+                                                        <i class="icom icosm_on" title="已实名认证">&nbsp;</i>  <i class="icom icosj_on" title="已手机认证">&nbsp;</i>  <i class="icom icoyx_on" title="已邮箱认证">&nbsp;</i>  <i class="icom icobk_on" title="已银行卡认证">&nbsp;</i>
+                                                    </samp>
+                                                    <span class=""><i></i></span>
+                                                </div>
+                                                <div class="task-work-element-info-action">
+                                                    <h3>
+                                                        公司 |                        <a href="http://shop.epwk.com/4080067/" target="_blank" title="宁波市顺通网络技术有限公司">
+                                                            宁波市顺通网
+                                                        </a>
+                                                    </h3>
+                                                    <span>
+                                                        <a href="http://www.epwk.com/help/bang_9148.html" target="_blank" title="能力品级：九品"><i class="iico">九品</i></a>                                                    <a href="http://www.epwk.com/vip.html" target="_blank" title="VIP钻石服务商" class="c333"><i class="spico spico_5"></i></a>                                                                        <a href="http://www.epwk.com/integrity.html" target="_blank"> <i class="icocx_new_on" title="未加入诚信卫士">&nbsp;</i> </a>
+                                                    </span>
+                                                    <p class="c999">提交于2018-02-01 09:36:09</p>
+                                                    <div class="clearfix pt_5">
+                                                        <span class="credit-show">
+                                                            <a href="http://www.epwk.com/help/bang_146275.html" target="_blank">信用：</a>
+                                                            <span class="span-icon"><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont ccc"></i><i class="iconfont ccc"></i></span>
+                                                            <b class="c396 ml_5">55</b>
+                                                            <div class="credit">
+                                                                <i class="triangle"></i>
+                                                                <div class="credit_tit">信用明细<span class="close">×</span></div>
+                                                                <div class="credit_box">
+                                                                    <div class="credit_bfb">
+                                                                        <ul>
+                                                                            <li><b><font class="red">￥300</font></b><span>交易金额</span></li>
+                                                                            <li><b><font class="red">100.0%</font></b><span>交易好评</span></li>
+                                                                            <li><b><font class="c333">2</font></b><span>中标次数</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="credit_box">
+                                                                    <div class="cerdit_user">
+                                                                        <h3>
+                                                                            可安心交易
+                                                                        </h3>
+                                                                        <div class="cerdit_pingfeng">
+                                                                            威客信用：<i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_noxing"></i><i class="ico_noxing"></i>                                            <font>55</font>
+                                                                            分
+                                                                        </div>
+                                                                        <a href="http://shop.epwk.com/4080067/credit.html" class="button orange" target="_blank">点击查看信用证书</a>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="task-work-button">
+                                                        <!--威客看到的按钮 结束-->
+                                                        <!--雇主看到的按钮 开始-->
+                                                    </div>
+                                                    <div class="task-work-button-two">
+                                                        <!--威客看到的按钮 开始-->
+                                                        <a class="button im_call_btn" href="javascript:;" data-uid="81236" data-utype="1">聊天</a>
+                                                        <a class="button" href="javascript:;" onclick="user_check('http://www.epwk.com/hiretask-tuid-81236.html', '_blank');">约请合作</a>
+                                                        <!-- kee操作按钮开始 -->
+                                                        <!-- kee操作按钮结束 -->
+                                                        <a class="button bt" href="http://shop.epwk.com/4080067/credit.html" target="_blank">信用证书</a>
+                                                        <a class="button" href="http://shop.epwk.com/4080067/" target="_blank">查看更多</a>
+                                                        <!--雇主看到的按钮 结束-->
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="task-work-element-right">
+                                                <div class="task-work-element-tender">
+                                                    <div class="task-work-element-tender-item">
+                                                        <span>
+                                                            <p class="c396">￥50000</p>
+                                                            <q>报价</q>
+                                                        </span>
+                                                        <span>
+                                                            <p class="c666">30天</p>
+                                                            <q class="bg-gray">工作周期</q>
+                                                        </span>
+                                                        <span>
+                                                            <p class="font14">
+                                                                浙江省-宁波市-慈溪市
+                                                            </p>
+                                                            <q>所在地区</q>
+                                                        </span>
+                                                    </div>
+                                                    <div class="clearfix pt_15">
+                                                        <b>报价说明：</b>
+                                                        宁波顺通网络 于2010年开始开发软件产品，是一家集软件产品研发、软硬件集成、网站建设、等全方位计算机信息技术服务于一体的软件企业、高新技术企业。经过公司的不断努力，顺通网络企业软件(OA办公自动化,CRM客户关系管理，PMS生产管理系统,企业进销存管理,PDM产品数据管理,ERP企业资源规划...)，顺通网络教育软件(成绩系统，档案系统，报名系统，培训系统，教务管理系统，数字化校园...)已发展成为国内企业软件行业最具竞争力的品牌之一。是全国范围内一家有竞争力的互联网软件团队，以立足为全国的学校、为企业提供软件、网站及企业软件定制为核心服务内容。
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="blk20"></div>
+                                                <div class="task-work-element-idea">
+                                                    <span class="f_r">
+                                                        <span>
+                                                            <i class="iconfont ccc font20"></i><!--绿色时样式c36b-->
+                                                            编号：<a href="http://www.epwk.com/task/579181/3466430.html#worksdetal" target="_blank">3466430</a>
+                                                        </span>
+                                                        <span class="c666 ml_5">雇主未浏览</span>
+                                                        <a class="ml_5" href="javascript:;" onclick="alTool(this);" shop_id="4080067" status="2" work_id="3466430">以往案例 <b class="c065" style="vertical-align:initial;">37</b></a>
+                                                    </span>
+                                                </div>
+                                                <div class="pinlunbox">
+                                                    <div class="pinluncontes">
+                                                        <div class="arwoperson clearfix" id="work_comment_box_3466430">
+                                                            <div class="answer-form " work_id="3466430">
+                                                                <div class="pt_10 pb_10">
+                                                                    <textarea class="tar_comment txt_input texare" onkeydown="checkCommentInner(this,event)" cols="70" placeholder="我要说几句..."></textarea>
+                                                                    <span class="answer-textarea answer-zone">
+                                                                        <button type="button" class="button answer-zone" value="确定">发表</button>
+                                                                        <span class="answer_word">你还能输入100个字!</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment_list arwoperson clearfix" id="work_3466430_comment">
+                                                            <img src="http://static11.weikeimg.com/images/common/loading-small.gif" id="loading">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="workercase" id="witkey_3466430_case" style="display:none;">
+                                                    <img src="http://static11.weikeimg.com/images/common/loading-small.gif" id="loading_c">
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="task-work-element" id="3466416" status="0">
+                                            <div class="task-work-element-info">
+                                                <div class="task-work-element-info-head">
+                                                    <em>
+                                                        <a href="http://shop.epwk.com/4070516/" target="_blank">
+                                                            <img src="http://img14.weikeimg.com/data/avatar/000/07/15/12_avatar_middle.jpg" uid="71512" class=" " width="80" height="80">
+                                                        </a>
+                                                    </em>
+                                                    <samp>
+                                                        <i class="icom icosm_on" title="已实名认证">&nbsp;</i>  <i class="icom icosj_on" title="已手机认证">&nbsp;</i>  <i class="icom icoyx_on" title="已邮箱认证">&nbsp;</i>  <i class="icom icobk_on" title="已银行卡认证">&nbsp;</i>
+                                                    </samp>
+                                                    <span class=""><i></i></span>
+                                                </div>
+                                                <div class="task-work-element-info-action">
+                                                    <h3>
+                                                        公司 |                        <a href="http://shop.epwk.com/4070516/" target="_blank" title="杭州华舰信息技术有限公司">
+                                                            杭州华舰信息
+                                                        </a>
+                                                    </h3>
+                                                    <span>
+                                                        <a href="http://www.epwk.com/help/bang_9148.html" target="_blank" title="能力品级：二品"><i class="iico">二品</i></a>                                                    <a href="http://www.epwk.com/vip.html" target="_blank" title="VIP钻石服务商" class="c333"><i class="spico spico_5"></i></a>                                                                        <a href="http://www.epwk.com/integrity.html" target="_blank"> <i class="icocx_new_on" title="未加入诚信卫士">&nbsp;</i> </a>
+                                                    </span>
+                                                    <p class="c999">提交于2018-02-01 09:32:16</p>
+                                                    <div class="clearfix pt_5">
+                                                        <span class="credit-show">
+                                                            <a href="http://www.epwk.com/help/bang_146275.html" target="_blank">信用：</a>
+                                                            <span class="span-icon"><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont ccc"></i><i class="iconfont ccc"></i></span>
+                                                            <b class="c396 ml_5">55</b>
+                                                            <div class="credit">
+                                                                <i class="triangle"></i>
+                                                                <div class="credit_tit">信用明细<span class="close">×</span></div>
+                                                                <div class="credit_box">
+                                                                    <div class="credit_bfb">
+                                                                        <ul>
+                                                                            <li><b><font class="red">￥10.6万</font></b><span>交易金额</span></li>
+                                                                            <li><b><font class="red">100.0%</font></b><span>交易好评</span></li>
+                                                                            <li><b><font class="c333">7</font></b><span>中标次数</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="credit_box">
+                                                                    <div class="cerdit_user">
+                                                                        <h3>
+                                                                            可安心交易
+                                                                        </h3>
+                                                                        <div class="cerdit_pingfeng">
+                                                                            威客信用：<i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_noxing"></i><i class="ico_noxing"></i>                                            <font>55</font>
+                                                                            分
+                                                                        </div>
+                                                                        <a href="http://shop.epwk.com/4070516/credit.html" class="button orange" target="_blank">点击查看信用证书</a>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="task-work-button">
+                                                        <!--威客看到的按钮 结束-->
+                                                        <!--雇主看到的按钮 开始-->
+                                                    </div>
+                                                    <div class="task-work-button-two">
+                                                        <!--威客看到的按钮 开始-->
+                                                        <a class="button im_call_btn" href="javascript:;" data-uid="71512" data-utype="1">聊天</a>
+                                                        <a class="button" href="javascript:;" onclick="user_check('http://www.epwk.com/hiretask-tuid-71512.html', '_blank');">约请合作</a>
+                                                        <!-- kee操作按钮开始 -->
+                                                        <!-- kee操作按钮结束 -->
+                                                        <a class="button bt" href="http://shop.epwk.com/4070516/credit.html" target="_blank">信用证书</a>
+                                                        <a class="button" href="http://shop.epwk.com/4070516/" target="_blank">查看更多</a>
+                                                        <!--雇主看到的按钮 结束-->
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="task-work-element-right">
+                                                <div class="task-work-element-hide">
+                                                    <i></i>
+                                                    <span>该稿件被作者设置为隐藏</span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="task-work-element" id="3465460" status="0">
+                                            <div class="task-work-element-info">
+                                                <div class="task-work-element-info-head">
+                                                    <em>
+                                                        <a href="http://shop.epwk.com/4118344/" target="_blank">
+                                                            <img src="http://img11.weikeimg.com/data/avatar/000/56/04/98_avatar_middle.jpg" uid="560498" class=" " width="80" height="80">
+                                                        </a>
+                                                    </em>
+                                                    <samp>
+                                                        <i class="icom icosm_on" title="已实名认证">&nbsp;</i>  <i class="icom icosj_on" title="已手机认证">&nbsp;</i>  <i class="icom icoyx_on" title="已邮箱认证">&nbsp;</i>  <i class="icom icobk_on" title="已银行卡认证">&nbsp;</i>
+                                                    </samp>
+                                                    <span class=""><i></i></span>
+                                                </div>
+                                                <div class="task-work-element-info-action">
+                                                    <h3>
+                                                        公司 |                        <a href="http://shop.epwk.com/4118344/" target="_blank" title="七七网络">
+                                                            七七网络
+                                                        </a>
+                                                    </h3>
+                                                    <span>
+                                                        <a href="http://www.epwk.com/help/bang_9148.html" target="_blank" title="能力品级：四品"><i class="iico">四品</i></a>                                                    <a href="http://www.epwk.com/vip.html" target="_blank" title="VIP钻石服务商" class="c333"><i class="spico spico_5"></i></a>                                                                        <a href="http://www.epwk.com/integrity.html" target="_blank"> <i class="icocx_new_off" title="已加入诚信卫士,官方建议您优先选择">&nbsp;</i> </a>
+                                                    </span>
+                                                    <p class="c999">提交于2018-01-31 15:02:35</p>
+                                                    <p>
+                                                        保证：<i class="icon-bz-20"><a href="http://www.epwk.com/integrity-view-wk.html" target="_blank" class="cfff">完成</a></i><i class="icon-bz-20"><a href="http://www.epwk.com/integrity-view-wk.html" target="_blank" class="cfff">售后</a></i><i class="icon-bz-20"><a href="http://www.epwk.com/integrity-view-wk.html" target="_blank" class="cfff">原创</a></i>                                                                                        <q class="block">已缴 <font class="red font12">￥3000</font> 交易保证金</q>
+                                                    </p>
+                                                    <div class="clearfix pt_5">
+                                                        <span class="credit-show">
+                                                            <a href="http://www.epwk.com/help/bang_146275.html" target="_blank">信用：</a>
+                                                            <span class="span-icon"><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont ccc"></i></span>
+                                                            <b class="c396 ml_5">75</b>
+                                                            <div class="credit">
+                                                                <i class="triangle"></i>
+                                                                <div class="credit_tit">信用明细<span class="close">×</span></div>
+                                                                <div class="credit_box">
+                                                                    <div class="credit_bfb">
+                                                                        <ul>
+                                                                            <li><b><font class="red">￥4.07万</font></b><span>交易金额</span></li>
+                                                                            <li><b><font class="red">100.0%</font></b><span>交易好评</span></li>
+                                                                            <li><b><font class="c333">11</font></b><span>中标次数</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="credit_box">
+                                                                    <div class="cerdit_user">
+                                                                        <h3>
+                                                                            可持续信赖
+                                                                        </h3>
+                                                                        <div class="cerdit_pingfeng">
+                                                                            威客信用：<i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_noxing"></i>                                            <font>75</font>
+                                                                            分
+                                                                        </div>
+                                                                        <a href="http://shop.epwk.com/4118344/credit.html" class="button orange" target="_blank">点击查看信用证书</a>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="task-work-button">
+                                                        <!--威客看到的按钮 结束-->
+                                                        <!--雇主看到的按钮 开始-->
+                                                    </div>
+                                                    <div class="task-work-button-two">
+                                                        <!--威客看到的按钮 开始-->
+                                                        <a class="button im_call_btn" href="javascript:;" data-uid="560498" data-utype="1">聊天</a>
+                                                        <a class="button" href="javascript:;" onclick="user_check('http://www.epwk.com/hiretask-tuid-560498.html', '_blank');">约请合作</a>
+                                                        <!-- kee操作按钮开始 -->
+                                                        <!-- kee操作按钮结束 -->
+                                                        <a class="button bt" href="http://shop.epwk.com/4118344/credit.html" target="_blank">信用证书</a>
+                                                        <a class="button" href="http://shop.epwk.com/4118344/" target="_blank">查看更多</a>
+                                                        <!--雇主看到的按钮 结束-->
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="task-work-element-right">
+                                                <div class="task-work-element-hide">
+                                                    <i></i>
+                                                    <span>该稿件被作者设置为隐藏</span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="task-work-element" id="3465456" status="0">
+                                            <div class="task-work-element-info">
+                                                <div class="task-work-element-info-head">
+                                                    <em>
+                                                        <a href="http://shop.epwk.com/4171110/" target="_blank">
+                                                            <img src="http://img11.weikeimg.com/data/avatar/002/05/41/66_avatar_middle.jpg" uid="2054166" class=" " width="80" height="80">
+                                                        </a>
+                                                    </em>
+                                                    <samp>
+                                                        <i class="icom icosm_on" title="已实名认证">&nbsp;</i>  <i class="icom icosj_on" title="已手机认证">&nbsp;</i>  <i class="icom icoyx_on" title="已邮箱认证">&nbsp;</i>  <i class="icom icobk_on" title="已银行卡认证">&nbsp;</i>
+                                                    </samp>
+                                                    <span class=""><i></i></span>
+                                                </div>
+                                                <div class="task-work-element-info-action">
+                                                    <h3>
+                                                        公司 |                        <a href="http://shop.epwk.com/4171110/" target="_blank" title="杭州普悦科技有限公司">
+                                                            杭州普悦科技
+                                                        </a>
+                                                    </h3>
+                                                    <span>
+                                                        <a href="http://www.epwk.com/help/bang_9148.html" target="_blank" title="能力品级：九品"><i class="iico">九品</i></a>                                                    <a href="http://www.epwk.com/vip.html" target="_blank" title="VIP钻石服务商" class="c333"><i class="spico spico_5"></i></a>                                                                        <a href="http://www.epwk.com/integrity.html" target="_blank"> <i class="icocx_new_on" title="未加入诚信卫士">&nbsp;</i> </a>
+                                                    </span>
+                                                    <p class="c999">提交于2018-01-31 15:01:22</p>
+                                                    <div class="clearfix pt_5">
+                                                        <span class="credit-show">
+                                                            <a href="http://www.epwk.com/help/bang_146275.html" target="_blank">信用：</a>
+                                                            <span class="span-icon"><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont ccc"></i><i class="iconfont ccc"></i></span>
+                                                            <b class="c396 ml_5">25</b>
+                                                            <div class="credit">
+                                                                <i class="triangle"></i>
+                                                                <div class="credit_tit">信用明细<span class="close">×</span></div>
+                                                                <div class="credit_box">
+                                                                    <div class="credit_bfb">
+                                                                        <ul>
+                                                                            <li><b><font class="red">￥0</font></b><span>交易金额</span></li>
+                                                                            <li><b><font class="red">暂无</font></b><span>交易好评</span></li>
+                                                                            <li><b><font class="c333">0</font></b><span>中标次数</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="credit_box">
+                                                                    <div class="cerdit_user">
+                                                                        <h3>
+                                                                            可安心交易
+                                                                        </h3>
+                                                                        <div class="cerdit_pingfeng">
+                                                                            威客信用：<i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_noxing"></i><i class="ico_noxing"></i>                                            <font>25</font>
+                                                                            分
+                                                                        </div>
+                                                                        <a href="http://shop.epwk.com/4171110/credit.html" class="button orange" target="_blank">点击查看信用证书</a>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="task-work-button">
+                                                        <!--威客看到的按钮 结束-->
+                                                        <!--雇主看到的按钮 开始-->
+                                                    </div>
+                                                    <div class="task-work-button-two">
+                                                        <!--威客看到的按钮 开始-->
+                                                        <a class="button im_call_btn" href="javascript:;" data-uid="2054166" data-utype="1">聊天</a>
+                                                        <a class="button" href="javascript:;" onclick="user_check('http://www.epwk.com/hiretask-tuid-2054166.html', '_blank');">约请合作</a>
+                                                        <!-- kee操作按钮开始 -->
+                                                        <!-- kee操作按钮结束 -->
+                                                        <a class="button bt" href="http://shop.epwk.com/4171110/credit.html" target="_blank">信用证书</a>
+                                                        <a class="button" href="http://shop.epwk.com/4171110/" target="_blank">查看更多</a>
+                                                        <!--雇主看到的按钮 结束-->
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="task-work-element-right">
+                                                <div class="task-work-element-hide">
+                                                    <i></i>
+                                                    <span>该稿件被作者设置为隐藏</span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="task-work-element" id="3465433" status="0">
+                                            <div class="task-work-element-info">
+                                                <div class="task-work-element-info-head">
+                                                    <em>
+                                                        <a href="http://shop.epwk.com/4146105/" target="_blank">
+                                                            <img src="http://img11.weikeimg.com/data/avatar/001/29/74/58_avatar_middle.jpg" uid="1297458" class=" " width="80" height="80">
+                                                        </a>
+                                                    </em>
+                                                    <samp>
+                                                        <i class="icom icosm_on" title="已实名认证">&nbsp;</i>  <i class="icom icosj_on" title="已手机认证">&nbsp;</i>  <i class="icom icoyx_on" title="已邮箱认证">&nbsp;</i>  <i class="icom icobk_on" title="已银行卡认证">&nbsp;</i>
+                                                    </samp>
+                                                    <span class=""><i></i></span>
+                                                </div>
+                                                <div class="task-work-element-info-action">
+                                                    <h3>
+                                                        工作室 |                        <a href="http://shop.epwk.com/4146105/" target="_blank" title="锋品设计">
+                                                            锋品设计
+                                                        </a>
+                                                    </h3>
+                                                    <span>
+                                                        <a href="http://www.epwk.com/help/bang_9148.html" target="_blank" title="能力品级：七品"><i class="iico">七品</i></a>                                                    <a href="http://www.epwk.com/vip.html" target="_blank" title="VIP钻石服务商" class="c333"><i class="spico spico_5"></i></a>                                                                        <a href="http://www.epwk.com/integrity.html" target="_blank"> <i class="icocx_new_on" title="未加入诚信卫士">&nbsp;</i> </a>
+                                                    </span>
+                                                    <p class="c999">提交于2018-01-31 14:45:47</p>
+                                                    <div class="clearfix pt_5">
+                                                        <span class="credit-show">
+                                                            <a href="http://www.epwk.com/help/bang_146275.html" target="_blank">信用：</a>
+                                                            <span class="span-icon"><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont red"></i><i class="iconfont ccc"></i><i class="iconfont ccc"></i></span>
+                                                            <b class="c396 ml_5">55</b>
+                                                            <div class="credit">
+                                                                <i class="triangle"></i>
+                                                                <div class="credit_tit">信用明细<span class="close">×</span></div>
+                                                                <div class="credit_box">
+                                                                    <div class="credit_bfb">
+                                                                        <ul>
+                                                                            <li><b><font class="red">￥3655</font></b><span>交易金额</span></li>
+                                                                            <li><b><font class="red">100.0%</font></b><span>交易好评</span></li>
+                                                                            <li><b><font class="c333">4</font></b><span>中标次数</span></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="credit_box">
+                                                                    <div class="cerdit_user">
+                                                                        <h3>
+                                                                            可安心交易
+                                                                        </h3>
+                                                                        <div class="cerdit_pingfeng">
+                                                                            威客信用：<i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_xing"></i><i class="ico_noxing"></i><i class="ico_noxing"></i>                                            <font>55</font>
+                                                                            分
+                                                                        </div>
+                                                                        <a href="http://shop.epwk.com/4146105/credit.html" class="button orange" target="_blank">点击查看信用证书</a>
+                                                                        <div class="clear"></div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                    <div class="task-work-button">
+                                                        <!--威客看到的按钮 结束-->
+                                                        <!--雇主看到的按钮 开始-->
+                                                    </div>
+                                                    <div class="task-work-button-two">
+                                                        <!--威客看到的按钮 开始-->
+                                                        <a class="button im_call_btn" href="javascript:;" data-uid="1297458" data-utype="1">聊天</a>
+                                                        <a class="button" href="javascript:;" onclick="user_check('http://www.epwk.com/hiretask-tuid-1297458.html', '_blank');">约请合作</a>
+                                                        <!-- kee操作按钮开始 -->
+                                                        <!-- kee操作按钮结束 -->
+                                                        <a class="button bt" href="http://shop.epwk.com/4146105/credit.html" target="_blank">信用证书</a>
+                                                        <a class="button" href="http://shop.epwk.com/4146105/" target="_blank">查看更多</a>
+                                                        <!--雇主看到的按钮 结束-->
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="task-work-element-right">
+                                                <div class="task-work-element-hide">
+                                                    <i></i>
+                                                    <span>该稿件被作者设置为隐藏</span>
+                                                </div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--邀约tab   bing-->
+                        <!--邀约tab   end-->
+                        <!--互动交流部分  start-->
+                        <!--互动交流部分  end-->
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="wid260 f_r">
+                    <div class="taskbutxo">
+                        <div class="ritongji">
+                            <span class="brd c999">浏览人数<br><b class="c333 font20">@Model.PageViewCount</b></span>
+                            <span class="c999">参与人数<br><b class="ceb2 font20">@Model.bidCount</b></span>
+                        </div>
+                        <div class="pt_20 pb_10 clearfix">
+                            <span class="c666">分享可赚钱，赶快告诉您的朋友吧</span>
+                            <div class="bdsharebuttonbox bdshare-button-style0-32" data-bd-bind="1517454864086">
+                                <a href="#" class="bds_more" data-cmd="more"></a>
+                                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                            </div>
+                            <script>
+                                window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": ["weixin", "qzone", "tsina", "tqq", "copy", "mshare"], "bdPic": "", "bdStyle": "0", "bdSize": "32" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+                            </script>
+                        </div>
+                    </div>
+                    <div style="height:192px;width:258px; position:relative; margin-bottom:20px;z-index:100;">
+                        <div style="width: 258px; right: 0px; bottom: auto; z-index: 9; left: 1291.5px; top: 0px;">
+                            <a href="javascript:void(0);" class="closflow" style="float: right; z-index: 10; cursor: pointer; margin-right: 10px; margin-top: 10px; display: block; top: 35px;">-</a><div class="taskritbt mb_20">
+                                <div class="title_thit" style="height: 30px; line-height: 30px; display: block;"> <em>快捷操作</em> </div>
+                                <div class="jiaogao">
+                                    <!-- 公共操作 开始-->
+                                    <span class="success">&nbsp;</span>此任务正接受投稿中
+                                    <!--可以交稿的按钮 开始 -->
+                                    <div class="maibutton"> <a class="button red" data="1" href="javascript:;" onclick="task_user_check('#submitwork',this)" id="user">投标</a> </div>
+                                    <!--可以交稿的按钮 结束 -->
+                                    <!-- 公共操作结束 -->
+                                    <!-- 雇主操作 开始-->
+                                    <div class="litbutton clearfix">
+                                        <a class="button" href="javascript:;" onclick="release_onekey(0, 579181)">发布类似任务</a>
+                                        <a class="button" href="javascript:;" onclick="report( 'task', '1','579181','2264810','markw');">举报任务</a>  <a class="button im_call_btn" href="javascript:;" data-taskid="579181" data-uid="2264810" data-utype="2">联系雇主</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(window).bind('scroll', function () {
+                            setMenuBar();
+                        });
+                        // 导航条定位
+                        function setMenuBar() {
+                            var scrollTop = $(window).scrollTop();
+                            if (scrollTop >= 450) {
+                                $('.closflow').parent("div").css({ 'position': 'fixed' });
+                            }
+                            else {
+                                $('.closflow').parent("div").css({ 'position': 'initial' });
+                            }
+                        }
+                    </script>
+                    <!--热门问答 百科-->
+                    <div class="blk20"></div>
+                    <div class="borbox">
+                        <div class="tab_title"><span class="select">热门问答</span><span class="">热门专题</span></div>
+                        <div class="tab_list">
+                            <div class="tab_list_li hot-ask">
+                                <ul>
+                                    <li><a href="http://ask.epwk.com/2765.html" target="_blank"><span>1</span>怎么开发软件！</a></li>
+                                    <li><a href="http://ask.epwk.com/13141.html" target="_blank"><span>2</span>开发软件？ 你们有帮人开发软件是吗</a></li>
+                                    <li><a href="http://ask.epwk.com/11889.html" target="_blank"><span>3</span>开发软件？ 你们有帮人开发软件是吗</a></li>
+                                    <li><a href="http://ask.epwk.com/3342.html" target="_blank"><span>4</span>Symbian塞班软件开发软件是什么啊</a></li>
+                                    <li><a href="http://ask.epwk.com/34230.html" target="_blank"><span>5</span>开发APP</a></li>
+                                    <li><a href="http://ask.epwk.com/7337.html" target="_blank"><span>6</span>开发APP</a></li>
+                                    <li><a href="http://ask.epwk.com/3071.html" target="_blank"><span>7</span>app软件开发需要准备些什么？</a></li>
+                                    <li><a href="http://ask.epwk.com/3073.html" target="_blank"><span>8</span>不知道开发软件学习哪种语言比较好？</a></li>
+                                    <li><a href="http://ask.epwk.com/13740.html" target="_blank"><span>9</span>内存数据库设计开发软件有哪些推荐</a></li>
+                                    <li><a href="http://ask.epwk.com/5705.html" target="_blank"><span>10</span>苹果手机软件开发怎么做？需要哪些基础条件吗？</a></li>
+                                </ul>
+                                <span><a class="c999 f_r" target="_blank" href="http://ask.epwk.com/">更多 &gt; </a></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="tab_list_li hot-baike">
+                                <ul class="clearfix">
+                                    <li><a href="http://gonglue.epwk.com/special/dmguanggao/" target="_blank">dm广告设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/gyshouhuisj/" target="_blank">工业设计手绘</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/jiudiangg/" target="_blank">酒店广告设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/cfguanggao/" target="_blank">cf广告设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/piaochuangsj/" target="_blank">飘窗设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/gexinzt/" target="_blank">个性字体</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/dongmangsj/" target="_blank">动漫设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/wysucai/" target="_blank">网页设计素材</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/gyggtp/" target="_blank">公益广告图片</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/gyggwa/" target="_blank">公益广告文案</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/xncsj/" target="_blank">新农村别墅设计</a></li>
+                                    <li><a href="http://gonglue.epwk.com/special/shineijz/" target="_blank">室内家装设计</a></li>
+                                </ul>
+                                <span><a class="c999 f_r" target="_blank" href="http://gonglue.epwk.com/special/">更多 &gt; </a></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <!--热门问答 百科-->
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

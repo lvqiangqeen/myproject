@@ -34,5 +34,12 @@ namespace AIYunNet.CMS.Web.Controllers
             }
             return View(demand);
         }
+
+
+        public ActionResult peoplecenter(int id = 0)
+        {
+            return View();
+        }
+
     }
 }

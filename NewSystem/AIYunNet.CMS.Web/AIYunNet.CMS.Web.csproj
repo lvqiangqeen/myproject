@@ -3858,6 +3858,9 @@
     <Content Include="Areas\SysAdmin\Views\DownLoadSys\Downloadtype.cshtml" />
     <Content Include="Areas\SysAdmin\Views\ImageList\DecWebImageList.cshtml" />
     <Content Include="Areas\SysAdmin\Views\ImageList\AddOrEditWebCaseImg.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\AddOrEditBuidingStages.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\BuidingStagesList.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStageInfo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3940,6 +3943,7 @@
     <Content Include="Views\Download\DownLoadSth.cshtml" />
     <Content Include="Views\Demand\DemandList.cshtml" />
     <Content Include="Views\Demand\DemandIndex.cshtml" />
+    <Content Include="Views\Demand\peoplecenter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

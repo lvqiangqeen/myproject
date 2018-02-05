@@ -17,6 +17,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
     {
         WebUserService webUserservice = new WebUserService();
         WebPeopleService webpeopleservice = new WebPeopleService();
+        WebWorkerService webWorkerService = new WebWorkerService();
         // GET: PeopleCenter/UserCenter
         [HttpGet]
         public ActionResult LoginOn()
@@ -42,16 +43,25 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                 }
                 else
                 {
-                    SessionHelper.SetSession("userName", userAccount);
+                    SessionHelper.SetSession("UserName", userAccount);
+
                     WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
+                    SessionHelper.SetSession("UserID", webuser.UserID);
+                    SessionHelper.SetSession("PositionCode", webuser.PositionCode);
+                    
                     WebPeople webpeople = new WebPeople();
-                    if (webpeopleservice.IsHaveuser(webuser.UserID))
+                    WebWorker webWorker = new WebWorker();
+                    if (webpeopleservice.IsHaveuser(webuser.UserID) && webuser.PositionCode == "WebPeople")
                     {
                         webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
+                        SessionHelper.SetSession("PositionID", webpeople.PeopleID);
                     }
-                    SessionHelper.SetSession("PeopleID", webpeople.PeopleID);
+                    else if (webWorkerService.IsHaveWorker(webuser.UserID) && webuser.PositionCode == "WebWorker")
+                    {
+                        webWorker = webWorkerService.GetWebWorkerByUserID(webuser.UserID);
+                        SessionHelper.SetSession("PositionID", webpeople.PeopleID);
+                    }
                     SessionHelper.SetSession("NickName", webuser.NickName);
-                    SessionHelper.SetSession("UserID", webuser.UserID);
                     return 200;
                 }
             }
@@ -67,7 +77,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             return View();
         }
         [HttpPost]
-        public int Register(string userAccount, string userPassword)
+        public int Register(string userAccount, string userPassword,string PositionCode,int PositionType)
         {
             bool bit=webUserservice.IsHaveuserAccount(userAccount);
             if (bit)
@@ -81,7 +91,9 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                 {
                     UserName = userAccount,
                     Password = FormsAuthentication.HashPasswordForStoringInConfigFile(userPassword, "md5"),
-                    Telephone = userAccount
+                    Telephone = userAccount,
+                    PositionCode= PositionCode,
+                    PositionType= PositionType
                 };
                 int result = webUserservice.AddWebUser(webuser);
                 return result;

@@ -3,6 +3,7 @@
 @using AIYunNet.CMS.BLL.Service
 @using AIYunNet.CMS.Common.Utility;
 @{ 
+    Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
     string userAccount = SessionHelper.Get("userName");
 
     WebUserService webuserservice = new WebUserService();
@@ -14,33 +15,28 @@
         webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
     }
 }
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>会员中心</title>
-    <meta content="脉空间" name="keywords">
-    <meta content="脉空间" name="description">
-    <meta http-equiv="Cache-Control" content="max-age=180">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="x-dns-prefetch-control" content="on">
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+</style>
     <link href="/content/meichen/css/basestyle.css" rel="stylesheet" type="text/css" />
     <link href="/content/meichen/css/mc.css" rel="stylesheet" type="text/css" />
     <link href="/content/meichen/css/user_center.css" rel="stylesheet" type="text/css" />
-    @*<script src="/content/meichen/js/jquery-1.8.3.min.js"></script>*@
-    <script src="~/Content/Plugins/jQuery/jQuery-2.2.0.min.js"></script>
-    <script src="~/Content/Plugins/jQueryUI/jquery-ui.js"></script>
-    <link href="/content/meichen/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
+	<link href="/content/meichen/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+	@*<link href="~/Content/Plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />*@
+	<link href="~/Content/Plugins/datatables/jquery.dataTables.css" rel="stylesheet" />	
+	
+	<script src="~/Content/Plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="~/Content/Plugins/jQueryUI/jquery-ui.js"></script>       
     <script src="~/Content/Scripts/jquery.pagination.js"></script>
     <script src="~/Content/Scripts/vue/vue.min.js"></script>
+	<script src="~/Content/Plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/Content/Plugins/datatables/jquery.dataTables.min.js"></script>
     @RenderSection("head", required: false)
-</head>
-<body>
-    <div class="topper">
+
+    <div class="topper" style="display:none;">
         <div class="wrap cl">
             <div class="t-left">您好，欢迎来到脉空间官方网站</div>
             <div class="t-right">
@@ -62,7 +58,7 @@
                     <li><a href="/AboutUs/AboutUsDetail" target="_blank" onclick="sessionStorage.setItem('key', 'linkus');">联系我们</a></li>
                 </ul>
             </div>
-        </div>
+        </div> 
     </div>
     <script type="text/javascript">
         $(function () {
@@ -127,8 +123,8 @@
                     <div class="centers_listm_one_in"><i class="fa fa-photo"></i><span>我的作品</span><b></b></div>
                     <div class="gjszmdm">
                         <a href="/PeopleCenter/CenterCases/CenterCaselist" class="center_in_self"><span>我的案例</span></a>
-                        @*<a href="u_works_list.html" class="center_in_self"><span>转载作品</span></a>
-                        <a href="u_works_list.html" class="center_in_self"><span>审核中</span></a>*@
+						<a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>阶段管理</span></a>
+						
                     </div>
                 </div>
                 <div class="listbox">
@@ -169,58 +165,6 @@
 
         <div class="clearfiexd"></div>
     </div>
-    <div class="footer">
-        <div class="ft-menu">
-            <div class="wrap hide">
-                <dl>
-                    <dt><i class="fa fa-compass"></i>新手指南</dt>
-                    <dd>
-                        <a href="#">注册新用户</a>
-                        <a href="#">设计入门</a>
-                        <a href="#">设计机构入门</a>
-                        <a href="#">规则中心</a>
-                        <a href="#">会员须知</a>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt><i class="fa fa-mortar-board"></i>设计师</dt>
-                    <dd>
-                        <a href="#">上传作品</a>
-                        <a href="#">查看需求</a>
-                        <a href="#">购买设计作品</a>
-                        <a href="#">案例作品</a>
-                        <a href="#">我的故事</a>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt><i class="fa fa-institution"></i>设计机构</dt>
-                    <dd>
-                        <a href="#">投标赚钱</a>
-                        <a href="#">发布作品</a>
-                        <a href="#">赚钱利器</a>
-                        <a href="#">大咖分享</a>
-                        <a href="#">设计机构联盟</a>
-                        <a href="#">美城商学院</a>
-                        <a href="#">机构等级</a>
-                    </dd>
-                </dl>
-                <dl>
-                    <dt><i class="fa fa-get-pocket"></i>交易保障</dt>
-                    <dd>
-                        <a href="#">双倍赔付</a>
-                        <a href="#">美城担保交易</a>
-                        <a href="#">诚信管理中心</a>
-                        <a href="#">曝光台</a>
-                        <a href="#">信用查询</a>
-                    </dd>
-                </dl>
-            </div>
-        </div>
-        <div class="ft-cop">
-            <p>Copyright 2005-2016 meicheng.com 版权所有 <a href="#">苏ICP备102002274-4号</a> 苏B2-200080005 不良信息举报电话：0527-88390110  邮箱：110@meicheng.com</p>
-            <p><a href="#"><img src="/content/meichen/images/ft0.jpg"></a><a href="#"><img src="/content/meichen/images/ft1.jpg"></a><a href="#"><img src="/content/meichen/images/ft2.jpg"></a><a href="#"><img src="/content/meichen/images/ft3.jpg"></a><a href="#"><img src="/content/meichen/images/ft4.jpg"></a></p>
-        </div>
-    </div>
-</body>
+    
+
 @RenderSection("Scripts", required: false)
-</html>
