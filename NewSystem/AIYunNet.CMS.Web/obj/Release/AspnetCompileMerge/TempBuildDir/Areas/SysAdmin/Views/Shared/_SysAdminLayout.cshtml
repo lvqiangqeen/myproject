@@ -284,7 +284,6 @@
                             <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=设计师"><i class="fa fa-circle-o"></i> 设计师</a></li>
                             <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=装修工长"><i class="fa fa-circle-o"></i>装修工长</a></li>
                             <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=装修工人"><i class="fa fa-circle-o"></i> 装修工人</a></li>
-                            <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
                             <li><a href="/SysAdmin/Lookup/LookupList"><i class="fa fa-circle-o"></i> 所有分类管理</a></li>
                             <li><a href="/SysAdmin/OtherContent/WebMenuList"><i class="fa fa-circle-o"></i> 栏目管理</a></li>
 
@@ -296,23 +295,29 @@
                     <li id="menu6" class="treeview">
                         <a href="#">
                             <i class="fa fa-files-o"></i>
-                            <span>图库管理</span>
+                            <span>案例和图库</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
                             @foreach (var item in tulist)
                             {
-                                <li><a href="/SysAdmin/ImageList/WebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                                <li><a href="/SysAdmin/ImageList/WebImageList?DecType=@item.Code" style="display:none;"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                            }
+                            @foreach (var item in tulist)
+                            {
+                                <li><a href="/SysAdmin/ImageList/DecWebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
                             }
                         </ul>
                     </li>
-                    <li id="menu7" class="treeview">
+                    <li id="menu7" class="treeview" style="display:none;">
                         <a href="#">
                             <i class="fa fa-cart-plus"></i>
-                            <span>商城管理</span>
+                            <span>案例和图库</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
                             <li><a href="/SysAdmin/Goods/GoodsList"><i class="fa fa-circle-o"></i> 商品管理</a></li>
                         </ul>
                     </li>
