@@ -115,8 +115,15 @@ namespace AIYunNet.CMS.BLL.Service
                     originalUser.Sex = newWebUser.Sex;
                     //originalUser.Cellphone = newWebUser.Cellphone;
                     originalUser.Email = newWebUser.Email;
-                    originalUser.Address = newWebUser.Address;
-
+                    //originalUser.Address = newWebUser.Address;
+                    originalUser.ProvinceID = newWebUser.ProvinceID;
+                    originalUser.ProvinceName = newWebUser.ProvinceName;
+                    originalUser.CityID = newWebUser.CityID;
+                    originalUser.CityName = newWebUser.CityName;
+                    originalUser.AreasID = newWebUser.AreasID;
+                    originalUser.AreasName = newWebUser.AreasName;
+                    originalUser.Img = newWebUser.Img;
+                    originalUser.thumbnailImage = newWebUser.thumbnailImage;
                     //originalUser.Fax = newWebUser.Fax;
                     //originalUser.IsLock = newWebUser.IsLock;
                     //originalUser.InIp = newWebUser.InIp;

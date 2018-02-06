@@ -162,7 +162,18 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("PositionType")]
         public int PositionType { get; set; }
-
+        [Column("ProvinceID")]
+        public string ProvinceID { get; set; }
+        [Column("ProvinceName")]
+        public string ProvinceName { get; set; }
+        [Column("CityID")]
+        public string CityID { get; set; }
+        [Column("CityName")]
+        public string CityName { get; set; }
+        [Column("AreasID")]
+        public string AreasID { get; set; }
+        [Column("AreasName")]
+        public string AreasName { get; set; }
         public WebUser()
         {
             IsDelete = false;
@@ -172,6 +183,9 @@ namespace AIYunNet.CMS.Domain.Model
             EditOn = DateTime.Now;
             PositionID = 0;
             PositionType = 0;
+            ProvinceID = "";
+            CityID = "";
+            AreasID = "";
         }
 
     }

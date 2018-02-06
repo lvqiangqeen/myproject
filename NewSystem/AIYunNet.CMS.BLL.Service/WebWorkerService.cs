@@ -37,6 +37,48 @@ namespace AIYunNet.CMS.BLL.Service
                 return context.WebWorker.FirstOrDefault(c => c.UserID == userID);
             }
         }
-
+        /// <summary>
+        /// 从个人中心修改
+        /// </summary>
+        public int UpdateWebWorkerFromCenter(WebWorker webworker)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                if (webworker != null)
+                {
+                    WebWorker originalPeople = context.WebWorker.Find(webworker.WorkerID);
+                    if (originalPeople != null)
+                    {
+                        originalPeople.EditOn = DateTime.Now;
+                        originalPeople.WorkerCategory = webworker.WorkerCategory;
+                        originalPeople.WorkerMail = webworker.WorkerMail;
+                        originalPeople.WorkerName = webworker.WorkerName;
+                        originalPeople.WorkerPhone = webworker.WorkerPhone;
+                        originalPeople.WorkerImage = webworker.WorkerImage;         
+                        originalPeople.thumbnailImage = webworker.thumbnailImage == null ? "" : webworker.thumbnailImage;
+                        originalPeople.ProvinceID = webworker.ProvinceID;
+                        originalPeople.ProvinceName = webworker.ProvinceName;
+                        originalPeople.CityID = webworker.CityID;
+                        originalPeople.CityName = webworker.CityName;
+                        originalPeople.AreasID = webworker.AreasID;
+                        originalPeople.AreasName = webworker.AreasName;
+                        context.SaveChanges();
+                    }
+                }
+                return 1;
+            }
+        }
+        /// <summary>
+        /// 添加
+        /// </summary>
+        public int AddWebWorker(WebWorker WebWorker)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                context.WebWorker.Add(WebWorker);
+                context.SaveChanges();
+                return 1;
+            }
+        }
     }
 }

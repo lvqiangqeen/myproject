@@ -19,15 +19,7 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                if (PeopleCategory != "")
-                {
-                    return context.WebPeople.Where(p => p.FlagDelete == 0 && p.PeopleCategory == PeopleCategory).OrderByDescending(p => p.AddOn).ToList();
-                }
-                else
-                {
-                    return context.WebPeople.Where(p => p.FlagDelete == 0).OrderByDescending(p => p.AddOn).ToList();
-                }
-
+               return context.WebPeople.Where(p => p.FlagDelete == 0).OrderByDescending(p => p.AddOn).ToList();               
             }
         }
 
@@ -59,7 +51,7 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                return context.WebPeople.Where(p => p.FlagDelete == 0 && p.PeopleCategory == "设计师" && p.IsTop == true && p.CityID== cityid).OrderByDescending(p => p.AddOn).ToList();
+                return context.WebPeople.Where(p => p.FlagDelete == 0 && p.IsTop == true && p.CityID== cityid && p.CompanyID==0).OrderByDescending(p => p.AddOn).ToList();
             }
         }
         /// <summary>
@@ -110,14 +102,9 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                if (PeopleCategory != "")
-                {
-                    return context.WebPeople.Where(p => p.CompanyID == companyID && p.FlagDelete == 0 && p.PeopleCategory == PeopleCategory).OrderByDescending(p => p.AddOn).ToList();
-                }
-                else
-                {
-                    return context.WebPeople.Where(p => p.CompanyID == companyID && p.FlagDelete == 0).OrderByDescending(p => p.AddOn).ToList();
-                }
+
+                return context.WebPeople.Where(p => p.CompanyID == companyID && p.FlagDelete == 0).OrderByDescending(p => p.AddOn).ToList();
+                
             }
         }
         /// <summary>
@@ -344,7 +331,7 @@ namespace AIYunNet.CMS.BLL.Service
                     WebCompany company = context.WebCompany.Find(webPeople.CompanyID);
                     if (originalPeople != null)
                     {
-                        originalPeople.Address = webPeople.Address;
+                        //originalPeople.Address = webPeople.Address;
                         //originalPeople.BelongArea = webPeople.BelongArea;
                         //originalPeople.CaseCount = webPeople.CaseCount;
                         if (webPeople.CompanyID == 0)
@@ -374,9 +361,16 @@ namespace AIYunNet.CMS.BLL.Service
                         originalPeople.PeopleImage = webPeople.PeopleImage;
                         //originalPeople.DesignerImage = webPeople.DesignerImage == null ? "" : webPeople.DesignerImage;
                         originalPeople.thumbnailImage = webPeople.thumbnailImage == null ? "" : webPeople.thumbnailImage;
+                        originalPeople.ProvinceID = webPeople.ProvinceID;
+                        originalPeople.ProvinceName = webPeople.ProvinceName;
+                        originalPeople.CityID = webPeople.CityID;
+                        originalPeople.CityName = webPeople.CityName;
+                        originalPeople.AreasID = webPeople.AreasID;
+                        originalPeople.AreasName = webPeople.AreasName;
                         //originalPeople.ShowOrder = webPeople.ShowOrder;
                         //originalPeople.WorkYears = webPeople.WorkYears;
                         //originalPeople.PeoplePosition = webPeople.PeoplePosition;
+
                         context.SaveChanges();
                     }
                 }
@@ -395,23 +389,14 @@ namespace AIYunNet.CMS.BLL.Service
                 if (webPeople != null)
                 {
                     WebPeople originalPeople = context.WebPeople.Find(webPeople.PeopleID);
-                    WebCommonService weblookupservice = new WebCommonService();
                     if (originalPeople != null)
                     {
                         originalPeople.PeoplePositionID = webPeople.PeoplePositionID;
-                        if (webPeople.PeopleCategory == "设计师")
-                        {
-                            originalPeople.PeoplePosition = weblookupservice.GetLookupDesc("people_position", webPeople.PeoplePositionID.ToString());
-                        }
-                        else
-                        {
-                            originalPeople.PeoplePosition = weblookupservice.GetLookupDesc("People_workers_position", webPeople.PeoplePositionID.ToString());
-                        }
+                        originalPeople.PeoplePosition = webPeople.PeoplePosition;
                         originalPeople.WorkYearsID = webPeople.WorkYearsID;
-
-                        originalPeople.WorkYears= weblookupservice.GetLookupDesc("people_workyear", webPeople.WorkYearsID.ToString());
-
-                        originalPeople.BelongArea = webPeople.BelongArea;
+                        originalPeople.WorkYears = webPeople.WorkYears;
+                        originalPeople.PriceID = webPeople.PriceID;
+                        //originalPeople.BelongArea = webPeople.BelongArea;
                         //originalPeople.CaseCount = webPeople.CaseCount;
                         originalPeople.EditOn = DateTime.Now;
                         originalPeople.GoodAtStyleID = webPeople.GoodAtStyleID;
@@ -421,13 +406,10 @@ namespace AIYunNet.CMS.BLL.Service
                         //originalPeople.IsBond = webPeople.IsBond;
                         //originalPeople.IsBuildingCount = webPeople.IsBuildingCount;
                         //originalPeople.IsTop = webPeople.IsTop;
-
                         originalPeople.PeopleInfo = webPeople.PeopleInfo;
                         //originalPeople.PeopleLevel = webPeople.PeopleLevel;
-
                         originalPeople.PeopleMotto = webPeople.PeopleMotto;
-
-                        //originalPeople.DesignerImage = webPeople.DesignerImage == null ? "" : webPeople.DesignerImage;
+                        originalPeople.DesignerImage = webPeople.DesignerImage == null ? "" : webPeople.DesignerImage;
 
                         //originalPeople.ShowOrder = webPeople.ShowOrder;
                         context.SaveChanges();

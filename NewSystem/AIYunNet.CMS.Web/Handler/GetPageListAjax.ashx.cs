@@ -294,7 +294,7 @@ namespace AIYunNet.CMS.Web.Handler
             string AreasID = context.Request["AreasID"];
             string goodatid = context.Request["goodatid"];
             string peoplepositionid = context.Request["peoplepositionid"];
-            string PeopleCategory = context.Request["PeopleCategory"];
+            
             string workyearid = context.Request["workyearid"];
             string companyID = context.Request["companyID"];
             string SortOrder = context.Request["SortOrder"];
@@ -310,7 +310,7 @@ namespace AIYunNet.CMS.Web.Handler
                 + "[GoodAtStyle],[PeopleMotto],[CaseCount],[IsBuildingCount],[IsBond],[IsAuthentication],[IsApproved],"
                 + "[IsTop],[BelongArea],[ShowOrder],[PeopleImage],[DesignerImage],[thumbnailImage],[CompanyID],[CompanyName],"
                 + "[AddOn],[EditOn],[DeleteOn],[FlagDelete],[CityID],[CityName],[AreasID],[AreasName],[UserID],[PageViewCount],[CollectCount],[PriceID],ProvinceID,ProvinceName");
-            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3} {4} {5} {6} {7}", string.IsNullOrEmpty(PeopleCategory) ? "" : "and PeopleCategory like '%" + PeopleCategory + "%'",
+            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3} {4} {5} {6} ",
                 goodatid == "0" || string.IsNullOrEmpty(goodatid) ? "" : "and GoodAtStyleID like '%" + goodatid + "%'",
                 AreasID == "0" || string.IsNullOrEmpty(AreasID) ? "" : "and (AreasID='0' or AreasID like '%" + AreasID + "%')",
                 peoplepositionid == "0" || string.IsNullOrEmpty(peoplepositionid) ? "" : "and PeoplePositionID like '%" + peoplepositionid + "%'",

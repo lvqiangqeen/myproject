@@ -57,7 +57,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                         webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
                         SessionHelper.SetSession("PositionID", webpeople.PeopleID);
                     }
-                    else if (webWorkerService.IsHaveWorker(webuser.UserID) && webuser.PositionCode == "WebWorker")
+                    else if (webWorkerService.IsHaveWorker(webuser.UserID) && (webuser.PositionCode == "WebWorkerLeader"|| webuser.PositionCode == "WebWorker"))
                     {
                         webWorker = webWorkerService.GetWebWorkerByUserID(webuser.UserID);
                         SessionHelper.SetSession("PositionID", webpeople.PeopleID);
@@ -142,43 +142,95 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                 NickName = Request["NickName"],
                 TrueName = Request["TrueName"],
                 Email = Request["Email"],
-                Address = Request["Address"],
+                //Address = Request["Address"],
                 Sex=Request["Sex"],
+                ProvinceID= Request["ProvinceID"],
+                ProvinceName= Request["ProvinceName"],
+                CityID= Request["CityID"],
+                CityName= Request["CityName"],
+                AreasID= Request["AreasID"],
+                AreasName= Request["AreasName"],
+                Img= Request["PeopleImage"],
+                thumbnailImage = Request["thumbnailImage"],
 
             };
             webUserservice.UpdateWebUserFromCenter(webuser);
-            if (webpeopleservice.IsHaveuser(Convert.ToInt32(Request["UserID"])))
-            {
-                WebPeople webpeople = webpeopleservice.GetWebPeopleByUserID(Convert.ToInt32(Request["UserID"]));
-                WebPeople webpeo = new WebPeople
-                {
-                    PeopleID = webpeople.PeopleID,
-                    Address = Request["Address"],
-                    PeopleCategory= Request["UserType"],
-                    PeopleImage= Request["PeopleImage"],
-                    thumbnailImage= Request["thumbnailImage"],
-                    PeoplePhone=Request["PeoplePhone"],
-                    PeopleName=Request["TrueName"],
-                    PeopleMail=Request["Email"]
-                };
-                webpeopleservice.UpdateWebPeopleFromCenter(webpeo);
-                
-            }
-            else
+            //设计师
+            if (Request["PositionCode"] == "WebPeople")
             {
                 WebPeople webpeo = new WebPeople
                 {
-                    Address = Request["Address"],
-                    PeopleName= Request["TrueName"],
-                    PeopleCategory = Request["UserType"],
+                    //Address = Request["Address"],
+                    //PeopleCategory = Request["UserType"],
                     PeopleImage = Request["PeopleImage"],
                     thumbnailImage = Request["thumbnailImage"],
                     PeoplePhone = Request["PeoplePhone"],
-                    PeopleMail = Request["Email"]
+                    PeopleName = Request["TrueName"],
+                    PeopleMail = Request["Email"],
+                    ProvinceID = Request["ProvinceID"],
+                    ProvinceName = Request["ProvinceName"],
+                    CityID = Request["CityID"],
+                    CityName = Request["CityName"],
+                    AreasID = Request["AreasID"],
+                    AreasName = Request["AreasName"],
                 };
-                webpeopleservice.AddWebPeople(webpeo);
+                if (webpeopleservice.IsHaveuser(Convert.ToInt32(Request["UserID"])))
+                {
+                    WebPeople webpeople = webpeopleservice.GetWebPeopleByUserID(Convert.ToInt32(Request["UserID"]));
+                    webpeo.PeopleID = webpeople.PeopleID;
+                    webpeopleservice.UpdateWebPeopleFromCenter(webpeo);
+                }
+                else
+                {
+                    webpeo.UserID= Convert.ToInt32(Request["UserID"]);
+                    webpeopleservice.AddWebPeople(webpeo);
+                }
             }
+            else if(Request["PositionCode"] == "WebWorkerLeader"|| Request["PositionCode"] == "WebWorker")
+            {
+                WebWorker worker = new WebWorker {
+                    WorkerName= Request["TrueName"],
+                    WorkerPhone= Request["PeoplePhone"],
+                    WorkerMail= Request["Email"],
+                    WorkerImage = Request["PeopleImage"],
+                    thumbnailImage= Request["thumbnailImage"],
+                    ProvinceID = Request["ProvinceID"],
+                    ProvinceName = Request["ProvinceName"],
+                    CityID = Request["CityID"],
+                    CityName = Request["CityName"],
+                    AreasID = Request["AreasID"],
+                    AreasName = Request["AreasName"],
+                };
+                if (Request["PositionCode"] == "WebWorkerLeader")
+                {
+                    worker.WorkerCategory = "装修工长";
+                }
+                else { worker.WorkerCategory = "装修工人"; }
+                if (webWorkerService.IsHaveWorker(Convert.ToInt32(Request["UserID"])))
+                {
+                    WebWorker WebWorker = webWorkerService.GetWebWorkerByUserID(Convert.ToInt32(Request["UserID"]));
+                    worker.WorkerID = WebWorker.WorkerID;
+                    webWorkerService.UpdateWebWorkerFromCenter(WebWorker);
+                }
+                else
+                {
+                    worker.UserID= Convert.ToInt32(Request["UserID"]);
+                    webWorkerService.AddWebWorker(worker);
+                }
+            }
+
             return 1;
+        }
+
+        //设计师详细信息
+        public ActionResult _DesignerView()
+        {
+            return View();
+        }
+        //工人和工长详细信息
+        public ActionResult _WorkerView()
+        {
+            return View();
         }
         //修改人物信息
         [HttpPost]
@@ -189,12 +241,15 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             {
                 PeopleID = Convert.ToInt32(Request["PeopleID"]),
                 PeoplePositionID = Request["PeoplePositionID"],
+                PeoplePosition = Request["PeoplePosition"],
                 WorkYearsID = Convert.ToInt32(Request["WorkYearsID"]),
-                BelongArea = Request["BelongArea"],
+                WorkYears= Request["WorkYears"],
+                PriceID = Convert.ToInt32(Request["PriceID"]),
                 PeopleMotto = Request["PeopleMotto"],
                 PeopleInfo = Request["PeopleInfo"],
                 GoodAtStyleID = Request["GoodAtStyleID"],
-                GoodAtStyle =Request["GoodAtStyle"]
+                GoodAtStyle =Request["GoodAtStyle"],
+                DesignerImage= Request["DesignerImage"],
             };
             webpeopleservice.UpdateWebPeopleFromCenterDetail(webpeo);
             return 1;

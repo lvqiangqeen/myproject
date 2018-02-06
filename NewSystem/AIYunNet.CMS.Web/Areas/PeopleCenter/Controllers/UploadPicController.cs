@@ -89,7 +89,53 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             }
             return Json(new { isUploaded = isUploaded, message = message, thumbnailmessage = thumbnailmessage }, "text/html");
         }
+        [HttpPost]
+        public ActionResult DecIndexImgUpload()
+        {
+            HttpPostedFileBase myFile = Request.Files["DecImageUpload"];
+            //获取图片的种类对应图片文件夹名称（公司，工人，设计师,或案例）
+            string ImageType = "PeopleCenter";
+            bool isUploaded = false;
+            string message = "上传失败!";
+            string ImgRootUrl = string.Empty;
 
+            if (myFile != null && myFile.ContentLength != 0)
+            {
+                string pathForSaving = string.Empty;
+                string fileType = FileHelper.GetFileTag(myFile.FileName);
+                if (fileType == "Image")
+                {
+                    pathForSaving = ImagePathInfo.ProcessBeginOfThePath("/UploadFiles/Images/" + ImageType);
+                    //pathForSaving = Server.MapPath("~/UploadFiles/Images/"+ ImageType);
+                }
+                else
+                {
+                    pathForSaving = ImagePathInfo.ProcessBeginOfThePath
+                        ("/UploadFiles/Files");
+                }
+
+                if (this.CreateFolderIfNeeded(pathForSaving))
+                {
+                    try
+                    {
+                        //图片路径处理
+                        var ImgUrl = new ImagePathInfo(myFile.FileName, pathForSaving);
+                        //如果路径不存在则新建
+                        ImgUrl.CreateDirectory();
+                        //保存图片
+                        myFile.SaveAs(ImgUrl.FileAbsolutePath);
+                        isUploaded = true;
+                        //保存后的图片路径
+                        message = ImgUrl.FileRelativePath;
+                    }
+                    catch (Exception ex)
+                    {
+                        message = string.Format("File upload failed: {0}", ex.Message);
+                    }
+                }
+            }
+            return Json(new { isUploaded = isUploaded, message = message}, "text/html");
+        }
         private bool CreateFolderIfNeeded(string path)
         {
             bool result = true;

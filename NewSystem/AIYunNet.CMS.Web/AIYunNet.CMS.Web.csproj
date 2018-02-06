@@ -3861,6 +3861,8 @@
     <Content Include="Areas\PeopleCenter\Views\CenterCases\AddOrEditBuidingStages.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\BuidingStagesList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStageInfo.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\UserCenter\_DesignerView.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\UserCenter\_WorkerView.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
