@@ -68,6 +68,46 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+
+        /// <summary>
+        /// 从个人中心详情页面修改
+        /// </summary>
+        public int UpdateWebWorkerFromCenterDetail(WebWorker WebWorker)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                if (WebWorker != null)
+                {
+                    WebWorker originalPeople = context.WebWorker.Find(WebWorker.WorkerID);
+                    if (originalPeople != null)
+                    {
+                        originalPeople.WorkerPositionID = WebWorker.WorkerPositionID;
+                        originalPeople.WorkerPosition = WebWorker.WorkerPosition;
+                        originalPeople.WorkYearsID = WebWorker.WorkYearsID;
+                        originalPeople.WorkYears = WebWorker.WorkYears;
+                        originalPeople.PriceName = WebWorker.PriceName;
+                        //originalPeople.BelongArea = webPeople.BelongArea;
+                        //originalPeople.CaseCount = webPeople.CaseCount;
+                        originalPeople.EditOn = DateTime.Now;
+                        originalPeople.GoodAtStyle = WebWorker.GoodAtStyle;
+                        //originalPeople.IsApproved = webPeople.IsApproved;
+                        //originalPeople.IsAuthentication = webPeople.IsAuthentication;
+                        //originalPeople.IsBond = webPeople.IsBond;
+                        //originalPeople.IsBuildingCount = webPeople.IsBuildingCount;
+                        //originalPeople.IsTop = webPeople.IsTop;
+                        originalPeople.WorkerInfo = WebWorker.WorkerInfo;
+                        //originalPeople.PeopleLevel = webPeople.PeopleLevel;
+                        originalPeople.WorkerMotto = WebWorker.WorkerMotto;
+
+                        //originalPeople.ShowOrder = webPeople.ShowOrder;
+                        context.SaveChanges();
+                    }
+                }
+
+
+                return 1;
+            }
+        }
         /// <summary>
         /// 添加
         /// </summary>

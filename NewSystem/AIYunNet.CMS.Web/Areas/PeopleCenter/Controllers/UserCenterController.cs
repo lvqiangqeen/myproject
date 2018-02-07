@@ -254,7 +254,27 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             webpeopleservice.UpdateWebPeopleFromCenterDetail(webpeo);
             return 1;
         }
-
+        //修改人物信息
+        [HttpPost]
+        [AuthorityFilter]
+        public int UpdateWorkerDetail()
+        {
+            WebWorker webpeo = new WebWorker
+            {
+                WorkerID = Convert.ToInt32(Request["WorkerID"]),
+                WorkerPositionID = Request["WorkerPositionID"],
+                WorkerPosition = Request["WorkerPosition"],
+                WorkYearsID = Convert.ToInt32(Request["WorkYearsID"]),
+                WorkYears = Request["WorkYears"],
+                PriceName = Request["PriceName"],
+                WorkerMotto = Request["WorkerMotto"],
+                WorkerInfo = Request["WorkerInfo"],
+                GoodAtStyleID = Request["GoodAtStyleID"],
+                GoodAtStyle = Request["GoodAtStyle"]
+            };
+            webWorkerService.UpdateWebWorkerFromCenterDetail(webpeo);
+            return 1;
+        }
 
 
 

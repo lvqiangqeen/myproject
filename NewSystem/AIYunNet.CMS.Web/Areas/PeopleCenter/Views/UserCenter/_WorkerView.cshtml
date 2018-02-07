@@ -1,17 +1,130 @@
-﻿
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
 @{
     Layout = null;
+    string userAccount = SessionHelper.Get("userName");
+    WebUserService webuserservice = new WebUserService();
+    WebWorkerService webworkerSer = new WebWorkerService();
+    IWebCommon webcommenservice = new WebCommonService();
+
+    WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
+    WebWorker webWorker = new WebWorker();
+    if (webworkerSer.IsHaveWorker(webuser.UserID))
+    {
+        webWorker = webworkerSer.GetWebWorkerByUserID(webuser.UserID);
+    }
+
+    //职位
+    List<WebLookup> positionlist = new List<WebLookup>();
+    positionlist = webcommenservice.GetLookupList("workers_position");
+
+    //工作年限
+    List<WebLookup> workyearlist = new List<WebLookup>();
+    workyearlist = webcommenservice.GetLookupList("people_workyear");
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_WorkerView</title>
-</head>
-<body>
-    <div> 
+<div class="zp_nrm" style="display:none;" id="UproInfolist">
+    <!--left-->
+    <div class="zp_nrm_l">
+        <img src="@AppSettingsHelper.ImgUrl@webWorker.WorkerImage">
     </div>
-</body>
-</html>
+    <!--right-->
+    <div class="zp_nrm_r">
+        <p><em>姓&nbsp;&nbsp;&nbsp;&nbsp;名：</em><i>@webWorker.WorkerName</i></p>
+        @if (webuser.PositionCode == "WebWorker")
+        {
+            <p>
+                <em>工&nbsp;&nbsp;&nbsp;&nbsp;种：</em><i>
+                    <select name="WorkerPositionID" class="u-ipt-txt" style="margin-top:11px; width:180px;height:30px;" id="WorkerPositionID">
+                        @foreach (WebLookup lo in positionlist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                </i>
+            </p>
+        }
+
+        <p>
+            <em>工作年限：</em><i>
+                <select name="WorkYearsID" class="u-ipt-txt" style="margin-top:11px; width:180px;height:30px;" id="WorkYearsID">
+                    @foreach (WebLookup lo in workyearlist)
+                    {
+                        <option value="@lo.Code">@lo.Description</option>
+                    }
+                </select>
+            </i>
+        </p>
+        <p><em>工程价位：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.PriceName" style="margin-top:11px; width:50px;" name="PriceName" />元/m²</i></p>
+        <p><em>擅长领域：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.GoodAtStyle" style="margin-top:11px; width:450px;" name="GoodAtStyle" /></i></p>
+        <p><em>评价自己：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.WorkerMotto" style="margin-top:11px; width:450px;" name="WorkerMotto" /></i></p>
+        <p style="height:173px"><em>个人简介：</em><i><textarea class="u-ipt-txt" cols="20" id="WorkerInfo" name="WorkerInfo" placeholder="请输入描述" rows="5" style="margin-top:11px; width:450px;height:140px;"></textarea></i></p>
+
+        <div><a href="javascript:void(0);" class="public_m3" id="workerbutton">保存修改</a></div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        //身份
+        var WorkerPositionID="@webWorker.WorkerPositionID";
+        if(WorkerPositionID!=null&&WorkerPositionID!="")
+        {
+            $("#WorkerPositionID").val(WorkerPositionID);
+        }
+        //工作年限
+        var WorkYearsID="@webWorker.WorkYearsID";
+        if(WorkYearsID!=null&&WorkYearsID!=0)
+        {
+            $("#WorkYearsID").val(WorkYearsID);
+        }
+
+        //个人简介
+        var WorkerInfo="@webWorker.WorkerInfo";
+        if(WorkerInfo!=null&&WorkerInfo!="")
+        {
+            $("#WorkerInfo").val(WorkerInfo);
+        }
+        $("#workerbutton").click(function () {
+            var WorkerPositionID=$("#WorkerPositionID").val();
+            var WorkerPosition=$("#WorkerPositionID option:checked").text();
+            var WorkYearsID=$("#WorkYearsID").val();
+            var WorkYears=$("#WorkYearsID option:checked").text();
+            var WorkerMotto=$("input[name=WorkerMotto]").val();
+            var WorkerInfo=$("#WorkerInfo").val();
+            var PriceName=$("input[name=PriceName]").val();
+            var GoodAtStyle=$("input[name=GoodAtStyle]").val();
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/PeopleCenter/UserCenter/UpdateWorkerDetail",
+                data: {
+                    WorkerID:@webWorker.WorkerID,
+                    WorkerPositionID:WorkerPositionID,
+                    WorkerPosition:WorkerPosition,
+                    WorkYearsID:WorkYearsID,
+                    PriceName:PriceName,
+                    WorkYears: WorkYears,
+                    WorkerMotto: WorkerMotto,
+                    GoodAtStyle:GoodAtStyle,
+                    WorkerInfo: WorkerInfo,
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("修改成功！");
+                        window.location.href = window.location.href;
+                    }
+                    else {
+                        alert("修改失败！");
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!2');
+                }
+            });
+
+        });
+    });
+</script>

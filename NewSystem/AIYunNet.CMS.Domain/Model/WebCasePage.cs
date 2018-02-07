@@ -69,6 +69,8 @@ namespace AIYunNet.CMS.Domain.Model
         public string CostAreaName { get; set; }
 
         public int DecType { get; set; }
+
+        public string DecTypeName { get; set; }
         public string GzStyleName { get; set; }
 
         public bool IsHot { get; set; }

@@ -410,8 +410,9 @@ namespace AIYunNet.CMS.Web.Handler
                 "(select description from WebLookup where code=WebCase.HouseArea and lookup_key='Case_house_area') as [HouseAreaName]," +
                 "(select description from WebLookup where code=WebCase.CostArea and lookup_key='Case_cost_area') as [CostAreaName]," +
                 "(select description from WebLookup where code=WebCase.GzStyle and lookup_key='Case_gz_style') as [GzStyleName]," +
+                "(select description from WebLookup where code=WebCase.DecType and lookup_key='Case_DecType') as [DecTypeName]," +
                 "[PageViewCount],[CollectCount],[ZanCount],[CommentCount],[AddOn]");
-            //SelectParameters = string.Format("[PeopleID],[PeopleName],[PeopleCategory],[PeoplePositionID],[PeoplePosition],[PeoplePhone],[PeopleMail],[Address],[WorkYears],[WorkYearsID],[PeopleInfo],[PeopleLevel],[GoodAtStyleID],[GoodAtStyle],[PeopleMotto],[CaseCount],[IsBuildingCount],[IsBond],[IsAuthentication],[IsApproved],[IsTop],[BelongArea],[ShowOrder],[PeopleImage] ,[DesignerImage],[thumbnailImage],[CompanyID],[CompanyName],[AddOn],[EditOn],[DeleteOn],[FlagDelete],[CityID],[CityName],[AreasID],[AreasName]");
+           
             SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3} {4} {5} {6} {7}",
                 companyID == 0 ? "" : "and companyID=" + companyID,
                 style == 0 ? "" : "and style=" + style,
@@ -431,29 +432,33 @@ namespace AIYunNet.CMS.Web.Handler
             paginfo.SortOrder = SortOrder + "AddOn desc,CaseID desc";
             var result = PageList.GetPageListBySQL<WebCasePage>(paginfo, out recordcount, out pageCount);
             List<WebCaseAndDesigner> list = new List<WebCaseAndDesigner>();
-            foreach (WebCasePage item in result)
+            if (result != null)
             {
-                WebCaseAndDesigner cadec = new WebCaseAndDesigner();
-                cadec.webcase = item;
-                if (item.PeopleID == 0)
+                foreach (WebCasePage item in result)
                 {
-                    cadec.designer = new WebPeople();
-                }
-                else
-                {
-                    cadec.designer = webPeopleService.GetWebPeopleByID(item.PeopleID);
-                }
-                if (item.CompanyID == 0)
-                {
-                    cadec.company = new WebCompany();
-                }
-                else
-                {
-                    cadec.company = webCompanyService.GetWebCompanyByID(item.CompanyID);
-                }
-                list.Add(cadec);
+                    WebCaseAndDesigner cadec = new WebCaseAndDesigner();
+                    cadec.webcase = item;
+                    if (item.PeopleID == 0)
+                    {
+                        cadec.designer = new WebPeople();
+                    }
+                    else
+                    {
+                        cadec.designer = webPeopleService.GetWebPeopleByID(item.PeopleID);
+                    }
+                    if (item.CompanyID == 0)
+                    {
+                        cadec.company = new WebCompany();
+                    }
+                    else
+                    {
+                        cadec.company = webCompanyService.GetWebCompanyByID(item.CompanyID);
+                    }
+                    list.Add(cadec);
 
+                }
             }
+
 
             var obj = new
             {
@@ -466,7 +471,7 @@ namespace AIYunNet.CMS.Web.Handler
         }
 
         /// <summary>
-        /// 获取案例分页
+        /// 获取个人中心案例分页
         /// </summary>
         public void GetCaseList()
         {

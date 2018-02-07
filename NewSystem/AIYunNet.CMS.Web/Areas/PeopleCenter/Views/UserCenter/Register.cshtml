@@ -11,6 +11,7 @@
         <div class="lg-error-ts" id="errorhave" style="display:none;"><i class="fa fa-times-circle"></i><span>该手机号已被注册</span></div>
         <div class="lg-error-ts" id="errornone" style="display:none;"><i class="fa fa-times-circle"></i><span>请输入用户名</span></div>
         <div class="lg-error-ts" id="errorposition" style="display:none;"><i class="fa fa-times-circle"></i><span>请选择您的身份</span></div>
+        <div class="lg-error-ts" id="errorall" style="display:none;"><i class="fa fa-times-circle"></i><span>请补全信息</span></div>
         <form id="login-form" action="https://account.vsochina.com/v2/login" method="post">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
@@ -94,30 +95,36 @@
         var userPassword = $("input[name=password]").val();
         var PositionCode = $("#PositionCode option:selected").val();
         var PositionType = 0;
-        $.ajax({
-            async: false,
-            type: "post",
-            url: "/PeopleCenter/UserCenter/Register",
-            data: {
+        if (userAccount == "" || userPassword == "" || PositionCode == "") {
+            $("#errorall").attr("style", "");
+        } else
+        {
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/PeopleCenter/UserCenter/Register",
+                data: {
 
-                userAccount: userAccount,
-                userPassword: userPassword,
-                PositionCode: PositionCode,
-                PositionType:PositionType
+                    userAccount: userAccount,
+                    userPassword: userPassword,
+                    PositionCode: PositionCode,
+                    PositionType: PositionType
 
-            },
-            success: function (data) {
-                if (data == 1) {
-                    alert("注册成功请登录！")
-                    window.location.href = "/PeopleCenter/UserCenter/LoginOn";
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("注册成功请登录！")
+                        window.location.href = "/PeopleCenter/UserCenter/LoginOn";
+                    }
+                    else {
+                        $("#erroruser").attr("style", "");
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!2');
                 }
-                else {
-                    $("#erroruser").attr("style", "");
-                }
-            },
-            error: function (xhr, type) {
-                alert('Ajax error!2');
-            }
-        });
+            });
+        }
+        
     });
 </script>

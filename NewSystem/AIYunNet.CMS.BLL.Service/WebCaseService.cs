@@ -146,8 +146,6 @@ namespace AIYunNet.CMS.BLL.Service
         //从总后台修改
         public int UpdateWebCase(WebCase webCase)
         {
-            WebCompanyService webCompanyService = new WebCompanyService();
-            WebPeopleService webPeopleService = new WebPeopleService();
             using (AIYunNetContext context=new AIYunNetContext())
             {
                 WebCase originalCase = context.WebCase.Find(webCase.CaseID);
@@ -159,12 +157,8 @@ namespace AIYunNet.CMS.BLL.Service
                     originalCase.CaseInfo = webCase.CaseInfo;
                     originalCase.CaseTitle = webCase.CaseTitle;
                     originalCase.CompanyID = webCase.CompanyID;
-
-                    webCompanyService.updateCaseCountbyCompanyID(webCase.CompanyID);
                     originalCase.IsHot = webCase.IsHot;
                     originalCase.PeopleID = webCase.PeopleID;
-
-                    webPeopleService.updateCaseCountbyPeopleID(webCase.PeopleID);
                     originalCase.ShowOrder = webCase.ShowOrder;
                     originalCase.CostArea = webCase.CostArea;
                     originalCase.Style = webCase.Style;
@@ -173,7 +167,6 @@ namespace AIYunNet.CMS.BLL.Service
                     originalCase.GzStyle = webCase.GzStyle;
                     originalCase.Jobschedule = webCase.Jobschedule;
                     originalCase.EditOn = DateTime.Now;
-
                     originalCase.DecType = webCase.DecType;
                     context.SaveChanges();
                     return 1;
@@ -220,8 +213,6 @@ namespace AIYunNet.CMS.BLL.Service
         //从公司后台修改
         public int UpdateWebCaseByCompany(WebCase webCase)
         {
-            WebCompanyService webCompanyService = new WebCompanyService();
-            WebPeopleService webPeopleService = new WebPeopleService();
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 WebCase originalCase = context.WebCase.Find(webCase.CaseID);
@@ -232,13 +223,9 @@ namespace AIYunNet.CMS.BLL.Service
                     originalCase.thumbnailImage = webCase.thumbnailImage;
                     originalCase.CaseInfo = webCase.CaseInfo;
                     originalCase.CaseTitle = webCase.CaseTitle;
-                    originalCase.CompanyID = webCase.CompanyID;
-
-                    webCompanyService.updateCaseCountbyCompanyID(webCase.CompanyID);
+                    originalCase.CompanyID = webCase.CompanyID;  
                     originalCase.IsTop = webCase.IsTop;
                     originalCase.PeopleID = webCase.PeopleID;
-
-                    webPeopleService.updateCaseCountbyPeopleID(webCase.PeopleID);
                     originalCase.ShowOrder = webCase.ShowOrder;
                     originalCase.CostArea = webCase.CostArea;
                     originalCase.Style = webCase.Style;
@@ -261,8 +248,6 @@ namespace AIYunNet.CMS.BLL.Service
         //设计师后台修改
         public int UpdateWebCasefromCenter(WebCase webCase)
         {
-            WebCompanyService webCompanyService = new WebCompanyService();
-            WebPeopleService webPeopleService = new WebPeopleService();
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 WebCase originalCase = context.WebCase.Find(webCase.CaseID);
@@ -274,10 +259,9 @@ namespace AIYunNet.CMS.BLL.Service
                     originalCase.CaseInfo = webCase.CaseInfo;
                     originalCase.CaseTitle = webCase.CaseTitle;
                     originalCase.CompanyID = 0;
-                    originalCase.IsTop = false;
+                    originalCase.IsTop = webCase.IsTop;
                     originalCase.PeopleID = webCase.PeopleID;
 
-                    webPeopleService.updateCaseCountbyPeopleID(originalCase.PeopleID);
                     originalCase.ShowOrder = 0;
                     originalCase.CostArea = webCase.CostArea;
                     originalCase.Style = webCase.Style;

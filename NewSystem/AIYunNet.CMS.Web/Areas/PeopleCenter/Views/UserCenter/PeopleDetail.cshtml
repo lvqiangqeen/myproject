@@ -44,26 +44,30 @@
     <div class="centers_r_items">
         <div class="items-tit">
             <a class="tit-name active" id="UacountInfo">账户信息</a>
-            <a class="tit-name" id="UproInfo">职业信息</a>
+            @if (webuser.PositionCode != "WebUser")
+            {
+                <a class="tit-name" id="UproInfo">职业信息</a>
+            }
+
             <script>
-                $(".tit-name").click(function(e){
-                    var id=$(e.target).attr('id');
+                $(".tit-name").click(function (e) {
+                    var id = $(e.target).attr('id');
 
-                    $("#"+id).addClass("active");
-                    $("#"+id).prevAll("a").removeClass("active");
-                    $("#"+id).nextAll("a").removeClass("active");
+                    $("#" + id).addClass("active");
+                    $("#" + id).prevAll("a").removeClass("active");
+                    $("#" + id).nextAll("a").removeClass("active");
 
-                    $("#"+id+"list").attr("style","");
-                    $("#"+id+"list").prevAll("div").attr("style","display:none;");
-                    $("#"+id+"list").nextAll("div").attr("style","display:none;");
+                    $("#" + id + "list").attr("style", "");
+                    $("#" + id + "list").prevAll("div").attr("style", "display:none;");
+                    $("#" + id + "list").nextAll("div").attr("style", "display:none;");
 
                 });
             </script>
         </div>
         <div class="items-con">
             <div class="zp_nrm" id="UacountInfolist">
-                <input type="hidden" value="@webuser.PositionCode" name="PositionCode"/>
-                <input type="hidden" value="@webuser.PositionType" name="PositionType"/>
+                <input type="hidden" value="@webuser.PositionCode" name="PositionCode" />
+                <input type="hidden" value="@webuser.PositionType" name="PositionType" />
                 <!--left-->
                 <div class="zp_nrm_l">
                     <img src="@AppSettingsHelper.ImgUrl@webuser.Img" id="ImgLook">
@@ -78,7 +82,10 @@
                     <p>
                         <em>类&nbsp;&nbsp;&nbsp;&nbsp;别：</em>
                         <i>@webcommenservice.GetLookupDesc("User_position", webuser.PositionCode)</i>
-                        <a href="/PeopleCenter/Certification/Authentication" class="renzheng-btn">身份认证</a><a href="/PeopleCenter/Certification/GuarantMoney" class="renzheng-btn">申请缴纳质保金</a><span class="ts">认证后可以发布作品吸引设计订单哦</span>
+                        @if (webuser.PositionCode != "WebUser")
+                        {
+                            <a href="/PeopleCenter/Certification/Authentication" class="renzheng-btn">身份认证</a><a href="/PeopleCenter/Certification/GuarantMoney" class="renzheng-btn">申请缴纳质保金</a><span class="ts">认证后可以发布作品吸引设计订单哦</span>
+                        }
                     </p>
 
 
@@ -96,54 +103,53 @@
                         </select>
                         <select class="ziliao-diqu-ipt" id="CityID" name="CityID"></select>
                     </span>
-                    <p style="height: 160px;">
-                        <em>服务区域：</em>
-                        <span id="Areaslist">
+                    @if (webuser.PositionCode != "WebUser")
+                    {
+                        <p style="height: 160px;">
+                            <em>服务区域：</em>
+                            <span id="Areaslist">
 
-                        </span>
-                        <input name="AreasID" type="hidden" value="@webuser.AreasID" />
-                        <input name="AreasName" type="hidden" value="@webuser.AreasName" />
-                    </p>
+                            </span>
+                            <input name="AreasID" type="hidden" value="@webuser.AreasID" />
+                            <input name="AreasName" type="hidden" value="@webuser.AreasName" />
+                        </p>
+                    }
                     <script>
                         $(function () {
                             $("#ProvinceID").val("@webuser.ProvinceID");
-                            var ProvinceID= $("#ProvinceID").val();
+                            var ProvinceID = $("#ProvinceID").val();
                             getcitylist(ProvinceID);
-                            $("#ProvinceID").change(function(){
-                                ProvinceID=$("#ProvinceID").val();
+                            $("#ProvinceID").change(function () {
+                                ProvinceID = $("#ProvinceID").val();
                                 getcitylist(ProvinceID);
-                                var CityID=$("#CityID  option:selected").val();
+                                var CityID = $("#CityID  option:selected").val();
                                 getArealist(CityID);
                             });
 
                             $("#CityID").change(function () {
-                                var CityID=$("#CityID  option:selected").val();
+                                var CityID = $("#CityID  option:selected").val();
                                 getArealist(CityID)
                             });
 
                             $("#CityID").val("@webuser.CityID");
-                            var CityID=$("#CityID  option:selected").val();
+                            var CityID = $("#CityID  option:selected").val();
                             getArealist(CityID);
 
-                            var AreasIDlist="@webuser.AreasID";
-                            if(AreasIDlist=="0")
-                            {
-                                $("#allarea").prop('checked',true);
-                                $("input:checkbox[name='areaidList']").prop('checked',true);
-                            }else
-                            {
-                                var AreaarrList=AreasIDlist.split(',');
-                                for(var i=0;i<AreaarrList.length;i++)
-                                {
-                                    if(AreaarrList[i]!="")
-                                        $("#areaid"+AreaarrList[i]).prop('checked',true);
+                            var AreasIDlist = "@webuser.AreasID";
+                            if (AreasIDlist == "0") {
+                                $("#allarea").prop('checked', true);
+                                $("input:checkbox[name='areaidList']").prop('checked', true);
+                            } else {
+                                var AreaarrList = AreasIDlist.split(',');
+                                for (var i = 0; i < AreaarrList.length; i++) {
+                                    if (AreaarrList[i] != "")
+                                        $("#areaid" + AreaarrList[i]).prop('checked', true);
                                 }
                             }
 
 
                             //获取区域list
-                            function getArealist(cityid)
-                            {
+                            function getArealist(cityid) {
                                 $.ajax({
                                     async: false,
                                     type: "post",
@@ -154,15 +160,15 @@
                                     success: function (data) {
                                         if (data != null) {
                                             var html = '';
-                                            html='<label class="checkbox-custom" style="padding-right: 10px;">'
-                                            +'<input id="allarea" type="checkbox" value="" />全城'
-                                            +'</label>'
-                                            $.each(data.list, function (i,item) {
+                                            html = '<label class="checkbox-custom" style="padding-right: 10px;">'
+                                            + '<input id="allarea" type="checkbox" value="" />全城'
+                                            + '</label>'
+                                            $.each(data.list, function (i, item) {
                                                 html += '<label class="checkbox-custom" style="padding-right: 10px;">'
-                                                    +'<input name="areaidList" id="areaid'+item.areaID+'" type="checkbox" value="'+item.areaID+'" />'
-                                                    +'<input type="hidden" name="areanameList" value="'+item.area+'" />'
-                                                    +item.area
-                                                    +'</label>';
+                                                    + '<input name="areaidList" id="areaid' + item.areaID + '" type="checkbox" value="' + item.areaID + '" />'
+                                                    + '<input type="hidden" name="areanameList" value="' + item.area + '" />'
+                                                    + item.area
+                                                    + '</label>';
                                             });
                                             $("#Areaslist").empty();
                                             $("#Areaslist").append(html);
@@ -178,17 +184,15 @@
                                 });
                             };
                             //区域动作
-                            function selectAllarea()
-                            {
-                                $("#allarea").click(function(){
-                                    if($('#allarea').is(':checked')) {
+                            function selectAllarea() {
+                                $("#allarea").click(function () {
+                                    if ($('#allarea').is(':checked')) {
                                         // do something
-                                        $("input:checkbox[name='areaidList']").prop('checked',true);
-                                    }else{$("input:checkbox[name='areaidList']").prop('checked',false);}
+                                        $("input:checkbox[name='areaidList']").prop('checked', true);
+                                    } else { $("input:checkbox[name='areaidList']").prop('checked', false); }
                                 });
                             }
-                            function getcitylist(provinceid)
-                            {
+                            function getcitylist(provinceid) {
                                 $.ajax({
                                     async: false,
                                     type: "post",
@@ -199,7 +203,7 @@
                                     success: function (data) {
                                         if (data != null) {
                                             var html = '';
-                                            $.each(data.list, function (i,item) {
+                                            $.each(data.list, function (i, item) {
                                                 html += '<option value="' + item.cityID + '">' + item.city + '</option>'
                                             });
                                             $("#CityID").empty();
@@ -224,7 +228,15 @@
                 </div>
 
             </div>
-            @{ Html.RenderPartial("_DesignerView");}
+            @if (webuser.PositionCode == "WebPeople")
+            {
+                Html.RenderPartial("_DesignerView");
+            }
+            else if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")
+            {
+                Html.RenderPartial("_WorkerView");
+            }
+
         </div>
     </div>
 </div>
@@ -232,17 +244,15 @@
 
     $(function () {
         //获取类别
-        var ptype="@webuser.UserType";
-        if(ptype!=null && ptype!="")
-        {
+        var ptype = "@webuser.UserType";
+        if (ptype != null && ptype != "") {
             $("#UserType").val(ptype);
         }
 
         //获取性别
-        var sex="@webuser.Sex";
-        if(sex!=null && sex!="")
-        {
-            $("input[name=Sex][value="+sex+"]").attr("checked","true");
+        var sex = "@webuser.Sex";
+        if (sex != null && sex != "") {
+            $("input[name=Sex][value=" + sex + "]").attr("checked", "true");
         }
 
 
@@ -288,19 +298,16 @@
         }
     });
     //获取区域
-    function getArea()
-    {
+    function getArea() {
         var AreasID = "";
-        var AreasName="";
-        if($('#allarea').is(':checked'))
-        {
-            AreasID="0";
-            AreasName="全城";
-        }else
-        {
-            $("input:checkbox[name='areaidList']:checked").each(function() {
+        var AreasName = "";
+        if ($('#allarea').is(':checked')) {
+            AreasID = "0";
+            AreasName = "全城";
+        } else {
+            $("input:checkbox[name='areaidList']:checked").each(function () {
                 AreasID += $(this).val() + ",";
-                AreasName+=$(this).next("input").val()+","
+                AreasName += $(this).next("input").val() + ","
             });
         }
         $("input[name='AreasID']").val(AreasID);
@@ -310,40 +317,40 @@
     $("#userbutton").click(function () {
         getArea();
         var NickName = $("input[name=NickName]").val();
-        var TrueName= $("input[name=TrueName]").val();
+        var TrueName = $("input[name=TrueName]").val();
         var PeopleImage = $("input[name=PeopleImage]").val();
         var thumbnailImage = $("input[name=thumbnailImage]").val();
         var Email = $("input[name=Email]").val();
         var Sex = $("input[name=Sex]:checked").val();
         var CityID = $("#CityID").val();
-        var CityName=$("#CityID  option:selected").text();
+        var CityName = $("#CityID  option:selected").text();
         var ProvinceID = $("#ProvinceID").val();
-        var ProvinceName=$("#ProvinceID  option:selected").text();
-        var AreasID= $("input[name=AreasID]").val();
-        var AreasName=$("input[name=AreasName]").val();
-        var PositionType=$("input[name=PositionType]").val();
-        var PositionCode=$("input[name=PositionCode]").val();
+        var ProvinceName = $("#ProvinceID  option:selected").text();
+        var AreasID = $("input[name=AreasID]").val();
+        var AreasName = $("input[name=AreasName]").val();
+        var PositionType = $("input[name=PositionType]").val();
+        var PositionCode = $("input[name=PositionCode]").val();
         $.ajax({
             async: false,
             type: "post",
             url: "/PeopleCenter/UserCenter/UpdatePeople",
             data: {
-                UserID:'@webuser.UserID',
-                NickName:NickName,
+                UserID: '@webuser.UserID',
+                NickName: NickName,
                 Email: Email,
                 Sex: Sex,
                 PeopleImage: PeopleImage,
                 thumbnailImage: thumbnailImage,
-                TrueName:TrueName,
-                PeoplePhone:'@webuser.Telephone',
-                CityID:CityID,
-                CityName:CityName,
-                ProvinceID:ProvinceID,
-                ProvinceName:ProvinceName,
-                AreasID:AreasID,
-                AreasName:AreasName,
-                PositionType:PositionType,
-                PositionCode:PositionCode
+                TrueName: TrueName,
+                PeoplePhone: '@webuser.Telephone',
+                CityID: CityID,
+                CityName: CityName,
+                ProvinceID: ProvinceID,
+                ProvinceName: ProvinceName,
+                AreasID: AreasID,
+                AreasName: AreasName,
+                PositionType: PositionType,
+                PositionCode: PositionCode
 
             },
             success: function (data) {

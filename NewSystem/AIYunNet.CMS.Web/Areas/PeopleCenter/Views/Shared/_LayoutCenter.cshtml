@@ -87,7 +87,8 @@
         <div class="u-main">
             <div class="u-logo"><a href="/PeopleCenter/UserCenter/PeopleCenterIndex"></a></div>
             <div class="menu">
-                <a href="/index/homepage" class="active">返回首页</a>
+                <a href="/index/HomeIndex" class="active">返回首页</a>
+                <a href="/Workers/DecDesignerIndex?peopleID=@webpeople.PeopleID" class="active" target="_blank">查看我的主页</a>
                 <a href="/PeopleCenter/CenterCases/AddandUpdateCenterCase?CaseID=0" class="upld upzp">上传案例</a>
                 <a href="upload_needs.html" class="upld upxq" target="_blank"  style="display:none;">发布需求</a>
             </div>
@@ -105,13 +106,13 @@
         <div class="centers_ml">
             <!--头像-->
             <div class="center_header">
-                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex"><img src="@AppSettingsHelper.ImgUrl@webpeople.PeopleImage" /></a>
+                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex"><img src="@AppSettingsHelper.ImgUrl@webuser.Img" /></a>
                 <div class="u-name">您好，<span>@if (webuser.NickName == null || webuser.NickName == "")
                 { @webuser.UserName}
                 else {@webuser.NickName }</span></div>
                 <div class="u-lx-dj"><span><i class="fa fa-mortar-board"></i></span><span class="vip-grade"><i class="fa fa-vimeo"></i><em>23</em></span></div>
                 <div class="u-qianming">@*<input type="text" placeholder="这个用户很懒，什么都没有写" />*@</div>
-                <div class="u-area"><span>石家庄</span>，<span>裕华区</span></div>
+                <div class="u-area"><span>@webuser.ProvinceName</span>，<span>@webuser.CityName</span></div>
             </div>
             <div class="u-safe-btn">
                 <a href="/PeopleCenter/UserCenter/PeopleDetail"><i class="fa fa-vcard"></i>个人资料</a>
@@ -119,14 +120,25 @@
             </div>
             <div class="centers_listm">
                 <!--分类开始-->
-                <div class="listbox">
-                    <div class="centers_listm_one_in"><i class="fa fa-photo"></i><span>我的作品</span><b></b></div>
-                    <div class="gjszmdm">
-                        <a href="/PeopleCenter/CenterCases/CenterCaselist" class="center_in_self"><span>我的案例</span></a>
-						<a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>阶段管理</span></a>
-						
+                @if (webuser.PositionCode == "WebPeople")
+                {
+                    <div class="listbox">
+                        <div class="centers_listm_one_in"><i class="fa fa-photo"></i><span>我的作品</span><b></b></div>
+                        <div class="gjszmdm">
+                            <a href="/PeopleCenter/CenterCases/CenterCaselist" class="center_in_self"><span>设计案例</span></a>
+                        </div>
                     </div>
-                </div>
+                }
+                else if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")
+                {
+                    <div class="listbox">
+                        <div class="centers_listm_one_in"><i class="fa fa-photo"></i><span>我的装修</span><b></b></div>
+                        <div class="gjszmdm">
+                            <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>阶段管理</span></a>
+                        </div>
+                    </div>
+                }
+
                 <div class="listbox">
                     <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>我的需求</span><b></b></div>
                     <div class="gjszmdm">

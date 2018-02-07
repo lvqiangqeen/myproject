@@ -41,16 +41,6 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			}
 			else
 			{
-				//WebCase webcase = new WebCase()
-				//{  
-				//    CaseTitle = Request["CaseTitle"],
-				//    HouseArea = Convert.ToInt32(Request["HouseArea"]),
-				//    HouseType = Convert.ToInt32(Request["HouseType"]),
-				//    Style = Convert.ToInt32(Request["Style"]),
-				//    CostArea = Convert.ToInt32(Request["CostArea"]),
-				//    CaseBrief = Request["CaseBrief"],
-				//    CaseInfo = Request["CaseInfo"]
-				//};
 				webcaseservice.AddWebCase(webcase);
 			}
 			return 1;
