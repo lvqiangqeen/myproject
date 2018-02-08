@@ -163,6 +163,11 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("bidCount")]
         public int bidCount { get; set; }
+        /// <summary>
+        /// 是否发布了计划
+        /// </summary>
+        [Column("IsPlan")]
+        public bool IsPlan { get; set; }
         public DecDemand()
         {
             ProvinceID = 0;
@@ -182,6 +187,7 @@ namespace AIYunNet.CMS.Domain.Model
             PageViewCount = 0;
             bidCount = 0;
             IsEnd = false;
+            IsPlan = false;
         }
     }
 }

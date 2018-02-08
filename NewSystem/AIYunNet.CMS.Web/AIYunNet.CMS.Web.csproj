@@ -1952,6 +1952,7 @@
     <Content Include="Content\LoginCompany\js\jquery.magnific-popup.js" />
     <Content Include="Content\LoginCompany\signup.html" />
     <Content Include="Content\meichen\css\basestyle.css" />
+    <Content Include="Content\meichen\css\bootstrap.css" />
     <Content Include="Content\meichen\css\drop-down.css" />
     <Content Include="Content\meichen\css\font-awesome.min.css" />
     <Content Include="Content\meichen\css\hzw-city-picker.css" />
@@ -3863,6 +3864,8 @@
     <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStageInfo.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\UserCenter\_DesignerView.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\UserCenter\_WorkerView.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerDemandList.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerBuidingList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

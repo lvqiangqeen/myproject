@@ -21,5 +21,26 @@ namespace AIYunNet.CMS.BLL.Service
                 return model;
             }
         }
+
+        public List<DecDemand> GetDecDemandListByUserIDAndType(int UserID,string UserType)
+        {
+            List<DecDemand> list = new List<DecDemand>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                try
+                {
+                    list = context.DecDemand.Where(c => c.GetUserID == UserID && c.GetUserType == UserType).OrderByDescending(c => c.AddOn).ToList();
+                    if (list == null)
+                    {
+                        list = new List<DecDemand>();
+                    }
+                    return list;
+                }
+                catch (Exception e)
+                {
+                    return list;
+                }
+            }
+        }
     }
 }

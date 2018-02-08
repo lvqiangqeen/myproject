@@ -1,8 +1,9 @@
 ﻿@using AIYunNet.CMS.Domain.Model
+
 @model List<WebBuiding>
 @{
-	ViewBag.Title = "BuidingStagesList";
-	Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    ViewBag.Title = "BuidingStagesList";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
 }
 @section head{
 	<style>
@@ -106,8 +107,10 @@
 </div>
 @section Scripts{
 	<script type="text/javascript">
+
 		$(document).ready(function ()
 		{
+		    sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
 			$('#stageCaseTable').DataTable({
 				"language": {
 					"emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",

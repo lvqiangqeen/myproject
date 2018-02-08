@@ -16,7 +16,10 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 	{
 		// GET: PeopleCenter/CenterCases
 		WebCaseService webcaseservice = new WebCaseService();
-		public ActionResult CenterCaselist()
+        DemandService demandSer = new DemandService();
+        WebBuidingService buidingSer = new WebBuidingService();
+        #region 设计
+        public ActionResult CenterCaselist()
 		{
 			return View();
 		}
@@ -46,32 +49,58 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			return 1;
 			//WebCase webcase = webcaseservice.GetWebCaseByID(CaseID);
 		}
+        #endregion
 
-		public ActionResult BuidingStagesList()
+        #region 装修接单
+        public ActionResult WorkerDemandList(int UserID)
+        {
+            List<DecDemand> list = demandSer.GetDecDemandListByUserIDAndType(UserID, "WebUser");
+            return View(list);
+        }
+        #endregion
+
+
+        #region 装修
+        public ActionResult WorkerBuidingList()
+        {
+            WebBuidingService service = new WebBuidingService();
+            int Workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+            List<WebBuiding> buidingList = service.GetWebBuidingListByWorkerID(Workerid,false);
+            return View(buidingList);
+        }
+        public ActionResult BuidingStagesList()
 		{
-			WebBuidingService service = new WebBuidingService();
-			int workerID = Convert.ToInt32(SessionHelper.Get("UserID"));
-			List<WebBuiding> buidingList = service.GetWebBuidingList(workerID);
-			return View(buidingList);
+            WebBuidingService service = new WebBuidingService();
+            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<WebBuiding> buidingList = service.GetWebBuidingList(UserID);
+            return View(buidingList);
+   //         WebBuidingService service = new WebBuidingService();
+			//int workerID = Convert.ToInt32(SessionHelper.Get("UserID"));
+			//List<WebBuiding> buidingList = service.GetWebBuidingList(workerID);
+			//return View(buidingList);
 		}
 
 		[HttpGet]
-		public ActionResult AddOrEditBuidingStages(int buidingID)
+		public ActionResult AddOrEditBuidingStages(int DemandID = 0, int BuidingID = 0)
 		{
 			IWebCommon commonService = new WebCommonService();
 			List<WebLookup> commonworkPosition = commonService.GetLookupList("workers_position");
 			IEnumerable<SelectListItem> workPositionList = commonworkPosition.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
 			ViewBag.workPositionList = workPositionList;
 
-			WebBuiding buidling = null;
-			if (buidingID == 0)
+			WebBuiding buidling = buidingSer.GetWebBuidingByDemandID(DemandID);
+            if (BuidingID != 0 && DemandID==0)
+            {
+                buidling = buidingSer.GetWebuidingByID(BuidingID);
+            }
+            if (BuidingID == 0 && DemandID == 0)
+            {
+                buidling = new WebBuiding();
+            }
+
+            if (buidling == null)
 			{
 				buidling = new WebBuiding();
-			}
-			else
-			{
-				WebBuidingService service = new WebBuidingService();
-				buidling = service.GetWebuidingByID(buidingID);
 			}
 			return View(buidling);
 		}
@@ -86,7 +115,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			}
 			else
 			{
-				webBuiding.WorkerID = Convert.ToInt32(SessionHelper.Get("UserID"));
+				webBuiding.WorkerID = Convert.ToInt32(SessionHelper.Get("PositionID"));
 				service.AddWebBuiding(webBuiding);
 			}
 
@@ -150,5 +179,6 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			service.AddBuidingTimeStages(timeStages);
 			return Json(new { RetCode = 1 });
 		}
-	}
+        #endregion
+    }
 }

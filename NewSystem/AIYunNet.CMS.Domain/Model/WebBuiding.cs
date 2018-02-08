@@ -137,6 +137,8 @@ namespace AIYunNet.CMS.Domain.Model
 
         [Column("UserID")]
         public int UserID { get; set; }
+        [Column("DemandID")]
+        public int DemandID { get; set; }
         [NotMapped]
         public string StageNowDesc { get; set; }
         public WebBuiding()
@@ -158,6 +160,7 @@ namespace AIYunNet.CMS.Domain.Model
             ResultID = 0;
             StageNow = 0;
             UserID = 0;
+            DemandID = 0;
         }
     }
 }

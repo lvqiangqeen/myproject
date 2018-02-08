@@ -60,7 +60,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                     else if (webWorkerService.IsHaveWorker(webuser.UserID) && (webuser.PositionCode == "WebWorkerLeader"|| webuser.PositionCode == "WebWorker"))
                     {
                         webWorker = webWorkerService.GetWebWorkerByUserID(webuser.UserID);
-                        SessionHelper.SetSession("PositionID", webpeople.PeopleID);
+                        SessionHelper.SetSession("PositionID", webWorker.WorkerID);
                     }
                     SessionHelper.SetSession("NickName", webuser.NickName);
                     return 200;
@@ -210,7 +210,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                 {
                     WebWorker WebWorker = webWorkerService.GetWebWorkerByUserID(Convert.ToInt32(Request["UserID"]));
                     worker.WorkerID = WebWorker.WorkerID;
-                    webWorkerService.UpdateWebWorkerFromCenter(WebWorker);
+                    webWorkerService.UpdateWebWorkerFromCenter(worker);
                 }
                 else
                 {

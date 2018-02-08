@@ -52,7 +52,7 @@
                         工长：<span>@Model.WorkerName</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
                         合同价：<span>@ViewBag.buiding.Price 元</span>&nbsp;&nbsp;&nbsp;&nbsp;装修面积：<span>@ViewBag.buiding.Space m²</span><br />
                         开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        @if (ViewBag.buiding.UserID != 0)
+                        @if (ViewBag.buiding.DemandID != 0)
                         {
                             @:监工：<strong>@ViewBag.buiding.superviseName</strong>
                         }<br>
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="ngz-jl-tit clear">
-                    @if (ViewBag.buiding.UserID != 0)
+                    @if (ViewBag.buiding.DemandID != 0)
                     {
                         int j = 0;
                         foreach (string item in stagelist)

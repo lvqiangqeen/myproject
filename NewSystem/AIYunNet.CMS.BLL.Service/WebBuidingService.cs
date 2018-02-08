@@ -52,6 +52,31 @@ namespace AIYunNet.CMS.BLL.Service
                 return buiding;
             }
         }
+        public List<WebBuiding> GetWebBuidingListByWorkerID(int WorkerID, bool isdemand)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                if (isdemand)
+                {
+                    return context.WebBuiding.Where(wb =>wb.FlagDelete == 0 && wb.WorkerID== WorkerID && wb.DemandID!=0).OrderByDescending(wb => wb.AddOn).ToList();
+                }
+                else
+                {
+                    return context.WebBuiding.Where(wb => wb.WorkerID == WorkerID && wb.FlagDelete == 0 && wb.DemandID == 0).OrderByDescending(wb => wb.AddOn).ToList();
+                }
+
+            }
+        }
+
+        public WebBuiding GetWebBuidingByDemandID(int DemandID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                return context.WebBuiding.FirstOrDefault(c => c.DemandID == DemandID);
+            }
+        }
+
+
 
         public List<WebBuiding> GetWebBuidingList(int workerID)
         {
@@ -105,6 +130,11 @@ namespace AIYunNet.CMS.BLL.Service
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 context.WebBuiding.Add(webBuiding);
+                DecDemand dec = context.DecDemand.Find(webBuiding.DemandID);
+                if (dec != null)
+                {
+                    dec.IsPlan = true;
+                }
                 context.SaveChanges();
                 return 1;
             }
