@@ -51,6 +51,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 		}
         #endregion
 
+        WebBuidingStagesService stageSer = new WebBuidingStagesService();
         #region 装修接单
         public ActionResult WorkerDemandList(int UserID)
         {
@@ -71,13 +72,9 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         public ActionResult BuidingStagesList()
 		{
             WebBuidingService service = new WebBuidingService();
-            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<WebBuiding> buidingList = service.GetWebBuidingList(UserID);
+            int Workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+            List<WebBuiding> buidingList = service.GetWebBuidingListByWorkerID(Workerid, true);
             return View(buidingList);
-   //         WebBuidingService service = new WebBuidingService();
-			//int workerID = Convert.ToInt32(SessionHelper.Get("UserID"));
-			//List<WebBuiding> buidingList = service.GetWebBuidingList(workerID);
-			//return View(buidingList);
 		}
 
 		[HttpGet]
@@ -130,28 +127,48 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			return Json(new { RetCode = 1 });
 		}
 
-		[HttpGet]
-		public ActionResult UpdateBuidingStageInfo(int buidingID)
+
+        [HttpGet]
+        public ActionResult UpdateBuidingStagesInfo(int buidingID, int StageID)
+        {          
+            WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
+            return View(stage);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
+        {
+            int ret = 0;
+            ret = stageSer.UpdateBuidingStagesInfo(buidingStage);
+            return Json(new { RetCode = 1 });
+        }
+
+        [HttpGet]
+		public ActionResult UpdateBuidingStageInfo(int buidingID,int StageID)
 		{
-			WebBuidingService service = new WebBuidingService();
-			WebBuiding buiding = service.GetWebuidingByID(buidingID);
-			string stageID = buiding.constructionstageID;
-			string stageText = buiding.constructionstage;
-			string[] stageIDArr = null;
-			string[] stageTextArr = null;
-			if (!string.IsNullOrWhiteSpace(stageID))
-			{
-				stageID = stageID.TrimEnd(',');
-				stageIDArr = stageID.Split(',');
-				stageText = stageText.TrimEnd(',');
-				stageTextArr = stageText.Split(',');
-			}
-			ViewBag.StagesIDs = stageIDArr;
-			ViewBag.StagesTexts = stageTextArr;
-			ViewBag.BuidingID = buidingID;
-			//ViewBag.WorkerType = "工长";
-			ViewBag.WorkerType = "工人";
-			return View();
+            WebBuidingService service = new WebBuidingService();
+            WebBuiding buiding = service.GetWebuidingByID(buidingID);
+            string stageID = buiding.constructionstageID;
+            string stageText = buiding.constructionstage;
+            string[] stageIDArr = null;
+            string[] stageTextArr = null;
+            if (!string.IsNullOrWhiteSpace(stageID))
+            {
+                stageID = stageID.TrimEnd(',');
+                stageIDArr = stageID.Split(',');
+                stageText = stageText.TrimEnd(',');
+                stageTextArr = stageText.Split(',');
+            }
+            ViewBag.StagesIDs = stageIDArr;
+            ViewBag.StagesTexts = stageTextArr;
+            ViewBag.BuidingID = buidingID;
+            //ViewBag.WorkerType = "工长";
+            ViewBag.WorkerType = "工人";
+            //WebBuidingStages stage= buidingSer.GetBuidingStageByBuidingIDAndStageID(buidingID, buidingID);
+
+
+
+            return View();
 		}
 
 		[HttpGet]

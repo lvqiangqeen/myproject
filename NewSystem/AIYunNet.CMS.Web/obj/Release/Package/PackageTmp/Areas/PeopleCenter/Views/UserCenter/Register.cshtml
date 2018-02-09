@@ -10,16 +10,23 @@
         <div class="lg-error-ts" id="errorcode" style="display:none;"><i class="fa fa-times-circle"></i><span>验证码不正确</span></div>
         <div class="lg-error-ts" id="errorhave" style="display:none;"><i class="fa fa-times-circle"></i><span>该手机号已被注册</span></div>
         <div class="lg-error-ts" id="errornone" style="display:none;"><i class="fa fa-times-circle"></i><span>请输入用户名</span></div>
+        <div class="lg-error-ts" id="errorposition" style="display:none;"><i class="fa fa-times-circle"></i><span>请选择您的身份</span></div>
+        <div class="lg-error-ts" id="errorall" style="display:none;"><i class="fa fa-times-circle"></i><span>请补全信息</span></div>
         <form id="login-form" action="https://account.vsochina.com/v2/login" method="post">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
                 <input type="text" name="username" placeholder="请输入11位手机号" class="form-control">
             </div>
-            @*<div class="input-group" style="width:181px">
-                <span class="input-group-addon"><i class="fa fa-get-pocket"></i></span>
-                <input type="text" name="codepassword" maxlength="20" placeholder="请输入右侧验证码" class="form-control" style="width:100px;">
-                <span class="imgyzm"><img src="images/reg-yzm.jpg" /></span>
-            </div>*@
+            <div class="input-group" style="width:181px">
+                <select name="PositionCode" class="u-ipt-txt" style="width:180px;height:30px;border: 0px solid #ddd;" id="PositionCode">
+                    <option value="">请选择您的身份</option>
+                    <option value="WebUser">装修业主（普通会员）</option>
+                    <option value="WebPeople">设计师</option>
+                    <option value="WebWorkerLeader">装修工长</option>
+                    <option value="WebWorker">装修工人</option>
+                </select>
+                <span class="imgyzm"><a href="javascript:;" style="color: red;" title="身份确定后无法修改,请您慎重选择！">身份确定后无法修改</a></span>
+            </div>
             <div class="input-group" style="width:181px">
                 <span class="input-group-addon"><i class="fa fa-get-pocket"></i></span>
                 <input type="text" name="telpassword" maxlength="20" placeholder="请输入短信验证码" class="form-control" style="width:100px;">
@@ -43,13 +50,14 @@
     $("input[name=username]").focus(function () {
         $(".lg-error-ts").attr("style", "display:none;");
     });
-
+    $("select[name=PositionCode]").focus(function () {
+        $(".lg-error-ts").attr("style", "display:none;");
+    });
     $("input[name=username]").blur(function () {
         var userAccount = $("input[name=username]").val();
         if (userAccount == "" || userAccount == null) {
             $("#errornone").attr("style", "");
-        } else
-        {
+        } else {
             $.ajax({
                 async: false,
                 type: "post",
@@ -64,7 +72,7 @@
                         $("#errorhave").attr("style", "");
                     }
                     else {
-                        
+
                     }
                 },
                 error: function (xhr, type) {
@@ -73,34 +81,50 @@
             });
         }
     });
+    $("select[name=PositionCode]").blur(function () {
+        var position = $("#PositionCode option:selected").val();
+        if (position == "")
+        {
+            $("#errorposition").attr("style", "");
+        }
 
+    });
 
-    $(".btn-login").click(function ()
-    {
+    $(".btn-login").click(function () {
         var userAccount = $("input[name=username]").val();
         var userPassword = $("input[name=password]").val();
-        $.ajax({
-            async: false,
-            type: "post",
-            url: "/PeopleCenter/UserCenter/Register",
-            data: {
+        var PositionCode = $("#PositionCode option:selected").val();
+        var PositionType = 0;
+        if (userAccount == "" || userPassword == "" || PositionCode == "") {
+            $("#errorall").attr("style", "");
+        } else
+        {
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/PeopleCenter/UserCenter/Register",
+                data: {
 
-                userAccount: userAccount,
-                userPassword: userPassword
-                
-            },
-            success: function (data) {
-                if (data == 1) {
-                    alert("注册成功请登录！")
-                    window.location.href = "/PeopleCenter/UserCenter/LoginOn";
+                    userAccount: userAccount,
+                    userPassword: userPassword,
+                    PositionCode: PositionCode,
+                    PositionType: PositionType
+
+                },
+                success: function (data) {
+                    if (data == 1) {
+                        alert("注册成功请登录！")
+                        window.location.href = "/PeopleCenter/UserCenter/LoginOn";
+                    }
+                    else {
+                        $("#erroruser").attr("style", "");
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!2');
                 }
-                else {
-                    $("#erroruser").attr("style", "");
-                }
-            },
-            error: function (xhr, type) {
-                alert('Ajax error!2');
-            }
-        });
+            });
+        }
+        
     });
 </script>

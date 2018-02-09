@@ -192,7 +192,7 @@
                         var datajson = eval('(' + data + ')');
                         var html = "";
                         $.each(datajson.list, function (i, item) {
-                            if (item.UserID == 0) {
+                            if (item.DemandID == 0) {
                                 html += '<dl class="ngz-case">'
                                 + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
                                 + '<dd>'

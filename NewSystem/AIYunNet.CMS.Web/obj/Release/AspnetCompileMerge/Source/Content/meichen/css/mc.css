@@ -1,7 +1,7 @@
 ﻿@charset "utf-8";
 /* CSS Document */
 /* 首页 */
-.wrap{width:1180px; margin:0 auto; position:relative;}
+/*.wrap{width:1180px; margin:0 auto; position:relative;}*/
 /* top */
 .header{width:100%; margin:0;}
 .topper{height:40px; background:#423e33;  position:relative; z-index:2;}

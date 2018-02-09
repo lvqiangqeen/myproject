@@ -47,11 +47,17 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("CompleteTime")]
         public string CompleteTime { get; set; }
-
+        /// <summary>
+        ///是否完工
+        /// </summary>
+        [Column("IsComplete")]
+        public bool IsComplete { get; set; }
         public WebBuidingStages()
         {
             WebBuidingID = 0;
             StageID = 0;
+            IsComplete = false;
+            StageContent = "";
         }
     }
 }

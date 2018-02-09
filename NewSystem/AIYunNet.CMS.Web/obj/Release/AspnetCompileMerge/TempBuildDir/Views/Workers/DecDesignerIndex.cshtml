@@ -772,7 +772,7 @@
                     }
                 },
                 error: function (xhr, type) {
-                    alert('Ajax error!');
+                    $(".opus_main").empty();
                 }
             });
 
@@ -841,7 +841,7 @@
                         }
                     },
                     error: function (xhr, type) {
-                        alert('Ajax error!');
+                        _self.pageList = [];
                     }
                 });
 

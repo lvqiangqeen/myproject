@@ -16,7 +16,7 @@
 .loginbox .tit a:hover{color:#0CF;}
 .loginbox .input-group:before,.loginbox .input-group:after{clear:both; display:block; content:"";}
 .loginbox .input-group .imgyzm{position:absolute; left:200px; top:0; height:36px;}
-.loginbox .input-group .imgyzm a{display:block; background:#ededed; border-radius:4px; height:34px; width:100px; text-align:center; line-height:34px; border:1px solid #ccc; color:#888; transition:all .3s ease-in-out;}
+.loginbox .input-group .imgyzm a{display:block; background:#ededed; border-radius:4px; height:34px; width:117px; text-align:center; line-height:34px; border:1px solid #ccc; color:#888; transition:all .3s ease-in-out;}
 .loginbox .input-group .imgyzm a:hover{background:#ccc;}
 .loginbox .input-group{position: relative; height:36px; line-height:36px; border-radius: 4px; margin-bottom:10px; border:1px solid #ccc; transition:all .3s ease-in-out; background:#fff;}
 .loginbox .input-group.active{box-shadow:0 0 8px #ccc;}

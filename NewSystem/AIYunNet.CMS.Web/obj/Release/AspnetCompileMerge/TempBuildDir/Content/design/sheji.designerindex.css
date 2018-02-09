@@ -53,7 +53,7 @@ body,html{position: relative;}
 .designer_nav .consult_box .consult_tlt .expense{font-size: 14px;font-family: "宋体";}
 .consult_box .consult_tlt .money_icon,.consult_box .consult_tlt .price{font-size: 24px;font-family: "微软雅黑";height: 40px;line-height: 40px;}
 .designer_nav .consult_box .consult_tlt .money_icon{margin-left: -2px;float: left;}
-.designer_nav .consult_box .consult_tlt .price{max-width: 150px;overflow: hidden;word-break:break-all;float:left;*max-width: 134px;}
+.designer_nav .consult_box .consult_tlt .price{max-width: 178px;overflow: hidden;word-break:break-all;float:left;*max-width: 134px;}
 .designer_nav .consult_box .consult_tlt .square{font-size: 18px;font-family: "Arial";float: right;height: 45px;line-height: 45px;}
 .designer_nav .consult_box .consult_con {padding: 20px 19px;border: solid 1px #e3e3e3;border-top: none; background: #fff;}
 .designer_nav .consult_box .consult_con .consult,.designer_nav .consult_box .consult_con .c_phone{width: 200px;height: 40px;line-height: 40px;font-size: 16px;display: block;color: #fff;}
