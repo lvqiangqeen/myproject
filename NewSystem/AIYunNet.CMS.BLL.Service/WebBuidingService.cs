@@ -72,7 +72,7 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                return context.WebBuiding.FirstOrDefault(c => c.DemandID == DemandID);
+                return context.WebBuiding.FirstOrDefault(c => c.DemandID == DemandID && c.FlagDelete==0);
             }
         }
 
@@ -124,7 +124,7 @@ namespace AIYunNet.CMS.BLL.Service
                 }
             }
         }
-
+        //工长加入装修案例
         public int AddWebBuiding(WebBuiding webBuiding)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -134,6 +134,23 @@ namespace AIYunNet.CMS.BLL.Service
                 if (dec != null)
                 {
                     dec.IsPlan = true;
+                }
+                context.SaveChanges();
+                WebBuiding org = GetWebBuidingByDemandID(webBuiding.DemandID);
+                List<string> listid = webBuiding.constructionstageID.Split(',').Where(c => c != "").ToList();
+                List<string> listStage = webBuiding.constructionstage.Split(',').Where(c => c != "").ToList();
+                int i = 0;
+                foreach (string id in listid)
+                {
+                    WebBuidingStages stage = new WebBuidingStages
+                    {
+                        WebBuidingID = org.BuidingID,
+                        StageID=Convert.ToInt32(id),
+                        StageName= listStage[i],
+                        sortID=i
+                    };
+                    context.WebBuidingStages.Add(stage);
+                    i++;
                 }
                 context.SaveChanges();
                 return 1;

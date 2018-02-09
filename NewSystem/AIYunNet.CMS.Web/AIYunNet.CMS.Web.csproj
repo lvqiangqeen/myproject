@@ -3866,6 +3866,7 @@
     <Content Include="Areas\PeopleCenter\Views\UserCenter\_WorkerView.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerDemandList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerBuidingList.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStagesInfo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
