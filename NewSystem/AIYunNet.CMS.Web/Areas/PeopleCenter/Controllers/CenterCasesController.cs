@@ -197,5 +197,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			return Json(new { RetCode = 1 });
 		}
         #endregion
+
+
     }
 }

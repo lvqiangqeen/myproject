@@ -45,9 +45,9 @@ namespace AIYunNet.CMS.Web.Handler
             int recordcount = 0;
             string SelectParameters = string.Format("[id],[ownername],[ownertel],[ProvinceID],[ProvinceName],[CityID],[CityName],[workTime],[WorkTimeName]"
                 + ",[buidingSpace],[buidingtype],[buidingname],[PublishuserID],[GetUserID],[GetUserType],[AddOn],[EndOn],[IsEnd],[EditOn],[OneSentence]"
-                + ",[DeleteOn],[IsDelete],[IsVerrify],[Demandneed],[Info],[DemandType],[DemandTypeName],[DemandState],[PageViewCount],[bidCount]");
+                + ",[DeleteOn],[IsDelete],[IsVerrify],[Demandneed],[Info],[DemandType],[DemandTypeName],[DemandState],[PageViewCount],[bidCount],[IsPublish]");
 
-            SortParameters = string.Format(" IsDelete=0 and IsVerrify=1 {0} {1} ",
+            SortParameters = string.Format(" IsDelete=0 and IsVerrify=1 AND IsPublish=1 {0} {1} ",
                 "and CityID='" + mkjcitycode + "'",
                  DemandType == "0" || string.IsNullOrEmpty(DemandType) ? "" : "and DemandType=" + DemandType);
 

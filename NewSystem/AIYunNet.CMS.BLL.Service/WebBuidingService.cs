@@ -108,8 +108,42 @@ namespace AIYunNet.CMS.BLL.Service
                     old.BuidingInfo = webBuiding.BuidingInfo;
                     old.Price = webBuiding.Price;
                     old.Space = webBuiding.Space;
-                    old.constructionstageID = webBuiding.constructionstageID;
-                    old.constructionstage = webBuiding.constructionstage;
+                    if (old.constructionstageID != webBuiding.constructionstageID)
+                    {
+                        old.constructionstageID = webBuiding.constructionstageID;
+                        old.constructionstage = webBuiding.constructionstage;
+                        old.StageNow = 0;
+                        //删除
+                        List<WebBuidingStages> liststage = context.WebBuidingStages.Where(c => c.WebBuidingID == webBuiding.BuidingID).ToList();
+                        if (liststage != null)
+                        {
+                            foreach (WebBuidingStages item in liststage)
+                            {
+                                context.WebBuidingStages.Remove(item);
+                            }
+                        }
+                        //添加
+                        if (webBuiding.constructionstageID != null)
+                        {
+                            WebBuiding org = GetWebBuidingByDemandID(webBuiding.DemandID);
+                            List<string> listid = webBuiding.constructionstageID.Split(',').Where(c => c != "").ToList();
+                            List<string> listStage = webBuiding.constructionstage.Split(',').Where(c => c != "").ToList();
+                            int i = 0;
+                            foreach (string id in listid)
+                            {
+                                WebBuidingStages stage = new WebBuidingStages
+                                {
+                                    WebBuidingID = org.BuidingID,
+                                    StageID = Convert.ToInt32(id),
+                                    StageName = listStage[i],
+                                    sortID = i
+                                };
+                                context.WebBuidingStages.Add(stage);
+                                i++;
+                            }
+                            context.SaveChanges();
+                        }
+                    }
                     old.ShowOrder = webBuiding.ShowOrder;
                     old.IsHot = webBuiding.IsHot;
                     old.IsTop = webBuiding.IsTop;
@@ -136,23 +170,27 @@ namespace AIYunNet.CMS.BLL.Service
                     dec.IsPlan = true;
                 }
                 context.SaveChanges();
-                WebBuiding org = GetWebBuidingByDemandID(webBuiding.DemandID);
-                List<string> listid = webBuiding.constructionstageID.Split(',').Where(c => c != "").ToList();
-                List<string> listStage = webBuiding.constructionstage.Split(',').Where(c => c != "").ToList();
-                int i = 0;
-                foreach (string id in listid)
+                if (webBuiding.constructionstageID!=null)
                 {
-                    WebBuidingStages stage = new WebBuidingStages
+                    WebBuiding org = GetWebBuidingByDemandID(webBuiding.DemandID);
+                    List<string> listid = webBuiding.constructionstageID.Split(',').Where(c => c != "").ToList();
+                    List<string> listStage = webBuiding.constructionstage.Split(',').Where(c => c != "").ToList();
+                    int i = 0;
+                    foreach (string id in listid)
                     {
-                        WebBuidingID = org.BuidingID,
-                        StageID=Convert.ToInt32(id),
-                        StageName= listStage[i],
-                        sortID=i
-                    };
-                    context.WebBuidingStages.Add(stage);
-                    i++;
+                        WebBuidingStages stage = new WebBuidingStages
+                        {
+                            WebBuidingID = org.BuidingID,
+                            StageID = Convert.ToInt32(id),
+                            StageName = listStage[i],
+                            sortID = i
+                        };
+                        context.WebBuidingStages.Add(stage);
+                        i++;
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
+
                 return 1;
             }
         }

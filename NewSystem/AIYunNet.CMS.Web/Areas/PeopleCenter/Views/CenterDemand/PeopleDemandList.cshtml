@@ -1,0 +1,173 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.Service
+@model List<DecDemand>
+@{
+    ViewBag.Title = "PeopleDemandList";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    WebCommonService comSer = new WebCommonService();
+}
+
+<style>
+    #stageContent input, select {
+        border: solid 1px #808080;
+    }
+
+    #stageContent #addStageBtn {
+        background: #ff6900;
+        width: 140px;
+        border: solid 1px #ff6900;
+    }
+</style>
+<div class="centers_mr" id="stageContent">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active" style="width: 100px;">我发布的需求</a>
+        </div>
+        <div class="action_area" style="padding:10px;">
+            <a id="addStageBtn" class="btn btn-primary" href="/PeopleCenter/CenterDemand/updateAndAddDemand?id=0">发布我的需求</a>
+        </div>
+        <table class="table table-striped" id="stageCaseTable">
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>小区名称</th>
+                    <th>面积</th>
+                    <th>预留电话</th>
+                    <th>发布时间</th>
+                    <th width="20%">需求状态</th>
+                    <th>装修流程</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (DecDemand demand in Model)
+                    {
+                        <tr>
+                            <td>@demand.DemandTypeName</td>
+                            <td>
+                                @demand.buidingname
+                            </td>
+                            <td>
+                                @demand.buidingSpace m²
+                            </td>
+                            <td>@demand.ownertel</td>
+                            <td>@demand.AddOn</td>
+                            @if (demand.IsVerrify == 0)
+                            {
+                                <td>需求还未审核请耐心等待</td>
+                            }
+                            else if (demand.IsVerrify == -1)
+                            {
+                                <td>审核未通过请修改您的需求</td>
+                            }
+                            else
+                            {
+                                if (demand.IsOver)
+                                {
+                                    <td>工期已结束</td>
+                                }
+                                else
+                                {
+                                    if (demand.GetUserID == 0)
+                                    {
+                                        <td>需求还未被接单</td>
+                                    }
+                                    else if (demand.GetUserID != 0 && demand.IsPlan == false)
+                                    {
+                                        <td>已接单还未发布装修计划</td>
+                                    }
+                                    else if (demand.IsPlan == true)
+                                    {
+                                        <td>已经发布装修计划</td>
+                                    }
+                                }
+
+                            }
+
+                            @if (demand.IsPlan)
+                            {
+                                <td>查看流程</td>
+                            }
+                            else
+                            {
+                                <td>没有发布流程</td>
+                            }
+                            
+                            <td>
+                                <a href="javascript:editDemand(@demand.id)">修改</a>
+                                <a style="display:block;" href="javascript:deleteBuiding(@demand.id)">删除</a>
+                            </td>
+                        </tr>
+                                        }
+
+                                    }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+		$(document).ready(function ()
+		{
+		    sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+			$('#stageCaseTable').DataTable({
+				"language": {
+					"emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+					"info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+					"infoEmpty": "没有记录",
+					"infoFiltered": "",
+					"lengthMenu": "显示 _MENU_ 条记录",
+					"search": "搜索:",
+					"zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": "前一页",
+						"sNext": "后一页",
+						"sLast": "尾页"
+					},
+				},
+				"paging": true,
+				"lengthChange": true,
+				"searching": true,
+				"ordering": false,
+				"info": true,
+				"autoWidth": false
+			});
+
+		});
+
+        function editDemand(id)
+		{
+            var url = "/PeopleCenter/CenterDemand/updateAndAddDemand?id=" + id;
+			window.location.href = url;
+		}
+
+		function deleteBuiding(buidingID)
+		{
+			var c = confirm("确定要删除这条记录吗？");
+			if (c != true)
+			{
+				return;
+			}
+
+			$.ajax({
+				type: "post",
+				url: "/PeopleCenter/CenterCases/DeleteWebBuiding",
+				data: { buidingID: buidingID },
+				success: function (data)
+				{
+					window.location.href = window.location.href;
+				}
+			});
+		}
+
+		function updateStagesInfo(buidingID)
+		{
+			var url = "/PeopleCenter/CenterCases/UpdateBuidingStageInfo?buidingID=" + buidingID + "&rnd=" + Math.random();
+			window.location.href = url;
+		}
+    </script>
+}
+

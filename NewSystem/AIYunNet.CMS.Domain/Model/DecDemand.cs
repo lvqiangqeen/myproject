@@ -168,6 +168,16 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsPlan")]
         public bool IsPlan { get; set; }
+        /// <summary>
+        /// 是否完工
+        /// </summary>
+        [Column("IsOver")]
+        public bool IsOver { get; set; }
+        /// <summary>
+        /// 是否发布到需求大厅
+        /// </summary>
+        [Column("IsPublish")]
+        public bool IsPublish { get; set; }
         public DecDemand()
         {
             ProvinceID = 0;
@@ -188,6 +198,8 @@ namespace AIYunNet.CMS.Domain.Model
             bidCount = 0;
             IsEnd = false;
             IsPlan = false;
+            IsOver = false;
+            IsPublish = false;
         }
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Areas\MustIndex\Controllers\MustController.cs" />
     <Compile Include="Areas\MustIndex\MustIndexAreaRegistration.cs" />
     <Compile Include="Areas\PeopleCenter\Controllers\CenterCasesController.cs" />
+    <Compile Include="Areas\PeopleCenter\Controllers\CenterDemandController.cs" />
     <Compile Include="Areas\PeopleCenter\Controllers\CertificationController.cs" />
     <Compile Include="Areas\PeopleCenter\Controllers\UploadPicController.cs" />
     <Compile Include="Areas\PeopleCenter\Controllers\UserCenterController.cs" />
@@ -3867,6 +3868,8 @@
     <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerDemandList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\WorkerBuidingList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStagesInfo.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterDemand\PeopleDemandList.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterDemand\updateAndAddDemand.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
