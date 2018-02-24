@@ -19,6 +19,12 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         WebPeopleService webpeopleservice = new WebPeopleService();
         WebWorkerService webWorkerService = new WebWorkerService();
         t_AreaService areaService = new t_AreaService();
+
+        [HttpGet]
+        public ActionResult LoinOnButton()
+        {
+            return View();
+        }
         // GET: PeopleCenter/UserCenter
         [HttpGet]
         public ActionResult LoginOn()

@@ -16,6 +16,9 @@
     IEnumerable<SelectListItem> provinceList = null;
     List<t_Province> common = areaService.GetProvinceList();
     provinceList = common.Select(com => new SelectListItem { Value = com.provinceID.ToString(), Text = com.province });
+
+    string userid = string.IsNullOrEmpty(Request["UserID"])?"0": Request["UserID"];
+    string peoplename = Request["peoplename"];
 }
 
 <style>
@@ -54,7 +57,14 @@
         <div class="upload-left">
             <form id="stageCaseForm">
                 @Html.HiddenFor(m => m.id)
-                <div class="req-push-title"><p class="req-name"><i></i><span>填写需求信息</span></p></div>
+                <input type="hidden" value="@userid" id="userid"/>
+                
+                <div class="req-push-title"><p class="req-name"><i></i><span>填写需求信息</span>
+                    @if (userid != "0")
+                    {
+                        <span>(发送给 @peoplename)</span>
+                    }
+                    </p></div>
                 <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称</span></div>
                     <div class="tab-r">
@@ -82,6 +92,13 @@
                         var provinceid = $("#ProvinceID").val();
                         var ProvinceName = "";
                         getcitylist(provinceid);
+                        if ("@Model.CityID" != "")
+                        {
+                            $("#cityid").val("@Model.CityID");
+                        }
+
+
+
                         $("#ProvinceID").change(function () {
                             provinceid = $("#ProvinceID").val();
                             ProvinceName = $("#ProvinceID").find("option:selected").text();
@@ -133,7 +150,7 @@
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label">您的联系方式：</span></div>
+                    <div class="tab-l"><span class="form-box-label">您的联系方式</span></div>
                     <div class="tab-r">
                         @Html.TextBoxFor(m => m.ownertel, new { @class = "form-ipt-txt", style = "width:20%" })
                     </div>
@@ -151,7 +168,7 @@
                         <span class="form-box-label">需求说明</span>
                     </div>
                     <div class="tab-r">
-                        @Html.TextAreaFor(m => m.Info, new { row = "4", col = "10" })
+                        @Html.TextAreaFor(m => m.Info, new { row = "6", col = "10" , style = "width:85%;height:150px;" })
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -160,9 +177,9 @@
                     <div class="tab-l">
                         <span class="form-box-label">设置</span>
                     </div>
-                    <div class="tab-r set_div">
-                        <span class="set_l">是否同时发布到需求大厅</span>
+                    <div class="tab-r set_div">                      
                         @Html.CheckBoxFor(m => m.IsPublish, new { style = "width:20px;height:20px;" })
+                        <span class="set_l">是否同时发布到需求大厅</span>
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -183,47 +200,51 @@
             $("#btnSubmit").click(function () {
                 var id = $("input[name=id]").val();
                 var buidingname = $("#buidingname").val();
-                var BuidingTitle = $("#BuidingTitle").val();
-                if (!BuidingTitle) {
+                //var BuidingTitle = $("#BuidingTitle").val();
+                if (!buidingname) {
                     alert("标题不能为空");
-                    $("#BuidingTitle").focus();
+                    $("#buidingname").focus();
                     return;
                 }
-                var BuidingID = $("#BuidingID").val();
-                var BuidingBrief = $("#BuidingBrief").val();
-                var BuidingInfo = $("#BuidingInfo").val();
-                var Price = $("#Price").val();
-                var Space = $("#Space").val();
-                var selectedStagesCode = $("#selectedStagesCode").val();
-                var selectedStagesText = $("#selectedStagesText").val();
-                var ShowOrder = $("#ShowOrder").val();
-                var IsHot = $("#IsHot").prop("checked") ? true : false;
-                var IsTop = $("#IsTop").prop("checked") ? true : false;
-                var BuidingImage = $("#ImageUrl").val();
-                var thumbnailImage = $("#thumbnailImage").val();
-                var StartTime = $("#datetimepicker").val();
+                var DemandType = $("#DemandType").val();
+                var DemandTypeName = $("#DemandType").find("option:selected").text();
+                var ProvinceID = $("#ProvinceID").val();
+                var ProvinceName = $("#ProvinceID").find("option:selected").text();
+                var CityID = $("#cityid").val();
+                var CityName = $("#cityid").find("option:selected").text();
+                var ownername = $("#ownername").val();
+                var ownertel = $("#ownertel").val();
+                var buidingSpace = $("#buidingSpace").val();
+                var OneSentence = $("#OneSentence").val();
+                var Info = $("#Info").val();
+                var IsPublish = $("#IsPublish").prop("checked") ? true : false;
+                var GetUserID = $("#userid").val();
+                var GetUserType = "WebUser";
                 $.ajax({
                     type: "post",
-                    url: "/PeopleCenter/CenterCases/AddOrEditBuidingStages",
+                    url: "/PeopleCenter/CenterDemand/updateAndAddDemand",
                     data: {
-                        BuidingID: BuidingID,
-                        BuidingTitle: BuidingTitle,
-                        BuidingBrief: BuidingBrief,
-                        BuidingInfo: BuidingInfo,
-                        Price: Price,
-                        Space: Space,
-                        ConstructionstageID: selectedStagesCode,
-                        Constructionstage: selectedStagesText,
-                        ShowOrder: ShowOrder,
-                        IsHot: IsHot,
-                        IsTop: IsTop,
-                        BuidingImage: BuidingImage,
-                        thumbnailImage: thumbnailImage,
-                        StartTime: StartTime,
+                        id: id,
+                        buidingname: buidingname,
+                        DemandType: DemandType,
+                        DemandTypeName: DemandTypeName,
+                        ProvinceID: ProvinceID,
+                        GetUserType:GetUserType,
+                        GetUserID:GetUserID,
+                        ProvinceName: ProvinceName,
+                        CityID: CityID,
+                        CityName: CityName,
+                        ownername: ownername,
+                        ownertel: ownertel,
+                        buidingSpace: buidingSpace,
+                        OneSentence: OneSentence,
+                        Info: Info,
+                        IsPublish: IsPublish,
+                        PublishuserID: "@SessionHelper.Get("UserID")",
                     },
                     success: function (data) {
                         if (data.RetCode == 1) {
-                            if (BuidingID > 0) {
+                            if (id > 0) {
                                 alert("修改成功！");
                             } else {
                                 alert("添加成功！");

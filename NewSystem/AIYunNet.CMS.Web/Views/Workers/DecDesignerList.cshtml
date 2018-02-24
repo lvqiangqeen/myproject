@@ -175,7 +175,8 @@
                             <div class="right">
                                 <p class="user_price"><span>{{item.PriceName}}</span></p>
                                 <div class="apply_box">
-                                    <a href="javascript:;" id="zsj_yyzx" data-id="554997" class="reservation">预约咨询</a>
+                                    <a href="javascript:;" id="zsj_yyzx" class="reservation" v-bind:data-name="item.PeopleName" v-bind:data-UserID="item.UserID">找TA设计</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -330,92 +331,114 @@
             </div>
         </div>
         <!-- 右栏 END -->
-
+        
     </div>
 </div>
 <script type="text/javascript">
-        //点击分类改变样式
-        $(".list > a").click(function () {
-            $(this).addClass("onselect").prevAll("a").removeClass();
-            $(this).nextAll("a").removeClass();
-            noticeVue.GetPageList(1);
-        });
+    //点击分类改变样式
+    $(".list > a").click(function () {
+        $(this).addClass("onselect").prevAll("a").removeClass();
+        $(this).nextAll("a").removeClass();
+        noticeVue.GetPageList(1);
+    });
+    var noticeVue = new Vue({
+        el: '.sjs_list',
+        data: {
+            pageList: []
+        },
+        mounted: function () {
+            this.GetPageList(1);
+        },
+        methods: {
+            //分页查询
+            GetPageList: function (pageIndex) {
+                var _self = this;
+                var PageSize = 15;
+                var AreasID = $("#AreasID > .onselect > input").val();
+                var goodatid = $("#goodatlist > .onselect > input").val();
+                var PriceID = $("#pricelist > .onselect > input").val();
+                var SortOrder = $("#SortOrder").val();
+                //设计师分页Ajax
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "../Handler/GetPageListAjax.ashx",
+                    data: {
+                        mkjcitycode: $("#mkjcitycode").val(),
+                        pageIndex: pageIndex,
+                        PageSize: PageSize,
+                        goodatid: goodatid,
+                        AreasID: AreasID,
+                        PriceID: PriceID,
+                        SortOrder: SortOrder,
+                        methodname: "GetDecDesignerList"
+                    },
+                    success: function (data) {
+                        if (data) {
+                            var datajson = eval('(' + data + ')');
+                            _self.pageList = datajson.list;
+                            if (_self.pageList != null) {
+                                destotal = datajson.recordcount;
+                                //列出页码,jq分页控件
+                                $('.M-box1').pagination({
+                                    totalData: datajson.recordcount,
+                                    showData: PageSize,
+                                    coping: true,
+                                    current: pageIndex,
+                                    callback: _self.pageselectCallback
+                                });
+                                Vue.nextTick(function () {
+                                    //页面层
+                                    $(".reservation").click(function () {
+                                        var peoplename = $(this).attr("data-name");
+                                        var userid = $(this).attr("data-userid");
+                                        if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")"!=null) {
+                                            window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+                                        } else {
+                                            layer.open({
+                                                type: 2,
+                                                scrollbar: false,
+                                                title: '登陆',
+                                                shadeClose: true,
+                                                shade: 0.8,
+                                                area: ['25%', '55%'],
+                                                content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                                                end: function () {
+                                                    location.reload();
+                                                }
 
-        var noticeVue = new Vue({
-            el: '.sjs_list',
-            data: {
-                pageList: []
-            },
-            mounted: function () {
-                this.GetPageList(1);
-            },
-            methods: {
-                //分页查询
-                GetPageList: function (pageIndex) {
-                    var _self = this;
-                    var PageSize = 15;
-                    var AreasID = $("#AreasID > .onselect > input").val();
-                    var goodatid = $("#goodatlist > .onselect > input").val();
-                    var PriceID = $("#pricelist > .onselect > input").val();
-                    var SortOrder = $("#SortOrder").val();
-                    //设计师分页Ajax
-                    $.ajax({
-                        async: false,
-                        type: "post",
-                        url: "../Handler/GetPageListAjax.ashx",
-                        data: {
-                            mkjcitycode: $("#mkjcitycode").val(),
-                            pageIndex: pageIndex,
-                            PageSize: PageSize,
-                            goodatid: goodatid,
-                            AreasID:AreasID,
-                            PriceID:PriceID,
-                            SortOrder:SortOrder,
-                            methodname: "GetDecDesignerList"
-                        },
-                        success: function (data) {
-                            if (data) {
-                                var datajson = eval('(' + data + ')');
-                                _self.pageList = datajson.list;
-                                if (_self.pageList != null) {
-                                    destotal = datajson.recordcount;
-                                    //列出页码,jq分页控件
-                                    $('.M-box1').pagination({
-                                        totalData: datajson.recordcount,
-                                        showData: PageSize,
-                                        coping: true,
-                                        current: pageIndex,
-                                        callback: _self.pageselectCallback
-                                    });
-                                    Vue.nextTick(function () {
+                                            });
+                                        }
 
-                                    });
-                                } else {
-                                    Vue.nextTick(function () {
+                                    })
 
-                                    });
-                                }
-
+                                });
                             } else {
-                                _self.pageList = [];
+                                Vue.nextTick(function () {
+
+                                });
                             }
-                        },
-                        error: function (xhr, type) {
+
+                        } else {
                             _self.pageList = [];
                         }
-                    });
+                    },
+                    error: function (xhr, type) {
+                        _self.pageList = [];
+                    }
+                });
 
-                },
-                //分页回调函数
-                pageselectCallback: function (pageIndex) {
-                    var _self = this;
-                    //获取当前页码
-                    _self.GetPageList(pageIndex.getCurrent());
-                }
-
-
+            },
+            //分页回调函数
+            pageselectCallback: function (pageIndex) {
+                var _self = this;
+                //获取当前页码
+                _self.GetPageList(pageIndex.getCurrent());
             }
-        });
+
+
+        }
+    });
 
 
 </script>

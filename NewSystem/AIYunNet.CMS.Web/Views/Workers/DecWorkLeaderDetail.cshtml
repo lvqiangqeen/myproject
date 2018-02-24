@@ -12,13 +12,14 @@
 <script src="~/Content/design/js/jquery.paginationNo.js"></script>
 <style>
     .page {
-    margin: 42px 0 20px;
-    height: 18px;
-    margin-top: 16px;
-}
+        margin: 42px 0 20px;
+        height: 18px;
+        margin-top: 16px;
+    }
+
     .buiding {
-     margin-bottom: 0px;
-    white-space: normal;
+        margin-bottom: 0px;
+        white-space: normal;
     }
 </style>
 <div class="container">
@@ -42,7 +43,7 @@
         <div class="gz-layout clear" style="background:#fff;border: 1px solid #d6d6d6;">
             <div class="gz-250">
                 <div class="ngz-gzphoto"><img src="@AppSettingsHelper.ImgUrl@Model.WorkerImage"></div>
-                <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-token="hnqi3IR3pa5_fHGrs3aslQ" data-foremanid="6689" data-foremanname="@Model.WorkerName">预约我免费报价</a>
+                <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-token="hnqi3IR3pa5_fHGrs3aslQ" data-foremanid="6689" data-foremanname="@Model.WorkerName">找TA装修</a>
                 <i class="ngz-call">@Model.WorkerPhone</i>
             </div>
             <div class="gz-716">
@@ -104,7 +105,7 @@
                 </div>
             </div>
             <div class="gz-716">
-                <div class="ngz-border clear" >
+                <div class="ngz-border clear">
                     <div class="ngz-tit"><h2>我的最新订单</h2><a href="/foreman-6689/tender">更多&gt;&gt;</a> </div>
                     <dl class="ngz-new-dd">
                         <dt style="width: 80px;">业主</dt>
@@ -131,7 +132,7 @@
                         <dd style="width: 90px;">52㎡</dd>
                         <dd style="width: 100px;">1室0厅0卫</dd>
                         <dd style="width: 120px;">2-3万</dd>
-                        <!--<dd style="width: 80px;">2017-10-25</dd>-->                
+                        <!--<dd style="width: 80px;">2017-10-25</dd>-->
                         <!--循环区域-->
 
                     </dl>
@@ -142,25 +143,25 @@
                         <div class="ngz-tit"><h2>工地案例</h2></div>
                         <!--工地案例循环部分开始-->
                         @*<dl class="ngz-case">
-                            <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
-                            <dd>
-                                <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
-                                <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
-                               
-                                <ul class="c-jd clear">
-                                    <li><i></i>水电阶段</li>
-                                    <li><i></i>泥木阶段</li>
-                                    <li><i></i>油漆阶段</li>
-                                    <li class="fns"><i></i>完美竣工</li>
-                                </ul>
-                                <div class="btn-w">
-                                    <a href="/foreman-6689/sites/12570" class="btn1">查看工地详情</a>
-                                    <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="物美超市底商">申请参观工地</a>
-                                    <span class="btn3">已有<em>81</em>人查看</span>
-                                </div>
-                            </dd>
-                        </dl>*@
-                        
+                                <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
+                                <dd>
+                                    <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
+                                    <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
+
+                                    <ul class="c-jd clear">
+                                        <li><i></i>水电阶段</li>
+                                        <li><i></i>泥木阶段</li>
+                                        <li><i></i>油漆阶段</li>
+                                        <li class="fns"><i></i>完美竣工</li>
+                                    </ul>
+                                    <div class="btn-w">
+                                        <a href="/foreman-6689/sites/12570" class="btn1">查看工地详情</a>
+                                        <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="物美超市底商">申请参观工地</a>
+                                        <span class="btn3">已有<em>81</em>人查看</span>
+                                    </div>
+                                </dd>
+                            </dl>*@
+
                     </motempty>
 
                     <div class="page">
@@ -174,6 +175,27 @@
 </div>
 <script>
     $(function () {
+        $(".J_callForeman").click(function () {
+            var peoplename = "@Model.WorkerName";
+            var userid = "@Model.UserID";
+            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+            } else {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '登陆',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['25%', '60%'],
+                    content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+        });
         GetPageList(1);
         function GetPageList(pageIndex) {
             var PageSize = 8;
@@ -194,25 +216,24 @@
                         $.each(datajson.list, function (i, item) {
                             if (item.DemandID == 0) {
                                 html += '<dl class="ngz-case">'
-                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
                                 + '<dd>'
-                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '">' + item.BuidingTitle + '</a></strong>'
                                 + '<p style="margin-bottom: 10px;">&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
                                 + '<p style="margin-bottom: 0px;white-space: normal;">&nbsp;&nbsp;简介&nbsp;&nbsp;' + item.BuidingBrief + '</p>'
                                 + '<div class="btn-w">'
-                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                + '<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '" class="btn1">查看工地详情</a>'
                                 + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
                                 + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
-                                +'</div>'
-                                +'</dd>'
-                                +'</dl>';
+                                + '</div>'
+                                + '</dd>'
+                                + '</dl>';
                             }
-                            else
-                            {
+                            else {
                                 html += '<dl class="ngz-case">'
-                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
                                 + '<dd>'
-                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '">' + item.BuidingTitle + '</a></strong>'
                                 + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
                                 + '<ul class="c-jd clear">';
                                 var stagelist = item.constructionstage.split(',');
@@ -221,27 +242,24 @@
                                     length = 6;
                                 }
                                 var Stage = item.StageNow;
-                                if (Stage >5)
-                                {
+                                if (Stage > 5) {
                                     Stage = 5;
                                 }
-                                for (var i = 0; i < length; i++)
-                                {
+                                for (var i = 0; i < length; i++) {
                                     if (i == Stage) {
-                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工","") + '阶段</li>';
-                                    } else
-                                    {
+                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                    } else {
                                         html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
                                     }
                                 }
-                                html+='</ul>'
-                                +'<div class="btn-w">'
-                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                html += '</ul>'
+                                + '<div class="btn-w">'
+                                + '<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '" class="btn1">查看工地详情</a>'
                                 + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
                                 + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
-                                +'</div>'
-                                +'</dd>'
-                                +'</dl>';
+                                + '</div>'
+                                + '</dd>'
+                                + '</dl>';
                             }
 
                         })

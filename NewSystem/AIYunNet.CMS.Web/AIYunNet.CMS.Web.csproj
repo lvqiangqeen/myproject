@@ -1681,6 +1681,7 @@
     <Content Include="Content\Css\workers\workerList.css" />
     <Content Include="Content\design\commencss.css" />
     <Content Include="Content\design\img\task_conduct.jpg" />
+    <Content Include="Content\design\layui-layer.css" />
     <Content Include="Content\design\sheji.demand.css" />
     <Content Include="Content\design\img\about_dian.gif" />
     <Content Include="Content\design\img\common_bg_l.png" />
@@ -3870,6 +3871,7 @@
     <Content Include="Areas\PeopleCenter\Views\CenterCases\UpdateBuidingStagesInfo.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\PeopleDemandList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\updateAndAddDemand.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\UserCenter\LoinOnButton.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

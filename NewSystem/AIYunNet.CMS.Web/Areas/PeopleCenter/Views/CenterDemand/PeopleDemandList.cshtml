@@ -36,7 +36,7 @@
                     <th>发布时间</th>
                     <th width="20%">需求状态</th>
                     <th>装修流程</th>
-                    <th>操作</th>
+                    <th width="10%">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,8 +96,8 @@
                             }
                             
                             <td>
-                                <a href="javascript:editDemand(@demand.id)">修改</a>
-                                <a style="display:block;" href="javascript:deleteBuiding(@demand.id)">删除</a>
+                                <a href="javascript:editDemand(@demand.id)" style="float: left;padding-right: 5px;"><i class="fa fa-pencil"></i></a>
+                                <a style="float: left;" href="javascript:deletedemand(@demand.id)" ><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                                         }
@@ -144,7 +144,7 @@
 			window.location.href = url;
 		}
 
-		function deleteBuiding(buidingID)
+		function deletedemand(id)
 		{
 			var c = confirm("确定要删除这条记录吗？");
 			if (c != true)
@@ -154,11 +154,15 @@
 
 			$.ajax({
 				type: "post",
-				url: "/PeopleCenter/CenterCases/DeleteWebBuiding",
-				data: { buidingID: buidingID },
+				url: "/PeopleCenter/CenterDemand/DeleteDemand",
+				data: { id: id },
 				success: function (data)
 				{
-					window.location.href = window.location.href;
+				    if (data.RetCode == 1) {
+				        window.location.href = window.location.href;
+				    } else if (data.RetCode == 2) {
+				        alert("装修计划正在进行不能删除！");
+				    } else { alert("删除失败！");}
 				}
 			});
 		}

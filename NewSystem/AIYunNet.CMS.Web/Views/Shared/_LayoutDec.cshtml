@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-@{ 
+@{
     AIYunNet.CMS.BLL.Service.All_NavService Ser = new AIYunNet.CMS.BLL.Service.All_NavService();
     List<AIYunNet.CMS.Domain.Model.Nav> list = Ser.GetAll_NavList();
     int i = 0;
@@ -13,7 +13,7 @@
 </head>
 <body style="position: relative;">
     <div class="wrap_1180">
-        
+
         @Html.Partial("_LayoutDecTopBar")
         <!--头部搜索-->
         <div class="top_search">
@@ -47,7 +47,7 @@
                     {
                         if (i == list.Count - 1)
                         {
-                            <li id="nav_@item.firstNav.id"  class="last">
+                            <li id="nav_@item.firstNav.id" class="last">
                                 <a href="@item.firstNav.url">@item.firstNav.navtitle</a>
                                 <div class="inner_menu">
                                     @foreach (var ite in item.list)
@@ -75,7 +75,8 @@
                 </ul>
                 <script>
                     $(function () {
-                         var navid= $.session.get('top_menu');
+
+                        var navid = $.session.get('top_menu');
                         $(".top_menu > ul > li > a").click(function () {
                             var indexid = $(this).parent("li").index();
                             $.session.set('top_menu', indexid);
@@ -86,6 +87,12 @@
                             $.session.set('top_menu', indexid);
                         })
 
+                    })
+                </script>
+                <script>
+                    $(function () {
+                        //所有页面均使用
+                        sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
                     })
                 </script>
                 <!--整站主导航 End-->

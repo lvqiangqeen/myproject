@@ -15,6 +15,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
     public class CenterDemandController : Controller
     {
         DemandService DeSer = new DemandService();
+        DecDemandAcceptService Deacc = new DecDemandAcceptService();
         // GET: PeopleCenter/CenterDemand
         public ActionResult PeopleDemandList()
         {
@@ -40,7 +41,31 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             {
                 ret = DeSer.AddDecDemand(demand);
             }
-            return Json(new { RetCode = 1 });
+            return Json(new { RetCode = ret });
+        }
+        [HttpPost]
+        public ActionResult AddDemandAccept(DecDemandAccept Accept)
+        {
+            int ret = 0;
+
+            ret = Deacc.AddDecDemandAccept(Accept);
+            
+            return Json(new { RetCode = ret });
+        }
+        [HttpPost]
+        public JsonResult DeleteDemand(int id)
+        {
+            int ret = 0;
+            DecDemand dec = DeSer.GetDecDemandByID(id);
+            if (dec.IsPlan)
+            {
+                ret = 2;
+            }
+            else
+            {
+                ret = DeSer.DeleteDecDemand(id);
+            }
+            return Json(new { RetCode = ret });
         }
     }
 }

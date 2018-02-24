@@ -33,3 +33,11 @@ D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Domain\bin\Debug\Dos
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.csprojResolveAssemblyReference.cache
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.dll
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\AIYunNet.CMS.Domain.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\AIYunNet.CMS.Domain.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\EntityFramework.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\EntityFramework.SqlServer.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\Dos.ORM.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.csprojResolveAssemblyReference.cache
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.pdb

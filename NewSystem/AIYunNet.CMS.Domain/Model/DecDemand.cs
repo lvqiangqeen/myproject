@@ -31,7 +31,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// ProvinceID
         /// </summary>
         [Column("ProvinceID")]
-        public int ProvinceID { get; set; }
+        public string ProvinceID { get; set; }
         /// <summary>
         /// ProvinceName
         /// </summary>
@@ -41,7 +41,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// CityID
         /// </summary>
         [Column("CityID")]
-        public int CityID { get; set; }
+        public string CityID { get; set; }
         /// <summary>
         /// CityName
         /// </summary>
@@ -178,10 +178,15 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsPublish")]
         public bool IsPublish { get; set; }
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
+        [Column("Guid")]
+        public string Guid { get; set; }
         public DecDemand()
         {
-            ProvinceID = 0;
-            CityID = 0;
+            ProvinceID = "";
+            CityID = "";
             workTime = 0;
             buidingSpace = 0;
             buidingtype = 0;
@@ -200,6 +205,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsPlan = false;
             IsOver = false;
             IsPublish = false;
+            Guid = System.Guid.NewGuid().ToString();
         }
     }
 }

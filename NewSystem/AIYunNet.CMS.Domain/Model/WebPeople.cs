@@ -170,6 +170,7 @@ namespace AIYunNet.CMS.Domain.Model
             AddOn = DateTime.Now;
             FlagDelete = 0;
             ShowOrder = 0;
+            UserID = 0;
             CaseCount = 0;
             IsBuildingCount = 0;
             PageViewCount = 0;
@@ -295,6 +296,7 @@ namespace AIYunNet.CMS.Domain.Model
             AddOn = DateTime.Now;
             FlagDelete = 0;
             ShowOrder = 0;
+            
             CaseCount = 0;
             IsBuildingCount = 0;
             PageViewCount = 0;

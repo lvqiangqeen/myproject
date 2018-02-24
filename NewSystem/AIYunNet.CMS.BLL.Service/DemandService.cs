@@ -17,11 +17,26 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                DecDemand model = context.DecDemand.Find(id);
+                DecDemand model = new DecDemand();
+                if (id != 0)
+                {
+                    model = context.DecDemand.Find(id);
+                }
                 return model;
             }
         }
-
+        public DecDemand GetDecDemandByGuID(string guid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemand model = new DecDemand();
+                if (guid != "")
+                {
+                    model = context.DecDemand.FirstOrDefault(c=>c.Guid==guid);
+                }
+                return model;
+            }
+        }
         public List<DecDemand> GetDecDemandListByUserIDAndType(int UserID,string UserType)
         {
             List<DecDemand> list = new List<DecDemand>();
@@ -63,11 +78,24 @@ namespace AIYunNet.CMS.BLL.Service
                 }
             }
         }
-
+        //添加需求时同时添加对谁的需求
         public int AddDecDemand(DecDemand DecDemand)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
+                if (DecDemand.GetUserID != 0)
+                {
+                    DecDemandAccept acc = new DecDemandAccept();
+                    acc.DemandGuid = DecDemand.Guid;
+                    acc.GetUserID = DecDemand.GetUserID;
+                    acc.PublicUserID = DecDemand.PublishuserID;
+                    acc.IsAccept = 0;
+                    DecDemandAcceptService ser = new DecDemandAcceptService();
+                    ser.AddDecDemandAccept(acc);
+                }
+
+                DecDemand.GetUserID = 0;
+                DecDemand.GetUserType = "";
                 context.DecDemand.Add(DecDemand);
                 context.SaveChanges();
                 return 1;
@@ -98,6 +126,25 @@ namespace AIYunNet.CMS.BLL.Service
                     context.SaveChanges();
                 }
                 return 1;
+            }
+        }
+
+        public int DeleteDecDemand(int id)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemand original = context.DecDemand.Find(id);
+                if (original != null)
+                {
+                    original.IsDelete = true;
+                    original.DeleteOn = DateTime.Now;
+                    context.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }

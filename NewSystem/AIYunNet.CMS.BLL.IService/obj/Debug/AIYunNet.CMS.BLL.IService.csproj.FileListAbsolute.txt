@@ -58,3 +58,13 @@ D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.IService\bin\Deb
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.csprojResolveAssemblyReference.cache
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.dll
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet.CMS.BLL.IService.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet.CMS.BLL.IService.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet.CMS.Domain.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\EntityFramework.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\Dos.ORM.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet.CMS.Domain.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\Dos.ORM.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.csprojResolveAssemblyReference.cache
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.pdb

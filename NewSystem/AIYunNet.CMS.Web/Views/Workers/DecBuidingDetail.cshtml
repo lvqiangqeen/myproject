@@ -58,7 +58,7 @@
                         }<br>
                     </div>
                     <div class="jl-right">
-                        <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="@ViewBag.buiding.BuidingTitle">预约参观</a>
+                        <a href="javascript:void(0);" class="J_callVisit btn2" data-userid="@Model.UserID" data-name="@Model.WorkerName">找TA装修</a>
                         <!--<p>已有<span>0</span>人预约参观</p>-->
                     </div>
                     @if (ViewBag.buiding.DemandID != 0)
@@ -170,3 +170,29 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $(".J_callVisit").click(function () {
+            var peoplename = $(this).attr("data-name");
+            var userid = $(this).attr("data-userid");
+            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+            } else {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '登陆',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['25%', '55%'],
+                    content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+
+        })
+    })
+</script>

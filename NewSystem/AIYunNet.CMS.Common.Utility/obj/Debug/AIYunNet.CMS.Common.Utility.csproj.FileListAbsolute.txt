@@ -38,3 +38,14 @@ D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Common.Utility\bin\D
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.csprojResolveAssemblyReference.cache
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.dll
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\AIYunNet.CMS.Common.Utility.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\AIYunNet.CMS.Common.Utility.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\AIYunNet.CMS.Domain.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\ImageProcessor.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\EntityFramework.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\Dos.ORM.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\AIYunNet.CMS.Domain.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\Dos.ORM.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.csprojResolveAssemblyReference.cache
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.pdb
