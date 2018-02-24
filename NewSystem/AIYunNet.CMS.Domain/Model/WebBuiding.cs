@@ -161,6 +161,8 @@ namespace AIYunNet.CMS.Domain.Model
             StageNow = 0;
             UserID = 0;
             DemandID = 0;
+            constructionstageID = "";
+            constructionstage = "";
         }
     }
 }

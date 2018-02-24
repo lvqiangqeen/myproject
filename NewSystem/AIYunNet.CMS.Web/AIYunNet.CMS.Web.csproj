@@ -3872,6 +3872,8 @@
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\PeopleDemandList.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\updateAndAddDemand.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\UserCenter\LoinOnButton.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterDemand\DemandListToMe.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterDemand\Demanddetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

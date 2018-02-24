@@ -17,6 +17,27 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         DemandService DeSer = new DemandService();
         DecDemandAcceptService Deacc = new DecDemandAcceptService();
         // GET: PeopleCenter/CenterDemand
+        //我给我发的需求
+        public ActionResult DemandListToMe()
+        {
+            int GetUserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<DecDemandAccept> list = Deacc.GetListByGetUserID(GetUserID);
+            return View(list);
+        }
+        [HttpGet]
+        public ActionResult Demanddetail(int id)
+        {
+            DecDemand demand = DeSer.GetDecDemandByID(id);
+            return View(demand);
+        }
+        [HttpPost]
+        public ActionResult updateIsAccept(DecDemandAccept acc)
+        {
+            int ret = 0;
+            ret = Deacc.UpdateIsAccept(acc);
+            return Json(new { RetCode = ret });
+        }
+        //我给别人发的需求
         public ActionResult PeopleDemandList()
         {
             int PublishUserID= Convert.ToInt32(SessionHelper.Get("UserID"));

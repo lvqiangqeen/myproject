@@ -1,0 +1,121 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.Service
+@model List<DecDemandAccept>
+@{
+    ViewBag.Title = "DemandListToMe";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    DemandService Ser = new DemandService();
+}
+
+<style>
+    #stageContent input, select {
+        border: solid 1px #808080;
+    }
+
+    #stageContent #addStageBtn {
+        background: #ff6900;
+        width: 140px;
+        border: solid 1px #ff6900;
+    }
+    .dataTables_wrapper {
+        padding-top:19px;
+}
+</style>
+<div class="centers_mr" id="stageContent">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active" style="width: 158px;">业主发给我的需求</a>
+        </div>
+        <table class="table table-striped" id="stageCaseTable" >
+            <thead>
+                <tr>
+                    <th>类型</th>
+                    <th>小区名称</th>
+                    <th>面积</th>
+                    <th>业主</th>
+                    <th>发布时间</th>
+                    <th>是否接单</th>
+                    <th width="10%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+
+                    foreach (DecDemandAccept de in Model)
+                    {
+                        DecDemand demand = Ser.GetDecDemandByGuID(de.DemandGuid);
+                        <tr>
+                            <td>@demand.DemandTypeName</td>
+                            <td>
+                                @demand.buidingname
+                            </td>
+                            <td>
+                                @demand.buidingSpace m²
+                            </td>
+                            <td>@demand.ownername</td>
+                            <td>@demand.AddOn</td>
+                            @if (de.IsAccept == 0)
+                            {
+                                <td>未确定</td>
+                            }
+                            else if (de.IsAccept == 1)
+                            {
+                                <td style="color:#03fc90">已接受</td>
+                            }
+                            else
+                            {
+                                <td  style="color:#ff0000">已拒绝</td>
+                            }
+
+
+                            <td>
+                                <a href="javascript:look(@demand.id)" style="float: left;padding-right: 5px;">查看详情</a>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+		$(document).ready(function ()
+		{
+		    sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+			$('#stageCaseTable').DataTable({
+				"language": {
+					"emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+					"info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+					"infoEmpty": "没有记录",
+					"infoFiltered": "",
+					"lengthMenu": "显示 _MENU_ 条记录",
+					"search": "搜索:",
+					"zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>",
+					"oPaginate": {
+						"sFirst": "首页",
+						"sPrevious": "前一页",
+						"sNext": "后一页",
+						"sLast": "尾页"
+					},
+				},
+				"paging": true,
+				"lengthChange": true,
+				"searching": true,
+				"ordering": false,
+				"info": true,
+				"autoWidth": false
+			});
+
+		});
+
+        function look(id)
+		{
+            var url = "/PeopleCenter/CenterDemand/Demanddetail?id=" + id;
+			window.location.href = url;
+		}
+
+    </script>
+}
+

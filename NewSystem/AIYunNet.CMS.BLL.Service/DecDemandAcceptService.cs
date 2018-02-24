@@ -22,7 +22,15 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
-
+        public DecDemandAccept GetAcceptByGuid(string guid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemandAccept old = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == guid);
+                return old;
+            }
+           
+        }
         public List<DecDemandAccept> GetListByGetUserID(int UserID)
         {
             List<DecDemandAccept> list = new List<DecDemandAccept>();
@@ -62,6 +70,28 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     return list;
                 }
+            }
+        }
+
+        //只修改GetUserID
+        public int UpdateIsAccept(DecDemandAccept acc)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemandAccept old = context.DecDemandAccept.FirstOrDefault(c=>c.DemandGuid== acc.DemandGuid);
+                if (old != null)
+                {
+                    old.IsAccept = acc.IsAccept;
+
+                    if (acc.IsAccept == 1)
+                    {
+                        DecDemand dec = context.DecDemand.FirstOrDefault(c => c.Guid == acc.DemandGuid);
+                        dec.GetUserType = "WebUser";
+                        dec.GetUserID = old.GetUserID;                       
+                    }
+                    context.SaveChanges();
+                }
+                return 1;
             }
         }
     }

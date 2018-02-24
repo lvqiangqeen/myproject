@@ -147,5 +147,21 @@ namespace AIYunNet.CMS.BLL.Service
                 }
             }
         }
+
+        //只修改GetUserID
+        public int UpdateDecDemandGetUser(DecDemand DecDemand)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemand old = context.DecDemand.Find(DecDemand.id);
+                if (old != null)
+                {
+                    old.GetUserID = DecDemand.GetUserID;
+                    old.GetUserType = DecDemand.GetUserType;
+                    context.SaveChanges();
+                }
+                return 1;
+            }
+        }
     }
 }
