@@ -5,6 +5,7 @@
     ViewBag.Title = "PeopleDemandList";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
     WebCommonService comSer = new WebCommonService();
+    WebBuidingService ser = new WebBuidingService();
 }
 
 <style>
@@ -44,6 +45,7 @@
                 {
                     foreach (DecDemand demand in Model)
                     {
+                        WebBuiding buiding = ser.GetWebBuidingByDemandID(demand.id);
                         <tr>
                             <td>@demand.DemandTypeName</td>
                             <td>
@@ -88,7 +90,7 @@
 
                             @if (demand.IsPlan)
                             {
-                                <td>查看流程</td>
+                                <td><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID"  target="_blank" title="点击查看完整流程">查看流程</a></td>
                             }
                             else
                             {

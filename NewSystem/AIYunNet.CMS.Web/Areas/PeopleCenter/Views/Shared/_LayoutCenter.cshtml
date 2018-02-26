@@ -156,20 +156,34 @@
         else if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")
         {
             <div class="listbox">
-                <div class="centers_listm_one_in"><i class="fa fa-building"></i><span>我的装修</span><b></b></div>
+                <div class="centers_listm_one_in"><i class="fa fa-building"></i><span>我的案例</span><b></b></div>
                 <div class="gjszmdm">
-                    <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>我的装修案例</span></a>
-                    <a href="/PeopleCenter/CenterCases/WorkerDemandList?UserID=@webuser.UserID" class="center_in_self"><span>我接受的任务</span></a>
-                    <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>阶段管理</span></a>
+                    <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>装修案例</span></a>
+                </div>
+            </div>
+            <div class="listbox">
+                <div class="centers_listm_one_in"><i class="fa fa-file-text"></i><span>我的订单</span><b></b></div>
+                <div class="gjszmdm">
+                    <a href="/PeopleCenter/CenterCases/WorkerDemandList?UserID=@webuser.UserID" class="center_in_self"><span>我的订单</span></a>
+                    <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>订单进度</span></a>
                 </div>
             </div>
         }
-
         <div class="listbox">
-            <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>我的需求</span><b></b></div>
+            <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>我的装修</span><b></b></div>
+            <div class="gjszmdm">
+                <a href="/PeopleCenter/Certification/Authentication" class="center_in_self"><span>装修进度</span></a>
+            </div>
+        </div>
+        <div class="listbox">
+            <div class="centers_listm_one_in"><i class="fa fa-reorder"></i><span>我的需求</span><b></b></div>
             <div class="gjszmdm">
                 <a href="/PeopleCenter/CenterDemand/PeopleDemandList" class="center_in_self"><span>我发布的需求</span></a>
-                <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self"><span>发给我的需求</span></a>
+                @if (webuser.PositionCode != "WebUser")
+                {
+                    <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self"><span>发给我的需求</span></a>
+                }
+               
             </div>
         </div>
         <div class="listbox">
