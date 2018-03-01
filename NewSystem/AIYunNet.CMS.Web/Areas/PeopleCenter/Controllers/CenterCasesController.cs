@@ -206,6 +206,23 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
             return View(buidingList);
         }
+
+        [HttpPost]
+        public JsonResult IsUserEnd(WebBuiding webBuiding)
+        {
+            WebBuidingService service = new WebBuidingService();
+            if (webBuiding.BuidingID > 0)
+            {
+                service.UpdateWebBuiding(webBuiding);
+            }
+            else
+            {
+                webBuiding.WorkerID = Convert.ToInt32(SessionHelper.Get("PositionID"));
+                service.AddWebBuiding(webBuiding);
+            }
+
+            return Json(new { RetCode = 1 });
+        }
         #endregion
     }
 }

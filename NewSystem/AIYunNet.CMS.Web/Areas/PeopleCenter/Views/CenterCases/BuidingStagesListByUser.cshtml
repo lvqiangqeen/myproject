@@ -92,15 +92,35 @@
                                                 <th></th>
                                             }
                                         }
-                                        @if (buiding.StageNow != list.Count - 1)
+                                        @if (buiding.IsWorkerEnd == 0)
                                         {
                                             <th>未竣工</th>
                                         }
                                         else
                                         {
-
+                                            if (buiding.IsUserEnd == 0)
+                                            {
+                                                <th>已竣工</th>
+                                            }
+                                            else if (buiding.IsUserEnd == 1)
+                                            {
+                                                <th>验收合格</th>
+                                            }
+                                            else if (buiding.IsUserEnd == 2)
+                                            {
+                                                <th>验收不合格</th>
+                                            }
                                         }
-                                        <th><a href="javascript::void(0)" class="editIsUserEnd"><i class="fa fa-pencil"></i><input type="hidden" value="@buiding.BuidingID"/></a></th>
+                                        @if (buiding.IsUserEnd == 1)
+                                        {
+                                            <th>业主已确认</th>
+                                        }
+                                        else
+                                        {
+                                            <th><a href="javascript::void(0)" class="editIsUserEnd"><i class="fa fa-pencil"></i><input type="hidden" value="@buiding.BuidingID" /></a></th>
+                                        }
+
+                                        
                                     </tr>
                                 }
 
@@ -147,11 +167,26 @@
         
         $(".editIsUserEnd").click(function () {
             //配置一个透明的询问框
-            layer.msg('是否通过验收？', {
+            layer.msg('是否通过验收？（如果您认为装修合格请点击“通过”，不合格请点击“延时”。）', {
                 time: 20000, //20s后自动关闭
-                btn: ['通过', '延时', '关闭']
+                btn: ['通过', '延时', '关闭'],
+                yes: function (index, layero) {
+                   
+                },
+                btn2: function (index, layero) {
+
+                },
+                btn3: function (index, layero) {
+
+                }
             });
         })
+
+
+        function IsUserEnd()
+        {
+
+        }
     </script>
 }
 
