@@ -139,6 +139,16 @@ namespace AIYunNet.CMS.Domain.Model
         public int UserID { get; set; }
         [Column("DemandID")]
         public int DemandID { get; set; }
+        /// <summary>
+        /// 工人确定完成（0没完成，1完成）
+        /// </summary>
+        [Column("IsWorkerEnd")]
+        public int IsWorkerEnd { get; set; }
+        /// <summary>
+        /// 业主确定是否完工（0没有确定，1确认完工，2延时）
+        /// </summary>
+        [Column("IsUserEnd")]
+        public int IsUserEnd { get; set; }
         [NotMapped]
         public string StageNowDesc { get; set; }
         public WebBuiding()
@@ -163,6 +173,8 @@ namespace AIYunNet.CMS.Domain.Model
             DemandID = 0;
             constructionstageID = "";
             constructionstage = "";
+            IsWorkerEnd = 0;
+            IsUserEnd = 0;
         }
     }
 }

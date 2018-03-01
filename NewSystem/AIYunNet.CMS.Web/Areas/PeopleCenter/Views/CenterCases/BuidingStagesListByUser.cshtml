@@ -1,0 +1,157 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@model List<WebBuiding>
+@{
+    ViewBag.Title = "BuidingStagesListByUser";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    List<string> list = new List<string>();
+    List<string> listid = new List<string>();
+}
+
+@section head{
+    <style>
+        #stageContent input, select {
+            border: solid 1px #808080;
+        }
+
+        #stageContent #addStageBtn {
+            background: #ff6900;
+            width: 140px;
+            border: solid 1px #ff6900;
+        }
+
+        .public_m5 table tbody tr th {
+            background: #fff;
+        }
+    </style>
+}
+<div class="centers_mr" id="stageContent">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active" style="width: 99px;">装修进度</a>
+        </div>
+        <div class="items-con">
+            <div class="public_m1 u-xiaoxi">
+                <div class="public_m5">
+                    <table border="0" cellspacing="0" cellpadding="0" id="stageCaseTable">
+                        <thead>
+                            <tr style="border-bottom:1px solid #000">
+                                <th>名称</th>
+                                <th>开始时间</th>
+                                <th>第一阶段</th>
+                                <th>第二阶段</th>
+                                <th>第三阶段</th>
+                                <th>第四阶段</th>
+                                <th>第五阶段</th>
+                                <th>第六阶段</th>
+                                <th>验收状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                foreach (WebBuiding buiding in Model)
+                                {
+                                    list = buiding.constructionstage.Split(',').Where(c => c != "").ToList<string>();
+                                    listid = buiding.constructionstageID.Split(',').Where(c => c != "").ToList<string>();
+                                    <tr>
+                                        <th><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID" target="_blank">@buiding.BuidingTitle</a></th>
+                                        <th>@buiding.StartTime</th>
+                                        @for (int i = 0; i < 6; i++)
+                                        {
+                                            if (i < list.Count)
+                                            {
+                                                if (i == list.Count - 1 || i == 5)
+                                                {
+                                                    if (buiding.StageNow == i)
+                                                    {
+                                                        <th><a href="javascript:void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                    }
+                                                    else
+                                                    {
+                                                        <th><a href="javascript:void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (buiding.StageNow == i)
+                                                    {
+                                                        <th><a href="javascript::void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                    }
+                                                    else
+                                                    {
+                                                        <th><a href="javascript::void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                    }
+
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <th></th>
+                                            }
+                                        }
+                                        @if (buiding.StageNow != list.Count - 1)
+                                        {
+                                            <th>未竣工</th>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        <th><a href="javascript::void(0)" class="editIsUserEnd"><i class="fa fa-pencil"></i><input type="hidden" value="@buiding.BuidingID"/></a></th>
+                                    </tr>
+                                }
+
+                            }
+                        </tbody>
+                    </table>
+                    <div style="color:#ff0000">*提示：绿色标记代表施工当前阶段。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+            $('#stageCaseTable').DataTable({
+                "language": {
+                    "emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+                    "info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+                    "infoEmpty": "没有记录",
+                    "infoFiltered": "",
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "search": "搜索:",
+                    "zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "前一页",
+                        "sNext": "后一页",
+                        "sLast": "尾页"
+                    },
+                },
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false
+            });
+
+        });
+        
+        $(".editIsUserEnd").click(function () {
+            //配置一个透明的询问框
+            layer.msg('是否通过验收？', {
+                time: 20000, //20s后自动关闭
+                btn: ['通过', '延时', '关闭']
+            });
+        })
+    </script>
+}
+

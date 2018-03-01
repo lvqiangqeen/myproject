@@ -198,6 +198,14 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 		}
         #endregion
 
-
+        #region 我的装修
+        public ActionResult BuidingStagesListByUser()
+        {
+            WebBuidingService service = new WebBuidingService();
+            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
+            return View(buidingList);
+        }
+        #endregion
     }
 }

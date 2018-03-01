@@ -258,6 +258,17 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+        //根据UserID获取装修
+        public List<WebBuiding> GetWebBuidingListByUserID(int UserID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+
+                 return context.WebBuiding.Where(wb => wb.FlagDelete == 0 && wb.UserID == UserID).OrderByDescending(wb => wb.AddOn).ToList();
+
+
+            }
+        }
 
     }
 }
