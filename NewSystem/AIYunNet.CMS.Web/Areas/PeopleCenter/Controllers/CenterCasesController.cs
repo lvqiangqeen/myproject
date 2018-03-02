@@ -208,20 +208,28 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         }
 
         [HttpPost]
-        public JsonResult IsUserEnd(WebBuiding webBuiding)
+        public JsonResult IsUserEnd(int buidingID,int IsUserend)
+        {
+            int ret = 0;
+            ret=buidingSer.IsUserEnd(buidingID, IsUserend);
+            return Json(new { RetCode = ret });
+        }
+        [HttpPost]
+        public JsonResult IsWorkerEnd(int buidingID)
+        {
+            int ret = 0;
+            ret = buidingSer.IsWorkerEnd(buidingID);
+            return Json(new { RetCode = ret });
+        }
+        #endregion
+
+        #region 装修评论
+        public ActionResult BuidingCommentScore(int buidingID=0)
         {
             WebBuidingService service = new WebBuidingService();
-            if (webBuiding.BuidingID > 0)
-            {
-                service.UpdateWebBuiding(webBuiding);
-            }
-            else
-            {
-                webBuiding.WorkerID = Convert.ToInt32(SessionHelper.Get("PositionID"));
-                service.AddWebBuiding(webBuiding);
-            }
-
-            return Json(new { RetCode = 1 });
+            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
+            return View();
         }
         #endregion
     }

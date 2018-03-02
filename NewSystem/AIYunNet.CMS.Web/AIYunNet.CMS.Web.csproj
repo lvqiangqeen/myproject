@@ -136,6 +136,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SysAdmin\Views\Shared\_UploadDesignerImage.cshtml" />
+    <Content Include="Content\BuidingComment\demo.html" />
+    <Content Include="Content\BuidingComment\images\btn.gif" />
+    <Content Include="Content\BuidingComment\images\comment\infobox-bg-l-r.gif" />
+    <Content Include="Content\BuidingComment\images\comment\infobox-bg-l.gif" />
+    <Content Include="Content\BuidingComment\images\comment\infobox-bg.gif" />
+    <Content Include="Content\BuidingComment\images\comment\star-tips.gif" />
+    <Content Include="Content\BuidingComment\images\comment\stars-all.gif" />
+    <Content Include="Content\BuidingComment\images\comment\stars.jpg" />
+    <Content Include="Content\BuidingComment\js\comment.js" />
+    <Content Include="Content\BuidingComment\js\jquery-1.4.2.min.js" />
     <Content Include="Content\comment\comment.css" />
     <Content Include="Content\comment\demo.js" />
     <Content Include="Content\comment\domo.html" />
@@ -3875,6 +3885,7 @@
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\DemandListToMe.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterDemand\Demanddetail.cshtml" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\BuidingStagesListByUser.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\BuidingCommentScore.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

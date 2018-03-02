@@ -270,5 +270,49 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
 
+        //业主确定是否完工（0没有确定，1确认完工，2延时）
+        public int IsUserEnd(int buidingID,int IsUserend)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+
+                WebBuiding old = context.WebBuiding.Find(buidingID);
+                if (old != null)
+                {               
+                    old.IsUserEnd = IsUserend;
+                    if (IsUserend == 2)
+                    {
+                        old.IsWorkerEnd = 0;
+                    }
+                    context.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+
+
+            }
+
+        }
+
+        public int IsWorkerEnd(int buidingID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuiding old = context.WebBuiding.Find(buidingID);
+                if (old != null)
+                {
+                    old.IsWorkerEnd = 1;
+                    context.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }
