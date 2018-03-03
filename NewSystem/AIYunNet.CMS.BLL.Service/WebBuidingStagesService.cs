@@ -11,6 +11,21 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidingStagesService
     {
+        public List<WebBuidingStages> GetWebBuidingStagesListByBuiding(int BuidingID)
+        {
+            List<WebBuidingStages> list = new List<WebBuidingStages>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+
+                list = context.WebBuidingStages.Where(c => c.WebBuidingID == BuidingID).OrderBy(c => c.sortID).ToList();
+                if (list == null)
+                {
+                    list = new List<WebBuidingStages>();
+                }
+                return list;
+            }
+
+        }
         public WebBuidingStages GetWebBuidingStagesByID(int BuidingID, int StageID)
         {
             WebBuidingStages stage = new WebBuidingStages();

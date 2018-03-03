@@ -1,10 +1,15 @@
 ﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
 @model List<WebBuiding>
 @{
     ViewBag.Title = "BuidingStagesListByUser";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
     List<string> list = new List<string>();
     List<string> listid = new List<string>();
+    WebWorkerService worser = new WebWorkerService();
+    
 }
 
 @section head{
@@ -116,11 +121,18 @@
                                         }
                                         @if (buiding.IsUserEnd == 1)
                                         {
-                                            <th><a title="查看评价" href="javascript::void(0)"><i class="fa fa-thumbs-o-up"></i></a></th>
+                                            <th><a title="查看评价" href="javascript::void(0)" class="OpenComment"><i class="fa fa-thumbs-o-up"></i><input type="hidden" name="buidingID" value="@buiding.BuidingID" /></a></th>
                                         }
                                         else
                                         {
-                                            <th><a href="javascript::void(0)" class="editIsUserEnd"><i class="fa fa-pencil"></i><input type="hidden" name="IsWorkerEnd" value="@buiding.IsWorkerEnd" /><input type="hidden" name="buidingID" value="@buiding.BuidingID" /></a></th>
+                                            <th>
+                                                <a href="javascript::void(0)" class="editIsUserEnd">
+                                                    <i class="fa fa-pencil"></i>
+                                                <input type="hidden" name="IsWorkerEnd" value="@buiding.IsWorkerEnd" />
+                                                <input type="hidden" name="buidingID" value="@buiding.BuidingID" />
+                                                    <input type="hidden" name="GetUserID" value="@worser.GetWebWorkerByID(buiding.WorkerID).UserID" />
+                                                </a>
+                                        </th>
                                         }                                                                                                                       
                                     </tr>
                                 }
@@ -136,6 +148,7 @@
 
 </div>
 @section Scripts{
+    
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -169,6 +182,7 @@
         $(".editIsUserEnd").click(function () {
             var buidingID = $(this).find("input[name=buidingID]").val();
             var IsWorkerEnd = $(this).find("input[name=IsWorkerEnd]").val();
+            var GetUserID=$(this).find("input[name=GetUserID]").val();
             //配置一个透明的询问框
             layer.msg('是否通过验收？<br>（装修合格请点击“通过”，不合格请点击“延时”。）', {
                 time: 20000, //20s后自动关闭
@@ -179,15 +193,16 @@
                     } else
                     {
                         IsUserEnd(buidingID, 1);
+                        layer.close(index);
                         layer.open({
                             type: 2,
                             scrollbar: false,
-                            title: '请您评价',
+                            title: '我要评论',
                             shadeClose: true,
                             shade: 0.8,
-                            area: ['25%', '60%'],
-                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore', 'no'],
-                            end: function () {
+                            area: ['60%', '50%'],
+                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID, 'no'],
+                            end: function () {                              
                                 location.reload();
                             }
 
@@ -201,7 +216,20 @@
                         layer.msg('项目未竣工<br>您不能验收');
                     } else {
                         IsUserEnd(buidingID, 2);
-                        window.location.href = window.location.href;
+                        layer.close(index);
+                        layer.open({
+                            type: 2,
+                            scrollbar: false,
+                            title: '我要评论',
+                            shadeClose: true,
+                            shade: 0.8,
+                            area: ['60%', '50%'],
+                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID, 'no'],
+                            end: function () {
+                                location.reload();
+                            }
+
+                        });
                     }
                 },
                 btn3: function (index, layero) {
@@ -209,7 +237,27 @@
                 }
             });
         })
+        $(".OpenComment").click(function () {
+            var CaseID = $(this).find("input").val();
+            OpenComment(CaseID);
+        })
 
+        function OpenComment(CaseID)
+        {
+            layer.open({
+                type: 2,
+                scrollbar: false,
+                title: '我要评论',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['60%', '50%'],
+                content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID='+CaseID, 'no'],
+                end: function () {
+                    //location.reload();
+                }
+
+            });
+        }
 
         function IsUserEnd(buidingID,IsUserend)
         {

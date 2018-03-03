@@ -224,12 +224,29 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         #endregion
 
         #region 装修评论
-        public ActionResult BuidingCommentScore(int buidingID=0)
+        WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
+        public ActionResult BuidingCommentScore(int CaseID = 0)
         {
-            WebBuidingService service = new WebBuidingService();
-            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
-            return View();
+            WebBuidingCaseComment comm = new WebBuidingCaseComment();
+            if (CaseID != 0)
+            {
+                comm= commerSer.GetCommentByTypeAndID("WebBuiding", CaseID);
+            }           
+            return View(comm);
+        }
+        [HttpPost]
+        public JsonResult AddOrEditComment(WebBuidingCaseComment comm)
+        {
+            int ret = 0;
+            if (comm.id == 0)
+            {
+                ret = commerSer.AddWebBuidingCaseComment(comm);
+            }
+            else
+            {
+                ret = commerSer.updateWebBuidingCaseComment(comm);
+            }            
+            return Json(new { RetCode = ret });
         }
         #endregion
     }

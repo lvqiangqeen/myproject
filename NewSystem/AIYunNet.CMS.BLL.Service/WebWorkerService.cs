@@ -11,6 +11,15 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebWorkerService
     {
+        public List<WebWorker> GetWebWorkerList()
+        {
+            List<WebWorker> list = new List<WebWorker>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                list = context.WebWorker.Where(c => c.WorkerCategory == "装修工长").ToList();
+                return list;
+            }
+        }
         public WebWorker GetWebWorkerByID(int id)
         {
             using (AIYunNetContext context = new AIYunNetContext())

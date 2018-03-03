@@ -30,7 +30,7 @@
                                 <th>小区</th>
                                 <th>面积</th>
                                 <th>发布时间</th>
-                                <th>当前阶段</th>
+                                @*<th>当前阶段</th>*@
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -38,8 +38,9 @@
                             @foreach (DecDemand item in Model)
                             {
                                 WebBuiding buiding = ser.GetWebBuidingByDemandID(item.id);
-                                List<string>list = buiding.constructionstage.Split(',').Where(c => c != "").ToList<string>();
-                                List<string> listid = buiding.constructionstageID.Split(',').Where(c => c != "").ToList<string>();
+
+                                //List<string>list = buiding.constructionstage.Split(',').Where(c => c != "").ToList<string>();
+                                //List<string> listid = buiding.constructionstageID.Split(',').Where(c => c != "").ToList<string>();
                                 <tr>
                                     <td><input type="checkbox" value="@item.id"></td>
                                     <td>@item.DemandTypeName</td>
@@ -49,7 +50,7 @@
                                     <td>@item.buidingname</td>
                                     <td>@item.buidingSpace m²</td>
                                     <td>@item.AddOn.ToString("yyyy-MM-dd")</td>
-                                    <td><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID"  style="color:#ff0000" target="_blank" title="点击查看完整流程">@list[buiding.StageNow].Replace("工", "阶段")</a></td>
+                                    @*<td><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID"  style="color:#ff0000" target="_blank" title="点击查看完整流程">@list[buiding.StageNow].Replace("工", "阶段")</a></td>*@
                                     @if (item.IsPlan)
                                     {
                                         <td><a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@item.id">查看计划</a></td>

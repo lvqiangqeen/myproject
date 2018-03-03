@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysAdminUserService.cs" />
     <Compile Include="t_AreaService.cs" />
+    <Compile Include="WebBuidingCaseCommentService.cs" />
     <Compile Include="WebBuidingService.cs" />
     <Compile Include="WebBuidingStagesService.cs" />
     <Compile Include="WebBuidingTimeStagesService.cs" />

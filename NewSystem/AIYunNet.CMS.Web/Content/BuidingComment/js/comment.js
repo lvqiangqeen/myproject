@@ -9,7 +9,7 @@ jQuery.fn.rater	= function(options) {
 		min		: 1,
 		max		: 5,
 		step	: 1,
-		value	: 5,
+		value	: null,
 		after_click	: null,
 		before_ajax	: null,
 		after_ajax	: null,

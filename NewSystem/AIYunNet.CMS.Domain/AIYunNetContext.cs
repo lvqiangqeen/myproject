@@ -52,6 +52,8 @@ namespace AIYunNet.CMS.Domain
         public virtual DbSet<DecDemand> DecDemand { get; set; }
         public virtual DbSet<WebCaseImg> WebCaseImg { get; set; }
         public virtual DbSet<DecDemandAccept> DecDemandAccept { get; set; }
-        
+        public virtual DbSet<WebBuidingCaseComment> WebBuidingCaseComment { get; set; }
+
+
     }
 }
