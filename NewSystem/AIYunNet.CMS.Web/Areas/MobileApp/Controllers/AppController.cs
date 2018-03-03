@@ -20,7 +20,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 		{
 			WebPeopleService peopleService = new WebPeopleService();
             WebWorkerService WorkerService = new WebWorkerService();
-            List<WebWorker> workerList= WorkerService.
+            List<WebWorker> workerList = WorkerService.GetWebWorkerList();
 
             List<WebPeople> workers = peopleService.GetWebPeopleList("装修工人");
 			ViewBag.Workers = workers;
@@ -31,7 +31,10 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 		{
 			WebPeopleService peopleService = new WebPeopleService();
 			WebPeople worker = peopleService.GetWebPeopleByID(peopleID);
-			return View(worker);
+            WebBuidingService buidingService = new WebBuidingService();
+            List<WebBuiding> caseList = buidingService.GetWebBuidingList(1);
+            ViewBag.CaseList = caseList;
+            return View(worker);
 		}
 
 		public ActionResult PeopleCenter(int peopleID)

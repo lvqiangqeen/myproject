@@ -1,5 +1,11 @@
 ﻿@model AIYunNet.CMS.Domain.Model.WebPeople
+@using AIYunNet.CMS.Domain.Model;
 @using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+	List<WebBuiding> caseList = ViewBag.CaseList as List<WebBuiding>;
+	WebCommonService webCommen = new WebCommonService();
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +19,17 @@
 	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/css/common.css">
 	<script type="text/javascript" src="~/Content/mobileapp/js/jquery.min.js"></script>
 	<script src="~/Content/mobileapp/js/common.js"></script>
+	<style>
+		.case_progress {
+			height: 1.75rem;
+			line-height: 1.75rem;
+			background-color: #fa4b28;
+			color: #fff;
+			border: solid 1px #fa4b28;
+			border-radius: 3px;
+			padding: 5px 5px;
+		}
+	</style>
 </head>
 
 <body>
@@ -59,13 +76,40 @@
 				<div class="worker-item-tit"><h2>个人简介</h2></div>
 				<div class="worker-item-con">@Model.PeopleInfo</div>
 			</div>
-
 		</div>
-
-		<a href="reservation.html" class="order">预约</a>
-
+		@if (caseList != null && caseList.Count > 0)
+		{
+			for (int i = 0; i < caseList.Count; i++)
+			{
+				<div class="ind-item">
+					<a href="#">
+						<div class="ind-item-img"><img src="@AppSettingsHelper.ImgUrl@caseList[i].thumbnailImage"></div>
+						<div class="ind-item-txt">
+							<h3 class="red">@caseList[i].BuidingTitle</h3>
+							<p>@caseList[i].BuidingBrief</p>
+							<p><span class="case_progress" data-buiding_id="@caseList[i].BuidingID">项目进度</span></p>
+						</div>
+					</a>
+				</div>
+			}
+		}
 	</div>
 	<!--container-end-->
+	<script>
+		$(function ()
+		{
+			$(".case_progress").click(function ()
+			{
+				var buidingID = $(this).data("buiding_id");
+				if (!buidingID)
+				{
+					return;
+				}
+
+				window.location.href = "/MobileApp/App/CaseProgressInfo?buidingID=" + buidingID + "&rnd=" + Math.random();
+			});
+		})
+	</script>
 </body>
 </html>
 

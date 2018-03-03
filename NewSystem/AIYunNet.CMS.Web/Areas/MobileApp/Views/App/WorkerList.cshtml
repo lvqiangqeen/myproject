@@ -103,20 +103,40 @@
 			{
 				for (int i = 0; i < workers.Count; i++)
 				{
-					<div class="jbsf-item top toptwo">
-						<a href="/MobileApp/App/WorkerDetail?peopleID=@workers[i].PeopleID">
-							<div class="jbsf-item-img"><img src="@AppSettingsHelper.ImgUrl@workers[i].thumbnailImage"></div>
-							<div class="jbsf-item-txt">
-								<h2>@workers[i].PeopleName</h2>
-								<div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>@workers[i].CaseCount</em>单</span></div>
-								<div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">@workers[i].WorkYears 年工龄</span><span class="worker-address">@workers[i].AreasName</span></div>
-							</div>
-						</a>
-					</div>
+					if (i < 20)
+					{
+						<div class="jbsf-item top toptwo">
+							<a href="/MobileApp/App/WorkerDetail?peopleID=@workers[i].PeopleID">
+								<div class="jbsf-item-img"><img src="@AppSettingsHelper.ImgUrl@workers[i].thumbnailImage"></div>
+								<div class="jbsf-item-txt">
+									<h2>@workers[i].PeopleName</h2>
+									<div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>@workers[i].CaseCount</em>单</span></div>
+									<div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">@workers[i].WorkYears 年工龄</span><span class="worker-address">@workers[i].AreasName</span></div>
+								</div>
+							</a>
+						</div>
+                    }
+                    else
+                    {
+                        if (i == 20)
+                        {
+                            <div class="jbsf-item top toptwo" id="loadMore"><a href="javascript:loadMorePeople()">查看全部</a></div>
+                        }
+						<div class="jbsf-item top toptwo needHidePoeple">
+							<a href="/MobileApp/App/WorkerDetail?peopleID=@workers[i].PeopleID">
+								<div class="jbsf-item-img"><img src="@AppSettingsHelper.ImgUrl@workers[i].thumbnailImage"></div>
+								<div class="jbsf-item-txt">
+									<h2>@workers[i].PeopleName</h2>
+									<div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>@workers[i].CaseCount</em>单</span></div>
+									<div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">@workers[i].WorkYears 年工龄</span><span class="worker-address">@workers[i].AreasName</span></div>
+								</div>
+							</a>
+						</div>
+					}
 				}
 			}
 
-		</div>
+						</div>
 		<!--内容列表-->
 
 	</div>
@@ -129,6 +149,17 @@
 		</ul>
 	</footer>
 	<!--container-end-->
+	<script>
+		$(function ()
+		{
+			$(".needHidePoeple").hide();
+			$("#loadMore").click(function ()
+			{
+				$(this).hide();
+				$(".needHidePoeple").show();
+			});
+		})
+	</script>
 </body>
 </html>
 
