@@ -64,6 +64,7 @@ namespace AIYunNet.CMS.Web.Controllers
         public ActionResult DecWorkLeaderDetail(int WorkerID=0)
         {
             WebWorker worker=webworkerService.GetWebWorkerByID(WorkerID);
+
             return View(worker);
         }
         [Description("工长详情")]

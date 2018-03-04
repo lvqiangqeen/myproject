@@ -19,8 +19,23 @@
             {<i class="level-03"></i>@:保证金
                             }
             </div>
-            <p style="width: 110px;margin-top:20px;"><i class="ngz-ico-jg"></i>城市：<em title="@Model.CityName">@Model.CityName</em></p>
-            <p style="width: 110px;margin-top:20px;"><i class="ngz-ico-cy"></i>从业：<em>@Model.WorkYears</em></p>
+
+            <p style="width: 220px;margin-top:20px;margin-left:5px;">等级：
+                @for (int i = 1; i <= Model.Stars / 25; i++)
+            {
+                    <img src="~/Content/imgStar/jinguan.gif" />
+                }
+                @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+            {
+                    <img src="~/Content/imgStar/huangguan.gif" />
+                }
+                @for (int i = 1; i <= Model.Stars % 5; i++)
+            {
+                    <img src="~/Content/imgStar/zuanshi.gif" />
+                }
+            </p>
+            <p style="width: 110px;"><i class="ngz-ico-jg"></i>城市：<em title="@Model.CityName">@Model.CityName</em></p>
+            <p style="width: 110px;"><i class="ngz-ico-cy"></i>从业：<em>@Model.WorkYears</em></p>
             <p style="width: 220px;" class="ellipsis"><i class="ngz-ico-qy"></i>服务区域：<em title="@Model.AreasName">@Model.AreasName</em></p>
         </div>
         <div class="ngz-xx-w clear">

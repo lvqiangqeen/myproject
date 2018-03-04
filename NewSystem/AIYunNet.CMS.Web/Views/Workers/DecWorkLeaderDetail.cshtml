@@ -6,6 +6,12 @@
 @{
     ViewBag.Title = "DecWorkLeaderDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    DemandService Ser = new DemandService();
+    List<DecDemand> list = Ser.GetDecDemandListByUserIDAndType(Model.UserID, "WebUser");
+    WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
+    List<WebBuidingCaseComment> comlist = comSer.GetCommentListByGetUserID(Model.UserID);
+    WebUserService userDer = new WebUserService();
+    
 }
 <link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
 <link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
@@ -57,8 +63,23 @@
                         {<i class="level-03"></i>@:保证金
                             }
                     </div>
-                    <p style="width: 135px;margin-top:10px;">所在地：@Model.CityName</p>
-                    <p style="width: 135px;margin-left:5px;margin-top:10px;">从业：@Model.WorkYears</p>
+                    <p style="width:250px;margin-top:10px;">等级：
+                    @for (int i = 1; i <= Model.Stars / 25; i++)
+                    {
+                        <img src="~/Content/imgStar/jinguan.gif" />
+                    }
+                    @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+                    {
+                        <img src="~/Content/imgStar/huangguan.gif" />
+                    }
+                    @for (int i = 1; i <= Model.Stars % 5; i++)
+                    {
+                        <img src="~/Content/imgStar/zuanshi.gif" />
+                    }
+                        
+                    </p>
+                    <p style="width: 135px;">所在地：@Model.CityName</p>
+                    <p style="width: 135px;margin-left:5px;">从业：@Model.WorkYears</p>
                     <p style="width: 135px;">入驻时间：@StringHelper.ToDateTimeother(Model.AddOn)</p>
                     <p class="ellipsis" style="width: 135px;margin-left:5px;" title="@Model.AreasName">服务区域：@Model.AreasName</p>
                 </div>
@@ -70,6 +91,7 @@
                     <p>&nbsp;&nbsp;擅长领域:&nbsp;&nbsp;<span title="@Model.GoodAtStyle">@StringHelper.StringTruncat(Model.GoodAtStyle, 14, "...")</span></p>
                 </div>
                 <div class="ngz-about-w" style="width: 175px;border: 0;">
+                   
                     <p style="width: 170px;"><i class="ngz-ico-jl"></i>接受装修第三方监管</p>
                     <p style="width: 170px;"><i class="ngz-ico-bzj"></i>由网站托管20%装修款</p>
                     <p style="width: 175px;"><i class="ngz-ico-zb"></i>售后：整体2年，水电5年</p>
@@ -80,7 +102,7 @@
         </div>
         <div class="gz-layout clear" style="margin-top: 22px;">
             <div class="gz-250">
-                <div class="ngz-border clear">
+                <div class="ngz-border clear" style="display:none;">
                     <div class="ngz-tit"><h2>预约我的业主</h2><span>共<i>57</i>人</span></div>
                     <ul class="ngz-my-yz">
                         <li><div class="name">薄先生</div><div class="address ellipsis">保密</div><div class="date">01-16</div></li>
@@ -94,44 +116,70 @@
                         <li><div class="name">陆先生</div><div class="address ellipsis">民生大厦</div><div class="date">12-24</div></li>
                     </ul>
                 </div>
-                <div class="ngz-border" style="margin-top: 22px;">
-                    <div class="ngz-tit"><h2>业主评价</h2><span>共<i>0</i>人</span></div>
+                <div class="ngz-border" style="margin-top: 0px;">
+                    <div class="ngz-tit"><h2>业主评价</h2>
+                    @if (comlist != null)
+                    {
+                        <span>共<i>@comlist.Count()</i>人</span>
+                    }
+                    
+                    </div>
                     <ul class="ngz-pj-w">
-                        <li>
-                            <div class="name-w"><img src="/Public/images/home/mrtx.gif">李先生<i class="star-05"></i></div>
-                            <p> 活很好，我挺满意的，对于我提出的要求，能立马给改，沟通的很及时，下次有活还找徐工</p>
-                        </li>
+                        @if (comlist != null)
+                        {
+                            foreach (var item in comlist)
+                            {
+                                string classnam = "star-0"+ item.Score;
+                                <li>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">李先生<i class="@classnam"></i></div>
+                                    <p> @item.Comment</p>
+                                </li>
+                            }
+                        }
                     </ul>
+
                 </div>
             </div>
             <div class="gz-716">
                 <div class="ngz-border clear">
-                    <div class="ngz-tit"><h2>我的最新订单</h2><a href="/foreman-6689/tender">更多&gt;&gt;</a> </div>
+                    <div class="ngz-tit"><h2>我的最新订单</h2>@*<a href="/foreman-6689/tender">更多&gt;&gt;</a>*@ </div>
                     <dl class="ngz-new-dd">
                         <dt style="width: 80px;">业主</dt>
                         <dt style="width: 296px;">小区</dt>
                         <dt style="width: 90px;">面积</dt>
-                        <dt style="width: 100px;">户型</dt>
-                        <dt style="width: 120px;">报价</dt>
+                        <dt style="width: 220px;">类型</dt>
+                        @*<dt style="width: 120px;">地区</dt>*@
                         <!--<dt style="width: 80px;">时间</dt>-->
                         <!--循环区域-->
-                        <dd style="width: 80px;">李女士</dd>
-                        <dd style="width: 296px;">广云花园</dd>
-                        <dd style="width: 90px;">100㎡</dd>
-                        <dd style="width: 100px;">2室1厅1卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
+                        @{ int j = 0;}
+                        @if (list != null)
+                        {
+                            foreach (var item in list)
+                            {
+                                if (j < 5)
+                                {
+                                    <dd style="width: 80px;">@item.ownername</dd>
+                                    <dd style="width: 296px;">@item.buidingname</dd>
+                                    <dd style="width: 90px;">@item.buidingSpace ㎡</dd>
+                                    <dd style="width: 220px;">@item.DemandTypeName</dd>
+                                    @*<dd style="width: 120px;">2-3万</dd>*@
+                                }
+                                j++;
+                            }
+                        }
+
                         <!--<dd style="width: 80px;">2017-11-10</dd>-->
-                        <dd style="width: 80px;">张先生</dd>
+                        @*<dd style="width: 80px;">张先生</dd>
                         <dd style="width: 296px;">河西</dd>
                         <dd style="width: 90px;">100㎡</dd>
                         <dd style="width: 100px;">3室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
+                        <dd style="width: 120px;">2-3万</dd>*@
                         <!--<dd style="width: 80px;">2017-10-26</dd>-->
-                        <dd style="width: 80px;">任女士</dd>
+                        @*<dd style="width: 80px;">任女士</dd>
                         <dd style="width: 296px;">河东区御景家园</dd>
                         <dd style="width: 90px;">52㎡</dd>
                         <dd style="width: 100px;">1室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
+                        <dd style="width: 120px;">2-3万</dd>*@
                         <!--<dd style="width: 80px;">2017-10-25</dd>-->
                         <!--循环区域-->
 

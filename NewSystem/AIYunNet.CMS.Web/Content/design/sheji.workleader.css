@@ -12,7 +12,7 @@
 .foreman-list dd.name-w .name i.icon02 {width:16px;height:16px;background-position: -151px -1px;}
 .foreman-list dd.name-w .name i.icon03 {width:60px;height:16px;background-position: -192px -1px;}
 
-.foreman-list dd.name-w .qd-w,.foreman-list dd.name-w .yy-w,.foreman-list dd.name-w .pj-w,.foreman-list dd.name-w .gd-w {float: left;width: 95px;height: 19px;padding-left:0;margin-top:10px;font-size: 12px;color: #666666;}
+.foreman-list dd.name-w .qd-w,.foreman-list dd.name-w .yy-w,.foreman-list dd.name-w .pj-w,.foreman-list dd.name-w .gd-w {float: left;width: 190px;height: 19px;padding-left:0;margin-top:10px;font-size: 12px;color: #666666;}
 .foreman-list dd.name-w .qd-w span,.foreman-list dd.name-w .yy-w span,.foreman-list dd.name-w .pj-w span,.foreman-list dd.name-w .gd-w span {color: #01af63;}
 .foreman-list dd.name-w .yy-w,.foreman-list dd.name-w .gd-w {margin-left:4px;}
 /*.foreman-list dd.name-w .qd-w {background-position: 0 -60px;}*/

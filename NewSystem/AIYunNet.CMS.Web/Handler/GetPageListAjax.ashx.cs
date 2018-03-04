@@ -181,7 +181,8 @@ namespace AIYunNet.CMS.Web.Handler
                 +",[WorkerImage],[thumbnailImage],[AddOn],[EditOn],[DeleteOn],[FlagDelete],[ProvinceID],[ProvinceName],[CityID]"
                 +",[CityName],[AreasID],[AreasName],[UserID],[PriceID],[PriceName],[WorkYearsID],[WorkYears],[WorkerPositionID]"
                 +",[WorkerPosition],[GoodAtStyleID],[GoodAtStyle],[PageViewCount],[CollectCount],[CommentCount],[BuildingCount]"
-                +",[IsBuildingCount],[IsApproved]");
+                + ",[IsBuildingCount],[IsApproved],"
+                + "Stars/25 as Huang,Stars%25/5 as Ying,Stars%25%5 as Xing");
 
             SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3}",
                 "and CityID='" + mkjcitycode + "'",

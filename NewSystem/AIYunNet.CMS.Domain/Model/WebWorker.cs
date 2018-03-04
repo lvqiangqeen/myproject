@@ -222,6 +222,17 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsApproved")]
         public bool IsApproved { get; set; }
+        /// <summary>
+        /// 星级
+        /// </summary>
+        [Column("Stars")]
+        public int Stars { get; set; }
+        [NotMapped]
+        public int Huang { get; set; }
+        [NotMapped]
+        public int Ying { get; set; }
+        [NotMapped]
+        public int Xing { get; set; }
         public WebWorker()
         {
             PageViewCount = 0;
@@ -244,6 +255,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsAuthentication = false;
             IsBond = false;
             BondMoney = 0;
+            Stars = 0;
         }
     }
 

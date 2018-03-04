@@ -165,12 +165,10 @@
                                 <p class="p_line ect">
                                     <span>擅长空间 <em>{{item.GoodAtStyle}}</em></span>
                                 </p>
-                                <div class="p_line sjs_order_total">
-                                    <div class="total_box">
-                                        @*<span>预约数</span>
-                                        <span class="total">827</span>*@
-                                    </div>
-                                </div>
+                                <p class="p_line ect">
+                                    <span>设计等级 <em><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /></em></span>
+                                </p>
+                                
                             </div>
                             <div class="right">
                                 <p class="user_price"><span>{{item.PriceName}}</span></p>
@@ -350,6 +348,10 @@
             this.GetPageList(1);
         },
         methods: {
+            GetStar:function (count)
+            {
+                return '<img src="~/Content/imgStar/jinstar.gif" />'
+            },
             //分页查询
             GetPageList: function (pageIndex) {
                 var _self = this;
