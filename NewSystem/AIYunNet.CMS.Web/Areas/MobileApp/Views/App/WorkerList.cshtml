@@ -1,4 +1,4 @@
-﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Domain.Model;
 @using AIYunNet.CMS.Common.Utility;
 @{
 	List<WebPeople> workers = ViewBag.Workers as List<WebPeople>;
@@ -105,7 +105,7 @@
 				{
 					if (i < 20)
 					{
-						<div class="jbsf-item top toptwo">
+						<div class="jbsf-item">
 							<a href="/MobileApp/App/WorkerDetail?peopleID=@workers[i].PeopleID">
 								<div class="jbsf-item-img"><img src="@AppSettingsHelper.ImgUrl@workers[i].thumbnailImage"></div>
 								<div class="jbsf-item-txt">
@@ -120,9 +120,9 @@
                     {
                         if (i == 20)
                         {
-                            <div class="jbsf-item top toptwo" id="loadMore"><a href="javascript:loadMorePeople()">查看全部</a></div>
+                            <div class="jbsf-item" id="loadMore"><a style="color: #666;font-size: 16px;text-align: center;width: 100%;" href="javascript:loadMorePeople()">查看全部</a></div>
                         }
-						<div class="jbsf-item top toptwo needHidePoeple">
+						<div class="jbsf-item needHidePoeple">
 							<a href="/MobileApp/App/WorkerDetail?peopleID=@workers[i].PeopleID">
 								<div class="jbsf-item-img"><img src="@AppSettingsHelper.ImgUrl@workers[i].thumbnailImage"></div>
 								<div class="jbsf-item-txt">
