@@ -13,7 +13,7 @@
     IEnumerable<SelectListItem> workPositionList = ViewBag.workPositionList as IEnumerable<SelectListItem>;
     int DemandID = Convert.ToInt32(Request["DemandID"]);
     string Guid = Request["Guid"];
-    int UserID = Request["UserID"].ToString() == "" || Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
+    int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
 }
 <link href="~/Content/Plugins/datepicker/datepicker3.css" rel="stylesheet" />
 <style>

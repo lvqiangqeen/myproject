@@ -27,7 +27,9 @@
         border-radius: 4px;
         width: 100%;
     }
-
+    .error{
+	color:red;
+}
     #stageCaseForm .set_div > input {
         width: 10%;
         height: 40px;
@@ -68,7 +70,8 @@
                 <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称</span></div>
                     <div class="tab-r">
-                        @Html.TextBoxFor(m => m.buidingname, new { @class = "form-ipt-txt", placeholder = "请简单写出您的标题（5-20个字)" })
+                        <input id="buidingname" name="buidingname" value="@Model.buidingname" minlength="2" type="text" placeholder = "请简单写出您的标题（5-20个字)" class = "form-ipt-txt" style = "width:30%"  required>
+                        @*@Html.TextBoxFor(m => m.buidingname, new { @class = "form-ipt-txt", placeholder = "请简单写出您的标题（5-20个字)" })*@
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -194,13 +197,17 @@
 
 
     <script>
-
         $(function () {
+            var isValidate = $("#stageCaseForm").validate();
 
             $("#btnSubmit").click(function () {
                 var id = $("input[name=id]").val();
                 var buidingname = $("#buidingname").val();
                 //var BuidingTitle = $("#BuidingTitle").val();
+                if (!isValidate.checkForm()) {
+                    isValidate.showErrors();
+                    return false;
+                }
                 if (!buidingname) {
                     alert("标题不能为空");
                     $("#buidingname").focus();

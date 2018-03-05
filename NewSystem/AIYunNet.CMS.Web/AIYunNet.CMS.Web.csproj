@@ -1693,6 +1693,7 @@
     <Content Include="Content\Css\workers\workerList.css" />
     <Content Include="Content\design\commencss.css" />
     <Content Include="Content\design\img\task_conduct.jpg" />
+    <Content Include="Content\design\js\jquery.validate.min.js" />
     <Content Include="Content\design\layui-layer.css" />
     <Content Include="Content\design\sheji.demand.css" />
     <Content Include="Content\design\img\about_dian.gif" />
