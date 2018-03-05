@@ -6,19 +6,27 @@
 @{
     ViewBag.Title = "DecWorkLeaderDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    DemandService Ser = new DemandService();
+    List<DecDemand> list = Ser.GetDecDemandListByUserIDAndType(Model.UserID, "WebUser").OrderByDescending(c=>c.AddOn).ToList();
+    WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
+    List<WebBuidingCaseComment> comlist = comSer.GetCommentListByGetUserID(Model.UserID,"WebBuiding").OrderByDescending(c=>c.Score).ToList();
+    WebUserService userDer = new WebUserService();
+    DemandService demandSer = new DemandService();
+
 }
 <link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
 <link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
 <script src="~/Content/design/js/jquery.paginationNo.js"></script>
 <style>
     .page {
-    margin: 42px 0 20px;
-    height: 18px;
-    margin-top: 16px;
-}
+        margin: 42px 0 20px;
+        height: 18px;
+        margin-top: 16px;
+    }
+
     .buiding {
-     margin-bottom: 0px;
-    white-space: normal;
+        margin-bottom: 0px;
+        white-space: normal;
     }
 </style>
 <div class="container">
@@ -42,7 +50,7 @@
         <div class="gz-layout clear" style="background:#fff;border: 1px solid #d6d6d6;">
             <div class="gz-250">
                 <div class="ngz-gzphoto"><img src="@AppSettingsHelper.ImgUrl@Model.WorkerImage"></div>
-                <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-token="hnqi3IR3pa5_fHGrs3aslQ" data-foremanid="6689" data-foremanname="@Model.WorkerName">预约我免费报价</a>
+                <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-token="hnqi3IR3pa5_fHGrs3aslQ" data-foremanid="6689" data-foremanname="@Model.WorkerName">找TA装修</a>
                 <i class="ngz-call">@Model.WorkerPhone</i>
             </div>
             <div class="gz-716">
@@ -56,8 +64,23 @@
                         {<i class="level-03"></i>@:保证金
                             }
                     </div>
-                    <p style="width: 135px;margin-top:10px;">所在地：@Model.CityName</p>
-                    <p style="width: 135px;margin-left:5px;margin-top:10px;">从业：@Model.WorkYears</p>
+                    <p style="width:250px;margin-top:10px;">等级：
+                    @for (int i = 1; i <= Model.Stars / 25; i++)
+                    {
+                        <img src="~/Content/imgStar/jinguan.gif" />
+                    }
+                    @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+                    {
+                        <img src="~/Content/imgStar/huangguan.gif" />
+                    }
+                    @for (int i = 1; i <= Model.Stars % 5; i++)
+                    {
+                        <img src="~/Content/imgStar/zuanshi.gif" />
+                    }
+                        
+                    </p>
+                    <p style="width: 135px;">所在地：@Model.CityName</p>
+                    <p style="width: 135px;margin-left:5px;">从业：@Model.WorkYears</p>
                     <p style="width: 135px;">入驻时间：@StringHelper.ToDateTimeother(Model.AddOn)</p>
                     <p class="ellipsis" style="width: 135px;margin-left:5px;" title="@Model.AreasName">服务区域：@Model.AreasName</p>
                 </div>
@@ -69,6 +92,7 @@
                     <p>&nbsp;&nbsp;擅长领域:&nbsp;&nbsp;<span title="@Model.GoodAtStyle">@StringHelper.StringTruncat(Model.GoodAtStyle, 14, "...")</span></p>
                 </div>
                 <div class="ngz-about-w" style="width: 175px;border: 0;">
+                   
                     <p style="width: 170px;"><i class="ngz-ico-jl"></i>接受装修第三方监管</p>
                     <p style="width: 170px;"><i class="ngz-ico-bzj"></i>由网站托管20%装修款</p>
                     <p style="width: 175px;"><i class="ngz-ico-zb"></i>售后：整体2年，水电5年</p>
@@ -79,7 +103,7 @@
         </div>
         <div class="gz-layout clear" style="margin-top: 22px;">
             <div class="gz-250">
-                <div class="ngz-border clear">
+                <div class="ngz-border clear" style="display:none;">
                     <div class="ngz-tit"><h2>预约我的业主</h2><span>共<i>57</i>人</span></div>
                     <ul class="ngz-my-yz">
                         <li><div class="name">薄先生</div><div class="address ellipsis">保密</div><div class="date">01-16</div></li>
@@ -93,46 +117,57 @@
                         <li><div class="name">陆先生</div><div class="address ellipsis">民生大厦</div><div class="date">12-24</div></li>
                     </ul>
                 </div>
-                <div class="ngz-border" style="margin-top: 22px;">
-                    <div class="ngz-tit"><h2>业主评价</h2><span>共<i>0</i>人</span></div>
+                <div class="ngz-border" style="margin-top: 0px;">
+                    <div class="ngz-tit"><h2>业主评价</h2>
+                    @if (comlist != null)
+                    {
+                        <span>共<i>@comlist.Count()</i>人</span>
+                    }
+                    
+                    </div>
                     <ul class="ngz-pj-w">
-                        <li>
-                            <div class="name-w"><img src="/Public/images/home/mrtx.gif">李先生<i class="star-05"></i></div>
-                            <p> 活很好，我挺满意的，对于我提出的要求，能立马给改，沟通的很及时，下次有活还找徐工</p>
-                        </li>
+                        @if (comlist != null)
+                        {
+                            foreach (var item in comlist)
+                            {
+                                string classnam = "star-0"+ item.Score;
+                                <li>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<i class="@classnam"></i></div>
+                                    <p> @item.Comment</p>
+                                </li>
+                            }
+                        }
                     </ul>
+
                 </div>
             </div>
             <div class="gz-716">
-                <div class="ngz-border clear" >
-                    <div class="ngz-tit"><h2>我的最新订单</h2><a href="/foreman-6689/tender">更多&gt;&gt;</a> </div>
+                <div class="ngz-border clear">
+                    <div class="ngz-tit"><h2>我的最新订单</h2>@*<a href="/foreman-6689/tender">更多&gt;&gt;</a>*@ </div>
                     <dl class="ngz-new-dd">
                         <dt style="width: 80px;">业主</dt>
                         <dt style="width: 296px;">小区</dt>
                         <dt style="width: 90px;">面积</dt>
-                        <dt style="width: 100px;">户型</dt>
-                        <dt style="width: 120px;">报价</dt>
+                        <dt style="width: 220px;">类型</dt>
+                        @*<dt style="width: 120px;">地区</dt>*@
                         <!--<dt style="width: 80px;">时间</dt>-->
                         <!--循环区域-->
-                        <dd style="width: 80px;">李女士</dd>
-                        <dd style="width: 296px;">广云花园</dd>
-                        <dd style="width: 90px;">100㎡</dd>
-                        <dd style="width: 100px;">2室1厅1卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
-                        <!--<dd style="width: 80px;">2017-11-10</dd>-->
-                        <dd style="width: 80px;">张先生</dd>
-                        <dd style="width: 296px;">河西</dd>
-                        <dd style="width: 90px;">100㎡</dd>
-                        <dd style="width: 100px;">3室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
-                        <!--<dd style="width: 80px;">2017-10-26</dd>-->
-                        <dd style="width: 80px;">任女士</dd>
-                        <dd style="width: 296px;">河东区御景家园</dd>
-                        <dd style="width: 90px;">52㎡</dd>
-                        <dd style="width: 100px;">1室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>
-                        <!--<dd style="width: 80px;">2017-10-25</dd>-->                
-                        <!--循环区域-->
+                        @{ int j = 0;}
+                        @if (list != null)
+                        {
+                            foreach (var item in list)
+                            {
+                                if (j < 5)
+                                {
+                                    <dd style="width: 80px;">@item.ownername</dd>
+                                    <dd style="width: 296px;">@item.buidingname</dd>
+                                    <dd style="width: 90px;">@item.buidingSpace ㎡</dd>
+                                    <dd style="width: 220px;">@item.DemandTypeName</dd>
+                                    @*<dd style="width: 120px;">2-3万</dd>*@
+                                }
+                                j++;
+                            }
+                        }
 
                     </dl>
                 </div>
@@ -142,25 +177,25 @@
                         <div class="ngz-tit"><h2>工地案例</h2></div>
                         <!--工地案例循环部分开始-->
                         @*<dl class="ngz-case">
-                            <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
-                            <dd>
-                                <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
-                                <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
-                               
-                                <ul class="c-jd clear">
-                                    <li><i></i>水电阶段</li>
-                                    <li><i></i>泥木阶段</li>
-                                    <li><i></i>油漆阶段</li>
-                                    <li class="fns"><i></i>完美竣工</li>
-                                </ul>
-                                <div class="btn-w">
-                                    <a href="/foreman-6689/sites/12570" class="btn1">查看工地详情</a>
-                                    <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="物美超市底商">申请参观工地</a>
-                                    <span class="btn3">已有<em>81</em>人查看</span>
-                                </div>
-                            </dd>
-                        </dl>*@
-                        
+                                <dt><a href="/foreman-6689/sites/12570"><img src="http://image.haogongzhang.com/construction/cover/201801/5a5b527ad0bee.jpg!cons.thumb" width="220" height="165" alt=""></a></dt>
+                                <dd>
+                                    <strong><a href="/foreman-6689/sites/12570">物美超市底商</a></strong>
+                                    <p>&nbsp;&nbsp;合同价：&nbsp;&nbsp;开工日期：2018-03-18&nbsp;&nbsp;</p>
+
+                                    <ul class="c-jd clear">
+                                        <li><i></i>水电阶段</li>
+                                        <li><i></i>泥木阶段</li>
+                                        <li><i></i>油漆阶段</li>
+                                        <li class="fns"><i></i>完美竣工</li>
+                                    </ul>
+                                    <div class="btn-w">
+                                        <a href="/foreman-6689/sites/12570" class="btn1">查看工地详情</a>
+                                        <a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="物美超市底商">申请参观工地</a>
+                                        <span class="btn3">已有<em>81</em>人查看</span>
+                                    </div>
+                                </dd>
+                            </dl>*@
+
                     </motempty>
 
                     <div class="page">
@@ -174,6 +209,27 @@
 </div>
 <script>
     $(function () {
+        $(".J_callForeman").click(function () {
+            var peoplename = "@Model.WorkerName";
+            var userid = "@Model.UserID";
+            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+            } else {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '登陆',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['330px', '330px'],
+                    content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+        });
         GetPageList(1);
         function GetPageList(pageIndex) {
             var PageSize = 8;
@@ -194,25 +250,24 @@
                         $.each(datajson.list, function (i, item) {
                             if (item.DemandID == 0) {
                                 html += '<dl class="ngz-case">'
-                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
                                 + '<dd>'
-                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '">' + item.BuidingTitle + '</a></strong>'
                                 + '<p style="margin-bottom: 10px;">&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
                                 + '<p style="margin-bottom: 0px;white-space: normal;">&nbsp;&nbsp;简介&nbsp;&nbsp;' + item.BuidingBrief + '</p>'
                                 + '<div class="btn-w">'
-                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                + '<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '" class="btn1">查看工地详情</a>'
                                 + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
                                 + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
-                                +'</div>'
-                                +'</dd>'
-                                +'</dl>';
+                                + '</div>'
+                                + '</dd>'
+                                + '</dl>';
                             }
-                            else
-                            {
+                            else {
                                 html += '<dl class="ngz-case">'
-                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
+                                + '<dt><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '"><img src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '" width="220" height="165" alt=""></a></dt>'
                                 + '<dd>'
-                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'">' + item.BuidingTitle + '</a></strong>'
+                                + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '">' + item.BuidingTitle + '</a></strong>'
                                 + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
                                 + '<ul class="c-jd clear">';
                                 var stagelist = item.constructionstage.split(',');
@@ -221,27 +276,24 @@
                                     length = 6;
                                 }
                                 var Stage = item.StageNow;
-                                if (Stage >5)
-                                {
+                                if (Stage > 5) {
                                     Stage = 5;
                                 }
-                                for (var i = 0; i < length; i++)
-                                {
+                                for (var i = 0; i < length; i++) {
                                     if (i == Stage) {
-                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工","") + '阶段</li>';
-                                    } else
-                                    {
+                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                    } else {
                                         html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
                                     }
                                 }
-                                html+='</ul>'
-                                +'<div class="btn-w">'
-                                +'<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID='+item.BuidingID+'" class="btn1">查看工地详情</a>'
+                                html += '</ul>'
+                                + '<div class="btn-w">'
+                                + '<a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '" class="btn1">查看工地详情</a>'
                                 + '<a href="javascript:void(0);" class="J_callVisit btn2" data-yyid="12570" data-yyname="' + item.BuidingTitle + '">申请参观工地</a>'
                                 + '<span class="btn3">已有<em>' + item.PageViewCount + '</em>人查看</span>'
-                                +'</div>'
-                                +'</dd>'
-                                +'</dl>';
+                                + '</div>'
+                                + '</dd>'
+                                + '</dl>';
                             }
 
                         })

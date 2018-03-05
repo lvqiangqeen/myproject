@@ -18,6 +18,9 @@
 </style>
 <div class="centers_mr" id="stageContent">
     <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active" style="width: 99px;">我的装修案例</a>
+        </div>
         <div class="action_area" style="padding:10px;">
             <a id="addStageBtn" class="btn btn-primary" href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?buidingID=0">添加装修案例</a>
         </div>
@@ -65,8 +68,8 @@
                             </td>
                             <td>@buiding.AddOn</td>
                             <td>
-                                <a href="javascript:editBuiding(@buiding.BuidingID)">修改</a>
-                                <a style="display:block;" href="javascript:deleteBuiding(@buiding.BuidingID)">删除</a>
+                                <a href="javascript:editBuiding(@buiding.BuidingID)" style="float: left;padding-right: 5px;"><i class="fa fa-pencil"></i></a>
+                                <a style="display:block;" href="javascript:deleteBuiding(@buiding.BuidingID)"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                                         }

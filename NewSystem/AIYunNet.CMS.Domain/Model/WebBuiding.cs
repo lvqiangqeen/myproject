@@ -149,10 +149,13 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsUserEnd")]
         public int IsUserEnd { get; set; }
+        [Column("Guid")]
+        public string Guid { get; set; }
         [NotMapped]
         public string StageNowDesc { get; set; }
         public WebBuiding()
         {
+            Guid = "";
             CompanyID = 0;
             WorkerID = 0;
             ShowOrder = 0;

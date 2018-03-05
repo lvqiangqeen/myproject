@@ -43,12 +43,12 @@ namespace AIYunNet.CMS.BLL.Service
                 return comm;
             }
         }
-        public List<WebBuidingCaseComment> GetCommentListByGetUserID(int id)
+        public List<WebBuidingCaseComment> GetCommentListByGetUserID(int id,string type)
         {
             List<WebBuidingCaseComment> comm = new List<WebBuidingCaseComment>();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                comm = context.WebBuidingCaseComment.Where(c=>c.GetUserID==id).ToList();
+                comm = context.WebBuidingCaseComment.Where(c=>c.GetUserID==id && c.CaseType== type).ToList();
                 return comm;
             }
         }

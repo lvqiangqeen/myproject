@@ -42,12 +42,7 @@
                             <tr style="border-bottom:1px solid #000">
                                 <th>查看详情</th>
                                 <th>开始时间</th>
-                                <th width="10%">阶段1</th>
-                                <th width="10%">阶段2</th>
-                                <th width="10%">阶段3</th>
-                                <th width="10%">阶段4</th>
-                                <th width="10%">阶段5</th>
-                                <th width="10%">阶段6</th>
+                                <th>装修流程</th>
                                 <th width="10%">业主验收</th>
                                 <th>操作</th>
                                 @*<th>是否完工</th>*@
@@ -72,39 +67,42 @@
                                     <tr>
                                         <th><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID" target="_blank">@buiding.BuidingTitle</a></th>
                                         <th>@buiding.StartTime</th>
-                                        @for (int i = 0; i < 6; i++)
-                                        {
-                                            if (i < list.Count)
+                                        <th>
+                                            @for (int i = 0; i < 6; i++)
                                             {
-                                                if (i == list.Count - 1 || i == 5)
+                                                if (i < list.Count)
                                                 {
-                                                    if (buiding.StageNow == i)
+                                                    if (i == list.Count - 1 || i == 5)
                                                     {
-                                                        <th><a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                        if (buiding.StageNow == i)
+                                                        {
+                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
+                                                        }
                                                     }
                                                     else
                                                     {
-                                                        <th><a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
+                                                        if (buiding.StageNow == i)
+                                                        {
+                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                        }
                                                     }
+
                                                 }
                                                 else
                                                 {
-                                                    if (buiding.StageNow == i)
-                                                    {
-                                                        <th><a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
-                                                    }
-                                                    else
-                                                    {
-                                                        <th><a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a></th>
-                                                    }
-                                                }
 
+                                                }
                                             }
-                                            else
-                                            {
-                                                <th></th>
-                                            }
-                                        }
+                                        </th>
+
 
                                         @if (buiding.IsUserEnd == 1)
                                         {

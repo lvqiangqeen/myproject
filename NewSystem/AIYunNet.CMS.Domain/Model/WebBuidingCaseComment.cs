@@ -75,7 +75,7 @@ namespace AIYunNet.CMS.Domain.Model
 
         public WebBuidingCaseComment()
         {
-            Guid = System.Guid.NewGuid().ToString();
+            Guid = "";
             Score = 0;
             AddOn = DateTime.Now.ToString();
             EditOn = DateTime.Now.ToString();

@@ -7,11 +7,12 @@
     ViewBag.Title = "DecWorkLeaderDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
     DemandService Ser = new DemandService();
-    List<DecDemand> list = Ser.GetDecDemandListByUserIDAndType(Model.UserID, "WebUser");
+    List<DecDemand> list = Ser.GetDecDemandListByUserIDAndType(Model.UserID, "WebUser").OrderByDescending(c=>c.AddOn).ToList();
     WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
-    List<WebBuidingCaseComment> comlist = comSer.GetCommentListByGetUserID(Model.UserID);
+    List<WebBuidingCaseComment> comlist = comSer.GetCommentListByGetUserID(Model.UserID,"WebBuiding").OrderByDescending(c=>c.Score).ToList();
     WebUserService userDer = new WebUserService();
-    
+    DemandService demandSer = new DemandService();
+
 }
 <link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
 <link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
@@ -131,7 +132,7 @@
                             {
                                 string classnam = "star-0"+ item.Score;
                                 <li>
-                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">李先生<i class="@classnam"></i></div>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<i class="@classnam"></i></div>
                                     <p> @item.Comment</p>
                                 </li>
                             }
@@ -167,21 +168,6 @@
                                 j++;
                             }
                         }
-
-                        <!--<dd style="width: 80px;">2017-11-10</dd>-->
-                        @*<dd style="width: 80px;">张先生</dd>
-                        <dd style="width: 296px;">河西</dd>
-                        <dd style="width: 90px;">100㎡</dd>
-                        <dd style="width: 100px;">3室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>*@
-                        <!--<dd style="width: 80px;">2017-10-26</dd>-->
-                        @*<dd style="width: 80px;">任女士</dd>
-                        <dd style="width: 296px;">河东区御景家园</dd>
-                        <dd style="width: 90px;">52㎡</dd>
-                        <dd style="width: 100px;">1室0厅0卫</dd>
-                        <dd style="width: 120px;">2-3万</dd>*@
-                        <!--<dd style="width: 80px;">2017-10-25</dd>-->
-                        <!--循环区域-->
 
                     </dl>
                 </div>
@@ -235,7 +221,7 @@
                     title: '登陆',
                     shadeClose: true,
                     shade: 0.8,
-                    area: ['25%', '60%'],
+                    area: ['330px', '330px'],
                     content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
                     end: function () {
                         location.reload();

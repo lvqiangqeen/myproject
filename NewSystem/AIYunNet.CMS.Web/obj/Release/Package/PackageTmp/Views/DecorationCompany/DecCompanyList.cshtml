@@ -164,7 +164,7 @@
                                         {{item.CompanyAddress}}
                                     </span>
                                     <div class="zgsclc_consult">
-                                        <a href="javascript:void(0)" class="free_design on" onclick="javascript:companyTender(this,'478250')">免费帮我做设计</a>
+                                        <a href="javascript:void(0)" class="free_design on" >找TA免费咨询</a>
                                         <a href="javascript:void(0)" class="free_price" onclick="javascript:companyTender(this,478250)">免费帮我出报价</a>
                                     </div>
 
@@ -428,7 +428,20 @@
 
                                     Vue.nextTick(function () {
                                         //样式
-                                        
+                                        //页面层
+                                        $(".free_design").click(function () {
+                                            layer.open({
+                                                type: 2,
+                                                scrollbar: false,
+                                                title: '登陆',
+                                                shadeClose: true,
+                                                shade: 0.8,
+                                                area: ['25%', '60%'],
+
+                                                content: ['/PeopleCenter/UserCenter/LoinOnButton', 'no'],
+
+                                            });
+                                        });
                                     });
                                 } else {
                                     _self.pageList = [];

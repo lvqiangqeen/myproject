@@ -6,9 +6,11 @@
     Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
     string userAccount = SessionHelper.Get("userName");
     WebUserService webuserservice = new WebUserService();
-    //WebPeopleService webpeopleservice = new WebPeopleService();
+    WebPeopleService webpeopleservice = new WebPeopleService();
     WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
-    //WebPeople webpeople = new WebPeople();
+    WebPeople webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
+    WebWorkerService workerSer = new WebWorkerService();
+    WebWorker webworker = workerSer.GetWebWorkerByUserID(webuser.UserID);
     //if (webpeopleservice.IsHaveuser(webuser.UserID))
     //{
     //    webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
@@ -134,7 +136,33 @@
                 {@webuser.NickName }
             </span>
         </div>
-        <div class="u-lx-dj"><span><i class="fa fa-mortar-board"></i></span><span class="vip-grade"><i class="fa fa-vimeo"></i><em>23</em></span></div>
+        <div class="u-lx-dj">
+            @{ 
+                int stars = 0;
+                if (webpeople != null)
+                {
+                    stars = webpeople.Stars;
+                }
+                if (webworker != null)
+                {
+                    stars = webworker.Stars;
+                }
+                }
+            等级：
+            @for (int i = 1; i <= stars / 25; i++)
+            {
+                <img src="~/Content/imgStar/jinguan.gif" />
+            }
+            @for (int i = 1; i <= stars % 25 / 5; i++)
+            {
+                <img src="~/Content/imgStar/huangguan.gif" />
+            }
+            @for (int i = 1; i <= stars % 5; i++)
+            {
+                <img src="~/Content/imgStar/zuanshi.gif" />
+            }
+            
+        </div>
         <div class="u-qianming">@*<input type="text" placeholder="这个用户很懒，什么都没有写" />*@</div>
         <div class="u-area"><span>@webuser.ProvinceName</span>，<span>@webuser.CityName</span></div>
     </div>
@@ -217,6 +245,14 @@
         $(".centers_listm_one_in").click(function () {
             $(this).next(".gjszmdm").slideToggle().siblings("gjszmdm").slideUp()
             $(this).children("b").toggleClass("active")
+        });
+        var indexPeopleCenterLeft=$.session.get('PeopleCenterLeft');
+        $(".center_in_self").eq(indexPeopleCenterLeft).attr("style", "background:#a1e6ff;");
+
+        $('.center_in_self').click(function(){
+            var index=$(".center_in_self").index($(this));
+            sessionStorage.setItem('PeopleCenterLeft', index);
+
         });
     })
 </script>

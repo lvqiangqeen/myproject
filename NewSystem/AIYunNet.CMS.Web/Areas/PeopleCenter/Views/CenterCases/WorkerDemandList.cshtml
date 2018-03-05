@@ -53,11 +53,11 @@
                                     @*<td><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID"  style="color:#ff0000" target="_blank" title="点击查看完整流程">@list[buiding.StageNow].Replace("工", "阶段")</a></td>*@
                                     @if (item.IsPlan)
                                     {
-                                        <td><a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@item.id">查看计划</a></td>
+                                        <td><a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@item.id&Guid=@item.Guid">查看计划</a></td>
                                     }
                                     else
                                     {
-                                        <td><a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@item.id">发布计划</a></td>
+                                        <td><a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@item.id&Guid=@item.Guid&UserID=@item.PublishuserID">发布计划</a></td>
                                     }
                                 </tr>
                             }

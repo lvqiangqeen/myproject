@@ -228,9 +228,10 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         public ActionResult BuidingCommentScore(int CaseID = 0)
         {
             WebBuidingCaseComment comm = new WebBuidingCaseComment();
-            if (CaseID != 0)
+            comm = commerSer.GetCommentByTypeAndID("WebBuiding", CaseID);
+            if (comm == null)
             {
-                comm= commerSer.GetCommentByTypeAndID("WebBuiding", CaseID);
+                comm= new WebBuidingCaseComment();
             }           
             return View(comm);
         }

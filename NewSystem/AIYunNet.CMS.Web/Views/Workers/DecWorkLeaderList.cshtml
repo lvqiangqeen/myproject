@@ -102,7 +102,7 @@ overflow: hidden;
                             <a v-bind:href="'/Workers/DecWorkLeaderDetail?WorkerID='+item.worker.WorkerID"  target="_blank">
                                 <div class="name">{{item.worker.WorkerName}} <i v-if="item.worker.IsAuthentication" class="level-02" title="认证工长"></i><i v-if="item.worker.IsBond" class="icon02" title="缴纳质保金"></i></div>
                                 <div class="qd-w" style="width: 190px;">擅长领域：<span>{{item.worker.GoodAtStyle}}</span></div>
-                                <div class="pj-w">等级：<span>
+                                <div class="pj-w">等级：<span  v-bind:title="item.worker.Stars">
                                     <img v-for="n in item.worker.Huang" src="~/Content/imgStar/jinguan.gif" />
                                     <img v-for="n in item.worker.Ying" src="~/Content/imgStar/huangguan.gif" />
                                     <img v-for="n in item.worker.Xing" src="~/Content/imgStar/zuanshi.gif" /></span></div>
@@ -332,7 +332,7 @@ overflow: hidden;
                                                 title: '登陆',
                                                 shadeClose: true,
                                                 shade: 0.8,
-                                                area: ['25%', '60%'],
+                                                area: ['330px', '330px'],
                                                 content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
                                                 end: function () {
                                                     location.reload();

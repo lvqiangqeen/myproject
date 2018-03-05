@@ -6,9 +6,11 @@
     Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
     string userAccount = SessionHelper.Get("userName");
     WebUserService webuserservice = new WebUserService();
-    //WebPeopleService webpeopleservice = new WebPeopleService();
+    WebPeopleService webpeopleservice = new WebPeopleService();
     WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
-    //WebPeople webpeople = new WebPeople();
+    WebPeople webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
+    WebWorkerService workerSer = new WebWorkerService();
+    WebWorker webworker = workerSer.GetWebWorkerByUserID(webuser.UserID);
     //if (webpeopleservice.IsHaveuser(webuser.UserID))
     //{
     //    webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
@@ -134,7 +136,33 @@
                 {@webuser.NickName }
             </span>
         </div>
-        <div class="u-lx-dj"><span><i class="fa fa-mortar-board"></i></span><span class="vip-grade"><i class="fa fa-vimeo"></i><em>23</em></span></div>
+        <div class="u-lx-dj">
+            @{ 
+                int stars = 0;
+                if (webpeople != null)
+                {
+                    stars = webpeople.Stars;
+                }
+                if (webworker != null)
+                {
+                    stars = webworker.Stars;
+                }
+                }
+            等级：
+            @for (int i = 1; i <= stars / 25; i++)
+            {
+                <img src="~/Content/imgStar/jinguan.gif" />
+            }
+            @for (int i = 1; i <= stars % 25 / 5; i++)
+            {
+                <img src="~/Content/imgStar/huangguan.gif" />
+            }
+            @for (int i = 1; i <= stars % 5; i++)
+            {
+                <img src="~/Content/imgStar/zuanshi.gif" />
+            }
+            
+        </div>
         <div class="u-qianming">@*<input type="text" placeholder="这个用户很懒，什么都没有写" />*@</div>
         <div class="u-area"><span>@webuser.ProvinceName</span>，<span>@webuser.CityName</span></div>
     </div>
@@ -143,6 +171,12 @@
         <a href="/PeopleCenter/UserCenter/UserCenterSafe"><i class="fa fa-get-pocket"></i>账户安全</a>
     </div>
     <div class="centers_listm">
+        <div class="listbox">
+            <div class="centers_listm_one_in"><i class="fa fa-wrench"></i><span>我的装修</span><b></b></div>
+            <div class="gjszmdm">
+                <a href="/PeopleCenter/CenterCases/BuidingStagesListByUser" class="center_in_self"><span>装修进度</span></a>
+            </div>
+        </div>
         <!--分类开始-->
         @if (webuser.PositionCode == "WebPeople")
         {
@@ -156,17 +190,33 @@
         else if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")
         {
             <div class="listbox">
-                <div class="centers_listm_one_in"><i class="fa fa-photo"></i><span>我的装修</span><b></b></div>
+                <div class="centers_listm_one_in"><i class="fa fa-building"></i><span>我的案例</span><b></b></div>
                 <div class="gjszmdm">
-                    <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>我的装修案例</span></a>
-                    <a href="/PeopleCenter/CenterCases/WorkerDemandList?UserID=@webuser.UserID" class="center_in_self"><span>业主需求</span></a>
-                    <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>阶段管理</span></a>
+                    <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>装修案例</span></a>
+                </div>
+            </div>
+            <div class="listbox">
+                <div class="centers_listm_one_in"><i class="fa fa-file-text"></i><span>装修订单</span><b></b></div>
+                <div class="gjszmdm">
+                    <a href="/PeopleCenter/CenterCases/WorkerDemandList?UserID=@webuser.UserID" class="center_in_self"><span>我的订单</span></a>
+                    <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>订单进度</span></a>
                 </div>
             </div>
         }
 
         <div class="listbox">
-            <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>我的需求</span><b></b></div>
+            <div class="centers_listm_one_in"><i class="fa fa-reorder"></i><span>设计装修需求</span><b></b></div>
+            <div class="gjszmdm">
+                <a href="/PeopleCenter/CenterDemand/PeopleDemandList" class="center_in_self"><span>我的需求</span></a>
+                @if (webuser.PositionCode != "WebUser")
+                {
+                    <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self"><span>业主需求</span></a>
+                }
+               
+            </div>
+        </div>
+        <div class="listbox">
+            <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>资格认证</span><b></b></div>
             <div class="gjszmdm">
                 <a href="/PeopleCenter/Certification/Authentication" class="center_in_self"><span>身份认证</span></a>
                 <a href="/PeopleCenter/Certification/GuarantMoney" class="center_in_self"><span>申请缴纳质保金</span></a>

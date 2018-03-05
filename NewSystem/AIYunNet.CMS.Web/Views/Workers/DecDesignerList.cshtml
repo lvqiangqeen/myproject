@@ -16,7 +16,7 @@
 </style>
 <div class="container">
     <div class="content clearfix">
-            <div class="global_pie">
+        <div class="global_pie">
             <ul class="column_list">
                 <li class="location">我的位置：</li>
                 <li>
@@ -49,7 +49,7 @@
                         <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
                         @foreach (WebLookup item in ViewBag.goodatlist as List<WebLookup>)
                         {
-                            <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code"/></a>
+                            <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code" /></a>
                         }
                     </div>
                 </div>
@@ -68,16 +68,16 @@
             <!-- 排序框 -->
             <div class="sort_common">
                 <div class="sort_list" id="sort">
-                    <a href="javascript:void(0)" class="on" rel="nofollow" id="default" >默认排序<span class=""></span></a>
+                    <a href="javascript:void(0)" class="on" rel="nofollow" id="default">默认排序<span class=""></span></a>
                     <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CaseCount">作品数<span class="icons"></span></a>
                     <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CollectCount">评价数<span class="icons"></span></a>
                     @*<a href="javascript:void(0)" class="" rel="nofollow" value="desc" id=""><span class="icons"></span></a>*@
-                    <input id="SortOrder" type="hidden" value=""/>
+                    <input id="SortOrder" type="hidden" value="" />
                 </div>
                 <div class="small_page">
                     <a href="javascript:void();"><span class="total_saw"></span><span></span></a>
                 </div>
-            </div>  
+            </div>
             <script>
                 $(function () {
                     $("#sort > a").val("desc");
@@ -108,7 +108,7 @@
                         }
                     });
                 })
-            </script>      
+            </script>
             <!-- 排序框 END -->
             <!-- 大牌设计师在线 -->
             <div class="sjs_online">
@@ -116,7 +116,7 @@
                     <span>大牌设计师在线</span>
                     <a class="show_here" id="showHere" href="javascript:void(0);">我也要出现在这里</a>
                 </div>
-                <div class="swiper-container switch_box"  id="switch_box">
+                <div class="swiper-container switch_box" id="switch_box">
                     <ul style="width: 834px; left: 0px;" class="swiper-wrapper">
                         @foreach (WebPeople peo in ViewBag.peoplelist)
                         {
@@ -148,14 +148,14 @@
                     <div class="sjs_info">
                         <div class="sjs_head">
                             <a v-bind:href="'/Workers/DecDesignerIndex?peopleID='+item.PeopleID" target="_blank">
-                                <img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.PeopleImage" v-bind:alt="item.PeopleName"width="118" height="118">
+                                <img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.PeopleImage" v-bind:alt="item.PeopleName" width="118" height="118">
                             </a>
                         </div>
                         <div class="sjs_msg">
                             <div class="left">
                                 <div class="name clearfix">
                                     <a v-bind:href="'/Workers/DecDesignerIndex?peopleID='+item.PeopleID" target="_blank"><span class="sjs_name">{{item.PeopleName}}</span></a>
-                                    <em v-if="item.IsBond" class="icon_zm" title="服务保障"></em>                                                                                                                                                                
+                                    <em v-if="item.IsBond" class="icon_zm" title="服务保障"></em>
                                     <em v-if="item.IsAuthentication" class="icon_rz_qy" title="资格认证"></em>
                                 </div>
                                 <p class="p_line">
@@ -166,22 +166,28 @@
                                     <span>擅长空间 <em>{{item.GoodAtStyle}}</em></span>
                                 </p>
                                 <p class="p_line ect">
-                                    <span>设计等级 <em><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /><img src="~/Content/imgStar/jinstar.gif" /></em></span>
+                                    <span>
+                                        设计等级 <em v-bind:title="item.Stars">
+                                            <img v-for="n in item.Huang" src="~/Content/imgStar/jinguan.gif" />
+                                            <img v-for="n in item.Ying" src="~/Content/imgStar/huangguan.gif" />
+                                            <img v-for="n in item.Xing" src="~/Content/imgStar/zuanshi.gif" />
+                                        </em>
+                                    </span>
                                 </p>
-                                
+
                             </div>
                             <div class="right">
                                 <p class="user_price"><span>{{item.PriceName}}</span></p>
                                 <div class="apply_box">
                                     <a href="javascript:;" id="zsj_yyzx" class="reservation" v-bind:data-name="item.PeopleName" v-bind:data-UserID="item.UserID">找TA设计</a>
-                                    
+
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="sjs_case">
                         <ul class="clearfix">
-                            <li class=""  v-for="ite in item.caselist">
+                            <li class="" v-for="ite in item.caselist">
                                 <a v-bind:href="'/Case/DecCaseDetail?CaseID='+ ite.CaseID + '&DecType='+ite.DecType" target="_blank">
                                     <img v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.CaseImageBig" v-bind:data-original="'@AppSettingsHelper.ImgUrl'+ite.CaseImageBig" v-bind:alt="ite.CaseTitle" width="210" height="210" style="display: inline;">
                                 </a>
@@ -193,7 +199,7 @@
             </div>
             <div class="page">
                 <!-- 页码开始 -->
-                    <div class="M-box1" style="text-align:center;"></div>
+                <div class="M-box1" style="text-align:center;"></div>
             </div>
         </div>
         <div class="content_right">
@@ -329,7 +335,7 @@
             </div>
         </div>
         <!-- 右栏 END -->
-        
+
     </div>
 </div>
 <script type="text/javascript">
@@ -348,8 +354,7 @@
             this.GetPageList(1);
         },
         methods: {
-            GetStar:function (count)
-            {
+            GetStar: function (count) {
                 return '<img src="~/Content/imgStar/jinstar.gif" />'
             },
             //分页查询
@@ -394,7 +399,7 @@
                                     $(".reservation").click(function () {
                                         var peoplename = $(this).attr("data-name");
                                         var userid = $(this).attr("data-userid");
-                                        if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")"!=null) {
+                                        if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
                                             window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
                                         } else {
                                             layer.open({
@@ -403,7 +408,7 @@
                                                 title: '登陆',
                                                 shadeClose: true,
                                                 shade: 0.8,
-                                                area: ['25%', '55%'],
+                                                area: ['330px', '330px'],
                                                 content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
                                                 end: function () {
                                                     location.reload();

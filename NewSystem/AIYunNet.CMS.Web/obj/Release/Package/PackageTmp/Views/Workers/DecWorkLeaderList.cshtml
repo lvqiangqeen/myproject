@@ -102,10 +102,13 @@ overflow: hidden;
                             <a v-bind:href="'/Workers/DecWorkLeaderDetail?WorkerID='+item.worker.WorkerID"  target="_blank">
                                 <div class="name">{{item.worker.WorkerName}} <i v-if="item.worker.IsAuthentication" class="level-02" title="认证工长"></i><i v-if="item.worker.IsBond" class="icon02" title="缴纳质保金"></i></div>
                                 <div class="qd-w" style="width: 190px;">擅长领域：<span>{{item.worker.GoodAtStyle}}</span></div>
-                                <div class="pj-w">业主评价：<span>{{item.worker.CommentCount}}</span></div>
-                                <div class="gd-w">在建工地：<span>{{item.worker.IsBuildingCount}}</span></div>
+                                <div class="pj-w">等级：<span  v-bind:title="item.worker.Stars">
+                                    <img v-for="n in item.worker.Huang" src="~/Content/imgStar/jinguan.gif" />
+                                    <img v-for="n in item.worker.Ying" src="~/Content/imgStar/huangguan.gif" />
+                                    <img v-for="n in item.worker.Xing" src="~/Content/imgStar/zuanshi.gif" /></span></div>
+                                @*<div class="gd-w">在建工地：<span>{{item.worker.IsBuildingCount}}</span></div>*@
                             </a>
-                            <div class="btn1 designBtn" data-foremanid="6689" data-token="hnqi3IR3pa5_fHGrs3aslA">免费预约量房</div>
+                            <div class="btn1 designBtn" v-bind:data-name="item.worker.WorkerName" v-bind:data-userid="item.worker.UserID">找TA装修</div>
                         </dd>
                         <dd class="case-w">
                             <div class="c-w" v-for="ite in item.biuding">
@@ -314,6 +317,31 @@ overflow: hidden;
                                         coping: true,
                                         current: pageIndex,
                                         callback: _self.pageselectCallback
+                                    });
+                                    Vue.nextTick(function () {
+                                        //页面层
+                                        $(".designBtn").click(function () {
+                                            var peoplename = $(this).attr("data-name");
+                                            var userid = $(this).attr("data-userid");
+                                            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")"!=null) {
+                                                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+                                            } else {
+                                            layer.open({
+                                                type: 2,
+                                                scrollbar: false,
+                                                title: '登陆',
+                                                shadeClose: true,
+                                                shade: 0.8,
+                                                area: ['330px', '330px'],
+                                                content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                                                end: function () {
+                                                    location.reload();
+                                                }
+
+                                            });
+                                        }
+                                        })
+
                                     });
 
                                 } else {

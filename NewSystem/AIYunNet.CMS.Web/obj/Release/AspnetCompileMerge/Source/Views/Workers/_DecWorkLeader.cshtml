@@ -8,7 +8,7 @@
 }
 <div class="gz-250">
     <div class="ngz-gzphoto"><img src="@AppSettingsHelper.ImgUrl@Model.WorkerImage"></div>
-    <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-foremanid="6689" data-foremanname="@Model.WorkerName">预约我免费报价</a>
+    <a href="javascript:void(0);" class="J_callForeman ngz-yybtn" data-userid="@Model.UserID" data-name="@Model.WorkerName">预约TA装修</a>
     <div class="ngz-border clear" style="border-bottom: 0;border-top: 0;">
         <div class="ngz-xx-w clear">
             <div class="ngz-xm-w"><h2>@Model.WorkerName</h2>
@@ -19,8 +19,23 @@
             {<i class="level-03"></i>@:保证金
                             }
             </div>
-            <p style="width: 110px;margin-top:20px;"><i class="ngz-ico-jg"></i>城市：<em title="@Model.CityName">@Model.CityName</em></p>
-            <p style="width: 110px;margin-top:20px;"><i class="ngz-ico-cy"></i>从业：<em>@Model.WorkYears</em></p>
+
+            <p style="width: 220px;margin-top:20px;margin-left:5px;">等级：
+                @for (int i = 1; i <= Model.Stars / 25; i++)
+            {
+                    <img src="~/Content/imgStar/jinguan.gif" />
+                }
+                @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+            {
+                    <img src="~/Content/imgStar/huangguan.gif" />
+                }
+                @for (int i = 1; i <= Model.Stars % 5; i++)
+            {
+                    <img src="~/Content/imgStar/zuanshi.gif" />
+                }
+            </p>
+            <p style="width: 110px;"><i class="ngz-ico-jg"></i>城市：<em title="@Model.CityName">@Model.CityName</em></p>
+            <p style="width: 110px;"><i class="ngz-ico-cy"></i>从业：<em>@Model.WorkYears</em></p>
             <p style="width: 220px;" class="ellipsis"><i class="ngz-ico-qy"></i>服务区域：<em title="@Model.AreasName">@Model.AreasName</em></p>
         </div>
         <div class="ngz-xx-w clear">
@@ -52,3 +67,29 @@
         </ul>
     </div>
 </div>
+<script>
+    $(function () {
+        $(".J_callForeman").click(function () {
+            var peoplename = $(this).attr("data-name");
+            var userid = $(this).attr("data-userid");
+            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+            } else {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '登陆',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['25%', '55%'],
+                    content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+
+        })
+    })
+</script>

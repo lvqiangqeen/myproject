@@ -181,7 +181,7 @@ namespace AIYunNet.CMS.Web.Handler
                 +",[WorkerImage],[thumbnailImage],[AddOn],[EditOn],[DeleteOn],[FlagDelete],[ProvinceID],[ProvinceName],[CityID]"
                 +",[CityName],[AreasID],[AreasName],[UserID],[PriceID],[PriceName],[WorkYearsID],[WorkYears],[WorkerPositionID]"
                 +",[WorkerPosition],[GoodAtStyleID],[GoodAtStyle],[PageViewCount],[CollectCount],[CommentCount],[BuildingCount]"
-                + ",[IsBuildingCount],[IsApproved],"
+                + ",[IsBuildingCount],[IsApproved],[Stars],"
                 + "Stars/25 as Huang,Stars%25/5 as Ying,Stars%25%5 as Xing");
 
             SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3}",
@@ -310,7 +310,8 @@ namespace AIYunNet.CMS.Web.Handler
                 + "[PeoplePhone],[PeopleMail],[Address],[WorkYears],[WorkYearsID],[PeopleInfo],[PeopleLevel],[GoodAtStyleID],"
                 + "[GoodAtStyle],[PeopleMotto],[CaseCount],[IsBuildingCount],[IsBond],[IsAuthentication],[IsApproved],"
                 + "[IsTop],[BelongArea],[ShowOrder],[PeopleImage],[DesignerImage],[thumbnailImage],[CompanyID],[CompanyName],"
-                + "[AddOn],[EditOn],[DeleteOn],[FlagDelete],[CityID],[CityName],[AreasID],[AreasName],[UserID],[PageViewCount],[CollectCount],[PriceID],ProvinceID,ProvinceName");
+                + "[AddOn],[EditOn],[DeleteOn],[FlagDelete],[CityID],[CityName],[AreasID],[AreasName],[UserID],[PageViewCount],[CollectCount],[PriceID],ProvinceID,ProvinceName,Stars,"
+                + "Stars / 25 as Huang, Stars % 25 / 5 as Ying, Stars % 25 % 5 as Xing");
             SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3} {4} {5} {6} ",
                 goodatid == "0" || string.IsNullOrEmpty(goodatid) ? "" : "and GoodAtStyleID like '%" + goodatid + "%'",
                 AreasID == "0" || string.IsNullOrEmpty(AreasID) ? "" : "and (AreasID='0' or AreasID like '%" + AreasID + "%')",

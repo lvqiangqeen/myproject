@@ -581,11 +581,11 @@ em.icon_xr{ background-position: -147px -48px;}
 .sub_zb_form .input_form .promise_txt{margin-top: 12px;color: #0cc1d3;text-align: center;line-height: 17px; font-family: '微软雅黑';}
 
 /*=======账号登录======*/
-.login_box{width:330px;height: 300px; position: relative; margin: 0 auto; margin-top: 5px;}
+.login_box{width:330px;height: 300px; position: relative; margin-top: 5px;}
 .login_box .tab_name{padding:5px 0 0;height: 38px; border-bottom: 1px #eee solid; margin: 0 40px 0; }
-.login_box .tab_name .icon{ width: 34px; height: 34px;position: absolute; top: 0; right: 0;cursor: pointer; background:url(http://img.shejiben.com/shejiben_img/login/icon_login.png) no-repeat; }
+/*.login_box .tab_name .icon{ width: 34px; height: 34px;position: absolute; top: 0; right: 0;cursor: pointer; background:url(http://img.shejiben.com/shejiben_img/login/icon_login.png) no-repeat; }
 .login_box .tab_name .icon_weixin_login{ background-position: 0 0;}
-.login_box .tab_name .icon_account_login{ background-position: -36px -3px;}
+.login_box .tab_name .icon_account_login{ background-position: -36px -3px;}*/
 .login_box .tab_name ul{ width: auto;height: 38px; display: block; margin: 0 auto; }
 .login_box .tab_name ul li{ width:125px; float: left; text-align: center; line-height: 38px; font-size: 16px; font-family: '微软雅黑'; cursor: pointer;  color: #333;}
 .login_box .tab_name ul li.on{color: #dd4f50; border-bottom: 2px #dd4f50 solid;}
@@ -919,85 +919,6 @@ Pagination Styles
 
 }
 
-
-
-#layui_layer_skinlayercss {display:none;position:absolute;width:1989px
-}
-.layui-layer, .layui-layer-shade {position:fixed;_position:absolute;pointer-events:auto}
-.layui-layer-shade {top:0;left:0;width:100%;height:100%;_height:expression(document.body.offsetHeight+"px")}
-.layui-layer {
-    top:150px;
-    left:50%;
-    margin:0;
-    padding:0;
-    background-color:#fff;
-    -webkit-background-clip:content;
-    box-shadow:1px 1px 50px rgba(0, 0, 0, .3);
-    border-radius:2px;
-    -webkit-animation-fill-mode:both;
-    animation-fill-mode:both;
-    -webkit-animation-duration:.3s;
-    animation-duration:.3s
-}
-.layui-layer-close {position:absolute}
-.layui-layer-content {position:relative}
-.layui-layer-border {border:1px solid #B2B2B2;border:1px solid rgba(0, 0, 0, .3);box-shadow:1px 1px 5px rgba(0, 0, 0, .2)}
-.layui-layer-moves {position:absolute;border:3px solid #666;border:3px solid rgba(0, 0, 0, .5);cursor:move;background-color:#fff;background-color:rgba(255, 255, 255, .3);filter:alpha(opacity=50)}
-.layui-layer-load {background:url(default/loading-0.gif) center center no-repeat #fff}
-.layui-layer-ico {background:url('http://img.shejiben.com/global.png?20160524') no-repeat}
-.layui-layer-btn a, .layui-layer-dialog .layui-layer-ico, .layui-layer-setwin a {display:inline-block;*display:inline;*zoom:1;vertical-align:top}
-.layui-layer-title {padding:0 80px 0 20px;height:42px;line-height:42px;font-size:14px;color:#fff;font-family: '微软雅黑'; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#333;border-radius:2px 2px 0 0}
-.layui-layer-setwin {position:absolute;right:0;*right:0;top:0;font-size:0;line-height:initial;}
-.layui-layer-setwin a {position:relative;width:16px;height:16px;margin-left:10px;font-size:12px;_overflow:hidden}
-.layui-layer-setwin .layui-layer-min cite {position:absolute;width:14px;height:2px;left:0;top:50%;margin-top:-1px;background-color:#2E2D3C;cursor:pointer;_overflow:hidden}
-.layui-layer-setwin .layui-layer-min:hover cite {background-color:#2D93CA}
-.layui-layer-setwin .layui-layer-max {background-position:-32px -40px}
-.layui-layer-setwin .layui-layer-max:hover {background-position:-16px -40px}
-.layui-layer-setwin .layui-layer-maxmin {background-position:-65px -40px}
-.layui-layer-setwin .layui-layer-maxmin:hover {background-position:-49px -40px}
-.layui-layer-setwin .layui-layer-close1 {background-position:0 -40px;cursor:pointer}
-.layui-layer-setwin .layui-layer-close1:hover {opacity:.7}
-.layui-layer-setwin .layui-layer-close2 {position:absolute;right:5px;top:9px;width:24px;height:24px;background-position: -56px -123px;*right:0;_display:none}
-.layui-layer-setwin .layui-layer-close{position:absolute;right:10px;top:9px;width:24px;height:24px;background-position: -56px -123px;*right:0;_display:none}
-.layui-layer-btn {text-align:center;padding:0 10px 30px;pointer-events:auto;}
-.layui-layer-btn a {width: auto;height:32px;line-height:32px;margin:0 10px;padding:0 20px;background-color:#f1f1f1;color:#333;border-radius:6px;font-size: 14px;font-weight:400;cursor:pointer;text-decoration:none;}
-.layui-layer-btn a:hover {opacity:.9;text-decoration:none}
-.layui-layer-btn a:active {opacity:.7}
-.layui-layer-btn .layui-layer-btn0 {background-color:#dd4f50;color:#fff}
-.layui-layer-dialog {min-width:260px}
-.layui-layer-dialog .layui-layer-content {position:relative;padding:20px;_padding:0; line-height:24px;word-break:break-all;font-size:14px;overflow:auto}
-.layui-layer-rim {border:6px solid #8D8D8D;border:6px solid rgba(0, 0, 0, .3);border-radius:5px;box-shadow:none}
-.layui-layer-msg {min-width:180px;border:1px solid #D3D4D3;box-shadow:none}
-.layui-layer-hui {position: absolute;min-width:100px;background-color:#000;filter:alpha(opacity=60);background-color:rgba(0, 0, 0, .6);color:#fff;border:none}
-.layui-layer-hui .layui-layer-content {padding:12px 25px;text-align:center}
-.layui-layer-dialog .layui-layer-padding {padding:20px 20px 20px 55px;text-align:left}
-.layui-layer-page .layui-layer-content {position:relative;overflow:auto}
-.layui-layer-iframe .layui-layer-btn, .layui-layer-page .layui-layer-btn {padding-top:10px}
-.layui-layer-nobg {background:0 0}
-.layui-layer-iframe .layui-layer-content {overflow:hidden}
-.layui-layer-iframe iframe {display:block;width:100%}
-.layui-layer-loading {border-radius:100%;background:0 0;box-shadow:none;border:none}
-.layui-layer-loading .layui-layer-content {width:60px;height:24px;background:url(default/loading-0.gif) no-repeat}
-.layui-layer-loading .layui-layer-loading1 {width:37px;height:37px;background:url(default/loading-1.gif) no-repeat}
-.layui-layer-ico16, .layui-layer-loading .layui-layer-loading2 {width:32px;height:32px;background:url(default/loading-2.gif) no-repeat}
-.layui-layer-tips {background:0 0;box-shadow:none;border:none}
-.layui-layer-tips .layui-layer-content {position:relative;line-height:22px;min-width:12px;padding:5px 10px;font-size:12px;_float:left;border-radius:3px;box-shadow:1px 1px 3px rgba(0, 0, 0, .3);background-color:#F90;color:#fff}
-.layui-layer-tips .layui-layer-close {right:-2px;top:-1px}
-.layui-layer-tips i.layui-layer-TipsG {position:absolute;width:0;height:0;border-width:8px;border-color:transparent;border-style:dashed;*overflow:hidden}
-.layui-layer-tips i.layui-layer-TipsB, .layui-layer-tips i.layui-layer-TipsT {left:5px;border-right-style:solid;border-right-color:#F90}
-.layui-layer-tips i.layui-layer-TipsT {bottom:-8px}
-.layui-layer-tips i.layui-layer-TipsB {top:-8px}
-.layui-layer-tips i.layui-layer-TipsL, .layui-layer-tips i.layui-layer-TipsR {top:1px;border-bottom-style:solid; border-bottom-color:#F90}
-.layui-layer-tips i.layui-layer-TipsR {left:-8px}
-.layui-layer-tips i.layui-layer-TipsL {right:-8px}
-.layui-layer-lan[type=dialog] {min-width:280px}
-.layui-layer-lan .layui-layer-title {background:#4476A7;color:#fff;border:none}
-.layui-layer-lan .layui-layer-btn {padding:10px;text-align:right;border-top:1px solid #E9E7E7}
-.layui-layer-lan .layui-layer-btn a {background:#BBB5B5;border:none}
-.layui-layer-lan .layui-layer-btn .layui-layer-btn1 {background:#C9C5C5;}
-.layui-layer-molv .layui-layer-title {background:#009f95;color:#fff;border:none}
-.layui-layer-molv .layui-layer-btn a {background:#009f95}
-.layui-layer-molv .layui-layer-btn .layui-layer-btn1 { background:#92B8B1}
 
 /*我的推广图片*/
 .gener_img img{display: inline;}

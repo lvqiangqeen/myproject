@@ -254,7 +254,7 @@ body{background:#f6f6f6}
 .gezhong_xxm ul li p{display:block; width:374px;height:auto; float:left; overflow:hidden; font-size:14px; line-height:20px; color:#999; margin-top:8px}
 /*一个订单信息*/
 .public_m5{height:auto; overflow:hidden}
-.public_m5 table tbody tr th{ background:#eaeaea; height:36px; font-weight:100; font-size:14px; text-align:center; line-height:36px}
+.public_m5 table tbody tr th{ background:#eaeaea; height:36px; font-weight:100; font-size:14px; text-align:left; line-height:36px}
 .public_m5 table{ width:100%;}
 
 .public_m5 table tbody tr td{ text-align:center; padding:8px 10px; font-size:12px; color:#333; border-bottom:1px solid #eaeaea}

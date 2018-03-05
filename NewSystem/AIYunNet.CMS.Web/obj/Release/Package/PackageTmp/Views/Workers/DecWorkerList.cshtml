@@ -130,12 +130,12 @@
                             
                             <li>工种：<span>{{item.WorkerPosition}}</span></li>
                             <li>从业：<span>{{item.WorkYears}}</span></li>
-                            <li>联系：<span style="display:none;">{{item.WorkerPhone}}</span><span class="Tel" title="点击查看电话" style="background: #14ae67;"><a href="javascript:void(0)">查看电话</a></span></li>
+                            <li>联系：<span style="display:none;">{{item.WorkerPhone}}</span><span class="Tel" title="点击查看电话" style="background: #46be8c;border: 1px solid #333;margin:2px;"><a href="javascript:void(0)" style="color: #fff;">查看电话</a></span></li>
                             <li>
-                                在建工地：<span>
-                                    <em style="font-size: 14px; color: #ea8731" title="9.0分">
-                                        {{item.IsBuildingCount}}
-                                    </em>
+                                等级：<span v-bind:title="item.Stars">
+                                         <img v-for="n in item.Huang" src="~/Content/imgStar/jinguan.gif" />
+                                         <img v-for="n in item.Ying" src="~/Content/imgStar/huangguan.gif" />
+                                         <img v-for="n in item.Xing" src="~/Content/imgStar/zuanshi.gif" />
                                 </span>
                             </li>
 

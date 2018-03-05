@@ -164,6 +164,9 @@ namespace AIYunNet.CMS.Domain.Model
 
         [Column("ProvinceName")]
         public string ProvinceName { get; set; }
+
+        [Column("Stars")]
+        public int Stars { get; set; }
         public WebPeople()
         {
             CollectCount = 0;
@@ -175,13 +178,14 @@ namespace AIYunNet.CMS.Domain.Model
             IsBuildingCount = 0;
             PageViewCount = 0;
             CommentCount = 0;
+            Stars = 0;
         }
     }
 
     public class WebPeoplePage
     {
         public int PeopleID { get; set; }
-
+        public int Stars { get; set; }
         public string PeopleName { get; set; }
 
         public string PeopleCategory { get; set; }
@@ -288,6 +292,11 @@ namespace AIYunNet.CMS.Domain.Model
 
 
         public string ProvinceName { get; set; }
+        public int Huang { get; set; }
+
+        public int Ying { get; set; }
+
+        public int Xing { get; set; }
 
         public List<WebCase> caselist { get; set; }
         public WebPeoplePage()
@@ -296,7 +305,7 @@ namespace AIYunNet.CMS.Domain.Model
             AddOn = DateTime.Now;
             FlagDelete = 0;
             ShowOrder = 0;
-            
+            Stars = 0;
             CaseCount = 0;
             IsBuildingCount = 0;
             PageViewCount = 0;

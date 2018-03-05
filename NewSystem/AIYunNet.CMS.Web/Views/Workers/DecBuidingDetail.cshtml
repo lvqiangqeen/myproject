@@ -18,6 +18,14 @@
     }
     //装修阶段
     int stageNow = Convert.ToInt32(ViewBag.buiding.StageNow);
+    WebBuidingCaseCommentService Ser = new WebBuidingCaseCommentService();
+    int id = Convert.ToInt32(ViewBag.buiding.BuidingID);
+    WebBuidingCaseComment comment = Ser.GetCommentByTypeAndID("WebBuiding", id);
+    string starclass = "";
+    if (comment != null)
+    {
+        starclass = "star-0" + comment.Score;
+    }
 }
 <link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
 <style>
@@ -42,7 +50,7 @@
             </ul>
         </div>
         <div class="gz-layout clear">
-            @{ Html.RenderPartial("_DecWorkLeader");}
+            @{ Html.RenderPartial("_DecWorkLeader");}       
             <div class="gz-716-border" style="padding-bottom: 30px;">
                 <div class="tit-w">
                     <h1>@ViewBag.buiding.BuidingTitle  @ViewBag.buiding.Space 平米</h1><span>阅读量：@ViewBag.buiding.PageViewCount 次</span>
@@ -51,11 +59,17 @@
                     <div class="jl-left">
                         工长：<span>@Model.WorkerName</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
                         合同价：<span>@ViewBag.buiding.Price 元</span>&nbsp;&nbsp;&nbsp;&nbsp;装修面积：<span>@ViewBag.buiding.Space m²</span><br />
-                        开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        @if (ViewBag.buiding.DemandID != 0)
+                        开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        @*@if (ViewBag.buiding.DemandID != 0)
                         {
                             @:监工：<strong>@ViewBag.buiding.superviseName</strong>
-                        }<br>
+                        }<br>*@
+                        @if (comment != null)
+                        {
+                            @:业主打分：<span><i class="@starclass"></i></span><br>
+                            @:业主评价：<span>@comment.Comment</span>
+
+                        }
                     </div>
                     <div class="jl-right">
                         <a href="javascript:void(0);" class="J_callVisit btn2" data-userid="@Model.UserID" data-name="@Model.WorkerName">找TA装修</a>
@@ -184,7 +198,7 @@
                     title: '登陆',
                     shadeClose: true,
                     shade: 0.8,
-                    area: ['25%', '55%'],
+                    area: ['330px', '330px'],
                     content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
                     end: function () {
                         location.reload();

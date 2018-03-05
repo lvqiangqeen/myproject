@@ -69,6 +69,30 @@
     <File Include="Areas/CompanyCenter/Views/web.config">
       <publishTime>05/18/2017 21:47:12</publishTime>
     </File>
+    <File Include="Areas/MobileApp/Views/App/BuidingStageInfo.cshtml">
+      <publishTime>03/05/2018 08:13:29</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/CaseProgressInfo.cshtml">
+      <publishTime>03/05/2018 08:13:29</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/Index.cshtml">
+      <publishTime>03/05/2018 08:13:29</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/PeopleCenter.cshtml">
+      <publishTime>03/05/2018 08:13:29</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/WorkerCaseList.cshtml">
+      <publishTime>03/05/2018 08:13:29</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/WorkerDetail.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/WorkerList.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/web.config">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
     <File Include="Areas/MustIndex/Views/Must/MustPage.cshtml">
       <publishTime>06/04/2017 13:17:35</publishTime>
     </File>
@@ -88,10 +112,16 @@
       <publishTime>02/07/2018 17:24:01</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/CenterCases/AddOrEditBuidingStages.cshtml">
-      <publishTime>02/08/2018 17:07:20</publishTime>
+      <publishTime>03/05/2018 10:26:53</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterCases/BuidingCommentScore.cshtml">
+      <publishTime>03/05/2018 09:43:36</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/CenterCases/BuidingStagesList.cshtml">
-      <publishTime>02/09/2018 17:06:04</publishTime>
+      <publishTime>03/05/2018 15:18:11</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterCases/BuidingStagesListByUser.cshtml">
+      <publishTime>03/05/2018 15:18:44</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/CenterCases/CenterCaselist.cshtml">
       <publishTime>02/07/2018 17:27:12</publishTime>
@@ -103,10 +133,22 @@
       <publishTime>02/09/2018 16:22:04</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/CenterCases/WorkerBuidingList.cshtml">
-      <publishTime>02/08/2018 17:01:31</publishTime>
+      <publishTime>02/26/2018 10:56:30</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/CenterCases/WorkerDemandList.cshtml">
-      <publishTime>02/08/2018 17:26:18</publishTime>
+      <publishTime>03/05/2018 10:24:19</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterDemand/Demanddetail.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterDemand/DemandListToMe.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterDemand/PeopleDemandList.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/CenterDemand/updateAndAddDemand.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/Certification/Authentication.cshtml">
       <publishTime>05/13/2017 22:39:07</publishTime>
@@ -118,13 +160,16 @@
       <publishTime>05/13/2017 19:25:42</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml">
-      <publishTime>02/08/2018 16:59:06</publishTime>
+      <publishTime>03/05/2018 15:54:05</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/Shared/_loginAndregister.cshtml">
       <publishTime>05/06/2017 22:05:34</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/UserCenter/LoginOn.cshtml">
       <publishTime>05/18/2017 16:10:48</publishTime>
+    </File>
+    <File Include="Areas/PeopleCenter/Views/UserCenter/LoinOnButton.cshtml">
+      <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Areas/PeopleCenter/Views/UserCenter/PeopleCenterIndex.cshtml">
       <publishTime>05/18/2017 16:14:35</publishTime>
@@ -382,28 +427,28 @@
       <publishTime>05/23/2017 19:54:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>02/09/2018 17:10:14</publishTime>
+      <publishTime>03/05/2018 15:56:32</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>02/09/2018 17:10:14</publishTime>
+      <publishTime>03/05/2018 15:56:33</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>02/09/2018 17:10:14</publishTime>
+      <publishTime>03/05/2018 15:56:32</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>02/09/2018 17:10:13</publishTime>
+      <publishTime>03/05/2018 15:56:32</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>02/09/2018 17:10:15</publishTime>
+      <publishTime>03/05/2018 15:56:33</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>02/09/2018 17:10:51</publishTime>
+      <publishTime>03/05/2018 15:56:52</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>02/09/2018 17:10:51</publishTime>
+      <publishTime>03/05/2018 15:56:52</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -1907,6 +1952,36 @@
     </File>
     <File Include="Content/BootStrap_Yellow/typography.html">
       <publishTime>04/12/2017 17:14:01</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/demo.html">
+      <publishTime>03/02/2018 16:44:36</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/btn.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/infobox-bg-l-r.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/infobox-bg-l.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/infobox-bg.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/star-tips.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/stars-all.gif">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/images/comment/stars.jpg">
+      <publishTime>03/02/2018 16:43:19</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/js/comment.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/BuidingComment/js/jquery-1.4.2.min.js">
+      <publishTime>03/02/2018 16:43:19</publishTime>
     </File>
     <File Include="Content/chahua25/about.html">
       <publishTime>04/24/2017 23:16:34</publishTime>
@@ -6615,6 +6690,9 @@
     <File Include="Content/design/js/theme/default/loading-2.gif">
       <publishTime>01/22/2018 15:49:32</publishTime>
     </File>
+    <File Include="Content/design/layui-layer.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
     <File Include="Content/design/sheji.about.css">
       <publishTime>01/02/2018 11:45:23</publishTime>
     </File>
@@ -6637,7 +6715,7 @@
       <publishTime>02/06/2018 17:12:44</publishTime>
     </File>
     <File Include="Content/design/sheji.designerlist.css">
-      <publishTime>02/06/2018 17:29:52</publishTime>
+      <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Content/design/sheji.download.css">
       <publishTime>01/30/2018 13:31:33</publishTime>
@@ -6646,7 +6724,7 @@
       <publishTime>11/29/2017 09:00:34</publishTime>
     </File>
     <File Include="Content/design/sheji.global.css">
-      <publishTime>01/16/2018 14:08:01</publishTime>
+      <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Content/design/sheji.header.css">
       <publishTime>01/02/2018 17:30:43</publishTime>
@@ -6664,10 +6742,10 @@
       <publishTime>01/18/2018 12:38:58</publishTime>
     </File>
     <File Include="Content/design/sheji.workleader.css">
-      <publishTime>01/15/2018 16:26:17</publishTime>
+      <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Content/design/sheji.workleaderdetail.css">
-      <publishTime>02/01/2018 10:04:32</publishTime>
+      <publishTime>03/05/2018 10:48:33</publishTime>
     </File>
     <File Include="Content/design/swiper/swiper-3.4.2.jquery.min.js">
       <publishTime>11/29/2017 10:52:51</publishTime>
@@ -7308,6 +7386,21 @@
     <File Include="Content/images/work_case.png">
       <publishTime>02/07/2017 23:10:16</publishTime>
     </File>
+    <File Include="Content/imgStar/huangguan.gif">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/imgStar/jinguan.gif">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/imgStar/jinstar.gif">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/imgStar/yinstar.gif">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/imgStar/zuanshi.gif">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
     <File Include="Content/jqeryMasonry/dist/fonts/chroma-ui/chroma-ui.eot">
       <publishTime>12/05/2017 11:08:46</publishTime>
     </File>
@@ -7591,7 +7684,7 @@
       <publishTime>02/05/2018 10:04:39</publishTime>
     </File>
     <File Include="Content/meichen/css/user_center.css">
-      <publishTime>02/05/2018 15:05:59</publishTime>
+      <publishTime>03/05/2018 15:10:41</publishTime>
     </File>
     <File Include="Content/meichen/desHome.html">
       <publishTime>04/30/2017 18:35:39</publishTime>
@@ -8126,6 +8219,372 @@
     </File>
     <File Include="Content/Mindex/index.html">
       <publishTime>11/28/2017 09:32:57</publishTime>
+    </File>
+    <File Include="Content/mobileapp/css/base.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/css/class.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/css/common.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/css/commonbake.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/1.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/2.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/3.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/4.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/back.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/book-process.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/book-recovery-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/camera.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/car-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/checkbox-on.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/checkbox.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/class-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/clear.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/coupons-greybg.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/coupons-redbg.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/dbaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/details-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/djaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/djwx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/dz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/eszh.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/face-bg.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/fwdh.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/fwdz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/fwfw.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/fwqy.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/hc.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/header-bot-tel.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/home-on.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/home.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/hyps.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/ind-banner.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/ind-tit.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/input-icon.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/integral-bg.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/jjaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/jjwx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/kc.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/mbc.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/mbxf.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/more.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-arrow.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-face-pic.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-bzzx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-ddjd.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-grzl.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-gsjj.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-kfzx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-wddd.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-wdjf.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-icon-yhq.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-on.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-order-address.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my-order-time.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/my.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/order-details-icon.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/order-evaluation-icon.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/order-on.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/order.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/other-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/pro-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/qzaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/repair-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/sf.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/sj.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/star.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/tip.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/topthree-icon.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/user-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/weixin.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/work-ages.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/work-type.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/worker-address.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/worker-img.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/worker-on.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/worker.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/wyaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/wywx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/xczx.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/xsgdst.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/ybddaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/yh.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/yinlian.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/ymaz.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/images/zhifubao.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/class/iscroll-5.1.2.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/class/slideNav.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/common.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/exif.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/iosOverlay.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/jquery.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/css/mui.diy.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/css/mui.min.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/css/mui.picker.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/css/mui.poppicker.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/js/mui.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/js/mui.picker.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/js/mui.poppicker.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/js/mui.previewimage.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/mui/js/mui.zoom.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/TouchSlide.1.1.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/js/upload_img.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/css/index.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/css/onlinebusinesshall/newexpand/css/index-debug.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/btn-bg-active.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/btn-bg.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/circle-active.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/circle.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/ling-bg.jpg">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/images/success.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/css/jquery.step.css">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/images/bar-bg-active.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/images/bar-bg.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/images/cell-active.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/images/cell.png">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery-step/js/jquery.step.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
+    </File>
+    <File Include="Content/mobileapp/progress/static/lib/jquery/1.8/jquery.min.js">
+      <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Content/MustIndex/css/animation.css">
       <publishTime>06/04/2017 09:19:32</publishTime>
@@ -13513,7 +13972,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>02/09/2018 17:10:43</publishTime>
+      <publishTime>03/05/2018 15:56:42</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -13657,7 +14116,7 @@
       <publishTime>01/12/2018 17:49:08</publishTime>
     </File>
     <File Include="Views/DecorationCompany/DecCompanyList.cshtml">
-      <publishTime>01/10/2018 08:41:23</publishTime>
+      <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Views/DecorationCompany/SecondCaseDetail.cshtml">
       <publishTime>02/07/2017 23:10:17</publishTime>
@@ -13756,13 +14215,13 @@
       <publishTime>12/04/2017 14:08:37</publishTime>
     </File>
     <File Include="Views/Shared/_headCssJs.cshtml">
-      <publishTime>02/05/2018 09:59:00</publishTime>
+      <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>10/25/2017 20:01:33</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDec.cshtml">
-      <publishTime>01/30/2018 15:07:00</publishTime>
+      <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDecCompany.cshtml">
       <publishTime>12/01/2017 16:04:35</publishTime>
@@ -13786,28 +14245,28 @@
       <publishTime>11/02/2017 13:50:51</publishTime>
     </File>
     <File Include="Views/Workers/DecBuidingDetail.cshtml">
-      <publishTime>02/09/2018 16:02:01</publishTime>
+      <publishTime>03/05/2018 11:15:01</publishTime>
     </File>
     <File Include="Views/Workers/DecDesignerIndex.cshtml">
-      <publishTime>02/06/2018 16:08:46</publishTime>
+      <publishTime>03/05/2018 11:14:49</publishTime>
     </File>
     <File Include="Views/Workers/DecDesignerList.cshtml">
-      <publishTime>02/06/2018 16:07:49</publishTime>
+      <publishTime>03/05/2018 15:27:26</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkerBuidingDetail.cshtml">
-      <publishTime>01/22/2018 16:29:24</publishTime>
+      <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkerDetail.cshtml">
       <publishTime>01/21/2018 17:51:18</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkerList.cshtml">
-      <publishTime>01/24/2018 17:15:20</publishTime>
+      <publishTime>03/05/2018 11:33:39</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkLeaderDetail.cshtml">
-      <publishTime>02/08/2018 14:49:12</publishTime>
+      <publishTime>03/05/2018 11:13:38</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkLeaderList.cshtml">
-      <publishTime>01/18/2018 10:44:36</publishTime>
+      <publishTime>03/05/2018 11:35:42</publishTime>
     </File>
     <File Include="Views/Workers/WorkersDesignerDetail.cshtml">
       <publishTime>02/08/2017 20:53:35</publishTime>
@@ -13843,7 +14302,7 @@
       <publishTime>02/08/2017 20:53:35</publishTime>
     </File>
     <File Include="Views/Workers/_DecWorkLeader.cshtml">
-      <publishTime>01/17/2018 16:21:24</publishTime>
+      <publishTime>03/05/2018 08:55:01</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>01/31/2018 10:49:09</publishTime>
