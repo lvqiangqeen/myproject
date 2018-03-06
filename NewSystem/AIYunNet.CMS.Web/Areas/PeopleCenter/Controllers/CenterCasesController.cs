@@ -103,7 +103,8 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult AddOrEditBuidingStages(WebBuiding webBuiding)
+        [ValidateInput(false)]
+        public JsonResult AddOrEditBuidingStages(WebBuiding webBuiding)
 		{
 			WebBuidingService service = new WebBuidingService();
 			if (webBuiding.BuidingID > 0)

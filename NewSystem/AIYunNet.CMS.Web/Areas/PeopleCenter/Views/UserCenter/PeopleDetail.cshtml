@@ -11,6 +11,9 @@
     WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
 }
 <style>
+        .error{
+	color:red;
+}
     .zp_nrm_r em {
         display: block;
         float: left;
@@ -58,14 +61,14 @@
                     $("#" + id).nextAll("a").removeClass("active");
 
                     $("#" + id + "list").attr("style", "");
-                    $("#" + id + "list").prevAll("div").attr("style", "display:none;");
-                    $("#" + id + "list").nextAll("div").attr("style", "display:none;");
+                    $("#" + id + "list").prevAll("form").attr("style", "display:none;");
+                    $("#" + id + "list").nextAll("form").attr("style", "display:none;");
 
                 });
             </script>
         </div>
         <div class="items-con">
-            <div class="zp_nrm" id="UacountInfolist">
+            <form class="zp_nrm" id="UacountInfolist">
                 <input type="hidden" value="@webuser.PositionCode" name="PositionCode" />
                 <input type="hidden" value="@webuser.PositionType" name="PositionType" />
                 <!--left-->
@@ -78,7 +81,7 @@
                 </div>
                 <!--right-->
                 <div class="zp_nrm_r">
-                    <p><em>用户名(昵称)：</em><i><input type="text" class="u-ipt-txt" value="@webuser.NickName" style="margin-top:11px; width:100px;" name="NickName" /></i></p>
+                    <p><em>用户名(昵称)：</em><i><input type="text" class="u-ipt-txt" value="@webuser.NickName" style="margin-top:11px; width:100px;" name="NickName" required/></i></p>
                     <p>
                         <em>类&nbsp;&nbsp;&nbsp;&nbsp;别：</em>
                         <i>@webcommenservice.GetLookupDesc("User_position", webuser.PositionCode)</i>
@@ -89,9 +92,9 @@
                     </p>
 
 
-                    <p><em>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</em><i><input type="text" class="u-ipt-txt" value="@webuser.Email" style="margin-top:11px; width:180px;" name="Email" /></i></p>
+                    <p><em>邮&nbsp;&nbsp;&nbsp;&nbsp;箱：</em><i><input type="email" class="u-ipt-txt" value="@webuser.Email" style="margin-top:11px; width:180px;" name="Email" /></i></p>
                     <p><em>手&nbsp;机&nbsp;号：</em><i>@webuser.Telephone</i><a href="u_safe.html">更换</a></p>
-                    <p><em>真实姓名：</em><i><input type="text" class="u-ipt-txt" value="@webuser.TrueName" style="margin-top:11px; width:100px;" name="TrueName" /></i></p>
+                    <p><em>真实姓名：</em><i><input type="text" class="u-ipt-txt" value="@webuser.TrueName" style="margin-top:11px; width:100px;" name="TrueName" required/></i></p>
                     <p><em>性&nbsp;&nbsp;&nbsp;&nbsp;别：</em><i><input type="radio" value="男" name="Sex" />男</i><i><input type="radio" value="女" name="Sex" />女</i></p>
                     <span class="borth_m">
                         <em>所在地：</em>
@@ -227,7 +230,7 @@
                     <div><a href="javascript:void(0);" class="public_m3" id="userbutton">保存修改</a></div>
                 </div>
 
-            </div>
+            </form>
             @if (webuser.PositionCode == "WebPeople")
             {
                 Html.RenderPartial("_DesignerView");
@@ -313,8 +316,13 @@
         $("input[name='AreasID']").val(AreasID);
         $("input[name='AreasName']").val(AreasName);
     }
-
+    //验证
+    var isValidate = $("#UacountInfolist").validate();
     $("#userbutton").click(function () {
+        if (!isValidate.checkForm()) {
+            isValidate.showErrors();
+            return false;
+        }
         getArea();
         var NickName = $("input[name=NickName]").val();
         var TrueName = $("input[name=TrueName]").val();
@@ -355,11 +363,14 @@
             },
             success: function (data) {
                 if (data == 1) {
-                    alert("修改成功！");
-                    window.location.href = window.location.href;
+                    layer.alert('修改成功', { icon: 6 }, function (index) {
+                        window.location.href = window.location.href;
+                    });
                 }
                 else {
-                    alert("修改失败！");
+                    layer.alert('修改失败', { icon: 5 }, function (index) {
+                        window.location.href = window.location.href;
+                    });
                 }
             },
             error: function (xhr, type) {

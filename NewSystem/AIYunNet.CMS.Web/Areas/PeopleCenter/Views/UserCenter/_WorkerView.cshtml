@@ -25,7 +25,7 @@
     workyearlist = webcommenservice.GetLookupList("people_workyear");
 }
 
-<div class="zp_nrm" style="display:none;" id="UproInfolist">
+<form class="zp_nrm" style="display:none;" id="UproInfolist">
     <!--left-->
     <div class="zp_nrm_l">
         <img src="@AppSettingsHelper.ImgUrl@webWorker.WorkerImage">
@@ -57,7 +57,7 @@
                 </select>
             </i>
         </p>
-        <p><em>工程价位：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.PriceName" style="margin-top:11px; width:50px;" name="PriceName" />元/m²</i></p>
+        <p><em>工程价位：</em><i><input type="number" class="u-ipt-txt" value="@webWorker.PriceName" style="margin-top:11px; width:50px;" name="PriceName" required/>元/m²</i></p>
         <p><em>擅长领域：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.GoodAtStyle" style="margin-top:11px; width:450px;" name="GoodAtStyle" /></i></p>
         <p><em>评价自己：</em><i><input type="text" class="u-ipt-txt" value="@webWorker.WorkerMotto" style="margin-top:11px; width:450px;" name="WorkerMotto" /></i></p>
         <p style="height:173px"><em>个人简介：</em><i><textarea class="u-ipt-txt" cols="20" id="WorkerInfo" name="WorkerInfo" placeholder="请输入描述" rows="5" style="margin-top:11px; width:450px;height:140px;"></textarea></i></p>
@@ -65,7 +65,7 @@
         <div><a href="javascript:void(0);" class="public_m3" id="workerbutton">保存修改</a></div>
     </div>
 
-</div>
+</form>
 <script>
     $(function () {
         //身份
@@ -87,7 +87,12 @@
         {
             $("#WorkerInfo").val(WorkerInfo);
         }
+        var isValidate = $("#UproInfolist").validate();
         $("#workerbutton").click(function () {
+            if (!isValidate.checkForm()) {
+                isValidate.showErrors();
+                return false;
+            }
             var WorkerPositionID=$("#WorkerPositionID").val();
             var WorkerPosition=$("#WorkerPositionID option:checked").text();
             var WorkYearsID=$("#WorkYearsID").val();
@@ -113,11 +118,15 @@
                 },
                 success: function (data) {
                     if (data == 1) {
-                        alert("修改成功！");
-                        window.location.href = window.location.href;
+                        layer.alert('修改成功', {icon: 6},function(index){
+                            window.location.href=window.location.href;
+                        });
+                        
                     }
                     else {
-                        alert("修改失败！");
+                        layer.alert('修改失败', { icon: 5 }, function (index) {
+                            window.location.href = window.location.href;
+                        });
                     }
                 },
                 error: function (xhr, type) {

@@ -124,6 +124,7 @@ namespace AIYunNet.CMS.Web.Handler
             string AreasID = context.Request["AreasID"];
             string CompanyID= context.Request["CompanyID"];
             string WorkerID = context.Request["WorkerID"];
+            string DemandID= context.Request["DemandID"];
             string SortOrder = context.Request["SortOrder"];
             string SortParameters = "";
             int pageCount = 0;
@@ -134,10 +135,11 @@ namespace AIYunNet.CMS.Web.Handler
                      + ",[CollectCount],[ZanCount],[CommentCount],[IsHot],[IsTop],[Price],[Space],[constructionstageID]"
                      + ",[constructionstage],[ResultID],[StartTime],[StageNow],[EndTime],[superviseName],[UserID],[DemandID]");
 
-            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} ",
+            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3} ",
                 CompanyID == "0" || string.IsNullOrEmpty(CompanyID) ? "" : "and CompanyID="+ CompanyID,
                 WorkerID == "0" || string.IsNullOrEmpty(WorkerID) ? "" : "and WorkerID=" + WorkerID,
-                AreasID == "0" || string.IsNullOrEmpty(AreasID) ? "" : "and (AreasID='0' or AreasID like '%" + AreasID + "%')");
+                AreasID == "0" || string.IsNullOrEmpty(AreasID) ? "" : "and (AreasID='0' or AreasID like '%" + AreasID + "%')",
+                string.IsNullOrEmpty(DemandID) ? "" : "and DemandID='0'");
 
             Pagination paginfo = new Pagination();
             paginfo.SelectParameters = SelectParameters;

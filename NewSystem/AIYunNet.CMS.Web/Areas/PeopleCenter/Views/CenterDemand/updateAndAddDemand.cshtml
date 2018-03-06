@@ -19,6 +19,13 @@
 
     string userid = string.IsNullOrEmpty(Request["UserID"])?"0": Request["UserID"];
     string peoplename = Request["peoplename"];
+    if (Model.GetUserID != 0)
+    {
+        WebUserService userSer = new WebUserService();
+        WebUser user = userSer.GetWebUserByID(Model.GetUserID);
+        peoplename = user.TrueName;
+    }
+
 }
 
 <style>
@@ -64,29 +71,32 @@
                 <div class="req-push-title"><p class="req-name"><i></i><span>填写需求信息</span>
                     @if (userid != "0")
                     {
-                        <span>(发送给 @peoplename)</span>
+                        <span style="color:red;">(发送给 @peoplename)</span>
+                    }
+                    else if (Model.GetUserID != 0)
+                    {
+                        <span style="color:red;">(发送给 @peoplename)</span>
                     }
                     </p></div>
                 <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称</span></div>
                     <div class="tab-r">
-                        <input id="buidingname" name="buidingname" value="@Model.buidingname" minlength="2" type="text" placeholder = "请简单写出您的标题（5-20个字)" class = "form-ipt-txt" style = "width:30%"  required>
-                        @*@Html.TextBoxFor(m => m.buidingname, new { @class = "form-ipt-txt", placeholder = "请简单写出您的标题（5-20个字)" })*@
+                        <input id="buidingname" name="buidingname" value="@Model.buidingname" minlength="2" type="text" placeholder="请简单写出您的标题（5-20个字)" class="u-ipt-txt" style = "width:30%"  required>                      
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label"><i>*</i>需求类型</span></div>
+                    <div class="tab-l"><span class="form-box-label">需求类型</span></div>
                     <div class="tab-r">
-                        @Html.DropDownListFor(m => m.DemandType, new SelectList(demandtypelist, "Value", "Text"), new { @class = "form-control", id = "DemandType", style = "width:20%" })
+                        @Html.DropDownListFor(m => m.DemandType, new SelectList(demandtypelist, "Value", "Text"), new { @class = "ziliao-diqu-ipt", id = "DemandType", style = "width:20%" })
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i></i>所在城市</span></div>
                     <div class="tab-r">
-                        @Html.DropDownListFor(m => m.ProvinceID, new SelectList(provinceList, "Value", "Text"), new { @class = "form-control", id = "ProvinceID", style = "width:20%;" })
-                        <select name="CityID" class="form-control" id="cityid" style = "width:20%;"></select>
+                        @Html.DropDownListFor(m => m.ProvinceID, new SelectList(provinceList, "Value", "Text"), new { @class = "ziliao-diqu-ipt", id = "ProvinceID", style = "width:20%;" })
+                        <select name="CityID" class="ziliao-diqu-ipt" id="cityid" style = "width:20%;"></select>
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -138,31 +148,32 @@
                 </script>
                 <div class="form-box-list">
                     <div class="tab-l">
-                        <span class="form-box-label">装修面积</span>
+                        <span class="form-box-label"><i>*</i>装修面积</span>
                     </div>
                     <div class="tab-r">
-                        @Html.TextBoxFor(m => m.buidingSpace, new { style = "width:10%" }) m²
-                    </div>
-                    <div class="clearfiexd"></div>
-                </div>
-                <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label">您的姓名</span></div>
-                    <div class="tab-r">
-                        @Html.TextBoxFor(m => m.ownername, new { @class = "form-ipt-txt", style = "width:20%" })
+                        <input id="buidingSpace" name="buidingSpace" value="@Model.buidingSpace" class="u-ipt-txt" min="5"  type="number"  style="width:10%" required>m²
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label">您的联系方式</span></div>
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>您的姓名</span></div>
                     <div class="tab-r">
-                        @Html.TextBoxFor(m => m.ownertel, new { @class = "form-ipt-txt", style = "width:20%" })
+                        <input id="ownername" name="ownername" value="@Model.ownername" class="u-ipt-txt" type="text" style="width:10%" required>
+                        @*@Html.TextBoxFor(m => m.ownername, new { @class = "form-ipt-txt", style = "width:20%" })*@
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label">简单介绍</span></div>
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>您的联系方式</span></div>
                     <div class="tab-r">
-                        @Html.TextBoxFor(m => m.OneSentence, new { @class = "form-ipt-txt", placeholder = "一句话描述您的需求" })
+                        <input id="ownertel" name="ownertel" value="@Model.ownertel" class="u-ipt-txt" type="text" style="width:20%" required>
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                    <div class="tab-r">
+                        <input id="OneSentence" name="OneSentence" value="@Model.OneSentence" class="u-ipt-txt" type="text" style="width:50%"  placeholder="一句话描述您的需求" required>
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -171,7 +182,7 @@
                         <span class="form-box-label">需求说明</span>
                     </div>
                     <div class="tab-r">
-                        @Html.TextAreaFor(m => m.Info, new { row = "6", col = "10" , style = "width:85%;height:150px;" })
+                        @Html.TextAreaFor(m => m.Info, new { row = "6", col = "10" , style = "width:85%;height:150px;",@class="u-ipt-txt" })
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -208,11 +219,6 @@
                     isValidate.showErrors();
                     return false;
                 }
-                if (!buidingname) {
-                    alert("标题不能为空");
-                    $("#buidingname").focus();
-                    return;
-                }
                 var DemandType = $("#DemandType").val();
                 var DemandTypeName = $("#DemandType").find("option:selected").text();
                 var ProvinceID = $("#ProvinceID").val();
@@ -227,6 +233,10 @@
                 var IsPublish = $("#IsPublish").prop("checked") ? true : false;
                 var GetUserID = $("#userid").val();
                 var GetUserType = "WebUser";
+                if ("@userid" == 0 && IsPublish == false) {
+                    layer.msg('您的需求没有勾选发布到大厅，施工者无法看到。');
+                    return false;
+                }
                 $.ajax({
                     type: "post",
                     url: "/PeopleCenter/CenterDemand/updateAndAddDemand",
@@ -252,11 +262,14 @@
                     success: function (data) {
                         if (data.RetCode == 1) {
                             if (id > 0) {
-                                alert("修改成功！");
+                                layer.alert('修改成功', { icon: 6 }, function (index) {
+                                    window.location.href = $.session.get('lasturl');
+                                });
                             } else {
-                                alert("添加成功！");
+                                layer.alert('添加成功', { icon: 6 }, function (index) {
+                                    window.location.href = $.session.get('lasturl');
+                                });
                             }
-                            window.location.href =  $.session.get('lasturl');
 
                         }
                     }

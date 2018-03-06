@@ -29,7 +29,7 @@
     List<WebLookup> priceList = webcommenservice.GetLookupList("People_Dec_price");
 
 }
-<div class="zp_nrm" style="display:none;" id="UproInfolist">
+<form class="zp_nrm" style="display:none;" id="UproInfolist">
     <!--left-->
     <div class="zp_nrm_l">
         <img src="@AppSettingsHelper.ImgUrl@webpeople.PeopleImage">
@@ -98,7 +98,7 @@
         <div><a href="javascript:void(0);" class="public_m3" id="peoplebutton">保存修改</a></div>
     </div>
 
-</div>
+</form>
 
 <script>
     $(function(){
@@ -220,11 +220,14 @@
                 },
                 success: function (data) {
                     if (data == 1) {
-                        alert("修改成功！");
-                        window.location.href = window.location.href;
+                        layer.alert('修改成功', { icon: 6 }, function (index) {
+                            window.location.href = window.location.href;
+                        });
                     }
                     else {
-                        alert("修改失败！");
+                        layer.alert('修改失败', { icon: 5 }, function (index) {
+                            window.location.href = window.location.href;
+                        });
                     }
                 },
                 error: function (xhr, type) {

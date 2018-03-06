@@ -118,7 +118,7 @@ a:hover,a:active,a:focus{outline:none;}
 .gz-250 .ngz-border .ngz-pj-w li .name-w img {width: 46px;height: 46px;border-radius: 23px;float: left;margin-right: 10px;}
 .gz-250 .ngz-border .ngz-pj-w li p {color: #969696;line-height: 18px;margin-top: 15px;}
 
-.ngz-case, .ngz-case dt, .ngz-case dd { height:165px; overflow:hidden;}
+.ngz-case, .ngz-case dt, .ngz-case dd { height:180px; overflow:hidden;}
 .ngz-case dt, .ngz-case dd {float:left;}
 .ngz-case {width:686px; padding:30px 0;border-bottom: 1px dotted #a0a0a0;}
 .ngz-case dt { width:220px;}

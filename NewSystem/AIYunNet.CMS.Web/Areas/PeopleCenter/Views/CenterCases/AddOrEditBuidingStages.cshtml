@@ -1,5 +1,7 @@
 ﻿@model AIYunNet.CMS.Domain.Model.WebBuiding
+@using AIYunNet.CMS.BLL.Service
 @using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.Domain.Model;
 @{
     ViewBag.Title = "AddBuidingStages";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
@@ -12,11 +14,19 @@
     }
     IEnumerable<SelectListItem> workPositionList = ViewBag.workPositionList as IEnumerable<SelectListItem>;
     int DemandID = Convert.ToInt32(Request["DemandID"]);
+    DemandService DeSer = new DemandService();
+    DecDemand demand = DeSer.GetDecDemandByID(DemandID);
     string Guid = Request["Guid"];
     int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
 }
+@section head{
+    <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
 <link href="~/Content/Plugins/datepicker/datepicker3.css" rel="stylesheet" />
 <style>
+    .error {
+        color: red;
+    }
+
     #stageCaseForm textarea, input {
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -44,40 +54,49 @@
         margin-right: 5px;
     }
 </style>
+}
+
 <div class="centers_mr">
     <div class="centers_r_items">
         <div class="upload-left">
             <form id="stageCaseForm">
                 @Html.HiddenFor(m => m.BuidingID)
                 <div class="req-push-title"><p class="req-name"><i></i><span>填写工程计划</span></p></div>
-                <div class="form-box-list">
+
+                @if (DemandID == 0)
+                {   <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称(工程标题)</span></div>
                     <div class="tab-r">
-                        @Html.TextBoxFor(m => m.BuidingTitle, new { @class = "form-ipt-txt", placeholder = "请简单写出您的标题（5-20个字)" })
+                        <input id="BuidingTitle" name="BuidingTitle" value="@Model.BuidingTitle" type="text" class="u-ipt-txt" style="width:30%" />
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
-                @if (DemandID == 0)
-                {
-                    <div class="form-box-list">
-                        <div class="tab-l"><span class="form-box-label">简单介绍</span></div>
-                        <div class="tab-r">
-                            @Html.TextAreaFor(m => m.BuidingBrief, new { row = "4", col = "10" })
-                        </div>
-                        <div class="clearfiexd"></div>
+                <div class="form-box-list">
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                    <div class="tab-r">
+                        @Html.TextAreaFor(m => m.BuidingBrief, new { row = "4", col = "10", style = "width:80%", })
                     </div>
+                    <div class="clearfiexd"></div>
+                </div>
                     <div class="form-box-list">
                         <div class="tab-l">
-                            <span class="form-box-label">详细介绍</span>
+                            <span class="form-box-label"><i>*</i>详细介绍</span>
                         </div>
                         <div class="tab-r">
-                            @Html.TextAreaFor(m => m.BuidingInfo, new { row = "4", col = "10" })
+                            @Html.TextAreaFor(m => m.BuidingInfo, new { row = "4", col = "10", style = "height:400px;width:80%", })
                         </div>
                         <div class="clearfiexd"></div>
                     </div>
                 }
                 else
                 {
+                    <div class="form-box-list">
+                        <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称(工程标题)</span></div>
+                        <div class="tab-r">
+                            <input id="BuidingTitle" name="BuidingTitle" value="@demand.buidingname" type="text" class="u-ipt-txt" readonly="readonly" style="width:30%" /><label style="color:red;">此标题为业主小区名称不能修改</label>
+                        </div>
+                        <div class="clearfiexd"></div>
+                    </div>
                     <div class="form-box-list">
                         <div class="tab-l">
                             <span class="form-box-label">阶段设置(<span style="color:#ff0000">最多设置6个</span>)</span>
@@ -113,16 +132,16 @@
                         </div>
                         <div class="clearfiexd"></div>
                     </div>
-}
+                }
                 <div class="form-box-list">
                     <div class="tab-l">
-                        <span class="form-box-label">项目情况</span>
+                        <span class="form-box-label"><i>*</i>项目情况</span>
                     </div>
                     <div class="tab-r">
                         <span class="set_l">价格</span>
-                        @Html.TextBoxFor(m => m.Price, new { style = "width:10%" }) 元
+                        @Html.TextBoxFor(m => m.Price, new { style = "width:5%", @class = "u-ipt-txt" }) 元
                         <span class="set_l">面积</span>
-                        @Html.TextBoxFor(m => m.Space, new { style = "width:10%" }) m²
+                        @Html.TextBoxFor(m => m.Space, new { style = "width:5%", @class = "u-ipt-txt" }) m²
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -131,7 +150,7 @@
                         <span class="form-box-label">施工开始时间</span>
                     </div>
                     <div class="tab-r">
-                        <input type="text" id="datetimepicker" style="width:120px;" class="input-text" name="StartTime" value="@Model.StartTime">
+                        <input type="text" id="datetimepicker" style="width:120px;" class="u-ipt-txt" name="StartTime" value="@Model.StartTime">
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -140,13 +159,13 @@
                     <div class="tab-r">
                         <div class="upimg">
                             @if (string.IsNullOrWhiteSpace(Model.thumbnailImage))
-							{
-                            <img src="" id="ImgLook" style="width:380px;height:280px;">
-							}
-							else
-							{
-                            <img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" id="ImgLook" style="width:380px;height:280px;">
-							}
+                            {
+                                <img src="" id="ImgLook" style="width:380px;height:280px;">
+                            }
+                            else
+                            {
+                                <img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" id="ImgLook" style="width:380px;height:280px;">
+                            }
                             <input class="btn btn-default" style="width:100px;margin-left:10px;" type='button' value='选择图片' onclick='javascript: $("#ImageUpload").click();' />
                             <input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" />
                             <a class="btn btn-primary" style="color:#fff" href="javascript:void(0);" id="BtnUpload">上传图片</a>
@@ -162,9 +181,9 @@
                     <div class="tab-l">
                         <span class="form-box-label">设置</span>
                     </div>
-                    <div class="tab-r set_div">
+                    <div class="tab-r">
                         <span class="set_l">显示顺序</span>
-                        @Html.TextBoxFor(m => m.ShowOrder)
+                        @Html.TextBoxFor(m => m.ShowOrder, new { style = "width:5%", @class = "u-ipt-txt" })
                         <span class="set_l" style="display:none;">热门推荐</span>
                         @Html.CheckBoxFor(m => m.IsHot, new { style = "display:none;" })
                         <span class="set_l">置顶显示</span>
@@ -185,9 +204,9 @@
     <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
     <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload-ui.js"></script>
     <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.iframe-transport.js"></script>
-<script src="~/Content/Plugins/datepicker/bootstrap-datepicker.js"></script>
-<script src="~/Content/Plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
-
+    <script src="~/Content/Plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/Plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
     <script>
         $(function () {
             $("#datetimepicker").datepicker({
@@ -198,7 +217,6 @@
                 todayHighlight: true,
                 format: "yyyy-mm-dd"//日期格式
             });
-
         });
 
         $(function () {
@@ -236,14 +254,40 @@
                 $("#selectedStagesCode").val(codestr);
                 $("#selectedStages").html(html);
             });
-
-            $("#btnSubmit").click(function () {
-                var BuidingTitle = $("#BuidingTitle").val();
-                if (!BuidingTitle) {
-                    alert("标题不能为空");
-                    $("#BuidingTitle").focus();
-                    return;
+            //表单验证
+            var isValidate = $("#stageCaseForm").validate({
+                rules: {
+                    BuidingTitle: "required",
+                    BuidingBrief: "required",
+                    BuidingInfo: "required",
+                    Price: {
+                        required: true,
+                        number: true
+                    },
+                    Space: {
+                        required: true,
+                        number: true
+                    }
+                },
+                messages: {
+                    BuidingBrief: "此处不能为空",
+                    BuidingBrief: "此处不能为空",
+                    Price: {
+                        required: "此字段不能为空",
+                        number: "必须输入数字"
+                    },
+                    Space: {
+                        required: "此字段不能为空",
+                        number: "必须输入数字"
+                    }
                 }
+            });
+            $("#btnSubmit").click(function () {
+                if (!isValidate.checkForm()) {
+                    isValidate.showErrors();
+                    return false;
+                }
+                var BuidingTitle = $("#BuidingTitle").val();
                 var BuidingID = $("#BuidingID").val();
                 var BuidingBrief = $("#BuidingBrief").val();
                 var BuidingInfo = $("#BuidingInfo").val();
@@ -262,7 +306,7 @@
                     url: "/PeopleCenter/CenterCases/AddOrEditBuidingStages",
                     data: {
                         Guid: '@Guid',
-                        UserID:'@UserID',
+                        UserID: '@UserID',
                         BuidingID: BuidingID,
                         BuidingTitle: BuidingTitle,
                         BuidingBrief: BuidingBrief,
@@ -277,16 +321,19 @@
                         BuidingImage: BuidingImage,
                         thumbnailImage: thumbnailImage,
                         StartTime: StartTime,
-                        DemandID:"@DemandID"
+                        DemandID: "@DemandID"
                     },
                     success: function (data) {
                         if (data.RetCode == 1) {
                             if (BuidingID > 0) {
-                                alert("修改成功！");
+                                layer.alert('修改成功', { icon: 6 }, function (index) {
+                                    window.location.href = $.session.get('lasturl');
+                                });
                             } else {
-                                alert("添加成功！");
+                                layer.alert('添加成功', { icon: 6 }, function (index) {
+                                    window.location.href = $.session.get('lasturl');
+                                });
                             }
-                            window.location.href =  $.session.get('lasturl');
 
                         }
                     }
@@ -341,6 +388,25 @@
                 });
             }
         }
-</script>
+
+        $(function () {
+            var editor = new wangEditor('BuidingInfo');
+
+            // 上传图片
+            editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+            // 配置自定义参数
+            editor.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            // 设置 headers
+            editor.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            editor.create();
+     
+        })
+    </script>
 }
 
