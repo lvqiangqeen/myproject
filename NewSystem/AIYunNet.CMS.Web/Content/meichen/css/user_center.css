@@ -45,7 +45,7 @@
 .u-main{width:1180px; margin:0 auto; position:relative;}
 .user-header{width:100%; height:74px; background:#f5f5f5; overflow:hidden; border-bottom:1px solid #ddd;  box-shadow:0 3px 8px #ddd;}
 .user-header .u-logo{float:left; height:50px; width:300px; margin-top:12px;}
-.user-header .u-logo a{display:block; width:300px; height:50px; background:url(../images/u-logo.jpg) no-repeat; outline:none;}
+.user-header .u-logo a{display:block; width:300px; height:50px; /*background:url(../images/u-logo.jpg) no-repeat;*/font-size: 38px; outline:none;}
 .user-header .u-logo.help a{background:url(../images/help-logo.jpg) no-repeat;}
 .user-header .menu{float:left; height:50px; overflow:hidden; margin-top:12px; margin-left:20px;}
 .user-header .menu a{font-size:14px; margin:10px 15px; display:block; width:100px; height:30px; line-height:30px; float:left;  text-align:center;}

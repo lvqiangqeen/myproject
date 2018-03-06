@@ -93,7 +93,24 @@
 </script>
 <div class="user-header">
     <div class="u-main">
-        <div class="u-logo"><a href="/PeopleCenter/UserCenter/PeopleCenterIndex"></a></div>
+        <div class="u-logo">
+            @if (webuser.PositionCode == "WebPeople")
+            {
+                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex">设计师中心</a>
+            }
+            else if (webuser.PositionCode == "WebWorkerLeader")
+            {
+                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex">工长中心</a>
+            }
+            else if (webuser.PositionCode == "WebWorker")
+            {
+                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex">工人中心</a>
+            }
+            else
+            {
+                <a href="/PeopleCenter/UserCenter/PeopleCenterIndex">用户中心</a>
+            }
+        </div>
         <div class="menu">
             <a href="/index/HomeIndex" class="active">返回首页</a>
             @if (webuser.PositionCode == "WebPeople")

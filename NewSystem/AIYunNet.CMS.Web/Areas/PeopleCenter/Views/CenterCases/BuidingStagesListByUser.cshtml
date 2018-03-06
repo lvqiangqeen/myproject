@@ -67,11 +67,11 @@
                                                     {
                                                         if (buiding.StageNow == i)
                                                         {
-                                                            <a href="javascript:void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
+                                                            <a class="stages" href="javascript:void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript:void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
+                                                            <a class="stages" href="javascript:void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
                                                         }
 
                                                     }
@@ -79,11 +79,11 @@
                                                     {
                                                         if (buiding.StageNow == i)
                                                         {
-                                                            <a href="javascript::void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                            <a class="stages" href="javascript::void(0)" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript::void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                            <a class="stages" href="javascript::void(0)" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
                                                         }
 
                                                     }
@@ -178,7 +178,18 @@
             });
 
         });
-        
+        $(".stages").click(function () {
+            //页面层
+
+            layer.open({
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', '240px'], //宽高
+                btn: ['合格', '不合格', '关闭'],
+                content: '<div class="imgContent"><p></p><ul><li><img src="http://localhost:4316/UploadFiles/EditorFiles/1347680855.jpg" alt="7" style="max-width:100%;"><img src="http://localhost:4316/UploadFiles/EditorFiles/1452986597.jpg" alt="8" style="max-width:100%;"><img src="http://localhost:4316/UploadFiles/EditorFiles/436392520.jpg" alt="9" style="max-width:100%;"><a href="http://media.china.com.cn/spbd/2018-02-01/1218093.html" target="_blank">七部门部署春运工作</a></li><li><a href="http://media.china.com.cn/spbd/2018-01-22/1212488.html" target="_blank">重庆：农民化身T台模特 扛农具走秀接地气</a></li><li><a href="http://media.china.com.cn/spbd/2018-01-21/1211846.html" target="_blank">人力资源和社会保障部：多举措支持农民工等返乡下乡创业</a></li><li><a href="http://media.china.com.cn/spbd/2018-01-17/1209188.html" target="_blank">这些事儿让乡村离振兴近了一步</a></li><li><a href="http://media.china.com.cn/spbd/2018-01-03/1201376.html" target="_blank">湖南农民制美味红薯干迎新年</a></li><li><a href="http://media.china.com.cn/spbd/2017-12-29/1198557.html" target="_blank">山东：8年全靠自学 农民工从初中学历到参加考研</a></li><li><a href="http://media.china.com.cn/spbd/2017-12-25/1195887.html" target="_blank">法国：新年将至 严防恐袭——重启安全警戒机制 部署十万军警</a></li><li><a href="http://media.china.com.cn/spbd/2017-12-22/1194283.html" target="_blank">河南汤阴——农民夜校解决乡村事务</a></li></ul><p><br></p></div>'
+            });
+        })
+
         $(".editIsUserEnd").click(function () {
             var buidingID = $(this).find("input[name=buidingID]").val();
             var IsWorkerEnd = $(this).find("input[name=IsWorkerEnd]").val();

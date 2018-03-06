@@ -207,7 +207,12 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
             return View(buidingList);
         }
-
+        //没有用
+        public ActionResult BuidingStagesDetailByUser(int buidingID=0, int StageID=0)
+        {
+            WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
+            return View(stage);
+        }
         [HttpPost]
         public JsonResult IsUserEnd(int buidingID,int IsUserend)
         {
