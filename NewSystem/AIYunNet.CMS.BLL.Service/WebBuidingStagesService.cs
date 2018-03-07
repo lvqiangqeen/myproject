@@ -11,6 +11,17 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidingStagesService
     {
+        //业主审核阶段信息
+        public int IsUserEnd(int BuidingID, int StageID,int IsUserend)
+        {         
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingStages old = context.WebBuidingStages.Where(wc => wc.WebBuidingID == BuidingID && wc.StageID == StageID).ToList()[0];
+                old.IsUserEnd = IsUserend;
+                context.SaveChanges();
+                return 1;
+            }
+        }
         public List<WebBuidingStages> GetWebBuidingStagesListByBuiding(int BuidingID)
         {
             List<WebBuidingStages> list = new List<WebBuidingStages>();
@@ -98,6 +109,30 @@ namespace AIYunNet.CMS.BLL.Service
                 }
 
             }
+        }
+
+        //判断是否可以修改阶段
+        public int IsCanUpdateStage(int buidingID, int stageID)
+        {
+            int ret = 0;
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingStages old = new WebBuidingStages();
+                WebBuidingStages current = context.WebBuidingStages.Where(bs => bs.WebBuidingID == buidingID && bs.StageID == stageID).FirstOrDefault();
+                if (current.sortID != 0)
+                {
+                    old = context.WebBuidingStages.Where(bs => bs.WebBuidingID == buidingID && bs.sortID == current.sortID - 1).FirstOrDefault();
+                    if (old.IsComplete)
+                    {
+                        ret = 1;
+                    }
+                }
+                else
+                {
+                    ret = 1;
+                }
+            }
+            return ret;
         }
     }
 }

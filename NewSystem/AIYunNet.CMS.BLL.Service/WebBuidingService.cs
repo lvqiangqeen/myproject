@@ -296,7 +296,7 @@ namespace AIYunNet.CMS.BLL.Service
             }
 
         }
-
+        //装修工人确定是否完工
         public int IsWorkerEnd(int buidingID)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -312,6 +312,31 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     return 0;
                 }
+            }
+        }
+
+        //工人判断是否可以结束工作 1可以结束 2没有全部完成 3业主没有审核通过 4业主没有审核
+        public int IsCanWorkerEnd(int buidingID)
+        {
+            int ret = 1;
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                int IsComplete = context.WebBuidingStages.Where(c => c.IsComplete == false && c.WebBuidingID == buidingID).ToList().Count();
+                int IsNot = context.WebBuidingStages.Where(c => c.IsUserEnd == 2 && c.WebBuidingID == buidingID).ToList().Count();
+                int IsNo = context.WebBuidingStages.Where(c => c.IsUserEnd == 0 && c.WebBuidingID == buidingID).ToList().Count();
+                if (IsNo != 0)
+                {
+                    ret = 4;
+                }
+                if (IsNot != 0)
+                {
+                    ret = 3;
+                }
+                if (IsComplete != 0)
+                {
+                    ret = 2;
+                }
+                return ret;
             }
         }
     }

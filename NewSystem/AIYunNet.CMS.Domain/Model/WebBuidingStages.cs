@@ -52,12 +52,18 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsComplete")]
         public bool IsComplete { get; set; }
+        /// <summary>
+        ///是否审核通过（0没有审核，1通过，2没通过）
+        /// </summary>
+        [Column("IsUserEnd")]
+        public int IsUserEnd { get; set; }
         public WebBuidingStages()
         {
             WebBuidingID = 0;
             StageID = 0;
             IsComplete = false;
             StageContent = "";
+            IsUserEnd = 0;
         }
     }
 }

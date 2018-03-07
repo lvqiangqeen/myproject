@@ -9,8 +9,7 @@
     List<string> list = new List<string>();
     List<string> listid = new List<string>();
     WebBuidingCaseCommentService Ser = new WebBuidingCaseCommentService();
-    
-
+    WebBuidingStagesService SageSer = new WebBuidingStagesService();
 }
 @section head{
     <style>
@@ -26,6 +25,12 @@
 
         .public_m5 table tbody tr th {
             background: #fff;
+        }
+                .thstage > i:last-child {
+        display:none;
+        }
+                       .thstage >  a {
+            color: black;
         }
     </style>
 }
@@ -67,31 +72,29 @@
                                     <tr>
                                         <th><a href="/Workers/DecBuidingDetail?WorkerID=@buiding.WorkerID&BuidingID=@buiding.BuidingID" target="_blank">@buiding.BuidingTitle</a></th>
                                         <th>@buiding.StartTime</th>
-                                        <th>
+                                        <th class="thstage">
                                             @for (int i = 0; i < 6; i++)
                                             {
                                                 if (i < list.Count)
                                                 {
-                                                    if (i == list.Count - 1 || i == 5)
+                                                    WebBuidingStages stage = SageSer.GetBuidingStageByBuidingIDAndStageID(buiding.BuidingID, Convert.ToInt32(listid[i]));
+                                                    if (stage.IsUserEnd == 2)
                                                     {
-                                                        if (buiding.StageNow == i)
-                                                        {
-                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a>
-                                                        }
+                                                        <a class="stages" href="javascript:Info(@buiding.BuidingID,@listid[i])" style="background-color:red;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                    }
+                                                    else if (stage.IsUserEnd == 1)
+                                                    {
+                                                        <a class="stages" href="javascript:Info(@buiding.BuidingID,@listid[i])" style="background-color:#40E0D0;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                     }
                                                     else
                                                     {
-                                                        if (buiding.StageNow == i)
+                                                        if (stage.IsComplete)
                                                         {
-                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#A1E700;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                            <a class="stages" href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                         else
                                                         {
-                                                            <a href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #a1e6ff;"></i>
+                                                            <a class="stages" href="javascript:updateStagesInfo(@buiding.BuidingID,@listid[i])" style="background-color:#B5B5B5;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                     }
 
@@ -168,10 +171,31 @@
             });
 
         });
-
-        function updateStagesInfo(buidingID, StageID) {
+        function Info(buidingID, StageID)
+        {
             var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
             window.location.href = url;
+        }
+        function updateStagesInfo(buidingID, StageID) {
+            $.ajax({
+                type: "post",
+                url: "/PeopleCenter/CenterCases/IsCanUpdateStage",
+                data: {
+                    buidingID: buidingID,
+                    stageID:StageID
+                },
+                success: function (data) {
+                    if (data.RetCode == 1) {
+                        var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
+                        window.location.href = url;
+                    } else
+                    {
+                        layer.alert('上个阶段任务还未竣工！', { icon: 5 });
+                    }
+                }
+
+            });
+
         }
 
         $(".editIsWorkerEnd").click(function () {
@@ -183,13 +207,35 @@
                 time: 20000, //20s后自动关闭
                 btn: ['竣工', '关闭'],
                 yes: function (index, layero) {
-                    if (StageNow != lastindex) {
-                        layer.msg('项目未完成<br>您不能竣工');
-                    } else {
-                        editIsWorkerEnd(buidingID);
+                    $.ajax({
+                        type: "post",
+                        url: "/PeopleCenter/CenterCases/IsCanWorkerEnd",
+                        data: {
+                            buidingID: buidingID
+                        },
+                        success: function (data) {
+                            if (data.RetCode == 1) {
+                                editIsWorkerEnd(buidingID);
+                                window.location.href = window.location.href;
+                            } else if (data.RetCode == 2) {
+                                layer.alert('工序没有全部完成！', { icon: 5 });
+                            } else if (data.RetCode == 3) {
+                                layer.alert('部分工序业主没有审核通过！', { icon: 5 });
+                            } else if (data.RetCode == 4) {
+                                layer.alert('业主没有审核！', { icon: 5 });
+                            }
+                        }
 
-                        window.location.href = window.location.href;
-                    }
+                    });
+
+
+                    //if (StageNow != lastindex) {
+                    //    layer.msg('项目未完成<br>您不能竣工');
+                    //} else {
+                    //    editIsWorkerEnd(buidingID);
+
+                    //    window.location.href = window.location.href;
+                    //}
 
                 },
                 btn2: function (index, layero) {

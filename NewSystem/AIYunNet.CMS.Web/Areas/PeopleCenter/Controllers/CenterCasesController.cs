@@ -76,8 +76,21 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             List<WebBuiding> buidingList = service.GetWebBuidingListByWorkerID(Workerid, true);
             return View(buidingList);
 		}
-
-		[HttpGet]
+        //是否可以进行下一步工序
+        public JsonResult IsCanUpdateStage(int buidingID, int stageID)
+        {
+            int ret = 0;
+            ret = stageSer.IsCanUpdateStage(buidingID, stageID);
+            return Json(new { RetCode = ret });
+        }
+        //是否可以结束全部做工
+        public JsonResult IsCanWorkerEnd(int buidingID)
+        {
+            int ret = 0;
+            ret = buidingSer.IsCanWorkerEnd(buidingID);
+            return Json(new { RetCode = ret });
+        }
+        [HttpGet]
 		public ActionResult AddOrEditBuidingStages(int DemandID = 0, int BuidingID = 0)
 		{
 			IWebCommon commonService = new WebCommonService();
@@ -207,12 +220,14 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
             return View(buidingList);
         }
-        //没有用
-        public ActionResult BuidingStagesDetailByUser(int buidingID=0, int StageID=0)
+        //阶段审核
+        public JsonResult IsUserEndStage(int buidingID,int stageID, int IsUserend)
         {
-            WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
-            return View(stage);
+            int ret = 0;
+            ret = stageSer.IsUserEnd(buidingID, stageID, IsUserend);
+            return Json(new { RetCode = ret });
         }
+        //总体审核
         [HttpPost]
         public JsonResult IsUserEnd(int buidingID,int IsUserend)
         {
@@ -228,9 +243,8 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             return Json(new { RetCode = ret });
         }
         #endregion
-
-        #region 装修评论
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
+        #region 装修评论
         public ActionResult BuidingCommentScore(int CaseID = 0)
         {
             WebBuidingCaseComment comm = new WebBuidingCaseComment();
