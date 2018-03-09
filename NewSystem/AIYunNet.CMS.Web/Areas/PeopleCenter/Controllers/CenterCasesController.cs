@@ -255,6 +255,16 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             }           
             return View(comm);
         }
+        public ActionResult LookBuidingComment(int CaseID = 0)
+        {
+            WebBuidingCaseComment comm = new WebBuidingCaseComment();
+            comm = commerSer.GetCommentByTypeAndID("WebBuiding", CaseID);
+            if (comm == null)
+            {
+                comm = new WebBuidingCaseComment();
+            }
+            return View(comm);
+        }
         [HttpPost]
         public JsonResult AddOrEditComment(WebBuidingCaseComment comm)
         {

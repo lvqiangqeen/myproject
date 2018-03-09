@@ -234,7 +234,18 @@
             $("input[name=workPosition]").click(function () {
                 var chk = $(this);
                 if (chk.prop("checked")) {
-                    selectedStages.push({ "code": chk.val(), "text": chk.data("text") });
+
+                        selectedStages.push({ "code": chk.val(), "text": chk.data("text") });
+                        if (selectedStages.length > 6)
+                        {
+                            layer.alert('装修阶段不能多于六个！', { icon: 5 });
+                            var code = chk.val();
+                            var index = selectedStages.findIndex(function (item) {
+                                return item.code == code;
+                            });
+                            selectedStages.splice(index, 1);
+                            return false;
+                        }
                 } else {
                     var code = chk.val();
                     var index = selectedStages.findIndex(function (item) {
@@ -327,7 +338,7 @@
                         if (data.RetCode == 1) {
                             if (BuidingID > 0) {
                                 layer.alert('修改成功', { icon: 6 }, function (index) {
-                                    window.location.href = $.session.get('lasturl');
+                                    window.location.href = window.location.href
                                 });
                             } else {
                                 layer.alert('添加成功', { icon: 6 }, function (index) {

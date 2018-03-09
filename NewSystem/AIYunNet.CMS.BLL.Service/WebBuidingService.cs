@@ -324,10 +324,10 @@ namespace AIYunNet.CMS.BLL.Service
                 int IsComplete = context.WebBuidingStages.Where(c => c.IsComplete == false && c.WebBuidingID == buidingID).ToList().Count();
                 int IsNot = context.WebBuidingStages.Where(c => c.IsUserEnd == 2 && c.WebBuidingID == buidingID).ToList().Count();
                 int IsNo = context.WebBuidingStages.Where(c => c.IsUserEnd == 0 && c.WebBuidingID == buidingID).ToList().Count();
-                if (IsNo != 0)
-                {
-                    ret = 4;
-                }
+                //if (IsNo != 0)
+                //{
+                //    ret = 4;
+                //}
                 if (IsNot != 0)
                 {
                     ret = 3;
@@ -337,6 +337,21 @@ namespace AIYunNet.CMS.BLL.Service
                     ret = 2;
                 }
                 return ret;
+            }
+        }
+
+        //根据UserID获取装修
+        public List<WebBuiding> GetCompleteWebBuidingListByUserID(int UserID)
+        {
+            List<WebBuiding> list = new List<WebBuiding>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                list= context.WebBuiding.Where(wb => wb.FlagDelete == 0 && wb.UserID == UserID && wb.IsUserEnd == 1).OrderByDescending(wb => wb.AddOn).ToList();
+                if (list == null)
+                {
+                    list = new List<WebBuiding>();
+                }
+                return list;
             }
         }
     }

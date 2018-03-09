@@ -207,7 +207,7 @@ body{background:#f6f6f6}
 .zp_nrm{overflow:hidden; padding-bottom:64px}
 .zp_nrm_l{ width:120px; height:144px; float:left; overflow:hidden}
 .zp_nrm_l img{ display:block; width:120px; height:120px; overflow:hidden}
-.zp_nrm_l a{ display:block; width:120px; height:24px; color:#333; text-align:center; line-height:24px}
+/*.zp_nrm_l a{ display:block; width:120px; height:24px; color:#333; text-align:center; line-height:24px}*/
 .zp_nrm_l a:hover{ color:#fa3b4a}
 .zp_nrm_r{ width:760px; height:auto; float:right; overflow:hidden}
 .zp_nrm_r p{ display:block; width:748px; height:51px; line-height:51px; color:#333; border-bottom:1px dashed #eaeaea; overflow:hidden}

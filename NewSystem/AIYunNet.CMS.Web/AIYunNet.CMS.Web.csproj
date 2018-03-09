@@ -4025,6 +4025,7 @@
     <Content Include="Areas\MobileApp\Views\App\WorkerDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\App\WorkerList.cshtml" />
     <Content Include="Areas\MobileApp\Views\web.config" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\LookBuidingComment.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

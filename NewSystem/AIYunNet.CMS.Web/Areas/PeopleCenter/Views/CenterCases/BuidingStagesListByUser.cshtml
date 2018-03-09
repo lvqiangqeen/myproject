@@ -10,6 +10,8 @@
     List<string> listid = new List<string>();
     WebWorkerService worser = new WebWorkerService();
     WebBuidingStagesService SageSer = new WebBuidingStagesService();
+    WebBuidingCaseCommentService commentSer = new WebBuidingCaseCommentService();
+    
 }
 
 @section head{
@@ -73,21 +75,21 @@
                                                     WebBuidingStages stage = SageSer.GetBuidingStageByBuidingIDAndStageID(buiding.BuidingID, Convert.ToInt32(listid[i]));
                                                     if (stage.IsUserEnd == 2)
                                                     {
-                                                        <a class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:red;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                        <a title="业主审核未通过" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:red;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                     }
                                                     else if (stage.IsUserEnd == 1)
                                                     {
-                                                        <a class="stages" href="javascript:OpenStagebyUserEnd(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#40E0D0;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                        <a title="业主审核通过" class="stages" href="javascript:OpenStagebyUserEnd(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#40E0D0;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                     }
                                                     else
                                                     {
                                                         if (stage.IsComplete)
                                                         {
-                                                            <a class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                            <a title="装修已完成" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                         else
                                                         {
-                                                            <a class="stages" href="javascript:void(0)" style="background-color:#B5B5B5;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                            <a title="装修未完成" class="stages" href="javascript:void(0)" style="background-color:#B5B5B5;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                     }
                                                 }
@@ -122,13 +124,13 @@
                                         }
                                         @if (buiding.IsUserEnd == 1)
                                         {
-                                            <th><a title="查看评价" href="javascript:void(0)" class="OpenComment"><i class="fa fa-thumbs-o-up"></i><input type="hidden" name="buidingID" value="@buiding.BuidingID" /></a></th>
+                                            <th><a title="查看评论" href="javascript:void(0)" class="pingjia btn btn-primary">查看评论<input type="hidden" name="buidingID" value="@buiding.BuidingID" /><input type="hidden" name="IsEdit" value="@commentSer.GetCommentByTypeAndID("WebBuiding",buiding.BuidingID).IsEdit"/></a></th>
                                         }
                                         else
                                         {
                                             <th>
-                                                <a href="javascript::void(0)" class="editIsUserEnd">
-                                                    <i class="fa fa-pencil"></i>
+                                                <a href="javascript::void(0)" class="editIsUserEnd btn btn-primary">
+                                                    我要验收
                                                     <input type="hidden" name="IsWorkerEnd" value="@buiding.IsWorkerEnd" />
                                                     <input type="hidden" name="buidingID" value="@buiding.BuidingID" />
                                                     <input type="hidden" name="Guid" value="@buiding.Guid" />
@@ -143,7 +145,7 @@
                             }
                         </tbody>
                     </table>
-                    <div style="color:#ff0000">*提示：绿色标记代表施工当前阶段。</div>
+                    <div style="color:#ff0000">*提示：灰色标记代表尚未施工，蓝色标记代表施工完成，绿色标记代表审核通过，红色标记代表审核未通过。点击蓝色图标进行审核。</div>
                 </div>
             </div>
         </div>
@@ -247,7 +249,6 @@
                     if (IsWorkerEnd == 0) {
                         layer.msg('项目未竣工<br>您不能验收');
                     } else {
-                        IsUserEnd(buidingID, 1);
                         layer.close(index);
                         layer.open({
                             type: 2,
@@ -256,7 +257,7 @@
                             shadeClose: true,
                             shade: 0.8,
                             area: ['772px', '280px'],
-                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
+                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?IsUserEnd=1&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
                             end: function () {
                                 location.reload();
                             }
@@ -270,7 +271,6 @@
                     if (IsWorkerEnd == 0) {
                         layer.msg('项目未竣工<br>您不能验收');
                     } else {
-                        IsUserEnd(buidingID, 2);
                         layer.close(index);
                         layer.open({
                             type: 2,
@@ -279,7 +279,7 @@
                             shadeClose: true,
                             shade: 0.8,
                             area: ['772px', '280px'],
-                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
+                            content: ['/PeopleCenter/CenterCases/BuidingCommentScore?IsUserEnd=2&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
                             end: function () {
                                 location.reload();
                             }
@@ -292,43 +292,61 @@
                 }
             });
         })
-        $(".OpenComment").click(function () {
-            var CaseID = $(this).find("input").val();
-            OpenComment(CaseID);
+        $(".pingjia").click(function () {
+            var CaseID = $(this).find("input[name=buidingID]").val();
+            var IsEdit = $(this).find("input[name=IsEdit]").val();
+            OpenComment(CaseID, IsEdit);
         })
 
-        function OpenComment(CaseID) {
-            layer.open({
-                type: 2,
-                scrollbar: false,
-                title: '我要评论',
-                shadeClose: true,
-                shade: 0.8,
-                area: ['772px', '280px'],
-                content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + CaseID, 'no'],
-                end: function () {
-                    //location.reload();
-                }
-
-            });
-        }
-
-        function IsUserEnd(buidingID, IsUserend) {
-            $.ajax({
-                type: "post",
-                url: "/PeopleCenter/CenterCases/IsUserEnd",
-                data: {
-                    buidingID: buidingID,
-                    IsUserend: IsUserend
-                },
-                success: function (data) {
-                    if (data.RetCode == 1) {
-                        //$('#stageCaseTable').DataTable().ajax.reload();
+        function OpenComment(CaseID, IsEdit) {
+            if (IsEdit == "1") {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '查看评论',
+                    btn: ['确定'],
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['400px', '300px'],
+                    content: ['/PeopleCenter/CenterCases/LookBuidingComment?CaseID=' + CaseID],
+                    end: function () {
+                        //location.reload();
                     }
-                }
+                });
+            } else
+            {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '查看评论',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['772px', '280px'],
+                    content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + CaseID, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+                });
+            }
 
-            });
         }
+        
+        //function IsUserEnd(buidingID, IsUserend) {
+        //    $.ajax({
+        //        type: "post",
+        //        url: "/PeopleCenter/CenterCases/IsUserEnd",
+        //        data: {
+        //            buidingID: buidingID,
+        //            IsUserend: IsUserend
+        //        },
+        //        success: function (data) {
+        //            if (data.RetCode == 1) {
+        //                //$('#stageCaseTable').DataTable().ajax.reload();
+        //            }
+        //        }
+
+        //    });
+        //}
     </script>
 }
 

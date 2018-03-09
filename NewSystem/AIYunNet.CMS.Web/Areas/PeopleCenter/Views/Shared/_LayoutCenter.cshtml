@@ -11,6 +11,7 @@
     WebPeople webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
     WebWorkerService workerSer = new WebWorkerService();
     WebWorker webworker = workerSer.GetWebWorkerByUserID(webuser.UserID);
+    WebBuidingService buidingSer = new WebBuidingService();
     //if (webpeopleservice.IsHaveuser(webuser.UserID))
     //{
     //    webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
@@ -164,20 +165,35 @@
                     stars = webworker.Stars;
                 }
                 }
-            等级：
-            @for (int i = 1; i <= stars / 25; i++)
+            @if (webuser.PositionCode != "WebUser")
             {
-                <img src="~/Content/imgStar/jinguan.gif" />
-            }
-            @for (int i = 1; i <= stars % 25 / 5; i++)
+                @:等级：
+                for (int i = 1; i <= stars / 25; i++)
+                {
+                    <img src="~/Content/imgStar/jinguan.gif"/>
+                }
+                for (int i = 1; i <= stars % 25 / 5; i++)
+                {
+                 <img src="~/Content/imgStar/huangguan.gif" />
+                }
+                for (int i = 1; i <= stars % 5; i++)
+                {
+                 <img src="~/Content/imgStar/zuanshi.gif" />
+                }
+            } else
             {
-                <img src="~/Content/imgStar/huangguan.gif" />
+                if (buidingSer.GetCompleteWebBuidingListByUserID(Convert.ToInt32(SessionHelper.Get("UserID"))).Count() > 0)
+                {
+                    @:VIP会员
+                }
+                else
+                {
+                    @:普通会员
+                }
+                
             }
-            @for (int i = 1; i <= stars % 5; i++)
-            {
-                <img src="~/Content/imgStar/zuanshi.gif" />
-            }
-            
+
+
         </div>
         <div class="u-qianming">@*<input type="text" placeholder="这个用户很懒，什么都没有写" />*@</div>
         <div class="u-area"><span>@webuser.ProvinceName</span>，<span>@webuser.CityName</span></div>
@@ -206,7 +222,7 @@
         else if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")
         {
             <div class="listbox">
-                <div class="centers_listm_one_in"><i class="fa fa-building"></i><span>我的案例</span><b></b></div>
+                <div class="centers_listm_one_in"><i class="fa fa-building"></i><span>晒我家</span><b></b></div>
                 <div class="gjszmdm">
                     <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>装修案例</span></a>
                 </div>
@@ -231,14 +247,18 @@
                
             </div>
         </div>
-        <div class="listbox">
-            <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>资格认证</span><b></b></div>
-            <div class="gjszmdm">
-                <a href="/PeopleCenter/Certification/Authentication" class="center_in_self"><span>身份认证</span></a>
-                <a href="/PeopleCenter/Certification/GuarantMoney" class="center_in_self"><span>申请缴纳质保金</span></a>
-                <a href="/PeopleCenter/Certification/CertificStatic" class="center_in_self"><span>审核状态</span></a>
+        @if (webuser.PositionCode != "WebUser")
+        {
+            <div class="listbox">
+                <div class="centers_listm_one_in"><i class="fa fa-paper-plane"></i><span>资格认证</span><b></b></div>
+                <div class="gjszmdm">
+                    <a href="/PeopleCenter/Certification/Authentication" class="center_in_self"><span>身份认证</span></a>
+                    <a href="/PeopleCenter/Certification/GuarantMoney" class="center_in_self"><span>申请缴纳质保金</span></a>
+                    <a href="/PeopleCenter/Certification/CertificStatic" class="center_in_self"><span>审核状态</span></a>
+                </div>
             </div>
-        </div>
+        }
+
         <div class="listbox" style="display:none;">
             <div class="centers_listm_one_in"><i class="fa fa-commenting"></i><span>我的消息</span><b></b></div>
             <div class="gjszmdm">

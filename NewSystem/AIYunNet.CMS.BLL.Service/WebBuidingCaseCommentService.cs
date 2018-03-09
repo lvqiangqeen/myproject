@@ -30,6 +30,8 @@ namespace AIYunNet.CMS.BLL.Service
                 old = context.WebBuidingCaseComment.Find(comment.id);
                 old.Score = comment.Score;
                 old.Comment = comment.Comment;
+                old.EditOn = DateTime.Now.ToString();
+                old.IsEdit = 1;
                 context.SaveChanges();
                 return 1;
             }

@@ -134,8 +134,9 @@
 				},
 				success: function (ret)
 				{
-					alert("添加成功！");
-					window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				    layer.alert('添加成功', { icon: 6 }, function (index) {
+				        window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				    });
 				}
 			});
 		}
@@ -144,6 +145,11 @@
 		{
 			var content = $("#txtStageInfo").val();
 			var IsComplete = $("#IsComplete").prop("checked") ? true : false;
+			if (delHtmlTag(content) == "")
+			{
+			    layer.alert('请写点什么吧！',{ icon: 2 });
+			    return false;
+			}
 			$.ajax({
 				type: "post",
 				url: "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo",
@@ -155,8 +161,9 @@
 				},
 				success: function (data)
 				{
-					alert("信息修改成功");
-					window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				    layer.alert('信息修改成功', { icon: 6 }, function (index) {
+				        window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				    });
 				}
 			});
 		}
@@ -232,6 +239,9 @@
 			var output = temp.innerText || temp.textContent;
 			temp = null;
 			return output;
+		}
+		function delHtmlTag(str) {
+		    return str.replace(/<[^>]+>/g, "");//去掉所有的html标记  
 		}
     </script>
 }

@@ -29,10 +29,6 @@
     .zp_nrm_l {
         height: 198px;
     }
-
-        .zp_nrm_l a {
-            color: #0099ff;
-        }
 </style>
 @section head{
 
@@ -76,8 +72,8 @@
                     <img src="@AppSettingsHelper.ImgUrl@webuser.Img" id="ImgLook">
                     <input type="hidden" name="PeopleImage" value="@webuser.Img" id="ImageUrl" />
                     <input type="hidden" name="thumbnailImage" value="@webuser.thumbnailImage" id="thumbnailImage" />
-                    <input type='button' value='上传图片' onclick='javascript: $("#ImageUpload").click();' />
-                    <input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" /><a href="javascript:void(0);" id="BtnUpload">更换头像</a>
+                    <input type='button' class="btn btn-default" value='选择' onclick='javascript: $("#ImageUpload").click();' />
+                    <input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" /><a href="javascript:void(0);" id="BtnUpload" class="btn btn-primary">上传</a>
                 </div>
                 <!--right-->
                 <div class="zp_nrm_r">

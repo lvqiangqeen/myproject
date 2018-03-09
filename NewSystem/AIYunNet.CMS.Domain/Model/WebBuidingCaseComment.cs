@@ -72,7 +72,11 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("CaseType")]
         public string CaseType { get; set; }
-
+        /// <summary>
+        /// IsEdit
+        /// </summary>
+        [Column("IsEdit")]
+        public int IsEdit { get; set; }
         public WebBuidingCaseComment()
         {
             Guid = "";
@@ -84,6 +88,7 @@ namespace AIYunNet.CMS.Domain.Model
             GetUserID = 0;
             CaseID = 0;
             Comment = "";
+            IsEdit = 0;
         }
     }
 }

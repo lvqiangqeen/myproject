@@ -519,7 +519,15 @@
         <div class="new_top_bar_right">
             <div class="login_status" id="nav_login">
                 <a href="/CompanyCenter/CompanyLogin/CompanyLogin" rel="nofollow" class="login">装修公司登录</a>
-                <a href="/PeopleCenter/UserCenter/LoginOn" rel="nofollow" class="register">设计师登录</a>
+                @if (SessionHelper.Get("userName")!=null)
+                {
+                    <a href="/PeopleCenter/UserCenter/PeopleCenterIndex" rel="nofollow" class="register">个人中心</a>
+                }
+                else
+                {
+                    <a href="/PeopleCenter/UserCenter/LoginOn" rel="nofollow" class="register">用户登录</a>
+                }
+               
             </div>
             <!-- 申请定制设计 -->
             <div class="zb_entrance">

@@ -10,6 +10,7 @@
     Model.CaseID = Convert.ToInt32(Request["CaseID"]);
     Model.CaseType = Request["CaseType"];
     Model.Guid = Request["Guid"];
+    string IsUserEnd= Request["IsUserEnd"];
 }
 <!DOCTYPE html>
 
@@ -28,7 +29,33 @@
             padding: 0;
             list-style-type: none;
         }
-
+        .btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+        .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    margin-left: 66px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
         a, img {
             border: 0;
         }
@@ -271,8 +298,9 @@
                 <textarea name="" id="Comment" class="text" placeholder="说点什么吧。。。"></textarea>
                 <span class="tr">字数限制为5-200个</span>
             </div>
-            <button class="btm" type="button"></button>
-
+            @*<button class="btm" type="button"></button>*@
+            <button class="btn btn-primary">确认评价</button>
+        <div style="color:red;margin-left: 55px;font-size: 15px;">*评论只能修改一次，请慎重评价。</div>
         </div><!--quiz_content end-->
     </div><!--quiz end-->
 </body>
@@ -502,7 +530,7 @@
         }
         $('#rate-comm-1').rater(options);
 
-        $(".btm").click(function () {
+        $(".btn").click(function () {
             var Score = $("#Score").val();
             var Comment = $("#Comment").val();
             var PablishUserID = $("#PablishUserID").val();
@@ -529,12 +557,17 @@
                     },
                     success: function (data) {
                         if (data.RetCode == 1) {
+                            if ('@IsUserEnd' != null)
+                            {
+                                IsUserEnd('@Request["CaseID"]', '@IsUserEnd');
+                            }
+
                             layer.open({
                                 type: 1,
                                 offset: 1,
                                 content: '<div style="padding: 20px 100px;">评价成功</div>',
                                 btn: '关闭',
-                                btnAlign: 'c', 
+                                btnAlign: 'c',
                                 shade: 0,
                                 yes: function () {
                                     var index = parent.layer.getFrameIndex(window.name);
@@ -551,7 +584,22 @@
 
 
         })
+        function IsUserEnd(buidingID, IsUserend) {
+            $.ajax({
+                type: "post",
+                url: "/PeopleCenter/CenterCases/IsUserEnd",
+                data: {
+                    buidingID: buidingID,
+                    IsUserend: IsUserend
+                },
+                success: function (data) {
+                    if (data.RetCode == 1) {
+                        //$('#stageCaseTable').DataTable().ajax.reload();
+                    }
+                }
 
+            });
+        }
 
     });
 
