@@ -175,7 +175,7 @@ a:hover,a:active,a:focus{outline:none;}
 }
 .ngz-stage dd .c-jd li i { width:15px; height:15px; margin:0 auto; display:block; background:url(img/ico-bg.png) no-repeat -85px -22px; top:-7px;  position:relative;}
 .gz-716-border .ngz-jl-w {padding: 35px 0;}
-.gz-716-border .ngz-jl-w .jl-left {height: 115px;float: left;width: 550px;line-height: 22px;padding-left: 20px;}
+.gz-716-border .ngz-jl-w .jl-left {height: auto;float: left;width: 550px;line-height: 22px;padding-left: 20px;}
 .gz-716-border .ngz-jl-w .jl-left span {color: #8e8e8e;}
 .gz-716-border .ngz-jl-w .jl-left strong {color:#ff0000;}
 .gz-716-border .ngz-jl-w .jl-right {width: 110px;float:right;}
