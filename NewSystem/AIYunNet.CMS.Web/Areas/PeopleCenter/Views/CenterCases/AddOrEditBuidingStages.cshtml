@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-box-list">
                         <div class="tab-l">
-                            <span class="form-box-label">阶段设置(<span style="color:#ff0000">最多设置6个</span>)</span>
+                            <span class="form-box-label">阶段设置</span>
                         </div>
                         <div class="tab-r div_workstage">
                             @if (workPositionList != null && workPositionList.Count() > 0)
@@ -233,9 +233,19 @@
 
             $("input[name=workPosition]").click(function () {
                 var chk = $(this);
-                if (chk.prop("checked")) {
 
-                        selectedStages.push({ "code": chk.val(), "text": chk.data("text") });
+                if (chk.prop("checked")) {
+                    if (selectedStages.length!=0)
+                    {
+                        var indexlast = selectedStages[selectedStages.length - 1].code;
+                        if (indexlast > chk.val()) {
+                            layer.alert('请按照顺序选择阶段！', { icon: 5 });
+                            return false;
+                        }
+                    }
+
+                    selectedStages.push({ "code": chk.val(), "text": chk.data("text") });
+                    
                         if (selectedStages.length > 6)
                         {
                             layer.alert('装修阶段不能多于六个！', { icon: 5 });

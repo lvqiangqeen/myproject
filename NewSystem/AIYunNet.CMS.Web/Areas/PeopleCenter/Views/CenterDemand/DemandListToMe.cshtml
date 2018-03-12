@@ -71,6 +71,14 @@
 
                             <td>
                                 <a href="javascript:look(@demand.id)" class="btn btn-primary">查看详情</a>
+                                @if (demand.IsPlan && de.IsAccept == 1)
+                                {
+                               <a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@demand.id&Guid=@demand.Guid" class="btn btn-primary">查看计划</a>
+                                }
+                                else if(de.IsAccept == 1)
+                                {
+                                    <a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@demand.id&Guid=@demand.Guid&UserID=@demand.PublishuserID" class="btn btn-primary">发布计划</a>
+                                }
                         </tr>
                     }
 

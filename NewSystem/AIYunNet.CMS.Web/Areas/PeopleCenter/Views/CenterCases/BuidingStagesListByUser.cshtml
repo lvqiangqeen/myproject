@@ -37,6 +37,7 @@
         display:none;
         }
     </style>
+<link href="~/Content/meichen/css/center.buidingstagelist.css" rel="stylesheet" />
 }
 <div class="centers_mr" id="stageContent">
     <div class="centers_r_items">
@@ -75,21 +76,21 @@
                                                     WebBuidingStages stage = SageSer.GetBuidingStageByBuidingIDAndStageID(buiding.BuidingID, Convert.ToInt32(listid[i]));
                                                     if (stage.IsUserEnd == 2)
                                                     {
-                                                        <a title="业主审核未通过" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:red;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                        <a title="业主审核未通过" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i]','@stage.StageContent')" style="background-color:red;margin-right:5px;padding: 5px;">@list[i]</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                     }
                                                     else if (stage.IsUserEnd == 1)
                                                     {
-                                                        <a title="业主审核通过" class="stages" href="javascript:OpenStagebyUserEnd(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#40E0D0;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                        <a title="业主审核通过" class="stages" href="javascript:OpenStagebyUserEnd(@buiding.BuidingID,@listid[i],'@list[i]','@stage.StageContent')" style="background-color:#40E0D0;margin-right:5px;padding: 5px;">@list[i]</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                     }
                                                     else
                                                     {
                                                         if (stage.IsComplete)
                                                         {
-                                                            <a title="装修已完成" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i].Replace("工", "阶段")','@stage.StageContent')" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                            <a title="装修已完成" class="stages" href="javascript:OpenStage(@buiding.BuidingID,@listid[i],'@list[i]','@stage.StageContent')" style="background-color:#a1e6ff;margin-right:5px;padding: 5px;">@list[i]</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                         else
                                                         {
-                                                            <a title="装修未完成" class="stages" href="javascript:void(0)" style="background-color:#B5B5B5;margin-right:5px;padding: 5px;">@list[i].Replace("工", "阶段")</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
+                                                            <a title="装修未完成" class="stages" href="javascript:void(0)" style="background-color:#B5B5B5;margin-right:5px;padding: 5px;">@list[i]</a><i class="fa fa-arrow-right" style="color: #B5B5B5;"></i>
                                                         }
                                                     }
                                                 }
@@ -149,6 +150,165 @@
                 </div>
             </div>
         </div>
+        <div class="zxPany-list zxPany-place zxPany-placePage">
+            <div class="place-info">
+                <dl class="info-list">
+                    <dt>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31324/">
+                            <img src="http://zxpt.image.zx-erp.qeeka.com/image-service/u9j/dmq/154508058.jpg" height="100" width="100" alt="张先生/女士家的工地直播" title="张先生/女士家的工地直播" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" title="张先生/女士家的工地直播"><a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31324/">张先生/女士家的工地直播</a></p>
+                        <p class="txt">
+                            <span>类型: 二手房</span>
+                            <span>方式: 半包</span>
+                            <span>户型: 二房</span>
+                            <span>风格:  简约</span>
+                            <span>造价: 64000元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li class="pred"><i></i><span>准备开工</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>
+                                <li><i></i><span>水电阶段</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"   style="border-radius:50%"><span>一个工人</span></li>
+                                <li><i></i><span>泥木阶段</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>
+                                <li><i></i><span>油漆阶段</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>
+                                <li><i></i><span>竣工阶段</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix" style="padding-top:20px;">
+                            <p class="w-txt fl"><span>（监理）发布新动态:</span> 开工大吉</p>
+                            <div class="t-txt fr"><span class="p-num">2</span><span class="p-c">9</span><span class="p-t">2018年03月12日</span></div>
+                        </div>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31324/" class="place-link">查看工地</a>
+                    </dd>
+                </dl>
+                <dl class="info-list">
+                    <dt>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31290/">
+                            <img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="100" width="100" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" title="朱先生/女士家的工地直播"><a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31290/">朱先生/女士家的工地直播</a></p>
+                        <p class="txt">
+                            <span>类型: 二手房</span>
+                            <span>方式: 半包</span>
+                            <span>户型: 二房</span>
+                            <span>风格:  简约</span>
+                            <span>造价: 44000元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li class="pred"><i></i><span>准备开工</span></li>
+                                <li><i></i><span>水电阶段</span></li>
+                                <li><i></i><span>泥木阶段</span></li>
+                                <li><i></i><span>油漆阶段</span></li>
+                                <li><i></i><span>竣工阶段</span></li>
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix">
+                            <p class="w-txt fl"><span>（监理）发布新动态:</span> 开工大吉</p>
+                            <div class="t-txt fr"><span class="p-num"></span><span class="p-c">7</span><span class="p-t">2018年03月12日</span></div>
+                        </div>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31290/" class="place-link">查看工地</a>
+                    </dd>
+                </dl>
+                <dl class="info-list">
+                    <dt>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31262/">
+                            <img src="http://zxpt.image.zx-erp.qeeka.com/image-service/fwb/7hp/184959468.jpg" height="100" width="100" alt="林先生/女士家的工地直播" title="林先生/女士家的工地直播" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" title="林先生/女士家的工地直播"><a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31262/">林先生/女士家的工地直播</a></p>
+                        <p class="txt">
+                            <span>类型: 二手房</span>
+                            <span>方式: 半包</span>
+                            <span>户型: 二房</span>
+                            <span>风格:  简约</span>
+                            <span>造价: 81800元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li class="pred"><i></i><span>准备开工</span></li>
+                                <li><i></i><span>水电阶段</span></li>
+                                <li><i></i><span>泥木阶段</span></li>
+                                <li><i></i><span>油漆阶段</span></li>
+                                <li><i></i><span>竣工阶段</span></li>
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix">
+                            <p class="w-txt fl"><span>（监理）发布新动态:</span> 开工大吉</p>
+                            <div class="t-txt fr"><span class="p-num"></span><span class="p-c">8</span><span class="p-t">2018年03月12日</span></div>
+                        </div>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31262/" class="place-link">查看工地</a>
+                    </dd>
+                </dl>
+                <dl class="info-list">
+                    <dt>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31261/">
+                            <img src="http://zxpt.image.zx-erp.qeeka.com/image-service/i2y/xeu/146325922.jpg" height="100" width="100" alt="刘先生/女士家的工地直播" title="刘先生/女士家的工地直播" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" title="刘先生/女士家的工地直播"><a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31261/">刘先生/女士家的工地直播</a></p>
+                        <p class="txt">
+                            <span>类型: 二手房</span>
+                            <span>方式: 半包</span>
+                            <span>户型: 二房</span>
+                            <span>风格:  简约</span>
+                            <span>造价: 62000元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li class="pred"><i></i><span>准备开工</span></li>
+                                <li><i></i><span>水电阶段</span></li>
+                                <li><i></i><span>泥木阶段</span></li>
+                                <li><i></i><span>油漆阶段</span></li>
+                                <li><i></i><span>竣工阶段</span></li>
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix">
+                            <p class="w-txt fl"><span>（监理）发布新动态:</span> 开工大吉</p>
+                            <div class="t-txt fr"><span class="p-num"></span><span class="p-c">9</span><span class="p-t">2018年03月12日</span></div>
+                        </div>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31261/" class="place-link">查看工地</a>
+                    </dd>
+                </dl>
+                <dl class="info-list">
+                    <dt>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31248/">
+                            <img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qbn/ity/151323778.jpg" height="100" width="100" alt="辛先生/女士家的工地直播" title="辛先生/女士家的工地直播" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" title="辛先生/女士家的工地直播"><a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31248/">辛先生/女士家的工地直播</a></p>
+                        <p class="txt">
+                            <span>类型: 二手房</span>
+                            <span>方式: 半包</span>
+                            <span>户型: 二房</span>
+                            <span>风格:  简约</span>
+                            <span>造价: 84000元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li class="pred"><i></i><span>准备开工</span></li>
+                                <li><i></i><span>水电阶段</span></li>
+                                <li><i></i><span>泥木阶段</span></li>
+                                <li><i></i><span>油漆阶段</span></li>
+                                <li><i></i><span>竣工阶段</span></li>
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix">
+                            <p class="w-txt fl"><span>（监理）发布新动态:</span> 开工大吉</p>
+                            <div class="t-txt fr"><span class="p-num"></span><span class="p-c">9</span><span class="p-t">2018年03月12日</span></div>
+                        </div>
+                        <a href="http://www.jia.com/zx/shanghai/gexingbao/gdzhibo/31248/" class="place-link">查看工地</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -204,7 +364,7 @@
                 type: 1,
                 title: title + "施工情况",
                 skin: 'layui-layer-rim', //加上边框
-                area: ['500px', '700px'], //宽高
+                area: ['300px', '550px'], //宽高
                 btn: ['合格', '不合格', '关闭'],
                 content: content,
                 yes: function (index, layero) {

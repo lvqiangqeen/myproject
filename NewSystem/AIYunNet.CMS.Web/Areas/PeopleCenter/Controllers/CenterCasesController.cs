@@ -94,7 +94,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 		public ActionResult AddOrEditBuidingStages(int DemandID = 0, int BuidingID = 0)
 		{
 			IWebCommon commonService = new WebCommonService();
-			List<WebLookup> commonworkPosition = commonService.GetLookupList("workers_position");
+			List<WebLookup> commonworkPosition = commonService.GetLookupList("Buiding_process");
 			IEnumerable<SelectListItem> workPositionList = commonworkPosition.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
 			ViewBag.workPositionList = workPositionList;
 
