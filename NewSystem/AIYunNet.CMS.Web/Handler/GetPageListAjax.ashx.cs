@@ -31,7 +31,7 @@ namespace AIYunNet.CMS.Web.Handler
             method.Invoke(this, null);
         }
         /// <summary>
-        /// 获取下载文件
+        /// 获取需求
         /// </summary>
         public void GetDecDemandList()
         {

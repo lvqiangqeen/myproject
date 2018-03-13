@@ -215,10 +215,10 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         #region 我的装修
         public ActionResult BuidingStagesListByUser()
         {
-            WebBuidingService service = new WebBuidingService();
-            int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
-            return View(buidingList);
+            //WebBuidingService service = new WebBuidingService();
+            //int UserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            //List<WebBuiding> buidingList = service.GetWebBuidingListByUserID(UserID);
+            return View();
         }
         //阶段审核
         public JsonResult IsUserEndStage(int buidingID,int stageID, int IsUserend)

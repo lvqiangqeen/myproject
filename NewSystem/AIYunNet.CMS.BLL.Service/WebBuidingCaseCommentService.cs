@@ -42,6 +42,10 @@ namespace AIYunNet.CMS.BLL.Service
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 comm = context.WebBuidingCaseComment.FirstOrDefault(c=>c.CaseID==id && c.CaseType== type);
+                if (comm == null)
+                {
+                    comm = new WebBuidingCaseComment();
+                }
                 return comm;
             }
         }

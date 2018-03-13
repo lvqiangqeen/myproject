@@ -179,5 +179,16 @@ namespace AIYunNet.CMS.Domain.Model
             IsWorkerEnd = 0;
             IsUserEnd = 0;
         }
+
+
+    }
+
+    public class BuidingDetail
+    {
+        public WebWorker woker { get; set; }
+        public WebBuiding buiding { get; set; }
+        public List<WebBuidingStagesAndWorker> stagelist { get; set; }
+        public DecDemand demand { get; set; }
+        public WebBuidingCaseComment comment { get; set; }
     }
 }

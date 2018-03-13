@@ -134,5 +134,34 @@ namespace AIYunNet.CMS.BLL.Service
             }
             return ret;
         }
+
+        //获取装修阶段和工人信息
+        public List<WebBuidingStagesAndWorker> GetStagesWorkerListByID(int BuidingID)
+        {
+            WebWorkerService Ser = new WebWorkerService();
+            List<WebBuidingStagesAndWorker> list = new List<WebBuidingStagesAndWorker>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<WebBuidingStages> stagelist= context.WebBuidingStages.Where(c => c.WebBuidingID == BuidingID).OrderBy(c => c.sortID).ToList();
+                if (stagelist.Count > 0)
+                {
+                    foreach (var item in stagelist)
+                    {
+                        WebBuidingStagesAndWorker link = new WebBuidingStagesAndWorker
+                        {
+                            stage = item,
+                            worker = Ser.GetWebWorkerByID(item.Workerid)
+                        };
+                        list.Add(link);
+                    }
+                }
+                if (list == null)
+                {
+                    list = new List<WebBuidingStagesAndWorker>();
+                }
+                return list;
+            }
+
+        }
     }
 }

@@ -131,6 +131,9 @@
     <Compile Include="Handler\GetPageListAjax.ashx.cs">
       <DependentUpon>GetPageListAjax.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Handler\GetPeopleCenterListAjax.ashx.cs">
+      <DependentUpon>GetPeopleCenterListAjax.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Handler\ZanAndSelectAjax.ashx.cs">
       <DependentUpon>ZanAndSelectAjax.ashx</DependentUpon>
     </Compile>
@@ -4027,6 +4030,7 @@
     <Content Include="Areas\MobileApp\Views\web.config" />
     <Content Include="Areas\PeopleCenter\Views\CenterCases\LookBuidingComment.cshtml" />
     <Content Include="Content\meichen\css\center.buidingstagelist.css" />
+    <Content Include="Handler\GetPeopleCenterListAjax.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

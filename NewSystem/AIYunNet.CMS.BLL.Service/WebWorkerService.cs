@@ -22,9 +22,15 @@ namespace AIYunNet.CMS.BLL.Service
         }
         public WebWorker GetWebWorkerByID(int id)
         {
+            WebWorker worker = new WebWorker();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                return context.WebWorker.Find(id);
+                worker = context.WebWorker.Find(id);
+                if (worker == null)
+                {
+                    worker= new WebWorker();
+                }
+                return worker;
             }
         }
         public bool IsHaveWorker(int UserID)

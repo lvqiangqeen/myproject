@@ -57,6 +57,17 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("IsUserEnd")]
         public int IsUserEnd { get; set; }
+        /// <summary>
+        ///工长id
+        /// </summary>
+        [Column("Workerleaderid")]
+        public int Workerleaderid { get; set; }
+        /// <summary>
+        ///工人id
+        /// </summary>
+        [Column("Workerid")]
+        public int Workerid { get; set; }
+
         public WebBuidingStages()
         {
             WebBuidingID = 0;
@@ -64,6 +75,20 @@ namespace AIYunNet.CMS.Domain.Model
             IsComplete = false;
             StageContent = "";
             IsUserEnd = 0;
+            Workerleaderid = 0;
+            Workerid = 0;
+        }
+    }
+
+    public class WebBuidingStagesAndWorker
+    {
+        public WebBuidingStages stage { get; set; }
+        public WebWorker worker { get; set; }
+
+        public WebBuidingStagesAndWorker()
+        {
+            stage = new WebBuidingStages();
+            worker = new WebWorker();
         }
     }
 }
