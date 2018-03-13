@@ -160,7 +160,7 @@
                         </a>
                     </dt>
                     <dd>
-                        <p class="name" v-bind:title="item.buiding.BuidingTitle"><a href="'/Workers/DecBuidingDetail?WorkerID='+item.buiding.WorkerID+'&BuidingID='+item.buiding.BuidingID">{{item.buiding.BuidingTitle}}</a></p>
+                        <p class="name" v-bind:title="item.buiding.BuidingTitle"><a v-bind:href="'/Workers/DecBuidingDetail?WorkerID='+item.buiding.WorkerID+'&BuidingID='+item.buiding.BuidingID">{{item.buiding.BuidingTitle}}</a></p>
                         <p class="txt">
                             <span>类型: {{item.demand.DemandTypeName}}</span>
                             <span>面积: {{item.buiding.Space}}m²</span>
@@ -169,12 +169,12 @@
                         <div class="proccess">
                             <ul class="clearfix">                             
                                 <li v-for="ite in item.stagelist">
-                                    <a v-if="ite.stage.IsUserEnd == 1" style="background-color:#40E0D0;" v-on:click="OpenStagebyUserEnd(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i></i><span>{{ite.stage.StageName}}</span></a>
-                                    <a v-if="ite.stage.IsUserEnd == 2" style="background-color:red;" v-on:click="OpenStage(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i></i><span>{{ite.stage.StageName}}</span></a>
-                                    <a v-if="ite.stage.IsUserEnd == 0 && ite.stage.IsComplete" style="background-color:#a1e6ff;" v-on:click="OpenStage(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i></i><span>{{ite.stage.StageName}}</span></a>
-                                    <a v-if="ite.stage.IsUserEnd == 0 && !ite.stage.IsComplete" style="background-color:#B5B5B5;"><i></i><span>{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 1"  v-on:click="OpenStagebyUserEnd(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i style="background-color: #01af63;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 2"  v-on:click="OpenStage(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i style="background-color: red;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 0 && ite.stage.IsComplete"  v-on:click="OpenStage(item.buiding.BuidingID,ite.stage.ID,ite.stage.StageName,ite.stage.StageContent)"><i style="background-color: #a1e6ff;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 0 && !ite.stage.IsComplete"><i style="background-color: #B5B5B5;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
                                     <a href="" target="_blank" v-if="ite.worker.WorkerID != 0">
-                                        <img v-if="ite.worker.thumbnailImage" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.worker.thumbnailImage" height="50" width="50" v-bind:alt="ite.stage.StageName" v-bind:title="ite.stage.StageName" style="border-radius:50%"><span>施工者：{{ite.worker.WorkerName}}</span>
+                                        <img v-if="ite.worker.thumbnailImage" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.worker.thumbnailImage" height="50" width="50" v-bind:alt="ite.stage.StageName" v-bind:title="ite.stage.StageName" style="border-radius:50%;margin-top: 18px;"><span>施工者：{{ite.worker.WorkerName}}</span>
                                     </a>
                                     
                                 </li>
@@ -269,7 +269,7 @@
                             type: 1,
                             title: title + "施工情况",
                             skin: 'layui-layer-rim', //加上边框
-                            area: ['300px', '550px'], //宽高
+                            area: ['400px', '550px'], //宽高
                             content: content
                         });
                     },
@@ -281,7 +281,7 @@
                             type: 1,
                             title: title + "施工情况",
                             skin: 'layui-layer-rim', //加上边框
-                            area: ['300px', '550px'], //宽高
+                            area: ['400px', '550px'], //宽高
                             btn: ['合格', '不合格', '关闭'],
                             content: content,
                             yes: function (index, layero) {

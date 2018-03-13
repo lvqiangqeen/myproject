@@ -1,0 +1,164 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebBuidingCaseComment
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@{
+    Layout = null;
+    Model.PablishUserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+    Model.GetUserID = Convert.ToInt32(Request["GetUserID"]);
+    Model.CaseID = Convert.ToInt32(Request["CaseID"]);
+    Model.CaseType = Request["CaseType"];
+    Model.Guid = Request["Guid"];
+    string IsUserEnd = Request["IsUserEnd"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BuidingComment</title>
+    <script src="~/Content/design/js/jquery-2.0.3.min.js"></script>
+    <script src="~/Content/design/js/layer.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            margin-left: 66px;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        a, img {
+            border: 0;
+        }
+
+        body {
+            font: 12px/180% Arial, Helvetica, sans-serif;
+        }
+        /*quiz style*/
+        .quiz {
+            border: solid 1px #ccc;
+            height: 270px;
+            width: 772px;
+        }
+
+            .quiz h3 {
+                font-size: 14px;
+                line-height: 35px;
+                height: 35px;
+                border-bottom: solid 1px #e8e8e8;
+                padding-left: 20px;
+                background: #f8f8f8;
+                color: #666;
+                position: relative;
+            }
+
+        .quiz_content {
+            padding-top: 10px;
+            padding-left: 20px;
+            position: relative;
+            height: 205px;
+        }
+
+            .quiz_content .l_text {
+                height: 120px;
+                position: relative;
+                padding-left: 18px;
+            }
+
+                .quiz_content .l_text .m_flo {
+                    float: left;
+                    width: 47px;
+                }
+
+                .quiz_content .l_text .text {
+                    width: 634px;
+                    height: 109px;
+                    border: solid 1px #ccc;
+                }
+
+                .quiz_content .l_text .tr {
+                    position: absolute;
+                    bottom: -18px;
+                    right: 40px;
+                }
+        /*goods-comm-stars style*/
+        .goods-comm {
+            height: 41px;
+            position: relative;
+            z-index: 7;
+        }
+
+        .goods-comm-stars {
+            line-height: 25px;
+            padding-left: 12px;
+            height: 41px;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            width: 400px;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="quiz">
+        <div class="quiz_content">
+
+            <div class="goods-comm">
+                <div class="goods-comm-stars">
+                    <span class="star_l">满意度：</span>
+                    <div id="rate-comm-1" class="rate-comm"></div>
+                </div>
+            </div>
+
+            <div class="l_text">
+                <input id="id" type="hidden" value="@Model.id" />
+                <input id="PablishUserID" type="hidden" value="@Model.PablishUserID" />
+                <input id="GetUserID" type="hidden" value="@Model.GetUserID" />
+                <input id="CaseID" type="hidden" value="@Model.CaseID" />
+                <input id="CaseType" type="hidden" value="@Model.CaseType" />
+                <input type="hidden" value="@Model.Score" id="Score" />
+                <input type="hidden" value="@Model.Guid" id="Guid" />
+                <label class="m_flo">内  容：</label>
+                <textarea name="" id="Comment" class="text" placeholder="说点什么吧。。。"></textarea>
+                <span class="tr">字数限制为5-200个</span>
+            </div>
+            <button class="btn btn-primary">确认评价</button>
+            <div style="color:red;margin-left: 55px;font-size: 15px;">*评论只能修改一次，请慎重评价。</div>
+        </div>
+    </div>
+</body>
+</html>

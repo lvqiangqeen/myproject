@@ -114,7 +114,14 @@
 .place-info .info-list dd .proccess{margin-top:40px;}
 .place-info .info-list dd .proccess ul{width:618px;height:auto;border-top:2px solid #eee;padding-left:12px;}
 .place-info .info-list dd .proccess li{width:56px;text-align:center;float:left;display:inline;margin:0 30px;}
-.place-info .proccess li i{width:14px;height:14px;display:inline-block;background:url(http://fastued2.jia.com/image/zhuangxiu/newCompany/companySprit.png) no-repeat -90px -30px;vertical-align:top;margin-top:-8px;}
+.place-info .proccess li i{width:14px;height:14px;display:inline-block;vertical-align:top;margin-top:-8px;
+                            background-color: #c7dec6;
+    border: 1px solid #000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+}
 .place-info .proccess .pred i{background-position:-73px -30px;}
 .place-info .proccess li span{font-size:14px;display:block;color:#999;}
 .place-info .proccess .pred span{color:#be9954;}

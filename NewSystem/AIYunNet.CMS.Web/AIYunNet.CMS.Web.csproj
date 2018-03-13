@@ -4031,6 +4031,7 @@
     <Content Include="Areas\PeopleCenter\Views\CenterCases\LookBuidingComment.cshtml" />
     <Content Include="Content\meichen\css\center.buidingstagelist.css" />
     <Content Include="Handler\GetPeopleCenterListAjax.ashx" />
+    <Content Include="Areas\PeopleCenter\Views\CenterCases\BuidingComment.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
