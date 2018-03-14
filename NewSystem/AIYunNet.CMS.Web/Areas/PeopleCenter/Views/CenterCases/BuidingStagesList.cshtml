@@ -6,10 +6,10 @@
 @{
     ViewBag.Title = "BuidingStagesList";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
-    List<string> list = new List<string>();
-    List<string> listid = new List<string>();
-    WebBuidingCaseCommentService Ser = new WebBuidingCaseCommentService();
-    WebBuidingStagesService SageSer = new WebBuidingStagesService();
+    //List<string> list = new List<string>();
+    //List<string> listid = new List<string>();
+    //WebBuidingCaseCommentService Ser = new WebBuidingCaseCommentService();
+    //WebBuidingStagesService SageSer = new WebBuidingStagesService();
 }
 @section head{
     <style>
@@ -26,20 +26,24 @@
         .public_m5 table tbody tr th {
             background: #fff;
         }
-                .thstage > i:last-child {
-        display:none;
+
+        .thstage > i:last-child {
+            display: none;
         }
-                       .thstage >  a {
+
+        .thstage > a {
             color: black;
         }
     </style>
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<link href="~/Content/meichen/css/center.buidingstagelist.css" rel="stylesheet" />
 }
 <div class="centers_mr" id="stageContent">
     <div class="centers_r_items">
         <div class="items-tit">
             <a class="tit-name active" style="width: 99px;">订单进度管理</a>
         </div>
-        <div class="items-con">
+        @*<div class="items-con">
             <div class="public_m1 u-xiaoxi">
                 <div class="public_m5">
                     <table border="0" cellspacing="0" cellpadding="0" id="stageCaseTable">
@@ -50,7 +54,6 @@
                                 <th>装修流程</th>
                                 <th width="10%">业主验收</th>
                                 <th>操作</th>
-                                @*<th>是否完工</th>*@
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +116,7 @@
                                         }
                                         else if (buiding.IsUserEnd == 2)
                                         {
-                                            <th><a href="javascript:void(0)" title="星级：@Star，评价：@comment" style="color:#ff0000;">不合格</a></th>                           
+                                            <th><a href="javascript:void(0)" title="星级：@Star，评价：@comment" style="color:#ff0000;">不合格</a></th>
                                         }
                                         else
                                         {
@@ -125,9 +128,16 @@
                                         }
                                         else
                                         {
-                                            <th><a href="javascript:void(0)" class="editIsWorkerEnd btn btn-primary">确认完成<input type="hidden" name="lastindex" value="@lastindex" /><input type="hidden" name="StageNow" value="@buiding.StageNow" /><input type="hidden" name="buidingID" value="@buiding.BuidingID" /></a></th>
+                                            <th>
+                                                <a href="javascript:void(0)" class="editIsWorkerEnd btn btn-primary">
+                                                    确认完成
+                                                    <input type="hidden" name="lastindex" value="@lastindex" />
+                                                    <input type="hidden" name="StageNow" value="@buiding.StageNow" />
+                                                    <input type="hidden" name="buidingID" value="@buiding.BuidingID" />
+                                                </a>
+                                            </th>
                                         }
-                                        
+
                                     </tr>
                                 }
 
@@ -137,12 +147,72 @@
                     <div style="color:#ff0000">*提示：灰色标记代表尚未施工，蓝色标记代表施工完成，绿色标记代表审核通过，红色标记代表审核未通过。点击图标进行装修内容发布。将鼠标放在业主验收栏目中可以查看评价。</div>
                 </div>
             </div>
+        </div>*@
+
+        <div class="zxPany-list zxPany-place zxPany-placePage">
+            <div class="place-info">
+                <dl class="info-list" v-for="item in pageList">
+                    <dt>
+                        <a v-bind:href="'/Workers/DecBuidingDetail?WorkerID='+item.buiding.WorkerID+'&BuidingID='+item.buiding.BuidingID" target="_blank">
+                            <img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.buiding.thumbnailImage" height="100" width="100" v-bind:alt="item.buiding.BuidingTitle" v-bind:title="item.buiding.BuidingTitle" class="trans">
+                        </a>
+                    </dt>
+                    <dd>
+                        <p class="name" v-bind:title="item.buiding.BuidingTitle"><a v-bind:href="'/Workers/DecBuidingDetail?WorkerID='+item.buiding.WorkerID+'&BuidingID='+item.buiding.BuidingID" target="_blank">{{item.buiding.BuidingTitle}}</a></p>
+                        <p class="txt">
+                            <span>类型: {{item.demand.DemandTypeName}}</span>
+                            <span>面积: {{item.buiding.Space}}m²</span>
+                            <span>造价: {{item.buiding.Price}}元</span>
+                        </p>
+                        <div class="proccess">
+                            <ul class="clearfix">
+                                <li v-for="ite in item.stagelist">
+                                    <a v-if="ite.stage.IsUserEnd == 1" v-on:click="Info(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #01af63;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 2" v-on:click="Info(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: red;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 0 && ite.stage.IsComplete" v-on:click="updateStagesInfo(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #a1e6ff;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a v-if="ite.stage.IsUserEnd == 0 && !ite.stage.IsComplete" v-on:click="updateStagesInfo(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #B5B5B5;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
+                                    <a href="" target="_blank" v-if="ite.worker.WorkerID != 0">
+                                        <img v-if="ite.worker.thumbnailImage" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.worker.thumbnailImage" height="50" width="50" v-bind:alt="ite.stage.StageName" v-bind:title="ite.stage.StageName" style="border-radius:50%;margin-top: 18px;"><span>施工者：{{ite.worker.WorkerName}}</span>
+                                    </a>
+
+                                </li>
+                                @*<li class="pred"><i></i><span>准备开工</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>*@
+                            </ul>
+                        </div>
+                        <div class="btm-txt clearfix" style="padding-top:20px;">
+                            <p class="w-txt fl" v-if="item.buiding.IsWorkerEnd == 0"><span>工程当前状态：</span> 未竣工</p>
+                            <p class="w-txt fl" v-else style="color:#009688;"><span>工程当前状态：</span> 已竣工</p>
+                            <p class="w-txt fl" v-if="item.buiding.IsUserEnd == 0" style="margin-left: 69px;"><span>业主验收情况：</span> 未验收</p>
+                            <p class="w-txt fl" v-if="item.buiding.IsUserEnd == 1" style="color:#009688;margin-left: 69px;"><span>业主验收情况：</span> 合格</p>
+                            <p class="w-txt fl" v-if="item.buiding.IsUserEnd == 2" style="color:#ff0000;margin-left: 69px;"><span>业主验收情况：</span> 不合格</p>
+                            <div class="t-txt fr">
+                                <span class="p-t">开工日期：{{item.buiding.StartTime}}</span>
+                            </div>
+                        </div>
+                        <a title="查看评论" href="javascript:void(0)" class="pingjia place-link" v-if="item.buiding.IsUserEnd == 1">
+                            查看评论
+                            <input type="hidden" name="buidingID" v-bind:value="item.buiding.BuidingID" />
+                            <input type="hidden" name="IsEdit" v-bind:value="item.comment.IsEdit" />
+                        </a>
+                        <a title="确认完成" href="javascript::void(0)" class="editIsWorkerEnd place-link" v-else>
+                            确认完成
+                            <input type="hidden" name="buidingID" v-bind:value="item.buiding.BuidingID" />
+                            <input type="hidden" name="StageNow" v-bind:value="item.buiding.StageNow" />
+                        </a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <div class="page">
+            <p class="page_num">
+                <div class="M-box1" style="text-align:center;"></div>
+            </p>
         </div>
     </div>
 
 </div>
 @section Scripts{
-    <script type="text/javascript">
+    @*<script type="text/javascript">
 
         $(document).ready(function () {
             sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
@@ -171,8 +241,7 @@
             });
 
         });
-        function Info(buidingID, StageID)
-        {
+        function Info(buidingID, StageID) {
             var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
             window.location.href = url;
         }
@@ -182,14 +251,13 @@
                 url: "/PeopleCenter/CenterCases/IsCanUpdateStage",
                 data: {
                     buidingID: buidingID,
-                    stageID:StageID
+                    stageID: StageID
                 },
                 success: function (data) {
                     if (data.RetCode == 1) {
                         var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
                         window.location.href = url;
-                    } else
-                    {
+                    } else {
                         layer.alert('上个阶段任务还未竣工！', { icon: 5 });
                     }
                 }
@@ -201,7 +269,7 @@
         $(".editIsWorkerEnd").click(function () {
             var buidingID = $(this).find("input[name=buidingID]").val();
             var StageNow = $(this).find("input[name=StageNow]").val();
-            var lastindex = $(this).find("input[name=lastindex]").val();
+            //var lastindex = $(this).find("input[name=lastindex]").val();
             //配置一个透明的询问框
             layer.msg('是否确认竣工。', {
                 time: 20000, //20s后自动关闭
@@ -254,12 +322,206 @@
                 },
                 success: function (data) {
                     if (data.RetCode == 1) {
-                        //$('#stageCaseTable').DataTable().ajax.reload();                      
+                        //$('#stageCaseTable').DataTable().ajax.reload();
                     }
                 }
 
             });
         }
+    </script>*@
+
+    <script>
+        $(function () {
+            sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+            var noticeVue = new Vue({
+                el: '.place-info',
+                data: {
+                    pageList: []
+                },
+                mounted: function () {
+                    this.GetPageList(1);
+                },
+                methods: {
+                    Info: function (buidingID, StageID) {
+                        layer.open({
+                            type: 2,
+                            scrollbar: false,
+                            title: '上传阶段信息',
+                            shadeClose: true,
+                            shade: 0.8,
+                            area: ['400px', '300px'],
+                            content: ['/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=' + buidingID + '&StageID=' + StageID + '&rnd=' + Math.random()],
+                            end: function () {
+                                location.reload();
+                            }
+                        });
+                        //var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
+                        //window.location.href = url;
+                    },
+                    updateStagesInfo: function (buidingID, StageID) {
+                        $.ajax({
+                            type: "post",
+                            url: "/PeopleCenter/CenterCases/IsCanUpdateStage",
+                            data: {
+                                buidingID: buidingID,
+                                stageID: StageID
+                            },
+                            success: function (data) {
+                                if (data.RetCode == 1) {
+                                    var url = "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo?buidingID=" + buidingID + "&StageID=" + StageID + "&rnd=" + Math.random();
+                                    window.location.href = url;
+                                } else {
+                                    layer.alert('上个阶段任务还未竣工！', { icon: 5 });
+                                }
+                            }
+
+                        });
+
+                    },
+                    //分页查询
+                    GetPageList: function (pageIndex) {
+                        var _self = this;
+                        var PageSize = 10;
+                        var SortOrder = "";
+                        //设计师分页Ajax
+                        $.ajax({
+                            async: true,
+                            type: "post",
+                            url: "/Handler/GetPeopleCenterListAjax.ashx",
+                            data: {
+                                pageIndex: pageIndex,
+                                PageSize: PageSize,
+                                WorkerID: '@SessionHelper.Get("PositionID")',
+                                DemandID:"1",
+                                methodname: "GetCenterBuidingDetailList"
+                            },
+                            success: function (data) {
+                                if (data) {
+                                    var datajson = eval('(' + data + ')');
+                                    _self.pageList = datajson.list;
+                                    if (datajson.list != null) {
+                                        destotal = datajson.recordcount;
+                                        //列出页码,jq分页控件
+                                        $('.M-box1').pagination({
+                                            totalData: datajson.recordcount,
+                                            showData: PageSize,
+                                            coping: true,
+                                            current: pageIndex,
+                                            callback: _self.pageselectCallback
+                                        });
+                                        Vue.nextTick(function () {
+
+                                            $(".editIsWorkerEnd").click(function () {
+                                                var buidingID = $(this).find("input[name=buidingID]").val();
+                                                var StageNow = $(this).find("input[name=StageNow]").val();
+                                                //var lastindex = $(this).find("input[name=lastindex]").val();
+                                                //配置一个透明的询问框
+                                                layer.msg('是否确认竣工。', {
+                                                    time: 20000, //20s后自动关闭
+                                                    btn: ['竣工', '关闭'],
+                                                    yes: function (index, layero) {
+                                                        $.ajax({
+                                                            type: "post",
+                                                            url: "/PeopleCenter/CenterCases/IsCanWorkerEnd",
+                                                            data: {
+                                                                buidingID: buidingID
+                                                            },
+                                                            success: function (data) {
+                                                                if (data.RetCode == 1) {
+                                                                    editIsWorkerEnd(buidingID);
+                                                                    window.location.href = window.location.href;
+                                                                } else if (data.RetCode == 2) {
+                                                                    layer.alert('工序没有全部完成！', { icon: 5 });
+                                                                } else if (data.RetCode == 3) {
+                                                                    layer.alert('部分工序业主没有审核通过！', { icon: 5 });
+                                                                } else if (data.RetCode == 4) {
+                                                                    layer.alert('业主没有审核！', { icon: 5 });
+                                                                }
+                                                            }
+
+                                                        });
+
+
+                                                        //if (StageNow != lastindex) {
+                                                        //    layer.msg('项目未完成<br>您不能竣工');
+                                                        //} else {
+                                                        //    editIsWorkerEnd(buidingID);
+
+                                                        //    window.location.href = window.location.href;
+                                                        //}
+
+                                                    },
+                                                    btn2: function (index, layero) {
+
+                                                    }
+                                                });
+                                            })
+                                            $(".pingjia").click(function () {
+                                                var CaseID = $(this).find("input[name=buidingID]").val();
+                                                var IsEdit = $(this).find("input[name=IsEdit]").val();
+                                                OpenComment(CaseID, IsEdit);
+                                            })
+
+                                            function OpenComment(CaseID, IsEdit) {
+                                                    layer.open({
+                                                        type: 2,
+                                                        scrollbar: false,
+                                                        title: '查看评论',
+                                                        btn: ['确定'],
+                                                        shadeClose: true,
+                                                        shade: 0.8,
+                                                        area: ['400px', '300px'],
+                                                        content: ['/PeopleCenter/CenterCases/LookBuidingComment?CaseID=' + CaseID],
+                                                        end: function () {
+                                                            //location.reload();
+                                                        }
+                                                    });
+
+                                            }
+
+                                            function editIsWorkerEnd(buidingID) {
+                                                $.ajax({
+                                                    type: "post",
+                                                    url: "/PeopleCenter/CenterCases/IsWorkerEnd",
+                                                    data: {
+                                                        buidingID: buidingID
+                                                    },
+                                                    success: function (data) {
+                                                        if (data.RetCode == 1) {
+                                                            //$('#stageCaseTable').DataTable().ajax.reload();
+                                                        }
+                                                    }
+
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        _self.pageList = [];
+                                    }
+
+                                } else {
+                                    //$("#caselist").empty();
+                                    _self.pageList = [];
+                                }
+                            },
+                            error: function (xhr, type) {
+                                _self.pageList = [];
+                            }
+                        });
+
+                    },
+                    //分页回调函数
+                    pageselectCallback: function (pageIndex) {
+                        var _self = this;
+                        //获取当前页码
+                        _self.GetPageList(pageIndex.getCurrent());
+                    }
+
+
+                }
+            });
+        })
+
     </script>
 }
 

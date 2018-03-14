@@ -4,7 +4,6 @@
     ViewBag.Title = "UpdateBuidingStagesInfo";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
 }
-@section head{
     <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
     <style>
         #ddlStage {
@@ -45,7 +44,7 @@
             padding: 10px;
         }
     </style>
-}
+
 <div class="centers_mr">
     <div class="centers_r_items" id="timeStageInfoDiv">
         <div class="req-push-title">
@@ -71,7 +70,7 @@
         </div>
     </div>
 </div>
-@section Scripts{
+
     <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
     <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
     <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
@@ -244,4 +243,4 @@
 		    return str.replace(/<[^>]+>/g, "");//去掉所有的html标记  
 		}
     </script>
-}
+

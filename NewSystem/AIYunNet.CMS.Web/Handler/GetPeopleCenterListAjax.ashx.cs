@@ -38,7 +38,9 @@ namespace AIYunNet.CMS.Web.Handler
             int pageIndex = string.IsNullOrEmpty(context.Request["pageIndex"]) ? 1 : Convert.ToInt32(context.Request["pageIndex"]);
             int PageSize = Convert.ToInt32(context.Request["PageSize"]);
             string UserID= context.Request["UserID"];
+            string WorkerID = context.Request["WorkerID"];
             string SortOrder = context.Request["SortOrder"];
+            string DemandID= context.Request["DemandID"];
             string SortParameters = "";
             int pageCount = 0;
             int recordcount = 0;
@@ -48,8 +50,10 @@ namespace AIYunNet.CMS.Web.Handler
                 +"[constructionstageID],[constructionstage],[ResultID],[StartTime],[StageNow],[EndTime],"
                 +"[superviseName],[UserID],[DemandID],[IsWorkerEnd],[IsUserEnd],[Guid]");
 
-            SortParameters = string.Format(" FlagDelete=0 {0} ",
-                 UserID == "0" || string.IsNullOrEmpty(UserID) ? "" : "and UserID=" + UserID);
+            SortParameters = string.Format(" FlagDelete=0 {0} {1}",
+                 UserID == "0" || string.IsNullOrEmpty(UserID) ? "" : "and UserID=" + UserID,
+                 WorkerID == "0" || string.IsNullOrEmpty(WorkerID) ? "" : "and WorkerID=" + WorkerID,
+                 string.IsNullOrEmpty(DemandID) ? "" : "and DemandID!=0");
 
             Pagination paginfo = new Pagination();
             paginfo.SelectParameters = SelectParameters;
