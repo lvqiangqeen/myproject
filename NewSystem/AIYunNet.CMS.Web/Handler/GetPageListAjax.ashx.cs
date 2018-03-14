@@ -31,6 +31,43 @@ namespace AIYunNet.CMS.Web.Handler
             method.Invoke(this, null);
         }
         /// <summary>
+        /// 获取工人案例
+        /// </summary>
+        public void GetWebBuidingSingleList()
+        {
+            int pageIndex = string.IsNullOrEmpty(context.Request["pageIndex"]) ? 1 : Convert.ToInt32(context.Request["pageIndex"]);
+            int PageSize = Convert.ToInt32(context.Request["PageSize"]);
+            string SortOrder = context.Request["SortOrder"];
+            string WorkerID = context.Request["WorkerID"];
+            string SortParameters = "";
+            int pageCount = 0;
+            int recordcount = 0;
+            string SelectParameters = string.Format("[ID],[WebBuidingStageID],[Title],[TimeStageInfo],[TimeStageContent],[AddTime]"
+                 + ",[sortID],[endtime],[FlagDelete],[DeleteOn],[TimeStageThumContent],[WorkerID],[DemandID],[IsUserEnd]"
+                 + ",[IsWorkerEnd],[UserID],[Guid],[Price],[Space],[BuidingSingleImage],[thumbnailImage],[EditOn],AddOn");
+
+            SortParameters = string.Format(" FlagDelete=0 {0} ",
+                 WorkerID == "0" || string.IsNullOrEmpty(WorkerID) ? "" : "and WorkerID=" + WorkerID);
+
+            Pagination paginfo = new Pagination();
+            paginfo.SelectParameters = SelectParameters;
+            paginfo.PageIndex = pageIndex;
+            paginfo.PageSize = PageSize;
+            paginfo.EntityName = "WebBuidingSingle";
+            paginfo.SortParameters = SortParameters;
+            paginfo.SortOrder = SortOrder + " AddTime desc,ID desc";
+            var result = PageList.GetPageListBySQL<WebBuidingSingle>(paginfo, out recordcount, out pageCount);
+
+            var obj = new
+            {
+                list = result,
+                recordcount = recordcount,
+                pageCount = pageCount
+            };
+            string msg = JsonConvert.SerializeObject(obj);
+            context.Response.Write(msg);
+        }
+        /// <summary>
         /// 获取需求
         /// </summary>
         public void GetDecDemandList()

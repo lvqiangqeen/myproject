@@ -6,6 +6,7 @@
 @{
     ViewBag.Title = "DecWorkerBuidingDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebBuidingSingle buiding = ViewBag.buidingSingle;
 }
 <link href="~/Content/design/sheji.workerbuidingdetail.css" rel="stylesheet" />
 <link href="~/Content/design/swiper/swiper-3.4.2.min.css" rel="stylesheet" />
@@ -25,7 +26,7 @@
                     <em class="arrow_gray_right"></em>
                 </li>
                 <li>
-                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID">@Model.WorkerName </a>--@ViewBag.buiding.BuidingTitle
+                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID">@Model.WorkerName </a>--@ViewBag.buidingSingle.Title
                 </li>
             </ul>
         </div>
@@ -35,12 +36,14 @@
                 <div class="logo floatL">
                     <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" alt="@Model.WorkerName" title="@Model.WorkerName" style="width:62px;height:62px;"></a>
                 </div>
+                
                 <div class="des floatL">
                     <span class="des-title">
-                        @ViewBag.buiding.BuidingTitle
-                    </span> <span>面积：@ViewBag.buiding.Space m²</span>
-                    <span>合同价：@ViewBag.buiding.Price 元</span>
-                    <span>类型：@ViewBag.buiding.constructionstage</span>
+                        @ViewBag.buidingSingle.Title
+                    </span> 
+                    <span>面积：@ViewBag.buidingSingle.Space m²</span>
+                    <span>合同价：@ViewBag.buidingSingle.Price 元</span>
+                    <span>类型：@ViewBag.demand.DemandTypeName</span>
                     <span style="float: right"><a href="/zb/yygd2161">预约参观</a></span>
                 </div>
             </div>
@@ -48,32 +51,30 @@
 
 
         <div class="supmain">
-            @foreach (WebBuidingTimeStages item in ViewBag.timestagelist as List<WebBuidingTimeStages>)
-            {
                 <div class="suplist">
                     <div class="supitem" style="position: relative">
                         <div class="supobj">
-                            @item.Title
+                            
                         </div>
                         <div class="supdetail">
                             <span>做工说明<span class="ico-t"></span></span>
                             <div class="supDes">
-                                <p>@item.TimeStageInfo</p>
+                                <p>@buiding.TimeStageInfo</p>
                             </div>
                             <span>现场图片<span class="ico-t"></span></span>
                             <div class="supImg">
                                 <div class="suptime">
                                     <span>
-                                        <b>@item.AddTime.ToString("dd")</b>日
-                                    </span><span>@item.AddTime.ToString("yyyy-MM")</span>
+                                        <b>@buiding.AddTime.ToString("dd")</b>日
+                                    </span><span>@buiding.AddTime.ToString("yyyy-MM")</span>
                                 </div>
                                 @{ 
                                     List<string> list = new List<string>();
                                     List<string> listthum = new List<string>();
-                                    if (item.TimeStageContent != "" && item.TimeStageContent != null)
+                                    if (buiding.TimeStageContent != "" && buiding.TimeStageContent != null)
                                     {
-                                        list = item.TimeStageContent.Split('|').Where(c=>c!="").ToList();
-                                        listthum=item.TimeStageThumContent.Split('|').Where(c => c != "").ToList();
+                                        list = buiding.TimeStageContent.Split('|').Where(c=>c!="").ToList();
+                                        listthum= buiding.TimeStageThumContent.Split('|').Where(c => c != "").ToList();
                                     }
                                     int i = 0;
                                 }
@@ -85,7 +86,7 @@
                                                     @foreach (string ite in list)
                                                     {
                                                         <li class="swiper-slide clone" style="float: left; width: 170px;">
-                                                            <img layer-src="@AppSettingsHelper.ImgUrl@ite" src="@AppSettingsHelper.ImgUrl@listthum[i]" alt="@item.Title">
+                                                            <img layer-src="@AppSettingsHelper.ImgUrl@ite" src="@AppSettingsHelper.ImgUrl@listthum[i]" alt="@buiding.Title">
                                                         </li>
                                                         i++;
                                                     }
@@ -102,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            }
+            
             <script>
                 //必须放在domx下面
                 var indexSwiper1 = new Swiper('.tempWrap', {

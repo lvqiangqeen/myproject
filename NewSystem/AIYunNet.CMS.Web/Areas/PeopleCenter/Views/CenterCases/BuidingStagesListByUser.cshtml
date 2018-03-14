@@ -201,7 +201,7 @@
                             <input type="hidden" name="IsWorkerEnd" v-bind:value="item.buiding.IsWorkerEnd" />
                             <input type="hidden" name="buidingID" v-bind:value="item.buiding.BuidingID" />
                             <input type="hidden" name="Guid" v-bind:value="item.buiding.Guid" />
-                            <input type="hidden" name="GetUserID" v-bind:value="item.worker.UserID" />
+                            <input type="hidden" name="GetUserID" v-bind:value="item.woker.UserID" />
                         </a>
                     </dd>
                 </dl>
@@ -364,8 +364,8 @@
                                                                 title: '我要评论',
                                                                 shadeClose: true,
                                                                 shade: 0.8,
-                                                                area: ['772px', '280px'],
-                                                                content: ['/PeopleCenter/CenterCases/BuidingCommentScore?IsUserEnd=1&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
+                                                                area: ['570px', '290px'],
+                                                                content: ['/PeopleCenter/CenterCases/BuidingComment?IsUserEnd=1&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid],
                                                                 end: function () {
                                                                     location.reload();
                                                                 }
@@ -386,8 +386,8 @@
                                                                 title: '我要评论',
                                                                 shadeClose: true,
                                                                 shade: 0.8,
-                                                                area: ['772px', '280px'],
-                                                                content: ['/PeopleCenter/CenterCases/BuidingCommentScore?IsUserEnd=2&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
+                                                                area: ['570px', '290px'],
+                                                                content: ['/PeopleCenter/CenterCases/BuidingComment?IsUserEnd=2&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
                                                                 end: function () {
                                                                     location.reload();
                                                                 }
@@ -428,8 +428,8 @@
                                                         title: '查看评论',
                                                         shadeClose: true,
                                                         shade: 0.8,
-                                                        area: ['772px', '280px'],
-                                                        content: ['/PeopleCenter/CenterCases/BuidingCommentScore?CaseID=' + CaseID, 'no'],
+                                                        area: ['570px', '290px'],
+                                                        content: ['/PeopleCenter/CenterCases/BuidingComment?CaseID=' + CaseID, 'no'],
                                                         end: function () {
                                                             location.reload();
                                                         }

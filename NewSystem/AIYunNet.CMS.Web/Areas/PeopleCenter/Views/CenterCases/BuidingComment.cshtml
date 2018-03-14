@@ -68,7 +68,7 @@
         .quiz {
             border: solid 1px #ccc;
             height: 270px;
-            width: 772px;
+            width: 550px;
         }
 
             .quiz h3 {
@@ -101,7 +101,7 @@
                 }
 
                 .quiz_content .l_text .text {
-                    width: 634px;
+                    width: 400px;
                     height: 109px;
                     border: solid 1px #ccc;
                 }
@@ -128,8 +128,9 @@
             width: 400px;
         }
 
-
-
+         .statue {
+             margin-left: 10px;
+        }
 
     </style>
 </head>
@@ -140,7 +141,7 @@
             <div class="goods-comm">
                 <div class="goods-comm-stars">
                     <span class="star_l">满意度：</span>
-                    <div id="rate-comm-1" class="rate-comm"></div>
+                    <input type="radio" value="3" name="Score" />好评<input type="radio" value="2" name="Score" class="statue"/>中评<input type="radio" value="1" name="Score" class="statue"/>差评
                 </div>
             </div>
 
@@ -162,3 +163,84 @@
     </div>
 </body>
 </html>
+<script>
+    $(function () {
+        //赋值
+        var comment = '@Model.Comment';
+        $("#Comment").val(comment);
+        //获取评分
+        var Score = "@Model.Score";
+        if (Score != null && Score != "" && Score!="0") {
+            $("input[name=Score][value=" + Score + "]").attr("checked", "true");
+        }
+        $(".btn").click(function () {
+            var Score = $("input[name=Score]:checked").val();
+            var Comment = $("#Comment").val();
+            var PablishUserID = $("#PablishUserID").val();
+            var GetUserID = $("#GetUserID").val();
+            var CaseID = $("#CaseID").val();
+            var CaseType = $("#CaseType").val();
+            var Guid = $("#Guid").val();
+            var id = $("#id").val();
+            if (Score == "0" || Score == null || Comment == "") {
+                layer.msg('请您为本次服务打分并评价');
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/PeopleCenter/CenterCases/AddOrEditComment",
+                    data: {
+                        id: id,
+                        Guid: Guid,
+                        PablishUserID: PablishUserID,
+                        GetUserID: GetUserID,
+                        CaseID: CaseID,
+                        CaseType: CaseType,
+                        Score: Score,
+                        Comment: Comment
+                    },
+                    success: function (data) {
+                        if (data.RetCode == 1) {
+                            if ('@IsUserEnd' != null) {
+                                IsUserEnd('@Request["CaseID"]', '@IsUserEnd');
+                            }
+
+                            layer.open({
+                                type: 1,
+                                offset: 1,
+                                content: '<div style="padding: 20px 100px;">评价成功</div>',
+                                btn: '关闭',
+                                btnAlign: 'c',
+                                shade: 0,
+                                yes: function () {
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                }
+                            });
+                            //window.close();
+
+                        }
+                    }
+
+                });
+            }
+
+
+        })
+        function IsUserEnd(buidingID, IsUserend) {
+            $.ajax({
+                type: "post",
+                url: "/PeopleCenter/CenterCases/IsUserEnd",
+                data: {
+                    buidingID: buidingID,
+                    IsUserend: IsUserend
+                },
+                success: function (data) {
+                    if (data.RetCode == 1) {
+                        //$('#stageCaseTable').DataTable().ajax.reload();
+                    }
+                }
+
+            });
+        }
+    })
+</script>

@@ -163,5 +163,22 @@ namespace AIYunNet.CMS.BLL.Service
             }
 
         }
+        //获取合作装修阶段
+        public WebBuidingStages GetStageByBuidIDandWorkerid(int buidingID, int workerid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingStages buidingStage = context.WebBuidingStages.Where(bs => bs.WebBuidingID == buidingID && bs.Workerid == workerid).FirstOrDefault();
+                if (buidingStage != null)
+                {
+                    return buidingStage;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+        }
     }
 }

@@ -249,15 +249,15 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
 
-        public int AddBuidingTimeStages(WebBuidingTimeStages timeStages)
-        {
-            using (AIYunNetContext context = new AIYunNetContext())
-            {
-                context.WebBuidingTimeStages.Add(timeStages);
-                context.SaveChanges();
-                return 1;
-            }
-        }
+        //public int AddBuidingTimeStages(WebBuidingTimeStages timeStages)
+        //{
+        //    using (AIYunNetContext context = new AIYunNetContext())
+        //    {
+        //        context.WebBuidingTimeStages.Add(timeStages);
+        //        context.SaveChanges();
+        //        return 1;
+        //    }
+        //}
         //根据UserID获取装修
         public List<WebBuiding> GetWebBuidingListByUserID(int UserID)
         {

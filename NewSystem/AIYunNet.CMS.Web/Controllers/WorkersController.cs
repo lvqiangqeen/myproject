@@ -21,7 +21,8 @@ namespace AIYunNet.CMS.Web.Controllers
         WebWorkerService webworkerService = new WebWorkerService();
         WebBuidingService webbuidingSer = new WebBuidingService();
         WebBuidingStagesService WebBuidingStagesSer = new WebBuidingStagesService();
-        WebBuidingTimeStagesService WebBuidingTimeStagesSer = new WebBuidingTimeStagesService();
+        WebBuidingSingleService WebBuidingSingleSer = new WebBuidingSingleService();
+        DemandService DemandSer = new DemandService();
         IWebCase webCaseService = new WebCaseService();
         IWebCommon webCommonService = new WebCommonService();//获取参数接口（包括各项分类）
         It_Area t_AreaService = new t_AreaService();
@@ -109,19 +110,16 @@ namespace AIYunNet.CMS.Web.Controllers
         }
 
         [Description("工人buiding详情")]
-        public ActionResult DecWorkerBuidingDetail(int WorkerID = 0, int BuidingID = 0)
+        public ActionResult DecWorkerBuidingDetail(int WorkerID = 0, int BuidingSingleID = 0)
         {
             WebWorker worker = webworkerService.GetWebWorkerByID(WorkerID);
-            WebBuiding buiding = webbuidingSer.GetWebBuidingByID(BuidingID);
+            WebBuidingSingle buidingSingle = WebBuidingSingleSer.GetWebBuidingSingleByID(BuidingSingleID);
+            DecDemand demand = DemandSer.GetDecDemandByID(buidingSingle.DemandID);
             //工人在constructionstageID中只有单个id
-            WebBuidingStages buidingstage = WebBuidingStagesSer.GetWebBuidingStagesByID(BuidingID, Convert.ToInt32(buiding.constructionstageID));
-            List<WebBuidingTimeStages> timestagelist = WebBuidingTimeStagesSer.GetTimeStagesList(buidingstage.ID);
-
-
-
-            ViewBag.timestagelist = timestagelist;
+            //WebBuidingStages buidingstage = WebBuidingStagesSer.GetWebBuidingStagesByID(BuidingID, Convert.ToInt32(buiding.constructionstageID));
+            ViewBag.buidingSingle = buidingSingle;
+            ViewBag.demand = demand;
             ViewBag.worker = worker;
-            ViewBag.buiding = buiding;
             return View(worker);
         }
     }

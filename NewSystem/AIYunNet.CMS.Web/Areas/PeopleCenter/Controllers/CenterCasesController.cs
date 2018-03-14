@@ -201,15 +201,15 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 			return Json(new { RetCode = 1 });
 		}
 
-		[HttpPost]
-		public JsonResult UpdateBuidingStageTimeInfo(WebBuidingTimeStages timeStages)
-		{
-			WebBuidingService service = new WebBuidingService();
-			timeStages.AddTime = DateTime.Now;
-			timeStages.FlagDelete = false;
-			service.AddBuidingTimeStages(timeStages);
-			return Json(new { RetCode = 1 });
-		}
+		//[HttpPost]
+		//public JsonResult UpdateBuidingStageTimeInfo(WebBuidingTimeStages timeStages)
+		//{
+		//	WebBuidingService service = new WebBuidingService();
+		//	timeStages.AddTime = DateTime.Now;
+		//	timeStages.FlagDelete = false;
+		//	service.AddBuidingTimeStages(timeStages);
+		//	return Json(new { RetCode = 1 });
+		//}
         #endregion
 
         #region 我的装修

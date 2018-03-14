@@ -45,7 +45,7 @@ namespace AIYunNet.CMS.Domain
         public virtual DbSet<WebWorker> WebWorker { get; set; }
         public virtual DbSet<WebBuiding> WebBuiding { get; set; }
         public virtual DbSet<WebBuidingStages> WebBuidingStages { get; set; }
-        public virtual DbSet<WebBuidingTimeStages> WebBuidingTimeStages { get; set; }
+        public virtual DbSet<WebBuidingSingle> WebBuidingSingle { get; set; }
         public virtual DbSet<DownLoad> DownLoad { get; set; }
         public virtual DbSet<DownLoadType> DownLoadType { get; set; }
         public virtual DbSet<All_Nav> All_Nav { get; set; }
