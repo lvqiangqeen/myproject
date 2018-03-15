@@ -52,7 +52,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         #endregion
 
         WebBuidingStagesService stageSer = new WebBuidingStagesService();
-        #region 装修接单
+        #region 需求接单
         public ActionResult WorkerDemandList(int UserID)
         {
             List<DecDemand> list = demandSer.GetDecDemandListByUserIDAndType(UserID, "WebUser");
@@ -143,73 +143,87 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 
 
         [HttpGet]
-        public ActionResult UpdateBuidingStagesInfo(int buidingID, int StageID)
+        public ActionResult UpdateBuidingStage(int buidingID=0, int StageID=0)
         {          
             WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
             return View(stage);
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
+        public ActionResult UpdateBuidingStage(WebBuidingStages buidingStage)
         {
             int ret = 0;
             ret = stageSer.UpdateBuidingStagesInfo(buidingStage);
             return Json(new { RetCode = 1 });
         }
 
-        [HttpGet]
-		public ActionResult UpdateBuidingStageInfo(int buidingID,int StageID)
-		{
-            WebBuidingService service = new WebBuidingService();
-            WebBuiding buiding = service.GetWebuidingByID(buidingID);
-            string stageID = buiding.constructionstageID;
-            string stageText = buiding.constructionstage;
-            string[] stageIDArr = null;
-            string[] stageTextArr = null;
-            if (!string.IsNullOrWhiteSpace(stageID))
-            {
-                stageID = stageID.TrimEnd(',');
-                stageIDArr = stageID.Split(',');
-                stageText = stageText.TrimEnd(',');
-                stageTextArr = stageText.Split(',');
-            }
-            ViewBag.StagesIDs = stageIDArr;
-            ViewBag.StagesTexts = stageTextArr;
-            ViewBag.BuidingID = buidingID;
-            //ViewBag.WorkerType = "工长";
-            ViewBag.WorkerType = "工人";
-            //WebBuidingStages stage= buidingSer.GetBuidingStageByBuidingIDAndStageID(buidingID, buidingID);
+        //      [HttpGet]
+        //      public ActionResult UpdateBuidingStagesInfo(int buidingID, int StageID)
+        //      {
+        //          WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
+        //          return View(stage);
+        //      }
+        //      [HttpPost]
+        //      [ValidateInput(false)]
+        //      public ActionResult UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
+        //      {
+        //          int ret = 0;
+        //          ret = stageSer.UpdateBuidingStagesInfo(buidingStage);
+        //          return Json(new { RetCode = 1 });
+        //      }
+        //      [HttpGet]
+        //public ActionResult UpdateBuidingStageInfo(int buidingID,int StageID)
+        //{
+        //          WebBuidingService service = new WebBuidingService();
+        //          WebBuiding buiding = service.GetWebuidingByID(buidingID);
+        //          string stageID = buiding.constructionstageID;
+        //          string stageText = buiding.constructionstage;
+        //          string[] stageIDArr = null;
+        //          string[] stageTextArr = null;
+        //          if (!string.IsNullOrWhiteSpace(stageID))
+        //          {
+        //              stageID = stageID.TrimEnd(',');
+        //              stageIDArr = stageID.Split(',');
+        //              stageText = stageText.TrimEnd(',');
+        //              stageTextArr = stageText.Split(',');
+        //          }
+        //          ViewBag.StagesIDs = stageIDArr;
+        //          ViewBag.StagesTexts = stageTextArr;
+        //          ViewBag.BuidingID = buidingID;
+        //          //ViewBag.WorkerType = "工长";
+        //          ViewBag.WorkerType = "工人";
+        //          //WebBuidingStages stage= buidingSer.GetBuidingStageByBuidingIDAndStageID(buidingID, buidingID);
 
 
 
-            return View();
-		}
+        //          return View();
+        //}
 
-		[HttpGet]
-		public JsonResult GetBuidingStageInfo(int buidingID, int stageID)
-		{
-			WebBuidingService service = new WebBuidingService();
-			string content = service.GetBuidingStageInfo(buidingID, stageID);
-			return Json(new { Content = content }, JsonRequestBehavior.AllowGet);
-		}
+        //[HttpGet]
+        //public JsonResult GetBuidingStageInfo(int buidingID, int stageID)
+        //{
+        //	WebBuidingService service = new WebBuidingService();
+        //	string content = service.GetBuidingStageInfo(buidingID, stageID);
+        //	return Json(new { Content = content }, JsonRequestBehavior.AllowGet);
+        //}
 
-		[HttpPost]
-		public JsonResult UpdateBuidingStageInfo(WebBuidingStages buidingStage)
-		{
-			WebBuidingService service = new WebBuidingService();
-			service.AddUpdateBuidingStages(buidingStage);
-			return Json(new { RetCode = 1 });
-		}
+        //[HttpPost]
+        //public JsonResult UpdateBuidingStageInfo(WebBuidingStages buidingStage)
+        //{
+        //	WebBuidingService service = new WebBuidingService();
+        //	service.AddUpdateBuidingStages(buidingStage);
+        //	return Json(new { RetCode = 1 });
+        //}
 
-		//[HttpPost]
-		//public JsonResult UpdateBuidingStageTimeInfo(WebBuidingTimeStages timeStages)
-		//{
-		//	WebBuidingService service = new WebBuidingService();
-		//	timeStages.AddTime = DateTime.Now;
-		//	timeStages.FlagDelete = false;
-		//	service.AddBuidingTimeStages(timeStages);
-		//	return Json(new { RetCode = 1 });
-		//}
+        //[HttpPost]
+        //public JsonResult UpdateBuidingStageTimeInfo(WebBuidingTimeStages timeStages)
+        //{
+        //	WebBuidingService service = new WebBuidingService();
+        //	timeStages.AddTime = DateTime.Now;
+        //	timeStages.FlagDelete = false;
+        //	service.AddBuidingTimeStages(timeStages);
+        //	return Json(new { RetCode = 1 });
+        //}
         #endregion
 
         #region 我的装修

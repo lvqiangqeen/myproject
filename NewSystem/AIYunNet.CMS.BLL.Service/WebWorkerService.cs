@@ -10,13 +10,32 @@ using AIYunNet.CMS.Domain;
 namespace AIYunNet.CMS.BLL.Service
 {
     public class WebWorkerService
-    {
+    {    
+        /// <summary>
+        /// 选取合作工人
+        /// </summary>
+        public List<WebWorker> GetWorkerExceptSelf(int workerid,string WorkerName)
+        {
+            List<WebWorker> list = new List<WebWorker>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                if (WorkerName == "")
+                {
+                    list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0).ToList();
+                } else
+                {
+                    list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0 && c.WorkerName.Contains(WorkerName)).ToList();
+                }
+                
+                return list;
+            }
+        }
         public List<WebWorker> GetWebWorkerList()
         {
             List<WebWorker> list = new List<WebWorker>();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                list = context.WebWorker.Where(c => c.WorkerCategory == "装修工长").ToList();
+                list = context.WebWorker.Where(c => c.WorkerCategory == "装修工长" && c.FlagDelete == 0).ToList();
                 return list;
             }
         }
@@ -28,7 +47,7 @@ namespace AIYunNet.CMS.BLL.Service
                 worker = context.WebWorker.Find(id);
                 if (worker == null)
                 {
-                    worker= new WebWorker();
+                    worker = new WebWorker();
                 }
                 return worker;
             }
@@ -69,7 +88,7 @@ namespace AIYunNet.CMS.BLL.Service
                         originalPeople.WorkerMail = webworker.WorkerMail;
                         originalPeople.WorkerName = webworker.WorkerName;
                         originalPeople.WorkerPhone = webworker.WorkerPhone;
-                        originalPeople.WorkerImage = webworker.WorkerImage;         
+                        originalPeople.WorkerImage = webworker.WorkerImage;
                         originalPeople.thumbnailImage = webworker.thumbnailImage == null ? "" : webworker.thumbnailImage;
                         originalPeople.ProvinceID = webworker.ProvinceID;
                         originalPeople.ProvinceName = webworker.ProvinceName;
