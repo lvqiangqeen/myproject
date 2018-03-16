@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using AIYunNet.CMS.Common.Utility;
 using AIYunNet.CMS.Domain.Model;
+using AIYunNet.CMS.Domain.OccaModel;
 using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Web.filter;
@@ -12,10 +13,13 @@ using AIYunNet.CMS.Web.filter;
 
 namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
 {
+    [AuthorityFilter]
     public class CenterWorkerController : Controller
     {
         WebWorkerService worSer = new WebWorkerService();
+        WebBuidTogetherService TogSer = new WebBuidTogetherService();
         // GET: PeopleCenter/CenterWorker
+        #region 选择合作伙伴
         //选择合作工人
         [HttpGet]
         public ActionResult SelectWorker()
@@ -33,5 +37,39 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             }
             return Json(new { code=0, msg="", count= list.Count(), data = list });
         }
+        [HttpPost]
+        public JsonResult SendWorkTogether(WebBuidTogether tog)
+        {
+            int ret = 0;
+            int ishave=TogSer.IsHaveTogther(tog.buidingID, tog.StageID);
+            if (ishave == 0)
+            {
+                ret = TogSer.AddBuidTogether(tog);
+            }        
+            return Json(new { RetCode = ret });
+        }
+        #endregion
+
+        #region 合作项目清单
+        [HttpGet]
+        public ActionResult WorkerTogetherList(int GetWorkerid=0)
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetTogetherList(int GetWorkerid = 0,int IsAccept=0,bool IsAll=false)
+        {
+            List<BuidTogether> list = TogSer.GetTogetherList(GetWorkerid, IsAccept, IsAll);
+            return Json(new { code = 0, msg = "", count = list.Count(), data = list });
+        }
+        //接受或拒绝
+        [HttpPost]
+        public JsonResult IsAcceptTogether(int id,int accept)
+        {
+            int ret = 0;
+            ret= TogSer.IsAccept(id, accept);
+            return Json(new { RetCode = ret });
+        }
+        #endregion
     }
 }

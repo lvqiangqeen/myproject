@@ -62,6 +62,7 @@
     <Compile Include="WebBuidingService.cs" />
     <Compile Include="WebBuidingStagesService.cs" />
     <Compile Include="WebBuidingSingleService.cs" />
+    <Compile Include="WebBuidTogetherService.cs" />
     <Compile Include="WebCaseImgService.cs" />
     <Compile Include="WebCaseService.cs" />
     <Compile Include="WebCommonService.cs" />

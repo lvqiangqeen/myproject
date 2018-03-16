@@ -163,14 +163,14 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         //          WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(buidingID, StageID);
         //          return View(stage);
         //      }
-        //      [HttpPost]
-        //      [ValidateInput(false)]
-        //      public ActionResult UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
-        //      {
-        //          int ret = 0;
-        //          ret = stageSer.UpdateBuidingStagesInfo(buidingStage);
-        //          return Json(new { RetCode = 1 });
-        //      }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
+        {
+            int ret = 0;
+            ret = stageSer.UpdateBuidingStagesInfo(buidingStage);
+            return Json(new { RetCode = 1 });
+        }
         //      [HttpGet]
         //public ActionResult UpdateBuidingStageInfo(int buidingID,int StageID)
         //{

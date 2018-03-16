@@ -4139,6 +4139,7 @@
     <Content Include="Content\layui\font\iconfont.ttf" />
     <Content Include="Content\layui\font\iconfont.woff" />
     <Content Include="Areas\PeopleCenter\Views\CenterWorker\SelectWorker.cshtml" />
+    <Content Include="Areas\PeopleCenter\Views\CenterWorker\WorkerTogetherList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -72,6 +72,7 @@
     <Compile Include="Model\WebBuidingCaseComment.cs" />
     <Compile Include="Model\WebBuidingStages.cs" />
     <Compile Include="Model\WebBuidingSingle.cs" />
+    <Compile Include="Model\WebBuidTogether.cs" />
     <Compile Include="Model\WebCase.cs" />
     <Compile Include="Model\WebCaseImg.cs" />
     <Compile Include="Model\WebCasePage.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Model\WebUser.cs" />
     <Compile Include="Model\WebWorker.cs" />
     <Compile Include="Model\Z_Comment.cs" />
+    <Compile Include="OccaModel\BuidTogether.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
