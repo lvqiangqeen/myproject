@@ -44,7 +44,7 @@
 .new_top_bar_right .login_status:hover .title,.new_top_bar_right .customer_service:hover .title ,.new_top_bar_right .designer_center:hover .title,.new_top_bar_right .navigation:hover .title{margin: 0; border-right: 1px #ddd solid; padding-top: 8px; padding-bottom: 8px; background: #fff;  border-left: 1px #ddd solid; margin-left: -1px;}
 .new_top_bar_right .login_status:hover ul,.new_top_bar_right .customer_service:hover ul ,.new_top_bar_right .designer_center:hover ul{ display: block; margin-left: -1px;} 
 .new_top_bar_right .login_status:hover ul{ width: 82px; text-indent: 3px; z-index: 14;}
-.new_top_bar_right .customer_service:hover ul{ width: 88px;}
+/*.new_top_bar_right .customer_service:hover ul{ width: 88px;}*/
 .new_top_bar_right .designer_center:hover ul{ width: 100px;}
 .new_top_bar_right .navigation{ float: left; position: relative;}
 .new_top_bar_right .navigation .title{ border-right:1px #efefef solid;}

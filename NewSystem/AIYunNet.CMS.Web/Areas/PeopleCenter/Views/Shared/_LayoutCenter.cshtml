@@ -5,6 +5,7 @@
 @{
     Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
     string userAccount = SessionHelper.Get("userName");
+
     WebUserService webuserservice = new WebUserService();
     WebPeopleService webpeopleservice = new WebPeopleService();
     WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
@@ -12,14 +13,42 @@
     WebWorkerService workerSer = new WebWorkerService();
     WebWorker webworker = workerSer.GetWebWorkerByUserID(webuser.UserID);
     WebBuidingService buidingSer = new WebBuidingService();
+
+
+    int demandCountNosee = 0;
+    int TogNosee = 0;
+    DecDemandAcceptService DecAcceptSer = new DecDemandAcceptService();
+    WebBuidTogetherService TogSer = new WebBuidTogetherService();
+    if (webworker != null)
+    {
+        demandCountNosee = DecAcceptSer.DemandToYou(Convert.ToInt32(SessionHelper.Get("UserID")));
+        TogNosee = TogSer.TogtherNoSee(webworker.WorkerID);
+    }
     //if (webpeopleservice.IsHaveuser(webuser.UserID))
     //{
     //    webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
     //}
+
 }
 <style>
     .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
         width: 1180px;
+    }
+    .tishi {
+        text-align: center;
+        margin-left:10px;
+        color: white;
+    line-height: initial;
+    font-size: 14px;
+            width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: text-top;
+            background-color: red;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     }
 </style>
 <link href="/content/meichen/css/basestyle.css" rel="stylesheet" type="text/css" />
@@ -71,6 +100,33 @@
 </div>
 <script type="text/javascript">
     $(function () {
+        var test = window.location.pathname;
+        var dingdan = '您有<a href="/PeopleCenter/CenterDemand/DemandListToMe"><span style="color:red;">' + '@demandCountNosee' + '</span>条订单</a>未处理！<br>';
+        var hezuo = '您有<a href="/PeopleCenter/CenterWorker/WorkerTogetherList"><span style="color:red;">' + '@TogNosee' + '</span>条合作申请</a>未处理！';
+        var text = "";
+        if ('@demandCountNosee' != "0")
+        {
+            text+=dingdan;
+        }
+        if ('@TogNosee' != "0")
+        {
+            text+=hezuo;
+        }
+        if (('@TogNosee' != "0" || '@demandCountNosee' != "0") && test == "/PeopleCenter/UserCenter/PeopleCenterIndex")
+        {
+            layer.open({
+                type: 1
+              , offset: 'rb'
+              ,area: ['300px', '200px']
+              , content: '<div style="padding: 20px 20px;">' + text + '</div>'
+              , btn: '关闭'
+              , btnAlign: 'c' //按钮居中
+              , shade: 0 //不显示遮罩
+              , yes: function () {
+                  layer.closeAll();
+              }
+            });
+        }
 
 
         var setTime;
@@ -144,7 +200,15 @@
     <div class="centers_ml">
         <!--头像-->
         <div class="center_header">
-            <a href="/PeopleCenter/UserCenter/PeopleCenterIndex"><img src="@AppSettingsHelper.ImgUrl@webuser.Img" /></a>
+            <a href="/PeopleCenter/UserCenter/PeopleCenterIndex">
+                @if (webuser.Img == "" || webuser.Img == null)
+                {
+                    <img src="~/Content/design/img/zhuangxiu.jpg" />
+                }
+                else
+                { <img src="@AppSettingsHelper.ImgUrl@webuser.Img" />}
+                
+            </a>
             <div class="u-name">
                 您好，<span>
                     @if (webuser.NickName == null || webuser.NickName == "")
@@ -203,12 +267,13 @@
         <a href="/PeopleCenter/UserCenter/UserCenterSafe"><i class="fa fa-get-pocket"></i>账户安全</a>
     </div>
     <div class="centers_listm">
-        <div class="listbox">
-            <div class="centers_listm_one_in"><i class="fa fa-wrench"></i><span>我的装修</span><b></b></div>
-            <div class="gjszmdm">
-                <a href="/PeopleCenter/CenterCases/BuidingStagesListByUser" class="center_in_self"><span>装修进度</span></a>
+            <div class="listbox">
+                <div class="centers_listm_one_in"><i class="fa fa-wrench"></i><span>我的装修</span><b></b></div>
+                <div class="gjszmdm">
+                    <a href="/PeopleCenter/CenterCases/BuidingStagesListByUser" class="center_in_self"><span>装修进度</span></a>
+                </div>
             </div>
-        </div>
+       
         <!--分类开始-->
         @if (webuser.PositionCode == "WebPeople")
         {
@@ -244,11 +309,11 @@
                 </div>
             </div>
         }
-        <div class="listbox">
+        <div class="listbox" style="">
             <div class="centers_listm_one_in"><i class="fa fa-reorder"></i><span>设计装修需求</span><b></b></div>
             <div class="gjszmdm">
                 
-                <a href="/PeopleCenter/CenterDemand/PeopleDemandList" class="center_in_self"><span>我的需求</span></a>
+                <a href="/PeopleCenter/CenterDemand/PeopleDemandList" class="center_in_self"><span>我的需求<i class="tishi">3</i></span></a>
                 @if (webuser.PositionCode != "WebUser")
                 {
                     <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self"><span>我的订单</span></a>
@@ -261,7 +326,13 @@
             <div class="listbox">
                 <div class="centers_listm_one_in"><i class="fa fa-file-text"></i><span>装修订单</span><b></b></div>
                 <div class="gjszmdm">
-                        <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self"><span>我的订单</span></a>                    
+                        <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self">
+                            <span>我的订单</span>
+                            @if (demandCountNosee != 0)
+                            {
+                                <i class="tishi">@demandCountNosee</i>
+                            }
+                    </a>                    
                 </div>
             </div>
         }
@@ -270,8 +341,13 @@
             <div class="listbox">
                 <div class="centers_listm_one_in"><i class="fa fa-user-circle"></i><span>装修合作</span><b></b></div>
                 <div class="gjszmdm">
-                    <a href="/PeopleCenter/CenterWorker/WorkerTogetherList" class="center_in_self"><span>合作项目</span></a>
-                    <a href="/PeopleCenter/Certification/GuarantMoney" class="center_in_self"><span>找您合作</span></a>
+                    <a href="/PeopleCenter/CenterWorker/WorkerTogetherList" class="center_in_self">
+                    <span>合作项目</span>
+                        @if (TogNosee != 0)
+                        {
+                            <i class="tishi">@TogNosee</i>
+                        }
+                    </a>
                 </div>
             </div>
         }

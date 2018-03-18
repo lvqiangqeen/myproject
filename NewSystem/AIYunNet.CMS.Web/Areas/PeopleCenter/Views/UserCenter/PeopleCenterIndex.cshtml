@@ -10,7 +10,7 @@
     string UserID = SessionHelper.Get("UserID");
     WebCaseService webcaseser = new WebCaseService();
     WebCommonService webcoser = new WebCommonService();
-    List<WebCase> webcaselist = webcaseser.GetWebCaseListByPeopleIDAndCount(Convert.ToInt32(PeopleID),3);
+    List<WebCase> webcaselist = webcaseser.GetWebCaseListByPeopleIDAndCount(Convert.ToInt32(PeopleID), 3);
 }
 
 <div class="centers_mr">
@@ -24,9 +24,9 @@
                     <div class="tab"><p><a href="u_ziliao.html">资料完成度</a></p></div>
                     <script type="text/javascript" src="/content/meichen/js/jquery.circliful.min.js"></script>
                     <script>
-	$(function(){
-		$('#myStat').circliful();
-	});
+                        $(function () {
+                            $('#myStat').circliful();
+                        });
                     </script>
                     <div id="myStat" data-dimension="60" data-text="85%" data-info="New Clients" data-width="10" data-fontsize="12" data-percent="85" data-fgcolor="#ff6561" data-bgcolor="#eee" data-fill="#FFF" class="circliful" style="width:60px; margin-left:45px;"></div>
                 </div>
@@ -108,4 +108,3 @@
         </div>
     </div>
 </div>
-

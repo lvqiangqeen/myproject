@@ -1,4 +1,4 @@
-﻿
+﻿@using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "WorkerTogetherList";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
@@ -20,7 +20,6 @@
         </script>
         <script type="text/html" id="barDemo">
             {{#  if(d.IsAccept == 0){ }}
-            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="check">查看</a>
             {{#  }else if(d.IsAccept == 1){ }}
             <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             {{#  }else if(d.IsAccept == 2){} }}
@@ -38,20 +37,24 @@
                     elem: '#demo'
                     //, height: 400
                     , method: "Post"
-                    , where: { GetWorkerid: 7 }
+                    , where: { GetWorkerid: '@SessionHelper.Get("PositionID")' }
                   , url: '/PeopleCenter/CenterWorker/GetTogetherList' //数据接口
                   , page: true //开启分页
                     , id: '#demo'
                   , cols: [[ //表头
-                    { field: 'buidingName', title: '小区名称', width: 130}
+                    { field: 'buidingName', title: '小区名称', width: 130,templet: function(d){
+                        return '<a href="/Workers/DecBuidingDetail?WorkerID=' + d.PublishWorkerid + '&BuidingID=' + d.buidingID + '" style="color: #23527c;">' + d.buidingName + '</a>'
+                    }}
                     , { field: 'stagename', title: '阶段任务', width: 100}
                     , { field: 'cityName', title: '城市', width: 100 }
-                    , { field: 'PublishWorkerName', title: '工长姓名', width: 100 }
+                    , { field: 'PublishWorkerName', title: '工长姓名', width: 100}
                     , { field: 'PublishWorkerTel', title: '工长电话', width: 130}
-                    , { field: 'ownername', title: '业主', width: 80}
+                    , { field: 'ownername', title: '需求', width: 100,templet: function (d) {
+                        return '<a href="/PeopleCenter/CenterDemand/Demanddetail?id=' + d.demandid + '" style="color: #23527c;" class="layui-btn layui-btn-primary layui-btn-xs" target="_blank">查看需求</a>'
+                    }}
                     , { field: 'startTime', title: '开工时间', width: 100, sort: true }
                     , { field: 'IsAccept', title: '接单', width: 80, align: 'center', toolbar: '#Accept',sort: true  }
-                    , { fixed: 'right', width: 80, align: 'center', toolbar: '#barDemo' } //这里的toolbar值是模板元素的选择器
+                    , { fixed: 'right', width: 70, align: 'center', toolbar: '#barDemo' } //这里的toolbar值是模板元素的选择器
                     //, { field: 'wealth', title: '财富', width: 135, sort: true }
                   ]]
                 });

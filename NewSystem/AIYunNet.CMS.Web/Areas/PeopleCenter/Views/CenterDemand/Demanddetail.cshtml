@@ -8,6 +8,7 @@
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
     DecDemandAcceptService ser = new DecDemandAcceptService();
     DecDemandAccept acc = ser.GetAcceptByGuid(Model.Guid);
+    WebCommonService commonService = new WebCommonService();
 }
 
 <div class="centers_mr">
@@ -52,6 +53,15 @@
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
+                    <div class="tab-l">
+                        <span class="form-box-label">户型</span>
+                    </div>
+                    <div class="tab-r">
+                        @Model.HouseType
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label">业主姓名</span></div>
                     <div class="tab-r">
                         @Model.ownername
@@ -61,7 +71,7 @@
                 @if (acc.IsAccept == 1)
                 {
                     <div class="form-box-list">
-                        <div class="tab-l"><span class="form-box-label">您的联系方式</span></div>
+                        <div class="tab-l"><span class="form-box-label">业主电话</span></div>
                         <div class="tab-r">
                             @Model.ownertel
                         </div>
@@ -69,7 +79,7 @@
                     </div>
                 }
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label">简单介绍</span></div>
+                    <div class="tab-l"><span class="form-box-label">装修风格</span></div>
                     <div class="tab-r">
                         @Model.OneSentence
                     </div>
@@ -154,9 +164,12 @@
                     success: function (data) {
                         if (data.RetCode == 1) {
 
-                            alert("信息已发送！");
-
-                            window.location.href = $.session.get('lasturl');
+                            layer.alert('信息已发送！', {
+                                icon: 6, yes: function () {
+                                    window.location.href = $.session.get('lasturl');
+                                }
+                            });
+                            
 
                         }
                     }

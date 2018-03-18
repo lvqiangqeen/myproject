@@ -1697,6 +1697,7 @@
     <Content Include="Content\Css\workers\workerList.css" />
     <Content Include="Content\design\commencss.css" />
     <Content Include="Content\design\img\task_conduct.jpg" />
+    <Content Include="Content\design\img\zhuangxiu.jpg" />
     <Content Include="Content\design\js\jquery.validate.min.js" />
     <Content Include="Content\design\js\messages_zh.js" />
     <Content Include="Content\design\layui-layer.css" />
@@ -4025,7 +4026,6 @@
     <Content Include="Content\CompanyCenterAdmin\lib\webuploader\0.1.5\server\fileupload2.php" />
     <Content Include="Content\CompanyCenterAdmin\lib\webuploader\0.1.5\server\preview.php" />
     <Content Include="Content\CompanyCenterAdmin\lib\zTree\.gitignore" />
-    <Content Include="Content\CompanyCenterAdmin\lib\zTree\v3\css\zTreeStyle\img\Thumbs.db" />
     <Content Include="Content\CompanyCenterAdmin\lib\zTree\v3\demo\cn\asyncData\getNodes.php" />
     <Content Include="Content\CompanyCenterAdmin\lib\zTree\v3\demo\cn\asyncData\getNodesForBigData.php" />
     <Content Include="Content\CompanyCenterAdmin\lib\zTree\v3\demo\en\asyncData\getNodes.php" />

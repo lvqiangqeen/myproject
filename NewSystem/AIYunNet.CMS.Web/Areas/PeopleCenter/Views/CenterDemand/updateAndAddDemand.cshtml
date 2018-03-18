@@ -9,9 +9,12 @@
     DemandService deSer = new DemandService();
     WebCommonService commonService = new WebCommonService();
     t_AreaService areaService = new t_AreaService();
-    //工作年限
+    //需求类型
     List<WebLookup> typelist = commonService.GetLookupList("Demand_type");
     IEnumerable<SelectListItem> demandtypelist = typelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+    //户型
+    List<WebLookup> housetypelist = commonService.GetLookupList("Demand_housetype");
+    IEnumerable<SelectListItem> houtypelist = housetypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
     //省份
     IEnumerable<SelectListItem> provinceList = null;
     List<t_Province> common = areaService.GetProvinceList();
@@ -24,6 +27,19 @@
         WebUserService userSer = new WebUserService();
         WebUser user = userSer.GetWebUserByID(Model.GetUserID);
         peoplename = user.TrueName;
+    }
+
+    List<string> housertype = new List<string>();
+    if (Model.HouseType != "")
+    {
+        housertype = Model.HouseType.ToString().Split(',').ToList();
+    }
+    else
+    {
+        for (int i=0; i < 5; i++)
+        {
+            housertype.Add("");
+        }
     }
 
 }
@@ -156,6 +172,56 @@
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
+                    <div class="tab-l">
+                        <span class="form-box-label"><i>*</i>户型</span>
+                    </div>
+                    <div class="tab-r">
+                        <select name="shi" class="ziliao-diqu-ipt" id="shi" style="width:10%;">
+                            <option value="1室">1室</option>
+                            <option value="2室">2室</option>
+                            <option value="3室">3室</option>
+                            <option value="4室">4室</option>
+                            <option value="5室">5室</option>
+                            <option value="6室">6室</option>
+                            <option value="7室">7室</option>
+                            <option value="8室">8室</option>
+                        </select>
+                        <select name="ting" class="ziliao-diqu-ipt" id="ting" style="width:10%;">
+                            <option value="1厅">1厅</option>
+                            <option value="2厅">2厅</option>
+                            <option value="3厅">3厅</option>
+                            <option value="4厅">4厅</option>
+                            <option value="5厅">5厅</option>
+                        </select>
+                        <select name="chu" class="ziliao-diqu-ipt" id="chu" style="width:10%;">
+                            <option value="0厨">0厨</option>
+                            <option value="1厨">1厨</option>
+                            <option value="2厨">2厨</option>
+                            <option value="3厨">3厨</option>
+                            <option value="4厨">4厨</option>
+                            <option value="5厨">5厨</option>
+                        </select>
+                        <select name="wei" class="ziliao-diqu-ipt" id="wei" style="width:15%;">
+                            <option value="0卫生间">0卫生间</option>
+                            <option value="1卫生间">1卫生间</option>
+                            <option value="2卫生间">2卫生间</option>
+                            <option value="3卫生间">3卫生间</option>
+                            <option value="4卫生间">4卫生间</option>
+                            <option value="5卫生间">5卫生间</option>
+                        </select>
+                        <select name="yang" class="ziliao-diqu-ipt" id="yang" style="width:15%;">
+                            <option value="0阳台">0阳台</option>
+                            <option value="1阳台">1阳台</option>
+                            <option value="2阳台">2阳台</option>
+                            <option value="3阳台">3阳台</option>
+                            <option value="4阳台">4阳台</option>
+                            <option value="5阳台">5阳台</option>
+                        </select>
+                       
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i>*</i>您的姓名</span></div>
                     <div class="tab-r">
                         <input id="ownername" name="ownername" value="@Model.ownername" class="u-ipt-txt" type="text" style="width:10%" required>
@@ -171,7 +237,7 @@
                     <div class="clearfiexd"></div>
                 </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>装修风格</span></div>
                     <div class="tab-r">
                         <input id="OneSentence" name="OneSentence" value="@Model.OneSentence" class="u-ipt-txt" type="text" style="width:50%"  placeholder="一句话描述您的需求" required>
                     </div>
@@ -209,6 +275,15 @@
 
     <script>
         $(function () {
+            if ("@Model.HouseType" != "")
+            {
+                $("#shi").val("@housertype[0]");
+                $("#ting").val("@housertype[1]");
+                $("#chu").val("@housertype[2]");
+                $("#wei").val("@housertype[3]");
+                $("#yang").val("@housertype[4]");
+            }
+
             var isValidate = $("#stageCaseForm").validate();
 
             $("#btnSubmit").click(function () {
@@ -224,10 +299,12 @@
                 var ProvinceID = $("#ProvinceID").val();
                 var ProvinceName = $("#ProvinceID").find("option:selected").text();
                 var CityID = $("#cityid").val();
+
                 var CityName = $("#cityid").find("option:selected").text();
                 var ownername = $("#ownername").val();
                 var ownertel = $("#ownertel").val();
                 var buidingSpace = $("#buidingSpace").val();
+                var HouseType = $("#shi").val() + "," + $("#ting").val() + "," + $("#chu").val() + "," + $("#wei").val() + "," + $("#yang").val();
                 var OneSentence = $("#OneSentence").val();
                 var Info = $("#Info").val();
                 var IsPublish = $("#IsPublish").prop("checked") ? true : false;
@@ -254,6 +331,7 @@
                         ownername: ownername,
                         ownertel: ownertel,
                         buidingSpace: buidingSpace,
+                        HouseType:HouseType,
                         OneSentence: OneSentence,
                         Info: Info,
                         IsPublish: IsPublish,

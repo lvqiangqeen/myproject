@@ -17,6 +17,7 @@ namespace AIYunNet.CMS.Domain.OccaModel
         public int PublishWorkerid { get; set; }
         public string PublishWorkerName { get; set; }
         public string PublishWorkerTel { get; set; }
+        public int demandid { get; set; }
         public string ownername { get; set; }
         public string ownertel { get; set; }
         public string startTime { get; set; }

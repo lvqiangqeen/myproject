@@ -183,6 +183,12 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("Guid")]
         public string Guid { get; set; }
+        /// <summary>
+        /// 户型
+        /// </summary>
+        [Column("HouseType")]
+        public string HouseType { get; set; }
+        
         public DecDemand()
         {
             ProvinceID = "";
@@ -205,6 +211,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsPlan = false;
             IsOver = false;
             IsPublish = false;
+            HouseType = "";
             Guid = System.Guid.NewGuid().ToString();
         }
     }

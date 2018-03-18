@@ -67,7 +67,7 @@
                                     <a v-if="ite.stage.IsUserEnd == 0 && ite.stage.IsComplete" v-on:click="updateStagesInfo(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #a1e6ff;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
                                     <a v-if="ite.stage.IsUserEnd == 0 && !ite.stage.IsComplete" v-on:click="updateStagesInfo(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #B5B5B5;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
 
-                                    <a href="" target="_blank" v-if="ite.worker.WorkerID != 0">
+                                    <a v-bind:href="'/Workers/DecWorkerDetail?WorkerID='+ite.worker.WorkerID" target="_blank" v-if="ite.worker.WorkerID != 0">
                                         <img v-if="ite.worker.thumbnailImage" v-bind:src="'@AppSettingsHelper.ImgUrl'+ite.worker.thumbnailImage" height="50" width="50" v-bind:alt="ite.stage.StageName" v-bind:title="ite.stage.StageName" style="border-radius:50%;margin-top: 18px;"><span>施工者：{{ite.worker.WorkerName}}</span>
                                     </a>
                                     <a v-on:click="FindWorker(item.buiding.BuidingID,ite.stage.StageID,item.buiding.WorkerID)" class="btn btn-primary" v-if="ite.worker.WorkerID == 0">寻找合作</a>

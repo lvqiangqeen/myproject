@@ -24,7 +24,15 @@
     string starclass = "";
     if (comment != null)
     {
-        starclass = "star-0" + comment.Score;
+        if (comment.Score >= 3)
+        {
+            starclass = "好评";
+        }
+        else if (comment.Score == 2)
+        {
+            starclass = "中评";
+        }
+        else { starclass = "差评"; }
     }
 }
 <link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
@@ -66,7 +74,7 @@
                         }<br>*@
                         @if (comment != null)
                         {
-                            @:业主打分：<span><i class="@starclass"></i></span><br>
+                            @:业主打分：<span style="color:red;">@*<i class="@starclass"></i>*@@starclass</span><br>
                             @:业主评价：<span>@comment.Comment</span>
 
                         }
@@ -83,13 +91,13 @@
                                     @{ int i = 0;}
                                     @foreach (string item in stagelist)
                                     {
-                                        if (i == stageNow)
+                                        if (i <= stageNow)
                                         {
-                                            <li class="fns"><i></i>@item.Replace("工", "")阶段</li>
+                                            <li class="fns"><i></i>@item</li>
                                         }
                                         else
                                         {
-                                            <li><i></i>@item.Replace("工", "")阶段</li>
+                                            <li><i></i>@item</li>
                                         }
                                         i++;
                                     }

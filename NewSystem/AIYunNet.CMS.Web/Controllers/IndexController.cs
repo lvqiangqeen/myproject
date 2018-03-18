@@ -83,8 +83,14 @@ namespace AIYunNet.CMS.Web.Controllers
             //设计图库
             indexList tkDeclist = webRecommend.GetIndexListPc(21, 0, false);
             ViewBag.tkDeclist = tkDeclist;
-            return View();
+            return View("HomeIndex");
 
+        }
+
+        public ActionResult Clear()
+        {
+            Session.Abandon();
+            return View();
         }
     }
 }

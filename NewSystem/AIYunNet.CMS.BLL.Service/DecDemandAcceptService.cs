@@ -94,5 +94,28 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+        //未查看的需求
+        public int DemandToYou(int UserID)
+        {
+            int ret = 0;
+            List<DecDemandAccept> list = new List<DecDemandAccept>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                try
+                {
+                    list = context.DecDemandAccept.Where(c => c.GetUserID == UserID && c.IsAccept==0).ToList();
+                    if (list != null)
+                    {
+                        ret = list.Count();
+
+                    }
+                    return ret;
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }

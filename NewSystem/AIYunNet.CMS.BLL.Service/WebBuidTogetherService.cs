@@ -76,12 +76,29 @@ namespace AIYunNet.CMS.BLL.Service
                                 PublishWorkerName =b.WorkerName,
                                 PublishWorkerTel=b.WorkerPhone,
                                 startTime=d.StartTime,
+                                demandid=y.id,
                                 ownername=y.ownername,
                                 ownertel=y.ownertel,
                                 IsAccept=c.IsAccept
                             };
                 List<BuidTogether> list = query.ToList();
                 return list;
+            }
+        }
+
+        //为查看合作清单
+        public int TogtherNoSee(int workerid)
+        {
+            int ret = 0;
+            List<WebBuidTogether> list = new List<WebBuidTogether>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                list = context.WebBuidTogether.Where(c => c.GetWorkerid == workerid && c.IsAccept==0).ToList();
+                if (list != null)
+                {
+                    ret = list.Count();
+                }
+                return ret;
             }
         }
     }

@@ -130,9 +130,20 @@
                         {
                             foreach (var item in comlist)
                             {
-                                string classnam = "star-0"+ item.Score;
+                                string classnam = "";
+                                string style = "";
+                                if (item.Score >= 3)
+                                {
+                                    classnam = "好评";
+                                    style = "#01af63";
+                                }
+                                else if (item.Score == 2)
+                                {
+                                    classnam = "中评";
+                                }
+                                else { classnam = "差评"; style = "red"; }
                                 <li>
-                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<i class="@classnam"></i></div>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<span style="margin-left:20px;">评级：</span><span style="color:@style;">@classnam</span></div>
                                     <p> @item.Comment</p>
                                 </li>
                             }
@@ -280,10 +291,10 @@
                                     Stage = 5;
                                 }
                                 for (var i = 0; i < length; i++) {
-                                    if (i == Stage) {
-                                        html += '<li class="fns"><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                    if (i <= Stage) {
+                                        html += '<li class="fns"><i></i>' + stagelist[i] + '</li>';
                                     } else {
-                                        html += '<li><i></i>' + stagelist[i].replace("工", "") + '阶段</li>';
+                                        html += '<li><i></i>' + stagelist[i] + '</li>';
                                     }
                                 }
                                 html += '</ul>'
