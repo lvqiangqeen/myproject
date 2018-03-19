@@ -18,6 +18,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
     {
         WebWorkerService worSer = new WebWorkerService();
         WebBuidTogetherService TogSer = new WebBuidTogetherService();
+        DecDemandAcceptService Deacc = new DecDemandAcceptService();
         // GET: PeopleCenter/CenterWorker
         #region 选择合作伙伴
         //选择合作工人
@@ -69,6 +70,21 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             int ret = 0;
             ret= TogSer.IsAccept(id, accept);
             return Json(new { RetCode = ret });
+        }
+        #endregion
+
+        #region 发给工人的需求
+        [HttpGet]
+        public ActionResult DemandListToWorker()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult DemandListToWorker(int GetUserID)
+        {
+            List<DecDemandAccept> list = Deacc.GetListByGetUserID(GetUserID);
+            return Json(new { code = 0, msg = "", count = list.Count(), data = list });
         }
         #endregion
     }
