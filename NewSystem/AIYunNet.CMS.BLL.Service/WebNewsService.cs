@@ -13,7 +13,7 @@ namespace AIYunNet.CMS.BLL.Service
     {
         public List<WebNews> GetWebNewsList()
         {
-            using (AIYunNetContext context = new AIYunNetContext())
+            using (AIYunNetContext context = new AIYunNetContext()) 
             {
                 return context.WebNews.Where(wn => wn.FlagDelete == 0).OrderByDescending(wn => wn.CreatedDate).ToList();
             }
