@@ -127,6 +127,11 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("AddOn")]
         public DateTime AddOn { get; set; }
+        /// <summary>
+        /// 详情
+        /// </summary>
+        [Column("Info")]
+        public string Info { get; set; }
         public WebBuidingSingle()
         {
             FlagDelete = false;
@@ -141,6 +146,7 @@ namespace AIYunNet.CMS.Domain.Model
             DemandID = 0;
             IsUserEnd = 0;
             IsWorkerEnd = 0;
+            Info = "";
         }
     }
 }

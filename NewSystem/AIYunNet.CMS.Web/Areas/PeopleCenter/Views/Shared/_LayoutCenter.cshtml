@@ -292,13 +292,13 @@
                     <a href="/PeopleCenter/CenterCases/WorkerBuidingList" class="center_in_self"><span>装修案例</span></a>
                 </div>
             </div>
-            <div class="listbox">
+            @*<div class="listbox">
                 <div class="centers_listm_one_in"><i class="fa fa-reorder"></i><span>装修进度</span><b></b></div>
                 <div class="gjszmdm">
-                    @*<a href="/PeopleCenter/CenterCases/WorkerDemandList?UserID=@webuser.UserID" class="center_in_self"><span>我的订单</span></a>*@
+                   
                     <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>订单进度</span></a>
                 </div>
-            </div>
+            </div>*@
         }
         @if (webuser.PositionCode == "WebUser")
         {
@@ -325,15 +325,32 @@
         {
             <div class="listbox">
                 <div class="centers_listm_one_in"><i class="fa fa-file-text"></i><span>装修订单</span><b></b></div>
-                <div class="gjszmdm">
+                @if (webuser.PositionCode == "WebWorkerLeader")
+                {
+                    <div class="gjszmdm">
                         <a href="/PeopleCenter/CenterDemand/DemandListToMe" class="center_in_self">
                             <span>我的订单</span>
                             @if (demandCountNosee != 0)
                             {
                                 <i class="tishi">@demandCountNosee</i>
                             }
-                    </a>                    
-                </div>
+                        </a>
+                        <a href="/PeopleCenter/CenterCases/BuidingStagesList" class="center_in_self"><span>订单进度</span></a>
+                    </div>
+                    
+                }
+                else if (webuser.PositionCode == "WebWorker")
+                {
+                    <div class="gjszmdm">
+                        <a href="/PeopleCenter/CenterWorker/DemandListToWorker" class="center_in_self">
+                            <span>我的订单</span>
+                            @if (demandCountNosee != 0)
+                            {
+                                <i class="tishi">@demandCountNosee</i>
+                            }
+                        </a>
+                    </div>                   
+                }
             </div>
         }
         @if (webuser.PositionCode == "WebWorkerLeader" || webuser.PositionCode == "WebWorker")

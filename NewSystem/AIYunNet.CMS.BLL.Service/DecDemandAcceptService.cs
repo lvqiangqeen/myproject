@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Domain;
+using AIYunNet.CMS.Domain.OccaModel;
 using AIYunNet.CMS.Domain.DataHelper;
 using System.Data;
 
@@ -115,6 +116,45 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     return 0;
                 }
+            }
+        }
+        //获取发给工人的需求清单
+        public List<AcceptDemand> GetDemandListByUserID(int UserID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                var query = from c in context.DecDemandAccept
+                            from d in context.DecDemand
+                            where c.DemandGuid == d.Guid
+                            && c.GetUserID == UserID && d.IsDelete==false
+                            select new AcceptDemand
+                            {
+                                id = d.id,
+                                buidingname=d.buidingname,
+                                ownername = d.ownername,
+                                ownertel = d.ownertel,
+                                ProvinceID = d.ProvinceID,
+                                ProvinceName = d.ProvinceName,
+                                CityID = d.CityID,
+                                CityName=d.CityName,
+                                buidingSpace = d.buidingSpace,
+                                OneSentence = d.OneSentence,
+                                PublishuserID = d.PublishuserID,
+                                GetUserID = d.GetUserID,
+                                GetUserType=d.GetUserType,
+                                AddOn = d.AddOn,
+                                IsEnd=d.IsEnd,
+                                IsVerrify = d.IsVerrify,
+                                DemandType=d.DemandType,
+                                DemandTypeName =d.DemandTypeName,
+                                Guid=d.Guid,
+                                HouseType=d.HouseType,
+                                IsPlan=d.IsPlan,
+                                AcceptUserID=c.GetUserID,
+                                IsAccept=c.IsAccept
+                            };
+                List<AcceptDemand> list = query.ToList();
+                return list;
             }
         }
     }

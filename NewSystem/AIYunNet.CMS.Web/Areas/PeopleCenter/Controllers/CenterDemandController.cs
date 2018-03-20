@@ -20,9 +20,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         //我给我发的需求
         public ActionResult DemandListToMe()
         {
-            int GetUserID = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<DecDemandAccept> list = Deacc.GetListByGetUserID(GetUserID);
-            return View(list);
+            return View();
         }
         [HttpGet]
         public ActionResult Demanddetail(int id)

@@ -218,7 +218,7 @@
                     pageIndex: pageIndex,
                     PageSize: PageSize,
                     WorkerID: "@Model.WorkerID",
-                    methodname: "GetWebBuidingSingleList"
+                    methodname: "GetDecBuidingList"
                 },
                 success: function (data) {
                     if (data) {
@@ -229,10 +229,10 @@
                             html += '<div class="col-5">'
                                 + '<div class="case-list">'
                                 + '<div class="pic">'
-                                + '<a style="height: 170px; display: block" target="_blank" href="/Workers/DecWorkerBuidingDetail?WorkerID=@Model.WorkerID&BuidingSingleID=' + item.ID + '">'
-                                + '<img title="' + item.Title + '" alt="' + item.Title + '" src="@AppSettingsHelper.ImgUrl' + item.BuidingSingleImage + '">'
+                                + '<a style="height: 170px; display: block" target="_blank" href="/Workers/DecWorkerBuidingDetail?WorkerID=@Model.WorkerID&BuidingID=' + item.BuidingID + '">'
+                                + '<img title="' + item.BuidingTitle + '" alt="' + item.BuidingTitle + '" src="@AppSettingsHelper.ImgUrl' + item.BuidingImage + '">'
                                 + '</a><div class="info">'
-                                + '<a target="_blank" href="/Workers/DecWorkerBuidingDetail?WorkerID=@Model.WorkerID&BuidingSingleID=' + item.ID + '">' + item.Title + '&nbsp;' + item.Space + '㎡'
+                                + '<a target="_blank" href="/Workers/DecWorkerBuidingDetail?WorkerID=@Model.WorkerID&BuidingSingleID=' + item.BuidingID + '">' + item.BuidingTitle + '&nbsp;' + item.Space + '㎡'
                                 + '</a></div></div>'
                                 + '<div class="handle">'
                                 + '<div class="floatL qdje">'

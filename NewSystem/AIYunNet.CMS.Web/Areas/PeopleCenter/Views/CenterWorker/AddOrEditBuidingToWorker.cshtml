@@ -1,0 +1,300 @@
+﻿@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.Domain.Model;
+@model AIYunNet.CMS.Domain.Model.WebBuiding
+@{
+    ViewBag.Title = "AddOrEditBuidingToWorker";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    IEnumerable<SelectListItem> workPositionList = ViewBag.workPositionList as IEnumerable<SelectListItem>;
+    int DemandID = Convert.ToInt32(Request["DemandID"]);
+    DemandService DeSer = new DemandService();
+    DecDemand demand = DeSer.GetDecDemandByID(DemandID);
+    string Guid = Request["Guid"];
+    int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
+}
+@section head{
+    <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/datepicker/datepicker3.css" rel="stylesheet" />
+    <style>
+        .error {
+            color: red;
+        }
+
+        #stageCaseForm textarea, input {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        #stageCaseForm .set_div > input {
+            width: 10%;
+            height: 40px;
+        }
+
+        #stageCaseForm .set_l {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        #stageCaseForm .div_workstage span {
+            padding: 10px;
+        }
+
+        #stageCaseForm .div_workstage input {
+            width: 20px;
+            height: 20px;
+            display: inline;
+            margin-right: 5px;
+        }
+    </style>
+}
+
+<div class="centers_mr">
+    <div class="centers_r_items">
+        <div class="upload-left">
+            <form id="stageCaseForm">
+                @Html.HiddenFor(m => m.BuidingID)
+                <div class="req-push-title"><p class="req-name"><i></i><span>填写工程计划</span></p></div>
+                    <div class="form-box-list">
+                        <div class="tab-l"><span class="form-box-label"><i>*</i>小区名称(工程标题)</span></div>
+                        <div class="tab-r">
+                            <input id="BuidingTitle" name="BuidingTitle" value="@demand.buidingname" type="text" class="u-ipt-txt" readonly="readonly" style="width:30%" /><label style="color:red;">此标题为业主小区名称不能修改</label>
+                        </div>
+                        <div class="clearfiexd"></div>
+                    </div>
+                <div class="form-box-list">
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                    <div class="tab-r">
+                        @Html.TextAreaFor(m => m.BuidingBrief, new { row = "4", col = "10", style = "width:80%", })
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <div class="tab-l"><span class="form-box-label"><i></i>装修阶段</span></div>
+                    <div class="tab-r">
+                        @Html.DropDownListFor(m => m.constructionstageID, new SelectList(ViewBag.workPositionList, "Value", "Text"), new { @class = "ziliao-diqu-ipt", id = "WebBuidingStageID", style = "width:20%" })
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <div class="tab-l">
+                        <span class="form-box-label"><i>*</i>项目情况</span>
+                    </div>
+                    <div class="tab-r">
+                        <span class="set_l">价格</span>
+                        @Html.TextBoxFor(m => m.Price, new { style = "width:5%", @class = "u-ipt-txt" }) 元
+                        <span class="set_l">面积</span>
+                        @Html.TextBoxFor(m => m.Space, new { style = "width:5%", @class = "u-ipt-txt" }) m²
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <div class="tab-l">
+                        <span class="form-box-label">施工开始时间</span>
+                    </div>
+                    <div class="tab-r">
+                        <input type="text" id="datetimepicker" style="width:120px;" class="u-ipt-txt" name="StartTime" value="@Model.StartTime">
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>上传封面</span></div>
+                    <div class="tab-r">
+                        <div class="upimg">
+                            @if (string.IsNullOrWhiteSpace(Model.thumbnailImage))
+                            {
+                                <img src="" id="ImgLook" style="width:380px;height:280px;">
+                            }
+                            else
+                            {
+                                <img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" id="ImgLook" style="width:380px;height:280px;">
+                            }
+                            <input class="btn btn-default" style="width:100px;margin-left:10px;" type='button' value='选择图片' onclick='javascript: $("#ImageUpload").click();' />
+                            <input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" />
+                            <a class="btn btn-primary" style="color:#fff" href="javascript:void(0);" id="BtnUpload">上传图片</a>
+                            <span class="form-sm" style="display:block">尺寸大小380px*280px图片大小不超过300K</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="CaseImageBig" value="@Model.BuidingImage" id="ImageUrl" />
+                    <input type="hidden" name="thumbnailImage" value="@Model.thumbnailImage" id="thumbnailImage" />
+                    <div class="clearfiexd"></div>
+                </div>
+
+                <div class="form-box-list">
+                    <div class="tab-l">
+                        <span class="form-box-label">设置</span>
+                    </div>
+                    <div class="tab-r">
+                        <span class="set_l">显示顺序</span>
+                        @Html.TextBoxFor(m => m.ShowOrder, new { style = "width:5%", @class = "u-ipt-txt" })
+                        <span class="set_l" style="display:none;">热门推荐</span>
+                        @Html.CheckBoxFor(m => m.IsHot, new { style = "display:none;" })
+                        <span class="set_l">置顶显示</span>
+                        @Html.CheckBoxFor(m => m.IsTop, new { style = "width:20px;height:20px;" })
+                    </div>
+                    <div class="clearfiexd"></div>
+                </div>
+                <div class="form-box-list">
+                    <a id="btnSubmit" class="btn-submit" href="javascript:void()">提交发布</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload-ui.js"></script>
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.iframe-transport.js"></script>
+    <script src="~/Content/Plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/Plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script>
+        $(function () {
+            $("#datetimepicker").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                clearBtn: true,//清除按钮
+                //todayBtn: true,//今日按钮
+                todayHighlight: true,
+                format: "yyyy-mm-dd"//日期格式
+            });
+        });
+
+        $(function () {
+            //表单验证
+            var isValidate = $("#stageCaseForm").validate({
+                rules: {
+                    BuidingTitle: "required",
+                    BuidingBrief: "required",
+                    BuidingInfo: "required",
+                    Price: {
+                        required: true,
+                        number: true
+                    },
+                    Space: {
+                        required: true,
+                        number: true
+                    }
+                },
+                messages: {
+                    BuidingBrief: "此处不能为空",
+                    BuidingBrief: "此处不能为空",
+                    Price: {
+                        required: "此字段不能为空",
+                        number: "必须输入数字"
+                    },
+                    Space: {
+                        required: "此字段不能为空",
+                        number: "必须输入数字"
+                    }
+                }
+            });
+            $("#btnSubmit").click(function () {
+                if (!isValidate.checkForm()) {
+                    isValidate.showErrors();
+                    return false;
+                }
+                var BuidingTitle = $("#BuidingTitle").val();
+                var BuidingID = $("#BuidingID").val();
+                var BuidingBrief = $("#BuidingBrief").val();
+                var BuidingInfo = $("#BuidingInfo").val();
+                var Price = $("#Price").val();
+                var Space = $("#Space").val();
+                var constructionstageID = $("#constructionstageID").val() + ",";
+                var constructionstage = $("#constructionstageID").text() + ",";
+                var ShowOrder = $("#ShowOrder").val();
+                var IsHot = $("#IsHot").prop("checked") ? true : false;
+                var IsTop = $("#IsTop").prop("checked") ? true : false;
+                var BuidingImage = $("#ImageUrl").val();
+                var thumbnailImage = $("#thumbnailImage").val();
+                var StartTime = $("#datetimepicker").val();
+                $.ajax({
+                    type: "post",
+                    url: "/PeopleCenter/CenterCases/AddOrEditBuidingStages",
+                    data: {
+                        Guid: '@Guid',
+                        UserID: '@UserID',
+                        BuidingID: BuidingID,
+                        BuidingTitle: BuidingTitle,
+                        BuidingBrief: BuidingBrief,
+                        BuidingInfo: BuidingInfo,
+                        Price: Price,
+                        Space: Space,
+                        ConstructionstageID: constructionstageID,
+                        Constructionstage: constructionstage,
+                        ShowOrder: ShowOrder,
+                        IsHot: IsHot,
+                        IsTop: IsTop,
+                        BuidingImage: BuidingImage,
+                        thumbnailImage: thumbnailImage,
+                        StartTime: StartTime,
+                        DemandID: "@DemandID"
+                    },
+                    success: function (data) {
+                        if (data.RetCode == 1) {
+                            if (BuidingID > 0) {
+                                layer.alert('修改成功', { icon: 6 }, function (index) {
+                                    window.location.href = window.location.href
+                                });
+                            } else {
+                                layer.alert('添加成功', { icon: 6 }, function (index) {
+                                    window.location.href = $.session.get('lasturl');
+                                });
+                            }
+
+                        }
+                    }
+
+                });
+            });
+
+            InitUploadPlugin();
+
+        })
+
+        function InitUploadPlugin() {
+            var jqXHRData = new Array();
+            initFileUpload();
+            $('#BtnUpload').on('click', function () {
+                if (jqXHRData.length > 0) {
+                    for (var i = 0; i < jqXHRData.length; i++) {
+                        jqXHRData[i].submit();
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            function initFileUpload() {
+                $('#ImageUpload').fileupload({
+                    url: '/PeopleCenter/UploadPic/CenterPictrueUpload',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        jqXHRData.push(data);
+                    },
+                    done: function (event, data) {
+                        if (data.result.isUploaded) {
+                            //$("#ImageUpload").val(data.result.message);
+                            $("#ImageUrl").val(data.result.message);
+                            $("#ImgLook").attr("src", "@AppSettingsHelper.ImgUrl" + data.result.message);
+                            $("#thumbnailImage").val(data.result.thumbnailmessage);
+                        } else {
+                            alert(data.result.message);
+                        }
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    },
+                    progressall: function (e, data) {
+                        var progress = parseInt(data.loaded / data.total * 100, 10);
+                        //$('#progress .bar').css('width', progress + '%');
+                    }
+                });
+            }
+        }
+    </script>
+}

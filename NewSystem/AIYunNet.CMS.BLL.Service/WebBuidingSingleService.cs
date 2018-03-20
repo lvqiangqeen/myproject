@@ -24,5 +24,19 @@ namespace AIYunNet.CMS.BLL.Service
                 return comm;
             }
         }
+
+        public WebBuidingSingle GetWebBuidingSingleByGuID(string guid)
+        {
+            WebBuidingSingle comm = new WebBuidingSingle();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                comm = context.WebBuidingSingle.FirstOrDefault(c=>c.Guid== guid);
+                if (comm == null)
+                {
+                    comm = new WebBuidingSingle();
+                }
+                return comm;
+            }
+        }
     }
 }

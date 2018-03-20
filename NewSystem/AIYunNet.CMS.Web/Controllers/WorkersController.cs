@@ -110,14 +110,15 @@ namespace AIYunNet.CMS.Web.Controllers
         }
 
         [Description("工人buiding详情")]
-        public ActionResult DecWorkerBuidingDetail(int WorkerID = 0, int BuidingSingleID = 0)
+        public ActionResult DecWorkerBuidingDetail(int WorkerID = 0, int BuidingID = 0)
         {
             WebWorker worker = webworkerService.GetWebWorkerByID(WorkerID);
-            WebBuidingSingle buidingSingle = WebBuidingSingleSer.GetWebBuidingSingleByID(BuidingSingleID);
-            DecDemand demand = DemandSer.GetDecDemandByID(buidingSingle.DemandID);
+            //WebBuidingSingle buidingSingle = WebBuidingSingleSer.GetWebBuidingSingleByID(BuidingSingleID);
+            WebBuiding buiding = webbuidingSer.GetWebBuidingByID(BuidingID);
+            DecDemand demand = DemandSer.GetDecDemandByID(buiding.DemandID);
             //工人在constructionstageID中只有单个id
-            //WebBuidingStages buidingstage = WebBuidingStagesSer.GetWebBuidingStagesByID(BuidingID, Convert.ToInt32(buiding.constructionstageID));
-            ViewBag.buidingSingle = buidingSingle;
+            WebBuidingStages buidingstage = WebBuidingStagesSer.GetWebBuidingStagesByID(BuidingID, Convert.ToInt32(buiding.constructionstageID.Replace(",","")));
+            ViewBag.buidingstage = buidingstage;
             ViewBag.demand = demand;
             ViewBag.worker = worker;
             return View(worker);

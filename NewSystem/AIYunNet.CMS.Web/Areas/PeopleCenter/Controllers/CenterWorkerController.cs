@@ -19,6 +19,8 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         WebWorkerService worSer = new WebWorkerService();
         WebBuidTogetherService TogSer = new WebBuidTogetherService();
         DecDemandAcceptService Deacc = new DecDemandAcceptService();
+        WebBuidingService buiSer = new WebBuidingService();
+        WebBuidingSingleService SingSer = new WebBuidingSingleService();
         // GET: PeopleCenter/CenterWorker
         #region 选择合作伙伴
         //选择合作工人
@@ -83,8 +85,25 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         [HttpPost]
         public JsonResult DemandListToWorker(int GetUserID)
         {
-            List<DecDemandAccept> list = Deacc.GetListByGetUserID(GetUserID);
+            List<AcceptDemand> list = Deacc.GetDemandListByUserID(GetUserID);
             return Json(new { code = 0, msg = "", count = list.Count(), data = list });
+        }
+        //工人发布流程
+        [HttpGet]
+        public ActionResult AddOrEditBuidingToWorker(int DemandID)
+        {
+            IWebCommon commonService = new WebCommonService();
+            List<WebLookup> commonworkPosition = commonService.GetLookupList("Buiding_process");
+            IEnumerable<SelectListItem> workPositionList = commonworkPosition.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            ViewBag.workPositionList = workPositionList;
+
+            WebBuiding buidling = buiSer.GetWebBuidingByDemandID(DemandID);
+
+            if (buidling == null)
+            {
+                buidling = new WebBuiding();
+            }
+            return View(buidling);
         }
         #endregion
     }

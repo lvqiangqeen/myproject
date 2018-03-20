@@ -96,6 +96,7 @@
     <Compile Include="Model\WebUser.cs" />
     <Compile Include="Model\WebWorker.cs" />
     <Compile Include="Model\Z_Comment.cs" />
+    <Compile Include="OccaModel\AcceptDemand.cs" />
     <Compile Include="OccaModel\BuidTogether.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

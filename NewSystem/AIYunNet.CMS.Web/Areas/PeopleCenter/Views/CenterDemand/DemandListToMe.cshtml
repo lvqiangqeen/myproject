@@ -1,130 +1,88 @@
-﻿@using AIYunNet.CMS.Domain.Model
-@using AIYunNet.CMS.BLL.Service
-@model List<DecDemandAccept>
+﻿@using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "DemandListToMe";
     Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
-    DemandService Ser = new DemandService();
 }
 
-<style>
-    #stageContent input, select {
-        border: solid 1px #808080;
-    }
-
-    #stageContent #addStageBtn {
-        background: #ff6900;
-        width: 140px;
-        border: solid 1px #ff6900;
-    }
-    .dataTables_wrapper {
-        padding-top:19px;
-}
-</style>
-<div class="centers_mr" id="stageContent">
+<div class="centers_mr" id="togetherList">
     <div class="centers_r_items">
         <div class="items-tit">
-            <a class="tit-name active" style="width: 158px;">业主发给我的需求</a>
+            <a class="tit-name active" style="width: 99px;">我的订单</a>
         </div>
-        <table class="table table-striped" id="stageCaseTable" >
-            <thead>
-                <tr>
-                    <th>类型</th>
-                    <th>小区名称</th>
-                    <th>面积</th>
-                    <th>业主</th>
-                    <th>发布时间</th>
-                    <th>是否接单</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null && Model.Count > 0)
-                {
-
-                    foreach (DecDemandAccept de in Model)
-                    {
-                        DecDemand demand = Ser.GetDecDemandByGuID(de.DemandGuid);
-                        <tr>
-                            <td>@demand.DemandTypeName</td>
-                            <td>
-                                @demand.buidingname
-                            </td>
-                            <td>
-                                @demand.buidingSpace m²
-                            </td>
-                            <td>@demand.ownername</td>
-                            <td>@demand.AddOn</td>
-                            @if (de.IsAccept == 0)
-                            {
-                                <td>未确定</td>
-                            }
-                            else if (de.IsAccept == 1)
-                            {
-                                <td style="color:#03fc90">已接受</td>
-                            }
-                            else
-                            {
-                                <td  style="color:#ff0000">已拒绝</td>
-                            }
-
-
-                            <td>
-                                <a href="javascript:look(@demand.id)" class="btn btn-primary">查看详情</a>
-                                @if (demand.IsPlan && de.IsAccept == 1)
-                                {
-                               <a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@demand.id&Guid=@demand.Guid" class="btn btn-primary">查看计划</a>
-                                }
-                                else if(de.IsAccept == 1)
-                                {
-                                    <a href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=@demand.id&Guid=@demand.Guid&UserID=@demand.PublishuserID" class="btn btn-primary">发布计划</a>
-                                }
-                        </tr>
-                    }
-
-                }
-            </tbody>
-        </table>
-        <div style="color:#ff0000">* 提示：点击“查看详情”来接单，接单后可以查看业主联系方式并不能够再拒绝，请慎重考虑是否接单。接单后任务会添加到“我的订单”中，您需要在“我的订单”中发布装修计划并开始装修。</div>
+        <table id="demo" lay-filter="test"></table>
+        <script type="text/html" id="Accept">
+            {{#  if(d.IsAccept == 0){ }}
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="look">操作</a>
+            {{#  }else if(d.IsAccept == 1){ }}
+            <a class="layui-btn layui-btn-xs" lay-event="accept">已接受</a>
+            {{#  }else if(d.IsAccept == 2){ }}
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="">已拒绝</a>
+            {{#  } }}
+        </script>
+        <script type="text/html" id="barDemo">
+            {{#  if(d.IsAccept == 0){ }}
+            {{#  }else if(d.IsPlan && d.IsAccept == 1){ }}
+            <a class="layui-btn layui-btn-xs" lay-event="lookliu">查看流程</a>
+            {{#  }else if(d.IsAccept == 1){}}
+            <a class="layui-btn  layui-btn-normal layui-btn-xs" lay-event="publishliu">发布流程</a>
+            {{# } }}
+        </script>
     </div>
 </div>
 @section Scripts{
-    <script type="text/javascript">
-		$(document).ready(function ()
-		{
-		    sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
-			$('#stageCaseTable').DataTable({
-				"language": {
-					"emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
-					"info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
-					"infoEmpty": "没有记录",
-					"infoFiltered": "",
-					"lengthMenu": "显示 _MENU_ 条记录",
-					"search": "搜索:",
-					"zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>",
-					"oPaginate": {
-						"sFirst": "首页",
-						"sPrevious": "前一页",
-						"sNext": "后一页",
-						"sLast": "尾页"
-					},
-				},
-				"paging": true,
-				"lengthChange": true,
-				"searching": true,
-				"ordering": false,
-				"info": true,
-				"autoWidth": false
-			});
+    <script>
+        $(function () {
+            sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+            layui.use('table', function () {
+                var table = layui.table;
 
-		});
+                //第一个实例
+                table.render({
+                    elem: '#demo'
+                    //, height: 400
+                    , method: "Post"
+                    , where: { GetUserID: '@SessionHelper.Get("UserID")' }
+                  , url: '/PeopleCenter/CenterWorker/DemandListToWorker' //数据接口
+                  , page: true //开启分页
+                    , id: '#demo'
+                  , cols: [[ //表头
+                    { field: 'DemandTypeName', title: '类型', width: 100 },
+                    { field: 'CityName', title: '城市', width: 100 }
+                    , { field: 'buidingname', title: '小区名称', width: 150 }
+                    , { field: 'HouseType', title: '户型', width: 150 }
+                    , { field: 'ownername', title: '业主', width: 100 }
+                    , {
+                        field: 'AddOn', title: '发布时间', width: 130,sort: true, templet: function (d) {
+                            var a = d.AddOn
+                            var date = new Date(parseInt(a.slice(6)));
+                            var result = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+                            return result;
+                        }
+                    }
 
-        function look(id)
-		{
-            var url = "/PeopleCenter/CenterDemand/Demanddetail?id=" + id;
-			window.location.href = url;
-		}
+                    , { field: 'IsAccept', title: '接单', width: 80, align: 'center', toolbar: '#Accept',sort: true  }
+                    , { fixed: 'right', width: 100, align: 'center', toolbar: '#barDemo' } //这里的toolbar值是模板元素的选择器
+                    //, { field: 'wealth', title: '财富', width: 135, sort: true }
+                  ]]
+                });
 
+                table.on('tool(test)', function (obj) {
+                    var data = obj.data;
+                    if (obj.event === 'lookliu') {
+                        var url = "/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=" + data.id + "&Guid=" + data.Guid;
+                        window.location.href = url;
+                    }
+                    if (obj.event === 'publishliu') {
+                        var url = "/PeopleCenter/CenterCases/AddOrEditBuidingStages?DemandID=" + data.id + "&Guid=" + data.Guid + "&UserID=" + data.PublishuserID;
+                        window.location.href = url;
+                    }
+                    if (obj.event === 'look' || obj.event === 'accept') {
+                        var url = "/PeopleCenter/CenterDemand/Demanddetail?id=" + data.id;
+                        window.location.href = url;
+                    }
+                });
+            });
+        })
     </script>
 }
 
