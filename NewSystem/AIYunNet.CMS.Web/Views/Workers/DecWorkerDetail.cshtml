@@ -66,8 +66,15 @@
                     <li class="gr-logo">
                         <img title="@Model.WorkerName" alt="@Model.WorkerName" src="@AppSettingsHelper.ImgUrl@Model.WorkerImage">
                     </li>
-                    <li class="gr-jj"><b>@Model.WorkerName 简介:</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.WorkerInfo</li>
-
+                    <li class="gr-jj">
+                        <b>@Model.WorkerName 简介:</b>
+                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Model.WorkerInfo
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="zhuangxiu"  style="background: #EE8F25;padding: 5px 20px;color: #fff;font-size: 16px;">
+                            找TA装修
+                        </a>
+                    </li>
                 </ul>
                 <ul class="gr-detail">
                     <li><b>工&nbsp;种：</b>@Model.WorkerPosition</li>
@@ -205,6 +212,27 @@
 
 </div>
 <script>
+    $(".zhuangxiu").click(function () {
+        var peoplename = "@Model.WorkerName";
+        var userid = "@Model.UserID";
+        if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+            window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+        } else {
+        layer.open({
+            type: 2,
+            scrollbar: false,
+            title: '登陆',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['330px', '330px'],
+            content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+            end: function () {
+                location.reload();
+            }
+
+        });
+    }
+    });
     $(function () {
         GetPageList(1);
 

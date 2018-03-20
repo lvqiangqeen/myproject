@@ -67,7 +67,16 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("Workerid")]
         public int Workerid { get; set; }
-
+        /// <summary>
+        ///图组
+        /// </summary>
+        [Column("ImgContent")]
+        public string ImgContent { get; set; }
+        /// <summary>
+        ///缩略图组
+        /// </summary>
+        [Column("thumContent")]
+        public string thumContent { get; set; }
         public WebBuidingStages()
         {
             WebBuidingID = 0;

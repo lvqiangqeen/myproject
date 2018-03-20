@@ -6,7 +6,9 @@
 @{
     ViewBag.Title = "DecWorkerBuidingDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
-    WebBuidingSingle buiding = ViewBag.buidingSingle;
+    WebBuiding buiding = ViewBag.buiding;
+    WebBuidingStages buidingstage = ViewBag.buidingstage;
+
 }
 <link href="~/Content/design/sheji.workerbuidingdetail.css" rel="stylesheet" />
 <link href="~/Content/design/swiper/swiper-3.4.2.min.css" rel="stylesheet" />
@@ -26,7 +28,7 @@
                     <em class="arrow_gray_right"></em>
                 </li>
                 <li>
-                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID">@Model.WorkerName </a>--@ViewBag.buidingSingle.Title
+                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID">@Model.WorkerName </a>--@buiding.BuidingTitle
                 </li>
             </ul>
         </div>
@@ -35,16 +37,16 @@
             <div class="title">
                 <div class="logo floatL">
                     <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" alt="@Model.WorkerName" title="@Model.WorkerName" style="width:62px;height:62px;"></a>
+
                 </div>
-                
                 <div class="des floatL">
                     <span class="des-title">
-                        @ViewBag.buidingSingle.Title
+                        @buiding.BuidingTitle
                     </span> 
-                    <span>面积：@ViewBag.buidingSingle.Space m²</span>
-                    <span>合同价：@ViewBag.buidingSingle.Price 元</span>
+                    <span>面积：@buiding.Space m²</span>
+                    <span>合同价：@buiding.Price 元</span>
                     <span>类型：@ViewBag.demand.DemandTypeName</span>
-                    <span style="float: right"><a href="/zb/yygd2161">找TA装修</a></span>
+                    <span style="float: right"><a href="javascript:void(0)" class="zhuangxiu">找TA装修</a></span>
                 </div>
             </div>
         </div>
@@ -59,22 +61,22 @@
                         <div class="supdetail">
                             <span>做工说明<span class="ico-t"></span></span>
                             <div class="supDes">
-                                <p>@buiding.TimeStageInfo</p>
+                                <p>@buiding.BuidingBrief</p>
                             </div>
                             <span>现场图片<span class="ico-t"></span></span>
                             <div class="supImg">
                                 <div class="suptime">
                                     <span>
-                                        <b>@buiding.AddTime.ToString("dd")</b>日
-                                    </span><span>@buiding.AddTime.ToString("yyyy-MM")</span>
+                                        <b>@buiding.AddOn.ToString("dd")</b>日
+                                    </span><span>@buiding.AddOn.ToString("yyyy-MM")</span>
                                 </div>
                                 @{ 
                                     List<string> list = new List<string>();
                                     List<string> listthum = new List<string>();
-                                    if (buiding.TimeStageContent != "" && buiding.TimeStageContent != null)
+                                    if (buidingstage.ImgContent != "" && buidingstage.thumContent != null)
                                     {
-                                        list = buiding.TimeStageContent.Split('|').Where(c=>c!="").ToList();
-                                        listthum= buiding.TimeStageThumContent.Split('|').Where(c => c != "").ToList();
+                                        list = buidingstage.ImgContent.Split('|').Where(c=>c!="").ToList();
+                                        listthum= buidingstage.thumContent.Split('|').Where(c => c != "").ToList();
                                     }
                                     int i = 0;
                                 }
@@ -86,7 +88,7 @@
                                                     @foreach (string ite in list)
                                                     {
                                                         <li class="swiper-slide clone" style="float: left; width: 170px;">
-                                                            <img layer-src="@AppSettingsHelper.ImgUrl@ite" src="@AppSettingsHelper.ImgUrl@listthum[i]" alt="@buiding.Title">
+                                                            <img layer-src="@AppSettingsHelper.ImgUrl@ite" src="@AppSettingsHelper.ImgUrl@listthum[i]" alt="@buiding.BuidingTitle">
                                                         </li>
                                                         i++;
                                                     }
@@ -105,6 +107,27 @@
                 </div>
             
             <script>
+                $(".zhuangxiu").click(function () {
+                    var peoplename = "@Model.WorkerName";
+                    var userid = "@Model.UserID";
+                    if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                        window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+                    } else {
+                        layer.open({
+                            type: 2,
+                            scrollbar: false,
+                            title: '登陆',
+                            shadeClose: true,
+                            shade: 0.8,
+                            area: ['330px', '330px'],
+                            content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                            end: function () {
+                                location.reload();
+                            }
+
+                        });
+                    }
+                });
                 //必须放在domx下面
                 var indexSwiper1 = new Swiper('.tempWrap', {
                     autoplay: 3000,//可选选项，自动滑动

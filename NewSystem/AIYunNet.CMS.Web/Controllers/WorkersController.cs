@@ -118,6 +118,7 @@ namespace AIYunNet.CMS.Web.Controllers
             DecDemand demand = DemandSer.GetDecDemandByID(buiding.DemandID);
             //工人在constructionstageID中只有单个id
             WebBuidingStages buidingstage = WebBuidingStagesSer.GetWebBuidingStagesByID(BuidingID, Convert.ToInt32(buiding.constructionstageID.Replace(",","")));
+            ViewBag.buiding = buiding;
             ViewBag.buidingstage = buidingstage;
             ViewBag.demand = demand;
             ViewBag.worker = worker;
