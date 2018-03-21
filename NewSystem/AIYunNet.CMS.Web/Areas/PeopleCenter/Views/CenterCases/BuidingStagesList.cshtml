@@ -60,7 +60,7 @@
                             <span>造价: {{item.buiding.Price}}元</span>
                         </p>
                         <div class="proccess">
-                            <ul class="clearfix">
+                            <ul class="clearfix" style="padding-left: 0px;width: 775px;">
                                 <li v-for="ite in item.stagelist">
                                     <a v-if="ite.stage.IsUserEnd == 1" v-on:click="Info(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: #01af63;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
                                     <a v-if="ite.stage.IsUserEnd == 2" v-on:click="Info(item.buiding.BuidingID,ite.stage.StageID)"><i style="background-color: red;"></i><span style="color:#337ab7">{{ite.stage.StageName}}</span></a>
@@ -72,6 +72,7 @@
                                     </a>
                                     <a v-on:click="FindWorker(item.buiding.BuidingID,ite.stage.StageID,item.buiding.WorkerID)" class="btn btn-primary" v-if="ite.worker.WorkerID == 0">寻找合作</a>
                                 </li>
+                                <li><i v-if="item.buiding.IsWorkerEnd==1 && item.buiding.IsUserEnd==1" style="background-color: #01af63;"></i><i v-else style="background-color: #B5B5B5;"></i><span style="color:#337ab7">项目竣工</span></li>
                                 @*<li class="pred"><i></i><span>准备开工</span><img src="http://zxpt.image.zx-erp.qeeka.com/image-service/qah/s2y/139119810.jpg" height="50" width="50" alt="朱先生/女士家的工地直播" title="朱先生/女士家的工地直播"  style="border-radius:50%"><span>一个工人</span></li>*@
                             </ul>
                         </div>

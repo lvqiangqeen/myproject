@@ -52,7 +52,7 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
 
-        public List<BuidTogether> GetTogetherList(int GetWorkerid,int isAccept,bool isall)
+        public List<BuidTogether> GetTogetherList(int GetWorkerid,int PageSize,int CurPage, out int count)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
@@ -81,7 +81,8 @@ namespace AIYunNet.CMS.BLL.Service
                                 ownertel=y.ownertel,
                                 IsAccept=c.IsAccept
                             };
-                List<BuidTogether> list = query.ToList();
+                count = query.ToList().Count();
+                List<BuidTogether> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
             }
         }

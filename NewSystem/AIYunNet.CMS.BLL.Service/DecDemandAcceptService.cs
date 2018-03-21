@@ -119,7 +119,7 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
         //获取发给工人的需求清单
-        public List<AcceptDemand> GetDemandListByUserID(int UserID,int PageSize,int CurPage)
+        public List<AcceptDemand> GetDemandListByUserID(int UserID,int PageSize,int CurPage,out int count)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
@@ -153,6 +153,7 @@ namespace AIYunNet.CMS.BLL.Service
                                 AcceptUserID=c.GetUserID,
                                 IsAccept=c.IsAccept
                             };
+                count = query.ToList().Count();
                 List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
             }

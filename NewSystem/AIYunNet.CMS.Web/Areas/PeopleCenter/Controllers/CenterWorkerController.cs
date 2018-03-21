@@ -60,10 +60,11 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult GetTogetherList(int GetWorkerid = 0,int IsAccept=0,bool IsAll=false)
+        public JsonResult GetTogetherList(int GetWorkerid = 0, int PageSize=0,int CurPage=0)
         {
-            List<BuidTogether> list = TogSer.GetTogetherList(GetWorkerid, IsAccept, IsAll);
-            return Json(new { code = 0, msg = "", count = list.Count(), data = list });
+            int count = 0;
+            List<BuidTogether> list = TogSer.GetTogetherList(GetWorkerid, PageSize, CurPage,out count);
+            return Json(new { code = 0, msg = "", count = count, data = list });
         }
         //接受或拒绝
         [HttpPost]
@@ -85,8 +86,9 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         [HttpPost]
         public JsonResult DemandListToWorker(int GetUserID, int PageSize, int CurPage)
         {
-            List<AcceptDemand> list = Deacc.GetDemandListByUserID(GetUserID, PageSize, CurPage);
-            return Json(new { code = 0, msg = "", count = list.Count(), data = list });
+            int count = 0;
+            List<AcceptDemand> list = Deacc.GetDemandListByUserID(GetUserID, PageSize, CurPage,out count);
+            return Json(new { code = 0, msg = "", count = count, data = list });
         }
         //工人发布流程
         [HttpGet]

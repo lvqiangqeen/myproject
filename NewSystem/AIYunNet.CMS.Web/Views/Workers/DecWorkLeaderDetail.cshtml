@@ -362,7 +362,7 @@
                                 + '<dd>'
                                 + '<strong><a href="/Workers/DecBuidingDetail?WorkerID=' +@Model.WorkerID +'&BuidingID=' + item.BuidingID + '">' + item.BuidingTitle + '</a></strong>'
                                 + '<p>&nbsp;&nbsp;合同价：' + item.Price + '元&nbsp;&nbsp;装修面积：' + item.Space + 'm²&nbsp;&nbsp;开工日期：' + item.StartTime + '&nbsp;&nbsp;</p>'
-                                + '<ul class="c-jd clear">';
+                                + '<ul class="c-jd clear" style="padding-left:0px;width:420px;">';
                                 var stagelist = item.constructionstage.split(',');
                                 var length = stagelist.length - 1;
                                 if (length > 6) {
@@ -378,6 +378,12 @@
                                     } else {
                                         html += '<li><i></i>' + stagelist[i] + '</li>';
                                     }
+                                }
+                                if (item.IsWorkerEnd == 1 && item.IsUserEnd == 1) {
+                                    html += '<li class="fns"><i></i>项目竣工</li>';
+                                } else
+                                {
+                                    html += '<li><i></i>项目竣工</li>';
                                 }
                                 html += '</ul>'
                                 + '<div class="btn-w">'
