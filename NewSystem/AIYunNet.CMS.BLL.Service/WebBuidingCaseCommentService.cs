@@ -49,12 +49,26 @@ namespace AIYunNet.CMS.BLL.Service
                 return comm;
             }
         }
-        public List<WebBuidingCaseComment> GetCommentListByGetUserID(int id,string type)
+        //获取评价123差中好，0为所有评价
+        public List<WebBuidingCaseComment> GetCommentListByGetUserID(int id,string type,int score)
         {
             List<WebBuidingCaseComment> comm = new List<WebBuidingCaseComment>();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                comm = context.WebBuidingCaseComment.Where(c=>c.GetUserID==id && c.CaseType== type).ToList();
+                if (score == 0)
+                {
+                    comm = context.WebBuidingCaseComment.Where(c => c.GetUserID == id && c.CaseType == type).OrderByDescending(c => c.AddOn).ToList();
+                }
+                else
+                {
+                    comm = context.WebBuidingCaseComment.Where(c => c.GetUserID == id && c.CaseType == type && c.Score == score).OrderByDescending(c => c.AddOn).ToList();
+                }
+                if (comm == null)
+                {
+                    comm = new List<WebBuidingCaseComment>();
+
+                }
+
                 return comm;
             }
         }

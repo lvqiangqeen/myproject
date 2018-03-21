@@ -92,7 +92,7 @@
                 <script>
                     $(function () {
                         //所有页面均使用
-                        sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+                        sessionStorage.setItem('lasturl', window.location.href);
                     })
                 </script>
                 <!--整站主导航 End-->

@@ -73,7 +73,7 @@
                 });
             });
         }
-        sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+        sessionStorage.setItem('lasturl',window.location.href);
         var destotal = "0";
         var noticeVue = new Vue({
             el: '#buidinglist',

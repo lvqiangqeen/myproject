@@ -9,6 +9,10 @@
     int DemandID = Convert.ToInt32(Request["DemandID"]);
     DemandService DeSer = new DemandService();
     DecDemand demand = DeSer.GetDecDemandByID(DemandID);
+    if (Model.constructionstageID != "")
+    {
+        Model.constructionstageID = Model.constructionstageID.Replace(",", "");
+    }
     string Guid = Request["Guid"];
     int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
 }
@@ -63,7 +67,7 @@
                         <div class="clearfiexd"></div>
                     </div>
                 <div class="form-box-list">
-                    <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                    <div class="tab-l"><span class="form-box-label"><i>*</i>做工说明</span></div>
                     <div class="tab-r">
                         @Html.TextAreaFor(m => m.BuidingBrief, new { row = "4", col = "10", style = "width:80%", })
                     </div>
@@ -72,7 +76,7 @@
                 <div class="form-box-list">
                     <div class="tab-l"><span class="form-box-label"><i></i>装修阶段</span></div>
                     <div class="tab-r">
-                        @Html.DropDownListFor(m => m.constructionstageID, new SelectList(ViewBag.workPositionList, "Value", "Text"), new { @class = "ziliao-diqu-ipt", id = "WebBuidingStageID", style = "width:20%" })
+                        @Html.DropDownListFor(m => m.constructionstageID, new SelectList(ViewBag.workPositionList, "Value", "Text"), new { @class = "ziliao-diqu-ipt", id = "constructionstageID", style = "width:20%" })
                     </div>
                     <div class="clearfiexd"></div>
                 </div>
@@ -202,7 +206,7 @@
                 var Price = $("#Price").val();
                 var Space = $("#Space").val();
                 var constructionstageID = $("#constructionstageID").val() + ",";
-                var constructionstage = $("#constructionstageID").text() + ",";
+                var constructionstage = $("#constructionstageID").find("option:selected").text() + ",";
                 var ShowOrder = $("#ShowOrder").val();
                 var IsHot = $("#IsHot").prop("checked") ? true : false;
                 var IsTop = $("#IsTop").prop("checked") ? true : false;

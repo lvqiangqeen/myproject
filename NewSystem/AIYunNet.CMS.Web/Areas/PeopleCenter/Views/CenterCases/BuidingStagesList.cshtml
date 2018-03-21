@@ -112,7 +112,7 @@
 
     <script>
         $(function () {
-            sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+            sessionStorage.setItem('lasturl', window.location.href);
             var noticeVue = new Vue({
                 el: '.place-info',
                 data: {
@@ -149,7 +149,7 @@
                             area: ['700px', '650px'],
                             content: ['/PeopleCenter/CenterCases/UpdateBuidingStage?buidingID=' + buidingID + '&StageID=' + StageID + '&rnd=' + Math.random()],
                             end: function () {
-                                
+
                                 _self.GetPageList(1);
                             }
                         });
@@ -167,7 +167,7 @@
                             },
                             success: function (data) {
                                 if (data.RetCode == 1) {
-                                    
+
                                     layer.open({
                                         type: 2,
                                         scrollbar: false,

@@ -125,13 +125,13 @@
                                 if (j == stageNow)
                                 {
                                     <a class="cur" href="javascript:void(0)">
-                                        @item.Replace("工", "")阶段
+                                        @item
                                         <input type="hidden" value="@stageidlist[j]" />
                                     </a>
                                 }
                                 else
                                 {
-                                    <a href="javascript:void(0)">@item.Replace("工", "")阶段<input type="hidden" value="@stageidlist[j]" /></a>
+                                    <a href="javascript:void(0)">@item<input type="hidden" value="@stageidlist[j]" /></a>
                                 }
                             }
                             else

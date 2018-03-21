@@ -6,6 +6,9 @@
 @{
     ViewBag.Title = "DecWorkerDetail";
     Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
+    WebUserService userDer = new WebUserService();
+    DemandService demandSer = new DemandService();
 }
 <link href="~/Content/design/sheji.workerdetail.css" rel="stylesheet" />
 <style>
@@ -107,100 +110,170 @@
                         </div>
                     </div>
                     <ul id="pjlist">
+                        <div class="layui-tab">
+                            <ul class="layui-tab-title">
+                                <li class="layui-this">好评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 3).Count())</li>
+                                <li>中评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2).Count())</li>
+                                <li>差评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1).Count())</li>
+                            </ul>
+                            <div class="layui-tab-content">
+                                <div class="layui-tab-item layui-show">
+                                    @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 3) != null)
+                                    {
+                                        foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 3))
+                                        {
+                                            string classnam = "";
+                                            string style = "";
+                                            if (item.Score == 3)
+                                            {
+                                                classnam = "好评";
+                                                style = "#01af63";
+                                            }
+                                            else if (item.Score == 2)
+                                            {
+                                                classnam = "中评";
+                                            }
+                                            else { classnam = "差评"; style = "red"; }
+                                            <dl class="comment-list">
+                                                <dt>
+                                                    <img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">
+                                                </dt>
+                                                <dd style="display: table">
+                                                    <div style="display: table-cell; vertical-align: middle">
+                                                        <div class="clearfix">
+                                                            <span class="pull-right"></span><b>
+                                                               @demandSer.GetDecDemandByGuID(item.Guid).ownername
+                                                            </b>
+                                                        </div>
+                                                        <p>
+                                                            <b style="color:@style">
+                                                                @classnam :
+                                                            </b><a title="@item.Comment">
+                                                                    @item.Comment
+                                                                </a>                                                                                                                          
+                                                        </p>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        }
+                                    }
+                                    @*<dl class="comment-list">
+                                        <dt>
+                                            <img src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg" onerror="this.onerror=null;this.src='/Member/UpControl/upload/avatars/noavatar_small.gif';">
+                                        </dt>
+                                        <dd style="display: table">
+                                            <div style="display: table-cell; vertical-align: middle">
+                                                <div class="clearfix">
+                                                    <span class="pull-right"></span><b>
+                                                        0工长
+                                                    </b>
+                                                </div>
+                                                <p>
+                                                    <b>
+                                                        徐超群零工 :
+                                                    </b><a title="请问你哪里还有人没？你好">
+                                                        请问你哪里还有人没？你好
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </dd>
 
-                        <dl class="comment-list">
-                            <dt>
-                                <img src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg" onerror="this.onerror=null;this.src='/Member/UpControl/upload/avatars/noavatar_small.gif';">
-                            </dt>
-                            <dd style="display: table">
-                                <div style="display: table-cell; vertical-align: middle">
-                                    <div class="clearfix">
-                                        <span class="pull-right"></span><b>
-                                            0工长
-                                        </b>
-                                    </div>
-                                    <p>
-                                        <b>
-                                            徐超群零工 :
-                                        </b><a title="请问你哪里还有人没？你好">
-                                            请问你哪里还有人没？你好
-                                        </a>
-                                    </p>
+
+                                    </dl>*@
                                 </div>
-                            </dd>
+                                <div class="layui-tab-item">
+                                    @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2) != null)
+                                    {
+                                        foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2))
+                                        {
+                                            string classnam = "";
+                                            string style = "";
+                                            if (item.Score == 3)
+                                            {
+                                                classnam = "好评";
+                                                style = "#01af63";
+                                            }
+                                            else if (item.Score == 2)
+                                            {
+                                                classnam = "中评";
+                                            }
+                                            else { classnam = "差评"; style = "red"; }
+                                            <dl class="comment-list">
+                                                <dt>
+                                                    <img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">
+                                                </dt>
+                                                <dd style="display: table">
+                                                    <div style="display: table-cell; vertical-align: middle">
+                                                        <div class="clearfix">
+                                                            <span class="pull-right"></span><b>
+                                                                @demandSer.GetDecDemandByGuID(item.Guid).ownername
+                                                            </b>
+                                                        </div>
+                                                        <p>
+                                                            <b style="color:@style">
+                                                                @classnam :
+                                                            </b><a title="@item.Comment">
+                                                                @item.Comment
+                                                            </a>
 
 
-                        </dl>
-                        <dl class="comment-list">
-                            <dt>
-                                <img src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg" onerror="this.onerror=null;this.src='/Member/UpControl/upload/avatars/noavatar_small.gif';">
-                            </dt>
-                            <dd style="display: table">
-                                <div style="display: table-cell; vertical-align: middle">
-                                    <div class="clearfix">
-                                        <span class="pull-right"></span><b>
-                                            0工长
-                                        </b>
-                                    </div>
-                                    <p>
-                                        <b>
-                                            徐超群零工 :
-                                        </b><a title="请问你哪里还有人没？你好">
-                                            请问你哪里还有人没？你好
-                                        </a>
-                                    </p>
+                                                        </p>
+                                                    </div>
+                                                </dd>
+
+
+                                            </dl>
+                                        }
+                                    }
                                 </div>
-                            </dd>
+                                <div class="layui-tab-item">
+                                    @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1) != null)
+                                    {
+                                        foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1))
+                                        {
+                                            string classnam = "";
+                                            string style = "";
+                                            if (item.Score == 3)
+                                            {
+                                                classnam = "好评";
+                                                style = "#01af63";
+                                            }
+                                            else if (item.Score == 2)
+                                            {
+                                                classnam = "中评";
+                                            }
+                                            else { classnam = "差评"; style = "red"; }
+                                            <dl class="comment-list">
+                                                <dt>
+                                                    <img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">
+                                                </dt>
+                                                <dd style="display: table">
+                                                    <div style="display: table-cell; vertical-align: middle">
+                                                        <div class="clearfix">
+                                                            <span class="pull-right"></span><b>
+                                                                @demandSer.GetDecDemandByGuID(item.Guid).ownername
+                                                            </b>
+                                                        </div>
+                                                        <p>
+                                                            <b style="color:@style">
+                                                                @classnam :
+                                                            </b><a title="@item.Comment">
+                                                                @item.Comment
+                                                            </a>
 
 
-                        </dl>
-                        <dl class="comment-list">
-                            <dt>
-                                <img src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg" onerror="this.onerror=null;this.src='/Member/UpControl/upload/avatars/noavatar_small.gif';">
-                            </dt>
-                            <dd style="display: table">
-                                <div style="display: table-cell; vertical-align: middle">
-                                    <div class="clearfix">
-                                        <span class="pull-right"></span><b>
-                                            0工长
-                                        </b>
-                                    </div>
-                                    <p>
-                                        <b>
-                                            徐超群零工 :
-                                        </b><a title="请问你哪里还有人没？你好">
-                                            请问你哪里还有人没？你好
-                                        </a>
-                                    </p>
+                                                        </p>
+                                                    </div>
+                                                </dd>
+
+
+                                            </dl>
+                                        }
+                                    }
                                 </div>
-                            </dd>
-
-
-                        </dl>
-                        <dl class="comment-list">
-                            <dt>
-                                <img src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg" onerror="this.onerror=null;this.src='/Member/UpControl/upload/avatars/noavatar_small.gif';">
-                            </dt>
-                            <dd style="display: table">
-                                <div style="display: table-cell; vertical-align: middle">
-                                    <div class="clearfix">
-                                        <span class="pull-right"></span><b>
-                                            0工长
-                                        </b>
-                                    </div>
-                                    <p>
-                                        <b>
-                                            徐超群零工 :
-                                        </b><a title="请问你哪里还有人没？你好">
-                                            请问你哪里还有人没？你好
-                                        </a>
-                                    </p>
-                                </div>
-                            </dd>
-
-
-                        </dl>
-                    </ul>
+                            </div>
+                        </div>
+                    </ul>                   
                     <div class="clear">
                     </div>
                 </div>
@@ -212,6 +285,32 @@
 
 </div>
 <script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+        , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+             tabChange: function () {
+              //切换到指定Tab项
+              element.tabChange('demo', '22'); //切换到：用户管理
+          }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
     $(".zhuangxiu").click(function () {
         var peoplename = "@Model.WorkerName";
         var userid = "@Model.UserID";

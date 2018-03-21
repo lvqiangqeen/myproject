@@ -32,7 +32,7 @@
 @section Scripts{
     <script>
         $(function () {
-            sessionStorage.setItem('lasturl', '@Request.Url.ToString()');
+            sessionStorage.setItem('lasturl',window.location.href);
             layui.use('table', function () {
                 var table = layui.table;
 

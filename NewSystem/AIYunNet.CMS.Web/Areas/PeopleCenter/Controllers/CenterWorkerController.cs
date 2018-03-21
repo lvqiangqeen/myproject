@@ -83,9 +83,9 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
         }
 
         [HttpPost]
-        public JsonResult DemandListToWorker(int GetUserID)
+        public JsonResult DemandListToWorker(int GetUserID, int PageSize, int CurPage)
         {
-            List<AcceptDemand> list = Deacc.GetDemandListByUserID(GetUserID);
+            List<AcceptDemand> list = Deacc.GetDemandListByUserID(GetUserID, PageSize, CurPage);
             return Json(new { code = 0, msg = "", count = list.Count(), data = list });
         }
         //工人发布流程

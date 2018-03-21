@@ -9,7 +9,6 @@
     DemandService Ser = new DemandService();
     List<DecDemand> list = Ser.GetDecDemandListByUserIDAndType(Model.UserID, "WebUser").OrderByDescending(c=>c.AddOn).ToList();
     WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
-    List<WebBuidingCaseComment> comlist = comSer.GetCommentListByGetUserID(Model.UserID,"WebBuiding").OrderByDescending(c=>c.Score).ToList();
     WebUserService userDer = new WebUserService();
     DemandService demandSer = new DemandService();
 
@@ -27,6 +26,9 @@
     .buiding {
         margin-bottom: 0px;
         white-space: normal;
+    }
+    .br_select > dl > dd > label{
+        margin-left:14px;
     }
 </style>
 <div class="container">
@@ -119,20 +121,38 @@
                 </div>
                 <div class="ngz-border" style="margin-top: 0px;">
                     <div class="ngz-tit"><h2>业主评价</h2>
-                    @if (comlist != null)
+                    @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 0) != null)
                     {
-                        <span>共<i>@comlist.Count()</i>人</span>
+                        <span>共<i>@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 0).Count()</i>人</span>
                     }
                     
                     </div>
-                    <ul class="ngz-pj-w">
-                        @if (comlist != null)
+                    <div class="br_select clear" style="height:31px;margin-top:10px;">
+                        <dl>
+                            <dd>
+                                <label>
+                                    <input type="radio" name="pl_level" value="3" checked="checked">
+                                    好评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 3).Count())
+                                </label>
+                                <label>
+                                    <input type="radio" name="pl_level" value="2">
+                                    中评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2).Count())
+                                </label>
+                                <label>
+                                    <input type="radio" name="pl_level" value="1">
+                                    差评(@comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1).Count())
+                                </label>
+                            </dd>
+                        </dl>
+                    </div>
+                    <ul class="ngz-pj-w pinjia3">
+                        @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 3) != null)
                         {
-                            foreach (var item in comlist)
+                            foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding",3).Take(5))
                             {
                                 string classnam = "";
                                 string style = "";
-                                if (item.Score >= 3)
+                                if (item.Score == 3)
                                 {
                                     classnam = "好评";
                                     style = "#01af63";
@@ -149,9 +169,71 @@
                             }
                         }
                     </ul>
-
+                    <ul class="ngz-pj-w pinjia2" style="display:none;">
+                        @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2) != null)
+                        {
+                            foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 2).Take(5))
+                            {
+                                string classnam = "";
+                                string style = "";
+                                if (item.Score == 3)
+                                {
+                                    classnam = "好评";
+                                    style = "#01af63";
+                                }
+                                else if (item.Score == 2)
+                                {
+                                    classnam = "中评";
+                                }
+                                else { classnam = "差评"; style = "red"; }
+                                <li>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<span style="margin-left:20px;">评级：</span><span style="color:@style;">@classnam</span></div>
+                                    <p> @item.Comment</p>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <ul class="ngz-pj-w pinjia1" style="display:none;">
+                        @if (comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1) != null)
+                        {
+                            foreach (var item in comSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 1).Take(5))
+                            {
+                                string classnam = "";
+                                string style = "";
+                                if (item.Score == 3)
+                                {
+                                    classnam = "好评";
+                                    style = "#01af63";
+                                }
+                                else if (item.Score == 2)
+                                {
+                                    classnam = "中评";
+                                }
+                                else { classnam = "差评"; style = "red"; }
+                                <li>
+                                    <div class="name-w"><img src="@AppSettingsHelper.ImgUrl@userDer.GetWebUserByID(item.PablishUserID).thumbnailImage">@demandSer.GetDecDemandByGuID(item.Guid).ownername<span style="margin-left:20px;">评级：</span><span style="color:@style;">@classnam</span></div>
+                                    <p> @item.Comment</p>
+                                </li>
+                            }
+                        }
+                    </ul>
                 </div>
             </div>
+            <script>
+                $(function () {
+                    $("input[name=pl_level]").click(function () {
+                        var score = $(this).val();
+                        for (var i = 1; i <= 3;i++)
+                        {
+                            if (score == i) {
+                                $(".pinjia" + i).show();
+                            } else {
+                                $(".pinjia" + i).hide();
+                            }
+                        }
+                    })
+                })
+            </script>
             <div class="gz-716">
                 <div class="ngz-border clear">
                     <div class="ngz-tit"><h2>我的最新订单</h2>@*<a href="/foreman-6689/tender">更多&gt;&gt;</a>*@ </div>
