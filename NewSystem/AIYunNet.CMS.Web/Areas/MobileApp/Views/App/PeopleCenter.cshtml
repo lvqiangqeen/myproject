@@ -1,4 +1,4 @@
-﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.Common.Utility;
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,21 +30,20 @@
 
 		<div class="personal-list">
 			<ul>
-				<li><a class="my-icon-wddd" href="my-order.html">我的订单</a></li>
+				<li><a class="my-icon-wddd" href="/MobileApp/App/WorkerDemandList?UserID=1">我的订单</a></li>
+				<li><a class="my-icon-wddd" href="/MobileApp/App/BuidingStagesList?peopleID=1">订单进度</a></li>
 			</ul>
 			<ul>
-				<li><a class="my-icon-grzl" href="personal-data.html">个人资料</a></li>
+				<li><a class="my-icon-grzl" href="/MobileApp/App/DesignCaseList?peopleID=1">设计案例</a></li>
 				<li><a class="my-icon-yhq" href="/MobileApp/App/WorkerCaseList?peopleID=1">我的项目</a></li>
-				@*<li><a class="my-icon-wdjf" href="integral.html">我的积分</a></li>*@
+				<li><a class="my-icon-yhq" href="/MobileApp/App/WorkerBuidingList?peopleID=1">装修案例</a></li>
+				<li><a class="my-icon-yhq" href="/MobileApp/App/BuidingStagesListByUser?peopleID=1">装修进度</a></li>
 			</ul>
-			@*<ul>
-				<li><a class="my-icon-gsjj" href="#">公司简介</a></li>
-				<li><a class="my-icon-bzzx" href="#">帮助中心</a></li>
-				<li><a class="my-icon-kfzx" href="#">客服咨询<span class="my-tel">400-000-0000</span></a></li>
-			</ul>*@
+			<ul>
+				<li><a class="my-icon-yhq" href="/MobileApp/App/PeopleDemandList?peopleID=1">我发布的需求</a></li>
+				<li><a class="my-icon-yhq" href="/MobileApp/App/DemandListToMe?peopleID=1">发给我的需求</a></li>
+			</ul>
 		</div>
-
-
 	</div>
 	<!--container-end-->
 	<!--footer-->
