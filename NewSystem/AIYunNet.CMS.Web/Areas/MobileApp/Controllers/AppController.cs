@@ -67,5 +67,28 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 			WebBuidingStages buidingStage = new WebBuidingStages();
 			return View(buidingStage);
 		}
+		
+		public ActionResult DesignCaseList(int peopleID)
+		{
+			WebBuidingService buidingService = new WebBuidingService();
+			List<WebBuiding> caseList = buidingService.GetWebBuidingList(peopleID);
+			ViewBag.CaseList = caseList;
+			return View();
+		}
+
+		public ActionResult WorkerDemandList(int UserID)
+		{
+			DemandService demandSer = new DemandService();
+			List<DecDemand> list = demandSer.GetDecDemandListByUserIDAndType(UserID, "WebUser");
+			return View(list);
+		}
+
+		public ActionResult BuidingStagesList()
+		{
+			WebBuidingService service = new WebBuidingService();
+			int Workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+			List<WebBuiding> buidingList = service.GetWebBuidingListByWorkerID(Workerid, true);
+			return View(buidingList);
+		}
 	}
 }
