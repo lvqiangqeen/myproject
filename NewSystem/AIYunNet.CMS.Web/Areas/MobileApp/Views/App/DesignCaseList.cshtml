@@ -1,0 +1,67 @@
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+	List<WebBuiding> caseList = ViewBag.CaseList as List<WebBuiding>;
+	WebCommonService webCommen = new WebCommonService();
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/css/base.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/css/common.css">
+	<script type="text/javascript" src="~/Content/mobileapp/js/jquery.min.js"></script>
+	<script src="~/Content/mobileapp/js/common.js"></script>
+	<style>
+		.case_progress {
+			height: 1.75rem;
+			line-height: 1.75rem;
+			background-color: #fa4b28;
+			color: #fff;
+			border: solid 1px #fa4b28;
+			border-radius: 3px;
+			padding: 5px 5px;
+		}
+	</style>
+</head>
+<body>
+	<header class="header" id="header">
+		<a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+		<a href="#" class="close">关闭</a>
+	</header>
+	<div class="container" id="container">
+		@if (caseList != null && caseList.Count > 0)
+		{
+			for (int i = 0; i < caseList.Count; i++)
+			{
+				<div class="ind-item">
+					<a href="#">
+						<div class="ind-item-img"><img src="@AppSettingsHelper.ImgUrl@caseList[i].thumbnailImage"></div>
+						<div class="ind-item-txt">
+							<h3 class="red">@caseList[i].BuidingTitle</h3>
+							<p>@if (string.IsNullOrWhiteSpace(caseList[i].BuidingBrief))
+							{
+								@:无简介
+							}
+							else
+							{
+								@:@caseList[i].BuidingBrief
+							} </p>
+							<p><span>评论数： @caseList[i].CommentCount</span><span style="margin-left:10px;">添加时间： @caseList[i].AddOn.ToShortDateString()</span> </p>
+						</div>
+					</a>
+				</div>
+			}
+		}
+	</div>
+	<script>
+		
+	</script>
+</body>
+</html>
