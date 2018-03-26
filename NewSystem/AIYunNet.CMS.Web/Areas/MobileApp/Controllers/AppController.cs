@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AIYunNet.CMS.Common.Utility;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {

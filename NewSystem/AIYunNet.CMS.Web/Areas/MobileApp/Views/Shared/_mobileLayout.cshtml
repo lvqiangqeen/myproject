@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>装修工长</title>
+    <link href="~/Content/WorkerApp/css/base.css" rel="stylesheet" />
+    <link href="~/Content/WorkerApp/css/common.css" rel="stylesheet" />
+    <script src="~/Content/WorkerApp/js/jquery.min.js"></script>
+    <script src="~/Content/design/js/jquerysession.js"></script>
+    <script src="~/Content/WorkerApp/js/common.js"></script>
+    <!--banner 脚本-->
+    <script src="~/Content/WorkerApp/js/TouchSlide.1.1.js"></script>
+
+</head>
+<body>
+    <header class="header" id="header">
+        <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+        <a href="#" class="close">关闭</a>
+    </header>
+    <!--header-end-->
+    @RenderBody()
+    <!--container-end-->
+    <!--footer-->
+    <footer class="footer" id="footer">
+        <ul class="footnav box-flex">
+            <li><a href="/MobileApp/MobileWorker/mWorkerList" class="home"><i></i><span class="full-block">首页</span></a></li>
+            <li><a href="/MobileApp/MobileWorker/mWorkerList" class="foot-worker"><i></i><span class="full-block">工人入驻</span></a></li>
+            <li><a href="/MobileApp/MobileWorker/mWorkerList" class="foot-order"><i></i><span class="full-block">订单</span></a></li>
+            <li><a href="/MobileApp/MobileWorker/mWorkerList" class="my"><i></i><span class="full-block">我的</span></a></li>
+        </ul>
+    </footer>
+    <!--footer-end-->
+    <!--栏目更多-->
+    <script type="text/javascript">
+
+        var mnavid = $.session.get('footnav');
+        $(".footnav > li").eq(mnavid).addClass("on");
+        $(".footnav > li").click(function() {
+            var num = $(this).index();
+            $.session.set('footnav', num);
+        });
+
+
+$(".ind-nav").each(function(){
+  var self = $(this);
+  var n=self.find("ul li").length;
+  if(n<=8){
+  self.find( ".more").addClass("hide-more");
+  }else{
+  self.find(".more").removeClass("hide-more");
+  }
+ self.find(".more").click(function(){
+    self.find( "ul" ).toggleClass("intro");
+	self.find(".more").toggleClass("add-more");
+  });
+  });
+    </script>
+    <!--栏目更多-->
+</body>
+</html>
