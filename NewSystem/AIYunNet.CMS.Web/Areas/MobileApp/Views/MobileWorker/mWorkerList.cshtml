@@ -1,9 +1,14 @@
-﻿
+﻿@using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "mWorkerList";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
 }
 <link href="~/Content/WorkerApp/css/class.css" rel="stylesheet" />
+<style>
+    .mui-scroll-wrapper {
+    top: 98px;
+}
+</style>
 <div class="container" id="container">
 
     <!--下拉分类-->
@@ -77,9 +82,13 @@
     <script src="~/Content/WorkerApp/js/class/slideNav.min.js"></script>
     <!--分类下拉列表结束-->
     <!--内容列表-->
-    <div class="jbsf-group">
+    <div class="jbsf-group mui-content mui-scroll-wrapper" id="refreshContainer">
+        <div class="mui-scroll">
+            <div class="mui-table-view mui-table-view-chevron">
 
-        <div class="jbsf-item top topone">
+            </div>
+        </div>
+        @*<div class="jbsf-item top topone">
             <a href="worker-details.html">
                 <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
                 <div class="jbsf-item-txt">
@@ -128,10 +137,145 @@
                     <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
                 </div>
             </a>
-        </div>
+        </div>*@
 
     </div>
     <!--内容列表-->
 
 </div>
+<script type="text/javascript">
 
+    (function () {
+        //上拉加载下拉刷新
+        mui.init({
+            pullRefresh: {
+                container: '#refreshContainer',
+                up: {
+                    contentrefresh: '正在加载...',
+                    callback: pullupRefresh
+                }
+            }
+        });
+
+
+        ////加载更多
+        //var dataNum = 25;//获取数据总数
+        //var pageSize = 10;//每页显示条数
+        //var counter = 1;//计数器
+        //var pageStart = 0;//开始数据条数
+
+        //getData(pageStart, pageSize);
+
+        //function getData(pageStart, pageSize) {
+        //    //显示数不足每页显示条数
+        //    if (dataNum - pageStart < pageSize) {
+        //        pageSize = dataNum - pageStart;
+        //        data(pageStart, pageSize);
+        //        console.log("显示数不足每页显示条数");
+        //    }
+        //        //显示隐藏加载更多
+        //    else if (pageStart + pageSize >= dataNum) {
+        //        data(pageStart, pageSize);
+        //        console.log("没有更多数据了");
+        //        //没有更多数据了
+        //    } else {
+        //        data(pageStart, pageSize);
+        //        console.log("显示dataNum" + dataNum + "pageSize" + pageSize + "pageStart" + pageStart);
+        //        //显示
+        //    }
+
+        //}
+
+        //function data(pageStart, pageSize) {
+        //    //业务
+        //    var result = "";
+        //    for (var i = pageStart; i < (pageStart + pageSize) ; i++) {
+        //        result += '<div class="jbsf-item">'
+        //            + '<a href="worker-details.html">'
+        //             + '<div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>'
+        //              + '<div class="jbsf-item-txt">'
+        //              + '<h2>李师傅'+i+'</h2>'
+        //              + '<div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>'
+        //              + '<div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>'
+        //              + '</div></a></div>';
+        //    }
+        //    console.log(jQuery);
+        //    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
+
+        //}
+        //加载更多
+        var pageSize = 10;//每页显示条数
+        var counter = 1;//计数器
+        var pageStart = 1;//开始数据条数
+        var Flag=true;
+
+        data(pageStart, pageSize);
+
+        function data(pageIndex, PageSize) {
+            //业务
+            var result = "";
+            $.ajax({
+                type: 'post',
+                url: '/Handler/GetPageListAjax.ashx',
+                async: false,
+                dataType: "json",
+                data: {
+                    mkjcitycode: $("#mkjcitycode").val(),
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    WorkerCategory: '装修工人',
+                    methodname: "GetDecWorkList"
+                },
+                success: function (data) {
+                    var datajson = data;
+                    Flag = datajson.list == null || datajson.list == undefined || datajson.list == '';
+                    //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
+                    console.log(Flag);
+                    if(Flag==false){
+                        counter++;
+                    }
+                    $.each(datajson.list, function (i, item) {
+                        result += '<div class="jbsf-item">'
+                            + '<a href="worker-details.html">'
+                             + '<div class="jbsf-item-img" style="float: left;"><img src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '"></div>'
+                              + '<div class="jbsf-item-txt" style="float: left;">'
+                              + '<h2>' + item.WorkerName + '</h2>'
+                              + '<div class="order-total">等级：<span>';
+                        for(var i=0;i<item.Huang;i++)
+                        {
+                            result += '<img src="/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        for(var i=0;i<6;i++)
+                        {
+                            result += '<img src="/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        for(var i=0;i<item.Xing;i++)
+                        {
+                            result += '<img src="/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        result += '</span><span style="margin-left: 10px;">已服务：<em>70</em>单</span></div>'
+                              + '<div class="jbsf-details"><span class="work-type">' + item.WorkerPosition + '</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.AreasName + '">' + item.AreasName + '</span></div>'
+                              + '</div></a></div>';
+                    });
+
+                    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
+                    //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
+                    pageStart++;
+
+                }
+            }
+        );
+
+        }
+        /**
+         * 上拉加载具体业务实现
+         */
+        function pullupRefresh() {
+            setTimeout(function () {
+                mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
+                data(pageStart, pageSize);
+            }, 1500);
+        }
+    })();
+
+</script>

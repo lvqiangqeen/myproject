@@ -21,7 +21,6 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button {	display:
 .box-flex, .myorder-ors a, .com-btnbox a, .common-items .item-content, .frame-list .content p:first-child, .footer-t p.user-info, .seckill-title .date, .seckill-ul a, .col-title a, .logistics li span:first-child, .seckill-framtitle .date, .order-btn, .mall-cate li, .sort-view, .sort-sider, .sort-view section span, .wish-box .merchants select, .c-hd section:nth-child(2), .com-footitem li, .com-client span.cli-txt, .sort-sider section span, .sort-sub-nav ul li, .channel-nav .row-col a, .list-item .info, .com-search-tips p, .wish-box .merchants a, .nav-ors li, .profx-list a {
 -webkit-box-flex:1;
 -moz-box-flex:1;
-display:block
 }
 .search-form .c-input-txt, .sec-warp, .sort-nav ul li, .frame-pop, .merch-pop, .comtext, .j_submit, .codebox-input, .code-btn {
 	-webkit-box-sizing:border-box;
