@@ -15,5 +15,10 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
+        public ActionResult mWorkerDetail(int workerid)
+        {
+
+            return View();
+        }
     }
 }

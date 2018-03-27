@@ -16,7 +16,7 @@
         <!--分类栏目开始-->
         <div class="mall-cate-box">
             <ul class="mall-cate">
-                <li class=""><a href="javascript:void(0);" data-type="category">全城</a></li>
+                <li class=""><a href="javascript:void(0);" data-type="category">@SessionHelper.GetSession("mkjcityname")</a></li>
                 <li class=""><a href="javascript:void(0);" data-type="district">评论</a></li>
                 <li class=""><a href="javascript:void(0);" data-type="sort">接单数</a></li>
                 <li class=""><a href="javascript:void(0);" data-type="screen">工种</a></li>
@@ -88,56 +88,6 @@
 
             </div>
         </div>
-        @*<div class="jbsf-item top topone">
-            <a href="worker-details.html">
-                <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
-                <div class="jbsf-item-txt">
-                    <h2>李师傅</h2>
-                    <div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>
-                    <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="jbsf-item top toptwo">
-            <a href="worker-details.html">
-                <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
-                <div class="jbsf-item-txt">
-                    <h2>李师傅</h2>
-                    <div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>
-                    <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="jbsf-item top topthree">
-            <a href="worker-details.html">
-                <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
-                <div class="jbsf-item-txt">
-                    <h2>李师傅</h2>
-                    <div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>
-                    <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="jbsf-item">
-            <a href="worker-details.html">
-                <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
-                <div class="jbsf-item-txt">
-                    <h2>李师傅</h2>
-                    <div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>
-                    <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="jbsf-item">
-            <a href="worker-details.html">
-                <div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>
-                <div class="jbsf-item-txt">
-                    <h2>李师傅</h2>
-                    <div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>
-                    <div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>
-                </div>
-            </a>
-        </div>*@
 
     </div>
     <!--内容列表-->
@@ -156,53 +106,6 @@
                 }
             }
         });
-
-
-        ////加载更多
-        //var dataNum = 25;//获取数据总数
-        //var pageSize = 10;//每页显示条数
-        //var counter = 1;//计数器
-        //var pageStart = 0;//开始数据条数
-
-        //getData(pageStart, pageSize);
-
-        //function getData(pageStart, pageSize) {
-        //    //显示数不足每页显示条数
-        //    if (dataNum - pageStart < pageSize) {
-        //        pageSize = dataNum - pageStart;
-        //        data(pageStart, pageSize);
-        //        console.log("显示数不足每页显示条数");
-        //    }
-        //        //显示隐藏加载更多
-        //    else if (pageStart + pageSize >= dataNum) {
-        //        data(pageStart, pageSize);
-        //        console.log("没有更多数据了");
-        //        //没有更多数据了
-        //    } else {
-        //        data(pageStart, pageSize);
-        //        console.log("显示dataNum" + dataNum + "pageSize" + pageSize + "pageStart" + pageStart);
-        //        //显示
-        //    }
-
-        //}
-
-        //function data(pageStart, pageSize) {
-        //    //业务
-        //    var result = "";
-        //    for (var i = pageStart; i < (pageStart + pageSize) ; i++) {
-        //        result += '<div class="jbsf-item">'
-        //            + '<a href="worker-details.html">'
-        //             + '<div class="jbsf-item-img"><img src="images/worker-img.jpg"></div>'
-        //              + '<div class="jbsf-item-txt">'
-        //              + '<h2>李师傅'+i+'</h2>'
-        //              + '<div class="order-total"><span class="sa_star"><i class="sa_d" style="width:70%;"></i></span><span>已服务：<em>70</em>单</span></div>'
-        //              + '<div class="jbsf-details"><span class="work-type">电工</span><span class="work-ages">5年工龄</span><span class="worker-address">安徽</span></div>'
-        //              + '</div></a></div>';
-        //    }
-        //    console.log(jQuery);
-        //    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
-
-        //}
         //加载更多
         var pageSize = 10;//每页显示条数
         var counter = 1;//计数器
@@ -274,7 +177,7 @@
             setTimeout(function () {
                 mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
                 data(pageStart, pageSize);
-            }, 1500);
+            }, 200);
         }
     })();
 

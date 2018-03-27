@@ -4229,6 +4229,7 @@
     <Content Include="Content\mui-master\sass\type.scss" />
     <Content Include="Content\mui-master\sass\variables.scss" />
     <Content Include="Content\mui-master\template\feedback\readme.md" />
+    <Content Include="Areas\MobileApp\Views\MobileWorker\mWorkerDetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
