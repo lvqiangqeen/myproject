@@ -6,7 +6,10 @@
 <link href="~/Content/WorkerApp/css/class.css" rel="stylesheet" />
 <style>
     .mui-scroll-wrapper {
-    top: 98px;
+    top: 80px;
+}
+    .mui-content {
+    background-color: white;
 }
 </style>
 <div class="container" id="container">
@@ -96,6 +99,7 @@
 <script type="text/javascript">
 
     (function () {
+
         //上拉加载下拉刷新
         mui.init({
             pullRefresh: {
@@ -142,7 +146,7 @@
                              + '<div class="jbsf-item-img" style="float: left;"><img src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '"></div>'
                               + '<div class="jbsf-item-txt" style="float: left;">'
                               + '<h2>' + item.WorkerName + '</h2>'
-                              + '<div class="order-total">等级：<span>';
+                              + '<div class="order-total"><span class="work-type">等级：</span><span>';
                         for(var i=0;i<item.Huang;i++)
                         {
                             result += '<img src="/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;"/>';
@@ -163,7 +167,9 @@
                     jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
                     //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
                     pageStart++;
-                    mui('body').on('tap', 'a', function () { document.location.href = this.href; });
+                    mui('#refreshContainer').on('tap', 'a', function () {
+                        window.top.location.href = this.href;
+                    });
   
                 }
             }
@@ -180,5 +186,8 @@
             }, 200);
         }
     })();
+    mui('body').on('click', 'a', function () {
+        window.top.location.href = this.href;
+    });
 
 </script>

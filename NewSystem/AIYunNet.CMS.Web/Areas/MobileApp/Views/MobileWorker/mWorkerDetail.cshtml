@@ -15,16 +15,11 @@
                 <div class="worker-top-txt">
                     <h2>@Model.WorkerName  </h2>
                     <span>价位：<em>@Model.PriceName 元/m²</em></span>
-                    <span>工龄：<em>@Model.WorkYears</em></span>
+                    <span>工种：<em>@Model.WorkerPosition</em></span>
+                    <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>
                     <span>籍贯：<em>@Model.ProvinceName  @Model.CityName</em></span>
-                    @*<span>已服务：<em>70</em>单</span>*@
+                    
                 </div>
-            </div>
-            <div class="worker-bot">
-                <a href="user-evaluation.html">
-                    <span>工种：</span>
-                    <span>@Model.WorkerPosition</span>                  
-                </a>
             </div>
             <div class="worker-bot">
                 <a href="user-evaluation.html">
@@ -62,7 +57,35 @@
             <div class="worker-item-tit"><h2>个人简介</h2></div>
             <div class="worker-item-con">@Model.WorkerInfo</div>
         </div>
-
+        <div class="mui-content worker-item" style="background-color:#fff">
+            <div class="worker-item-tit"><h2>装修案例</h2></div>
+            <ul class="mui-table-view mui-grid-view">
+                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                    <a href="#">
+                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/shuijiao.jpg">
+                        <div class="mui-media-body">幸福就是可以一起睡觉</div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                    <a href="#">
+                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/muwu.jpg">
+                        <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                    <a href="#">
+                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/cbd.jpg">
+                        <div class="mui-media-body">Color of SIP CBD</div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                    <a href="#">
+                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/yuantiao.jpg">
+                        <div class="mui-media-body">静静看这世界</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <a href="reservation.html" class="order">找TA装修</a>
