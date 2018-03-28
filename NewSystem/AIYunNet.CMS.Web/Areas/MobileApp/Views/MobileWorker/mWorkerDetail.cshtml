@@ -1,4 +1,5 @@
-﻿
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker
+@using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "mWorkerDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
@@ -10,36 +11,56 @@
 
         <div class="worker-item worker">
             <div class="worker-top">
-                <div class="worker-top-img"><img src="images/worker-img.jpg"></div>
+                <div class="worker-top-img"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:80px;height:80px;"></div>
                 <div class="worker-top-txt">
-                    <h2>李师傅</h2>
-                    <span>工龄：<em>5</em>年</span>
-                    <span>籍贯：<em>安徽</em></span>
-                    <span>已服务：<em>70</em>单</span>
+                    <h2>@Model.WorkerName  </h2>
+                    <span>价位：<em>@Model.PriceName 元/m²</em></span>
+                    <span>工龄：<em>@Model.WorkYears</em></span>
+                    <span>籍贯：<em>@Model.ProvinceName  @Model.CityName</em></span>
+                    @*<span>已服务：<em>70</em>单</span>*@
                 </div>
             </div>
             <div class="worker-bot">
                 <a href="user-evaluation.html">
-                    <span>用户评分：</span>
-                    <span class="sa_star"><i class="sa_d" style="width:70%;"></i></span>
-                    <span>(<em>20</em>人评价)</span>
+                    <span>工种：</span>
+                    <span>@Model.WorkerPosition</span>                  
+                </a>
+            </div>
+            <div class="worker-bot">
+                <a href="user-evaluation.html">
+                    <span>等级：</span>
+                    <span>
+                        @for (int i = 1; i <= Model.Stars / 25; i++)
+            {
+                            <img src="~/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                        @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+            {
+                            <img src="~/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                        @for (int i = 1; i <= Model.Stars % 5; i++)
+            {
+                            <img src="~/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                    </span>
+
                 </a>
             </div>
         </div>
 
         <div class="worker-item">
-            <div class="worker-item-tit"><h2>服务项目</h2></div>
-            <div class="worker-item-con">木地板、木门安装木地板、木门安装木地板、木门安装木地板、木门安装。</div>
+            <div class="worker-item-tit"><h2>服务地区</h2></div>
+            <div class="worker-item-con">@Model.AreasName</div>
         </div>
 
         <div class="worker-item">
-            <div class="worker-item-tit"><h2>服务范围</h2></div>
-            <div class="worker-item-con">木地板、木门安装木地板、木门安装木地板、木门安装木地板、木门安装。</div>
+            <div class="worker-item-tit"><h2>擅长领域</h2></div>
+            <div class="worker-item-con">@Model.GoodAtStyle</div>
         </div>
 
         <div class="worker-item">
             <div class="worker-item-tit"><h2>个人简介</h2></div>
-            <div class="worker-item-con">木地板、木门安装木地板、木门安装木地板、木门安装木地板、木门安装。</div>
+            <div class="worker-item-con">@Model.WorkerInfo</div>
         </div>
 
     </div>

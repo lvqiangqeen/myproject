@@ -113,7 +113,6 @@
         var Flag=true;
 
         data(pageStart, pageSize);
-
         function data(pageIndex, PageSize) {
             //业务
             var result = "";
@@ -139,7 +138,7 @@
                     }
                     $.each(datajson.list, function (i, item) {
                         result += '<div class="jbsf-item">'
-                            + '<a href="worker-details.html">'
+                            + '<a href="/MobileApp/MobileWorker/mWorkerDetail?workerid=' + item.WorkerID + '">'
                              + '<div class="jbsf-item-img" style="float: left;"><img src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '"></div>'
                               + '<div class="jbsf-item-txt" style="float: left;">'
                               + '<h2>' + item.WorkerName + '</h2>'
@@ -148,7 +147,7 @@
                         {
                             result += '<img src="/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;"/>';
                         }
-                        for(var i=0;i<6;i++)
+                        for(var i=0;i<item.Ying;i++)
                         {
                             result += '<img src="/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;"/>';
                         }
@@ -156,7 +155,7 @@
                         {
                             result += '<img src="/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;"/>';
                         }
-                        result += '</span><span style="margin-left: 10px;">已服务：<em>70</em>单</span></div>'
+                        result += '</span></div>'
                               + '<div class="jbsf-details"><span class="work-type">' + item.WorkerPosition + '</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.AreasName + '">' + item.AreasName + '</span></div>'
                               + '</div></a></div>';
                     });
@@ -164,7 +163,8 @@
                     jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
                     //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
                     pageStart++;
-
+                    mui('body').on('tap', 'a', function () { document.location.href = this.href; });
+  
                 }
             }
         );
