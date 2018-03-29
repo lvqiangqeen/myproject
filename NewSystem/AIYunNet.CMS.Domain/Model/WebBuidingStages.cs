@@ -82,6 +82,8 @@ namespace AIYunNet.CMS.Domain.Model
             WebBuidingID = 0;
             StageID = 0;
             IsComplete = false;
+            thumContent = "";
+            ImgContent = "";
             StageContent = "";
             IsUserEnd = 0;
             Workerleaderid = 0;

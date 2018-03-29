@@ -17,14 +17,17 @@
     <title>装修工长</title>
     <link href="~/Content/WorkerApp/css/base.css" rel="stylesheet" />
     <link href="~/Content/WorkerApp/css/common.css" rel="stylesheet" />
+    <link href="~/Content/layer.mobile-v2.0/layer_mobile/need/layer.css" rel="stylesheet" />
     <script src="~/Content/WorkerApp/js/jquery.min.js"></script>
     @*<script src="~/Content/design/js/jquery-2.0.3.min.js"></script>*@
     <script src="~/Content/design/js/jquerysession.js"></script>
     <script src="~/Content/WorkerApp/js/common.js"></script>
     <!--banner 脚本-->
-    <script src="~/Content/WorkerApp/js/TouchSlide.1.1.js"></script>
     <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+    <script src="~/Content/WorkerApp/js/TouchSlide.1.1.js"></script>
     <script src="~/Content/mui-master/dist/js/mui.js"></script>
+    <script src="~/Content/layer.mobile-v2.0/layer_mobile/layer.js"></script>
+    @*<script src="~/Content/layui/layui.js"></script>*@
 </head>
 <body>
     @if (SessionHelper.GetSession("mkjcitycode") != null)
@@ -34,7 +37,7 @@
     }
     <header class="header" id="header">
         <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
-        <a href="#" class="close">关闭</a>
+        <a href="#" class="close" style="display:none;">关闭</a>
     </header>
     <!--header-end-->
     @RenderBody()

@@ -61,7 +61,9 @@
     <Compile Include="Areas\CompanyCenter\Controllers\CompanyVerifyController.cs" />
     <Compile Include="Areas\CompanyCenter\Controllers\UpPicCompanyController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\AppController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
     <Compile Include="Areas\MobileApp\MobileAppAreaRegistration.cs" />
     <Compile Include="Areas\MustIndex\Controllers\MustAdminController.cs" />
     <Compile Include="Areas\MustIndex\Controllers\MustController.cs" />
@@ -1597,6 +1599,9 @@
     <Content Include="Content\js\imglist\imgList.js" />
     <Content Include="Content\js\imglist\masonry-docs.min.js" />
     <Content Include="Content\js\index\YuxiSlider.jQuery.min.js" />
+    <Content Include="Content\layer.mobile-v2.0\layer_mobile\layer.js" />
+    <Content Include="Content\layer.mobile-v2.0\layer_mobile\need\layer.css" />
+    <Content Include="Content\layer.mobile-v2.0\更新日志.txt" />
     <Content Include="Content\layui\css\layui.css" />
     <Content Include="Content\layui\css\layui.mobile.css" />
     <Content Include="Content\layui\css\modules\code.css" />
@@ -3854,6 +3859,12 @@
     <Content Include="Content\WorkerApp\js\TouchSlide.1.1.js" />
     <Content Include="Content\WorkerApp\js\upload_img.js" />
     <Content Include="Content\WorkerApp\login.html" />
+    <Content Include="Content\WorkerApp\Login\css\gongyong.css" />
+    <Content Include="Content\WorkerApp\Login\images\sousuo.png" />
+    <Content Include="Content\WorkerApp\Login\images\sy.png" />
+    <Content Include="Content\WorkerApp\Login\index.html" />
+    <Content Include="Content\WorkerApp\Login\js\jquery-1.8.3.min.js" />
+    <Content Include="Content\WorkerApp\Login\login.html" />
     <Content Include="Content\WorkerApp\maintenance-reservation.html" />
     <Content Include="Content\WorkerApp\my-name.html" />
     <Content Include="Content\WorkerApp\my-order.html" />
@@ -4230,6 +4241,13 @@
     <Content Include="Content\mui-master\sass\variables.scss" />
     <Content Include="Content\mui-master\template\feedback\readme.md" />
     <Content Include="Areas\MobileApp\Views\MobileWorker\mWorkerDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MoblieBuiding\mBuidingDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\mPCenter.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\LoginCenter.cshtml" />
+    <Content Include="Content\layer.mobile-v2.0\demo.url" />
+    <Content Include="Content\layer.mobile-v2.0\doc\官网.url" />
+    <Content Include="Content\layer.mobile-v2.0\doc\有问必答.url" />
+    <Content Include="Content\layer.mobile-v2.0\layim.url" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

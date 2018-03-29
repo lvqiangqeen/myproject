@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "mPCenter";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+<script>
+    $(function () {
+        var html = "<h1>个人中心</h1>";
+        $("#header").append(html);
+    })
+</script>
+<div class="container" id="container">
+    <div class="my-face">
+        <div class="my-face-con">
+            <div class="my-face-pic"><img src="images/my-face-pic.jpg"></div>
+            <p>18050000000</p>
+        </div>
+    </div>
+
+    <div class="personal-list">
+        <ul>
+            <li><a class="my-icon-wddd" href="my-order.html">我的订单</a></li>
+        </ul>
+        <ul>
+            <li><a class="my-icon-grzl" href="personal-data.html">个人资料</a></li>
+            <li><a class="my-icon-yhq" href="coupons.html">优惠券</a></li>
+            <li><a class="my-icon-wdjf" href="integral.html">我的积分</a></li>
+        </ul>
+        <ul>
+            <li><a class="my-icon-gsjj" href="#">公司简介</a></li>
+            <li><a class="my-icon-bzzx" href="#">帮助中心</a></li>
+            <li><a class="my-icon-kfzx" href="#">客服咨询<span class="my-tel">400-000-0000</span></a></li>
+        </ul>
+    </div>
+
+
+</div>
+

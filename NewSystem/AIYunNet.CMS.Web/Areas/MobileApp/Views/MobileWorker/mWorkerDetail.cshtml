@@ -1,4 +1,5 @@
-﻿@model AIYunNet.CMS.Domain.Model.WebWorker
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker    
+@using AIYunNet.CMS.Domain.Model
 @using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "mWorkerDetail";
@@ -17,7 +18,7 @@
                     <span>价位：<em>@Model.PriceName 元/m²</em></span>
                     <span>工种：<em>@Model.WorkerPosition</em></span>
                     <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>
-                    <span>籍贯：<em>@Model.ProvinceName  @Model.CityName</em></span>
+                    <span>地区：<em>@Model.ProvinceName  @Model.CityName</em></span>
                     
                 </div>
             </div>
@@ -26,17 +27,26 @@
                     <span>等级：</span>
                     <span>
                         @for (int i = 1; i <= Model.Stars / 25; i++)
-            {
+                        {
                             <img src="~/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;" />
                         }
                         @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
-            {
+                        {
                             <img src="~/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;" />
                         }
                         @for (int i = 1; i <= Model.Stars % 5; i++)
-            {
+                        {
                             <img src="~/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;" />
                         }
+                    </span>
+
+                </a>
+            </div>
+            <div class="worker-bot">
+                <a href="user-evaluation.html">
+                    <span>评价：</span>
+                    <span>
+                        50条
                     </span>
 
                 </a>
@@ -60,30 +70,15 @@
         <div class="mui-content worker-item" style="background-color:#fff">
             <div class="worker-item-tit"><h2>装修案例</h2></div>
             <ul class="mui-table-view mui-grid-view">
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/shuijiao.jpg">
-                        <div class="mui-media-body">幸福就是可以一起睡觉</div>
-                    </a>
-                </li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/muwu.jpg">
-                        <div class="mui-media-body">想要一间这样的木屋，静静的喝咖啡</div>
-                    </a>
-                </li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/cbd.jpg">
-                        <div class="mui-media-body">Color of SIP CBD</div>
-                    </a>
-                </li>
-                <li class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a href="#">
-                        <img class="mui-media-object" src="/Content/mui-master/examples/hello-mui/images/yuantiao.jpg">
-                        <div class="mui-media-body">静静看这世界</div>
-                    </a>
-                </li>
+                @foreach (var item in ViewBag.list as List<WebBuiding>)
+                {
+                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                        <a href="/MobileApp/MoblieBuiding/mBuidingDetail?id=@item.BuidingID">
+                            <img class="mui-media-object" src="@AppSettingsHelper.ImgUrl@item.thumbnailImage">
+                            <div class="mui-media-body">@item.BuidingTitle</div>
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 /* CSS Document */@charset=utf-8;/*css reset*/
@@ -83,10 +83,10 @@ input, textarea, select, option, button, form, fieldset {
 	border:none;
 	outline:none;
 	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
+	/*-webkit-box-sizing: content-box;*/
 	-o-box-sizing: content-box;
 	-ms-box-sizing: content-box;
-	box-sizing: content-box;
+	/*box-sizing: content-box;*/
 }
 /* common */.txthide {
 	text-indent:-9999px;

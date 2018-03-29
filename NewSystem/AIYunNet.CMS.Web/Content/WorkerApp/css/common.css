@@ -88,7 +88,7 @@ ul.intro li:last-child{ border-right:1px solid #ededed;}
 .min-price-tit{ padding:0.5rem 0; }
 .min-price-tit h2{border-left:2px solid #fa4b28; padding-left:0.25rem; color:#999999; font-size: 0.7rem;}
 .min-price-con{ line-height:1rem; padding-bottom:0.75rem; }
-.min-price-bot{width:100%; position:fixed; bottom:0; left:0; height:2.1rem; line-height:2.1rem;  }
+.min-price-bot{width:100%;/*position:fixed;*/ bottom:0; left:0; height:2.1rem; line-height:2.1rem;  }
 .min-price-bot a{ color:#fff;font-size:0.75rem; text-align:center; display:block; }
 .min-price-bot div{width:50%; height:100%; float:left;}
 .min-price-tel{ background-color:#1a85f8; }

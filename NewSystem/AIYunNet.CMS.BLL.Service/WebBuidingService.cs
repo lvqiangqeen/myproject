@@ -354,5 +354,15 @@ namespace AIYunNet.CMS.BLL.Service
                 return list;
             }
         }
+
+
+        //手机端获取单人装修案例
+        public List<WebBuiding> moblieGetWebBuidingList(int workerID,int count)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                return context.WebBuiding.Where(wb => wb.WorkerID == workerID && wb.FlagDelete == 0).OrderByDescending(wb => wb.AddOn).Take(count).ToList();
+            }
+        }
     }
 }

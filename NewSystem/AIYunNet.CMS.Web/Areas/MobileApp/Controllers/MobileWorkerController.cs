@@ -13,6 +13,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     public class MobileWorkerController : Controller
     {
         WebWorkerService workerSer = new WebWorkerService();
+        WebBuidingService buidSer = new WebBuidingService();
         // GET: MobileApp/MobileWorker
         public ActionResult mWorkerList()
         {
@@ -21,6 +22,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult mWorkerDetail(int workerid=1)
         {
             WebWorker worker = workerSer.GetWebWorkerByID(workerid);
+            List<WebBuiding> list = buidSer.moblieGetWebBuidingList(workerid, 4);
+            ViewBag.list = list;
             return View(worker);
         }
     }
