@@ -1,4 +1,6 @@
-﻿
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@model WebUser
 @{
     ViewBag.Title = "mPCenter";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
@@ -12,8 +14,8 @@
 <div class="container" id="container">
     <div class="my-face">
         <div class="my-face-con">
-            <div class="my-face-pic"><img src="images/my-face-pic.jpg"></div>
-            <p>18050000000</p>
+            <div class="my-face-pic"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage"></div>
+            <p>@Model.NickName</p>
         </div>
     </div>
 
@@ -22,7 +24,7 @@
             <li><a class="my-icon-wddd" href="my-order.html">我的订单</a></li>
         </ul>
         <ul>
-            <li><a class="my-icon-grzl" href="personal-data.html">个人资料</a></li>
+            <li><a class="my-icon-grzl" href="/MobileApp/MobileCenter/PersonData">个人资料</a></li>
             <li><a class="my-icon-yhq" href="coupons.html">优惠券</a></li>
             <li><a class="my-icon-wdjf" href="integral.html">我的积分</a></li>
         </ul>

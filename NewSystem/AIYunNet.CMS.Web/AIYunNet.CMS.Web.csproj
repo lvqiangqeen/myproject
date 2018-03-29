@@ -61,6 +61,7 @@
     <Compile Include="Areas\CompanyCenter\Controllers\CompanyVerifyController.cs" />
     <Compile Include="Areas\CompanyCenter\Controllers\UpPicCompanyController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\AppController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\mLoginController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="filter\AllSessionFilter.cs" />
     <Compile Include="filter\AuthorityFilter.cs" />
     <Compile Include="filter\CompanyFilter.cs" />
+    <Compile Include="filter\MobileUserFilter.cs" />
     <Compile Include="filter\PeopleIDFilter.cs" />
     <Compile Include="filter\ZanFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -4243,11 +4245,12 @@
     <Content Include="Areas\MobileApp\Views\MobileWorker\mWorkerDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\MoblieBuiding\mBuidingDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileCenter\mPCenter.cshtml" />
-    <Content Include="Areas\MobileApp\Views\MobileCenter\LoginCenter.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mLogin\LoginCenter.cshtml" />
     <Content Include="Content\layer.mobile-v2.0\demo.url" />
     <Content Include="Content\layer.mobile-v2.0\doc\官网.url" />
     <Content Include="Content\layer.mobile-v2.0\doc\有问必答.url" />
     <Content Include="Content\layer.mobile-v2.0\layim.url" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\PersonData.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
