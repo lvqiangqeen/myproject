@@ -1331,6 +1331,7 @@
     <Content Include="Content\design\commencss.css" />
     <Content Include="Content\design\img\task_conduct.jpg" />
     <Content Include="Content\design\img\zhuangxiu.jpg" />
+    <Content Include="Content\design\js\jquery-form.js" />
     <Content Include="Content\design\js\jquery.validate.min.js" />
     <Content Include="Content\design\js\messages_zh.js" />
     <Content Include="Content\design\layui-layer.css" />
@@ -4251,6 +4252,8 @@
     <Content Include="Content\layer.mobile-v2.0\doc\有问必答.url" />
     <Content Include="Content\layer.mobile-v2.0\layim.url" />
     <Content Include="Areas\MobileApp\Views\MobileCenter\PersonData.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataText.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataAreas.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

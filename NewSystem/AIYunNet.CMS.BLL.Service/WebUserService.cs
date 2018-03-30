@@ -9,7 +9,7 @@ using AIYunNet.CMS.Domain;
 
 namespace AIYunNet.CMS.BLL.Service
 {
-    public class WebUserService:IWebUser
+    public class WebUserService : IWebUser
     {
         public int AddWebUser(WebUser WebUser)
         {
@@ -179,6 +179,57 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     return 0;
                 }
+            }
+        }
+
+
+        t_AreaService areaSer = new t_AreaService();
+        //在手机端修改user
+        public int UpdateWebUserFromMobile(int id, string data, string type)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebUser originalUser = context.WebUser.Find(id);
+                if (originalUser != null)
+                {
+
+                    switch (type)
+                    {
+                        case "TrueName":
+                            originalUser.TrueName = data;
+                            break;
+                        case "NickName":
+                            originalUser.NickName = data;
+                            break;
+
+                        case "Sex":
+                            originalUser.Sex = data;
+                            break;
+                        case "Email":
+                            originalUser.Email = data;
+                            break;
+                        case "CityID":
+                            t_City city = areaSer.GetCityByID(data);
+                            originalUser.ProvinceID = city.father;
+                            originalUser.ProvinceName = areaSer.GetProvince(city.father).province;
+                            originalUser.CityID = data;
+                            originalUser.CityName = city.city;
+                            originalUser.AreasID = "0";
+                            originalUser.AreasName = "全城";
+                            break;
+                        case "AreasID":
+                            List<string> area = data.Split(';').ToList(); 
+                            originalUser.AreasID = area[0];
+                            originalUser.AreasName = area[1];
+                            break;
+                        default:
+
+                            break;
+                    }
+                    originalUser.EditOn = DateTime.Now;
+                    context.SaveChanges();
+                }
+                return 1;
             }
         }
 

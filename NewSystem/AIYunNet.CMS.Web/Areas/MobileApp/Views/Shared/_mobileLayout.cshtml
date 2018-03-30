@@ -23,9 +23,8 @@
     <script src="~/Content/design/js/jquerysession.js"></script>
     <script src="~/Content/WorkerApp/js/common.js"></script>
     <!--banner 脚本-->
-    <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+    
     <script src="~/Content/WorkerApp/js/TouchSlide.1.1.js"></script>
-    <script src="~/Content/mui-master/dist/js/mui.js"></script>
     <script src="~/Content/layer.mobile-v2.0/layer_mobile/layer.js"></script>
     @*<script src="~/Content/layui/layui.js"></script>*@
 </head>
@@ -35,7 +34,7 @@
         <input type="hidden" value="@SessionHelper.GetSession("mkjcitycode").ToString()" id="mkjcitycode" />
         <input type="hidden" value="@SessionHelper.GetSession("mkjcityname").ToString()" id="mkjcityname" />
     }
-    <header class="header" id="header">
+    <header class="header header-save" id="header">
         <a href="javascript:history.go(-1)" target=_self class="back">返回</a>
         <a href="#" class="close" style="display:none;">关闭</a>
     </header>

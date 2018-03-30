@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "EditPersonDataAreas";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string title = Request["title"];
+    string type = Request["type"];
+    string data = Request["data"];
+}
+<script src="~/Content/design/js/jquery-form.js"></script>
+<script>
+    $(function () {
+        var title = "@title";
+        var html = "<h1>" + title + "</h1><button class='bnt' type=''>保存</button>";
+        $("#header").append(html);
+
+        $(".bnt").click(function () {
+            $("button[type=submit]").click();
+        })
+
+        /** 验证文件是否导入成功  */
+        $("#form1").ajaxForm(function (data) {
+            if (data == "1") {
+                window.location.href = "/MobileApp/MobileCenter/PersonData";
+            } else
+            {
+                layer.open({
+                    content: '修改失败'
+       , btn: '我知道了'
+                });
+            }
+        });
+    })
+</script>
+@*<link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />*@
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script><script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		mui('.mui-input-group').on('change', 'input', function() {
+			var value = this.checked?"true":"false";
+			this.previousElementSibling.innerText = "checked："+value;
+		});
+</script>
+<div class="container" id="container">
+    <form id="form1" action="/MobileApp/MobileCenter/updatePersonData" method="post">
+        <div class="modify">
+            <input type="hidden" name="type" value="@type" />
+            <input type="text" name="data" value="@data">
+            <div class="mui-card">
+ 
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label>checked：false</label>
+                        <input name="checkbox" value="Item 1" type="checkbox">
+                    </div>
+                    <div class="mui-input-row mui-checkbox mui-left">
+                        <label>checked：true</label>
+                        <input name="checkbox" value="Item 2" type="checkbox" checked>
+                    </div>
+                    <div class="mui-input-row mui-checkbox mui-left mui-disabled">
+                        <label>disabled checkbox</label>
+                        <input name="checkbox" type="checkbox" disabled="disabled">
+                    </div>
+                
+            </div>
+        </div>
+        <button type='submit' style="display:none;">保存</button>
+    </form>
+
+
+</div>
+

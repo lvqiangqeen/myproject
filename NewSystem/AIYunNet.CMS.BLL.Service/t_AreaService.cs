@@ -88,5 +88,55 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+
+
+
+        public t_Province GetProvince(string provinceid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                t_Province province = context.t_Province.Find(provinceid);
+                return province;
+            }
+        }
+
+        public List<city> GetJson()
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<city> list = new List<city>();
+                List<t_Province> provincelist = context.t_Province.ToList();
+                foreach (var item in provincelist)
+                {
+                    city ci = new city();
+                    ci.value = item.provinceID;
+                    ci.text = item.province;
+                    List<area> li = new List<area>();
+                    List<t_City> citylist= context.t_City.Where(c=>c.father==item.provinceID).ToList();
+                    foreach (t_City ite in citylist)
+                    {
+                        area ar = new area();
+                        ar.value = ite.cityID;
+                        ar.text = ite.city;
+                        li.Add(ar);
+                    }
+                    ci.children = li;
+                    list.Add(ci);
+                }
+                return list;
+            }
+        }
+    }
+    public class area
+    {
+        public string value { get; set; }
+        public string text { get; set; }
+    }
+    public class city
+    {
+        public string value { get; set; }
+        public string text { get; set; }
+        public List<area> children { get; set; }
+
     }
 }

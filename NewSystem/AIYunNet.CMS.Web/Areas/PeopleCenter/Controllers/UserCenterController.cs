@@ -187,7 +187,7 @@ namespace AIYunNet.CMS.Web.Areas.PeopleCenter.Controllers
                     webpeopleservice.UpdateWebPeopleFromCenter(webpeo);
                 }
                 else
-                {
+                { 
                     webpeo.UserID= Convert.ToInt32(Request["UserID"]);
                     webpeopleservice.AddWebPeople(webpeo);
                 }

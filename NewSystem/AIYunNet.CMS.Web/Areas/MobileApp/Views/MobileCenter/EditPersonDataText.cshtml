@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "EditPersonDataText";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string title = Request["title"];
+    string type = Request["type"];
+    string data = Request["data"];
+}
+<script src="~/Content/design/js/jquery-form.js"></script>
+<script>
+    $(function () {
+        var title = "@title";
+        var html = "<h1>" + title + "</h1><button class='bnt' type=''>保存</button>";
+        $("#header").append(html);
+
+        $(".bnt").click(function () {
+            $("button[type=submit]").click();
+        })
+
+        /** 验证文件是否导入成功  */
+        $("#form1").ajaxForm(function (data) {
+            if (data == "1") {
+                window.location.href = "/MobileApp/MobileCenter/PersonData";
+            } else
+            {
+                layer.open({
+                    content: '修改失败'
+       , btn: '我知道了'
+                });
+            }
+        });
+    })
+</script>
+<style>
+    .clear-close {
+    bottom: 94%;
+}
+</style>
+<div class="container" id="container">
+    <form id="form1" action="/MobileApp/MobileCenter/updatePersonData" method="post">
+        <div class="modify">
+            <input type="hidden" name="type" value="@type"/>
+            <input type="text" name="data" value="@data" required><a href="javascript:" class="clear-close" id="clear-close" onclick="javascript:document.getElementById('username').value='';document.getElementById('username').focus();" value="clear"></a>
+        </div>
+        <button type='submit' style="display:none;">保存</button>
+    </form>
+
+
+</div>
+
