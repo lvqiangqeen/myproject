@@ -154,5 +154,45 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+
+        WebCommonService cSer = new WebCommonService();
+        //在手机端修改worker
+        public int UpdateWebWorkerFromMobile(int id, string data, string type)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebWorker originalWorker = context.WebWorker.Find(id);
+                if (originalWorker != null)
+                {
+
+                    switch (type)
+                    {
+                        case "WorkYearsID":
+                            originalWorker.WorkYearsID = Convert.ToInt32(data);
+                            originalWorker.WorkYears= cSer.GetLookupDesc("people_workyear", data);
+                            break;
+                        case "PriceName":
+                            originalWorker.PriceName = data;
+                            break;
+                        case "GoodAtStyle":
+                            originalWorker.GoodAtStyle = data;
+                            break;
+
+                        case "WorkerMotto":
+                            originalWorker.WorkerMotto = data;
+                            break;
+                        case "WorkerInfo":
+                            originalWorker.WorkerInfo = data;
+                            break;
+                        default:
+
+                            break;
+                    }
+                    originalWorker.EditOn = DateTime.Now;
+                    context.SaveChanges();
+                }
+                return 1;
+            }
+        }
     }
 }

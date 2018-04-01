@@ -1,21 +1,24 @@
-﻿
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
 @{
     ViewBag.Title = "EditPersonDataAreas";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     string title = Request["title"];
     string type = Request["type"];
     string data = Request["data"];
+    string cityid= Request["cityid"];
+    List<string> list = data.Split(';').ToList();
+    t_AreaService areaService = new t_AreaService();
+    List<t_Area> arealist = areaService.GetAreaListByfather(cityid);
 }
 <script src="~/Content/design/js/jquery-form.js"></script>
 <script>
     $(function () {
         var title = "@title";
-        var html = "<h1>" + title + "</h1><button class='bnt' type=''>保存</button>";
+        var html = "<h1>" + title + "</h1>";
         $("#header").append(html);
 
-        $(".bnt").click(function () {
-            $("button[type=submit]").click();
-        })
 
         /** 验证文件是否导入成功  */
         $("#form1").ajaxForm(function (data) {
@@ -31,41 +34,83 @@
         });
     })
 </script>
-@*<link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />*@
-<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script><script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-		mui('.mui-input-group').on('change', 'input', function() {
-			var value = this.checked?"true":"false";
-			this.previousElementSibling.innerText = "checked："+value;
-		});
-</script>
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />
+<style>
+    .modify input {
+     line-height: 0rem; 
+     margin-top: 0rem; 
+}
+    button{
+    vertical-align: middle;
+    border: 0px solid #ccc; 
+    background-color: #1d1d21;
+}
+</style>
+
 <div class="container" id="container">
-    <form id="form1" action="/MobileApp/MobileCenter/updatePersonData" method="post">
-        <div class="modify">
+    <div class="mui-card">
+        <form class="mui-input-group" id="form1" action="/MobileApp/MobileCenter/updatePersonData" method="post">
             <input type="hidden" name="type" value="@type" />
-            <input type="text" name="data" value="@data">
-            <div class="mui-card">
- 
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label>checked：false</label>
-                        <input name="checkbox" value="Item 1" type="checkbox">
-                    </div>
-                    <div class="mui-input-row mui-checkbox mui-left">
-                        <label>checked：true</label>
-                        <input name="checkbox" value="Item 2" type="checkbox" checked>
-                    </div>
-                    <div class="mui-input-row mui-checkbox mui-left mui-disabled">
-                        <label>disabled checkbox</label>
-                        <input name="checkbox" type="checkbox" disabled="disabled">
-                    </div>
-                
+            <input type="hidden" name="data" value="@data">
+            <div class="mui-input-row mui-checkbox mui-left">
+                <label>全城</label>
+                <input name="checkbox" value="0" type="checkbox" id="allarea">
             </div>
-        </div>
-        <button type='submit' style="display:none;">保存</button>
-    </form>
-
-
+            @foreach (t_Area item in arealist)
+            {
+                <div class="mui-input-row mui-checkbox mui-left">
+                    <label>@item.area</label>
+                    @{ string id = "areaid" + item.areaID;}
+                    <input name="areaidList" value="@item.areaID" type="checkbox" id="@id">
+                    <input type="hidden" value="@item.area" >
+                </div>
+            }
+            <button type='submit' style="display:none;">保存</button>
+        </form>
+    </div>
+    <div class="mui-content-padded">
+        <button class="bnt mui-btn mui-btn-block mui-btn-primary">保存</button>
+    </div>
 </div>
+<script>
+    $(function () {
+        var AreasIDlist = "@list[0]";
+        if (AreasIDlist== "0") {
+            $("#allarea").prop('checked', true);
+            $("input:checkbox[name='areaidList']").prop('checked', true);
+        } else {
+            var AreaarrList = AreasIDlist.split(',');
+            for (var i = 0; i < AreaarrList.length; i++) {
+                if (AreaarrList[i] != "")
+                    $("#areaid" + AreaarrList[i]).prop('checked', true);
+            }
+        }
 
+        $("#allarea").click(function () {
+            if ($('#allarea').is(':checked')) {
+                // do something
+                $("input:checkbox[name='areaidList']").prop('checked', true);
+            } else { $("input:checkbox[name='areaidList']").prop('checked', false); }
+        });
+        function getAreas()
+        {
+            var AreasID = "";
+            var AreasName = "";
+            if ($('#allarea').is(':checked')) {
+                AreasID = "0";
+                AreasName = "全城";
+            } else {
+                $("input:checkbox[name='areaidList']:checked").each(function () {
+                    AreasID += $(this).val() + ",";
+                    AreasName += $(this).next("input").val() + ","
+                });
+            }
+            var data = AreasID + ";" + AreasName;
+            $("input[name='data']").val(data);
+        }
+        $(".bnt").click(function () {
+            getAreas();
+            $("button[type=submit]").click();
+        })
+    })
+</script>

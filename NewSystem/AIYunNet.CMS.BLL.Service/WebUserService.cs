@@ -185,11 +185,12 @@ namespace AIYunNet.CMS.BLL.Service
 
         t_AreaService areaSer = new t_AreaService();
         //在手机端修改user
-        public int UpdateWebUserFromMobile(int id, string data, string type)
+        public int UpdateWebUserFromMobileBywoker(int id, string data, string type)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 WebUser originalUser = context.WebUser.Find(id);
+                WebWorker originWorker = context.WebWorker.FirstOrDefault(c => c.UserID == id);
                 if (originalUser != null)
                 {
 
@@ -197,6 +198,7 @@ namespace AIYunNet.CMS.BLL.Service
                     {
                         case "TrueName":
                             originalUser.TrueName = data;
+                            originWorker.WorkerName = data;
                             break;
                         case "NickName":
                             originalUser.NickName = data;
@@ -207,6 +209,7 @@ namespace AIYunNet.CMS.BLL.Service
                             break;
                         case "Email":
                             originalUser.Email = data;
+                            originWorker.WorkerMail = data;
                             break;
                         case "CityID":
                             t_City city = areaSer.GetCityByID(data);
@@ -216,11 +219,20 @@ namespace AIYunNet.CMS.BLL.Service
                             originalUser.CityName = city.city;
                             originalUser.AreasID = "0";
                             originalUser.AreasName = "全城";
+
+                            originWorker.ProvinceID= city.father;
+                            originWorker.ProvinceName= areaSer.GetProvince(city.father).province;
+                            originWorker.CityID = data;
+                            originWorker.CityName = city.city;
+                            originWorker.AreasID = "0";
+                            originWorker.AreasName = "全城";
                             break;
                         case "AreasID":
                             List<string> area = data.Split(';').ToList(); 
                             originalUser.AreasID = area[0];
                             originalUser.AreasName = area[1];
+                            originWorker.AreasID = area[0];
+                            originWorker.AreasName = area[1];
                             break;
                         default:
 

@@ -40,13 +40,14 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
         public ActionResult EditPersonDataAreas()
         {
+
             return View();
         }
         [HttpPost]
         public int updatePersonData(string data, string type)
         {
             int ret = 0;
-            ret = webUserservice.UpdateWebUserFromMobile(Convert.ToInt32(SessionHelper.Get("UserID")), data, type);
+            ret = webUserservice.UpdateWebUserFromMobileBywoker(Convert.ToInt32(SessionHelper.Get("UserID")), data, type);
             return ret;
         }
         #endregion

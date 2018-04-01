@@ -158,5 +158,46 @@ namespace AIYunNet.CMS.BLL.Service
                 return list;
             }
         }
+
+        //获取发给工人的需求清单手机端
+        public List<AcceptDemand> mGetDemandListByUserID(int UserID, int PageSize, int CurPage, out int count)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                var query = from c in context.DecDemandAccept
+                            from d in context.DecDemand
+                            where c.DemandGuid == d.Guid
+                            && c.GetUserID == UserID && d.IsDelete == false
+                            select new AcceptDemand
+                            {
+                                id = d.id,
+                                buidingname = d.buidingname,
+                                ownername = d.ownername,
+                                ownertel = d.ownertel,
+                                ProvinceID = d.ProvinceID,
+                                ProvinceName = d.ProvinceName,
+                                CityID = d.CityID,
+                                CityName = d.CityName,
+                                buidingSpace = d.buidingSpace,
+                                OneSentence = d.OneSentence,
+                                PublishuserID = d.PublishuserID,
+                                GetUserID = d.GetUserID,
+                                GetUserType = d.GetUserType,
+                                AddOn = d.AddOn,
+                                IsEnd = d.IsEnd,
+                                IsVerrify = d.IsVerrify,
+                                DemandType = d.DemandType,
+                                DemandTypeName = d.DemandTypeName,
+                                Guid = d.Guid,
+                                HouseType = d.HouseType,
+                                IsPlan = d.IsPlan,
+                                AcceptUserID = c.GetUserID,
+                                IsAccept = c.IsAccept
+                            };
+                count = query.ToList().Count();
+                List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                return list;
+            }
+        }
     }
 }

@@ -72,23 +72,59 @@
     <File Include="Areas/MobileApp/Views/App/BuidingStageInfo.cshtml">
       <publishTime>03/03/2018 17:21:53</publishTime>
     </File>
+    <File Include="Areas/MobileApp/Views/App/BuidingStagesList.cshtml">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
     <File Include="Areas/MobileApp/Views/App/CaseProgressInfo.cshtml">
       <publishTime>03/04/2018 23:26:18</publishTime>
     </File>
+    <File Include="Areas/MobileApp/Views/App/DesignCaseList.cshtml">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
     <File Include="Areas/MobileApp/Views/App/Index.cshtml">
-      <publishTime>03/03/2018 17:21:53</publishTime>
+      <publishTime>03/31/2018 15:46:44</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/PeopleCenter.cshtml">
-      <publishTime>03/04/2018 23:26:18</publishTime>
+      <publishTime>03/27/2018 20:01:49</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/WorkerCaseList.cshtml">
       <publishTime>03/04/2018 23:26:18</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/App/WorkerDemandList.cshtml">
+      <publishTime>03/27/2018 20:01:49</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/WorkerDetail.cshtml">
       <publishTime>03/03/2018 17:56:28</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/WorkerList.cshtml">
       <publishTime>03/04/2018 23:26:18</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/mLogin/LoginCenter.cshtml">
+      <publishTime>03/30/2018 19:22:44</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataAreas.cshtml">
+      <publishTime>03/31/2018 00:44:55</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataText.cshtml">
+      <publishTime>03/31/2018 01:06:53</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileCenter/mPCenter.cshtml">
+      <publishTime>03/30/2018 00:26:51</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileCenter/PersonData.cshtml">
+      <publishTime>03/31/2018 00:54:24</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerDetail.cshtml">
+      <publishTime>03/30/2018 19:22:44</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerList.cshtml">
+      <publishTime>03/31/2018 15:49:15</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/MoblieBuiding/mBuidingDetail.cshtml">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Areas/MobileApp/Views/Shared/_mobileLayout.cshtml">
+      <publishTime>03/31/2018 15:53:40</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/web.config">
       <publishTime>03/03/2018 17:21:53</publishTime>
@@ -448,28 +484,28 @@
       <publishTime>02/20/2018 17:28:55</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>03/21/2018 23:43:10</publishTime>
+      <publishTime>03/31/2018 01:08:30</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>03/21/2018 23:43:11</publishTime>
+      <publishTime>03/31/2018 01:08:32</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>03/21/2018 23:43:10</publishTime>
+      <publishTime>03/31/2018 01:08:31</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>03/21/2018 23:43:10</publishTime>
+      <publishTime>03/31/2018 01:08:30</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>03/21/2018 23:43:12</publishTime>
+      <publishTime>03/31/2018 01:08:33</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/20/2018 17:29:01</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>03/21/2018 23:44:42</publishTime>
+      <publishTime>03/31/2018 16:07:18</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>03/21/2018 23:44:42</publishTime>
+      <publishTime>03/31/2018 16:07:18</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>03/05/2018 20:13:05</publishTime>
@@ -6681,6 +6717,9 @@
     <File Include="Content/design/js/jquery-2.0.3.min.js">
       <publishTime>02/20/2018 17:28:58</publishTime>
     </File>
+    <File Include="Content/design/js/jquery-form.js">
+      <publishTime>03/30/2018 19:22:44</publishTime>
+    </File>
     <File Include="Content/design/js/jquery.paginationNo.js">
       <publishTime>02/20/2018 17:28:58</publishTime>
     </File>
@@ -6763,7 +6802,7 @@
       <publishTime>02/20/2018 17:28:58</publishTime>
     </File>
     <File Include="Content/design/sheji.workerbuidingdetail.css">
-      <publishTime>02/20/2018 17:28:58</publishTime>
+      <publishTime>03/29/2018 21:33:42</publishTime>
     </File>
     <File Include="Content/design/sheji.workerdetail.css">
       <publishTime>02/20/2018 17:28:58</publishTime>
@@ -7649,6 +7688,27 @@
     </File>
     <File Include="Content/js/index/YuxiSlider.jQuery.min.js">
       <publishTime>02/20/2018 17:28:59</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/demo.url">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/doc/官网.url">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/doc/有问必答.url">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/layer_mobile/layer.js">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/layer_mobile/need/layer.css">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/layim.url">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/layer.mobile-v2.0/更新日志.txt">
+      <publishTime>03/29/2018 21:33:42</publishTime>
     </File>
     <File Include="Content/layui/css/layui.css">
       <publishTime>03/15/2018 20:12:24</publishTime>
@@ -8930,6 +8990,975 @@
     </File>
     <File Include="Content/mobileapp/progress/static/lib/jquery/1.8/jquery.min.js">
       <publishTime>03/03/2018 17:22:26</publishTime>
+    </File>
+    <File Include="Content/mui-master/.gitignore">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/dist/css/mui.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/dist/css/mui.min.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/dist/fonts/mui.ttf">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/dist/js/mui.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/dist/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/.project">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/app.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/feedback.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/icons-extra.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.dtpicker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.imageviewer.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.indexedlist.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.listpicker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.min.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.picker.all.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.picker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.picker.min.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/css/mui.poppicker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/accordion.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/actionsheet-plus.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/actionsheet.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/ad.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/ajax.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/badges.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/beecloud.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/best-practices/list-to-detail/detail.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/best-practices/list-to-detail/list-to-detail.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/best-practices/list-to-detail/listview.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/best-practices/list-to-detail/vue.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/buttons-with-badges.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/buttons-with-block.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/buttons-with-icons.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/buttons-with-loading.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/buttons.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/card.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/checkbox.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/clouddb_wilddog.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/date.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/dialog.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/dtpicker.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/echarts.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/feedback.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/grid-default.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/grid-pagination.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/guide.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/icons-extra.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/icons.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/im-chat.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/imageviewer-native.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/imageviewer.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/indexed-list-select.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/indexed-list.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/info.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/input.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/lazyload-image.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/list-triplex-row.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/list-with-input.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/locker-dom.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/login.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/media-list.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/message-bottom.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/modals.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/nav-nativeObj.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/nav.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/nav_transparent.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/nav_transparent_native.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/numbox.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-down.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-left-plus-main.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-left-plus-menu.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-left.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-right-plus-main.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-right-plus-menu.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/offcanvas-drag-right.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/pagination.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/picker.html">
+      <publishTime>03/30/2018 19:22:44</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/popovers.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/progressbar.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/pullrefresh.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/pullrefresh_main.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/pullrefresh_sub.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/pullrefresh_with_tab.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/radio.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/range.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/setting.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/slider-default.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/slider-native.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/slider-table-default.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/slider-table-pagination.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/slider-with-title.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/switches.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-subpage-1.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-subpage-2.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-subpage-3.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-subpage-4.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-subpage-5.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-top-webview-main.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-vertical-scroll.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-webview-main.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-webview-subpage-about.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-webview-subpage-chat.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-webview-subpage-contact.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-webview-subpage-setting.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-with-segmented-control-vertical.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-with-segmented-control.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tab-with-viewpagerindicator.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tabbar-labels-only.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tabbar-with-submenus.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tabbar.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tableviews-with-badges.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tableviews-with-collapses.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tableviews-with-swipe.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/tableviews.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/examples/typography.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/fonts/mui-icons-extra.ttf">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/fonts/mui.ttf">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/60x60.gif">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/cbd.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/login-1.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/logo.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/muwu.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/qrcode.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/shuijiao.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/images/yuantiao.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/index-menu.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/index.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/95516.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/arttmpl.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/beecloud.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/city.data-3.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/city.data.js">
+      <publishTime>03/30/2018 19:22:44</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/feedback.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.dtpicker.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.imageViewer.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.indexedlist.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.lazyload.img.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.lazyload.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.listpicker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.locker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.picker.all.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.picker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.picker.min.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.poppicker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.previewimage.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.view.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/mui.zoom.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/update.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/js/webviewGroup.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/libs/echarts-all.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/hello-mui/manifest.json">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/.project">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/css/feedback-page.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/css/mui.min.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/css/style.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/fonts/mui.ttf">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/forget_password.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/iconfont-tianjia.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/qihoo.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/qq.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/sinaweibo.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/user-photo.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/images/weixin.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/app.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/feedback-page.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/feedback.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/mui.enterfocus.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/mui.locker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/js/mui.view.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/libs/easymob-webim-sdk/easemob.im-1.0.5.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/libs/easymob-webim-sdk/jquery-1.11.1.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/libs/easymob-webim-sdk/json2.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/libs/easymob-webim-sdk/quickstart.md">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/libs/easymob-webim-sdk/strophe-custom-2.0.0.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/login.html">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/main.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/manifest.json">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/README.md">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/reg.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/setting.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/login/unlock.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/css/mui.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/css/mui.min.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/fonts/.DS_Store">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/fonts/iconfont.ttf">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/fonts/mui.ttf">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/html/.DS_Store">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/html/new-webview.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/html/tab-webview-subpage-chat.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/html/tab-webview-subpage-contact.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/images/.DS_Store">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/images/60x60.gif">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/images/logo.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/images/ma.png">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/index.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/js/mui.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/js/util.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/manifest.json">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/README.md">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/unpackage/.confirmed_dependencies">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/examples/nativeTab/unpackage/.dependencies">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/fonts/mui.ttf">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/grunt/mui-namespace-generator.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/Gruntfile.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/actions.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/ajax.plugin.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/input.plugin.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/modals.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.active.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.ajax.5+.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.ajax.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.animation.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.animationframe.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.back.5+.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.back.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.button.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.class.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.class.scroll.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.class.scroll.pullrefresh.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.class.scroll.slider.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.detect.5+.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.detect.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.dialog.alert.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.dialog.confirm.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.dialog.prompt.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.dialog.toast.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.event.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.animation.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.bind.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.classlist.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.fastclick.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.fixed.keyboard.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.drag.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.flick.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.hold.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.longtap.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.pinch.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.swipe.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.gestures.tap.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.init.5+.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.init.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.init.pullrefresh.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.jsonp.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.layout.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.namespace.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.number.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.offcanvas.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.popup.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.progressbar.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.pullrefresh.5+.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.pullrefresh.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.target.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/mui.transparent.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/popovers.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/segmented-controllers.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/sliders.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/switches.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/js/tableviews.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/LICENSE">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/mui_snippets.rb">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/package.json">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/css/mui.dtpicker.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/css/mui.picker.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/css/mui.poppicker.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/dist/css/mui.picker.all.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/dist/css/mui.picker.min.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/dist/js/mui.picker.all.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/dist/js/mui.picker.min.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/gulpfile.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/js/mui.dtpicker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/js/mui.picker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/js/mui.poppicker.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/picker/package.json">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/plugin/share/plusShare.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/README.md">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/badges.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/bars.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/base.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/buttons.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/cards.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/forms.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/fullscreen.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/grid.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/hack.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/icon.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/iframe.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/iscroll.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/loadings.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/mixins.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/modals.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/mui.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/normalize.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/number.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/off-canvas.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/os.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/pagination.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/popovers.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/popup.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/progressbar.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/pullrefreshs.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/push.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/scroll.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/segmented-controls.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/slider-cell.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/sliders.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/switches.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/table-views.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/toast.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/type.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/sass/variables.scss">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/template/feedback/css/feedback.css">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/template/feedback/feedback.html">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/template/feedback/js/feedback.js">
+      <publishTime>03/27/2018 20:01:51</publishTime>
+    </File>
+    <File Include="Content/mui-master/template/feedback/readme.md">
+      <publishTime>03/27/2018 20:01:51</publishTime>
     </File>
     <File Include="Content/MustIndex/css/animation.css">
       <publishTime>02/20/2018 17:28:57</publishTime>
@@ -14286,6 +15315,450 @@
     <File Include="Content/WeChatCenter/js/twitter/jquery.tweet.js">
       <publishTime>02/23/2017 23:16:08</publishTime>
     </File>
+    <File Include="Content/WorkerApp/add-class.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/book-recovery.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/car-details.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/car-list.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/coupons.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/base.css">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/class.css">
+      <publishTime>03/28/2018 22:30:11</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/common.css">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/commonbake.css">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/details.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/floor-classification.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/goods-allocation.html">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/1.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/2.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/3.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/4.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/back.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/book-process.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/book-recovery-img.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/camera.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/car-img.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/checkbox-on.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/checkbox.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/class-img.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/clear.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/coupons-greybg.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/coupons-redbg.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/dbaz.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/details-img.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/djaz.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/djwx.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/dz.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/eszh.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/face-bg.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/fwdh.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/fwdz.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/fwfw.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/fwqy.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/hc.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/header-bot-tel.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/home-on.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/home.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/hyps.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/ind-banner.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/ind-tit.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/input-icon.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/integral-bg.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/jjaz.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/jjwx.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/kc.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/mbc.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/mbxf.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/more.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-arrow.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-face-pic.jpg">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-bzzx.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-ddjd.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-grzl.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-gsjj.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-kfzx.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-wddd.png">
+      <publishTime>03/27/2018 20:01:49</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-wdjf.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-icon-yhq.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-on.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-order-address.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my-order-time.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/my.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/order-details-icon.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/order-evaluation-icon.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/order-on.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/order.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/other-img.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/pro-img.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/qzaz.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/repair-img.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/sf.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/sj.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/star.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/tip.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/topthree-icon.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/user-img.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/weixin.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/work-ages.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/work-type.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/worker-address.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/worker-img.jpg">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/worker-on.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/worker.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/wyaz.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/wywx.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/xczx.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/xsgdst.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/ybddaz.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/yh.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/yinlian.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/ymaz.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/images/zhifubao.png">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/index.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/integral.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/jiabang-worker.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/class/iscroll-5.1.2.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/class/slideNav.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/common.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/exif.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/iosOverlay.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/jquery.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/css/mui.diy.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/css/mui.min.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/css/mui.picker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/css/mui.poppicker.css">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/js/mui.min.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/js/mui.picker.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/js/mui.poppicker.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/js/mui.previewimage.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/mui/js/mui.zoom.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/TouchSlide.1.1.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/upload_img.js">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/login.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/css/gongyong.css">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/images/sousuo.png">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/images/sy.png">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/index.html">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/js/jquery-1.8.3.min.js">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/Login/login.html">
+      <publishTime>03/29/2018 21:33:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/maintenance-reservation.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/my-name.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/my-order.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/my.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/online-evaluation.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/online-hs.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-confirm.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-details.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-evaluation.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-payment.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-schedule1.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-schedule2.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-schedule3.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/order-schedule4.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/other-classification.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/personal-data.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/personal-data1.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/pro-list.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/repair-details.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/reservation.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/user-evaluation.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/worker-details.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/worker-join.html">
+      <publishTime>03/27/2018 20:01:50</publishTime>
+    </File>
     <File Include="DownLoad/sjs_icon.png">
       <publishTime>02/20/2018 17:28:59</publishTime>
     </File>
@@ -14320,7 +15793,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/21/2018 23:44:35</publishTime>
+      <publishTime>03/31/2018 16:07:12</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>02/20/2018 17:28:59</publishTime>
@@ -14602,7 +16075,7 @@
       <publishTime>03/05/2018 20:13:05</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkerBuidingDetail.cshtml">
-      <publishTime>03/20/2018 23:09:57</publishTime>
+      <publishTime>03/29/2018 21:33:42</publishTime>
     </File>
     <File Include="Views/Workers/DecWorkerDetail.cshtml">
       <publishTime>03/21/2018 20:42:59</publishTime>
@@ -14656,7 +16129,7 @@
       <publishTime>02/20/2018 17:29:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/21/2018 23:43:52</publishTime>
+      <publishTime>03/31/2018 01:09:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

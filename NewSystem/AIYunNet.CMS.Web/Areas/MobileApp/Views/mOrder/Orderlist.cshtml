@@ -1,0 +1,140 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "Orderlist";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+@*<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />*@
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<style>
+    ul > li > span > h2 {
+            font-size: 0.7rem;
+                    line-height: 1.75rem;
+    text-align: center;
+    }
+
+</style>
+<script>
+    var html = "<h1>我的订单</h1>";
+    $("#header").append(html);
+</script>
+<div class="container" id="container">
+
+    <!--我的订单选项卡-->
+    <div id="my-order" class="my-order">
+        <!--栏目-->
+        <ul id="nav">
+            <li style="margin-left: 10px;margin-right:20px;"><span class="selected"><h2>全部订单</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span><h2>已完成</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span><h2>未完成</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span><h2>待评价</h2></span></li>
+        </ul>
+        <!--栏目-->
+        <!--内容-->
+        <div id="menu_con">
+
+            <!--全部订单开始-->
+            <div class="tag" style="display:block" id="refreshContainer">
+                <div class="mui-scroll">
+                    <div class="mui-table-view mui-table-view-chevron">
+
+                    </div>
+                </div>
+
+            </div>
+            <!--全部订单结束-->
+        </div>
+        <!--内容-->
+
+    </div>
+
+    <!--我的订单选项卡结束-->
+
+</div>
+<script type="text/javascript">
+
+    (function () {
+
+        //上拉加载下拉刷新
+        mui.init({
+            pullRefresh: {
+                container: '#refreshContainer',
+                up: {
+                    contentrefresh: '正在加载...',
+                    callback: pullupRefresh
+                }
+            }
+        });
+        //加载更多
+        var pageSize = 10;//每页显示条数
+        var counter = 1;//计数器
+        var pageStart = 1;//开始数据条数
+        var Flag=true;
+
+        data(pageStart, pageSize);
+        function data(pageIndex, PageSize) {
+            //业务
+            var result = "";
+            $.ajax({
+                type: 'post',
+                url: '/Handler/GetPageListAjax.ashx',
+                async: false,
+                dataType: "json",
+                data: {
+                    mkjcitycode: $("#mkjcitycode").val(),
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    WorkerCategory: '装修工人',
+                    methodname: "GetDecWorkList"
+                },
+                success: function (data) {
+                    var datajson = data;
+                    Flag = datajson.list == null || datajson.list == undefined || datajson.list == '';
+                    //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
+                    console.log(Flag);
+                    if(Flag==false){
+                        counter++;
+                    }
+                    $.each(datajson.list, function (i, item) {
+                        result += '<div class="my-order-item">'
+                       +'<div class="my-order-item-tit clearfix">'
+                            +'<h3>订单号：888888888</h3>'
+                            +'<span class="my-order-wait-zf">等待支付</span>'
+                        +'</div>'
+                        +'<div class="my-order-item-txt">'
+                            + '<div class="my-order-time">2015-11-28  13:30</div>'
+                            +'<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
+                        +'</div>'
+                        +'<div class="my-order-item-btn">'
+                            +'<div class="pos-r">'
+                                +'<span class="my-order-item-cancel">取消订单</span>'
+                                +'<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
+                            +'</div></div></div>';
+                    });
+
+                    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
+                    //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
+                    pageStart++;
+                    mui('#refreshContainer').on('tap', 'a', function () {
+                        window.top.location.href = this.href;
+                    });
+
+                }
+            }
+        );
+
+        }
+        /**
+         * 上拉加载具体业务实现
+         */
+        function pullupRefresh() {
+            setTimeout(function () {
+                mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
+                data(pageStart, pageSize);
+            }, 200);
+        }
+    })();
+    mui('body').on('click', 'a', function () {
+        window.top.location.href = this.href;
+    });
+
+</script>

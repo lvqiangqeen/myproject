@@ -65,6 +65,7 @@
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\mOrderController.cs" />
     <Compile Include="Areas\MobileApp\MobileAppAreaRegistration.cs" />
     <Compile Include="Areas\MustIndex\Controllers\MustAdminController.cs" />
     <Compile Include="Areas\MustIndex\Controllers\MustController.cs" />
@@ -133,6 +134,9 @@
     <Compile Include="filter\ZanFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\GetMobilePageList.ashx.cs">
+      <DependentUpon>GetMobilePageList.ashx</DependentUpon>
     </Compile>
     <Compile Include="Handler\GetPageListAjax.ashx.cs">
       <DependentUpon>GetPageListAjax.ashx</DependentUpon>
@@ -4254,6 +4258,9 @@
     <Content Include="Areas\MobileApp\Views\MobileCenter\PersonData.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataText.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataAreas.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileWorker\mupdateWebWorker.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\Orderlist.cshtml" />
+    <Content Include="Handler\GetMobilePageList.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

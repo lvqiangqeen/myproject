@@ -1,12 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "EditPersonDataText";
+    ViewBag.Title = "mupdateWebWorker";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     string title = Request["title"];
     string type = Request["type"];
     string data = Request["data"];
 }
 <link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/app.css" rel="stylesheet" />
 <style>
     .modify input {
         line-height: 0rem;
@@ -18,20 +19,17 @@
         border: 0px solid #ccc;
         background-color: #1d1d21;
     }
-
 </style>
 <script src="~/Content/design/js/jquery-form.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script>
 <script>
     $(function () {
         var title = "@title";
         var html = "<h1>" + title + "</h1>";
         $("#header").append(html);
-
         $(".bnt").click(function () {
-            $("#sex").val($("input[name=Sex]:checked").val());
             $("button[type=submit]").click();
         })
-
         /** 验证文件是否导入成功  */
         $("#form1").ajaxForm(function (data) {
             if (data == "1") {
@@ -51,35 +49,40 @@
     }
 </style>
 <div class="container" id="container">
-    <form id="form1" class="mui-input-group" action="/MobileApp/MobileCenter/updatePersonData" method="post">
+    <form id="form1" action="/MobileApp/MobileWorker/updateWorkerData" method="post">
         <input type="hidden" name="type" value="@type" />
-        @if (type == "Sex")
-        {
-            <div class="mui-input-row mui-radio">
-                <label>男</label>
-                <input name="Sex" type="radio" value="男">
-            </div>
-            <div class="mui-input-row mui-radio">
-                <label>女</label>
-                <input name="Sex" type="radio" value="女">
-            </div>
-            <input id="sex" type="hidden" name="data" value="@data" required>
-                    <script>
-                        var sex = "@data";
-                        if (sex != null && sex != "") {
-                            $("input[name=Sex][value=" + sex + "]").attr("checked", "true");
-                        }
-                    </script>
-        }
-        else
-        {
-            <script>
-                $("#form1").removeClass();
-            </script>
-            <div class="modify">
+        <div class="modify">
+            @if (type == "PriceName")
+            {
+                <div class="mui-numbox">
+                    <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+                    <input class="mui-input-numbox" type="number" name="data" value="@data.Replace("元/m²", "").Replace(" ","")" />
+                    <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+                </div>@:元/m²
+
+            }
+            else if (type == "WorkerInfo")
+            {
+
+                <style>
+                    .mui-content-padded {
+                        margin-top: 100px;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                </style>
+                <textarea id="textarea" rows="5" placeholder="写点什么吧。。。" name="data"></textarea>
+                <script>
+                    $("#textarea").val("@data");
+                </script>
+            }
+            else
+            {
                 <input type="text" name="data" value="@data" required>
-            </div>
-        }
+            }
+
+        </div>
+
         <button type='submit' style="display:none;">保存</button>
     </form>
 
@@ -88,3 +91,6 @@
 <div class="mui-content-padded">
     <button class="bnt mui-btn mui-btn-block mui-btn-primary">保存</button>
 </div>
+<script>
+    mui.init();
+</script>
