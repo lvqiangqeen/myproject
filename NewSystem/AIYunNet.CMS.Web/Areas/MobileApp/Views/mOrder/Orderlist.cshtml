@@ -11,7 +11,9 @@
                     line-height: 1.75rem;
     text-align: center;
     }
-
+    .selected {
+    color: red;
+    }
 </style>
 <script>
     var html = "<h1>我的订单</h1>";
@@ -23,10 +25,10 @@
     <div id="my-order" class="my-order">
         <!--栏目-->
         <ul id="nav">
-            <li style="margin-left: 10px;margin-right:20px;"><span class="selected"><h2>全部订单</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span><h2>已完成</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span><h2>未完成</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span><h2>待评价</h2></span></li>
+            <li style="margin-left: 10px;margin-right:20px;" class="selected"><span class="quanbu"><h2>全部订单</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span class="fabu"><h2>已发布</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span class="nofabu"><h2>未发布</h2></span></li>
+            <li style="margin-left: 20px;margin-right:20px;"><span class="jujue"><h2>已拒绝</h2></span></li>
         </ul>
         <!--栏目-->
         <!--内容-->
@@ -53,7 +55,6 @@
 <script type="text/javascript">
 
     (function () {
-
         //上拉加载下拉刷新
         mui.init({
             pullRefresh: {
@@ -68,47 +69,80 @@
         var pageSize = 10;//每页显示条数
         var counter = 1;//计数器
         var pageStart = 1;//开始数据条数
-        var Flag=true;
+        var Flag = true;
+        var isall = 1;
+        var IsAccept = 1;
+        var IsPlan = 1;
+        mui("#nav").on("tap", "#nav > li", function () {
 
-        data(pageStart, pageSize);
-        function data(pageIndex, PageSize) {
+            //当前对象直接就是--->this
+            var liclass=this.childNodes[0].getAttribute("class");
+            if (liclass == "quanbu")
+            {
+                isall = 1;
+            IsAccept = 1;
+            IsPlan = 1;
+           
+            } else if (liclass == "jujue")
+            {
+                isall = 0;
+                IsAccept = 0;
+                IsPlan = 0;
+
+            } else if (liclass == "fabu")
+            {
+                isall = 0;
+                IsAccept = 1;
+                IsPlan = 1;
+            } else if (liclass == "nofabu")
+            {
+                isall = 0;
+                IsAccept = 1;
+                IsPlan = 0;
+            }
+            $(".mui-table-view").empty();
+            data(isall, IsAccept, IsPlan, pageStart, pageSize);
+        });
+
+        data(isall, IsAccept, IsPlan, pageStart, pageSize);
+        function data(isall, IsAccept, IsPlan, pageIndex, PageSize) {
             //业务
             var result = "";
             $.ajax({
                 type: 'post',
-                url: '/Handler/GetPageListAjax.ashx',
+                url: '/MobileApp/mOrder/GetOrderlist',
                 async: false,
                 dataType: "json",
                 data: {
-                    mkjcitycode: $("#mkjcitycode").val(),
-                    pageIndex: pageIndex,
+                    CurPage: pageIndex,
                     PageSize: PageSize,
-                    WorkerCategory: '装修工人',
-                    methodname: "GetDecWorkList"
+                    isall: isall,
+                    IsAccept: IsAccept,
+                    IsPlan: IsPlan
                 },
                 success: function (data) {
                     var datajson = data;
-                    Flag = datajson.list == null || datajson.list == undefined || datajson.list == '';
+                    Flag = datajson == null || datajson == undefined || datajson == '';
                     //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
                     console.log(Flag);
-                    if(Flag==false){
+                    if (Flag == false) {
                         counter++;
                     }
-                    $.each(datajson.list, function (i, item) {
+                    $.each(datajson, function (i, item) {
                         result += '<div class="my-order-item">'
-                       +'<div class="my-order-item-tit clearfix">'
-                            +'<h3>订单号：888888888</h3>'
-                            +'<span class="my-order-wait-zf">等待支付</span>'
-                        +'</div>'
-                        +'<div class="my-order-item-txt">'
+                       + '<div class="my-order-item-tit clearfix">'
+                            + '<h3>订单号：888888888</h3>'
+                            + '<span class="my-order-wait-zf">等待支付</span>'
+                        + '</div>'
+                        + '<div class="my-order-item-txt">'
                             + '<div class="my-order-time">2015-11-28  13:30</div>'
-                            +'<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
-                        +'</div>'
-                        +'<div class="my-order-item-btn">'
-                            +'<div class="pos-r">'
-                                +'<span class="my-order-item-cancel">取消订单</span>'
-                                +'<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
-                            +'</div></div></div>';
+                            + '<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
+                        + '</div>'
+                        + '<div class="my-order-item-btn">'
+                            + '<div class="pos-r">'
+                                + '<span class="my-order-item-cancel">取消订单</span>'
+                                + '<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
+                            + '</div></div></div>';
                     });
 
                     jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
@@ -129,7 +163,7 @@
         function pullupRefresh() {
             setTimeout(function () {
                 mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
-                data(pageStart, pageSize);
+                data(isall, IsAccept, IsPlan, pageStart, pageSize);
             }, 200);
         }
     })();
