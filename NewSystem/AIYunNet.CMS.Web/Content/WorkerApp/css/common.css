@@ -287,7 +287,7 @@ span.cancel{ color:#ff731c; background-color:transparent; border:1px solid #ff73
 .my-order ul li span{ display:block;}
 .my-order ul a.selected{ border-bottom:2px solid #fa4b28; color:#fa4b28; }
 .my-order-item{ background-color:#fff; margin-bottom:0.3rem; }
-.my-order-item-tit{ padding:0 0.5rem; font-size:0.7rem; height:1.5rem; line-height:1.5rem; }
+.my-order-item-tit{ padding:0 0.5rem; font-size:0.7rem; height:1.0rem; }
 .my-order-item-tit h3{ float:left; }
 .my-order-item-tit span{ float:right;}
 .my-order-wait-zf{ color:#fa4b28;}

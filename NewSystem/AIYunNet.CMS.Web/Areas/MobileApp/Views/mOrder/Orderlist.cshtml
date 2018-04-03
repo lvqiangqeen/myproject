@@ -3,172 +3,649 @@
     ViewBag.Title = "Orderlist";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
 }
-@*<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />*@
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
 <style>
-    ul > li > span > h2 {
-            font-size: 0.7rem;
-                    line-height: 1.75rem;
-    text-align: center;
+    h3 {
+        font-size: 17px;
     }
-    .selected {
-    color: red;
+
+    .mui-table-view {
+        background-color: #efeff4;
     }
 </style>
 <script>
     var html = "<h1>我的订单</h1>";
-    $("#header").append(html);
+    $("#header").remove();
 </script>
 <div class="container" id="container">
 
     <!--我的订单选项卡-->
-    <div id="my-order" class="my-order">
-        <!--栏目-->
-        <ul id="nav">
-            <li style="margin-left: 10px;margin-right:20px;" class="selected"><span class="quanbu"><h2>全部订单</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span class="fabu"><h2>已发布</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span class="nofabu"><h2>未发布</h2></span></li>
-            <li style="margin-left: 20px;margin-right:20px;"><span class="jujue"><h2>已拒绝</h2></span></li>
-        </ul>
-        <!--栏目-->
-        <!--内容-->
-        <div id="menu_con">
+    @*<div id="my-order" class="my-order">
+            <!--栏目-->
+            <ul id="nav">
+                <li style="margin-left: 10px;margin-right:20px;" class="selected"><span class="quanbu"><h2>全部订单</h2></span></li>
+                <li style="margin-left: 20px;margin-right:20px;"><span class="fabu"><h2>已发布</h2></span></li>
+                <li style="margin-left: 20px;margin-right:20px;"><span class="nofabu"><h2>未发布</h2></span></li>
+                <li style="margin-left: 20px;margin-right:20px;"><span class="jujue"><h2>已拒绝</h2></span></li>
+            </ul>
+            <!--栏目-->
+            <!--内容-->
+            <div id="menu_con">
 
-            <!--全部订单开始-->
-            <div class="tag" style="display:block" id="refreshContainer">
-                <div class="mui-scroll">
-                    <div class="mui-table-view mui-table-view-chevron">
+                <!--全部订单开始-->
+                <div class="tag" style="display:block" id="refreshContainer">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view mui-table-view-chevron">
 
+                        </ul>
                     </div>
+
                 </div>
-
+                <!--全部订单结束-->
             </div>
-            <!--全部订单结束-->
-        </div>
-        <!--内容-->
+            <!--内容-->
 
-    </div>
+        </div>*@
 
     <!--我的订单选项卡结束-->
-
+    <div class="mui-content">
+        <div id="slider" class="mui-slider mui-fullscreen">
+            <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <div class="mui-scroll">
+                    <a class="mui-control-item mui-active" href="#item1mobile">
+                        推荐
+                    </a>
+                    <a class="mui-control-item" href="#item2mobile">
+                        热点
+                    </a>
+                    <a class="mui-control-item" href="#item3mobile">
+                        北京
+                    </a>
+                    <a class="mui-control-item" href="#item4mobile">
+                        社会
+                    </a>
+                    <a class="mui-control-item" href="#item5mobile">
+                        娱乐
+                    </a>
+                    <a class="mui-control-item" href="#item6mobile">
+                        科技
+                    </a>
+                </div>
+            </div>
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="my-order-item mui-table-view-cell">
+                                    <div class="my-order-item-tit clearfix">
+                                        <h3>订单号：888888888</h3>
+                                        <span class="my-order-acceptance">订单受理中</span>
+                                    </div>
+                                    <div class="my-order-item-txt">
+                                        <div class="my-order-time">2015-11-28  13:30</div>
+                                        <div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>
+                                    </div>
+                                    <div class="my-order-item-btn">
+                                        <div class="pos-r">
+                                            <span class="my-order-item-cancel">取消订单</span>
+                                            <span class="my-order-item-jindu"><a href="order-schedule1.html">查看进度</a></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="my-order-item mui-table-view-cell">
+                                    <div class="my-order-item-tit clearfix">
+                                        <h3>订单号：888888888</h3>
+                                        <span class="my-order-acceptance">订单受理中</span>
+                                    </div>
+                                    <div class="my-order-item-txt">
+                                        <div class="my-order-time">2015-11-28  13:30</div>
+                                        <div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>
+                                    </div>
+                                    <div class="my-order-item-btn">
+                                        <div class="pos-r">
+                                            <span class="my-order-item-cancel">取消订单</span>
+                                            <span class="my-order-item-jindu"><a href="order-schedule1.html">查看进度</a></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第1个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第2个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第3个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item4mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第4个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item5mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第5个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item6mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-1
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-2
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-3
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-4
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-5
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-6
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-7
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-8
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-9
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-10
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-11
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-12
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-13
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-14
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-15
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-16
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-17
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-18
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-19
+                                </li>
+                                <li class="mui-table-view-cell">
+                                    第6个选项卡子项-20
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<script type="text/javascript">
 
-    (function () {
-        //上拉加载下拉刷新
-        mui.init({
-            pullRefresh: {
-                container: '#refreshContainer',
-                up: {
-                    contentrefresh: '正在加载...',
-                    callback: pullupRefresh
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
+<script>
+    mui.init();
+    (function ($) {
+        //阻尼系数
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        $('.mui-scroll-wrapper').scroll({
+            bounce: false,
+            indicators: true, //是否显示滚动条
+            deceleration: deceleration
+        });
+        $.ready(function () {
+            //循环初始化所有下拉刷新，上拉加载。
+            var pageIndex1 = 1;
+            var pageIndex2 = 1;
+            var pageIndex3 = 1;
+            var pageIndex4 = 1;
+            $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+                var isall = 1;
+                var IsAccept = 0;
+                var IsPlan = 0;
+                if (index == "0") {
+                    isall = 0;
+                    IsAccept = 1;
+                    IsPlan = 0;
+                } else if (index = "1") {
+                    isall = 0;
+                    IsAccept = 2;
+                    IsPlan = 1;
+                } else if (index == "2") {
+                    isall = 0;
+
+                } else {
+                    isall = 0;
+                    IsAccept = 0;
+                    IsPlan = 1;
                 }
-            }
-        });
-        //加载更多
-        var pageSize = 10;//每页显示条数
-        var counter = 1;//计数器
-        var pageStart = 1;//开始数据条数
-        var Flag = true;
-        var isall = 1;
-        var IsAccept = 1;
-        var IsPlan = 1;
-        mui("#nav").on("tap", "#nav > li", function () {
-
-            //当前对象直接就是--->this
-            var liclass=this.childNodes[0].getAttribute("class");
-            if (liclass == "quanbu")
-            {
-                isall = 1;
-            IsAccept = 1;
-            IsPlan = 1;
-           
-            } else if (liclass == "jujue")
-            {
-                isall = 0;
-                IsAccept = 0;
-                IsPlan = 0;
-
-            } else if (liclass == "fabu")
-            {
-                isall = 0;
-                IsAccept = 1;
-                IsPlan = 1;
-            } else if (liclass == "nofabu")
-            {
-                isall = 0;
-                IsAccept = 1;
-                IsPlan = 0;
-            }
-            $(".mui-table-view").empty();
-            data(isall, IsAccept, IsPlan, pageStart, pageSize);
-        });
-
-        data(isall, IsAccept, IsPlan, pageStart, pageSize);
-        function data(isall, IsAccept, IsPlan, pageIndex, PageSize) {
-            //业务
-            var result = "";
-            $.ajax({
-                type: 'post',
-                url: '/MobileApp/mOrder/GetOrderlist',
-                async: false,
-                dataType: "json",
-                data: {
-                    CurPage: pageIndex,
-                    PageSize: PageSize,
-                    isall: isall,
-                    IsAccept: IsAccept,
-                    IsPlan: IsPlan
-                },
-                success: function (data) {
-                    var datajson = data;
-                    Flag = datajson == null || datajson == undefined || datajson == '';
-                    //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
-                    console.log(Flag);
-                    if (Flag == false) {
-                        counter++;
+                $(pullRefreshEl).pullToRefresh({
+                    up: {
+                        callback: function () {
+                            var self = this;
+                            setTimeout(function () {
+                                var ul = self.element.querySelector('.mui-table-view');
+                                //ul.appendChild(createFragment(ul, index, 5));
+                                //ul.appendChild(createFragment1(pageIndex4, isall, IsAccept, IsPlan));
+                                if (index == "0") {
+                                    var html=createFragment1(pageIndex1, isall, IsAccept, IsPlan);
+                                    ul.appendChild(html);
+                                    pageIndex1++;
+                                } else if (index = "1") {
+                                    ul.appendChild(createFragment1(pageIndex2, isall, IsAccept, IsPlan));
+                                    pageIndex2++;
+                                } else if (index == "2") {
+                                    ul.appendChild(createFragment1(pageIndex3, isall, IsAccept, IsPlan));
+                                    pageIndex3++;
+                                } else {
+                                    ul.appendChild(createFragment1(pageIndex4, isall, IsAccept, IsPlan));
+                                    pageIndex4++;
+                                }
+                                self.endPullUpToRefresh();
+                            }, 1000);
+                        }
                     }
-                    $.each(datajson, function (i, item) {
-                        result += '<div class="my-order-item">'
-                       + '<div class="my-order-item-tit clearfix">'
-                            + '<h3>订单号：888888888</h3>'
-                            + '<span class="my-order-wait-zf">等待支付</span>'
-                        + '</div>'
-                        + '<div class="my-order-item-txt">'
-                            + '<div class="my-order-time">2015-11-28  13:30</div>'
-                            + '<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
-                        + '</div>'
-                        + '<div class="my-order-item-btn">'
-                            + '<div class="pos-r">'
-                                + '<span class="my-order-item-cancel">取消订单</span>'
-                                + '<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
-                            + '</div></div></div>';
-                    });
-
-                    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
-                    //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
-                    pageStart++;
-                    mui('#refreshContainer').on('tap', 'a', function () {
-                        window.top.location.href = this.href;
-                    });
-
+                });
+            });
+            var createFragment = function (ul, index, count, reverse) {
+                var length = ul.querySelectorAll('li').length;
+                var fragment = document.createDocumentFragment();
+                var li;
+                for (var i = 0; i < count; i++) {
+                    li = document.createElement('li');
+                    li.className = 'mui-table-view-cell';
+                    li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
+                    fragment.appendChild(li);
                 }
-            }
-        );
+                return fragment;
+            };
 
-        }
-        /**
-         * 上拉加载具体业务实现
-         */
-        function pullupRefresh() {
-            setTimeout(function () {
-                mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
-                data(isall, IsAccept, IsPlan, pageStart, pageSize);
-            }, 200);
-        }
-    })();
-    mui('body').on('click', 'a', function () {
-        window.top.location.href = this.href;
-    });
 
+            var createFragment1 = function (pageIndex, isall, IsAccept, IsPlan) {
+                var result = "";
+                $.ajax({
+                    type: 'post',
+                    url: '/MobileApp/mOrder/GetOrderlist',
+                    async: false,
+                    dataType: "json",
+                    data: {
+                        CurPage: pageIndex,
+                        PageSize: 1,
+                        isall: isall,
+                        IsAccept: IsAccept,
+                        IsPlan: IsPlan
+                    },
+                    success: function (data) {
+                        var fragment = document.createDocumentFragment();
+                        var li;
+                        var datajson = data;
+                        Flag = datajson == null || datajson == undefined || datajson == '';
+                        //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
+                        console.log(Flag);
+                        if (Flag == false) {
+                            //counter++;
+                        }
+                        $.each(datajson, function (i, item) {
+                            li = document.createElement('li');
+                            li.className = 'my-order-item mui-table-view-cell';
+                            li.innerHTML = '<div class="my-order-item-tit clearfix">'
+                                + '<h3>订单号：888888888</h3>'
+                                + '<span class="my-order-wait-zf">等待支付</span>'
+                            + '</div>'
+                            + '<div class="my-order-item-txt">'
+                                + '<div class="my-order-time">2015-11-28  13:30</div>'
+                                + '<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
+                            + '</div>'
+                            + '<div class="my-order-item-btn">'
+                                + '<div class="pos-r">'
+                                    + '<span class="my-order-item-cancel">取消订单</span>'
+                                    + '<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
+                                + '</div></div>';
+                            fragment.appendChild(li);
+                        });
+                        return fragment;
+                    }
+                }
+);
+            };
+        });
+    })(mui);
 </script>
