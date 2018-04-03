@@ -542,7 +542,8 @@
 				});
 				$.ready(function() {
 					//循环初始化所有下拉刷新，上拉加载。
-					$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+				    $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+				        alert(index);
 						$(pullRefreshEl).pullToRefresh({
 							down: {
 								callback: function() {
@@ -574,7 +575,7 @@
 						for (var i = 0; i < count; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
-							li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
+							li.innerHTML = '<li>第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1))) + '</li>';
 							fragment.appendChild(li);
 						}
 						return fragment;

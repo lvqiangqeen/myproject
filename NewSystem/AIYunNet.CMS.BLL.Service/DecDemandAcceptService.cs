@@ -200,7 +200,7 @@ namespace AIYunNet.CMS.BLL.Service
                 count = query.ToList().Count();
                 if (isall == 0)
                 {
-                    query = query.Where(c => c.IsPlan == plan);
+                    query = query.Where(c => c.IsAccept == IsAccept);
                 }           
                 List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
