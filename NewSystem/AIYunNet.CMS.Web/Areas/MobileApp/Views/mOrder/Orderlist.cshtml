@@ -13,63 +13,33 @@
     .mui-table-view {
         background-color: #efeff4;
     }
+    .mui-fullscreen {
+    bottom: 64px;
+}
+    .mui-pull-bottom-wrapper {
+    text-align: center;
+    }
 </style>
 <script>
     var html = "<h1>我的订单</h1>";
     $("#header").remove();
 </script>
 <div class="container" id="container">
-
-    <!--我的订单选项卡-->
-    @*<div id="my-order" class="my-order">
-            <!--栏目-->
-            <ul id="nav">
-                <li style="margin-left: 10px;margin-right:20px;" class="selected"><span class="quanbu"><h2>全部订单</h2></span></li>
-                <li style="margin-left: 20px;margin-right:20px;"><span class="fabu"><h2>已发布</h2></span></li>
-                <li style="margin-left: 20px;margin-right:20px;"><span class="nofabu"><h2>未发布</h2></span></li>
-                <li style="margin-left: 20px;margin-right:20px;"><span class="jujue"><h2>已拒绝</h2></span></li>
-            </ul>
-            <!--栏目-->
-            <!--内容-->
-            <div id="menu_con">
-
-                <!--全部订单开始-->
-                <div class="tag" style="display:block" id="refreshContainer">
-                    <div class="mui-scroll">
-                        <ul class="mui-table-view mui-table-view-chevron">
-
-                        </ul>
-                    </div>
-
-                </div>
-                <!--全部订单结束-->
-            </div>
-            <!--内容-->
-
-        </div>*@
-
-    <!--我的订单选项卡结束-->
     <div class="mui-content">
         <div id="slider" class="mui-slider mui-fullscreen">
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                 <div class="mui-scroll">
                     <a class="mui-control-item mui-active" href="#item1mobile">
-                        推荐
+                        全部
                     </a>
                     <a class="mui-control-item" href="#item2mobile">
-                        热点
+                        新订单
                     </a>
                     <a class="mui-control-item" href="#item3mobile">
-                        北京
+                        已接受
                     </a>
                     <a class="mui-control-item" href="#item4mobile">
-                        社会
-                    </a>
-                    <a class="mui-control-item" href="#item5mobile">
-                        娱乐
-                    </a>
-                    <a class="mui-control-item" href="#item6mobile">
-                        科技
+                        已拒绝
                     </a>
                 </div>
             </div>
@@ -110,23 +80,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="item5mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="item6mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view">
- 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -154,6 +107,8 @@
             $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
                 $(pullRefreshEl).pullToRefresh({
                     up: {
+                        contentnomore: '没有更多了',
+                        contentrefresh: "正在加载...",
                         auto: true,
                         callback: function () {
                             var self = this;
@@ -163,58 +118,60 @@
                                 var IsPlan = 0;
                                 if (index == "0") {
                                     isall = 1;
-                                    IsAccept = 1;
+                                    IsAccept = 0;
                                     IsPlan = 0;
                                 } else if (index == "1") {
                                     isall = 0;
-                                    IsAccept = 2;
+                                    IsAccept = 0;
                                     IsPlan = 1;
                                 } else if (index == "2") {
                                     isall = 0;
-                                    IsAccept = 0;
+                                    IsAccept = 1;
                                     IsPlan = 1;
 
                                 } else {
                                     isall = 0;
-                                    IsAccept = 0;
+                                    IsAccept = 2;
                                     IsPlan = 1;
                                 }
                                 var ul = self.element.querySelector('.mui-table-view');
                                 //ul.appendChild(createFragment(ul, index, 5));
                                 //ul.appendChild(createFragment1(pageIndex4, isall, IsAccept, IsPlan));
+                                var bool = false;
                                 if (index == "0") {
                                     var html=createFragment1(pageIndex1, isall, IsAccept, IsPlan);
                                     ul.appendChild(html);
+                                    bool = html.childNodes.length == 0 ? true : false;
                                     pageIndex1++;
                                 } else if (index == "1") {
+                                    var html = createFragment1(pageIndex2, isall, IsAccept, IsPlan);
                                     ul.appendChild(createFragment1(pageIndex2, isall, IsAccept, IsPlan));
+                                    bool = html.childNodes.length == 0 ? true : false;
                                     pageIndex2++;
                                 } else if (index == "2") {
+                                    var html = createFragment1(pageIndex3, isall, IsAccept, IsPlan);
                                     ul.appendChild(createFragment1(pageIndex3, isall, IsAccept, IsPlan));
+                                    bool = html.childNodes.length == 0 ? true : false;
                                     pageIndex3++;
                                 } else {
+                                    var html = createFragment1(pageIndex4, isall, IsAccept, IsPlan);
                                     ul.appendChild(createFragment1(pageIndex4, isall, IsAccept, IsPlan));
+                                    bool = html.childNodes.length == 0 ? true : false;
                                     pageIndex4++;
                                 }
-                                self.endPullUpToRefresh();
-                            }, 1000);
+                                self.endPullUpToRefresh(bool);
+                            }, 200);
                         }
                     }
                 });
             });
-            var createFragment = function (ul, index, count, reverse) {
-                var length = ul.querySelectorAll('li').length;
-                var fragment = document.createDocumentFragment();
-                var li;
-                for (var i = 0; i < count; i++) {
-                    li = document.createElement('li');
-                    li.className = 'mui-table-view-cell';
-                    li.innerHTML = '第' + (index + 1) + '个选项卡子项-' + (length + (reverse ? (count - i) : (i + 1)));
-                    fragment.appendChild(li);
-                }
-                return fragment;
-            };
-
+            var time = function (AddOn)
+            {
+                var a = AddOn
+                var date = new Date(parseInt(a.slice(6)));
+                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate()+'日';
+                return result;
+            }
 
             var createFragment1 = function (pageIndex, isall, IsAccept, IsPlan) {
                 var fragment = document.createDocumentFragment();
@@ -236,19 +193,33 @@
                         $.each(data, function (i, item) {
                             var li = document.createElement('li');
                             li.className = 'my-order-item mui-table-view-cell';
-                            li.innerHTML = '<div class="my-order-item-tit clearfix">'
+                            
+                            var html= '<div class="my-order-item-tit clearfix">'
                                 + '<h3>订单号：888888888</h3>'
-                                + '<span class="my-order-wait-zf">等待支付</span>'
-                            + '</div>'
+                            if (item.IsAccept == '0')
+                            {
+                                html += '<span class="my-order-wait-zf">新订单</span>';
+                            } else if (item.IsAccept == '1')
+                            {
+                                html += '<span class="my-order-wait-zf" style="color:#009688">已接受</span>';
+                            } else if (item.IsAccept == '2')
+                            {
+                                html += '<span class="my-order-wait-zf" style="color:red;">已拒绝</span>';
+                            }
+                            html += '</div>'
                             + '<div class="my-order-item-txt">'
-                                + '<div class="my-order-time">2015-11-28  13:30</div>'
-                                + '<div class="my-order-address">合肥市高新区长江路拓基城市广场金座A2002</div>'
+                                + '<div class="my-order-time">' + time(item.AddOn) + '</div>'
+                                + '<div class="my-order-address">' + item.CityName + ' ' + item.buidingname + '</div>'
                             + '</div>'
                             + '<div class="my-order-item-btn">'
                                 + '<div class="pos-r">'
-                                    + '<span class="my-order-item-cancel">取消订单</span>'
-                                    + '<span class="my-order-item-red"><a href="order-payment.html">立即支付</a></span>'
-                                + '</div></div>';
+                                    + '<span class="my-order-item-cancel"><a href="order-payment.html">查看需求</a></span>';
+                            if (item.IsAccept == '2') {
+                            } else if (item.IsPlan) {
+                                html += '<span class="my-order-item-red"><a href="order-payment.html">查看流程</a></span></div></div>';
+                            } else
+                            {html += '<span class="my-order-item-red"><a href="order-payment.html">发布流程</a></span></div></div>';}
+                            li.innerHTML = html;
                             fragment.appendChild(li);
                         });
                         

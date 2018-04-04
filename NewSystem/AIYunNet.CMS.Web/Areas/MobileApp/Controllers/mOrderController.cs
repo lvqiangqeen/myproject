@@ -11,10 +11,11 @@ using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
-    [AllSessionFilter]
+    [MobileUserFilter]
     public class mOrderController : Controller
     {
         DecDemandAcceptService AcSer = new DecDemandAcceptService();
+        DemandService deSer = new DemandService();
         // GET: MobileApp/mOrder
         public ActionResult Orderlist()
         {
@@ -28,6 +29,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             int userid = Convert.ToInt32(SessionHelper.Get("UserID"));
             List<AcceptDemand> list =  AcSer.mGetDemandListByUserID(isall,IsAccept,IsPlan, userid, PageSize, CurPage, out count);
             return Json(list);
+        }
+
+        public ActionResult OrderDetail(string guid)
+        {
+            DecDemand demand = deSer.GetDecDemandByGuID(guid);
+            return View(demand);
         }
     }
 }
