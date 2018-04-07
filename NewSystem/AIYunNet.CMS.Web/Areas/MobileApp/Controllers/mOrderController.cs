@@ -16,6 +16,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         DecDemandAcceptService AcSer = new DecDemandAcceptService();
         DemandService deSer = new DemandService();
+        #region 订单
         // GET: MobileApp/mOrder
         public ActionResult Orderlist()
         {
@@ -36,5 +37,14 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             DecDemand demand = deSer.GetDecDemandByGuID(guid);
             return View(demand);
         }
+
+        [HttpPost]
+        public ActionResult updateIsAccept(DecDemandAccept acc)
+        {
+            int ret = 0;
+            ret = AcSer.UpdateIsAccept(acc);
+            return Json(new { RetCode = ret });
+        }
+        #endregion
     }
 }

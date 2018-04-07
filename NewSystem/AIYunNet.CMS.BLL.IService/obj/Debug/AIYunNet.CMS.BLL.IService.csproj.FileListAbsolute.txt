@@ -54,7 +54,6 @@ E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\EntityFramework.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\Dos.ORM.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\AIYunNet.CMS.Domain.pdb
-E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\bin\Debug\Dos.ORM.xml
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.csprojResolveAssemblyReference.cache
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.IService\obj\Debug\AIYunNet.CMS.BLL.IService.pdb

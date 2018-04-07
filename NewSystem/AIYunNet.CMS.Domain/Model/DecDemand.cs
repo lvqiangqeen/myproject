@@ -124,7 +124,7 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("IsVerrify")]
         public int IsVerrify { get; set; }
         /// <summary>
-        /// 一句话描述需求
+        /// 装修风格
         /// </summary>
         [Column("OneSentence")]
         public string OneSentence { get; set; }

@@ -34,7 +34,6 @@ E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\ImageP
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\EntityFramework.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\Dos.ORM.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\AIYunNet.CMS.Domain.pdb
-E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\bin\Debug\Dos.ORM.xml
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.csprojResolveAssemblyReference.cache
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Common.Utility\obj\Debug\AIYunNet.CMS.Common.Utility.pdb

@@ -4261,6 +4261,7 @@
     <Content Include="Areas\MobileApp\Views\MobileWorker\mupdateWebWorker.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\Orderlist.cshtml" />
     <Content Include="Handler\GetMobilePageList.ashx" />
+    <Content Include="Areas\MobileApp\Views\mOrder\OrderDetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
