@@ -46,5 +46,10 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(new { RetCode = ret });
         }
         #endregion
+
+        public ActionResult mBuidingList()
+        {
+            return View();
+        }
     }
 }

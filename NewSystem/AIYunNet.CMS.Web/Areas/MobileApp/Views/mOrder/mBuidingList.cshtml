@@ -1,0 +1,115 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "mBuidingList";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<style>
+    h3 {
+        font-size: 17px;
+    }
+
+    .mui-table-view {
+        background-color: #efeff4;
+    }
+
+    .mui-fullscreen {
+        bottom: 64px;
+    }
+
+    .mui-pull-bottom-wrapper {
+        text-align: center;
+    }
+    .mui-table {
+    width: 75%;
+}
+</style>
+<script>
+    var html = "<h1>我的订单</h1>";
+    $("#header").remove();
+</script>
+<div class="container" id="container">
+    <div class="mui-content">
+        <div id="slider" class="mui-slider mui-fullscreen">
+            <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <div class="mui-scroll">
+                    <a class="mui-control-item mui-active" href="#item1mobile">
+                        新订单
+                    </a>
+                    <a class="mui-control-item" href="#item2mobile">
+                        已接受
+                    </a>
+                    <a class="mui-control-item" href="#item3mobile">
+                        发布流程
+                    </a>
+                    <a class="mui-control-item" href="#item4mobile">
+                        已拒绝
+                    </a>
+                </div>
+            </div>
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell mui-media">
+                                    <a class="mui-navigate-right">
+                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/cbd.jpg">
+                                        <div class="mui-table mui-media-body">
+                                            <div class="mui-table-cell mui-col-xs-10">
+                                                <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
+                                                <h5>申请人：李四</h5>
+                                                <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mui-table-view-cell mui-media">
+                                    <a class='mui-navigate-right' href="javascript:;">
+                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/yuantiao.jpg">
+                                        <div class="mui-media-body">
+                                            远眺
+                                            <p class='mui-ellipsis'>静静的看这个世界，最后终于疯了</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mui-table-view-cell mui-media">
+                                    <a class="mui-navigate-right">
+                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/shuijiao.jpg">
+                                        <div class="mui-media-body">
+                                            幸福
+                                            <p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item4mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
