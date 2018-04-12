@@ -1,6 +1,6 @@
 ﻿@using AIYunNet.CMS.Common.Utility;
 @{
-    ViewBag.Title = "mBuidingList";
+    ViewBag.Title = "mobileBuidingList";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
@@ -21,14 +21,15 @@
     .mui-pull-bottom-wrapper {
         text-align: center;
     }
+
     .mui-table {
-    width: 85%;
-}
+        width: 85%;
+    }
+
     .mui-navigate-right:after, .mui-push-right:after {
-    /* right: 15px; */
-    content: '';
-}
-    
+        /* right: 15px; */
+        content: '';
+    }
 </style>
 <script>
     $("#header").remove();
@@ -54,39 +55,7 @@
                     <div id="scroll1" class="mui-scroll-wrapper">
                         <div class="mui-scroll">
                             <ul class="mui-table-view">
-                                <li class="mui-table-view-cell mui-media">
-            <a class="mui-navigate-right">
-                <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/cbd.jpg">
-                <div class="mui-table mui-media-body">
-                    <div class="mui-table-cell mui-col-xs-10">
-                        <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-                        <h5>类型：水电装修</h5>
-                        <div id="demo1" style="margin-top: 12px;">
-                            <p class="mui-progressbar mui-progressbar-in" data-progress="20"><span></span></p>
-                            <div>
-                                <div style="float:left;width: 20%; text-align: center">
-                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
-                                </div>
-                                <div style="float:left;width: 20%; text-align: center">
-                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
-                                </div>
-                                <div style="float:left;width: 20%; text-align: center">
-                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
-                                </div>
-                                <div style="float:left;width: 20%; text-align: center">
-                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
-                                </div>
-                                <div style="float:left;width: 20%; text-align: center">
-                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <h5 style="margin-top: 10px;">业主评价：好评</h5>
-                    </div>
-                </div>
-            </a>
-        </li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -145,15 +114,13 @@
                                 } else if (index == "1") {
                                     IsWorkerEnd = 0;
                                     IsUserEnd = 2;
-                                } else if (index == "2")
-                                {
+                                } else if (index == "2") {
                                     IsWorkerEnd = 1;
                                     IsUserEnd = 1;
                                 }
                                 var ul = self.element.querySelector('.mui-table-view');
                                 var bool = false;
-                                if (index == "0")
-                                {
+                                if (index == "0") {
                                     var html = createFragment1(pageIndex1, IsWorkerEnd, IsUserEnd);
                                     ul.appendChild(createFragment1(pageIndex1, IsWorkerEnd, IsUserEnd));
                                     bool = html.childNodes.length == 0 ? true : false;
@@ -181,11 +148,10 @@
                 });
             });
 
-            var time = function (AddOn)
-            {
+            var time = function (AddOn) {
                 var a = AddOn
                 var date = new Date(parseInt(a.slice(6)));
-                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate()+'日';
+                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日';
                 return result;
             }
 
@@ -209,24 +175,29 @@
                             var li = document.createElement('li');
                             li.className = 'mui-table-view-cell mui-media';
 
-                            var html = '<a class="mui-navigate-right">'
-                                    + '<img class="mui-media-object mui-pull-left" src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg">'
+                            var html = '<a class="mui-navigate-right" href="/MobileApp/mOrder/mobileBuidingDetail?BuidingID=' + item.BuidingID + '">'
+                                    + '<img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '">'
                                     + '<div class="mui-table mui-media-body">'
                                     + '<div class="mui-table-cell mui-col-xs-10">'
-                                    + '<h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>'
-                                    + '<h5>类型：水电装修</h5>'
-                                    + '<div style="margin-top: 12px;">'
-                                    + '<p class="mui-progressbar mui-progressbar-in" data-progress="20"><span></span></p>'
-                                    + '<div style="display:inline-block;text-align:justify;">'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">1</span>'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">2</span>'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">3</span>'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">4</span>'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">5</span>'
-                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">6</span>'
-                                    + '</div></div>'
-                                    + '<h5 style="margin-top: 10px;">业主评价：好评</h5>'
-                                    + '</div></div></a>';
+                                    + '<h4 class="mui-ellipsis">' + item.BuidingTitle + '</h4>';
+                            var list = item.constructionstage.split(',');
+                            var nowStage = list[item.StageNow + 1];
+                            if (list[item.StageNow + 1] == "") {
+                                nowStage = "工程结束";
+                            }
+                            var progress = 100 * (item.StageNow + 1) / list.length;
+                            html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>'
+                                    + '<div style="margin-top: 39px;">'
+                                    + '<p class="mui-progressbar mui-progressbar-in" data-progress="' + progress + '"><span></span></p>'
+                                    + '<div style="margin-top: 5px;">';
+                            var width= 100 * 1/list.length;
+                            for (var i = 0; i < list.length; i++) {
+                                html += '<div style="float:left;width: ' + width + '%; text-align: center">'
+                                     + '<span class="mui-badge mui-badge-primary">' + (i + 1) + '</span></div>';
+                            }
+
+                            html += '</div></div>'
+                             + '</div></div></a>';
                             li.innerHTML = html;
                             fragment.appendChild(li);
                         });
@@ -238,3 +209,4 @@
         });
     })(mui);
 </script>
+

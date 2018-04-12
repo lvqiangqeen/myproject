@@ -48,7 +48,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
         #endregion
 
-        public ActionResult mBuidingList()
+        #region 工程
+        public ActionResult mobileBuidingList()
         {
             return View();
         }
@@ -61,5 +62,11 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             List<WebBuiding> list = buidSer.mGetBListByWorker(workerid, IsWorkerEnd, IsUserEnd, PageSize, CurPage);
             return Json(list);
         }
+
+        public ActionResult mobileBuidingDetail(int BuidingID)
+        {
+            return View();
+        }
+        #endregion
     }
 }
