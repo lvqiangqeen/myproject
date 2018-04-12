@@ -16,6 +16,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         DecDemandAcceptService AcSer = new DecDemandAcceptService();
         DemandService deSer = new DemandService();
+        WebBuidingService buidSer = new WebBuidingService();
         #region 订单
         // GET: MobileApp/mOrder
         public ActionResult Orderlist()
@@ -50,6 +51,15 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult mBuidingList()
         {
             return View();
+        }
+        //根据UserID获取装修进度列表信息
+
+        [HttpPost]
+        public ActionResult GetBuidinglist(int PageSize, int IsWorkerEnd, int IsUserEnd, int CurPage)
+        {
+            int workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+            List<WebBuiding> list = buidSer.mGetBListByWorker(workerid, IsWorkerEnd, IsUserEnd, PageSize, CurPage);
+            return Json(list);
         }
     }
 }

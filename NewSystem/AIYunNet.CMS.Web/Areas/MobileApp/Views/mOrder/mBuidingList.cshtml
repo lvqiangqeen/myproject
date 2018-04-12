@@ -22,11 +22,15 @@
         text-align: center;
     }
     .mui-table {
-    width: 75%;
+    width: 85%;
 }
+    .mui-navigate-right:after, .mui-push-right:after {
+    /* right: 15px; */
+    content: '';
+}
+    
 </style>
 <script>
-    var html = "<h1>我的订单</h1>";
     $("#header").remove();
 </script>
 <div class="container" id="container">
@@ -35,16 +39,13 @@
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                 <div class="mui-scroll">
                     <a class="mui-control-item mui-active" href="#item1mobile">
-                        新订单
+                        进行中
                     </a>
                     <a class="mui-control-item" href="#item2mobile">
-                        已接受
+                        延期中
                     </a>
                     <a class="mui-control-item" href="#item3mobile">
-                        发布流程
-                    </a>
-                    <a class="mui-control-item" href="#item4mobile">
-                        已拒绝
+                        已竣工
                     </a>
                 </div>
             </div>
@@ -54,35 +55,38 @@
                         <div class="mui-scroll">
                             <ul class="mui-table-view">
                                 <li class="mui-table-view-cell mui-media">
-                                    <a class="mui-navigate-right">
-                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/cbd.jpg">
-                                        <div class="mui-table mui-media-body">
-                                            <div class="mui-table-cell mui-col-xs-10">
-                                                <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-                                                <h5>申请人：李四</h5>
-                                                <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mui-table-view-cell mui-media">
-                                    <a class='mui-navigate-right' href="javascript:;">
-                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/yuantiao.jpg">
-                                        <div class="mui-media-body">
-                                            远眺
-                                            <p class='mui-ellipsis'>静静的看这个世界，最后终于疯了</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mui-table-view-cell mui-media">
-                                    <a class="mui-navigate-right">
-                                        <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/shuijiao.jpg">
-                                        <div class="mui-media-body">
-                                            幸福
-                                            <p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-                                        </div>
-                                    </a>
-                                </li>
+            <a class="mui-navigate-right">
+                <img class="mui-media-object mui-pull-left" src="~/Content/mui-master/examples/hello-mui/images/cbd.jpg">
+                <div class="mui-table mui-media-body">
+                    <div class="mui-table-cell mui-col-xs-10">
+                        <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
+                        <h5>类型：水电装修</h5>
+                        <div id="demo1" style="margin-top: 12px;">
+                            <p class="mui-progressbar mui-progressbar-in" data-progress="20"><span></span></p>
+                            <div>
+                                <div style="float:left;width: 20%; text-align: center">
+                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
+                                </div>
+                                <div style="float:left;width: 20%; text-align: center">
+                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
+                                </div>
+                                <div style="float:left;width: 20%; text-align: center">
+                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
+                                </div>
+                                <div style="float:left;width: 20%; text-align: center">
+                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
+                                </div>
+                                <div style="float:left;width: 20%; text-align: center">
+                                    <span class="mui-badge mui-badge-primary" data-progress="10">12</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h5 style="margin-top: 10px;">业主评价：好评</h5>
+                    </div>
+                </div>
+            </a>
+        </li>
                             </ul>
                         </div>
                     </div>
@@ -101,15 +105,136 @@
                         </div>
                     </div>
                 </div>
-                <div id="item4mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view"></ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
+<script>
+    mui.init();
+    //示例1
+    (function ($) {
+        //阻尼系数
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        $('.mui-scroll-wrapper').scroll({
 
+            bounce: false,
+            indicators: true, //是否显示滚动条
+            deceleration: deceleration
+        });
+        $.ready(function () {
+            //循环初始化所有下拉刷新，上拉加载。
+            var pageIndex1 = 1;
+            var pageIndex2 = 1;
+            var pageIndex3 = 1;
+            $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+                $(pullRefreshEl).pullToRefresh({
+                    up: {
+                        contentnomore: '没有更多了',
+                        contentrefresh: "正在加载...",
+                        auto: true,
+                        callback: function () {
+                            var self = this;
+                            setTimeout(function () {
+                                var IsWorkerEnd = 0;
+                                var IsUserEnd = 0;
+                                if (index == "0") {
+                                    IsWorkerEnd = 0;
+                                    IsUserEnd = 0;
+                                } else if (index == "1") {
+                                    IsWorkerEnd = 0;
+                                    IsUserEnd = 2;
+                                } else if (index == "2")
+                                {
+                                    IsWorkerEnd = 1;
+                                    IsUserEnd = 1;
+                                }
+                                var ul = self.element.querySelector('.mui-table-view');
+                                var bool = false;
+                                if (index == "0")
+                                {
+                                    var html = createFragment1(pageIndex1, IsWorkerEnd, IsUserEnd);
+                                    ul.appendChild(createFragment1(pageIndex1, IsWorkerEnd, IsUserEnd));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex1++;
+                                }
+                                else if (index == "1") {
+                                    var html = createFragment1(pageIndex2, IsWorkerEnd, IsUserEnd);
+                                    ul.appendChild(createFragment1(pageIndex2, IsWorkerEnd, IsUserEnd));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex2++;
+                                } else if (index == "2") {
+                                    var html = createFragment1(pageIndex3, IsWorkerEnd, IsUserEnd);
+                                    ul.appendChild(createFragment1(pageIndex3, IsWorkerEnd, IsUserEnd));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex3++;
+                                }
+                                //自定义颜色示例
+                                mui(".mui-progressbar").each(function () {
+                                    mui(this).progressbar({ progress: this.getAttribute("data-progress") }).show();
+                                });
+                                self.endPullUpToRefresh(bool);
+                            }, 200);
+                        }
+                    }
+                });
+            });
+
+            var time = function (AddOn)
+            {
+                var a = AddOn
+                var date = new Date(parseInt(a.slice(6)));
+                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate()+'日';
+                return result;
+            }
+
+            var createFragment1 = function (pageIndex, IsWorkerEnd, IsUserEnd) {
+                var fragment = document.createDocumentFragment();
+                var result = "";
+                $.ajax({
+                    type: 'post',
+                    url: '/MobileApp/mOrder/GetBuidinglist',
+                    async: false,
+                    dataType: "json",
+                    data: {
+                        CurPage: pageIndex,
+                        PageSize: 10,
+                        IsWorkerEnd: IsWorkerEnd,
+                        IsUserEnd: IsUserEnd,
+                    },
+                    success: function (data) {
+
+                        $.each(data, function (i, item) {
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell mui-media';
+
+                            var html = '<a class="mui-navigate-right">'
+                                    + '<img class="mui-media-object mui-pull-left" src="http://localhost:4316//UploadFiles/Images/PeopleImage/2017/04/25/6c7beac1-61ed-4af8-992f-477e8fa32311.jpg">'
+                                    + '<div class="mui-table mui-media-body">'
+                                    + '<div class="mui-table-cell mui-col-xs-10">'
+                                    + '<h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>'
+                                    + '<h5>类型：水电装修</h5>'
+                                    + '<div style="margin-top: 12px;">'
+                                    + '<p class="mui-progressbar mui-progressbar-in" data-progress="20"><span></span></p>'
+                                    + '<div style="display:inline-block;text-align:justify;">'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">1</span>'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">2</span>'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">3</span>'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">4</span>'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">5</span>'
+                                    + '<span class="mui-badge mui-badge-primary" style="margin:10px;">6</span>'
+                                    + '</div></div>'
+                                    + '<h5 style="margin-top: 10px;">业主评价：好评</h5>'
+                                    + '</div></div></a>';
+                            li.innerHTML = html;
+                            fragment.appendChild(li);
+                        });
+
+                    }
+                });
+                return fragment;
+            };
+        });
+    })(mui);
+</script>

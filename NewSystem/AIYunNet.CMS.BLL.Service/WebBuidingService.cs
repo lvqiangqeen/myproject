@@ -364,5 +364,17 @@ namespace AIYunNet.CMS.BLL.Service
                 return context.WebBuiding.Where(wb => wb.WorkerID == workerID && wb.FlagDelete == 0).OrderByDescending(wb => wb.AddOn).Take(count).ToList();
             }
         }
+
+        //手机端获取单人装修案例分页
+        public List<WebBuiding> mGetBListByWorker(int workerID, int IsWorkerEnd, int IsUserEnd, int PageSize, int CurPage)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<WebBuiding> list = context.WebBuiding.Where(wb => wb.WorkerID == workerID && 
+                wb.FlagDelete == 0 && wb.IsWorkerEnd== IsWorkerEnd && wb.IsUserEnd== IsUserEnd
+                && wb.DemandID!=0).OrderByDescending(wb => wb.AddOn).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                return list;
+            }
+        }
     }
 }
