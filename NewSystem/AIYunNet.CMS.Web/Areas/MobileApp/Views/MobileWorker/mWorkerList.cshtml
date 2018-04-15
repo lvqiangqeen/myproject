@@ -107,14 +107,13 @@
     (function () {
 
         //上拉加载下拉刷新
-        mui.init({
-            pullRefresh: {
-                container: '#refreshContainer',
-                up: {
-                    contentrefresh: '正在加载...',
-                    callback: pullupRefresh
-                }
+        mui.init({pullRefresh:{
+            container: '#refreshContainer',
+            up: {
+                contentrefresh: '正在加载...',
+                callback: pullupRefresh
             }
+        }
         });
         //加载更多
         var pageSize = 10;//每页显示条数

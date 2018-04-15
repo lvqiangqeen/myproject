@@ -4264,6 +4264,7 @@
     <Content Include="Areas\MobileApp\Views\mOrder\OrderDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\mobileBuidingList.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\mobileBuidingDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\SelectWorker.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

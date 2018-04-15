@@ -11,6 +11,7 @@ using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
+    [AllSessionFilter]
     [MobileUserFilter]
     public class mOrderController : Controller
     {
@@ -82,6 +83,11 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ViewBag.stageslist = stageslist;
             ViewBag.demand = demand;
             return View(buiding);
+        }
+        //选择工人
+        public ActionResult SelectWorker()
+        {
+            return View();
         }
         #endregion
     }
