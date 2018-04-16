@@ -77,9 +77,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return View(buiding);
         }
 
-        public ActionResult mobileStageDetail()
+        public ActionResult mobileStageDetail(int BuidingID,int StageID)
         {
-            return View();
+            WebBuiding buiding = buidSer.GetWebBuidingByID(BuidingID);
+            WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(BuidingID, StageID);
+            ViewBag.stage = stage;
+            return View(buiding);
         }
         //选择工人页面
         public ActionResult SelectWorker()

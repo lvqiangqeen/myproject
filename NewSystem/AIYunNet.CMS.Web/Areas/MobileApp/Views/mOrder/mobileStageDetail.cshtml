@@ -1,7 +1,13 @@
-﻿
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebBuiding
 @{
     ViewBag.Title = "mobileStageDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebBuidingStages stage = ViewBag.stage;
+    
 }
 <style>
 
@@ -19,7 +25,7 @@
         padding: 0.3rem;
         overflow: auto;
         clear: both;
-        margin: 1rem auto;
+        /*margin: 1rem auto;*/
         border: 1px solid #555;
     }
 
@@ -108,7 +114,7 @@
 
 <div class="container" id="container">
 
-    <p class="car-description">空车拉货小货车搬家空车拉货小小货车搬家空车拉货 小货车搬家</p>
+    <p class="car-description">@Model.BuidingTitle--@stage.StageName</p>
 
     <ul class="car-details clearfix">
         <li class="fwfw">服务范围：<em>同城运输</em></li>
@@ -122,7 +128,7 @@
         <div class="min-price-con">有小货车出租，可承接搬家，企事业单位，个人长短包，24小时随叫随到，长期合作价格更优惠，期待您的来电。</div>
     </div>
     <div class="min-price">
-        <div class="min-price-tit"><h2>详细信息</h2></div>
+        <div class="min-price-tit"><h2>上传图片</h2></div>
         <!--    照片添加    -->
         <div class="z_photo">
             <div class="z_file">
