@@ -3873,6 +3873,9 @@
     <Content Include="Content\WorkerApp\Login\js\jquery-1.8.3.min.js" />
     <Content Include="Content\WorkerApp\Login\login.html" />
     <Content Include="Content\WorkerApp\maintenance-reservation.html" />
+    <Content Include="Content\WorkerApp\MimageUpload\multiIimageUpload\index.html" />
+    <Content Include="Content\WorkerApp\MimageUpload\multiIimageUpload\www.jq22.com.txt" />
+    <Content Include="Content\WorkerApp\MimageUpload\multiIimageUpload\z_add.png" />
     <Content Include="Content\WorkerApp\my-name.html" />
     <Content Include="Content\WorkerApp\my-order.html" />
     <Content Include="Content\WorkerApp\my.html" />
@@ -4265,6 +4268,8 @@
     <Content Include="Areas\MobileApp\Views\mOrder\mobileBuidingList.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\mobileBuidingDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\SelectWorker.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\mobileStageDetail.cshtml" />
+    <Content Include="Content\WorkerApp\MimageUpload\multiIimageUpload\jquery插件库.url" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

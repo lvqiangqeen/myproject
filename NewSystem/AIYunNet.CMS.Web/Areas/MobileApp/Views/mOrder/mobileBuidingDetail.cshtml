@@ -18,7 +18,7 @@
         var title = '@Model.BuidingTitle';
         var html = "<h1>"+title+"</h1>";
         $("#header").append(html);
-    })
+    });
 </script>
 <div class="container" id="container">
 
@@ -55,10 +55,10 @@
                             </div>
                         }
                         <p style="margin-top:10px;">
-                            <button class="layui-btn">发布信息</button>
+                            <button class="layui-btn" onclick="javascript:stageUpdate(@Model.BuidingID,@item.StageID);">发布信息</button>
                             @if (item.Workerid == 0)
                             {
-                                <button class="layui-btn" style="background-color:#337ab7">寻找合作</button>
+                                <button class="layui-btn" style="background-color:#337ab7" onclick="javascript:worklist(@Model.BuidingID,@item.StageID);">寻找合作</button>
                             }                           
                         </p>
 
@@ -90,3 +90,14 @@
 
 </div>
 
+<script>
+    function worklist(buidingID,StageID)
+    {
+        window.top.location.href = "/MobileApp/mOrder/SelectWorker?WorkerCategory=装修工人&positionID=0&buidingID="+buidingID+"&StageID="+StageID;
+    }
+    function stageUpdate(buidingID,StageID)
+    {
+        window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID="+buidingID+"&StageID="+StageID;
+    }
+
+</script>

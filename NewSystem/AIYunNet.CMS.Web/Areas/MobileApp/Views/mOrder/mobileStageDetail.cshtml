@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "mobileStageDetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+<style>
+
+
+    .container1 {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        clear: both;
+    }
+
+    .z_photo {
+        /*width: 5rem;*/
+        height: 8rem;
+        padding: 0.3rem;
+        overflow: auto;
+        clear: both;
+        margin: 1rem auto;
+        border: 1px solid #555;
+    }
+
+        .z_photo img {
+            width: 3rem;
+            height: 3rem;
+        }
+
+    .z_addImg {
+        float: left;
+        margin-right: 0.2rem;
+    }
+
+    .z_file {
+        width: 1rem;
+        height: 1rem;
+        background: url(/Content/WorkerApp/MimageUpload/multiIimageUpload/z_add.png) no-repeat;
+        background-size: 100% 100%;
+        float: left;
+        margin-right: 0.2rem;
+    }
+
+        .z_file input::-webkit-file-upload-button {
+            width: 1rem;
+            height: 1rem;
+            border: none;
+            position: absolute;
+            outline: 0;
+            opacity: 0;
+        }
+
+        .z_file input#file {
+            display: block;
+            width: auto;
+            border: 0;
+            vertical-align: middle;
+        }
+    /*遮罩层*/
+
+    .z_mask {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        display: none;
+    }
+
+    .z_alert {
+        width: 3rem;
+        height: 2rem;
+        border-radius: .2rem;
+        background: #fff;
+        font-size: .24rem;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -1.5rem;
+        margin-top: -2rem;
+    }
+
+        .z_alert p:nth-child(1) {
+            line-height: 1.5rem;
+        }
+
+        .z_alert p:nth-child(2) span {
+            display: inline-block;
+            width: 49%;
+            height: .5rem;
+            line-height: .5rem;
+            float: left;
+            border-top: 1px solid #ddd;
+        }
+
+    .z_cancel {
+        border-right: 1px solid #ddd;
+    }
+</style>
+<script>
+    var html = "<h1>上传阶段信息</h1>";
+    $("#header").append(html);
+</script>
+
+<div class="container" id="container">
+
+    <p class="car-description">空车拉货小货车搬家空车拉货小小货车搬家空车拉货 小货车搬家</p>
+
+    <ul class="car-details clearfix">
+        <li class="fwfw">服务范围：<em>同城运输</em></li>
+        <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
+        <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
+        <li class="fwdh">电话：<em>18000000000</em></li>
+    </ul>
+
+    <div class="min-price">
+        <div class="min-price-tit"><h2>详细信息</h2></div>
+        <div class="min-price-con">有小货车出租，可承接搬家，企事业单位，个人长短包，24小时随叫随到，长期合作价格更优惠，期待您的来电。</div>
+    </div>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>详细信息</h2></div>
+        <!--    照片添加    -->
+        <div class="z_photo">
+            <div class="z_file">
+                <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+
+            </div>
+
+        </div>
+
+        <!--遮罩层-->
+        <div class="z_mask">
+            <!--弹出框-->
+            <div class="z_alert">
+                <p>确定要删除这张图片吗？</p>
+                <p>
+                    <span class="z_cancel">取消</span>
+                    <span class="z_sure">确定</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        //px转换为rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    //if (clientWidth >= 640) {
+                    //    docEl.style.fontSize = '100px';
+                    //} else {
+                    //    docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    //}
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+        function imgChange(obj1, obj2) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < fileList.length; i++) {
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                    };
+
+                }
+            };
+        };
+
+    </script>
+</div>
+
+
+

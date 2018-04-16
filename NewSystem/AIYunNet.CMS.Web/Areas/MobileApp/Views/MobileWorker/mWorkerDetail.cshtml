@@ -4,8 +4,17 @@
 @{
     ViewBag.Title = "mWorkerDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string PublishWorkerid = SessionHelper.Get("PositionID");
+    string buidingID = Request["buidingID"];
+    string StageID = Request["StageID"];
+    string type= Request["type"];
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script>
+    var html = "<h1>工人详细信息</h1>";
+    $("#header").append(html);
+</script>
 <div class="container" id="container">
 
     <div class="worker-details">
@@ -82,8 +91,51 @@
             </ul>
         </div>
     </div>
+    @if (type == "合作")
+    {
+        <a href="javascript:workertogether(@Model.WorkerID,'@Model.WorkerName')" class="order" style="color:white;background-color:#007aff">找TA合作</a>
+    }
+    else
+    {
+        <a href="reservation.html" class="order">找TA装修</a>
+    }
 
-    <a href="reservation.html" class="order">找TA装修</a>
 
 </div>
+<script>
+    function workertogether(GetWorkerid, workername) {
+        //询问框
+        layer.open({
+            content: '您确定要与' + workername + '合作吗？'
+          , btn: ['确认', '再想想']
+          , yes: function (index) {
+              $.ajax({
+                  type: "post",
+                  url: "/MobileApp/mOrder/SendWorkTogether",
+                  data: {
+                      PublishWorkerid: "@PublishWorkerid",
+                      GetWorkerid: GetWorkerid,
+                      buidingID: "@buidingID",
+                      StageID: "@StageID"
+                  },
+                  success: function (data) {
+                      if (data.RetCode == 1) {
+                          //信息框
+                          layer.open({
+                              content: '您的申请已经成功提交，请等待对方回复！'
+                            , btn: '我知道了'
+                          });
+                      } else {
+                          layer.open({
+                              content: '您已经提交了合作申请，不能重复提交！'
+                            , btn: '我知道了'
+                          });
 
+                      }
+                  }
+
+              });
+          }
+        });
+    }
+</script>

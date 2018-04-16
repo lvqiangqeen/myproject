@@ -10,7 +10,40 @@ using AIYunNet.CMS.Domain;
 namespace AIYunNet.CMS.BLL.Service
 {
     public class WebWorkerService
-    {    
+    {
+        /// <summary>
+        /// 手机端选取合作工人
+        /// </summary>
+        public List<WebWorker> mGetWorkerExceptSelf(int workerid, string WorkerName,int PageIndex,int PageSize,string WorkerCategory,string WorkerPositionID)
+        {
+            List<WebWorker> list = new List<WebWorker>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                if (WorkerName != "")
+                {
+                    list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0 && c.WorkerName.Contains(WorkerName)).OrderByDescending(wb => wb.Stars).Skip(PageSize * (PageIndex - 1)).Take(PageSize * PageIndex).ToList();
+                    return list;
+                }
+                if (WorkerCategory == "装修工长")
+                {
+                    list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0 && c.WorkerCategory == WorkerCategory).OrderByDescending(wb => wb.Stars).Skip(PageSize * (PageIndex - 1)).Take(PageSize * PageIndex).ToList();
+                    return list;
+                }
+                else
+                {
+                    if (WorkerPositionID == "0")
+                    {
+                        list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0 && c.WorkerCategory == WorkerCategory).OrderByDescending(wb => wb.Stars).Skip(PageSize * (PageIndex - 1)).Take(PageSize * PageIndex).ToList();
+                    }
+                    else
+                    {
+                        list = context.WebWorker.Where(c => c.WorkerID != workerid && c.FlagDelete == 0 && c.WorkerCategory == WorkerCategory && c.WorkerPositionID == WorkerPositionID).OrderByDescending(wb => wb.Stars).Skip(PageSize * (PageIndex - 1)).Take(PageSize * PageIndex).ToList();
+                    }
+
+                    return list;
+                }
+            }
+        }
         /// <summary>
         /// 选取合作工人
         /// </summary>
