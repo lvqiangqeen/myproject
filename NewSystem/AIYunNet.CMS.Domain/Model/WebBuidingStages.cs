@@ -77,6 +77,11 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("thumContent")]
         public string thumContent { get; set; }
+        /// <summary>
+        ///文字
+        /// </summary>
+        [Column("wordContent")]
+        public string wordContent { get; set; }
         public WebBuidingStages()
         {
             WebBuidingID = 0;
@@ -88,6 +93,8 @@ namespace AIYunNet.CMS.Domain.Model
             IsUserEnd = 0;
             Workerleaderid = 0;
             Workerid = 0;
+            wordContent = "";
+
         }
     }
 
