@@ -84,6 +84,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ViewBag.stage = stage;
             return View(buiding);
         }
+        //手机端修改阶段详情
+        [HttpPost]
+        public JsonResult mUpdateBuidingStagesInfo()
+        {
+            return Json(new { RetCode = ret });
+        }
         //选择工人页面
         public ActionResult SelectWorker()
         {

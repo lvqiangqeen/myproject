@@ -72,7 +72,7 @@ namespace AIYunNet.CMS.BLL.Service
 
             }
         }
-
+        //修改装修阶段详情
         public int UpdateBuidingStagesInfo(WebBuidingStages buidingStage)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -180,5 +180,47 @@ namespace AIYunNet.CMS.BLL.Service
 
             }
         }
+
+        //手机端修改装修阶段详情
+        public int mUpdateBuidingStagesInfo(WebBuidingStages buidingStage)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingStages old = context.WebBuidingStages.Find(buidingStage.ID);
+                WebBuiding buiding = context.WebBuiding.Find(buidingStage.WebBuidingID);
+                if (old != null)
+                {
+                    old.wordContent = buidingStage.wordContent;
+                    old.ImgContent = buidingStage.ImgContent;
+                    old.thumContent = buidingStage.thumContent;
+                    old.CompleteTime = DateTime.Now.ToString();
+                    old.IsComplete = buidingStage.IsComplete;
+                    context.SaveChanges();
+                    List<WebBuidingStages> list = new List<WebBuidingStages>();
+                    try
+                    {
+                        list = context.WebBuidingStages.Where(c => c.WebBuidingID == buidingStage.WebBuidingID && c.IsComplete == true).OrderByDescending(c => c.sortID).ToList();
+                    }
+                    catch (Exception e)
+                    {
+                        list = new List<WebBuidingStages>();
+                    }
+                    if (list.Count > 0)
+                    {
+                        int stageNow = list[0].sortID;
+                        buiding.StageNow = stageNow;
+                        context.SaveChanges();
+                    }
+
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+        }
+
     }
 }

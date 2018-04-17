@@ -7,7 +7,7 @@
     ViewBag.Title = "mobileStageDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     WebBuidingStages stage = ViewBag.stage;
-    
+    string IsComplete = stage.IsComplete ? "1" : "0";
 }
 <style>
 
@@ -111,12 +111,13 @@
     var html = "<h1>上传阶段信息</h1>";
     $("#header").append(html);
 </script>
-
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
 <div class="container" id="container">
 
-    <p class="car-description">@Model.BuidingTitle--@stage.StageName</p>
+    <p class="car-description">当前阶段：@Model.BuidingTitle--@stage.StageName</p>
 
-    <ul class="car-details clearfix">
+    <ul class="car-details clearfix" style="display:none;">
         <li class="fwfw">服务范围：<em>同城运输</em></li>
         <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
         <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
@@ -124,8 +125,8 @@
     </ul>
 
     <div class="min-price">
-        <div class="min-price-tit"><h2>详细信息</h2></div>
-        <div class="min-price-con">有小货车出租，可承接搬家，企事业单位，个人长短包，24小时随叫随到，长期合作价格更优惠，期待您的来电。</div>
+        <div class="min-price-tit"><h2>阶段描述</h2></div>
+        <div class="min-price-con"><textarea id="textarea" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
     </div>
     <div class="min-price">
         <div class="min-price-tit"><h2>上传图片</h2></div>
@@ -150,6 +151,38 @@
             </div>
         </div>
     </div>
+    <ul class="car-details clearfix">
+        <li class="mui-table-view-cell" style="height: 41px;padding-left: 0rem;">
+            <span style="font-weight: normal;font-size: 0.7rem;border-left: 2px solid #fa4b28;padding-left: 0.25rem;">确认完成</span>
+            <div class="mui-switch mui-switch-blue mui-active">
+                <div class="mui-switch-handle"></div>
+                <input value="@IsComplete" type="hidden" name="IsComplete"/>
+            </div>
+        </li>
+    </ul>
+    <a href="javascript:updateStage()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+    <script>
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			mui('.mui-switch').each(function() { //循环所有toggle
+				//toggle.classList.contains('mui-active') 可识别该toggle的开关状态
+				//this.parentNode.querySelector('span').innerText = '状态：' + (this.classList.contains('mui-active') ? 'true' : 'false');
+				/**
+				 * toggle 事件监听
+				 */
+				this.addEventListener('toggle', function(event) {
+					//event.detail.isActive 可直接获取当前状态
+				    //this.parentNode.querySelector('span').innerText = '状态：' + (event.detail.isActive ? 'true' : 'false');
+				    if (event.detail.isActive) {
+				        $("input[name=IsComplete]").val(1);
+				    } else
+				    {
+				        $("input[name=IsComplete]").val(0);
+				    }
+				});
+			});
+    </script>
     <script>
         //px转换为rem
         (function(doc, win) {
@@ -216,6 +249,37 @@
             };
         };
 
+    </script>
+    <script>
+        function updateStage()
+        {
+            $.ajax({
+                type: "post",
+                url: "/MobileApp/mOrder/SendWorkTogether",
+                data: {
+                    PublishWorkerid: "@PublishWorkerid",
+                    GetWorkerid: GetWorkerid,
+                    buidingID: "@buidingID",
+                    StageID: "@StageID"
+                },
+                success: function (data) {
+                    if (data.RetCode == 1) {
+                        //信息框
+                        layer.open({
+                            content: '您的申请已经成功提交，请等待对方回复！'
+                          , btn: '我知道了'
+                        });
+                    } else {
+                        layer.open({
+                            content: '您已经提交了合作申请，不能重复提交！'
+                          , btn: '我知道了'
+                        });
+
+                    }
+                }
+
+            });
+        }
     </script>
 </div>
 
