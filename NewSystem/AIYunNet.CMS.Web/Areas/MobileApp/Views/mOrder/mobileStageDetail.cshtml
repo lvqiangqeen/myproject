@@ -8,6 +8,11 @@
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     WebBuidingStages stage = ViewBag.stage;
     string IsComplete = stage.IsComplete ? "1" : "0";
+    List<string> thlist = new List<string>();
+    if (stage.thumContent != "" && stage.thumContent!=null)
+    {
+        thlist = stage.thumContent.Split('|').Where(c => c != "").ToList();
+    }
 }
 <style>
 
@@ -126,17 +131,26 @@
 
     <div class="min-price">
         <div class="min-price-tit"><h2>阶段描述</h2></div>
-        <div class="min-price-con"><textarea id="textarea" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
+        <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
     </div>
     <div class="min-price">
         <div class="min-price-tit"><h2>上传图片</h2></div>
+        <input value="@stage.ImgContent" name="ImgContent" type="hidden"/>
+        <input value="@stage.thumContent" name="thumContent" type="hidden" />
         <!--    照片添加    -->
         <div class="z_photo">
             <div class="z_file">
                 <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
 
             </div>
+            @if (thlist.Count > 0)
+            {
+                foreach (var item in thlist)
+                {
+                    <div class="z_addImg"><img src="@AppSettingsHelper.ImgUrl@item"></div>
+                }
 
+            }
         </div>
 
         <!--遮罩层-->
@@ -154,7 +168,7 @@
     <ul class="car-details clearfix">
         <li class="mui-table-view-cell" style="height: 41px;padding-left: 0rem;">
             <span style="font-weight: normal;font-size: 0.7rem;border-left: 2px solid #fa4b28;padding-left: 0.25rem;">确认完成</span>
-            <div class="mui-switch mui-switch-blue mui-active">
+            <div class="mui-switch" id="IsComplete">
                 <div class="mui-switch-handle"></div>
                 <input value="@IsComplete" type="hidden" name="IsComplete"/>
             </div>
@@ -204,6 +218,7 @@
         })(document, window);
 
         function imgChange(obj1, obj2) {
+            $(".z_addImg").remove();
             //获取点击的文本框
             var file = document.getElementById("file");
             //存放图片的父级元素
@@ -213,8 +228,11 @@
             //文本框的父级元素
             var input = document.getElementsByClassName(obj2)[0];
             var imgArr = [];
+            var ImgContent = "";
+            var thumContent = "";
             //遍历获取到得图片文件
             for (var i = 0; i < fileList.length; i++) {
+                
                 var imgUrl = window.URL.createObjectURL(file.files[i]);
                 imgArr.push(imgUrl);
                 var img = document.createElement("img");
@@ -223,8 +241,49 @@
                 imgAdd.setAttribute("class", "z_addImg");
                 imgAdd.appendChild(img);
                 imgContainer.appendChild(imgAdd);
+
+                var data = new FormData();
+                data.append('file', file.files[i]);
+                data.append("name", file.files[i].name);
+
+                $.ajax({
+                    type: "post",
+                    url: "/MobileApp/upload/mPictrueUpload",
+                    datatype: 'JSON',
+                    fileElementId: 'file',
+                    async: false,
+                    // 告诉jQuery不要去处理发送的数据
+                    processData: false,
+                    // 告诉jQuery不要去设置Content-Type请求头
+                    contentType: false,
+                    cache: false,
+                    traditional: true,
+                    data: data,
+                    success: function (data) {
+                        if (data.isUploaded) {
+                            ImgContent += data.message + "|";
+                            thumContent += data.thumbnailmessage + "|";
+                           
+                            //信息框
+                        //    layer.open({
+                        //        content: '您的申请已经成功提交，请等待对方回复！'
+                        //      , btn: '我知道了'
+                        //    });
+                        //} else {
+                        //    layer.open({
+                        //        content: '您已经提交了合作申请，不能重复提交！'
+                        //      , btn: '我知道了'
+                        //    });
+
+                        }
+                    }
+
+                });
             };
-            imgRemove();
+            
+            $("input[name=ImgContent]").val(ImgContent);
+            $("input[name=thumContent]").val(thumContent);
+            //imgRemove();
         };
 
         function imgRemove() {
@@ -251,27 +310,45 @@
 
     </script>
     <script>
+        if ($("input[name=IsComplete]").val() == "1") {
+            $("#IsComplete").attr("class", "mui-switch mui-switch-blue mui-active");
+        } else {
+            $("#IsComplete").attr("class", "mui-switch mui-switch-blue");
+        }
+       
+        $("#wordContent").val("@stage.wordContent");
+
         function updateStage()
         {
+            var IsComplete = $("input[name=IsComplete]").val()=="1"?true:false;
+            var wordContent = $("#wordContent").val();
+            var ImgContent = $("input[name=ImgContent]").val();
+            var thumContent = $("input[name=thumContent]").val();
             $.ajax({
                 type: "post",
-                url: "/MobileApp/mOrder/SendWorkTogether",
+                url: "/MobileApp/mOrder/mUpdateBuidingStagesInfo",
                 data: {
-                    PublishWorkerid: "@PublishWorkerid",
-                    GetWorkerid: GetWorkerid,
-                    buidingID: "@buidingID",
-                    StageID: "@StageID"
+				    ID:'@stage.ID',
+                    WebBuidingID: '@Model.BuidingID',
+                    wordContent:wordContent,
+                    ImgContent: ImgContent,
+                    thumContent:thumContent,
+				    IsComplete: IsComplete
                 },
                 success: function (data) {
                     if (data.RetCode == 1) {
                         //信息框
                         layer.open({
-                            content: '您的申请已经成功提交，请等待对方回复！'
+                            content: '修改成功！'
                           , btn: '我知道了'
+                            , yes: function ()
+                            {
+                                window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
+                            }
                         });
                     } else {
                         layer.open({
-                            content: '您已经提交了合作申请，不能重复提交！'
+                            content: '修改失败！'
                           , btn: '我知道了'
                         });
 

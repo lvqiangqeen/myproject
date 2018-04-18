@@ -86,8 +86,9 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
         //手机端修改阶段详情
         [HttpPost]
-        public JsonResult mUpdateBuidingStagesInfo()
+        public JsonResult mUpdateBuidingStagesInfo(WebBuidingStages stage)
         {
+            int ret = stageSer.mUpdateBuidingStagesInfo(stage);
             return Json(new { RetCode = ret });
         }
         //选择工人页面
