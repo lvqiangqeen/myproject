@@ -4271,6 +4271,7 @@
     <Content Include="Areas\MobileApp\Views\mOrder\SelectWorker.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\mobileStageDetail.cshtml" />
     <Content Include="Content\WorkerApp\MimageUpload\multiIimageUpload\jquery插件库.url" />
+    <Content Include="Areas\MobileApp\Views\mOrder\mTogetherBuidingList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -22,5 +22,7 @@ namespace AIYunNet.CMS.Domain.OccaModel
         public string ownertel { get; set; }
         public string startTime { get; set; }
         public int IsAccept { get; set; }
+        public bool IsComplete { get; set; }
+        public int IsUserEnd { get; set; }
     }
 }

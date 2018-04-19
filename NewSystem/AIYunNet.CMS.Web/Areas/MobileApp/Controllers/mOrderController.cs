@@ -117,5 +117,21 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(new { RetCode = ret });
         }
         #endregion
+
+        #region 合作项目
+        public ActionResult mTogetherBuidingList()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetmTogetherList(int IsAccept, int IsComplete, int PageSize, int CurPage)
+        {
+            int count = 0;
+            int workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+            List<BuidTogether> list = TogSer.GetmTogetherList(IsAccept, IsComplete, workerid, CurPage, PageSize,out count);
+            return Json(list);
+        }
+        #endregion
     }
 }

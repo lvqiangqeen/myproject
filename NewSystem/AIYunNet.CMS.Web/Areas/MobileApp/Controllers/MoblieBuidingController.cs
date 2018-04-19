@@ -35,5 +35,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ViewBag.demand = demand;
             return View(buiding);
         }
+
+
+
     }
 }

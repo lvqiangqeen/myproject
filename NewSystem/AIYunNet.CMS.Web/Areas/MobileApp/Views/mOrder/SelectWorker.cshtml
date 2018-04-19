@@ -105,11 +105,19 @@
                           layer.open({
                               content: '您的申请已经成功提交，请等待对方回复！'
                             ,btn: '我知道了'
+                              ,yes:function()
+                              {
+                                  window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@buidingID";
+                              }
                           });
                       } else {
                           layer.open({
                               content: '您已经提交了合作申请，不能重复提交！'
                             ,btn: '我知道了'
+                              ,yes:function()
+                              {
+                                  window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@buidingID";
+                              }
                           });
 
                       }

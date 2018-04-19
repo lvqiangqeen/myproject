@@ -51,7 +51,7 @@ namespace AIYunNet.CMS.BLL.Service
                 
             }
         }
-
+        //获取合作项目
         public List<BuidTogether> GetTogetherList(int GetWorkerid,int PageSize,int CurPage, out int count)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -79,7 +79,9 @@ namespace AIYunNet.CMS.BLL.Service
                                 demandid=y.id,
                                 ownername=y.ownername,
                                 ownertel=y.ownertel,
-                                IsAccept=c.IsAccept
+                                IsAccept=c.IsAccept,                                
+                                IsComplete = e.IsComplete,
+                                IsUserEnd = e.IsUserEnd
                             };
                 count = query.ToList().Count();
                 List<BuidTogether> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
@@ -87,6 +89,52 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
 
+
+        //mobile获取合作项目
+        public List<BuidTogether> GetmTogetherList(int IsAccept,int IsComplete, int GetWorkerid, int PageSize, int CurPage, out int count)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                //list = context.WebBuidTogether.Where(c => c.GetWorkerid == GetWorkerid && c.IsAccept == isAccept).ToList();              
+                var query = from c in context.WebBuidTogether
+                            from d in context.WebBuiding
+                            from b in context.WebWorker
+                            from e in context.WebBuidingStages
+                            from y in context.DecDemand
+                            where c.buidingID == d.BuidingID && (c.buidingID == e.WebBuidingID && c.StageID == e.StageID)
+                            && c.PublishWorkerid == b.WorkerID && c.GetWorkerid == GetWorkerid && d.DemandID == y.id
+                            select new BuidTogether
+                            {
+                                id = c.id,
+                                buidingID = c.buidingID,
+                                stageid = c.StageID,
+                                buidingName = d.BuidingTitle,
+                                stagename = e.StageName,
+                                cityName = y.CityName,
+                                PublishWorkerid = b.WorkerID,
+                                PublishWorkerName = b.WorkerName,
+                                PublishWorkerTel = b.WorkerPhone,
+                                startTime = d.StartTime,
+                                demandid = y.id,
+                                ownername = y.ownername,
+                                ownertel = y.ownertel,
+                                IsAccept = c.IsAccept,
+                                IsComplete=e.IsComplete,
+                                IsUserEnd=e.IsUserEnd
+                            };
+                count = query.ToList().Count();
+                List<BuidTogether> list = new List<BuidTogether>();
+                bool iscom = IsComplete == 0 ? false : true;
+                if (IsAccept != 1)
+                {
+                    list = query.Where(c => c.IsAccept == IsAccept).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                } else
+                {
+                    list = query.Where(c => c.IsAccept == 1 && c.IsComplete== iscom).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                }
+                return list;
+            }
+        }
         //为查看合作清单
         public int TogtherNoSee(int workerid)
         {
