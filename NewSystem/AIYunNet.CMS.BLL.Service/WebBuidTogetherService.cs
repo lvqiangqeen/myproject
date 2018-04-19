@@ -123,14 +123,15 @@ namespace AIYunNet.CMS.BLL.Service
                                 IsUserEnd=e.IsUserEnd
                             };
                 count = query.ToList().Count();
-                List<BuidTogether> list = new List<BuidTogether>();
+
+                List<BuidTogether> list = query.ToList();
                 bool iscom = IsComplete == 0 ? false : true;
                 if (IsAccept != 1)
                 {
-                    list = query.Where(c => c.IsAccept == IsAccept).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                    list = query.ToList().Where(c => c.IsAccept == IsAccept).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 } else
                 {
-                    list = query.Where(c => c.IsAccept == 1 && c.IsComplete== iscom).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                    list = query.ToList().Where(c => c.IsAccept == 1 && c.IsComplete == iscom).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 }
                 return list;
             }

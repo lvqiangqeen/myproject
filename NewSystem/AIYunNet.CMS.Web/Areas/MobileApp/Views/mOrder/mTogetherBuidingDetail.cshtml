@@ -1,0 +1,87 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebBuiding
+@{
+    ViewBag.Title = "mTogetherBuidingDetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    DecDemand demand = ViewBag.demand;
+    WebBuidingStages stage = ViewBag.stage;
+    WebWorkerService workerSer = new WebWorkerService();
+    WebWorker worker = workerSer.GetWebWorkerByID(Model.WorkerID);
+    string id = Request["togetherid"];
+}
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script>
+    $(function () {
+        var title = '@Model.BuidingTitle';
+        var html = "<h1>"+title+"</h1>";
+        $("#header").append(html);
+    });
+</script>
+<div class="container" id="container">
+
+    <div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>
+    <ul class="details-price clearfix">
+        <li>小区地址：@demand.CityName@Model.BuidingTitle</li>
+        <li><em>@Model.Space</em>平米</li>
+        <li>房间户型：@demand.HouseType</li>
+        <li>装修工长：@worker.WorkerName</li>
+        <li>联系方式：@worker.WorkerPhone</li>
+        <li>开工日期：@Model.StartTime</li>
+        <li style="color:red;">负责阶段：@stage.StageName</li>
+    </ul>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>做工详情</h2></div>
+        <div class="min-price-con">@Model.BuidingBrief</div>
+    </div>
+
+    <div class="min-price">
+        <div class="mui-input-row mui-radio mui-left">
+            <label>接受</label>
+            <input name="IsAccept" type="radio" value="1">
+        </div>
+        <div class="mui-input-row mui-radio mui-left">
+            <label>拒绝</label>
+            <input name="IsAccept" type="radio" value="2">
+        </div>
+        </div>
+
+        <a class="pay" href="#">确认</a>
+    
+
+    <span class="cancel" onclick="javascript:history.go(-1)">返回</span>
+</div>
+
+<script>
+    $(function () {
+        var isacc = '@id';
+        $("input[name=IsAccept][value=" + isacc + "]").attr("checked", "true");
+        //$(".pay").click(function () {
+        //    var isaccept = $("input[name='IsAccept']:checked").val();
+        //    $.ajax({
+        //        type: 'post',
+        //        url: '/MobileApp/mOrder/updateIsAccept',
+        //        async: false,
+        //        dataType: "json",
+        //        data: {
+        //            IsAccept: isaccept,
+        //        },
+        //        success: function (data) {
+        //            if (data.RetCode == '1') {
+        //                layer.open({
+        //                    content: '确认成功'
+        //                    , btn: '我知道了', yes: function (index, layero) {
+        //                        //按钮【按钮一】的回调
+        //                        history.go(-1);
+        //                    }
+        //                });
+        //            }
+
+
+        //        }
+        //    });
+        //})
+    })
+</script>

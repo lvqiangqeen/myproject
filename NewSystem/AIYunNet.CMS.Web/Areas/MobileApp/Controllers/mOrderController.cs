@@ -79,6 +79,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 
         public ActionResult mobileStageDetail(int BuidingID,int StageID)
         {
+            
             WebBuiding buiding = buidSer.GetWebBuidingByID(BuidingID);
             WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(BuidingID, StageID);
             ViewBag.stage = stage;
@@ -119,6 +120,15 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         #endregion
 
         #region 合作项目
+        public ActionResult mTogetherBuidingDetail(int BuidingID = 0,int StageID = 0,int togetherid=0)
+        {
+            WebBuiding buiding = buidSer.GetWebBuidingByID(BuidingID);
+            WebBuidingStages stage = stageSer.GetBuidingStageByBuidingIDAndStageID(BuidingID, StageID);
+            DecDemand demand = deSer.GetDecDemandByGuID(buiding.Guid);
+            ViewBag.stage = stage;
+            ViewBag.demand = demand;
+            return View(buiding);
+        }
         public ActionResult mTogetherBuidingList()
         {
             return View();
@@ -129,7 +139,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             int count = 0;
             int workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
-            List<BuidTogether> list = TogSer.GetmTogetherList(IsAccept, IsComplete, workerid, CurPage, PageSize,out count);
+            List<BuidTogether> list = TogSer.GetmTogetherList(IsAccept, IsComplete, workerid, PageSize, CurPage,out count);
             return Json(list);
         }
         #endregion

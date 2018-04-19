@@ -130,7 +130,7 @@
                         up: {
                             contentnomore: '没有更多了',
                             contentrefresh: "正在加载...",
-                            //auto: true,
+                            auto: true,
                             callback: function () {
                                 var self = this;
                                 setTimeout(function () {
@@ -212,11 +212,11 @@
                                 var li = document.createElement('li');
                                 li.className = 'mui-table-view-cell mui-media';
 
-                                var html = '<a class="mui-navigate-right" href="/MobileApp/mOrder/mobileBuidingDetail?BuidingID=' + item.BuidingID + '">'
+                                var html = '<a class="mui-navigate-right" href="/MobileApp/mOrder/mTogetherBuidingDetail?BuidingID=' + item.buidingID + '&StageID=' + item.stageid + '&togetherid=' + item.id + '">'
                                         + '<div class="mui-table mui-media-body">'
                                         + '<div class="mui-table-cell mui-col-xs-10">'
                                         + '<h4 class="mui-ellipsis">' + item.buidingName + '</h4>'
-                                        + '<h5>合作人（工长）：' + item.PublishWorkerName + '</h5>'
+                                        + '<h5>发布工长：' + item.PublishWorkerName + '</h5>'
                                         + '<h5>合作阶段：' + item.stagename + '</h5>'
                                         + '</div>'
                                         + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">';
@@ -228,10 +228,10 @@
                                 } else
                                 {
                                     if (IsComplete == 0) {
-                                        html += '<span class="mui-h5" style="color:red;">未完成</span>';
+                                        html += '<span class="mui-h5" style="color:#007aff;">进行中</span>';
                                     } else
                                     {
-                                        html += '<span class="mui-h5" style="color:red;">已竣工</span>';
+                                        html += '<span class="mui-h5" style="color:#009688;">已竣工</span>';
                                     }
                                 }
                                         
