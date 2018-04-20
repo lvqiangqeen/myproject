@@ -129,6 +129,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ViewBag.demand = demand;
             return View(buiding);
         }
+        [HttpPost]
+        public ActionResult IsAccept(int id, int IsAccept)
+        {
+            int ret = 0;
+            ret = TogSer.IsAccept(id, IsAccept);
+            return Json(new { RetCode = ret });
+        }
         public ActionResult mTogetherBuidingList()
         {
             return View();

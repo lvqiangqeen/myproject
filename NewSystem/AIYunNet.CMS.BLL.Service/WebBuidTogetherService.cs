@@ -13,6 +13,14 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidTogetherService
     {
+        public WebBuidTogether GetTogetherbyID(int id)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidTogether old = context.WebBuidTogether.Find(id);
+                return old;
+            }
+        }
         //确认合作
         public int IsAccept(int id,int accept)
         {            
