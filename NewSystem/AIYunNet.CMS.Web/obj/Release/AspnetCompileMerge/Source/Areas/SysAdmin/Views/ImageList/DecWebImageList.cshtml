@@ -1,0 +1,119 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@{
+    ViewBag.Title = "DecWebImageList";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    IWebCommon commonService = new WebCommonService();
+    int DecType = string.IsNullOrEmpty(Request["DecType"]) ? 1 : Convert.ToInt32(Request["DecType"]);
+}
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">
+            @*<a class="btn btn-primary" href="/SysAdmin/ImageList/AddOrEditWebCaseImg?ImgID=0"><i class="fa fa-pencil"></i>添加图集</a>*@
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" id="ImgList">
+        <table id="webImgDt" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+                <tr class="header-style" role="row">
+                    <th class="text-center">
+                        <input id="chkAll" type="checkbox">
+                    </th>
+                    <th>图片</th>
+                    <th>图库类型</th>
+                    <th>风格筛选</th>
+                    <th>装饰空间</th>
+                    <th>添加时间</th>
+                    <th>操作 </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WebCaseImg img in ViewBag.imglist as List<WebCaseImg>)
+                {
+                    <tr>
+                        <td><input class="chkWebImg" type="checkbox" value="@img.imgID"></td>
+                        <td><img src="@img.thumbnailImage" style="width:100px;height:100px;"/></td>
+                        <td>@commonService.GetLookupDesc("Case_DecType", img.DecType.ToString())</td>
+                        @if (img.DecType == 2)
+                        {
+                            <td></td>
+                        }
+                        else
+                        {
+                            <td>@commonService.GetLookupDesc("Case_style", img.JzStyle.ToString()) </td>
+                        }
+                        @if (img.DecType == 2)
+                        {
+                            <td>@commonService.GetLookupDesc("Case_gz_style", img.GzStyle.ToString()) </td>
+                        }
+                        else
+                        {
+                            <td>@commonService.GetLookupDesc("Case_Img_Jzspace", img.JzSpace.ToString()) </td>
+                        }
+                        @*<td>@commonService.GetLookupDesc("Img_commercialstyle", img.commercialstyle.ToString())</td>*@
+                        <td>@img.AddOn</td>
+                        <td>
+                            <a class="btn1 btn-stroke" href="/SysAdmin/ImageList/AddOrEditWebCaseImg?ImgID=@img.imgID"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                            <a class="btn1 btn-stroke" href="javascript:deleteImg(@img.imgID)"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+
+    <script>
+        $(function () {
+            $("#webImgDt").DataTable({
+                "language": {
+                    "emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+                    "info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+                    "infoEmpty": "没有记录",
+                    "infoFiltered": "",
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "search": "搜索:",
+                    "zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>"
+                },
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "order": [[5, "desc"]]
+            });
+        })
+
+        function deleteImg(ImgID) {
+
+            swal({
+                title: "你确定?",
+                text: "你将删除这个记录!",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "不,取消",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是, 删除",
+                closeOnConfirm: false
+            },
+    function () {
+        $.ajax({
+            type: "post",
+            url: "/SysAdmin/ImageList/DeleteWebCseImg",
+            data: { "imgID": ImgID },
+            success: function (data) {
+                if (data.RetCode = 1) {
+                    window.location.href = window.location.href;
+                }
+            }
+        });
+    });
+        }
+    </script>
+}
+

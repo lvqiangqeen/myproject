@@ -1,0 +1,338 @@
+﻿
+@{
+	ViewBag.Title = "UpdateBuidingStageInfo";
+	Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+	string[] stageIDArr = ViewBag.StagesIDs as string[];
+	string[] stageTextArr = ViewBag.StagesTexts as string[];
+}
+@section head{
+	<link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+	<style>
+			#ddlStage {
+				border: solid 1px #E0E0E0;
+				height: 35px;
+				border-radius: 4px;
+				width: 200px;
+			}
+			#timeStageInfoDiv textarea, input {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			width: 100%;
+		}
+
+		#timeStageInfoDiv .set_div > input {
+			width: 10%;
+			height: 40px;
+		}
+
+		#timeStageInfoDiv .set_l {
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+
+		#timeStageInfoDiv .div_workstage span {
+			padding: 10px;
+		}
+
+		#timeStageInfoDiv .div_workstage input {
+			width: 20px;
+			height: 20px;
+			display: inline;
+			margin-right: 5px;
+		}
+		#uploadedImages td{
+			padding:10px;
+		}
+	</style>
+}
+<div class="centers_mr">
+	<div class="centers_r_items" id="timeStageInfoDiv">
+		<div class="req-push-title">
+			<input type="hidden" id="hidWorkType" value="@ViewBag.WorkerType"/>
+			<input type="hidden" id="hidBuidingID" value="@ViewBag.BuidingID" />
+			<p class="req-name"><i></i><span>填写阶段信息</span></p>
+		</div>
+		@if (ViewBag.WorkerType == "工长")
+		{
+			<div class="form-box-list">
+				<div class="tab-l"><span class="form-box-label">选择阶段</span></div>
+				<div class="tab-r">
+					<select id="ddlStage">
+						<option value="-1">--请选择阶段--</option>
+						@if (stageIDArr != null && stageIDArr.Length > 0)
+						{
+							for (int i = 0; i < stageIDArr.Length; i++)
+							{
+								<option value="@stageIDArr[i]">@stageTextArr[i]</option>
+							}
+						}
+					</select>
+				</div>
+				<div class="clearfiexd"></div>
+			</div>
+		<!--工长发布信息-->
+			<div class="form-box-list">
+				<div class="tab-l"><span class="form-box-label">阶段信息</span></div>
+				<div class="tab-r">
+					<textarea id="txtStageInfo" class="form_field" rows="20"></textarea>
+				</div>
+				<div class="clearfiexd"></div>
+			</div>
+		}
+		else
+		{
+			<!--工人发布信息-->
+			<div class="form-box-list">
+				<div class="tab-l"><span class="form-box-label">标题</span></div>
+				<div class="tab-r">
+					<input name="stageTitle" id="txtTimeStageTitle" class="form-ipt-txt">
+				</div>
+				<div class="clearfiexd"></div>
+			</div>
+			<div class="form-box-list">
+				<div class="tab-l"><span class="form-box-label">简介</span></div>
+				<div class="tab-r">
+					<textarea id="txtTimeStageInfo" class="form_field" rows="4"></textarea>
+				</div>
+				<div class="clearfiexd"></div>
+			</div>
+			<div class="form-box-list">
+				<div class="form-box-list">
+					<div class="tab-l"><span class="form-box-label">工程图片</span></div>
+					<div class="tab-r">
+						<div class="upimg" style="clear:both;">
+							<input class="btn btn-default" style="width:100px;margin-left:10px;" type='button' value='选择图片' onclick='javascript: $("#ImageUpload").click();' />
+							<input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" />
+							<a class="btn btn-primary" style="color:#fff" href="javascript:void(0);" id="BtnUpload">上传图片</a>
+							<span class="form-sm" style="display:block">尺寸大小380px*280px图片大小不超过300K</span>
+							<table id="uploadedImages"></table>
+						</div>
+					</div>
+					<input type="hidden" name="CaseImageBig" value="" id="ImageUrl" />
+					<input type="hidden" name="thumbnailImage" value="" id="thumbnailImage" />
+					<div class="clearfiexd"></div>
+				</div> 
+
+			</div>
+			<div class="form-box-list">
+				<div class="tab-l"><span class="form-box-label">设置</span></div>
+				<div class="tab-r">
+					<span class="set_l">结束日期</span>
+					<input name="txtEndDate" id="txtEndDate" class="form-ipt-txt" style="width:30%">
+					<span class="set_l">顺序</span>
+					<input name="txtSorted" id="txtSorted" class="form-ipt-txt" style="width:30%">
+				</div>
+				<div class="clearfiexd"></div>
+			</div>
+		}
+		<div class="form-box-list">
+			<a id="btnSave" class="btn-submit" href="javascript:void(0)">提交发布</a>
+		</div>
+	</div>
+</div>
+@section Scripts{
+	<link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
+	<link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+	<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
+	<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload-ui.js"></script>
+	<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.iframe-transport.js"></script>
+	<script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
+	<script>
+		$(function ()
+		{
+			//这段富文本编辑器有问题
+			//var editor = new wangEditor('txtStageInfo');
+			//// 上传图片
+			//editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+			//// 配置自定义参数
+			//editor.config.uploadParams = {
+			//	token: 'abcdefg',
+			//	user: 'wangfupeng1988'
+			//};
+			//// 设置 headers
+			//editor.config.uploadHeaders = {
+			//	'Accept': 'text/x-json'
+			//};
+			//editor.create();
+
+			$("#ddlStage").change(function ()
+			{
+				var stageID = $("#ddlStage").val();
+				if (stageID == -1)
+				{
+					return;
+				}
+				var buidingID = $("#hidBuidingID").val();
+				$.ajax({
+					type: "get",
+					url: "/PeopleCenter/CenterCases/GetBuidingStageInfo",
+					data: { buidingID: buidingID, stageID: stageID, rnd: Math.random() },
+					success: function (data)
+					{
+						if (data.Content)
+						{
+							$("#txtStageInfo").val(data.Content);
+						} else
+						{
+							$("#txtStageInfo").val('');
+						}
+					}
+				});
+			});
+
+			$("#btnSave").click(function ()
+			{
+				var workType = $("#hidWorkType").val();
+				if (workType == "工人")
+				{
+					updateBuidingStageTime();
+				}
+				if (workType == "工长")
+				{
+					updateBuidingStage();
+				}		
+				
+			});
+
+			InitUploadPlugin();		
+		})
+
+		function updateBuidingStageTime()
+		{
+			var timeStageTitle = $("#txtTimeStageTitle").val().trim();
+			if (!timeStageTitle)
+			{
+				alert("标题不能为空");
+				return;
+			}
+			var buidingID = $("#hidBuidingID").val();			
+			var timeStageInfo = $("#txtTimeStageInfo").val();
+			var uploadImgs = $("#ImageUrl").val();
+			var uploadThumbnailImage = $("#thumbnailImage").val();
+			var endDate = $("#txtEndDate").val();
+			var sortOrder = $("#txtSorted").val();
+			debugger;
+			$.ajax({
+				type: "post",
+				url: "/PeopleCenter/CenterCases/UpdateBuidingStageTimeInfo",
+				data: {
+					WebBuidingStageID: buidingID,
+					Title: timeStageTitle,
+					TimeStageInfo: timeStageInfo,
+					TimeStageContent: uploadImgs,
+					sortID: sortOrder,
+					endtime: endDate,
+					TimeStageThumContent: uploadThumbnailImage
+				},
+				success: function (ret)
+				{
+					alert("添加成功！");
+					window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				}
+			});
+		}
+
+		function updateBuidingStage()
+		{
+			var buidingID = $("#hidBuidingID").val();
+			var stageID = $("#ddlStage").val();
+			if (stageID == -1)
+			{
+				alert("请选择阶段！");
+				return;
+			}
+			var stageText = $("#ddlStage").find("option:selected").text();
+			var content = $("#txtStageInfo").val();
+
+			$.ajax({
+				type: "post",
+				url: "/PeopleCenter/CenterCases/UpdateBuidingStageInfo",
+				data: {
+					WebBuidingID: buidingID,
+					StageID: stageID,
+					StageName: stageText,
+					StageContent: HTMLDecode(content)
+				},
+				success: function (data)
+				{
+					alert("信息修改成功");
+					window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				}
+			});
+		}
+
+		function InitUploadPlugin()
+		{
+			var jqXHRData = new Array();
+			initFileUpload();
+			$('#BtnUpload').on('click', function ()
+			{
+				if (jqXHRData.length > 0)
+				{
+					for (var i = 0; i < jqXHRData.length; i++)
+					{
+						jqXHRData[i].submit();
+					}
+					return true;
+				} else
+				{
+					return false;
+				}
+			});
+
+			function initFileUpload()
+			{
+				$('#ImageUpload').fileupload({
+					url: '/PeopleCenter/UploadPic/CenterPictrueUpload',
+					dataType: 'json',
+					add: function (e, data)
+					{
+						jqXHRData.push(data);
+					},
+					done: function (event, data)
+					{
+						if (data.result.isUploaded)
+						{
+							var imageUrlStr = $("#ImageUrl").val() + "," + data.result.message;
+							imageUrlStr = imageUrlStr.substr(1, imageUrlStr.length - 1);
+							$("#ImageUrl").val(imageUrlStr);
+
+							var thumbnailImageStr = $("#thumbnailImage").val() + "," + data.result.thumbnailmessage;
+							thumbnailImageStr = thumbnailImageStr.substr(1, thumbnailImageStr.length - 1);
+							$("#thumbnailImage").val(thumbnailImageStr);
+							$("#uploadedImages").append('<tr><td><img src="' + data.result.thumbnailmessage + '"/></td><td><a>删除</a></td></tr>');
+
+						} else
+						{
+							alert(data.result.message);
+						}
+						jqXHRData = [];
+					},
+					fail: function (event, data)
+					{
+						if (data.files[0].error)
+						{
+							alert(data.files[0].error);
+						}
+						jqXHRData = [];
+					},
+					progressall: function (e, data)
+					{
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						//$('#progress .bar').css('width', progress + '%');
+					}
+				});
+			}
+		}
+
+		function HTMLDecode(text)
+		{
+			var temp = document.createElement("div");
+			temp.innerHTML = text;
+			var output = temp.innerText || temp.textContent;
+			temp = null;
+			return output;
+		}
+	</script>
+}

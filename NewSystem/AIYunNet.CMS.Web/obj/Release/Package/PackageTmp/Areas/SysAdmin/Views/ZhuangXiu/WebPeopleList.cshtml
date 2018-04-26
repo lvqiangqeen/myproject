@@ -1,0 +1,140 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@{
+    ViewBag.Title = "WebPeopleList";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    List<WebPeople> peopleList = ViewBag.PeopleList as List<WebPeople>;
+    string PeopleCategory = Request["PeopleCategory"].ToString();
+}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">
+            <a class="btn btn-primary" href="/SysAdmin/ZhuangXiu/AddOrEditWebPeople?peopleID=0&PeopleCategory=@PeopleCategory">
+            <i class="fa fa-pencil"></i>添加人员</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" id="peopleList">
+        <table id="webPeopleDt" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+                <tr class="header-style" role="row">
+                    <th class="text-center">
+                        <input id="chkAll" type="checkbox">
+                    </th>
+                    <th>姓名</th>
+                    <th>类别</th>
+                    <th>所属公司</th>
+                    <th>电话</th>
+                    <th>邮箱</th>
+                    <th>年限</th>
+                    <th>级别</th>
+                    <th>擅长风格</th>
+                    <th>案例个数</th>
+                    <th>所属区域</th>
+                    <th>是否审核</th>
+                    <th>是否认证</th>                   
+                    <th>添加时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                 @if (peopleList != null)
+                    {
+                        foreach (WebPeople people in peopleList)
+                        {
+                            <tr>
+                                <td><input class="chkCompany" type="checkbox" value="@people.PeopleID"></td>
+                                <td>@people.PeopleName</td>
+                                <td>@people.PeopleCategory</td>
+                                <td>@people.CompanyName</td>
+                                <td>@people.PeoplePhone</td>
+                                <td>@people.PeopleMail</td>                                
+                                <td>@people.WorkYears</td>
+                                <td>@people.PeopleLevel</td>
+                                <td>@people.GoodAtStyle</td>
+                                <td>@people.CaseCount</td> 
+                                <td>@people.BelongArea</td> 
+                                <td>
+                                    @if (people.IsApproved)
+                                    {
+                                        @:<span style="color:red">是</span>
+                                    }
+                                    else
+                                    {
+                                        @:否
+                                    }
+                                </td>                              
+                                <td>
+                                    @if (people.IsAuthentication)
+                                    {
+                                        @:<span style="color:red">是</span>
+                                    }
+                                    else
+                                    {
+                                        @:否
+                                    }
+                                </td>                               
+                                <td>@people.AddOn</td>
+                                <td>
+                                    <a class="btn1 btn-stroke" href="/SysAdmin/ZhuangXiu/AddOrEditWebPeople?peopleID=@people.PeopleID&&PeopleCategory=@PeopleCategory"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                    <a class="btn1 btn-stroke" href="javascript:deletePeople(@people.PeopleID)"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(function () {
+            sessionStorage.setItem('url', '@Request.Url.ToString()');
+
+            $("#webPeopleDt").DataTable({
+                "language": {
+                    "emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+                    "info": "显示 _START_ 到 _END_条记录 ，总共 _TOTAL_ 条记录",
+                    "infoEmpty": "没有数据",
+                    "infoFiltered": "",
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "search": "搜索:",
+                    "zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>"
+                },
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "order": [[13, "desc"]]
+            });
+        })
+
+        function deletePeople(peopleID) {
+
+            swal({
+                title: "你确定?",
+                text: "你将删除这个记录!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是, 删除!",
+                cancelButtonText:"不，取消",
+                closeOnConfirm: false
+            },
+    function () {
+        $.ajax({
+            type: "post",
+            url: "/SysAdmin/ZhuangXiu/DeleteWebPeople",
+            data: { "peopleID": peopleID },
+            success: function (data) {
+                if (data.RetCode = 1) {
+                    window.location.href = window.location.href;
+                }
+            }
+
+        });
+    });
+        }
+    </script>
+}

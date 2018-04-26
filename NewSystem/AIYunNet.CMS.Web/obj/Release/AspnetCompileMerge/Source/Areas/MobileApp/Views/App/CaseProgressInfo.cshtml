@@ -1,0 +1,164 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@{
+	List<WebBuidingStages> buidingStageList = ViewBag.BuidingStages as List<WebBuidingStages>;
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/progress/css/onlinebusinesshall/newexpand/css/index-debug.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/progress/css/index.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/progress/static/lib/jquery-step/css/jquery.step.css">
+	<style>
+		.goto_detail{
+			    color: #fff;
+    background-color: #5eb95e;
+    border-color: #5eb95e;
+    padding: 5px 5px;
+    border-radius: 3px;
+    text-decoration: none;
+    float: right;
+		}
+		.intro-list-content span{
+			font-size:20px;
+		}
+		.intro-list-left {
+			text-align:left;
+		}
+	</style>
+</head>
+<body>
+	<header class="header" id="header">
+		<a href="javascript:history.go(-1)" target=_self class="back">返回</a>
+		<h1>项目进度详情</h1>
+	</header>
+	<div class="step-body" id="myStep" style="top:48px;">
+		<div class="step-content">
+			<div class="step-list">
+				<div class="page-panel-title">
+						<h3 class="page-panel-title-left">流程说明</h3>
+						<h3 class="page-panel-title-right">注：点击按钮进入阶段信息详情</h3>
+					</div>
+				<div class="intro-flow">
+					@*<div class="intro-list">
+						<div class="intro-list-left">
+							水电工
+						</div>
+						<div class="intro-list-right">
+							<span>1</span>
+							<div class="intro-list-content">
+								<span>该阶段已完成</span><a class="goto_detail" href="/MobileApp/App/BuidingStageInfo?buidingID=26&stageID=1">查看详情</a>
+							</div>
+						</div>
+					</div>
+					<div class="intro-list">
+						<div class="intro-list-left">
+							泥瓦工
+						</div>
+						<div class="intro-list-right">
+							<span>1</span>
+							<div class="intro-list-content">
+								<span>该阶段已完成</span><a class="goto_detail" href="/MobileApp/App/BuidingStageInfo?buidingID=26&stageID=1">查看详情</a>
+							</div>
+						</div>
+					</div>
+					<div class="intro-list intro-list-active">
+						<div class="intro-list-left">
+							油漆工
+						</div>
+						<div class="intro-list-right">
+							<span>1</span>
+							<div class="intro-list-content">
+								<span>该阶段未完成</span>
+							</div>
+						</div>
+					</div>*@
+					@if (buidingStageList != null && buidingStageList.Count > 0)
+                    {
+                        foreach (WebBuidingStages buidingStage in buidingStageList)
+                        {
+                            if (buidingStage.IsComplete)
+                            {
+                                <div class="intro-list">
+                                    <div class="intro-list-left">
+                                        @buidingStage.StageName
+                                    </div>
+                                    <div class="intro-list-right">
+                                        <span>@buidingStage.sortID</span>
+                                        <div class="intro-list-content">
+                                            <span>该阶段已完成</span><a class="goto_detail" href="/MobileApp/App/BuidingStageInfo?buidingID=@buidingStage.WebBuidingID&stageID=@buidingStage.StageID">查看详情</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="intro-list intro-list-active">
+                                    <div class="intro-list-left">
+                                        @buidingStage.StageName
+                                    </div>
+                                    <div class="intro-list-right">
+                                        <span>@buidingStage.sortID</span>
+                                        <div class="intro-list-content">
+                                            <span>该阶段未完成</span><a class="goto_detail" href="/MobileApp/App/BuidingStageInfo?buidingID=@buidingStage.WebBuidingID&stageID=@buidingStage.StageID">查看详情</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+
+                    }
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="~/Content/mobileapp/progress/static/lib/jquery/1.8/jquery.min.js"></script>
+	<script src="~/Content/mobileapp/progress/static/lib/jquery-step/js/jquery.step.js"></script>
+	<script>
+		$(function ()
+		{
+
+			var step = $("#myStep").step({
+				animate: true,
+				initStep: 1,
+				speed: 1000
+			});
+
+
+			$("#preBtn").click(function (event)
+			{
+				var yes = step.preStep();
+
+			});
+			$("#applyBtn").click(function (event)
+			{
+				var yes = step.nextStep();
+
+			});
+			$("#submitBtn").click(function (event)
+			{
+				var yes = step.nextStep();
+
+
+			});
+			$("#goBtn").click(function (event)
+			{
+				var yes = step.goStep(3);
+
+			});
+
+
+
+
+		});
+	</script>
+
+</body>
+</html>

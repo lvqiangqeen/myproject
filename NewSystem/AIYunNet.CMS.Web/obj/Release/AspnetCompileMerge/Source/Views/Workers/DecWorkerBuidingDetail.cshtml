@@ -1,0 +1,150 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecWorkerBuidingDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebBuiding buiding = ViewBag.buiding;
+    WebBuidingStages buidingstage = ViewBag.buidingstage;
+
+}
+<link href="~/Content/design/sheji.workerbuidingdetail.css" rel="stylesheet" />
+<link href="~/Content/design/swiper/swiper-3.4.2.min.css" rel="stylesheet" />
+<script src="~/Content/design/swiper/swiper-3.4.2.jquery.min.js"></script>
+
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/workers/DecWorkerList">找工人</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID">@Model.WorkerName </a>--@buiding.BuidingTitle
+                </li>
+            </ul>
+        </div>
+
+        <div class="Main">
+            <div class="title">
+                <div class="logo floatL">
+                    <a href="/Workers/DecWorkerDetail?WorkerID=@Model.WorkerID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" alt="@Model.WorkerName" title="@Model.WorkerName" style="width:62px;height:62px;"></a>
+
+                </div>
+                <div class="des floatL">
+                    <span class="des-title">
+                        @buiding.BuidingTitle
+                    </span> 
+                    <span>面积：@buiding.Space m²</span>
+                    <span>合同价：@buiding.Price 元</span>
+                    <span>类型：@ViewBag.demand.DemandTypeName</span>
+                    <span style="float: right"><a href="javascript:void(0)" class="zhuangxiu">找TA装修</a></span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="supmain">
+                <div class="suplist">
+                    <div class="supitem" style="position: relative">
+                        <div class="supobj">
+                            
+                        </div>
+                        <div class="supdetail">
+                            <span>做工说明<span class="ico-t"></span></span>
+                            <div class="supDes">
+                                <p>@buiding.BuidingBrief</p>
+                            </div>
+                            <span>现场图片<span class="ico-t"></span></span>
+                            <div class="supImg">
+                                <div class="suptime">
+                                    <span>
+                                        <b>@buiding.constructionstage.Replace(",","")</b>
+                                        <b>@buiding.AddOn.ToString("dd")</b>日
+                                    </span><span>@buiding.AddOn.ToString("yyyy-MM")</span>
+                                </div>
+                                @{ 
+                                    List<string> list = new List<string>();
+                                    List<string> listthum = new List<string>();
+                                    if (buidingstage.ImgContent != "" && buidingstage.thumContent != null)
+                                    {
+                                        list = buidingstage.ImgContent.Split('|').Where(c=>c!="").ToList();
+                                        listthum= buidingstage.thumContent.Split('|').Where(c => c != "").ToList();
+                                    }
+                                    int i = 0;
+                                }
+                                <div class="imgBox">
+                                    <div class="i-center floatL">
+                                        <div class="bd">
+                                            <div id="slider" class="swiper-container tempWrap" style="overflow:hidden; position:relative; width:850px">
+                                                <ul class="swiper-wrapper layer-photos-demo layer-photos-demo" style="width: 2720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: -170px;">
+                                                    @foreach (string ite in list)
+                                                    {
+                                                        <li class="swiper-slide clone" style="float: left; width: 170px;">
+                                                            <img layer-src="@AppSettingsHelper.ImgUrl@ite" src="@AppSettingsHelper.ImgUrl@listthum[i]" alt="@buiding.BuidingTitle">
+                                                        </li>
+                                                        i++;
+                                                    }
+                                                </ul>
+                                            </div>
+
+                                            <div class="swiper-button-prev swiper-button-black"></div>
+                                            <div class="swiper-button-next swiper-button-black"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            
+            <script>
+                $(".zhuangxiu").click(function () {
+                    var peoplename = "@Model.WorkerName";
+                    var userid = "@Model.UserID";
+                    if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                        window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+                    } else {
+                        layer.open({
+                            type: 2,
+                            scrollbar: false,
+                            title: '登陆',
+                            shadeClose: true,
+                            shade: 0.8,
+                            area: ['330px', '330px'],
+                            content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                            end: function () {
+                                location.reload();
+                            }
+
+                        });
+                    }
+                });
+                //必须放在domx下面
+                var indexSwiper1 = new Swiper('.tempWrap', {
+                    autoplay: 3000,//可选选项，自动滑动
+                    slidesPerView: 5,
+                    prevButton: '.swiper-button-prev',
+                    nextButton: '.swiper-button-next',
+                });
+                //调用示例
+                layer.ready(function () { //为了layer.ext.js加载完毕再执行
+                    layer.photos({
+                        photos: '.layer-photos-demo'
+                      , shift: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+

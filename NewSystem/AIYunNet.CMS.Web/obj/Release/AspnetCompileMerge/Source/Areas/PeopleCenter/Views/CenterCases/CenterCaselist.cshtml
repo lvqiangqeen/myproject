@@ -1,0 +1,125 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "CenterCaselist";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    string userAccount = SessionHelper.Get("userName");
+    WebUserService webuserservice = new WebUserService();
+    WebPeopleService webpeopleservice = new WebPeopleService();
+
+    WebUser webuser = webuserservice.GetWebUserByAccount(userAccount);
+    WebPeople webpeople = new WebPeople();
+    if (webpeopleservice.IsHaveuser(webuser.UserID))
+    {
+        webpeople = webpeopleservice.GetWebPeopleByUserID(webuser.UserID);
+    }
+}
+@section head{
+    
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+    }
+
+<div class="centers_mr">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active">全部案例</a>
+        </div>
+        <div class="items-con">
+            <!--如果没有数据<div class="items-con none-date">--->
+            <div class="ind-tuku u-c" id="caselist">
+                <ul>
+                    <li v-for="item in pageList">
+                        <div class="img"><a v-bind:href="'/Case/DecCaseDetail?CaseID='+item.webcase.CaseID +'&DecType='+item.webcase.DecType" target="_blank"><img  v-bind:src="'@AppSettingsHelper.ImgUrl'+item.webcase.CaseImageBig" v-bind:alt="item.webcase.CaseTitle" ></a></div>
+                        <div class="info">
+                            <div class="name">{{item.webcase.CaseTitle}}<span>阅读<em>{{item.webcase.PageViewCount}}</em>次</span></div>
+                            <div class="sort"><span>{{item.webcase.DecTypeName}}</span><a v-bind:href="'/PeopleCenter/CenterCases/AddandUpdateCenterCase?CaseID='+item.webcase.CaseID" class="u-editworks-btn"><i class="fa fa-edit"></i>编辑</a></div>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- 页码开始 -->
+                <div class="listPage">
+                    <div class="team_page">
+                        
+                            <div class="M-box1" style="text-align:center;"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script type="text/javascript">
+
+
+        //设计师个数
+        var destotal = "0";
+        var noticeVue = new Vue({
+            el: '#caselist',
+            data: {
+                pageList: []
+            },
+            mounted: function () {
+                this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize = 9;
+                    //设计师分页Ajax
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "../../Handler/GetPageListAjax.ashx",
+                        data: {
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            peopleID:@webpeople.PeopleID,
+                            methodname: "GetDecCaseList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+
+                                destotal = datajson.recordcount;
+                               
+                                //列出页码,jq分页控件
+                                $('.M-box1').pagination({
+                                    totalData: datajson.recordcount,
+                                    showData: PageSize,
+                                    coping: true,
+                                    current: pageIndex,
+                                    callback: _self.pageselectCallback
+                                });
+                                Vue.nextTick(function () {
+                                    //样式
+                                });
+                            } else {
+                                _self.pageList =[];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            _self.pageList =[];
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+
+
+</script>
+}

@@ -1,0 +1,110 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.Service
+@model AIYunNet.CMS.Domain.Model.WebCompany
+@{
+    ViewBag.Title = "CompanyTuBaDesignerDetail";
+    Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
+    WebPeople people = ViewBag.people as WebPeople;
+    WebCommonService webCommonService = new WebCommonService();
+}
+@{ Html.RenderPartial("_CompanyTuBaHead");}
+<div id="content">
+    <div class="zgs_nav_div">
+        <div class="znd">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span>@Model.CompanyName</span><em></em>
+                    </a>
+                </li>
+                <li>
+                    <a href="/DecorationCompany/CompanyTuBaDesignerList?companyID=@Model.CompanyID">
+                        <span>设计团队</span><em></em>
+                    </a>
+                </li>
+                <li class="on">@people.PeopleName</li>
+            </ul>
+        </div>
+    </div>
+
+    <style>
+        .zgs_id_left img {
+            width: 100px;
+        }
+    </style>
+    <div class="main_frame clearfix">
+        <div class="zgs_innerpage_left">
+            <ul>
+                <li>
+                    <a href="/DecorationCompany/CompanyTuBaDesignerList?companyID=@Model.CompanyID" class="on">全部团队成员</a>
+                    @foreach (var item in ViewBag.peoplepositionlist as List<WebLookup>)
+                    {
+                        <a href="/DecorationCompany/CompanyTuBaDesignerList?companyID=@Model.CompanyID" hidefocus="true" rel="nofollow">@item.Description</a>
+                    }
+                </li>
+            </ul>
+        </div>
+        <div class="zgs_innerpage_right">
+            <div class="zgs_i_designer">
+                <div class="zgs_id_left">
+                    <img src="@AppSettingsHelper.ImgUrl@people.thumbnailImage" width="100" height="100" alt="@people.PeopleName">
+                    <div class="shade"></div>
+                    <a href="javascript:void(0)" onclick="bookStylist({toid:'478250',s_source:75, ptag:'1_5_2_2'});">预约此设计师</a>
+                    <div class="zgs_prama" style="display:none;">
+                        <span>
+                            <em>口碑值</em>
+                            <b>20</b>
+                        </span>
+                        <span>
+                            <em>活跃值</em>
+                            <b>0</b>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="zgs_id_right">
+                    <dl>
+                        <dt>
+                            @people.PeopleName <em>@webCommonService.GetLookupDesc("people_position", people.PeoplePositionID.ToString())</em>
+                        </dt>
+                        <dd>
+                            <span>设计理念</span>
+                            <p>@people.PeopleMotto</p>
+                        </dd>
+                        <dd>
+                            <span>个人介绍</span>
+                            <p>
+                                @people.PeopleInfo
+                            </p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="design_work">
+                <h3>设计作品</h3>
+                <span></span>
+                <em>@people.CaseCount</em>
+            </div>
+            <ul>
+                @foreach (var item in ViewBag.caselist as List<WebCase>)
+                {
+                    <li>
+                        <a href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@Model.CompanyID" target="_blank">
+                            <img alt="@item.CaseTitle" src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" width="240" height="168">
+                            <div class="zgs_dc_layer"></div>
+                            <div class="zgs_dc_content">
+                                <span>@item.CaseTitle</span>
+                                <em class="zgs_dc_no"></em>
+                                <em class="zgs_dc_date">@item.EditOn.ToString("yyyy-MM-dd") </em>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+<span class="clear">&nbsp;</span>
+</div>
+

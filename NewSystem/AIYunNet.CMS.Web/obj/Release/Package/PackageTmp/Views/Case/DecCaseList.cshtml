@@ -1,0 +1,302 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecCaseList";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+    WebCommonService webCommen = new WebCommonService();
+    WebPeopleService webpeopleSer = new WebPeopleService();
+    WebCompanyService webcompanySer = new WebCompanyService();
+    List<WebLookup> stylelist = webCommen.GetLookupList("Case_style");//风格
+    List<WebLookup> costarealist = webCommen.GetLookupList("Case_cost_area");//造价
+    List<WebLookup> housetypelist = webCommen.GetLookupList("Case_house_type");//户型
+    List<WebLookup> housearealist = webCommen.GetLookupList("Case_house_area");//面积
+    List<WebLookup> gzStylelist = webCommen.GetLookupList("Case_gz_style");//工装风格
+    int DecType = string.IsNullOrEmpty(Request["DecType"]) ? 1 : Convert.ToInt32(Request["DecType"]);
+
+}
+<link href="~/Content/design/sheji.caselist.css" rel="stylesheet" />
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+        .fiter .fiter_line .list {
+    width: 1045px;
+}
+</style>
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    @if (DecType == 1)
+                    {
+                        <a href="#">精选家装</a>
+                    }
+                    else
+                    {<a href="#">精选工装</a> }
+                </li>
+            </ul>
+        </div>
+        <!-- 筛选框 -->
+        <div class="fiter">
+            @if (DecType == 1)
+            {
+                <div class="fiter_line">
+                    <span class="column">风格：</span>
+                    <div class="list" id="stylelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in stylelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="fiter_line">
+                    <span class="column">户型：</span>
+                    <div class="list" id="housetypelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in housetypelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="fiter_line">
+                    <span class="column">风格：</span>
+                    <div class="list" id="gzStylelist">
+                        <a href="javascript:void(0);" class="onselect">
+                            <span>全部</span>
+                            <input type="hidden" value="0">
+                        </a>
+                        @foreach (WebLookup item in gzStylelist)
+                        {
+                            <a href="javascript:void(0);" class="">
+                                <span>@item.Description</span>
+                                <input type="hidden" value="@item.Code">
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            }
+            <div class="fiter_line">
+                <span class="column">造价：</span>
+                <div class="list" id="costarealist">
+                    <a href="javascript:void(0);" class="onselect">
+                        <span>全部</span>
+                        <input type="hidden" value="0">
+                    </a>
+                    @foreach (WebLookup item in costarealist)
+                    {
+                        <a href="javascript:void(0);" class="">
+                            <span>@item.Description</span>
+                            <input type="hidden" value="@item.Code">
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="fiter_line">
+                <span class="column">面积：</span>
+                <div class="list" id="housearealist">
+                    <a href="javascript:void(0);" class="onselect">
+                        <span>全部</span>
+                        <input type="hidden" value="0">
+                    </a>
+                    @foreach (WebLookup item in housearealist)
+                    {
+                        <a href="javascript:void(0);" class="">
+                            <span>@item.Description</span>
+                            <input type="hidden" value="@item.Code">
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- 筛选框 END -->
+        <!-- 列表 -->
+        <div class="case-list-box clearfix">
+            @foreach (WebCase item in ViewBag.hotlist)
+            {
+                <div class="case-list case-list-hot">
+                    <i class="icon-hot">热门推荐</i>
+                    <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@DecType" target="_blank" alt="@item.CaseTitle"><img src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" alt="@item.CaseTitle" width="282" height="282" style="display: inline;"></a>
+                    <div class="case-info">
+                        <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@DecType" target="_blank" alt="@item.CaseTitle" class="title ect">@item.CaseTitle</a>
+                        @if (DecType == 1)
+                        {
+                            <span class="space cut-line">@webCommen.GetLookupDesc("Case_house_type", item.HouseType.ToString())</span>
+                            <span class="style cut-line">@webCommen.GetLookupDesc("Case_style", item.Style.ToString())</span>
+                        }
+                        else
+                        {
+                            <span class="style cut-line">@webCommen.GetLookupDesc("Case_gz_style", item.GzStyle.ToString())</span>
+                        }
+                        <span class="area cut-line">@webCommen.GetLookupDesc("Case_house_area", item.HouseArea.ToString())</span>
+                        <span class="price">@webCommen.GetLookupDesc("Case_cost_area", item.CostArea.ToString())</span>
+                    </div>
+                    @if (item.CompanyID != 0)
+                    {
+                        <div class="case-sjs">
+                            <div class="head float_l"><img src="@AppSettingsHelper.ImgUrl@webcompanySer.GetWebCompanyByID(item.CompanyID).thumbnailImage" alt="@webcompanySer.GetWebCompanyByID(item.CompanyID).CompanyName" width="22" height="22"></div>
+                            <div class="nick ect float_l">装修公司：<a class="show-sjs-info" href="/DecorationCompany/CompanyTuBa?companyID=@item.CompanyID" target="_blank">@webcompanySer.GetWebCompanyByID(item.CompanyID).CompanyName</a></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="case-sjs">
+                            <div class="head float_l"><img src="@AppSettingsHelper.ImgUrl@webpeopleSer.GetWebPeopleByID(item.PeopleID).thumbnailImage" alt="@webpeopleSer.GetWebPeopleByID(item.PeopleID).PeopleName" width="22" height="22"></div>
+                            <div class="nick ect float_l">设计师：<a class="show-sjs-info" href="/Workers/DecDesignerIndex?peopleID=@item.PeopleID" target="_blank">@webpeopleSer.GetWebPeopleByID(item.PeopleID).PeopleName</a></div>
+                        </div>
+                    }
+                </div>
+            }
+            <div class="case-list" v-for="item in pageList">
+                <a v-bind:href="'/Case/DecCaseDetail?CaseID='+item.webcase.CaseID +'&DecType=@DecType'" target="_blank" alt="item.webcase.CaseTitle"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.webcase.CaseImageBig" alt="item.webcase.CaseTitle" width="282" height="282" style="display: inline;"></a>
+                <div class="case-info">
+                    <a v-bind:href="'/Case/DecCaseDetail?CaseID='+item.webcase.CaseID +'&DecType=@DecType'" target="_blank" alt="item.webcase.CaseTitle" class="title ect">{{item.webcase.CaseTitle}}</a>
+                    @if (DecType == 1)
+                    {
+                        <span class="space cut-line">{{item.webcase.HouseTypeName}}</span>
+                        <span class="style cut-line">{{item.webcase.StyleName}}</span>
+                    }
+                    else
+                    {
+                        <span class="space cut-line">{{item.webcase.GzStyleName}}</span>
+                    }   
+                    <span class="area cut-line">{{item.webcase.HouseAreaName}}</span>
+                    <span class="price">{{item.webcase.CostAreaName}}</span>
+                </div>
+                <div class="case-sjs" v-if="item.company.CompanyID!== 0">
+                    <div class="head float_l"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.company.thumbnailImage" alt="item.company.CompanyName" width="22" height="22"></div>
+                    <div class="nick ect float_l">装修公司：<a class="show-sjs-info" v-bind:href="'/DecorationCompany/CompanyTuBa?companyID='+item.company.CompanyID" target="_blank">{{item.company.CompanyName}}</a></div>
+                </div>
+                <div class="case-sjs" v-else="item.designer.PeopleID!== 0">
+                    <div class="head float_l"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.designer.thumbnailImage" alt="item.designer.PeopleName" width="22" height="22"></div>
+                    <div class="nick ect float_l">设计师：<a class="show-sjs-info" v-bind:href="'/Workers/DecDesignerIndex?peopleID='+item.designer.PeopleID" target="_blank">{{item.designer.PeopleName}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <p class="page_num">
+
+                <div class="M-box1" style="text-align:center;"></div>
+
+            </p>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {
+        //隐藏链接
+        $(".wrap_link").hide();
+        //点击分类改变样式
+        $(".list >a").click(function () {
+            $(this).addClass("onselect").prevAll("a").removeClass();
+            $(this).nextAll("a").removeClass();
+            noticeVue.GetPageList(1);
+        });
+        var noticeVue = new Vue({
+            el: '.case-list-box',
+            data: {
+                pageList: []
+            },
+            mounted: function () {
+                this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize = 20;
+
+                    var styleid = $("#stylelist > .onselect > input").val();
+                    var housetypeid = $("#housetypelist > .onselect > input").val();
+                    var costareaid = $("#costarealist > .onselect > input").val();
+                    var houseareaid = $("#housearealist > .onselect > input").val();
+                    var gzstyleid = $("#gzStylelist > .onselect > input").val();
+                    var DecType = "@DecType";
+                    var SortOrder = $("#SortOrder").val();
+                    //设计师分页Ajax
+                    $.ajax({
+                        async: true,
+                        type: "post",
+                        url: "../Handler/GetPageListAjax.ashx",
+                        data: {
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            styleid: styleid,
+                            housetypeid: housetypeid,
+                            costareaid: costareaid,
+                            houseareaid: houseareaid,
+                            gzstyleid:gzstyleid,
+                            SortOrder: SortOrder,
+                            DecType : DecType,
+                            methodname: "GetDecCaseList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+                                if (datajson.list != null) {
+                                    destotal = datajson.recordcount;
+                                    //列出页码,jq分页控件
+                                    $('.M-box1').pagination({
+                                        totalData: datajson.recordcount,
+                                        showData: PageSize,
+                                        coping: true,
+                                        current: pageIndex,
+                                        callback: _self.pageselectCallback
+                                    });
+                                } else {
+                                    _self.pageList = [];
+                                }
+
+                            } else {
+                                //$("#caselist").empty();
+                                _self.pageList = [];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            _self.pageList = [];
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+
+    })
+</script>

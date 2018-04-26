@@ -1,0 +1,475 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "DecCompanyList";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+}
+
+
+<link href="~/Content/design/sheji.companylist.css" rel="stylesheet" />
+<link href="~/Content/design/sheji.designerlist.css" rel="stylesheet" />
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+    .zgs_company_list ul li {
+        border-bottom: 8px solid #f4f4f4;
+        padding-bottom: 0px;
+    }
+    .M-box1 {
+        width: 938px;
+        height: 0px;
+    }
+</style>
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/index/homeindex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/DecorationCompany/DecCompanyList">装修公司</a>
+                </li>
+                <span></span>
+            </ul>
+        </div>
+        <!-- 左栏 -->
+        <div class="content_left" id="zsjList">
+            <!-- 筛选框 -->
+            <div class="fiter">
+                <div class="fiter_line">
+                    <span class="column">服务地区：</span>
+                    <div class="list" id="AreasID">
+                        <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                        @foreach (var item in ViewBag.t_Arealist as List<t_Area>)
+                        {
+                            <a href="javascript:void(0)" class=""><span>@item.area</span><input type="hidden" value="@item.areaID" /></a>
+                        }
+                    </div>
+                </div>
+                <div class="fiter_line">
+                    <span class="column">装修类型：</span>
+                    <div class="list" id="Typelist">
+                        <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                        @foreach (WebLookup item in ViewBag.Typelist as List<WebLookup>)
+                        {
+                            <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code" /></a>
+                        }
+                    </div>
+                </div>
+                <div class="fiter_line">
+                    <span class="column">专长风格：</span>
+                    <div class="list" id="Stylelist">
+                        <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                        @foreach (WebLookup item in ViewBag.Stylelist as List<WebLookup>)
+                        {
+                            <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code" /></a>
+                        }
+                    </div>
+                </div>
+                <div class="fiter_line">
+                    <span class="column">承接价位：</span>
+                    <div class="list" id="Pricelist">
+                        <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                        @foreach (WebLookup item in ViewBag.Pricelist as List<WebLookup>)
+                        {
+                            <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code" /></a>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- 筛选框 END -->
+            <!-- 排序框 -->
+            <div class="sort_common">
+                <div class="sort_list" id="sort">
+                    <a href="javascript:void(0)" class="on" rel="nofollow" id="default">默认排序<span class=""></span></a>
+                    <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CaseCount">案例个数<span class="icons"></span></a>
+                    <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CollectCount">评价数<span class="icons"></span></a>
+                    @*<a href="javascript:void(0)" class="" rel="nofollow" value="desc" id=""><span class="icons"></span></a>*@
+                    <input id="SortOrder" type="hidden" value="" />
+                </div>
+                <div class="small_page">
+                    <a href="javascript:void();"><span class="total_saw"></span><span></span></a>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $("#sort > a").val("desc");
+                    $("#sort > a").click(function () {
+                        if ($(this).attr("id") == "default") {
+                            var SortOrder1 = " ";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        } else if ($(this).val() == "desc") {
+                            var SortOrder1 = $(this).attr("id") + " " + $(this).val() + ",";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).val("asc");
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        } else if ($(this).val() == "asc") {
+                            var SortOrder1 = $(this).attr("id") + " " + $(this).val() + ",";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).val("desc");
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        }
+                    });
+                })
+            </script>
+            <!-- 公司列表 -->
+            
+                <div class="zgs_company_list">
+                    <ul style="">
+                        <li id="" data-ad="" v-for="item in pageList">
+                            <div class="zgscl_container">
+                                <a v-bind:href="'/DecorationCompany/CompanyTuBa?companyID='+item.CompanyID" target="_blank" class="zgscl_logo" rel="nofollow">
+                                    <img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.CompanyImage" v-bind:alt="item.CompanyName" width="138" height="138">
+                                </a>
+                                <div class="zgsclc_data">
+                                    <span class="zd_one">
+                                        <h3>
+                                            <a v-bind:href="'/DecorationCompany/CompanyTuBa?companyID='+item.CompanyID" target="_blank" class="zgscl_name">{{item.CompanyName}}</a>
+                                        </h3>
+                                    </span>
+                                    <span class="zd_two">
+                                        <i v-if="item.IsAuthentication" class="zdq_3" title="该公司营业执照已认证"></i>                              
+                                        <i v-if="item.IsFamousEnterprise" class="zdq_4" title="认证公司"></i>
+                                        <i v-if="item.IsPreferentialActivity" class="zdq_5_no" title="优惠活动"></i>
+                                        <i v-if="item.IsBond" class="zdq_2" title="该公司已交保障金"></i>
+                                        <a href="javascript:void(0)" title="设计方案" target="_blank"><i class="zdq_6" title="设计方案"></i><em>{{item.CaseCount}}套</em></a>
+                                        <a href="javascript:void(0)" title="工地数量" target="_blank">
+                                            <i class="zdq_7" title="工地数量"></i>
+                                            <em>{{item.InBuildingCount}}个</em>
+                                        </a>
+                                        <a href="javascript:void(0)" title="评价次数" target="_blank" rel="nofollow">
+                                            <i class="zdq_8" title="评价次数"></i>
+                                            <em> {{item.CommentCount}}次</em>
+                                        </a>
+
+                                    </span>
+                                    <span class="zd_three">
+                                        <em></em>
+                                        {{item.CompanyAddress}}
+                                    </span>
+                                    <div class="zgsclc_consult">
+                                        <a href="javascript:void(0)" class="free_design on" >找TA免费咨询</a>
+                                        <a href="javascript:void(0)" class="free_price" onclick="javascript:companyTender(this,478250)">免费帮我出报价</a>
+                                    </div>
+
+                                </div>
+                                <div class="zgsclc_koubei big_city">
+                                    <div class="zgsclc_level" style="display:none;">
+                                        <span class="text_gsdj">认证级别</span>
+                                        <div class="zgsclc_little_level">
+                                            <a href="http://bj.to8to.com/zs/fiveStar.php?uid=478250" target="_blank" rel="nofollow" class="zgscl_golden zgscl_a_gloden">
+                                                <em class="zgs_ico_golden5" title="模范公司"></em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="clear">
+                                        <span class="koubei_text">热<em style="margin:0 6px;">度</em>值</span>
+                                        <a class="zgscl_a_gloden" href="javascript:void(0)">
+                                            <span class="koubei_number">{{item.PageViewCount}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="clear" style="display:none;">
+                                        <span class="koubei_text">好<em style="margin:0 6px;">评</em>率</span>
+                                        <a class="zgscl_a_gloden" target="_blank" href="http://bj.to8to.com/zs/yz_dp.php?uid=478250">
+                                            <span class="koubei_number haoping-text">98.03%</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="special_service">
+                                <p>
+                                    公司注册时间<em>{{item.CompanyAddOn|time}}</em>
+                                </p>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <div class="page">
+                        <!-- 页码开始 -->
+                        <div class="M-box1" style="text-align:center;"></div>
+                    </div>
+                </div>
+            
+        </div>
+
+        <div class="content_right">
+            <!-- 申请设计列表 -->
+            <form action="#" id="subZbForm" name="subZbForm" method="post" class="sub_zb_form zsj_form" style="top: 0px;">
+                <i class="bg"></i>
+                <div class="remain_num clearfix numscale">
+                    <span>还剩</span>
+                    <span class="numitem hundreds"><em>1</em></span>
+                    <span class="numitem decade"><em>1</em></span>
+                    <span class="numitem place"><em>9</em></span>
+                    <span>名额</span>
+                </div>
+                <div class="input_form">
+                    <div class="box">
+                        <input class="input_txt" name="chenghu" id="sChenghu" type="text" placeholder="请输入您的称呼">
+                    </div>
+                    <div class="box">
+                        <input class="input_txt" name="phone" id="sPhone" type="text" placeholder="请输入手机号码">
+                    </div>
+                    <div class="box box_city fd-form-group fd-form-city district" id="city-box">
+                        <div class="fd-form-input">
+                            <input type="text" name="city" id="city" readonly="true" placeholder="请选择房屋所在城市" class="input_txt form-city">
+                            <i></i>
+                        </div>
+                    </div>
+                    <div class="box box_btn clear">
+                        <input type="button" class="smbmit_btn" id="zsjBtn" name="subs" value="立即申请">
+                        <i></i>
+                    </div>
+                    <div class="promise_txt">设计本将严格保护您的隐私<br>请放心填写</div>
+                </div>
+            </form>
+            <!-- 找设计师 上设计本 -->
+            <div class="doubt">
+                <p class="doubt_header">找设计师<em></em>上设计本</p>
+                <p class="total_1">百万设计师为您打造最佳定制</p>
+                <p class="total_2">在线担保交易保障您的资金安全</p>
+                <ul class="deal">
+                    <li class="deal_left">
+                        <span class="icon pic_fixed1"></span>
+                    </li>
+                    <li class="deal_right">
+                        <p class="total">不懂装修设计？</p>
+                        <p class="word">一对一客服服务，全程跟进解决设计装修疑惑</p>
+                    </li>
+                </ul>
+                <ul class="deal">
+                    <li class="deal_left">
+                        <span class="icon pic_fixed2"></span>
+                    </li>
+                    <li class="deal_right">
+                        <p class="total">担心设计不满意？</p>
+                        <p class="word">分阶段确认设计，每个阶段修改至您满意为止</p>
+                    </li>
+                </ul>
+                <ul class="deal">
+                    <li class="deal_left">
+                        <span class="icon pic_fixed3"></span>
+                    </li>
+                    <li class="deal_right">
+                        <p class="total">不放心在线交易？</p>
+                        <p class="word">设计本免费帮您保障资金安全，满意了才付设计费</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 图片 遇见 -->
+            <div class="picture">
+                <a href="http://www.shejiben.com/zb/?ptag=1_5_6_19" target="_blank">
+                    <img src="http://pic.shejiben.com/hot_sjb/429_7662.png?1510903224" width="220" height="280">
+                </a>
+            </div>
+
+            <!-- 设计师专访 -->
+            <div class="talk swiper-container" id="index_slider">
+                <div class="talk_header">
+                    <span>设计师专访</span>
+                    <div class="mark">
+                        <ul class="points slider_mark" id="pointer-2"><li class="swiper-pagination-switch"></li><li class="swiper-pagination-switch"></li><li class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></li></ul>
+                    </div>
+                </div>
+                <ul id="slider-wrap-2" class="slider-wrap swiper-wrapper" style="width: 1100px; transform: translate3d(-660px, 0px, 0px); transition-duration: 0.3s; height: 340px;">
+                    <li class="swiper-slide swiper-slide-duplicate" id="img3" style="width: 220px; height: 340px;">
+                        <a href="http://www.shejiben.com/zt/z344.html" target="_blank">
+                            <img src="http://pic1.shejiben.com/hot_sjb/428_9278.jpg?1511505339" width="220" height="240">
+                            <span class="pic_fixed">
+                                <span class="word">第<em>335</em>期</span>
+                            </span>
+                        </a>
+                        <p class="introduce"><b>韦忠<em>:</em></b>设计改变生活</p>
+                    </li>
+                    <li class="swiper-slide" id="img1" style="width: 220px; height: 340px;">
+                        <a href="http://www.shejiben.com/zt/z343.html" target="_blank">
+                            <img src="http://pic1.shejiben.com/hot_sjb/428_9055.jpg?1511250087" width="220" height="240">
+                            <span class="pic_fixed">
+                                <span class="word">第<em>334</em>期</span>
+                            </span>
+                        </a>
+                        <p class="introduce"><b>秦岳明<em>:</em></b>推崇自然人文，强调空间处理</p>
+                    </li>
+                    <li class="swiper-slide" id="img2" style="width: 220px; height: 340px;">
+                        <a href="http://www.shejiben.com/zt/z345.html" target="_blank">
+                            <img src="http://pic1.shejiben.com/hot_sjb/428_9230.jpg?1512371160" width="220" height="240">
+                            <span class="pic_fixed">
+                                <span class="word">第<em>336</em>期</span>
+                            </span>
+                        </a>
+                        <p class="introduce"><b>韩文强<em>:</em></b>与自然相关联的空间设计</p>
+                    </li>
+                    <li class="swiper-slide swiper-slide-visible swiper-slide-active" id="img3" style="width: 220px; height: 340px;">
+                        <a href="http://www.shejiben.com/zt/z344.html" target="_blank">
+                            <img src="http://pic1.shejiben.com/hot_sjb/428_9278.jpg?1511505339" width="220" height="240">
+                            <span class="pic_fixed">
+                                <span class="word">第<em>335</em>期</span>
+                            </span>
+                        </a>
+                        <p class="introduce"><b>韦忠<em>:</em></b>设计改变生活</p>
+                    </li>
+                    <li class="swiper-slide swiper-slide-duplicate" id="img1" style="width: 220px; height: 340px;">
+                        <a href="http://www.shejiben.com/zt/z343.html" target="_blank">
+                            <img src="http://pic1.shejiben.com/hot_sjb/428_9055.jpg?1511250087" width="220" height="240">
+                            <span class="pic_fixed">
+                                <span class="word">第<em>334</em>期</span>
+                            </span>
+                        </a>
+                        <p class="introduce"><b>秦岳明<em>:</em></b>推崇自然人文，强调空间处理</p>
+                    </li>
+                </ul>
+                <div class="chain">
+                    <a href="http://www.shejiben.com/zt/" target="_blank">查看全部&gt;</a>
+                </div>
+            </div>
+        </div>
+        <!-- 右栏 END -->
+
+    </div>
+</div>
+<script type="text/javascript">
+        //点击分类改变样式
+        $(".list > a").click(function () {
+            $(this).addClass("onselect").prevAll("a").removeClass();
+            $(this).nextAll("a").removeClass();
+            noticeVue.GetPageList(1);
+        });
+        Vue.filter('time',
+       function (value) {
+           var date = new Date(value);
+           Y = date.getFullYear(),
+           m = date.getMonth() + 1,
+           d = date.getDate(),
+           H = date.getHours(),
+           i = date.getMinutes(),
+           s = date.getSeconds();
+           if (m < 10) {
+               m = '0' + m;
+           }
+           if (d < 10) {
+               d = '0' + d;
+           }
+           if (H < 10) {
+               H = '0' + H;
+           }
+           if (i < 10) {
+               i = '0' + i;
+           }
+           if (s < 10) {
+               s = '0' + s;
+           }
+           var t = Y + '年' + m + '月' + d + '日';
+           return t;
+       });
+        var noticeVue = new Vue({
+            el: '.zgs_company_list',
+            data: {
+                pageList: []
+            },
+            mounted: function () {
+                this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize = 15;
+                    var AreasID = $("#AreasID > .onselect > input").val();
+                    var Typelist = $("#Typelist > .onselect > input").val();
+                    var Stylelist = $("#Stylelist > .onselect > input").val();
+                    var Pricelist = $("#Pricelist > .onselect > input").val();
+                    var SortOrder = $("#SortOrder").val();
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "../Handler/GetPageListAjax.ashx",
+                        data: {
+                            mkjcitycode: $("#mkjcitycode").val(),
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            Typelist: Typelist,
+                            AreasID:AreasID,
+                            Stylelist: Stylelist,
+                            Pricelist: Pricelist,
+                            SortOrder: SortOrder,
+                            methodname: "GetDecCompanyList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+                                if (_self.pageList != null) {
+                                    conpanytotal = datajson.recordcount;
+                                    //列出页码,jq分页控件
+                                    $('.M-box1').pagination({
+                                        totalData: datajson.recordcount,
+                                        showData: PageSize,
+                                        coping: true,
+                                        current: pageIndex,
+                                        callback: _self.pageselectCallback
+                                    });
+
+                                    Vue.nextTick(function () {
+                                        //样式
+                                        //页面层
+                                        $(".free_design").click(function () {
+                                            layer.open({
+                                                type: 2,
+                                                scrollbar: false,
+                                                title: '登陆',
+                                                shadeClose: true,
+                                                shade: 0.8,
+                                                area: ['25%', '60%'],
+
+                                                content: ['/PeopleCenter/UserCenter/LoinOnButton', 'no'],
+
+                                            });
+                                        });
+                                    });
+                                } else {
+                                    _self.pageList = [];
+                                    Vue.nextTick(function () {
+                                        //样式
+                                        
+                                    });
+                                }
+
+                            } else {
+                                _self.pageList = [];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            alert('Ajax error!');
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+</script>
+

@@ -1,0 +1,268 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "DecWorkerList";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+}
+<link href="~/Content/design/sheji.caselist.css" rel="stylesheet" />
+<link href="~/Content/design/sheji.workleader.css" rel="stylesheet" />
+<link href="~/Content/design/sheji.workerlist.css" rel="stylesheet" />
+<style>
+    .wrap_1180 .new_top_bar, .wrap_1180 .index_logo, .wrap_1180 .top_menu, .wrap_1180 .content, .wrap_1180 .cppyright_content {
+        width: 1180px;
+    }
+    .fiter .fiter_line .list {
+    width: 1045px;
+}
+    .w-recommend .recommend-tittle p {
+    width: 100px;
+}
+</style>
+
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="#">找工长</a> 
+                </li>
+            </ul>
+        </div>
+        <!-- 筛选框 -->
+        <div class="fiter">
+            <div class="fiter_line">
+                <span class="column">服务地区：</span>
+                <div class="list" id="AreasID">
+                    <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                    @foreach (var item in ViewBag.t_Arealist as List<t_Area>)
+                    {
+                        <a href="javascript:void(0)" class=""><span>@item.area</span><input type="hidden" value="@item.areaID" /></a>
+                    }
+                </div>
+            </div>
+            <div class="fiter_line">
+                <span class="column">装修工种：</span>
+                <div class="list" id="positionID">
+                    <a rel="nofollow" href="javascript:void(0)" class="onselect"><span>不限</span><input type="hidden" value="0" /></a>
+                    @foreach (var item in ViewBag.positionlist as List<WebLookup>)
+                    {
+                        <a href="javascript:void(0)" class=""><span>@item.Description</span><input type="hidden" value="@item.Code" /></a>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- 筛选框 END -->
+        <!-- 排序框 -->
+        <div class="sort_common">
+            <div class="sort_list" id="sort">
+                <a href="javascript:void(0)" class="on" rel="nofollow" id="default">默认排序<span class=""></span></a>
+                <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CaseCount">在建工地数<span class="icons"></span></a>
+                <a href="javascript:void(0)" class="" rel="nofollow" value="desc" id="CollectCount">保证金<span class="icons"></span></a>
+                @*<a href="javascript:void(0)" class="" rel="nofollow" value="desc" id=""><span class="icons"></span></a>*@
+                <input id="SortOrder" type="hidden" value="" />
+            </div>
+            <div class="small_page">
+                <a href="javascript:void();"><span class="total_saw"></span><span></span></a>
+            </div>
+        </div>
+        <script>
+                $(function () {
+                    $("#sort > a").val("desc");
+                    $("#sort > a").click(function () {
+                        if ($(this).attr("id") == "default") {
+                            var SortOrder1 = " ";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        } else if ($(this).val() == "desc") {
+                            var SortOrder1 = $(this).attr("id") + " " + $(this).val() + ",";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).val("asc");
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        } else if ($(this).val() == "asc") {
+                            var SortOrder1 = $(this).attr("id") + " " + $(this).val() + ",";
+                            $("#SortOrder").val(SortOrder1);
+                            $(this).val("desc");
+                            $(this).attr("class", "on");
+                            $(this).prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            noticeVue.GetPageList(1);
+                        }
+                    });
+                })
+        </script>
+        <!-- 列表 -->
+        <div class="bylj-content-box clearfix ">
+            <div class="bylj-little-box fl " v-for="item in pageList">
+                <div class="clearfix">
+                    <div class="little-box-img fl">
+                        <a target="_blank" v-bind:href="'/Workers/DecWorkerDetail?WorkerID='+item.WorkerID">
+                            <img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.WorkerImage" style="width: 130px;
+                                    height: 130px" alt="item.WorkerName" title="item.WorkerName">
+                        </a>
+                    </div>
+                    <div class="little-box-list fl">
+                        <ul>
+                            <li class="first-li">
+                                <a target="_blank"  v-bind:href="'/Workers/DecWorkerDetail?WorkerID='+item.WorkerID">
+                                    {{item.WorkerName}}
+                                </a> 
+                                <em class="m_vip"></em>
+                                @*<a style="background: none; width: auto; vertical-align: middle; padding-left: 20px;
+                                        cursor: pointer">
+                                    <img src="/images/online.gif">
+                                </a>*@
+                            </li>
+
+                            @*<li>
+                                <p style="cursor: pointer" onclick="ShowStar()">
+                                    <img title="一金星(星数越多，级别越高)" src="http://wh.gz360.com/Images/jinstar.gif">
+                                </p>
+                            </li>*@
+                            
+                            <li>工种：<span>{{item.WorkerPosition}}</span></li>
+                            <li>从业：<span>{{item.WorkYears}}</span></li>
+                            <li>联系：<span style="display:none;">{{item.WorkerPhone}}</span><span class="Tel" title="点击查看电话" style="background: #46be8c;border: 1px solid #333;margin:2px;"><a href="javascript:void(0)" style="color: #fff;">查看电话</a></span></li>
+                            <li>
+                                等级：<span v-bind:title="item.Stars">
+                                         <img v-for="n in item.Huang" src="~/Content/imgStar/jinguan.gif" />
+                                         <img v-for="n in item.Ying" src="~/Content/imgStar/huangguan.gif" />
+                                         <img v-for="n in item.Xing" src="~/Content/imgStar/zuanshi.gif" />
+                                </span>
+                            </li>
+
+
+                        </ul>
+                        <script>
+                            $(function () {
+                                $(".Tel > a").click(function () {
+                                    $(this).parent("span").hide();
+                                    $(this).parent("span").prevAll("span").show();
+                                })
+                            })
+                        </script>
+                    </div>
+                </div>
+                <div class="w-recommend">
+                    <div class="recommend-tittle clearfix">
+                        <p class="fl" style="padding-left: 12px;">
+                            【一句话评价】
+                        </p>
+                        <div class="fl">
+                            <img src="~/Content/design/img/w_line_img_14.png" />
+                        </div>
+                    </div>
+                    <p class="xzheight">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.WorkerMotto}}
+                        @*<a href="../Comment/list-杜腊寅.html" target="_blank">
+
+                        </a>*@
+
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="page">
+      
+
+                <div class="M-box1" style="text-align:center;"></div>
+
+            
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+        //点击分类改变样式
+        $(".list > a").click(function () {
+            $(this).addClass("onselect").prevAll("a").removeClass();
+            $(this).nextAll("a").removeClass();
+            noticeVue.GetPageList(1);
+        });
+
+        var noticeVue = new Vue({
+            el: '.bylj-content-box',
+            data: {
+                pageList: [],
+            },
+            mounted: function () {
+               this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize = 20;
+                    var AreasID = $("#AreasID > .onselect > input").val();
+                    var positionID = $("#positionID > .onselect > input").val();
+                    var SortOrder = $("#SortOrder").val();
+                    //设计师分页Ajax
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "../Handler/GetPageListAjax.ashx",
+                        data: {
+                            mkjcitycode: $("#mkjcitycode").val(),
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            AreasID: AreasID,
+                            positionID:positionID,
+                            WorkerCategory:'装修工人',
+                            SortOrder:SortOrder,
+                            methodname: "GetDecWorkList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+                                if (_self.pageList != null) {
+                                    destotal = datajson.recordcount;
+                                    //列出页码,jq分页控件
+                                    $('.M-box1').pagination({
+                                        totalData: datajson.recordcount,
+                                        showData: PageSize,
+                                        coping: true,
+                                        current: pageIndex,
+                                        callback: _self.pageselectCallback
+                                    });
+
+                                } else {
+                                    _self.pageList = [];
+                                }
+
+                            } else {
+                                _self.pageList = [];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            _self.pageList = [];
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+
+
+</script>

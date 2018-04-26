@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/dist/css/AdminLTE.css" rel="stylesheet" />
+    <link href="~/Content/Css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/jQueryUI/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/bootstrap3-dialog/css/bootstrap-dialog.min.css" rel="stylesheet" />
+
+    <script src="~/Content/Plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="~/Content/Plugins/jQueryUI/jquery-ui.js"></script>
+    <script src="~/Content/Plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/Plugins/dist/js/app.js"></script>
+    <script src="~/Content/Plugins/dist/js/demo.js"></script>
+    <script src="~/Content/Plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/Plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Content/Plugins/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
+    <script src="~/Content/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Content/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <style>
+        .new_button_style {
+            width: 100px;
+            margin-right: 10px;
+        }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div class="content-wrapper">
+        <section class="content">
+            @RenderBody()
+        </section>
+    </div>
+    @RenderSection("Scripts", false)
+</body>
+</html>

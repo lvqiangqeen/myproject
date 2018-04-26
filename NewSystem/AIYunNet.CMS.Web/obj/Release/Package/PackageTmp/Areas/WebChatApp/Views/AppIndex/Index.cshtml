@@ -1,0 +1,229 @@
+﻿@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/WebChatApp/Views/Shared/_Layout.cshtml";
+    List<WebRecommend> webCompanys = ViewBag.WebCompanys as List<WebRecommend>;
+    List<WebRecommend> webDesigners = ViewBag.WebDesigners as List<WebRecommend>;
+    List<WebRecommend> webCases = ViewBag.WebCases as List<WebRecommend>;
+    List<WebRecommend> webWorkLeaders = ViewBag.webWorkLeaders as List<WebRecommend>;
+}
+
+@*首页轮播*@
+<div class="slider-container full-bottom">
+    <div class="homepage-slider" data-snap-ignore="true">
+        @foreach (WebRecommend re in ViewBag.Weblunbo)
+        {
+            <div>
+                <a href="@re.RecWechartUrl"><img src="@AppSettingsHelper.thumbnailImage@re.thumbnailImage" alt="img" style="width:375px;height:211px;"></a>
+            </div>
+        }
+    </div>
+</div>
+<div class="header-clear"></div>
+@*首页菜单*@
+<div class="landing-navigation">
+    <div class="landing-navigation-tablet-top-adjustment"></div>
+    <a href="/WebChatApp/AppCompanys/CompanysList">        
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/1s.jpg" alt="img">
+        <em>装修公司</em>
+    </a>
+    <a href="/WebChatApp/AppPeoples/DesignerList">       
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/3s.jpg" alt="img">
+        <em>设计师</em>
+    </a>
+    <a href="/WebChatApp/Appcase/caselist">       
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/2s.jpg" alt="img">
+        <em>装修案例</em>
+    </a>
+    <a href="/WebChatApp/AppPeoples/WorkerList">        
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/4s.jpg" alt="img">
+        <em>装修工人</em>
+    </a>
+    <a href="/WebChatApp/AppShopCenter/ShopCenter/ShopHomePage">       
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/5s.jpg" alt="img">
+        <em>装修商城</em>
+    </a>
+    <a href="contact.html">
+        @*<img class="nav-icon" src="/content/WebChatApp/TINYBAR/images/icons/misc/mail.png" alt="img">
+            <div class="nav-overlay"></div>*@
+        <img class="nav-image" src="/content/WebChatApp/TINYBAR/images/general-nature/6s.jpg" alt="img">
+        <em>联系我们</em>
+    </a>
+</div>
+<div class="decoration"></div>
+
+<div class="content">
+    <div class="content-heading full-bottom">
+        <h2>优秀案例</h2>
+        <em style="display:inline">我们会展示各种风格的案例，供您参考</em>
+        <a href="/WebChatApp/AppCase/caselist" style="float:right;display:inline">更多</a>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="container no-bottom">
+        @if (webCases != null && webCases.Count > 0)
+        {
+            <div class="one-half-responsive">
+                <p class="thumb-left no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCases[0].thumbnailImage" alt="img" style="border-radius:0">
+                    <a style="display:inline;" href="@webCases[0].RecWechartUrl"><strong>@webCases[3].RecommendName</strong></a>
+                    <em><br>@webCases[0].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCases != null && webCases.Count > 1)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive last-column">
+                <p class="thumb-right no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCases[1].thumbnailImage" style="border-radius:0" alt="img">
+                    <a href="@webCases[1].RecWechartUrl"><strong>@webCases[3].RecommendName</strong></a>
+                    <em><br>@webCases[1].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCases != null && webCases.Count > 2)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive">
+                <p class="thumb-left no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCases[2].thumbnailImage" style="border-radius:0" alt="img">
+                    <a style="display:inline;" href="@webCases[2].RecWechartUrl"><strong>@webCases[3].RecommendName</strong></a>
+                    <em><br>@webCases[2].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCases != null && webCases.Count > 3)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive last-column">
+                <p class="thumb-right no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCases[3].thumbnailImage" style="border-radius:0" alt="img">
+                    <a href="@webCases[3].RecWechartUrl"><strong>@webCases[3].RecommendName</strong></a>
+                    <em><br>@webCases[3].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+    </div>
+    <div class="decoration"></div>
+
+    <div class="content-heading full-bottom">
+        <h2>优秀设计师</h2>
+        <em style="display:inline">我们这有最优秀的设计师</em>
+        <a href="/WebChatApp/AppPeoples/DesignerList" style="float:right;display:inline">更多</a>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="container">
+        <a href="#" class="next-staff"></a>
+        <a href="#" class="prev-staff"></a>
+        <div class="staff-slider" data-snap-ignore="true">
+            @if (webDesigners != null && webDesigners.Count > 0)
+            {
+                foreach (WebRecommend designer in webDesigners)
+                {
+                    <div>
+                        <div class="staff-item">
+                            <img src="@AppSettingsHelper.ImgUrl@designer.thumbnailImage" alt="img">
+                            <h4>@designer.RecommendName</h4>                            
+                            <strong>@designer.RecommendInfo</strong>
+                            <a href="@designer.RecWechartUrl" class="button button-red center-button">详细信息</a>
+                        </div>
+                    </div>}
+            }
+        </div>
+    </div>
+    <div class="decoration"></div>
+
+    <div class="content-heading full-bottom">
+        <h2>推荐装修公司</h2>
+        <em style="display:inline">我们为您推荐最好的装修公司</em>
+        <a href="/WebChatApp/AppCompanys/CompanysList" style="float:right;display:inline">更多</a>
+    </div>
+    <div class="decoration"></div>
+    <div class="container no-bottom">
+        <!-- Page Columns-->
+        @if (webCompanys != null && webCompanys.Count > 0)
+        {
+            <div class="one-half-responsive">
+                <p class="thumb-left no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCompanys[0].thumbnailImage" alt="img">
+                    <a style="display:inline;" href="@webCompanys[0].RecWechartUrl"><strong>@webCompanys[0].RecommendName</strong></a>
+                    <em><br>@webCompanys[0].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCompanys != null && webCompanys.Count > 1)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive last-column">
+                <p class="thumb-right no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCompanys[1].thumbnailImage" alt="img">
+                    <a href="@webCompanys[1].RecWechartUrl"><strong>@webCompanys[1].RecommendName</strong></a>
+                    <em><br>@webCompanys[1].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCompanys != null && webCompanys.Count > 2)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive">
+                <p class="thumb-left no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCompanys[2].thumbnailImage" alt="img">
+                    <a style="display:inline;" href="@webCompanys[2].RecWechartUrl"><strong>@webCompanys[2].RecommendName</strong></a>
+                    <em><br>@webCompanys[2].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+        @if (webCompanys != null && webCompanys.Count > 3)
+        {
+            <div class="decoration hide-if-responsive"></div>
+            <div class="one-half-responsive last-column">
+                <p class="thumb-right no-bottom">
+                    <img src="@AppSettingsHelper.ImgUrl@webCompanys[3].thumbnailImage" alt="img">
+                    <a href="@webCompanys[3].RecWechartUrl"><strong>@webCompanys[3].RecommendName</strong></a>
+                    <em><br>@webCompanys[3].RecommendInfo </em>
+                </p>
+                <div class="thumb-clear"></div>
+            </div>
+        }
+    </div>
+    <div class="decoration"></div>
+
+    <div class="content-heading full-bottom">
+        <h2>装修工人</h2>
+        <em style="display:inline">我们为您提供更多的装修工人</em>
+        <a href="/WebChatApp/AppPeoples/WorkerList" style="float:right;display:inline">更多</a>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="portfolio-adaptive adaptive-three">
+        @if (webWorkLeaders != null && webWorkLeaders.Count > 0)
+        {
+            foreach (WebRecommend leader in webWorkLeaders)
+            {
+                <div class="adaptive-item" style="margin-bottom:5px;">
+                    <a href="@leader.RecWechartUrl" title="Caption Goes Here">
+                        <img class="responsive-image" style="margin-bottom:5px;" src="@AppSettingsHelper.ImgUrl@leader.thumbnailImage" alt="img">
+                    </a>
+                    <span>
+                        @leader.RecommendName
+                    </span>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="decoration"></div>
+
+</div>

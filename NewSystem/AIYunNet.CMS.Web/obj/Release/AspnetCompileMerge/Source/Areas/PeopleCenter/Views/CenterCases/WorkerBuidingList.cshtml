@@ -1,0 +1,148 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@model List<WebBuiding>
+@{
+    ViewBag.Title = "WorkerBuidingList";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+    int Workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
+}
+@section head{
+
+    <link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+    <style>
+        .centers_r_items .items-tit a.tit-name {
+    width: 100px;
+}
+    </style>
+}
+
+<div class="centers_mr">
+    <div class="centers_r_items">
+        <div class="items-tit">
+            <a class="tit-name active">我的装修案例</a>
+        </div>
+        <div class="action_area" style="padding:10px;">
+            <a id="addStageBtn" class="btn btn-primary" href="/PeopleCenter/CenterCases/AddOrEditBuidingStages?buidingID=0">添加装修案例</a>
+        </div>
+        <div class="items-con">
+            <!--如果没有数据<div class="items-con none-date">--->
+            <div class="ind-tuku u-c" id="buidinglist">
+                <ul>
+                    <li v-for="item in pageList">
+                        <div class="img"><a v-bind:href="'/Workers/DecBuidingDetail?WorkerID='+item.WorkerID +'&BuidingID='+item.BuidingID" target="_blank"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.BuidingImage" v-bind:alt="item.BuidingTitle"></a></div>
+                        <div class="info">
+                            <div class="name">{{item.BuidingTitle}}<span>浏览<em>{{item.PageViewCount}}</em>次</span></div>
+                            <div class="sort"><span>{{item.Price}}元</span>&nbsp;&nbsp;<span>{{item.Space}}m²</span>
+                                <a v-bind:href="'javascript:deleteBuiding('+item.BuidingID+')'"  class="u-editworks-btn"><i class="fa fa-trash-o"></i>删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a v-bind:href="'/PeopleCenter/CenterCases/AddOrEditBuidingStages?buidingID='+item.BuidingID" class="u-editworks-btn"><i class="fa fa-edit"></i>编辑</a>
+                                
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- 页码开始 -->
+                <div class="listPage">
+                    <div class="team_page">
+
+                        <div class="M-box1" style="text-align:center;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function deleteBuiding(buidingID) {
+            layer.confirm('确定要删除这条记录吗？', {
+                btn: ['确定', '取消']//按钮
+            }, function (index) {
+                layer.close(index);
+                //此处请求后台程序，下方是成功后的前台处理……
+                $.ajax({
+                    type: "post",
+                    url: "/PeopleCenter/CenterCases/DeleteWebBuiding",
+                    data: { buidingID: buidingID },
+                    success: function (data) {
+                        window.location.href = window.location.href;
+                    }
+                });
+            });
+        }
+        sessionStorage.setItem('lasturl',window.location.href);
+        var destotal = "0";
+        var noticeVue = new Vue({
+            el: '#buidinglist',
+            data: {
+                pageList: []
+            },
+            mounted: function () {
+                this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize = 9;
+                    //设计师分页Ajax
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "../../Handler/GetPageListAjax.ashx",
+                        data: {
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            DemandID:0,
+                            WorkerID:'@Workerid',
+                            methodname: "GetDecBuidingList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+
+                                destotal = datajson.recordcount;
+
+                                //列出页码,jq分页控件
+                                $('.M-box1').pagination({
+                                    totalData: datajson.recordcount,
+                                    showData: PageSize,
+                                    coping: true,
+                                    current: pageIndex,
+                                    callback: _self.pageselectCallback
+                                });
+                                Vue.nextTick(function () {
+                                    //样式
+                                });
+                            } else {
+                                _self.pageList =[];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            _self.pageList =[];
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+
+
+    </script>
+}
+
+
+
+

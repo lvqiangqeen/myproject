@@ -1,0 +1,103 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebBuiding
+@{
+    ViewBag.Title = "mobileBuidingDetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    List<WebBuidingStages> stageslist= ViewBag.stageslist;
+    DecDemand demand = ViewBag.demand;
+    WebWorkerService workerSer = new WebWorkerService();
+
+}
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script>
+    $(function () {
+        var title = '@Model.BuidingTitle';
+        var html = "<h1>"+title+"</h1>";
+        $("#header").append(html);
+    });
+</script>
+<div class="container" id="container">
+
+    <div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>
+    <ul class="details-price clearfix">
+        <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
+        <li>开工日期：@Model.StartTime</li>
+        <div><li style="float:left;width:40%;">类型：@demand.DemandTypeName</li><li style="float:left;width:60%;">户型：@demand.HouseType</li></div>
+    </ul>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>做工详情</h2></div>
+        <ul class="layui-timeline">
+            @foreach (WebBuidingStages item in stageslist)
+            {
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">@item.StageName</h3>
+                        @if (item.IsComplete)
+                        {
+                            <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                        }
+                        else
+                        {
+                            <p style="font-size: 20px;">该阶段项目未完成</p>
+                        }
+                        @if (item.Workerid != 0)
+                        {
+                            WebWorker worker = workerSer.GetWebWorkerByID(item.Workerid);
+                            <p style="margin-top:20px;width: 100%;color: #fa4b28;margin-bottom:0px;">合作工人：</p>
+                            <div style="width: 100%;height:50px;font-size:16px;">
+                                  <img class="mui-media-object" src="@AppSettingsHelper.ImgUrl@worker.thumbnailImage" style="width:50px;height:50px;border-radius:50px;">
+                                  @worker.WorkerName
+                            </div>
+                        }
+                        <p style="margin-top:10px;">
+                            <button class="layui-btn" onclick="javascript:stageUpdate(@Model.BuidingID,@item.StageID);">发布信息</button>
+                            @if (item.Workerid == 0)
+                            {
+                                <button class="layui-btn" style="background-color:#337ab7" onclick="javascript:worklist(@Model.BuidingID,@item.StageID);">寻找合作</button>
+                            }                           
+                        </p>
+
+                    </div>
+                </li>
+            }
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">项目竣工</h3>
+                    @if (Model.IsWorkerEnd == 1)
+                    {
+                        <p style="font-size: 20px;color:#009688;">项目已完成</p>
+                    }
+                    else
+                    {
+                        <p style="font-size: 20px;">项目未完成</p>
+                    }
+                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal">确认收工</button></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    @*<div class="min-price-bot">
+            <div class="min-price-tel"><a href="#">电话咨询</a></div>
+            <div class="min-price-order"><a href="reservation.html">我要预约</a></div>
+        </div>*@
+
+</div>
+
+<script>
+    function worklist(buidingID,StageID)
+    {
+        window.top.location.href = "/MobileApp/mOrder/SelectWorker?WorkerCategory=装修工人&positionID=0&buidingID="+buidingID+"&StageID="+StageID;
+    }
+    function stageUpdate(buidingID,StageID)
+    {
+        window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID="+buidingID+"&StageID="+StageID;
+    }
+
+</script>

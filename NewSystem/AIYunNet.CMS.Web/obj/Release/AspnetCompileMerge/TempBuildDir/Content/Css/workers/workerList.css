@@ -1,0 +1,212 @@
+#banner{
+	margin: 13px 0;
+}
+
+#main .w .works{
+	width: 274px;
+	height: 39px;
+	margin: 0 auto 17px;
+	font-size: 17px;
+	color: #595656;
+}
+#main .w .works .line_l{
+	width: 86px;
+	height: 1px;
+	background-color: #7a7878;
+	float: left;
+	margin-top: 8px;
+}
+#main .w .works .work{
+	float: left;
+	width: 102px;
+	text-align: center;
+	line-height: 17px;
+}
+#main .w .works .line_r{
+	width: 86px;
+	height: 1px;
+	background-color: #7a7878;
+	float: left;
+	margin-top: 8px;
+}
+#main .w .works p{
+	float: left;
+	width: 274px;
+	text-align: center;
+	text-transform:capitalize;
+	line-height: 31px;
+}
+
+#main > div > div.list > div:nth-child(1){
+	margin-top:16px; 
+}
+#main .w .list:last-child{
+	padding-bottom:20px; 
+}
+#main .w .list{
+	border-top: dotted 1px #7a7878;
+	border-bottom: dotted 1px #7a7878;
+}
+#main .w .works_list{
+	line-height: 38px;
+}
+#main .w .works_list span .b{
+	font-size: 14px;
+	color: #787575;
+	font-weight: bold;
+}
+#main .w .works_list span a{
+	color: #787575;
+	padding: 6px 8px;
+	border-radius: 4px;
+}
+#main .w .works_list span .now{
+	background-color: #ff742d;
+	color: #fff;
+}
+
+#main .w .details_cards{
+	margin-top: 55px;
+}
+#main .w .details_cards .card_l{
+	margin-bottom: 10px;
+	float: left;
+}
+#main > div > div.details_cards > div.cards_rows > div:nth-child(2n){
+	padding-left: 10px;	
+}
+#main .w .details_cards .card_l .portrait{
+	float: left;
+	border-radius: 6px;
+}
+    #main .w .details_cards .card_l .portrait > a > img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+#main .w .details_cards .card_l .card_intro{
+	float: left;
+	margin-left: 12px;
+	width: 360px;
+	height: 174px;
+	background-color: #e7e7e7;
+	border-radius: 6px;
+}
+#main>.w>.details_cards> div:nth-child(2n) .card_l .card_intro{
+	margin-left: 0;
+}
+#main>.w>.details_cards> div:nth-child(2n) .card_l .portrait{
+	margin-left: 12px;
+}
+#main>.w>.details_cards> div:nth-child(2n+1) .card_l .card_intro{
+	margin-left: 12px;
+}
+#main>.w>.details_cards> div:nth-child(2n+1) .card_l .portrait{
+	margin-left: 0;
+}
+#main .w .details_cards .card_l .card_intro .type{
+	margin: 15px 31px 8px 20px;	
+}
+#main .w .details_cards .card_l .card_intro .type .mg{
+	float: left;
+	background: url(/content/images/card_41.jpg) no-repeat 0 5px;
+}
+#main .w .details_cards .card_l .card_intro .type .mg span{
+	font-size: 14px;
+	line-height: 22px;
+	color: #666;
+	padding-left: 24px;
+}
+#main .w .details_cards .card_l .card_intro .type .ensure{
+	float: right;
+}
+
+#main .w .details_cards .card_l .card_intro .name{
+	margin: 0 31px 11px 20px;	
+}
+#main .w .details_cards .card_l .card_intro .name .p1{
+	float: left;
+	background: url(/content/images/card_46.jpg) no-repeat 0 6px;
+	padding-right: 44px;
+}
+#main .w .details_cards .card_l .card_intro .name .p1 span{
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+	padding-left: 24px;
+}
+#main .w .details_cards .card_l .card_intro .name .p2{
+	float: left;
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+	padding-left: 24px;
+}
+#main .w .details_cards .card_l .card_intro .name .p3{
+	float: right;
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+	padding-left: 24px;
+}
+#main .w .details_cards .card_l .card_intro .tel{
+	margin: 2px 31px 5px 20px;	
+	background: url(/content/images/card_50.jpg) no-repeat 3px 4px;
+}
+#main .w .details_cards .card_l .card_intro .tel p{
+	font-size: 14px;
+	line-height: 24px;
+	color: #666;
+	padding-left: 26px;
+}
+#main .w .details_cards .card_l .card_intro .address{
+	margin: 8px 20px 0 20px;	
+}
+#main .w .details_cards .card_l .card_intro .address .ad{
+	float: left;
+	background: url(/content/images/card_57.jpg) no-repeat 3px 4px;
+}
+#main .w .details_cards .card_l .card_intro .address .ad span{
+	font-size: 14px;
+	line-height: 26px;
+	color: #666;
+	padding-left: 26px;
+}
+#main .w .details_cards .card_l .card_intro .address .ad_r{
+	float: right;
+}
+#main .w .details_cards .card_l .card_intro .address .ad_r .ask{
+	width: 105px;
+	height: 28px;
+	background-color: #ec6813;
+	border-radius: 2px;
+	margin-top: 4px;
+}
+#main .w .details_cards .card_l .card_intro .address .ad_r .ask img{
+	float: left;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+#main .w .details_cards .card_l .card_intro .address .ad_r .ask span{
+	float: left;
+	font-size: 14px;
+	line-height: 28px;
+	color: #fff;
+	padding-left: 7px;
+}
+#main .w .team_page{
+	line-height: 292px;
+	text-align: center;
+	padding-bottom: 40px;
+}
+#main .w .team_page span a{
+	color: #000;
+	font-size: 12px;
+	padding: 11px;
+	border-radius: 2px;
+}
+#main .w .team_page span .now{
+	background-color: #ee5500;
+	color: #fff;
+}

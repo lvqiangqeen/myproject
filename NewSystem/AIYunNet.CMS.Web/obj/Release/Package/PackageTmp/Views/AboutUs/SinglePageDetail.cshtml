@@ -1,0 +1,62 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebRecommend
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "SinglePageDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content_wrapper">
+    <div class="container">
+        <div class="content_block no-sidebar row">
+            <div class="fl-container span12">
+                <div class="row">
+                    <div class="posts-block span12">
+                        <div class="contentarea">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <h2 class="title">@Model.RecommendName</h2>
+                                </div>
+                            </div><!-- .row-fluid -->
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="blog_post_preview">
+                                        @*<div class="featured_image_full">
+                                            <div class="slider-wrapper theme-default">
+                                                <div class="nivoSlider">
+                                                    <img src="images/slider/top_slide1.jpg" data-thumb="img/slider/top_slide1.jpg" alt="" />
+                                                    <img src="images/slider/top_slide2.jpg" data-thumb="img/slider/top_slide2.jpg" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                        @*<div class="blog_info">
+                                            <div class="blog_info_block">
+                                                <span class="date">25 april 2019</span>
+                                                <span class="skills">Skills Needed: HTML5, CSS3</span>
+                                                <span class="category">Categories <a rel="category tag" href="#">Photography,</a> <a rel="category tag" href="#">Wordpress</a></span>
+                                                <span class="url">Project URL: <a href="#">View Project</a></span>
+                                                <span class="blog_tags">Tags: <a rel="tag" href="#">lorem,</a> <a rel="tag" href="#">ipsum,</a> <a rel="tag" href="#">dolor,</a> <a rel="tag" href="#">sit amet</a></span>
+                                            </div>
+                                            <div class="portfolio_share">
+                                                <a href="#" class="ico_socialize_facebook2 ico_socialize type2"></a>
+                                                <a href="#" class="ico_socialize_twitter2 ico_socialize type2"></a>
+                                                <a href="#" class="ico_socialize_pinterest ico_socialize type2"></a>
+                                                <a href="#" class="ico_socialize_google2 ico_socialize type2"></a>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>*@
+                                        <article class="contentarea">
+                                            @Html.Raw(Model.RecommendContent)
+                                        </article>
+                                    </div><!--.blog_post_preview -->
+                                </div><!-- span12 -->
+                            </div><!-- .row-fluid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

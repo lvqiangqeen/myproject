@@ -1,0 +1,80 @@
+﻿@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@{
+    ViewBag.Title = "CompanysList";
+    Layout = "~/Areas/WebChatApp/Views/Shared/_Layout.cshtml";
+    IWebRecommend WebRecommendService = new WebRecommendService();
+    List<WebRecommend> webCompanys = WebRecommendService.GetWebRecommendList(6, 1);
+}
+@section head{
+}
+
+<div class="header-clear"></div>
+<div class="content">
+    <div class="container">
+        <div class="one-half-responsive">
+            @if (webCompanys != null && webCompanys.Count > 0)
+            {
+                <a href="@webCompanys[0].RecWechartUrl"><img src="@AppSettingsHelper.thumbnailImage@webCompanys[0].thumbnailImage" alt="img" style="width:375px;height:211px;"></a>
+            }
+        </div>
+    </div>
+
+    <div class="decoration"></div>
+    <div class="one-third-responsive">
+    </div>
+</div>
+<div class="header-clear"></div>
+@section Scripts{
+    @*  <script src="~/Content/TINYBAR/scripts/dropload.js"></script>*@
+    <script>
+        $(function () {
+            GetPageList(1);
+        });
+        function GetPageList(page) {
+
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '/WebChatApp/AppCompanys/GetCompanysList?pageIndex=' + page + '&PageSize=' + 6,
+                dataType: 'json',
+                success: function (data) {
+                    //var datajson = eval('(' + data + ')');
+                    page++;
+                    var result = "";
+                    var arrLen = 0;
+                    if (data.list != null) {
+                        arrLen = data.list.length;
+                    }
+                    $(".listcom").remove();
+                    if (arrLen > 0) {
+                        for (var i = 0; i < arrLen; i++) {
+                            result += '<a href="/WebChatApp/AppCompanys/CompanyDetail?CompanyID=' + data.list[i].CompanyID + '" class="user-list-item">'
+                                    + '<img src="@AppSettingsHelper.thumbnailImage' + data.list[i].thumbnailImage + '" alt="img" style="border-radius: 0px;">'
+                                    + '<strong>' + data.list[i].CompanyName + '<br></strong>'
+                                    + '<em>' + data.list[i].CompanyAddress + '</em><br>'
+                                    + '<em>' + data.list[i].CompanyMoble + '</em>'
+                                    + '<em> | 案例：' + data.list[i].CaseCount + '件</em>'
+                                    + '</a>'
+                                    + '<div class="decoration"></div>';
+                        }
+                        result += '<a class="listcom" href="javascript:void(0);" onclick="GetPageList(' + page + ')">下一页</a>';
+                        $('.one-third-responsive').append(result);
+
+                    } else {
+                        result += '<a class="listcom" href="javascript:void(0);">没有更多了。。。</a>';
+                        $('.one-third-responsive').append(result);
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!');
+
+                }
+            });
+        }
+
+    </script>
+}
+

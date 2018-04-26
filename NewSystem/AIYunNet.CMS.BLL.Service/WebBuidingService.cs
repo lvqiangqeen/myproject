@@ -52,6 +52,25 @@ namespace AIYunNet.CMS.BLL.Service
                 return buiding;
             }
         }
+        /// <summary>
+        ///  根据GuID获取在建工地
+        /// </summary>
+        /// <returns></returns>
+        public WebBuiding GetWebBuidingByGuID(string GuID)
+        {
+            WebBuiding buiding = new WebBuiding();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                try
+                {
+                    buiding = context.WebBuiding.FirstOrDefault(c=>c.Guid== GuID);
+                }
+                catch (Exception e)
+                {
+                }
+                return buiding;
+            }
+        }
         public List<WebBuiding> GetWebBuidingListByWorkerID(int WorkerID, bool isdemand)
         {
             using (AIYunNetContext context = new AIYunNetContext())

@@ -67,10 +67,18 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(list);
         }
 
-        public ActionResult mobileBuidingDetail(int BuidingID)
+        public ActionResult mobileBuidingDetail(int BuidingID=0,string Guid="")
         {
-            WebBuiding buiding = buidSer.GetWebBuidingByID(BuidingID);
-            List<WebBuidingStages> stageslist = stageSer.GetWebBuidingStagesListByBuiding(BuidingID);
+            WebBuiding buiding = new WebBuiding();
+            if (BuidingID != 0)
+            {
+                buiding = buidSer.GetWebBuidingByID(BuidingID);
+            }
+            if (Guid != "")
+            {
+                buiding = buidSer.GetWebBuidingByGuID(Guid);
+            }
+            List<WebBuidingStages> stageslist = stageSer.GetWebBuidingStagesListByBuiding(buiding.BuidingID);
             DecDemand demand = deSer.GetDecDemandByGuID(buiding.Guid);
             ViewBag.stageslist = stageslist;
             ViewBag.demand = demand;

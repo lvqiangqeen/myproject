@@ -343,7 +343,8 @@
                           , btn: '我知道了'
                             , yes: function ()
                             {
-                                window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
+                                history.go(-1);
+                                //window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
                             }
                         });
                     } else {

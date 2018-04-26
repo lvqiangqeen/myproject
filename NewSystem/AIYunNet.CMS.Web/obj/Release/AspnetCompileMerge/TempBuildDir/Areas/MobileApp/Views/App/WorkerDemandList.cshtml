@@ -1,0 +1,106 @@
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.Service
+@model List<DecDemand>
+@{
+	Layout = null;
+	WebBuidingService ser = new WebBuidingService();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<title>我的订单</title>
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/css/base.css">
+	<link rel="stylesheet" type="text/css" href="~/Content/mobileapp/css/common.css">
+	<script type="text/javascript" src="~/Content/mobileapp/js/jquery.min.js"></script>
+	<script src="~/Content/mobileapp/js/common.js"></script>
+	<style>
+		#nav li span {
+			margin-right: 10px;
+		}
+
+			#nav li span.selected {
+				color: #fa4b28;
+			}
+
+		.owner-info {
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<header class="header" id="header">
+		@*<a href="javascript:history.go(-1)" target=_self class="back">返回</a>*@
+		<h1>我的订单</h1>
+	</header>
+	<!--header-end-->
+
+	<div class="container" id="container">
+		<!--我的订单选项卡-->
+		<div id="my-order" class="my-order">
+
+			<!--栏目-->
+			<ul id="nav">
+				<li><span class="selected"><h2>全部订单</h2></span></li>
+				<li><span><h2>已完成</h2></span></li>
+				@*<li><span><h2>待付款</h2></span></li>*@
+				<li><span><h2>待评价</h2></span></li>
+			</ul>
+			<!--栏目-->
+			<!--内容-->
+			<div id="menu_con">
+
+				<!--全部订单开始-->
+				<section class="tag" style="display:block">
+					@foreach (DecDemand item in Model)
+					{
+						<div class="my-order-item">
+							<div class="my-order-item-tit clearfix">
+								<h3>@item.DemandTypeName</h3>
+								<span class="my-order-wait-zf">等待支付</span>
+							</div>
+							<div class="my-order-item-txt">
+								<div class="my-order-time">@item.AddOn.ToString("yyyy-MM-dd") @item.ownername @item.ownertel</div>
+								<div class="my-order-address">@item.buidingSpace m² @item.buidingname @item.CityName</div>
+							</div>
+							<div class="my-order-item-btn">
+								<div class="pos-r">
+									@if (item.IsPlan)
+				{
+										<span class="my-order-item-cancel">查看计划</span>
+				}
+				else
+				{
+										<span class="my-order-item-red"><a href="order-payment.html">发布计划</a></span>
+				}
+
+								</div>
+							</div>
+						</div>
+
+					}
+				</section>
+			</div>
+			<!--内容-->
+
+		</div>
+	</div>
+	<!--container-end-->
+	<!--footer-->
+	<footer class="footer" id="footer">
+		<ul class="footnav box-flex">
+			<li><a href="/MobileApp/App/WorkerList" class="home"><i></i><span class="full-block">首页</span></a></li>
+			<li><a href="worker-join.html" class="foot-worker"><i></i><span class="full-block">工人入驻</span></a></li>
+			<li class="on"><a href="my-order.html" class="foot-order"><i></i><span class="full-block">订单</span></a></li>
+			<li><a href="/MobileApp/App/PeopleCenter?peopleID=30" class="my"><i></i><span class="full-block">我的</span></a></li>
+		</ul>
+	</footer>
+	<!--footer-end-->
+
+</body>
+</html>

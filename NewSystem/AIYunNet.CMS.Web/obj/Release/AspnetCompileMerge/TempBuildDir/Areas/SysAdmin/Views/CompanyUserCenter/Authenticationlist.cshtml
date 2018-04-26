@@ -1,0 +1,121 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "Authenticationlist";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    WebCompanyService webComser = new WebCompanyService();
+}
+
+<div class="box">
+    <div class="box-header">
+        <h2>企业认证申请</h2>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" id="auuList">
+        <table id="aulistDt" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+            <thead>
+                <tr class="header-style" role="row">
+                    <th class="text-center">
+                        <input id="chkAll" type="checkbox">
+                    </th>
+                    <th>公司名称</th>
+                    <th>法人姓名</th>
+                    <th>身份证号</th>
+                    <th>申请时间</th>
+                    <th>是否通过</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.aulist != null)
+                {
+                    foreach (WebCompanyAuthentication au in ViewBag.aulist as List<WebCompanyAuthentication>)
+                    {
+                        <tr>
+                            <td><input class="chkCompany" type="checkbox" value="@au.AuID"></td>
+                            <td>@au.CompanyName</td>
+                            <td>@au.PeopleName</td>
+                            <td>@au.PeopleIdentity</td>
+                            <td>@au.EditOn</td>
+                            <td>
+                                @if (au.IsAuthentication == 1)
+                                {
+                                    @:<span style="color:greenyellow">是</span>
+                                    }
+                                else if (au.IsAuthentication == 2)
+                                {
+                                    @:否
+                                    }
+                                else
+                                {
+                                    @:<span style="color:red">未审核 </span>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn1 btn-stroke" href="/SysAdmin/CompanyUserCenter/AddAndEditCompanyUser?UserID=@au.CompanyUserID" title="用户信息"><i class="fa fa-user"></i></a>&nbsp;&nbsp;
+                                <a class="btn1 btn-stroke" href="/SysAdmin/ZhuangXiu/AddOrEditWebCompany?companyID=@au.CompanyID" title="公司信息"><i class="fa fa-home"></i></a>&nbsp;&nbsp;
+                                <a class="btn1 btn-stroke" href="/SysAdmin/CompanyUserCenter/AddAndUpdateAu?auid=@au.AuID"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                <a class="btn1 btn-stroke" href="javascript:deleteAu(@au.AuID)"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(function () {
+            sessionStorage.setItem('url', '@Request.Url.ToString()');
+
+            $("#aulistDt").DataTable({
+                "language": {
+                    "emptyTable": "<span style='color:#ef4136;'>没有数据<br></span>",
+                    "info": "显示 _START_ 到 _END_ ，总共 _TOTAL_ 条记录",
+                    "infoEmpty": "没有记录",
+                    "infoFiltered": "",
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "search": "搜索:",
+                    "zeroRecords": "<span style='color:#ef4136;'>没有匹配记录</span>"
+                },
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "order": [[5, "desc"]]
+            });
+        })
+
+        function deleteAu(AUID) {
+
+            swal({
+                title: "你确定?",
+                text: "你将删除这个记录!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "是, 删除!",
+                cancelButtonText: "不，取消",
+                closeOnConfirm: false
+            },
+	function () {
+	    $.ajax({
+	        type: "post",
+	        url: "/SysAdmin/CompanyUserCenter/DeleteAu",
+	        data: { "AUID": AUID },
+	        success: function (data) {
+	            if (data.RetCode = 1) {
+	                window.location.href = window.location.href;
+	            }
+	        }
+
+	    });
+	});
+        }
+    </script>
+
+}
+
