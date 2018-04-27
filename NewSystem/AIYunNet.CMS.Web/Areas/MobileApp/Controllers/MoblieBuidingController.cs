@@ -15,6 +15,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingService buidSer = new WebBuidingService();
         DemandService DemandSer = new DemandService();
         WebBuidingStagesService WebBuidingStagesSer = new WebBuidingStagesService();
+        //案例详情
         // GET: MobileApp/MoblieBuiding
         public ActionResult mBuidingDetail(int id)
         {
@@ -35,8 +36,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ViewBag.demand = demand;
             return View(buiding);
         }
+        //装修流程页面
+        public ActionResult buidingStage()
+        {
 
-
+            return View();
+        }
 
     }
 }
