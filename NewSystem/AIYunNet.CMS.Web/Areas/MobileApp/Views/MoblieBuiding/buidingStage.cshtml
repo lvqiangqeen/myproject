@@ -1,8 +1,224 @@
-﻿
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model AIYunNet.CMS.Domain.Model.WebBuiding
 @{
     ViewBag.Title = "buidingStage";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string[] stagesIDArr = null;
+    string[] stagesTextArr = null;
+    if (Model != null && !string.IsNullOrWhiteSpace(Model.constructionstageID))
+    {
+        stagesIDArr = Model.constructionstageID.Split(',');
+        stagesTextArr = Model.constructionstage.TrimEnd(',').Split(',');
+    }
+    IEnumerable<SelectListItem> workPositionList = ViewBag.workPositionList as IEnumerable<SelectListItem>;
+    int DemandID = Convert.ToInt32(Request["DemandID"]);
+    DemandService DeSer = new DemandService();
+    DecDemand demand = DeSer.GetDecDemandByID(DemandID);
+    string Guid = Request["Guid"];
+    int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
 }
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.picker.min.js"></script>
+<style>
+    .mui-numbox {
+        width: 150px;
+    }
+    .mui-pciker-list {
+    background-color:#ddd;
+    }
+    .mui-input-row label {
+    padding-left: 0px;
+}
+.mui-btn-block {
+    font-size: 18px;
+    display: inline; 
+    width: auto;
+    margin-bottom: 10px;
+    padding: 15px 0;
+}
+</style>
+<script>
+    var html = "<h1>发布流程</h1>";
+    $("#header").append(html);
+</script>
+<div class="container" id="container">
 
-<h2>buidingStage</h2>
+    <p class="car-description">@Model.BuidingTitle</p>
 
+    <ul class="car-details clearfix">
+        <li class="fwfw">服务范围：<em>同城运输</em></li>
+        <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
+        <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
+        <li class="fwdh">电话：<em>18000000000</em></li>
+    </ul>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>基本信息</h2></div>
+        <div class="min-price-con">
+            <label>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
+            <div class="mui-numbox">
+                <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+                <input class="mui-input-numbox" type="number" />
+                <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+            </div>元
+        </div>
+        <div class="min-price-con">
+            <label>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：</label>
+            <div class="mui-numbox">
+                <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+                <input class="mui-input-numbox" type="number" />
+                <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+            </div>m²
+        </div>
+        <div class="min-price-con">
+            <label>施工日期：</label>
+            @*<input type="text" placeholder="施工开始日期" id="starttime">*@
+            <button id='demo4' data-options='{"type":"date"}' class="btn mui-btn mui-btn-block">选择日期 ...</button>
+        </div>
+       
+    </div>
+    <form class="mui-input-group">
+        <div class="mui-input-row">
+            <label>Input</label>
+            <input type="text" placeholder="普通输入框">
+        </div>
+        <div class="mui-input-row">
+            <label>Input</label>
+            <input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
+        </div>
+        <div class="mui-input-row mui-plus-visible">
+            <label>Input</label>
+            <input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
+        </div>
+        <div class="mui-button-row">
+            <button type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
+            <button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+        </div>
+    </form>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>阶段描述</h2></div>
+        <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
+    </div>
+    @*<div class="min-price">
+            <div class="min-price-tit"><h2>上传图片</h2></div>
+            <input value="@stage.ImgContent" name="ImgContent" type="hidden" />
+            <input value="@stage.thumContent" name="thumContent" type="hidden" />
+            <!--    照片添加    -->
+            <div class="z_photo">
+                <div class="z_file">
+                    <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+
+                </div>
+                @if (thlist.Count > 0)
+                {
+                    foreach (var item in thlist)
+                    {
+                        <div class="z_addImg"><img src="@AppSettingsHelper.ImgUrl@item"></div>
+                    }
+
+                }
+            </div>
+
+            <!--遮罩层-->
+            <div class="z_mask">
+                <!--弹出框-->
+                <div class="z_alert">
+                    <p>确定要删除这张图片吗？</p>
+                    <p>
+                        <span class="z_cancel">取消</span>
+                        <span class="z_sure">确定</span>
+                    </p>
+                </div>
+            </div>
+        </div>*@
+    <ul class="car-details clearfix">
+        <li class="mui-table-view-cell" style="height: 41px;padding-left: 0rem;">
+            <span style="font-weight: normal;font-size: 0.7rem;border-left: 2px solid #fa4b28;padding-left: 0.25rem;">确认完成</span>
+            <div class="mui-switch" id="IsComplete">
+                <div class="mui-switch-handle"></div>
+                <input value="" type="hidden" name="IsComplete" />
+            </div>
+        </li>
+    </ul>
+    <a href="javascript:updateStage()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+    <script>
+        mui.init({
+            swipeBack: true //启用右滑关闭功能
+        });
+        mui('.mui-switch').each(function () { //循环所有toggle
+            //toggle.classList.contains('mui-active') 可识别该toggle的开关状态
+            //this.parentNode.querySelector('span').innerText = '状态：' + (this.classList.contains('mui-active') ? 'true' : 'false');
+            /**
+             * toggle 事件监听
+             */
+            this.addEventListener('toggle', function (event) {
+                //event.detail.isActive 可直接获取当前状态
+                //this.parentNode.querySelector('span').innerText = '状态：' + (event.detail.isActive ? 'true' : 'false');
+                if (event.detail.isActive) {
+                    $("input[name=IsComplete]").val(1);
+                } else {
+                    $("input[name=IsComplete]").val(0);
+                }
+            });
+        });
+    </script>
+    <script>
+        (function ($) {
+
+				$.init();
+				var result = $('#starttime')[0];
+				var btns = $('.btn');
+				btns.each(function (i, btn) {
+				    btn.addEventListener('tap', function () {
+				        var _self = this;
+				        if (_self.picker) {
+				            _self.picker.show(function (rs) {
+				                result.innerText = rs.text;
+				                _self.picker.dispose();
+				                _self.picker = null;
+				            });
+				        } else {
+				            var optionsJson = this.getAttribute('data-options') || '{}';
+				            var options = JSON.parse(optionsJson);
+				            var id = this.getAttribute('id');
+				            /*
+                             * 首次显示时实例化组件
+                             * 示例为了简洁，将 options 放在了按钮的 dom 上
+                             * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+                             */
+				            _self.picker = new $.DtPicker(options);
+				            _self.picker.show(function (rs) {
+				                /*
+                                 * rs.value 拼合后的 value
+                                 * rs.text 拼合后的 text
+                                 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+                                 * rs.m 月，用法同年
+                                 * rs.d 日，用法同年
+                                 * rs.h 时，用法同年
+                                 * rs.i 分（minutes 的第二个字母），用法同年
+                                 */
+				                result.value = rs.text;
+				                /*
+                                 * 返回 false 可以阻止选择框的关闭
+                                 * return false;
+                                 */
+				                /*
+                                 * 释放组件资源，释放后将将不能再操作组件
+                                 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+                                 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+                                 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+                                 */
+				                _self.picker.dispose();
+				                _self.picker = null;
+				            });
+				        }
+
+				    }, false);
+				});
+			})(mui);
+    </script>
+</div>

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AIYunNet.CMS.Web.filter;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Domain.Model;
+using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.Common.Utility;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
@@ -37,11 +38,29 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return View(buiding);
         }
         //装修流程页面
-        public ActionResult buidingStage()
+        [HttpGet]
+        public ActionResult buidingStage(int DemandID = 0, int BuidingID = 0)
         {
+            IWebCommon commonService = new WebCommonService();
+            List<WebLookup> commonworkPosition = commonService.GetLookupList("Buiding_process");
+            IEnumerable<SelectListItem> workPositionList = commonworkPosition.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            ViewBag.workPositionList = workPositionList;
 
-            return View();
+            WebBuiding buidling = buidSer.GetWebBuidingByDemandID(DemandID);
+            if (BuidingID != 0 && DemandID == 0)
+            {
+                buidling = buidSer.GetWebuidingByID(BuidingID);
+            }
+            if (BuidingID == 0 && DemandID == 0)
+            {
+                buidling = new WebBuiding();
+            }
+
+            if (buidling == null)
+            {
+                buidling = new WebBuiding();
+            }
+            return View(buidling);
         }
-
     }
 }
