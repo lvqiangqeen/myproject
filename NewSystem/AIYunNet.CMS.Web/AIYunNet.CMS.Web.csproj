@@ -1903,6 +1903,17 @@
     <Content Include="Content\mobileapp\css\class.css" />
     <Content Include="Content\mobileapp\css\common.css" />
     <Content Include="Content\mobileapp\css\commonbake.css" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\demo\index.html" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\demo\jquery-1.11.1.min.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\dist\0.chunk.min.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\dist\1.chunk.min.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\dist\2.chunk.min.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\dist\html5ImgCompress.min.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\src\html5ImgCompress.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\src\libs\exif.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\src\libs\jpeg_encoder_basic.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\src\libs\megapix-image.js" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\webpack.config.js" />
     <Content Include="Content\mobileapp\images\1.png" />
     <Content Include="Content\mobileapp\images\2.png" />
     <Content Include="Content\mobileapp\images\3.png" />
@@ -4274,6 +4285,9 @@
     <Content Include="Areas\MobileApp\Views\mOrder\mTogetherBuidingList.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\mTogetherBuidingDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\MoblieBuiding\buidingStage.cshtml" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\.gitignore" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\package.json" />
+    <Content Include="Content\mobileapp\html5ImgCompress-master\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

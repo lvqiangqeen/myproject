@@ -17,6 +17,7 @@
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.poppicker.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/city.data.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/city.data-3.js"></script>
+<script src="~/Content/mobileapp/html5ImgCompress-master/dist/html5ImgCompress.min.js"></script>
 <style>
     .mui-pciker-list {
         background-color: #ddd;
@@ -31,6 +32,9 @@
     <div class="personal-data1">
         <ul>
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'NickName')"><span>用户名(昵称)</span><em>@Model.NickName</em></a></li>
+            <li><a href="javascript:void(0);" id="uploadpic" onclick='javascript: $("#ImageUpload").click();'><span>头像</span><em><img id="thum" src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:50px;height:50px;border-radius:5px;margin-top: 4px;"></em></a></li>
+            <input type="file" id="ImageUpload" style="display:none;">
+            
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Email')"><span>邮箱</span><em>@Model.Email</em></a></li>
             <li><a href="my-name.html"><span>手机号</span><em>@Model.Telephone</em></a></li>
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'TrueName')"><span>真实姓名</span><em>@Model.TrueName</em></a></li>
@@ -44,7 +48,73 @@
             <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'WorkerInfo')"><span>个人简介</span><em>@worker.WorkerInfo</em></a></li>
         </ul>
     </div>
+    <script>
+        $("#uploadpic").click(function () {
+            $('#ImageUpload').on('change', function (e) {
+                new html5ImgCompress(e.target.files[0], {
+                    before: function (file) {
+                        console.log('单张: 压缩前...');
+                        var data = new FormData();
+                        data.append('file', file);
+                        data.append("name", file.name);
+                        $.ajax({
+                            type: "post",
+                            url: "/MobileApp/upload/mPictrueUpload",
+                            datatype: 'JSON',
+                            fileElementId: 'file',
+                            async: false,
+                            // 告诉jQuery不要去处理发送的数据
+                            processData: false,
+                            // 告诉jQuery不要去设置Content-Type请求头
+                            contentType: false,
+                            cache: false,
+                            traditional: true,
+                            data: data,
+                            success: function (data) {
+                                if (data.isUploaded) {
+                                    var Img = data.message;
+                                    var thum = data.thumbnailmessage;
+                                    var thuming = '@AppSettingsHelper.ImgUrl' + thum;
 
+                                    $.ajax({
+                                        type: "post",
+                                        url: "/MobileApp/MobileCenter/updatePersonData",
+                                        data: {
+                                            data:Img+";"+thum,
+                                            type:"Img"
+                                        },
+                                        success: function (data) {
+                                            if (data=="1") {
+                                                $("#thum").attr("src", thuming);
+                                            }
+                                        }
+
+                                    });
+                                }
+                            }
+
+                        });
+
+                    },
+                    done: function (file, base64) {
+                        console.log('单张: 压缩成功...');
+                        //insertImg(file, j); // 显示原图
+                        //insertImg(base64, j++); // 显示压缩后
+                    },
+                    fail: function (file) {
+                        console.log('单张: 压缩失败...');
+                    },
+                    complete: function (file) {
+                        console.log('单张: 压缩完成...');
+                    },
+                    notSupport: function (file) {
+                        alert('浏览器不支持！');
+                    }
+                });
+            })
+
+        })
+    </script>
 </div>
 <script>
     function EditWorkerDataText(item, type)

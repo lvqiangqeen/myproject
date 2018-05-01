@@ -196,6 +196,13 @@ namespace AIYunNet.CMS.BLL.Service
 
                     switch (type)
                     {
+                        case "Img":
+                            List<string> ili = data.Split(';').ToList();
+                            originalUser.Img = ili[0];
+                            originalUser.thumbnailImage = ili[1];
+                            originWorker.WorkerImage= ili[0];
+                            originWorker.thumbnailImage= ili[1];
+                            break;
                         case "TrueName":
                             originalUser.TrueName = data;
                             originWorker.WorkerName = data;

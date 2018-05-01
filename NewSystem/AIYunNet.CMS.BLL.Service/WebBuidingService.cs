@@ -163,6 +163,7 @@ namespace AIYunNet.CMS.BLL.Service
                             context.SaveChanges();
                         }
                     }
+                    old.StartTime = webBuiding.StartTime;
                     old.ShowOrder = webBuiding.ShowOrder;
                     old.IsHot = webBuiding.IsHot;
                     old.IsTop = webBuiding.IsTop;

@@ -38,6 +38,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return View(buiding);
         }
         //装修流程页面
+        [MobileUserFilter]
         [HttpGet]
         public ActionResult buidingStage(int DemandID = 0, int BuidingID = 0)
         {
@@ -61,6 +62,24 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
                 buidling = new WebBuiding();
             }
             return View(buidling);
+        }
+        [MobileUserFilter]
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult AddOrEditBuidingStages(WebBuiding webBuiding)
+        {
+            WebBuidingService service = new WebBuidingService();
+            if (webBuiding.BuidingID > 0)
+            {
+                service.UpdateWebBuiding(webBuiding);
+            }
+            else
+            {
+                webBuiding.WorkerID = Convert.ToInt32(SessionHelper.Get("PositionID"));
+                service.AddWebBuiding(webBuiding);
+            }
+
+            return Json(new { RetCode = 1 });
         }
     }
 }

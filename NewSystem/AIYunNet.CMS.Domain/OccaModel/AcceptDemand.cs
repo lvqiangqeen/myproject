@@ -106,6 +106,8 @@ namespace AIYunNet.CMS.Domain.OccaModel
         /// 需求说明
         /// </summary>
         public string Info { get; set; }
+
+        public int DemandId { get; set; }
         /// <summary>
         /// DemandType
         /// </summary>
@@ -156,6 +158,7 @@ namespace AIYunNet.CMS.Domain.OccaModel
         public int IsAccept { get; set; }
         public AcceptDemand()
         {
+            DemandId = 0;
             ProvinceID = "";
             CityID = "";
             workTime = 0;
