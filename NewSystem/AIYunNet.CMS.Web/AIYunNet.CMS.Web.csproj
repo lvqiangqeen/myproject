@@ -63,6 +63,7 @@
     <Compile Include="Areas\MobileApp\Controllers\AppController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\mLoginController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\MobileUserController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\mOrderController.cs" />
@@ -4288,6 +4289,12 @@
     <Content Include="Content\mobileapp\html5ImgCompress-master\.gitignore" />
     <Content Include="Content\mobileapp\html5ImgCompress-master\package.json" />
     <Content Include="Content\mobileapp\html5ImgCompress-master\README.md" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\UserData.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileCenter\EditUserDataText.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\BuidinglistUser.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\BuidingDetailUser.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\DemandList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\DemandDetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

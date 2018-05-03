@@ -251,6 +251,52 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+        public int UpdateWebUserFromMobile(int id, string data, string type)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebUser originalUser = context.WebUser.Find(id);
+                if (originalUser != null)
+                {
 
+                    switch (type)
+                    {
+                        case "Img":
+                            List<string> ili = data.Split(';').ToList();
+                            originalUser.Img = ili[0];
+                            originalUser.thumbnailImage = ili[1];
+                            break;
+                        case "TrueName":
+                            originalUser.TrueName = data;
+                            break;
+                        case "NickName":
+                            originalUser.NickName = data;
+                            break;
+
+                        case "Sex":
+                            originalUser.Sex = data;
+                            break;
+                        case "Email":
+                            originalUser.Email = data;
+                            break;
+                        case "CityID":
+                            t_City city = areaSer.GetCityByID(data);
+                            originalUser.ProvinceID = city.father;
+                            originalUser.ProvinceName = areaSer.GetProvince(city.father).province;
+                            originalUser.CityID = data;
+                            originalUser.CityName = city.city;
+                            originalUser.AreasID = "0";
+                            originalUser.AreasName = "全城";
+                            break;
+                        default:
+
+                            break;
+                    }
+                    originalUser.EditOn = DateTime.Now;
+                    context.SaveChanges();
+                }
+                return 1;
+            }
+        }
     }
 }

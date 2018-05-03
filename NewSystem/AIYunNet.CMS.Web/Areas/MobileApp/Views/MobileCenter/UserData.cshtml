@@ -3,7 +3,7 @@
 @using AIYunNet.CMS.BLL.Service;
 @model WebUser
 @{
-    ViewBag.Title = "PersonData";
+    ViewBag.Title = "UserData";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     WebWorkerService wSer = new WebWorkerService();
     WebWorker worker = wSer.GetWebWorkerByUserID(Convert.ToInt32(SessionHelper.Get("UserID")));
@@ -34,18 +34,12 @@
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'NickName')"><span>用户名(昵称)</span><em>@Model.NickName</em></a></li>
             <li><a href="javascript:void(0);" id="uploadpic" onclick='javascript: $("#ImageUpload").click();'><span>头像</span><em><img id="thum" src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:50px;height:50px;border-radius:5px;margin-top: 4px;"></em></a></li>
             <input type="file" id="ImageUpload" style="display:none;">
-            
+
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Email')"><span>邮箱</span><em>@Model.Email</em></a></li>
             <li><a href="javascript:void(0);"><span>手机号</span><em>@Model.Telephone</em></a></li>
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'TrueName')"><span>真实姓名</span><em>@Model.TrueName</em></a></li>
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Sex')"><span>性别</span><em>@Model.Sex</em></a></li>
             <li><a href="javascript:void(0)" id="showCityPicker"><span>所在地</span><em id="showCityPickerem">@Model.ProvinceName  @Model.CityName</em><i id="cityid" style="display:none;">@Model.CityID</i></a></li>
-            <li><a href="javascript:void(0);" onclick="EditPersonDataArea(this, 'AreasID')"><span>服务地区</span><em id="Areas">@Model.AreasName</em><i id="AreasID" style="display:none;">@Model.AreasID</i></a></li>
-            <li><a href="javascript:void(0);" id='showYearPicker'><span>工作年限</span><em id="showYearPickerem">@worker.WorkYears</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'PriceName')"><span>工程价位</span><em>@worker.PriceName 元/m²</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'GoodAtStyle')"><span>擅长领域</span><em>@worker.GoodAtStyle</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'WorkerMotto')"><span>评价自己</span><em>@worker.WorkerMotto</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'WorkerInfo')"><span>个人简介</span><em>@worker.WorkerInfo</em></a></li>
         </ul>
     </div>
     <script>
@@ -78,7 +72,7 @@
 
                                     $.ajax({
                                         type: "post",
-                                        url: "/MobileApp/MobileCenter/updatePersonData",
+                                        url: "/MobileApp/MobileCenter/updateUserData",
                                         data: {
                                             data:Img+";"+thum,
                                             type:"Img"
@@ -117,23 +111,11 @@
     </script>
 </div>
 <script>
-    function EditWorkerDataText(item, type)
-    {
-        var title = $(item).find("span").text();
-        var data = $(item).find("em").text();
-        window.location.href = "/MobileApp/MobileWorker/mupdateWebWorker?title=" + title + "&type=" + type + "&data=" + data;
-    }
     function EditPersonDataText(item,type)
     {
         var title = $(item).find("span").text();
         var data=$(item).find("em").text();
-        window.location.href = "/MobileApp/MobileCenter/EditPersonDataText?title=" + title + "&type=" + type + "&data=" + data;
-    }
-    function EditPersonDataArea(item, type) {
-        var title = $(item).find("span").text();
-        var data = $(item).find("i").text() + ";" + $(item).find("em").text();
-        var cityid = $("#cityid").text();
-        window.location.href = "/MobileApp/MobileCenter/EditPersonDataAreas?cityid=" + cityid + "&title=" + title + "&type=" + type + "&data=" + data;
+        window.location.href = "/MobileApp/MobileCenter/EditUserDataText?title=" + title + "&type=" + type + "&data=" + data;
     }
 </script>
 <script>
@@ -150,32 +132,7 @@
 						return obj[param] || '';
 					};
 				    //普通示例
-					var yearPicker = new $.PopPicker();
-					yearPicker.setData([{
-					    value: '1',
-					    text: '1-3年'
-					}, {
-					    value: '2',
-					    text: '3-5年'
-					}, {
-					    value: '3',
-					    text: '5-10年'
-					}, {
-					    value: '4',
-					    text: '10-15年'
-					}, {
-					    value: '5',
-					    text: '15年以上'
-					}]);
-					var showYearPickerButton = doc.getElementById('showYearPicker');
-					showYearPickerButton.addEventListener('tap', function (event) {
-					    yearPicker.show(function (items) {
-					        document.getElementById("showYearPickerem").innerHTML = items[0].text;
-					        //返回 false 可以阻止选择框的关闭
-					        //return false;
-					        selectyear(items[0].value, "WorkYearsID");
-					    });
-					}, false);
+
 				    //-----------------------------------------
 				    //级联示例
 
@@ -190,14 +147,13 @@
 					            //cityResult.innerText = "你选择的城市是:" + items[0].text + " " + items[1].text;
 					            document.getElementById("showCityPickerem").innerHTML = items[0].text + " " + items[1].text;
 					            document.getElementById("cityid").innerHTML = items[1].value;
-					            document.getElementById("Areas").innerHTML = "请选择服务地区";
-					            
+
 					            selectcity(items[1].value, "CityID");
 					            //返回 false 可以阻止选择框的关闭
 					            //return false;
 					        });
 					    }, false);
-					
+
 
 				    //-----------------------------------------
 					    function selectcity(data,type)
@@ -218,36 +174,14 @@
 					            }
 					        }
 					        // 第三步： open一个链接
-					        ajax.open("POST", "/MobileApp/MobileCenter/updatePersonData", false);//true异步请求，false同步
+					        ajax.open("POST", "/MobileApp/MobileCenter/updateUserData", false);//true异步请求，false同步
 					        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					        // 第四步： send一个请求。 可以发送对象和字符串，不需要传递数据发送null
 					        ajax.send("data=" + data + "&type=" + type);
 					        //window.top.location.href = window.top.location.href;
 					    }
 				    //-----------------------------------------
-					    function selectyear(data, type) {
-					        // 第一步： 获得XMLHttpRequest对象
-					        var ajax = new XMLHttpRequest();
-					        // 第二步： 设置状态监听函数
-					        ajax.onreadystatechange = function () {
-					            console.log(ajax.readyState);
-					            console.log(ajax.status);
-					            // 第五步：在监听函数中，判断readyState=4 && status=200表示请求成功
-					            if (ajax.readyState == 4 && ajax.status == 200) {
-					                // 第六步： 使用responseText、responseXML接受响应数据，并使用原生JS操作DOM进行显示
-					                console.log(ajax.responseText);
-					                console.log(ajax.responseXML);// 返回不是XML，显示null
-					                console.log(JSON.parse(ajax.responseText));
-					                console.log(eval("(" + ajax.responseText + ")"));
-					            }
-					        }
-					        // 第三步： open一个链接
-					        ajax.open("POST", "/MobileApp/MobileWorker/updateWorkerData", false);//true异步请求，false同步
-					        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-					        // 第四步： send一个请求。 可以发送对象和字符串，不需要传递数据发送null
-					        ajax.send("data=" + data + "&type=" + type);
-					        //window.top.location.href = window.top.location.href;
-					    }
+					    
 				    //-----------------------------------------
 
 				});
@@ -255,3 +189,4 @@
 
 
 </script>
+

@@ -1,0 +1,186 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebBuiding
+@{
+    ViewBag.Title = "BuidingDetailUser";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    List<WebBuidingStages> stageslist = ViewBag.stageslist;
+    DecDemand demand = ViewBag.demand;
+    WebWorkerService workerSer = new WebWorkerService();
+}
+
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script>
+    $(function () {
+        var title = '@Model.BuidingTitle';
+        var html = "<h1>"+title+"</h1>";
+        $("#header").append(html);
+    });
+</script>
+<div class="container" id="container">
+
+    <div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>
+    <ul class="details-price clearfix">
+        <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
+        <li>开工日期：@Model.StartTime</li>
+        <div><li style="float:left;width:40%;">类型：@demand.DemandTypeName</li><li style="float:left;width:60%;">户型：@demand.HouseType</li></div>
+    </ul>
+    <div class="min-price">
+        <div class="min-price-tit"><h2>做工详情</h2></div>
+        <ul class="layui-timeline">
+            @foreach (WebBuidingStages item in stageslist)
+            {
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">@item.StageName</h3>
+                        @if (item.IsUserEnd == 1)
+                        {
+                            <p style="font-size: 20px;color:#009688;">该阶段项目业主验收通过</p>
+                        }
+                        else if (item.IsUserEnd == 2)
+                        {
+                            <p style="font-size: 20px;color:red;">该阶段项目业主验收未通过</p>
+                        }
+                        else
+                        {
+                            if (item.IsComplete)
+                            {
+                                <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                            }
+                            else
+                            {
+                                <p style="font-size: 20px;">该阶段项目未完成</p>
+                            }
+                        }
+
+                        @if (item.Workerid != 0)
+                        {
+                            WebWorker worker = workerSer.GetWebWorkerByID(item.Workerid);
+                            <p style="margin-top:20px;width: 100%;color: #fa4b28;margin-bottom:0px;">装修工人：</p>
+                            <div style="width: 100%;height:50px;font-size:16px;">
+                                <img class="mui-media-object" src="@AppSettingsHelper.ImgUrl@worker.thumbnailImage" style="width:50px;height:50px;border-radius:50px;">
+                                @worker.WorkerName
+                            </div>
+                        }
+                        @if (item.IsUserEnd != 1)
+                        {
+                            int IsComplete= item.IsComplete?1:0;
+                            <p style="margin-top:10px;">
+                                <button class="layui-btn" onclick="javascript:IsUserEnd(@Model.BuidingID,@item.StageID,@IsComplete);">阶段审核</button>
+                            </p>
+                        }
+
+                        <p style="margin-top:10px;">@item.wordContent</p>
+                        @{
+                            List<string> img = new List<string>();
+                            if (item.ImgContent != "")
+                            {
+                                img = item.thumContent.Split('|').Where(c => c != "").ToList();
+                            }
+                                } 
+                        <p style="margin-top:10px;">
+                            @foreach (string ite in img)
+                            {
+                                <img src="@AppSettingsHelper.ImgUrl@ite" style="max-width:100%;margin-top:5px;">
+                            }
+                            </p>
+                    </div>
+                </li>
+            }
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">项目竣工</h3>
+                    @if (Model.IsWorkerEnd == 1)
+                    {
+                        <p style="font-size: 20px;color:#009688;">项目已完成</p>
+                    }
+                    else
+                    {
+                        <p style="font-size: 20px;">项目未完成</p>
+                    }
+                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal">验收评价</button></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    @*<div class="min-price-bot">
+            <div class="min-price-tel"><a href="#">电话咨询</a></div>
+            <div class="min-price-order"><a href="reservation.html">我要预约</a></div>
+        </div>*@
+
+</div>
+
+<script>
+    function IsUserEnd(buidingID, stageID,IsComplete)
+    {
+        if (IsComplete==1) {
+
+            //询问框
+            layer.open({
+                content: '该阶段装修是否让您满意？'
+              , btn: ['合格', '不合格']
+              , yes: function (index) {
+                  IsUserEndStage(buidingID, stageID, 1);
+                  location.reload();
+                  layer.close(index);
+              },
+                btn2: function (index) {
+                    IsUserEndStage(buidingID, stageID, 2);
+                    location.reload();
+                    layer.close(index);
+                }
+            });
+        } else
+        {
+            //信息框
+            layer.open({
+                content: '该阶段项目还未竣工'
+              , btn: '我知道了'
+            });
+        }
+        
+    }
+    function IsUserEndStage(buidingID, stageID, IsUserend) {
+        $.ajax({
+            type: "post",
+            url: "/PeopleCenter/CenterCases/IsUserEndStage",
+            data: {
+                buidingID: buidingID,
+                stageID: stageID,
+                IsUserend: IsUserend
+            },
+            success: function (data) {
+                if (data.RetCode == 1) {
+                    //$('#stageCaseTable').DataTable().ajax.reload();
+                    window.location.href = window.location.href;
+                }
+            }
+
+        });
+    }
+    //layer.open({
+    //    type: 1,
+    //    title: title + "施工情况",
+    //    skin: 'layui-layer-rim', //加上边框
+    //    area: ['400px', '550px'], //宽高
+    //    btn: ['合格', '不合格', '关闭'],
+    //    content: content,
+    //    yes: function (index, layero) {
+    //        _self.IsUserEndStage(buidingid, stageid, 1);
+    //    },
+    //    btn2: function (index, layero) {
+    //        _self.IsUserEndStage(buidingid, stageid, 2);
+    //    },
+    //    btn3: function (index, layero) {
+
+    //    }
+    //});
+
+</script>
+

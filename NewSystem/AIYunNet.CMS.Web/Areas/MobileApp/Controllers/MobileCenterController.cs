@@ -53,6 +53,23 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         #endregion
 
 
-
+        #region 普通用户资料
+        public ActionResult UserData()
+        {
+            WebUser user = webUserservice.GetWebUserByID(Convert.ToInt32(SessionHelper.Get("UserID")));
+            return View(user);
+        }
+        [HttpPost]
+        public int updateUserData(string data, string type)
+        {
+            int ret = 0;
+            ret = webUserservice.UpdateWebUserFromMobile(Convert.ToInt32(SessionHelper.Get("UserID")), data, type);
+            return ret;
+        }
+        public ActionResult EditUserDataText()
+        {
+            return View();
+        }
+        #endregion
     }
 }
