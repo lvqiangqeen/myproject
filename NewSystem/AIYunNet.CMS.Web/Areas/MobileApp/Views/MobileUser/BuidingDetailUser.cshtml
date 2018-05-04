@@ -77,7 +77,7 @@
                         <p style="margin-top:10px;">@item.wordContent</p>
                         @{
                             List<string> img = new List<string>();
-                            if (item.ImgContent != "")
+                            if (item.ImgContent != "" && item.ImgContent != null)
                             {
                                 img = item.thumContent.Split('|').Where(c => c != "").ToList();
                             }

@@ -8,6 +8,7 @@ using AIYunNet.CMS.Web.filter;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Common.Utility;
+using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
@@ -17,6 +18,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingService buidSer = new WebBuidingService();
         WebBuidingStagesService stageSer = new WebBuidingStagesService();
         DemandService deSer = new DemandService();
+        WebCommonService wCSer = new WebCommonService();
+
         #region 装修进度（用户）
         // GET: MobileApp/MobileUser
         public ActionResult BuidinglistUser()
@@ -53,9 +56,43 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
-        public ActionResult DemandDetail()
+        [HttpPost]
+        public ActionResult GetDemandlist(int PageSize, int IsAccept, int IsPlan, int CurPage)
         {
-            return View();
+            int count = 0;
+            int PublicUserID = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<Demand> list = deSer.GetPublishDemandList(PublicUserID, PageSize, IsAccept, IsPlan, CurPage,out count);
+            return Json(list);
+        }
+        public ActionResult DemandDetail(int id=0)
+        {
+            DecDemand dec = new DecDemand();
+            if (id != 0)
+            {
+                dec = deSer.GetDecDemandByID(id);
+            }
+            
+            return View(dec);
+        }
+        [HttpPost]
+        public ActionResult updateDemandDetail(DecDemand dec)
+        {
+            int ret = 0;
+            if (dec.id == 0)
+            {
+                ret=deSer.AddDecDemand(dec);
+            }
+            else
+            {
+                ret=deSer.UpdateDecDemand(dec);
+            }
+            return Json(new { RetCode = ret });
+        }
+        [HttpPost]
+        public ActionResult GetDemandType()
+        {
+            List<lookupJson> list= wCSer.GetJson();
+            return Json(list);
         }
         #endregion
     }

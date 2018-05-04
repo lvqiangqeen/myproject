@@ -117,5 +117,30 @@ namespace AIYunNet.CMS.BLL.Service
                 }
             }
         }
+
+
+
+        public List<lookupJson> GetJson()
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<lookupJson> list = new List<lookupJson>();
+                List<WebLookup> WebLookuplist = GetLookupList("Demand_type");
+                foreach (var item in WebLookuplist)
+                {
+                    lookupJson ci = new lookupJson();
+                    ci.value = item.Code;
+                    ci.text = item.Description;
+                    list.Add(ci);
+                }
+                return list;
+            }
+        }
+    }
+
+    public class lookupJson
+    {
+        public string value { get; set; }
+        public string text { get; set; }
     }
 }

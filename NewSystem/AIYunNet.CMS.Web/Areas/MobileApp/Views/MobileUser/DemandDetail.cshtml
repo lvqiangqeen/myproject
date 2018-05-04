@@ -1,10 +1,39 @@
-﻿
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@model DecDemand
 @{
     ViewBag.Title = "DemandDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
+<link href="~/Content/mui-master/examples/hello-mui/css/app.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.poppicker.css" rel="stylesheet" />
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.picker.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.poppicker.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/city.data.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/city.data-3.js"></script>
+<style>
+    .mui-input-group .mui-input-row {
+        height: auto;
+    }
+
+    .mui-input-row .mui-numbox {
+        float: left;
+        margin: 2px 0px;
+    }
+
+    .mui-numbox {
+        width: 150px;
+    }
+
+    .mui-pciker-list {
+        background-color: #ddd;
+    }
+</style>
 <script>
     var html = "<h1>需求信息</h1>";
     $("#header").append(html);
@@ -14,67 +43,157 @@
         <div class="mui-content-padded" style="margin: 5px;">
             <form class="mui-input-group">
                 <div class="mui-input-row">
-                    <label>Input</label>
-                    <input type="text" placeholder="普通输入框">
+                    <label>小区地址</label>
+                    <input type="text" value="@Model.buidingname" placeholder="填写小区地址" name="buidingname">
                 </div>
                 <div class="mui-input-row">
-                    <label>Input</label>
-                    <input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
+                    <label>您的姓名</label>
+                    <input type="text" value="@Model.ownername" placeholder="填写您的姓名" name="ownername">
                 </div>
-                <div class="mui-input-row mui-plus-visible">
-                    <label>Input</label>
-                    <input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
+                <div class="mui-input-row">
+                    <label>联系方式</label>
+                    <input type="text" value="@Model.ownertel" placeholder="填写联系方式" name="ownertel">
+                </div>
+                <div class="mui-input-row">
+                    <label>装修风格</label>
+                    <input type="text" value="@Model.OneSentence" placeholder="填写装修风格" name="OneSentence">
+                </div>
+                <div class="mui-input-row">
+                    <label>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积</label>
+                    <div class="mui-numbox">
+                        <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+                        <input class="mui-input-numbox" type="number" value="@Model.buidingSpace" name="buidingSpace" />
+                        <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+                    </div>m²
+                </div>
+                <div class="mui-input-row">
+                    <label>所&nbsp;&nbsp;在&nbsp;&nbsp;地</label>
+                    <input type="text" placeholder="点击此处选择城市" id="showCityPicker" value="@Model.ProvinceName @Model.CityName">
+                    <input type="hidden" value="@Model.CityID" name="CityID" id="CityID"/>
+                    <input type="hidden" value="@Model.CityName" name="CityName" id="CityName" />
+                    <input type="hidden" value="@Model.ProvinceID" name="ProvinceID" id="ProvinceID" />
+                    <input type="hidden" value="@Model.ProvinceName" name="ProvinceName" id="ProvinceName" />
+                </div>
+                <div class="mui-input-row">
+                    <label>需求类型</label>
+                    <input type="text" placeholder="点击此处选择需求类型" id="showTypePicker" value="@Model.DemandTypeName">
+                    <input type="hidden" value="@Model.DemandType" name="DemandType" id="DemandType"/>
+                    <input type="hidden" value="@Model.DemandTypeName" name="DemandTypeName" id="DemandTypeName" />
+                </div>
+                <div class="mui-input-row" style="margin: 10px 5px;border-style: solid;border-width: 0.5px;">
+                    <textarea id="textarea" rows="5" placeholder="任务描述"></textarea>
+                    <script>
+                        $("#textarea").val('@Model.Info'); 
+                    </script>
                 </div>
                 <div class="mui-button-row">
-                    <button type="button" class="mui-btn mui-btn-primary" onclick="return false;">确认</button>&nbsp;&nbsp;
-                    <button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+                    <button type="button" class="mui-btn mui-btn-primary" id="queren">确认</button>&nbsp;&nbsp;
+                    <button type="button" class="mui-btn mui-btn-danger" onclick="javascript:history.go(-1);">取消</button>
                 </div>
             </form>
-            <div class="mui-input-row" style="margin: 10px 5px;">
-                <textarea id="textarea" rows="5" placeholder="多行文本框"></textarea>
-            </div>
         </div>
     </div>
 
-    <script>
-			mui.init({
-				swipeBack: true //启用右滑关闭功能
-			});
-			 //语音识别完成事件
-			document.getElementById("search").addEventListener('recognized', function(e) {
-				console.log(e.detail.value);
-			});
-
-			var nativeWebview, imm, InputMethodManager;
-			var initNativeObjects = function() {
-				if (mui.os.android) {
-					var main = plus.android.runtimeMainActivity();
-					var Context = plus.android.importClass("android.content.Context");
-					InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager");
-					imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
-				} else {
-					nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
-				}
-			};
-			var showSoftInput = function() {
-				if (mui.os.android) {
-					imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
-				} else {
-					nativeWebview.plusCallMethod({
-						"setKeyboardDisplayRequiresUserAction": false
-					});
-				}
-				setTimeout(function() {
-					var inputElem = document.querySelector('input');
-					inputElem.focus();
-					inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
-				}, 200);
-			};
-			mui.plusReady(function() {
-				initNativeObjects();
-				showSoftInput();
-			});
-
-    </script>
-
 </div>
+<script>
+    (function ($, doc) {
+        $.init();
+        $.ready(function () {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * param {Object} obj 对象
+             * param {String} param 属性名
+             */
+            var _getParam = function (obj, param) {
+                return obj[param] || '';
+            };
+            //普通示例
+            //普通示例
+            var userPicker = new $.PopPicker();
+            var json = null;
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '/MobileApp/MobileUser/GetDemandType',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) { //返回json结果
+                    json = data;
+                }
+            });
+            userPicker.setData(json);
+            var showUserPickerButton = doc.getElementById('showTypePicker');
+            var userResult = doc.getElementById('showTypePicker');
+            showUserPickerButton.addEventListener('tap', function (event) {
+                userPicker.show(function (items) {
+                    //userResult.value = JSON.stringify(items[0]);
+                    userResult.value = items[0].text;
+                    document.getElementById("DemandType").value = items[0].value;
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+            //-----------------------------------------
+            //级联示例
+
+            var cityPicker = new $.PopPicker({
+                layer: 2
+            });
+            cityPicker.setData(cityData);
+            var showCityPickerButton = doc.getElementById('showCityPicker');
+            //var cityResult = doc.getElementById('cityResult');
+            showCityPickerButton.addEventListener('tap', function (event) {
+                cityPicker.show(function (items) {
+                    //cityResult.innerText = "你选择的城市是:" + items[0].text + " " + items[1].text;
+                    document.getElementById("showCityPicker").value = items[0].text + " " + items[1].text;
+                    document.getElementById("CityID").value = items[1].value;
+                    document.getElementById("CityName").value = items[1].text;
+                    document.getElementById("ProvinceID").value = items[0].value;
+                    document.getElementById("ProvinceName").value = items[0].text;
+                    selectcity(items[1].value, "CityID");
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+
+
+            //-----------------------------------------
+            function selectcity(data, type) {
+                // 第一步： 获得XMLHttpRequest对象
+                var ajax = new XMLHttpRequest();
+                // 第二步： 设置状态监听函数
+                ajax.onreadystatechange = function () {
+                    console.log(ajax.readyState);
+                    console.log(ajax.status);
+                    // 第五步：在监听函数中，判断readyState=4 && status=200表示请求成功
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        // 第六步： 使用responseText、responseXML接受响应数据，并使用原生JS操作DOM进行显示
+                        console.log(ajax.responseText);
+                        console.log(ajax.responseXML);// 返回不是XML，显示null
+                        console.log(JSON.parse(ajax.responseText));
+                        console.log(eval("(" + ajax.responseText + ")"));
+                    }
+                }
+                // 第三步： open一个链接
+                //ajax.open("POST", "/MobileApp/MobileCenter/updateUserData", false);//true异步请求，false同步
+                //ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                // 第四步： send一个请求。 可以发送对象和字符串，不需要传递数据发送null
+                //ajax.send("data=" + data + "&type=" + type);
+                //window.top.location.href = window.top.location.href;
+            }
+            //-----------------------------------------
+
+            //-----------------------------------------
+
+        });
+    })(mui, document);
+
+
+</script>
+<script>
+    $(function () {
+        $("#queren").click(function () {
+
+        })
+    })
+</script>

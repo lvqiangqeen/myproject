@@ -50,13 +50,13 @@
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
                 <div class="mui-scroll">
                     <a class="mui-control-item mui-active" href="#item1mobile">
-                        新项目
+                        待接受
                     </a>
                     <a class="mui-control-item" href="#item2mobile">
-                        进行中
+                        已接受
                     </a>
                     <a class="mui-control-item" href="#item3mobile">
-                        已竣工
+                        施工中
                     </a>
                     <a class="mui-control-item" href="#item4mobile">
                         已拒绝
@@ -144,42 +144,42 @@
                                 var self = this;
                                 setTimeout(function () {
                                     var IsAccept = 0;
-                                    var IsComplete = 0;
+                                    var IsPlan = 0;
                                     if (index == "0") {
                                         IsAccept = 0;
-                                        IsComplete = 0;
+                                        IsPlan = 0;
                                     } else if (index == "1") {
                                         IsAccept = 1;
-                                        IsComplete = 0;
+                                        IsPlan = 0;
                                     } else if (index == "2") {
                                         IsAccept = 1;
-                                        IsComplete = 1;
+                                        IsPlan = 1;
                                     } else{
                                         IsAccept = 2;
-                                        IsComplete = 0;
+                                        IsPlan = 0;
                                     }
                                     var ul = self.element.querySelector('.mui-table-view');
                                     var bool = false;
                                     if (index == "0") {
-                                        var html = createFragment1(pageIndex1, IsAccept, IsComplete);
-                                        ul.appendChild(createFragment1(pageIndex1, IsAccept, IsComplete));
+                                        var html = createFragment1(pageIndex1, IsAccept, IsPlan);
+                                        ul.appendChild(createFragment1(pageIndex1, IsAccept, IsPlan));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex1++;
                                     }
                                     else if (index == "1") {
-                                        var html = createFragment1(pageIndex2, IsAccept, IsComplete);
-                                        ul.appendChild(createFragment1(pageIndex2, IsAccept, IsComplete));
+                                        var html = createFragment1(pageIndex2, IsAccept, IsPlan);
+                                        ul.appendChild(createFragment1(pageIndex2, IsAccept, IsPlan));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex2++;
                                     } else if (index == "2") {
-                                        var html = createFragment1(pageIndex3, IsAccept, IsComplete);
-                                        ul.appendChild(createFragment1(pageIndex3, IsAccept, IsComplete));
+                                        var html = createFragment1(pageIndex3, IsAccept, IsPlan);
+                                        ul.appendChild(createFragment1(pageIndex3, IsAccept, IsPlan));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex3++;
                                     } else
                                     {
-                                        var html = createFragment1(pageIndex4, IsAccept, IsComplete);
-                                        ul.appendChild(createFragment1(pageIndex4, IsAccept, IsComplete));
+                                        var html = createFragment1(pageIndex4, IsAccept, IsPlan);
+                                        ul.appendChild(createFragment1(pageIndex4, IsAccept, IsPlan));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex4++;
                                     }
@@ -200,20 +200,25 @@
                     var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日';
                     return result;
                 }
-
-                var createFragment1 = function (pageIndex, IsAccept, IsComplete) {
+                function ChangeDateFormat(cellval) {
+                    var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+                    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                    return date.getFullYear() + "-" + month + "-" + currentDate;
+                }
+                var createFragment1 = function (pageIndex, IsAccept, IsPlan) {
                     var fragment = document.createDocumentFragment();
                     var result = "";
                     $.ajax({
                         type: 'post',
-                        url: '/MobileApp/mOrder/GetmTogetherList',
+                        url: '/MobileApp/MobileUser/GetDemandlist',
                         async: false,
                         dataType: "json",
                         data: {
                             CurPage: pageIndex,
                             PageSize: 10,
                             IsAccept: IsAccept,
-                            IsComplete: IsComplete,
+                            IsPlan: IsPlan,
                         },
                         success: function (data) {
 
@@ -221,28 +226,33 @@
                                 var li = document.createElement('li');
                                 li.className = 'mui-table-view-cell mui-media';
 
-                                var html = '<a class="mui-navigate-right" href="/MobileApp/mOrder/mTogetherBuidingDetail?BuidingID=' + item.buidingID + '&StageID=' + item.stageid + '&togetherid=' + item.id + '">'
+                                var html = '<a class="mui-navigate-right" href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">'
                                         + '<div class="mui-table mui-media-body">'
                                         + '<div class="mui-table-cell mui-col-xs-10">'
-                                        + '<h4 class="mui-ellipsis">' + item.buidingName + '</h4>'
-                                        + '<h5>发布工长：' + item.PublishWorkerName + '</h5>'
-                                        + '<h5>合作阶段：' + item.stagename + '</h5>'
+                                        + '<h4 class="mui-ellipsis">' + item.buidingname + '</h4>';
+                                if (item.IsAccept == 1) {
+                                    html += '<h5>施工者：' + item.GetUserName + '</h5>';
+                                } else
+                                {
+                                    html += '<h5>接收人：' + item.AcceptUserName + '</h5>'
+                                }
+                                      
+                                html += '<h5>发布日：' + ChangeDateFormat(item.AddOn) + '</h5>'
                                         + '</div>'
                                         + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">';
                                 if (item.IsAccept == 0)
                                 {
-                                    html += '<span class="mui-h5" style="color:#007aff;">新项目</span></div></div></a>';
+                                    html += '<span class="mui-h5" style="color:#007aff;">新需求</span></div></div></a>';
                                 } else if (item.IsAccept == 2) {
                                     html += '<span class="mui-h5" style="color:red;">已拒绝</span></div></div></a>';
                                 } else
                                 {
-                                    if (IsComplete == 0) {
-                                        html += '<span class="mui-h5" style="color:#007aff;">进行中</span></div></div></a>'
-                                        + '<a href="/MobileApp/mOrder/mobileStageDetail?buidingID=' + item.buidingID + '&StageID=' + item.stageid + '&list=1"  class="mui-btn mui-btn-primary mui-btn-outlined">发布信息</a>';
+                                    if (IsPlan == 0) {
+                                        html += '<span class="mui-h5" style="color:#007aff;">已接受</span></div></div></a>';
                                     } else
                                     {
-                                        html += '<span class="mui-h5" style="color:#009688;">已竣工</span></div></div></a>'
-                                        + '<a href="/MobileApp/mOrder/mobileStageDetail?buidingID=' + item.buidingID + '&StageID=' + item.stageid + '&list=1" class="mui-btn mui-btn-primary mui-btn-outlined">发布信息</a>';
+                                        html += '<span class="mui-h5" style="color:#009688;">施工中</span></div></div></a>'
+                                        + '<a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '" class="mui-btn mui-btn-primary mui-btn-outlined">施工情况</a>';
                                     }
                                 }
                                 li.innerHTML = html;

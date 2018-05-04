@@ -7,6 +7,7 @@ using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Domain;
 using AIYunNet.CMS.Domain.DataHelper;
+using AIYunNet.CMS.Domain.OccaModel;
 using System.Data;
 
 namespace AIYunNet.CMS.BLL.Service
@@ -32,12 +33,12 @@ namespace AIYunNet.CMS.BLL.Service
                 DecDemand model = new DecDemand();
                 if (guid != "")
                 {
-                    model = context.DecDemand.FirstOrDefault(c=>c.Guid==guid);
+                    model = context.DecDemand.FirstOrDefault(c => c.Guid == guid);
                 }
                 return model;
             }
         }
-        public List<DecDemand> GetDecDemandListByUserIDAndType(int UserID,string UserType)
+        public List<DecDemand> GetDecDemandListByUserIDAndType(int UserID, string UserType)
         {
             List<DecDemand> list = new List<DecDemand>();
             using (AIYunNetContext context = new AIYunNetContext())
@@ -57,7 +58,52 @@ namespace AIYunNet.CMS.BLL.Service
                 }
             }
         }
+        //获取用户发布的需求
+        public List<Demand> GetPublishDemandList(int PublicUserID, int PageSize, int IsAccept, int IsPlan, int CurPage, out int count)
+        {
+            List<Demand> list = new List<Demand>();
+            bool isplan = IsPlan == 1 ? true : false;
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                var query = from c in context.DecDemandAccept
+                            from d in context.DecDemand
+                            where c.DemandGuid == d.Guid
+                            && c.PublicUserID == PublicUserID && d.IsDelete == false
+                            && c.IsAccept== IsAccept && d.IsPlan == isplan
+                            select new Demand
+                            {
+                                id = d.id,
+                                buidingname = d.buidingname,
+                                ownername = d.ownername,
+                                ownertel = d.ownertel,
+                                ProvinceID = d.ProvinceID,
+                                ProvinceName = d.ProvinceName,
+                                CityID = d.CityID,
+                                CityName = d.CityName,
+                                buidingSpace = d.buidingSpace,
+                                OneSentence = d.OneSentence,
+                                PublishuserID = d.PublishuserID,
+                                GetUserID = d.GetUserID,
+                                GetUserType = d.GetUserType,
+                                AddOn = d.AddOn,
+                                IsEnd = d.IsEnd,
+                                IsVerrify = d.IsVerrify,
+                                DemandType = d.DemandType,
+                                DemandTypeName = d.DemandTypeName,
+                                Guid = d.Guid,
+                                HouseType = d.HouseType,
+                                IsPlan = d.IsPlan,
+                                AcceptUserID = c.GetUserID,
+                                IsAccept = c.IsAccept,
+                                AcceptUserName = context.WebWorker.FirstOrDefault(w => w.UserID == c.GetUserID).WorkerName,
+                                GetUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName
+                            };
+                count = query.ToList().Count();
+                list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+            }
 
+            return list;
+        }
         public List<DecDemand> GetMyDecDemandList(int PublishUserID)
         {
             List<DecDemand> list = new List<DecDemand>();
@@ -65,7 +111,7 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 try
                 {
-                    list = context.DecDemand.Where(c => c.PublishuserID == PublishUserID && c.IsDelete==false).OrderByDescending(c => c.AddOn).ToList();
+                    list = context.DecDemand.Where(c => c.PublishuserID == PublishUserID && c.IsDelete == false).OrderByDescending(c => c.AddOn).ToList();
                     if (list == null)
                     {
                         list = new List<DecDemand>();
