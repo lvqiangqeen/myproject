@@ -5,6 +5,31 @@
 @{
     ViewBag.Title = "DemandDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string shi = "0", ting = "0", chu = "0", wei = "0", yang = "0";
+    List<string> housetypelist = new List<string>();
+    if (Model.HouseType != "" && Model.HouseType != null)
+    {
+        housetypelist = Model.HouseType.Replace("室", "").Replace("厅", "").Replace("厨", "").Replace("卫生间", "").Replace("阳台", "").Split(',').ToList();
+        shi = housetypelist[0];
+        ting = housetypelist[1];
+        chu = housetypelist[2];
+        wei = housetypelist[3];
+        yang = housetypelist[4];
+    }
+    int IsPublish = Model.IsPublish == true ? 1 : 0;
+    DecDemandAccept acc = new DecDemandAccept();
+    DecDemandAcceptService accSer = new DecDemandAcceptService();
+    WebWorkerService workSer = new WebWorkerService();
+    acc = accSer.GetAcceptByGuid(Model.Guid);
+
+    int GetUserID = Request["GetUserID"]==null && Request["GetUserID"]=="" ? 0:Convert.ToInt32(Request["GetUserID"]);
+    string GetUserName = Request["GetUserName"] == null && Request["GetUserName"] == "" ? "" : Request["GetUserName"]+"("+ Request["WorkerCategory"] + ")";
+    if (acc != null && GetUserID==0)
+    {
+        GetUserID = acc.GetUserID;
+        GetUserName = workSer.GetWebWorkerByUserID(GetUserID).WorkerName+ "("+workSer.GetWebWorkerByUserID(GetUserID).WorkerCategory+")";
+
+    }
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
@@ -42,6 +67,7 @@
     <div class="mui-content">
         <div class="mui-content-padded" style="margin: 5px;">
             <form class="mui-input-group">
+                <input type="hidden" value="@Model.id" name="id">
                 <div class="mui-input-row">
                     <label>小区地址</label>
                     <input type="text" value="@Model.buidingname" placeholder="填写小区地址" name="buidingname">
@@ -66,10 +92,18 @@
                         <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
                     </div>m²
                 </div>
+                <div class="mui-input-row" style="line-height:35px;">
+                    <label>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+                    <input class="mui-input-numbox" type="number" value="@shi" name="shi" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />室
+                    <input class="mui-input-numbox" type="number" value="@ting" name="ting" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />厅
+                    <input class="mui-input-numbox" type="number" value="@chu" name="chu" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />厨
+                    <input class="mui-input-numbox" type="number" value="@wei" name="wei" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />卫
+                    <input class="mui-input-numbox" type="number" value="@yang" name="yang" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />阳台
+                </div>
                 <div class="mui-input-row">
                     <label>所&nbsp;&nbsp;在&nbsp;&nbsp;地</label>
                     <input type="text" placeholder="点击此处选择城市" id="showCityPicker" value="@Model.ProvinceName @Model.CityName">
-                    <input type="hidden" value="@Model.CityID" name="CityID" id="CityID"/>
+                    <input type="hidden" value="@Model.CityID" name="CityID" id="CityID" />
                     <input type="hidden" value="@Model.CityName" name="CityName" id="CityName" />
                     <input type="hidden" value="@Model.ProvinceID" name="ProvinceID" id="ProvinceID" />
                     <input type="hidden" value="@Model.ProvinceName" name="ProvinceName" id="ProvinceName" />
@@ -77,18 +111,51 @@
                 <div class="mui-input-row">
                     <label>需求类型</label>
                     <input type="text" placeholder="点击此处选择需求类型" id="showTypePicker" value="@Model.DemandTypeName">
-                    <input type="hidden" value="@Model.DemandType" name="DemandType" id="DemandType"/>
+                    <input type="hidden" value="@Model.DemandType" name="DemandType" id="DemandType" />
                     <input type="hidden" value="@Model.DemandTypeName" name="DemandTypeName" id="DemandTypeName" />
                 </div>
                 <div class="mui-input-row" style="margin: 10px 5px;border-style: solid;border-width: 0.5px;">
                     <textarea id="textarea" rows="5" placeholder="任务描述"></textarea>
                     <script>
-                        $("#textarea").val('@Model.Info'); 
+                        $("#textarea").val('@Model.Info');
                     </script>
+                </div>
+                @if (Model.GetUserID == 0)
+                {
+                    <div class="mui-input-row">
+                        <label>发送谁</label>
+                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName">
+                        <input type="hidden" value="@GetUserID" name="GetUserID" />
+                    </div>
+                }
+                else
+                {
+                    <div class="mui-input-row">
+                        <label>发送谁</label>
+                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName">
+                        <input type="hidden" value="@GetUserID" name="GetUserID" />
+                    </div>
+                }
+
+
+                <div class="mui-input-row">
+
+                    <label>发布的到大厅</label>
+
+                    <div class="mui-switch" id="IsPublish">
+                        <div class="mui-switch-handle"></div>
+                        <input value="@IsPublish" type="hidden" name="IsPublish" />
+                    </div>
+
                 </div>
                 <div class="mui-button-row">
                     <button type="button" class="mui-btn mui-btn-primary" id="queren">确认</button>&nbsp;&nbsp;
-                    <button type="button" class="mui-btn mui-btn-danger" onclick="javascript:history.go(-1);">取消</button>
+                    <button type="button" class="mui-btn mui-btn-danger" id="quxiao">取消</button>
+                    <script>
+                        $("#quxiao").click(function () {
+                            window.location.href = "/MobileApp/MobileUser/DemandList";
+                        });
+                    </script>
                 </div>
             </form>
         </div>
@@ -129,6 +196,8 @@
                     //userResult.value = JSON.stringify(items[0]);
                     userResult.value = items[0].text;
                     document.getElementById("DemandType").value = items[0].value;
+                    document.getElementById("DemandTypeName").value = items[0].text;
+                    
                     //返回 false 可以阻止选择框的关闭
                     //return false;
                 });
@@ -191,9 +260,115 @@
 
 </script>
 <script>
+    mui('.mui-switch').each(function () { //循环所有toggle
+        //toggle.classList.contains('mui-active') 可识别该toggle的开关状态
+        //this.parentNode.querySelector('span').innerText = '状态：' + (this.classList.contains('mui-active') ? 'true' : 'false');
+        /**
+         * toggle 事件监听
+         */
+        this.addEventListener('toggle', function (event) {
+            //event.detail.isActive 可直接获取当前状态
+            //this.parentNode.querySelector('span').innerText = '状态：' + (event.detail.isActive ? 'true' : 'false');
+            if (event.detail.isActive) {
+                $("input[name=IsPublish]").val(1);
+            } else {
+                $("input[name=IsPublish]").val(0);
+            }
+        });
+    });
+</script>
+<script>
     $(function () {
+        if ($("input[name=IsPublish]").val() == "1") {
+            $("#IsPublish").attr("class", "mui-switch mui-switch-blue mui-active");
+        } else {
+            $("#IsPublish").attr("class", "mui-switch mui-switch-blue");
+        }
         $("#queren").click(function () {
+            var id = $("input[name=id]").val();
+            var success=updateDemand();
+            if (success == 1)
+            {
+                if (id > 0) {
+                    layer.open({
+                        content: '修改成功！'
+                      , btn: '我知道了',
+                      yes: function ()
+                      {
+                          window.location.href = "/MobileApp/MobileUser/DemandList";
+                      }
+                    });
+                } else {
+                    layer.open({
+                        content: '发送成功！'
+                      , btn: '我知道了',
+                      yes: function () {
+                          window.location.href = "/MobileApp/MobileUser/DemandList";
+                      }
+                    });
+                }
+            }
 
+        });
+        $("input[name=GetUserName]").click(function () {
+            var success = updateDemand();
+            if (success == 1) {
+                window.location.href = "/MobileApp/MobileUser/SelectWorkerforDemand?WorkerCategory=装修工长&Guid=@Model.Guid";
+            }
         })
+        function updateDemand()
+        {
+            var ret = 0;
+            var id = $("input[name=id]").val();
+            var buidingname = $("input[name=buidingname]").val();
+            var DemandType = $("input[name=DemandType]").val();
+            var DemandTypeName = $("input[name=DemandTypeName]").val();
+            var ProvinceID = $("input[name=ProvinceID]").val();
+            var ProvinceName = $("input[name=ProvinceName]").val();
+            var CityID = $("input[name=CityID]").val();
+            var CityName = $("input[name=CityName]").val();
+            var ownername = $("input[name=ownername]").val();
+            var ownertel = $("input[name=ownertel]").val();
+            var buidingSpace = $("input[name=buidingSpace]").val();
+            var HouseType = $("input[name=HouseType]").val();
+            var OneSentence = $("input[name=OneSentence]").val();
+            var Info = $("#textarea").val();
+            var IsPublish = $("input[name=IsPublish]").val() == 1 ? true : false;
+            var HouseType = $("input[name=shi]").val() + "室," + $("input[name=ting]").val() + "厅," + $("input[name=chu]").val() + "厨," + $("input[name=wei]").val() + "卫生间," + $("input[name=yang]").val() + "阳台";
+            var GetUserID = $("input[name=GetUserID]").val();
+            $.ajax({
+                type: "post",
+                url: "/MobileApp/MobileUser/updateDemandDetail",
+                async:false,
+                data: {
+                    id: id,
+                    buidingname: buidingname,
+                    DemandType: DemandType,
+                    DemandTypeName: DemandTypeName,
+                    ProvinceID: ProvinceID,
+                    GetUserType: "WebUser",
+                    GetUserID: GetUserID,
+                    ProvinceName: ProvinceName,
+                    CityID: CityID,
+                    CityName: CityName,
+                    ownername: ownername,
+                    ownertel: ownertel,
+                    buidingSpace: buidingSpace,
+                    HouseType: HouseType,
+                    OneSentence: OneSentence,
+                    Info: Info,
+                    IsPublish: IsPublish,
+                    PublishuserID: "@SessionHelper.Get("UserID")",
+            },
+                success: function (data) {
+                    if (data.RetCode == 1) {
+                        ret = 1;
+
+                    }
+                }
+
+            });
+            return ret;
+        }
     })
 </script>

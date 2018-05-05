@@ -234,7 +234,8 @@
                                     html += '<h5>施工者：' + item.GetUserName + '</h5>';
                                 } else
                                 {
-                                    html += '<h5>接收人：' + item.AcceptUserName + '</h5>'
+                                    var AcceptUserName = item.AcceptUserName == null ? '未选择' : item.AcceptUserName;
+                                    html += '<h5>接收人：' + AcceptUserName + '</h5>'
                                 }
                                       
                                 html += '<h5>发布日：' + ChangeDateFormat(item.AddOn) + '</h5>'

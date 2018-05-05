@@ -19,6 +19,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingStagesService stageSer = new WebBuidingStagesService();
         DemandService deSer = new DemandService();
         WebCommonService wCSer = new WebCommonService();
+        WebWorkerService workSer = new WebWorkerService();
+        WebBuidTogetherService TogSer = new WebBuidTogetherService();
 
         #region 装修进度（用户）
         // GET: MobileApp/MobileUser
@@ -64,12 +66,15 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             List<Demand> list = deSer.GetPublishDemandList(PublicUserID, PageSize, IsAccept, IsPlan, CurPage,out count);
             return Json(list);
         }
-        public ActionResult DemandDetail(int id=0)
+        public ActionResult DemandDetail(int id=0,string Guid="")
         {
             DecDemand dec = new DecDemand();
-            if (id != 0)
+            if (id != 0 && Guid == "")
             {
                 dec = deSer.GetDecDemandByID(id);
+            } else if(Guid!="" && id==0)
+            {
+                dec = deSer.GetDecDemandByGuID(Guid);
             }
             
             return View(dec);
@@ -95,5 +100,32 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(list);
         }
         #endregion
+
+        #region 选择需求发送人列表
+        public ActionResult SelectWorkerforDemand()
+        {
+            return View();
+        }
+        //获取工人信息
+        [HttpPost]
+        public ActionResult mGetWorkerlist(string WorkerName, int CurPage, int PageSize, string WorkerCategory, string WorkerPositionID)
+        {
+            List<WebWorker> list = workSer.mGetWorker(WorkerName, CurPage, PageSize, WorkerCategory, WorkerPositionID);
+            return Json(list);
+        }
+        //选择合作工人
+        [HttpPost]
+        public JsonResult SendWorkTogether(WebBuidTogether tog)
+        {
+            int ret = 0;
+            int ishave = TogSer.IsHaveTogther(tog.buidingID, tog.StageID);
+            if (ishave == 0)
+            {
+                ret = TogSer.AddBuidTogether(tog);
+            }
+            return Json(new { RetCode = ret });
+        }
+        #endregion
+
     }
 }

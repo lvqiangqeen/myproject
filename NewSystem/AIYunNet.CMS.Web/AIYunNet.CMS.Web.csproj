@@ -4295,6 +4295,7 @@
     <Content Include="Areas\MobileApp\Views\MobileUser\BuidingDetailUser.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\DemandList.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\DemandDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\SelectWorkerforDemand.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
