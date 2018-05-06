@@ -113,17 +113,18 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             List<WebWorker> list = workSer.mGetWorker(WorkerName, CurPage, PageSize, WorkerCategory, WorkerPositionID);
             return Json(list);
         }
-        //选择合作工人
-        [HttpPost]
-        public JsonResult SendWorkTogether(WebBuidTogether tog)
+        public ActionResult decDemandDetail(int id = 0, string Guid = "")
         {
-            int ret = 0;
-            int ishave = TogSer.IsHaveTogther(tog.buidingID, tog.StageID);
-            if (ishave == 0)
+            DecDemand dec = new DecDemand();
+            if (id != 0 && Guid == "")
             {
-                ret = TogSer.AddBuidTogether(tog);
+                dec = deSer.GetDecDemandByID(id);
             }
-            return Json(new { RetCode = ret });
+            else if (Guid != "" && id == 0)
+            {
+                dec = deSer.GetDecDemandByGuID(Guid);
+            }
+            return View(dec);
         }
         #endregion
 

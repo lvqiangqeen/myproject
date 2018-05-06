@@ -4296,6 +4296,9 @@
     <Content Include="Areas\MobileApp\Views\MobileUser\DemandList.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\DemandDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\SelectWorkerforDemand.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\decDemandDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mLogin\registCenter.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileWorker\mWorkerLeaderList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

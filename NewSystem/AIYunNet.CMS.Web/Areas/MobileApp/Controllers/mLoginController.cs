@@ -75,6 +75,59 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public int Register(string userAccount, string userPassword, string PositionCode, int PositionType)
+        {
+            bool bit = webUserservice.IsHaveuserAccount(userAccount);
+            if (bit)
+            {
+                //存在
+                return 0;
+            }
+            else
+            {
+                WebUser webuser = new WebUser
+                {
+                    UserName = userAccount,
+                    Password = FormsAuthentication.HashPasswordForStoringInConfigFile(userPassword, "md5"),
+                    Telephone = userAccount,
+                    PositionCode = PositionCode,
+                    PositionType = PositionType
+                };
+                int result = webUserservice.AddWebUser(webuser);
+                int userid = webUserservice.GetWebUserByAccount(userAccount).UserID;
+                if (PositionCode == "WebWorkerLeader" || PositionCode == "WebWorker")
+                {
+                    WebWorker worker = new WebWorker
+                    {
+                        WorkerPhone = userAccount,
+                        UserID= userid
+                    };
+                    if (PositionCode == "WebWorkerLeader")
+                    {
+                        worker.WorkerCategory = "装修工长";
+                    }
+                    else { worker.WorkerCategory = "装修工人"; }
+                    webWorkerService.AddWebWorker(worker);
+                }
+                return result;
+
+            }
+        }
+        [HttpPost]
+        public int IsHaveTel(string userAccount)
+        {
+            bool bit = webUserservice.IsHaveuserAccount(userAccount);
+            if (bit)
+            {
+                //存在
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
         #endregion
     }
 }

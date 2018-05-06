@@ -21,12 +21,41 @@
 
     <div class="personal-list">
         <ul>
-            <li><a class="my-icon-grzl" href="/MobileApp/MobileCenter/PersonData">个人资料</a></li>
+            @if (SessionHelper.Get("PositionCode") == "WebUser")
+            {
+                <li><a class="my-icon-grzl" href="/MobileApp/MobileCenter/UserData">个人资料</a></li>
+            }
+            else
+            {
+                if (SessionHelper.Get("PositionCode") == "WebWorkerLeader")
+                {
+                    <li><a class="my-icon-grzl" href="/MobileApp/MobileCenter/PersonData">工长资料</a></li>
+                }
+                else if (SessionHelper.Get("PositionCode") == "WebWorker")
+                {
+                    <li><a class="my-icon-grzl" href="/MobileApp/MobileCenter/PersonData">工人资料</a></li>
+                }
+
+            }
+
         </ul>
         <ul>
-            <li><a class="my-icon-wddd" href="/MobileApp/mOrder/Orderlist">我的订单</a></li>
-            <li><a class="my-icon-yhq" href="/MobileApp/mOrder/mobileBuidingList">订单进度</a></li>
-            <li><a class="my-icon-wdjf" href="/MobileApp/mOrder/mTogetherBuidingList">我的合作项目</a></li>
+            @*<li><a class="my-icon-wddd" href="/MobileApp/MobileUser/BuidinglistUser">装修进度</a></li>
+            <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandList">我的需求</a></li>
+            <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandDetail">发布需求</a></li>*@
+            @if (SessionHelper.Get("PositionCode") == "WebUser")
+            {
+                <li><a class="my-icon-wddd" href="/MobileApp/MobileUser/BuidinglistUser">装修进度</a></li>
+                <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandList">我的需求</a></li>
+                <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandDetail">发布需求</a></li>
+            }
+            else
+            {
+                <li><a class="my-icon-wddd" href="/MobileApp/mOrder/Orderlist">我的订单</a></li>
+                <li><a class="my-icon-yhq" href="/MobileApp/mOrder/mobileBuidingList">订单进度</a></li>
+                <li><a class="my-icon-wdjf" href="/MobileApp/mOrder/mTogetherBuidingList">我的合作项目</a></li>
+            }
+
         </ul>
         <ul>
             <li><a class="my-icon-gsjj" href="#">公司简介</a></li>
@@ -34,6 +63,7 @@
             <li><a class="my-icon-kfzx" href="#">客服咨询<span class="my-tel">400-000-0000</span></a></li>
         </ul>
     </div>
+    <a href="/MobileApp/mLogin/LoginCenter" class="order">退出</a>
 
 
 </div>

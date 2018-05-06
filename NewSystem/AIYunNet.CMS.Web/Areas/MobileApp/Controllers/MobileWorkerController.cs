@@ -15,9 +15,25 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         WebWorkerService workerSer = new WebWorkerService();
         WebBuidingService buidSer = new WebBuidingService();
+        WebCommonService wCSer = new WebCommonService();
+        t_AreaService t_AreaService = new t_AreaService();
         // GET: MobileApp/MobileWorker
         public ActionResult mWorkerList()
         {
+            string mkjcitycode = SessionHelper.GetSession("mkjcitycode").ToString();
+          
+            List<t_Area> t_Arealist = t_AreaService.GetAreaListByfather(mkjcitycode);
+            List<WebLookup> workerlist = wCSer.GetLookupList("workers_position");
+            ViewBag.workerlist = workerlist;
+            ViewBag.t_Arealist = t_Arealist;
+            return View();
+        }
+        public ActionResult mWorkerLeaderList()
+        {
+            string mkjcitycode = SessionHelper.GetSession("mkjcitycode").ToString();
+
+            List<t_Area> t_Arealist = t_AreaService.GetAreaListByfather(mkjcitycode);
+            ViewBag.t_Arealist = t_Arealist;
             return View();
         }
         public ActionResult mWorkerDetail(int workerid=1)
@@ -39,6 +55,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult mupdateWebWorker()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetWorkerPositionType()
+        {
+            List<lookupJson> list = wCSer.GetJson("workers_position");
+            return Json(list);
         }
         #endregion
     }

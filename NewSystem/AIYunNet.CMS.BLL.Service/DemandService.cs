@@ -169,6 +169,7 @@ namespace AIYunNet.CMS.BLL.Service
                     old.CityName = DecDemand.CityName;
                     old.buidingSpace = DecDemand.buidingSpace;
                     old.buidingname = DecDemand.buidingname;
+                    old.HouseType = DecDemand.HouseType;
                     context.SaveChanges();
                 }
                 return 1;

@@ -1,0 +1,212 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "mWorkerLeaderList";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string AreasID = Request["AreasID"];
+    string mkjcitycode = Request["mkjcitycode"];
+    string SortOrder = " Stars " + Request["SortOrder"] + ",";
+    string AreasName = Request["AreasName"] == null ? SessionHelper.GetSession("mkjcityname").ToString() : Request["AreasName"];
+}
+
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<link href="~/Content/WorkerApp/css/class.css" rel="stylesheet" />
+<script>
+    var html = "<h1>工长列表</h1>";
+    $("#header").append(html);
+</script>
+<style>
+    .mui-scroll-wrapper {
+        top: 100px;
+    }
+
+    .mui-content {
+        background-color: white;
+    }
+</style>
+<div class="container" id="container">
+
+    <!--下拉分类-->
+    <div class="cate-nav">
+        <!--分类栏目开始-->
+        <div class="mall-cate-box">
+            <ul class="mall-cate">
+                <li class=""><a id="AreasName" href="javascript:void(0);" data-type="category">@AreasName</a></li>
+                <li class=""><a href="javascript:void(0);" data-type="district">等级</a></li>
+                @*<li class=""><a href="javascript:void(0);" data-type="sort">接单数</a></li>*@
+                @*<li class=""><a id="gongzhong" href="javascript:void(0);" data-type="screen">@gongzhong</a></li>*@
+            </ul>
+        </div>
+        <!--分类栏目结束-->
+        <!--弹出下拉列表开始-->
+        <div class="sortdrop-wrapper hide" data-type="category" style="display: none;">
+            <div class="sort-wrapper">
+                <div class="sort-view">
+                    <div>
+                        <section class="select"><a href="/MobileApp/MobileWorker/mWorkerLeaderList?AreasName=全城&AreasID=0&SortOrder=@Request["SortOrder"]" data-main="category_emptyMenu"><span class="all">全城</span></a></section>
+                        @foreach (var item in ViewBag.t_Arealist as List<t_Area>)
+                        {
+                            <section><a href="/MobileApp/MobileWorker/mWorkerLeaderList?AreasName=@item.area&AreasID=@item.areaID&SortOrder=@Request["SortOrder"]" data-main="category_emptyMenu"> <span class="news">@item.area</span></a></section>
+                        }
+                    </div>
+                    <i class="m-down hide" style="display: none;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="sortdrop-wrapper hide" data-type="district" style="display: none;">
+            <div class="sort-wrapper">
+                <div class="sort-view">
+                    <div>
+                        <section class="select"><a href="/MobileApp/MobileWorker/mWorkerLeaderList?AreasName=@AreasName&AreasID=@AreasID&SortOrder=desc"><span>从高到底</span></a></section>
+                        <section><a href="/MobileApp/MobileWorker/mWorkerLeaderList?AreasName=@AreasName&AreasID=@AreasID&SortOrder=asc"><span>从低到高</span></a></section>
+                    </div>
+                    <i class="m-down hide" style="display: none;"></i>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="sortdrop-wrapper hide" data-type="sort" style="display: none;">
+                <div class="sort-wrapper">
+                    <div class="sort-view">
+                        <div>
+                            <section class="select"><a href="#"> <span>从高到底</span></a></section>
+                            <section><a href="#"><span>从低到高</span></a></section>
+                        </div>
+                        <i class="m-down hide" style="display: none;"></i>
+                    </div>
+                </div>
+            </div>*@
+
+        @*<div class="sortdrop-wrapper hide" data-type="screen" style="display: none;">
+            <div class="sort-wrapper" id="filterPop">
+                <div class="sort-view sort-screen">
+                    <div>
+                        <section class="select"><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=0&gongzhong=全部&SortOrder=@Request["SortOrder"]"><span>全部</span></a></section>
+                        @foreach (var item in ViewBag.workerlist as List<WebLookup>)
+                        {
+                            <section><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@item.Code&gongzhong=@item.Description&SortOrder=@Request["SortOrder"]"><span>@item.Description</span></a></section>
+                        }
+                    </div>
+                    <i class="m-down hide" style="display: none;"></i>
+                </div>
+            </div>
+        </div>*@
+        <!--弹出下拉列表结束-->
+    </div>
+    <div class="pop-shade hide" style="display: none; height: 100%;"></div>
+    <!--分类下拉列表js引入-->
+    <script src="~/Content/WorkerApp/js/class/iscroll-5.1.2.min.js"></script>
+    <script src="~/Content/WorkerApp/js/class/slideNav.min.js"></script>
+    <!--分类下拉列表结束-->
+    <!--内容列表-->
+    <div class="jbsf-group mui-content mui-scroll-wrapper" id="refreshContainer">
+        <div class="mui-scroll">
+            <div class="mui-table-view mui-table-view-chevron">
+
+            </div>
+        </div>
+
+    </div>
+    <!--内容列表-->
+
+</div>
+<script type="text/javascript">
+
+    (function () {
+
+        //上拉加载下拉刷新
+        mui.init({pullRefresh:{
+            container: '#refreshContainer',
+            up: {
+                contentrefresh: '正在加载...',
+                callback: pullupRefresh
+            }
+        }
+        });
+        //加载更多
+        var pageSize = 10;//每页显示条数
+        var counter = 1;//计数器
+        var pageStart = 1;//开始数据条数
+        var Flag=true;
+
+        data(pageStart, pageSize);
+        function data(pageIndex, PageSize) {
+            //业务
+            var result = "";
+            $.ajax({
+                type: 'post',
+                url: '/Handler/GetPageListAjax.ashx',
+                async: false,
+                dataType: "json",
+                data: {
+                    mkjcitycode: $("#mkjcitycode").val(),
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    AreasID: '@AreasID',
+                    SortOrder:'@SortOrder',
+                    WorkerCategory: '装修工长',
+                    methodname: "GetDecWorkList"
+                },
+                success: function (data) {
+                    var datajson = data;
+                    Flag = datajson.list == null || datajson.list == undefined || datajson.list == '';
+                    //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
+                    console.log(Flag);
+                    if(Flag==false){
+                        counter++;
+                    }
+                    $.each(datajson.list, function (i, item) {
+                        result += '<div class="jbsf-item">'
+                            + '<a href="/MobileApp/MobileWorker/mWorkerDetail?workerid=' + item.worker.WorkerID + '">'
+                             + '<div class="jbsf-item-img" style="float: left;"><img src="@AppSettingsHelper.ImgUrl' + item.worker.thumbnailImage + '"></div>'
+                              + '<div class="jbsf-item-txt" style="float: left;">'
+                              + '<h2>' + item.worker.WorkerName + '</h2>'
+                              + '<div class="order-total"><span class="work-type">等级：</span><span>';
+                        for (var i = 0; i < item.worker.Huang; i++)
+                        {
+                            result += '<img src="/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        for (var i = 0; i < item.worker.Ying; i++)
+                        {
+                            result += '<img src="/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        for (var i = 0; i < item.worker.Xing; i++)
+                        {
+                            result += '<img src="/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;"/>';
+                        }
+                        result += '</span></div>'
+                              + '<div class="jbsf-details"><span class="work-type">工长</span><span class="work-ages" style="margin-left: 10px;">' + item.worker.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.worker.AreasName + '">' + item.worker.AreasName + '</span></div>'
+                              + '</div></a></div>';
+                    });
+
+                    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
+                    //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
+                    pageStart++;
+                    mui('#refreshContainer').on('tap', 'a', function () {
+                        window.top.location.href = this.href;
+                    });
+
+                }
+            }
+        );
+
+        }
+        /**
+         * 上拉加载具体业务实现
+         */
+        function pullupRefresh() {
+            setTimeout(function () {
+                mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
+                data(pageStart, pageSize);
+            }, 200);
+        }
+    })();
+    mui('body').on('click', 'a', function () {
+        window.top.location.href = this.href;
+    });
+
+</script>
+

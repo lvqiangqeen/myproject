@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "LoginCenter";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    Session.Abandon();
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
@@ -117,7 +118,7 @@
         <div class="mui-content-padded">
             <button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
             <div class="link-area">
-                <a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+                <a id='reg'href="/MobileApp/mLogin/registCenter">注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
             </div>
         </div>
         <div class="mui-content-padded oauth-area">

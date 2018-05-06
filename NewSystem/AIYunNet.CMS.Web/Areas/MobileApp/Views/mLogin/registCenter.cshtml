@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewBag.Title = "registCenter";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/login/css/style.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/app.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.css" rel="stylesheet" />
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.poppicker.css" rel="stylesheet" />
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.picker.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.poppicker.js"></script>
+<style>
+    a {
+        display: -webkit-inline-box;
+    }
+</style>
+<style>
+    .area {
+        margin: 20px auto 0px auto;
+    }
+
+    .mui-input-group {
+        margin-top: 10px;
+    }
+
+        .mui-input-group:first-child {
+            margin-top: 20px;
+        }
+
+        .mui-input-group label {
+            width: 22%;
+        }
+
+    .mui-input-row label ~ input,
+    .mui-input-row label ~ select,
+    .mui-input-row label ~ textarea {
+        width: 78%;
+    }
+
+    .mui-checkbox input[type=checkbox],
+    .mui-radio input[type=radio] {
+        top: 6px;
+    }
+
+    .mui-content-padded {
+        margin-top: 25px;
+    }
+
+    .mui-btn {
+        padding: 10px;
+    }
+
+    .link-area {
+        display: block;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .spliter {
+        color: #bbb;
+        padding: 0px 8px;
+    }
+
+    .oauth-area {
+        position: absolute;
+        bottom: 20px;
+        left: 0px;
+        text-align: center;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+        .oauth-area .oauth-btn {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-size: 30px 30px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            margin: 0px 20px;
+            /*-webkit-filter: grayscale(100%); */
+            border: solid 1px #ddd;
+            border-radius: 25px;
+        }
+
+            .oauth-area .oauth-btn:active {
+                border: solid 1px #aaa;
+            }
+
+            .oauth-area .oauth-btn.disabled {
+                background-color: #ddd;
+            }
+
+    input {
+        -webkit-user-select: auto;
+    }
+</style>
+<script>
+    $(function () {
+        var html = "<h1>注册</h1>";
+        $("#header").append(html);
+    })
+</script>
+<div class="container" id="container">
+
+    <div class="mui-content">
+        <form id='login-form' class="mui-input-group">
+            <div class="mui-input-row">
+                <label>账号</label>
+                <input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入账号">
+            </div>
+            <div class="mui-input-row">
+                <label>身份</label>
+                <input id='PositionCode' type="text" class="mui-input-clear mui-input" placeholder="点击选择身份">
+                <input type="hidden" value="" id="aPositionCode">
+            </div>
+            <div class="mui-input-row">
+                <label>密码</label>
+                <input id='password' type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+            </div>
+            <div class="mui-input-row">
+                <label>确认</label>
+                <input id='repassword' type="password" class="mui-input-clear mui-input" placeholder="请确认密码">
+            </div>
+        </form>
+
+        <div class="mui-content-padded">
+            <button id='regist' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
+            <div class="link-area">
+                <a id='reg' href="/MobileApp/mLogin/LoginCenter">登陆账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
+            </div>
+        </div>
+        <div class="mui-content-padded oauth-area">
+        </div>
+    </div>
+    <script>
+    (function ($, doc) {
+        $.init();
+        $.ready(function () {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * param {Object} obj 对象
+             * param {String} param 属性名
+             */
+            var _getParam = function (obj, param) {
+                return obj[param] || '';
+            };
+            //普通示例
+            //普通示例
+            var userPicker = new $.PopPicker();
+            var json = [{
+                value: 'WebUser',
+                text: '装修业主（普通会员）'
+            }, {
+                value: 'WebPeople',
+                text: '设计师'
+            }, {
+                value: 'WebWorkerLeader',
+                text: '装修工长'
+            }, {
+                value: 'WebWorker',
+                text: '装修工人'
+            }];
+            userPicker.setData(json);
+            var showUserPickerButton = doc.getElementById('PositionCode');
+            var userResult = doc.getElementById('PositionCode');
+            showUserPickerButton.addEventListener('tap', function (event) {
+                userPicker.show(function (items) {
+                    //userResult.value = JSON.stringify(items[0]);
+                    userResult.value = items[0].text;
+                    document.getElementById("aPositionCode").value = items[0].value;
+
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+            //-----------------------------------------
+
+
+
+
+        });
+    })(mui, document);
+
+
+    </script>
+    <script>
+        $(function () {
+            function IsHaveTel(userAccount) {
+                var datacode = 1;
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "/MobileApp/mLogin/IsHaveTel",
+                    data: {
+                        userAccount: userAccount
+                    },
+                    success: function (data) {
+                        if (data == 0) {
+                            layer.open({
+                                content: '账号已经被人注册！'
+                                , btn: '我知道了'
+                            });
+                            datacode = 0;
+                        }
+                        else {
+
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!2');
+                    }
+                });
+                if (datacode == 0) {
+                    return 0;
+                }
+            }
+            $("#regist").click(function () {
+                var userAccount = $("#account").val();
+                var userPassword = $("#password").val();
+                var repassword = $("#repassword").val();
+                var PositionCode = $("#aPositionCode").val();
+                if (userAccount == "" || userAccount == null || userPassword == "" || userPassword == null) {
+                    layer.open({
+                        content: '账号密码不能为空！'
+, btn: '我知道了'
+                    });
+                    return false;
+                } else {
+                    var datacode = IsHaveTel(userAccount);
+                    if (datacode == 0)
+                    {
+                        return false;
+                    }
+                }
+
+                if (repassword != userPassword) {
+                    layer.open({
+                        content: '两次密码不一致'
+       , btn: '我知道了'
+                    });
+                    return false;
+                }
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "/MobileApp/mLogin/Register",
+                    data: {
+                        userAccount: userAccount,
+                        userPassword: userPassword,
+                        PositionCode: PositionCode,
+                        PositionType: 0
+                    },
+                    success: function (data) {
+                        if (data == 1) {
+                            layer.open({
+                                content: '注册成功请登陆'
+, btn: '我知道了', yes: function ()
+{
+    window.location.href = "/MobileApp/mLogin/LoginCenter";
+}
+                            });
+                            
+                        }
+                        else {
+          
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!2');
+                    }
+                });
+            })
+        })
+    </script>
+
+</div>
+

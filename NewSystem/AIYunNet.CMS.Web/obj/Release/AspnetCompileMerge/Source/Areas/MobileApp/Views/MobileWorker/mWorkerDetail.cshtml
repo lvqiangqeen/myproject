@@ -25,7 +25,10 @@
                 <div class="worker-top-txt">
                     <h2>@Model.WorkerName  </h2>
                     <span>价位：<em>@Model.PriceName 元/m²</em></span>
-                    <span>工种：<em>@Model.WorkerPosition</em></span>
+                    @if (Model.WorkerCategory == "装修工人")
+                    {
+                        <span>工种：<em>@Model.WorkerPosition</em></span>
+                    }
                     <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>
                     <span>地区：<em>@Model.ProvinceName  @Model.CityName</em></span>
                     
@@ -97,12 +100,22 @@
     }
     else
     {
-        <a href="reservation.html" class="order">找TA装修</a>
+        <a href="javascript:selectwork(@Model.UserID,'@Model.WorkerName','@Model.WorkerCategory')" class="order">找TA装修</a>
     }
 
 
 </div>
 <script>
+    function selectwork(GetUserID, GetUserName, WorkerCategory) {  
+        //询问框
+        layer.open({
+            content: '您确定找' + GetUserName + '装修吗？'
+          , btn: ['确认', '再想想']
+          , yes: function (index) {
+              window.top.location.href = "/MobileApp/MobileUser/DemandDetail?Guid=@Request["Guid"]&GetUserID=" + GetUserID + "&GetUserName=" + GetUserName + "&WorkerCategory=" + WorkerCategory;
+          }
+        });
+    }
     function workertogether(GetWorkerid, workername) {
         //询问框
         layer.open({

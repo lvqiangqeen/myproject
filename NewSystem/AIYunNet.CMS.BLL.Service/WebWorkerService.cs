@@ -237,6 +237,10 @@ namespace AIYunNet.CMS.BLL.Service
                             originalWorker.WorkYearsID = Convert.ToInt32(data);
                             originalWorker.WorkYears= cSer.GetLookupDesc("people_workyear", data);
                             break;
+                        case "WorkerPositionID":
+                            originalWorker.WorkerPositionID = data;
+                            originalWorker.WorkerPosition = cSer.GetLookupDesc("workers_position", data);
+                            break;
                         case "PriceName":
                             originalWorker.PriceName = data;
                             break;
@@ -260,5 +264,7 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+
+       
     }
 }

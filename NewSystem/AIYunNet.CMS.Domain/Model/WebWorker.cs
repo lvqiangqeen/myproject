@@ -243,6 +243,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsBuildingCount = 0;
             IsApproved = false;
             WorkYearsID = 0;
+            WorkYears = "";
             PriceID = 0;
             UserID = 0;
             FlagDelete = 0;

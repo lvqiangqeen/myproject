@@ -242,13 +242,17 @@ namespace AIYunNet.CMS.Web.Handler
             var obj = new Object();
             if (WorkerCategory == "装修工长")
             {
-                foreach (var item in result)
+                if (result != null)
                 {
-                    WorkerAndBuidingList eq = new WorkerAndBuidingList();
-                    eq.worker = item;
-                    eq.biuding = sercive.GetWebBuidingListByCount(item.WorkerID, 3);
-                    list.Add(eq);
+                    foreach (var item in result)
+                    {
+                        WorkerAndBuidingList eq = new WorkerAndBuidingList();
+                        eq.worker = item;
+                        eq.biuding = sercive.GetWebBuidingListByCount(item.WorkerID, 3);
+                        list.Add(eq);
+                    }
                 }
+
                 obj = new
                 {
                     list = list,

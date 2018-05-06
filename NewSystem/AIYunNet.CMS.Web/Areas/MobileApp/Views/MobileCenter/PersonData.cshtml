@@ -7,6 +7,10 @@
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     WebWorkerService wSer = new WebWorkerService();
     WebWorker worker = wSer.GetWebWorkerByUserID(Convert.ToInt32(SessionHelper.Get("UserID")));
+    if (worker == null)
+    {
+        worker = new WebWorker();
+    }
 }
 <link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />
 <link href="~/Content/mui-master/examples/hello-mui/css/app.css" rel="stylesheet" />
@@ -41,6 +45,11 @@
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Sex')"><span>性别</span><em>@Model.Sex</em></a></li>
             <li><a href="javascript:void(0)" id="showCityPicker"><span>所在地</span><em id="showCityPickerem">@Model.ProvinceName  @Model.CityName</em><i id="cityid" style="display:none;">@Model.CityID</i></a></li>
             <li><a href="javascript:void(0);" onclick="EditPersonDataArea(this, 'AreasID')"><span>服务地区</span><em id="Areas">@Model.AreasName</em><i id="AreasID" style="display:none;">@Model.AreasID</i></a></li>
+            @if (SessionHelper.Get("PositionCode") == "WebWorker")
+            {
+                <li><a href="javascript:void(0);" id='showPositionPicker'><span>工种</span><em id="showPositionPickerem">@worker.WorkerPosition</em></a></li>
+            }
+            
             <li><a href="javascript:void(0);" id='showYearPicker'><span>工作年限</span><em id="showYearPickerem">@worker.WorkYears</em></a></li>
             <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'PriceName')"><span>工程价位</span><em>@worker.PriceName 元/m²</em></a></li>
             <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'GoodAtStyle')"><span>擅长领域</span><em>@worker.GoodAtStyle</em></a></li>
@@ -150,6 +159,29 @@
 						return obj[param] || '';
 					};
 				    //普通示例
+					var positionPicker = new $.PopPicker();
+					var json = null;
+					$.ajax({
+					    type: 'post',
+					    async: false,
+					    url: '/MobileApp/MobileWorker/GetWorkerPositionType',
+					    contentType: 'application/json;charset=utf-8',
+					    success: function (data) { //返回json结果
+					        json = data;
+					    }
+					});
+					positionPicker.setData(json)
+					var showpositionPickerButton = doc.getElementById('showPositionPicker');
+					showpositionPickerButton.addEventListener('tap', function (event) {
+					    positionPicker.show(function (items) {
+					        document.getElementById("showPositionPickerem").innerHTML = items[0].text;
+					        //返回 false 可以阻止选择框的关闭
+					        //return false;
+					        selectposition(items[0].value, "WorkerPositionID");
+					    });
+					}, false);
+				    //-----------------------------------------
+				    //普通示例
 					var yearPicker = new $.PopPicker();
 					yearPicker.setData([{
 					    value: '1',
@@ -198,7 +230,30 @@
 					        });
 					    }, false);
 					
-
+				    //-----------------------------------------
+					    function selectposition(data, type) {
+					        // 第一步： 获得XMLHttpRequest对象
+					        var ajax = new XMLHttpRequest();
+					        // 第二步： 设置状态监听函数
+					        ajax.onreadystatechange = function () {
+					            console.log(ajax.readyState);
+					            console.log(ajax.status);
+					            // 第五步：在监听函数中，判断readyState=4 && status=200表示请求成功
+					            if (ajax.readyState == 4 && ajax.status == 200) {
+					                // 第六步： 使用responseText、responseXML接受响应数据，并使用原生JS操作DOM进行显示
+					                console.log(ajax.responseText);
+					                console.log(ajax.responseXML);// 返回不是XML，显示null
+					                console.log(JSON.parse(ajax.responseText));
+					                console.log(eval("(" + ajax.responseText + ")"));
+					            }
+					        }
+					        // 第三步： open一个链接
+					        ajax.open("POST", "/MobileApp/MobileWorker/updateWorkerData", false);//true异步请求，false同步
+					        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					        // 第四步： send一个请求。 可以发送对象和字符串，不需要传递数据发送null
+					        ajax.send("data=" + data + "&type=" + type);
+					        //window.top.location.href = window.top.location.href;
+					    }
 				    //-----------------------------------------
 					    function selectcity(data,type)
 					    {

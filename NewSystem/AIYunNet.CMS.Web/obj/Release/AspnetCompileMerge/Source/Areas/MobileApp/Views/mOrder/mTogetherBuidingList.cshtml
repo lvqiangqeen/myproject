@@ -34,6 +34,13 @@
     .mui-ios .mui-table-view-cell {
         background-color: #fff;
     }
+    .mui-table-view-cell>.mui-badge, .mui-table-view-cell>.mui-btn, .mui-table-view-cell>.mui-switch, .mui-table-view-cell>a>.mui-badge, .mui-table-view-cell>a>.mui-btn, .mui-table-view-cell>a>.mui-switch {
+    top: 70%;
+    right: 59px;
+}
+     .mui-table-view-cell {
+         background-color: white;
+    }
 </style>
 <script>
     $("#header").remove();
@@ -74,6 +81,9 @@
                                                 <span class="mui-h5" style="color:red;">已拒绝</span>
                                             </div>
                                         </div>
+                                    </a>
+                                    <a class="mui-btn mui-btn-primary mui-btn-outlined">
+                                        操作
                                     </a>
                                 </li>*@
                             </ul>
@@ -222,21 +232,20 @@
                                         + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">';
                                 if (item.IsAccept == 0)
                                 {
-                                    html += '<span class="mui-h5" style="color:#007aff;">新项目</span>';
+                                    html += '<span class="mui-h5" style="color:#007aff;">新项目</span></div></div></a>';
                                 } else if (item.IsAccept == 2) {
-                                    html += '<span class="mui-h5" style="color:red;">已拒绝</span>';
+                                    html += '<span class="mui-h5" style="color:red;">已拒绝</span></div></div></a>';
                                 } else
                                 {
                                     if (IsComplete == 0) {
-                                        html += '<span class="mui-h5" style="color:#007aff;">进行中</span>';
+                                        html += '<span class="mui-h5" style="color:#007aff;">进行中</span></div></div></a>'
+                                        + '<a href="/MobileApp/mOrder/mobileStageDetail?buidingID=' + item.buidingID + '&StageID=' + item.stageid + '&list=1"  class="mui-btn mui-btn-primary mui-btn-outlined">发布信息</a>';
                                     } else
                                     {
-                                        html += '<span class="mui-h5" style="color:#009688;">已竣工</span>';
+                                        html += '<span class="mui-h5" style="color:#009688;">已竣工</span></div></div></a>'
+                                        + '<a href="/MobileApp/mOrder/mobileStageDetail?buidingID=' + item.buidingID + '&StageID=' + item.stageid + '&list=1" class="mui-btn mui-btn-primary mui-btn-outlined">发布信息</a>';
                                     }
                                 }
-                                        
-
-                                html += '</div></div></a>';
                                 li.innerHTML = html;
                                 fragment.appendChild(li);
                             });
