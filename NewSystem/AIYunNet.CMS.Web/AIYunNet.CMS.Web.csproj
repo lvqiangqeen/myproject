@@ -4300,6 +4300,7 @@
     <Content Include="Areas\MobileApp\Views\MobileUser\decDemandDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\mLogin\registCenter.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileWorker\mWorkerLeaderList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileComment\CommentDetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -4414,7 +4415,6 @@
     <Folder Include="Areas\CompanyCenter\Models\" />
     <Folder Include="Areas\CompanyCenter\Views\UpPicCompany\" />
     <Folder Include="Areas\MobileApp\Models\" />
-    <Folder Include="Areas\MobileApp\Views\MobileComment\" />
     <Folder Include="Areas\MobileApp\Views\upload\" />
     <Folder Include="Areas\MustIndex\Models\" />
     <Folder Include="Areas\PeopleCenter\Models\" />

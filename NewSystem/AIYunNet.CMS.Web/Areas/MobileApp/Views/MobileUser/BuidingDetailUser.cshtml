@@ -167,68 +167,34 @@
 
     $("#yanshou").click(function () {
         layer.open({
-            content: '该项目装修施工是否可以验收？'
-              , btn: ['是', '延期']
+            content: '该项目装修施工是否合格？'
+              , btn: ['合格', '不合格']
               , yes: function (index) {
-                 
-                  location.reload();
-                  layer.close(index);
+                  if ("@Model.IsWorkerEnd" == 0) {
+                      //信息框
+                      layer.open({
+                          content: '该项目还未竣工'
+                        , btn: '我知道了'
+                      });
+                  } else
+                  {
+                      window.location.href = '/MobileApp/MobileComment/CommentDetail?IsUserEnd=1&CaseID=@Model.BuidingID&CaseType=WebBuiding&GetUserID=@demand.GetUserID&Guid=@Model.Guid';
+                      
+                  }
               },
             btn2: function (index) {
-                
-                location.reload();
-                layer.close(index);
+                if ("@Model.IsWorkerEnd" == 0) {
+                    //信息框
+                    layer.open({
+                        content: '该项目还未竣工'
+                      , btn: '我知道了'
+                    });
+                } else {
+                    window.location.href = '/MobileApp/MobileComment/CommentDetail?IsUserEnd=2&CaseID=@Model.BuidingID&CaseType=WebBuiding&GetUserID=@demand.GetUserID&Guid=@Model.Guid';
+                }
             }
         });
     });
-    layer.msg('是否通过验收？<br>（装修合格请点击“通过”，不合格请点击“延时”。）', {
-        time: 20000, //20s后自动关闭
-        btn: ['合格', '不合格', '关闭'],
-        yes: function (index, layero) {
-            if (IsWorkerEnd == 0) {
-                layer.msg('项目未竣工<br>您不能验收');
-            } else {
-                layer.close(index);
-                layer.open({
-                    type: 2,
-                    scrollbar: false,
-                    title: '我要评论',
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['570px', '290px'],
-                    content: ['/PeopleCenter/CenterCases/BuidingComment?IsUserEnd=1&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid],
-                    end: function () {
-                        location.reload();
-                    }
-
-                });
-                //window.location.href = window.location.href;
-            }
-
-        },
-        btn2: function (index, layero) {
-            if (IsWorkerEnd == 0) {
-                layer.msg('项目未竣工<br>您不能验收');
-            } else {
-                layer.close(index);
-                layer.open({
-                    type: 2,
-                    scrollbar: false,
-                    title: '我要评论',
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['570px', '290px'],
-                    content: ['/PeopleCenter/CenterCases/BuidingComment?IsUserEnd=2&CaseID=' + buidingID + '&CaseType=WebBuiding&GetUserID=' + GetUserID + '&Guid=' + Guid, 'no'],
-                    end: function () {
-                        location.reload();
-                    }
-
-                });
-            }
-        },
-        btn3: function (index, layero) {
-
-        }
-    });
+   
 </script>
 

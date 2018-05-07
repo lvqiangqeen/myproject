@@ -51,6 +51,9 @@
                     <a class="mui-control-item" href="#item3mobile">
                         已竣工
                     </a>
+                    <a class="mui-control-item" href="#item4mobile">
+                        已确认
+                    </a>
                 </div>
             </div>
             <div class="mui-slider-group">
@@ -71,6 +74,13 @@
                     </div>
                 </div>
                 <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item4mobile" class="mui-slider-item mui-control-content">
                     <div class="mui-scroll-wrapper">
                         <div class="mui-scroll">
                             <ul class="mui-table-view"></ul>
@@ -100,6 +110,7 @@
             var pageIndex1 = 1;
             var pageIndex2 = 1;
             var pageIndex3 = 1;
+            var pageIndex4 = 1;
             $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
                 $(pullRefreshEl).pullToRefresh({
                     up: {
@@ -118,6 +129,9 @@
                                     IsWorkerEnd = 0;
                                     IsUserEnd = 2;
                                 } else if (index == "2") {
+                                    IsWorkerEnd = 1;
+                                    IsUserEnd = 0;
+                                } else if (index == "3") {
                                     IsWorkerEnd = 1;
                                     IsUserEnd = 1;
                                 }
@@ -139,6 +153,11 @@
                                     ul.appendChild(createFragment1(pageIndex3, IsWorkerEnd, IsUserEnd));
                                     bool = html.childNodes.length == 0 ? true : false;
                                     pageIndex3++;
+                                } else if (index == "3") {
+                                    var html = createFragment1(pageIndex4, IsWorkerEnd, IsUserEnd);
+                                    ul.appendChild(createFragment1(pageIndex4, IsWorkerEnd, IsUserEnd));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex4++;
                                 }
                                 //自定义颜色示例
                                 mui(".mui-progressbar").each(function () {
