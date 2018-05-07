@@ -103,7 +103,7 @@
                     {
                         <p style="font-size: 20px;">项目未完成</p>
                     }
-                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal">验收评价</button></p>
+                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal" id="yanshou">验收评价</button></p>
                 </div>
             </li>
         </ul>
@@ -165,7 +165,22 @@
         });
     }
 
-
+    $("#yanshou").click(function () {
+        layer.open({
+            content: '该项目装修施工是否可以验收？'
+              , btn: ['是', '延期']
+              , yes: function (index) {
+                 
+                  location.reload();
+                  layer.close(index);
+              },
+            btn2: function (index) {
+                
+                location.reload();
+                layer.close(index);
+            }
+        });
+    });
     layer.msg('是否通过验收？<br>（装修合格请点击“通过”，不合格请点击“延时”。）', {
         time: 20000, //20s后自动关闭
         btn: ['合格', '不合格', '关闭'],
