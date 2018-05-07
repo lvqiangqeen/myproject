@@ -325,6 +325,7 @@ namespace AIYunNet.CMS.BLL.Service
                 if (old != null)
                 {
                     old.IsWorkerEnd = 1;
+                    old.StageNow = old.StageNow + 1;
                     context.SaveChanges();
                     return 1;
                 }

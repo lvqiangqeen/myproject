@@ -81,5 +81,22 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 
             return Json(new { RetCode = 1 });
         }
+
+        [MobileUserFilter]
+        [HttpPost]
+        public JsonResult IsWorkerEnd(int buidingID)
+        {
+            int ret = 0;
+            ret = buidSer.IsWorkerEnd(buidingID);
+            return Json(new { RetCode = ret });
+        }
+        //是否可以结束全部做工
+        [MobileUserFilter]
+        public JsonResult IsCanWorkerEnd(int buidingID)
+        {
+            int ret = 0;
+            ret = buidSer.IsCanWorkerEnd(buidingID);
+            return Json(new { RetCode = ret });
+        }
     }
 }

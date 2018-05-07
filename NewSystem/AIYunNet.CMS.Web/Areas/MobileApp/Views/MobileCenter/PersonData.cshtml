@@ -158,29 +158,33 @@
 					var _getParam = function(obj, param) {
 						return obj[param] || '';
 					};
-				    //普通示例
-					var positionPicker = new $.PopPicker();
-					var json = null;
-					$.ajax({
-					    type: 'post',
-					    async: false,
-					    url: '/MobileApp/MobileWorker/GetWorkerPositionType',
-					    contentType: 'application/json;charset=utf-8',
-					    success: function (data) { //返回json结果
-					        json = data;
-					    }
-					});
-					positionPicker.setData(json)
-					var showpositionPickerButton = doc.getElementById('showPositionPicker');
-					showpositionPickerButton.addEventListener('tap', function (event) {
-					    positionPicker.show(function (items) {
-					        document.getElementById("showPositionPickerem").innerHTML = items[0].text;
-					        //返回 false 可以阻止选择框的关闭
-					        //return false;
-					        selectposition(items[0].value, "WorkerPositionID");
+					if ('@SessionHelper.Get("PositionCode")' == "WebWorker")
+					{
+					    //普通示例
+					    var positionPicker = new $.PopPicker();
+					    var json = null;
+					    $.ajax({
+					        type: 'post',
+					        async: false,
+					        url: '/MobileApp/MobileWorker/GetWorkerPositionType',
+					        contentType: 'application/json;charset=utf-8',
+					        success: function (data) { //返回json结果
+					            json = data;
+					        }
 					    });
-					}, false);
-				    //-----------------------------------------
+					    positionPicker.setData(json)
+					    var showpositionPickerButton = doc.getElementById('showPositionPicker');
+					    showpositionPickerButton.addEventListener('tap', function (event) {
+					        positionPicker.show(function (items) {
+					            document.getElementById("showPositionPickerem").innerHTML = items[0].text;
+					            //返回 false 可以阻止选择框的关闭
+					            //return false;
+					            selectposition(items[0].value, "WorkerPositionID");
+					        });
+					    }, false);
+					    //-----------------------------------------
+					}
+
 				    //普通示例
 					var yearPicker = new $.PopPicker();
 					yearPicker.setData([{

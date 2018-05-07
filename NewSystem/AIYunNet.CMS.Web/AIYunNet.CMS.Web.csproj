@@ -63,6 +63,7 @@
     <Compile Include="Areas\MobileApp\Controllers\AppController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\mLoginController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\MobileCommentController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileUserController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
@@ -4413,6 +4414,7 @@
     <Folder Include="Areas\CompanyCenter\Models\" />
     <Folder Include="Areas\CompanyCenter\Views\UpPicCompany\" />
     <Folder Include="Areas\MobileApp\Models\" />
+    <Folder Include="Areas\MobileApp\Views\MobileComment\" />
     <Folder Include="Areas\MobileApp\Views\upload\" />
     <Folder Include="Areas\MustIndex\Models\" />
     <Folder Include="Areas\PeopleCenter\Models\" />

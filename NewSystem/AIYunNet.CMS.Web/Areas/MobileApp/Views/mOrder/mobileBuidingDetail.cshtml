@@ -77,7 +77,7 @@
                     {
                         <p style="font-size: 20px;">项目未完成</p>
                     }
-                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal">确认收工</button></p>
+                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal" id="IsWorkerEnd">确认收工</button></p>
                 </div>
             </li>
         </ul>
@@ -99,5 +99,79 @@
     {
         window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID="+buidingID+"&StageID="+StageID;
     }
+    $("#IsWorkerEnd").click(function () {
+        //询问框
+        layer.open({
+            content: '是否确认完工？'
+          , btn: ['是', '否']
+          , yes: function (index) {
+              IsWorkerEnd(@Model.BuidingID);
+              location.reload();
+              layer.close(index);
+          },
+            btn2: function (index) {
+                location.reload();
+                layer.close(index);
+            }
+        });
+    })
+    function IsWorkerEnd(buidingID)
+    {
+        $.ajax({
+            type: "post",
+            url: "/MobileApp/MoblieBuiding/IsCanWorkerEnd",
+            data: {
+                buidingID: buidingID
+            },
+            success: function (data) {
+                if (data.RetCode == 1) {
+                    editIsWorkerEnd(buidingID);
+                    window.location.href = window.location.href;
+                } else if (data.RetCode == 2) {
+                    layer.open({
+                        content: '工序没有全部完成！'
+  , btn: ['我知道了']
+  , yes: function (index) {
+      location.reload();
+      layer.close(index);
+  }
+                    });
+                } else if (data.RetCode == 3) {
+                    layer.open({
+                        content: '部分工序业主没有审核通过！'
+, btn: ['我知道了']
+, yes: function (index) {
+    location.reload();
+    layer.close(index);
+}
+                    });
+                } else if (data.RetCode == 4) {
+                    layer.open({
+                        content: '业主没有审核！'
+, btn: ['我知道了']
+, yes: function (index) {
+    location.reload();
+    layer.close(index);
+}
+                    });
+                }
+            }
 
+        });
+    }
+    function editIsWorkerEnd(buidingID) {
+        $.ajax({
+            type: "post",
+            url: "/MobileApp/MoblieBuiding/IsWorkerEnd",
+            data: {
+                buidingID: buidingID
+            },
+            success: function (data) {
+                if (data.RetCode == 1) {
+                    //$('#stageCaseTable').DataTable().ajax.reload();
+                }
+            }
+
+        });
+    }
 </script>
