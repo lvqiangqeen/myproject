@@ -153,9 +153,31 @@ namespace AIYunNet.CMS.BLL.Service
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 DecDemand old = context.DecDemand.Find(DecDemand.id);
+                DecDemandAcceptService ser = new DecDemandAcceptService();
+                DecDemandAccept accold = ser.GetAcceptByGuid(DecDemand.Guid);
                 if (old != null)
-                {
-                    old.ownername = DecDemand.ownername;
+                { 
+
+                    if (DecDemand.GetUserID != 0)
+                    {
+                        if (accold != null)
+                        {
+                            accold.GetUserID= DecDemand.GetUserID;
+                            accold.PublicUserID= DecDemand.PublishuserID;
+                            accold.IsAccept = 0;
+                        }
+                        else
+                        {
+                            DecDemandAccept acc = new DecDemandAccept();
+                            acc.DemandGuid = DecDemand.Guid;
+                            acc.GetUserID = DecDemand.GetUserID;
+                            acc.PublicUserID = DecDemand.PublishuserID;
+                            acc.IsAccept = 0;
+                            ser.AddDecDemandAccept(acc);
+                        }
+
+                    }
+                old.ownername = DecDemand.ownername;
                     old.ownertel = DecDemand.ownertel;
                     old.ProvinceID = DecDemand.ProvinceID;
                     old.ProvinceName = DecDemand.ProvinceName;
