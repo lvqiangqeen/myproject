@@ -7,7 +7,17 @@
 }
 <script>
     $(function () {
-        var html = "<h1>个人中心</h1>";
+        var html="";
+        if ("@SessionHelper.Get("PositionCode")"=="WebUser")
+        {
+            html = "<h1>业主中心</h1>";
+        }else if("@SessionHelper.Get("PositionCode")"=="WebWorkerLeader")
+        {
+            html = "<h1>工长中心</h1>";
+        }else
+        {
+            html = "<h1>工人中心</h1>";
+        }
         $("#header").append(html);
     })
 </script>

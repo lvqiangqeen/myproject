@@ -18,7 +18,7 @@
     DemandService DeSer = new DemandService();
     DecDemand demand = DeSer.GetDecDemandByID(DemandID);
     string Guid = Request["Guid"];
-    int UserID = Request["UserID"] == null ? 0 : Convert.ToInt32(Request["UserID"].ToString());
+    int UserID = demand.GetUserID;
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.min.css" rel="stylesheet" />

@@ -37,13 +37,24 @@
                     <i class="layui-icon layui-timeline-axis"></i>
                     <div class="layui-timeline-content layui-text">
                         <h3 class="layui-timeline-title">@item.StageName</h3>
-                        @if (item.IsComplete)
+                        @if (item.IsUserEnd == 1)
                         {
-                            <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                            <p style="font-size: 20px;color:#009688;">该阶段项目业主验收通过</p>
+                        }
+                        else if (item.IsUserEnd == 2)
+                        {
+                            <p style="font-size: 20px;color:red;">该阶段项目业主验收未通过</p>
                         }
                         else
                         {
-                            <p style="font-size: 20px;">该阶段项目未完成</p>
+                            if (item.IsComplete)
+                            {
+                                <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                            }
+                            else
+                            {
+                                <p style="font-size: 20px;">该阶段项目未完成</p>
+                            }
                         }
                         @if (item.Workerid != 0)
                         {
@@ -97,7 +108,42 @@
     }
     function stageUpdate(buidingID,StageID)
     {
-        window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID="+buidingID+"&StageID="+StageID;
+        $.ajax({
+            type: "post",
+            url: "/MobileApp/MoblieBuiding/IsCanContinueWork",
+            data: {
+                BuidingID: buidingID,
+                StageID: StageID
+            },
+            success: function (data) {
+                if (data == 1) {
+                    window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID=" + buidingID + "&StageID=" + StageID;
+                } else if (data == 2) {
+                    layer.open({
+                        content: '上阶段业主审核未通过！'
+  , btn: ['我知道了']
+  , yes: function (index) {
+      layer.close(index);
+  }
+                    });
+                } else
+                {
+                    layer.open({
+                        content: '上阶段业主未审核！'
+, btn: ['我知道了']
+, yes: function (index) {
+    layer.close(index);
+}
+                    });
+                }
+            }
+
+        });
+        
+    }
+    function IsCanContinueWork(buidingID,StageID)
+    {
+
     }
     $("#IsWorkerEnd").click(function () {
         //询问框
@@ -109,7 +155,7 @@
               location.reload();
               layer.close(index);
           },
-            btn2: function (index) {
+            no: function (index) {
                 location.reload();
                 layer.close(index);
             }

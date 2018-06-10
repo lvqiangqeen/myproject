@@ -11,6 +11,31 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidingStagesService
     {
+        //是否可以进行下一阶段任务(0是不可以，1是可以)
+        public int IsCanContinueWork(int BuidingID, int StageID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingStages old = context.WebBuidingStages.FirstOrDefault(wc => wc.WebBuidingID == BuidingID && wc.StageID == StageID);
+                if (old.sortID == 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    WebBuidingStages oldlast = context.WebBuidingStages.FirstOrDefault(wc => wc.WebBuidingID == BuidingID && wc.sortID == old.sortID-1);
+                    if (oldlast.IsUserEnd == 1)
+                    {
+                        return 1;
+                    }
+                    else if (oldlast.IsUserEnd == 2)
+                    {
+                        return 2;
+                    }
+                    else { return 0; }
+                }
+            }
+        }
         //业主审核阶段信息
         public int IsUserEnd(int BuidingID, int StageID,int IsUserend)
         {         

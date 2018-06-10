@@ -18,6 +18,10 @@ namespace AIYunNet.CMS.Common.Utility
         public static string  vueImgUrl = ConfigurationManager.AppSettings["vueImgUrl"];
         public static string thumbnailImage = ConfigurationManager.AppSettings["thumbnailImage"];
         public static string vuethumbnailImage = ConfigurationManager.AppSettings["vuethumbnailImage"];
+        //短信验证密匙
+        public static string SMSKey = ConfigurationManager.AppSettings["SMSKey"];
+        //短信验证账号
+        public static string SMSUid = ConfigurationManager.AppSettings["SMSUid"];
         private static readonly NameValueCollection AppSettings;
 
         static AppSettingsHelper()

@@ -16,6 +16,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingService buidSer = new WebBuidingService();
         DemandService DemandSer = new DemandService();
         WebBuidingStagesService WebBuidingStagesSer = new WebBuidingStagesService();
+        //是否可以进行下一步
+        [HttpPost]
+        public int IsCanContinueWork(int BuidingID, int StageID)
+        {
+            int ret = WebBuidingStagesSer.IsCanContinueWork(BuidingID, StageID);
+            return ret;
+        }
         //案例详情
         // GET: MobileApp/MoblieBuiding
         public ActionResult mBuidingDetail(int id)

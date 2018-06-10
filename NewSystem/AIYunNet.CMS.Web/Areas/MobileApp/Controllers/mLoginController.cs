@@ -8,6 +8,8 @@ using AIYunNet.CMS.Web.filter;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Common.Utility;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
@@ -23,6 +25,14 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult LoginCenter()
         {
             return View();
+        }
+        public string GetStrMd5(string ConvertString)
+        {
+
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(ConvertString)));
+            t2 = t2.Replace("-", "");
+            return t2;
         }
         [HttpPost]
         public int LoginOn(string userAccount, string userPassword)
@@ -76,6 +86,22 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return View();
         }
         [HttpPost]
+        public JsonResult Getsuijishu(string userAccount)
+        {
+            string mishiMD5 = GetStrMd5(AppSettingsHelper.SMSKey);
+            string Uid = AppSettingsHelper.SMSUid;
+
+            Random rad = new Random();
+            int value = rad.Next(1000, 10000);//用rad生成大于等于1000，小于等于9999的随机数；
+            string suijishu = value.ToString(); //转化为字符串；
+
+            string url = "http://utf8.api.smschinese.cn/?Uid=" + Uid + "&KeyMD5=" + mishiMD5 + "&smsMob=" + userAccount + "&smsText=验证码:" + suijishu;
+            SMSapiHelper sms = new SMSapiHelper();
+            string ret = sms.GetHtmlFromUrl(url);
+            return Json(new { RetCode = ret, suijishu = suijishu });
+        } 
+
+        [HttpPost]
         public int Register(string userAccount, string userPassword, string PositionCode, int PositionType)
         {
             bool bit = webUserservice.IsHaveuserAccount(userAccount);
@@ -86,6 +112,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             }
             else
             {
+
+
                 WebUser webuser = new WebUser
                 {
                     UserName = userAccount,
