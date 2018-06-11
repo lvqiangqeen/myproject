@@ -18,7 +18,7 @@
     DemandService DeSer = new DemandService();
     DecDemand demand = DeSer.GetDecDemandByID(DemandID);
     string Guid = Request["Guid"];
-    int UserID = demand.GetUserID;
+    int UserID = demand.PublishuserID;
 }
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.min.css" rel="stylesheet" />
@@ -236,7 +236,7 @@
 </style>
 
 <script>
-    var html = "<h1>发布流程</h1>";
+    var html = "<h1>编写流程</h1>";
     $("#header").append(html);
 </script>
 <div class="container" id="container">
@@ -383,8 +383,10 @@
         <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
     </div>*@
     
-    
-    <a href="javascript:updateStages()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+    @if (Model.IsWorkerEnd != 1)
+    {
+        <a href="javascript:updateStages()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+    }
     
     <script>
         (function ($) {
