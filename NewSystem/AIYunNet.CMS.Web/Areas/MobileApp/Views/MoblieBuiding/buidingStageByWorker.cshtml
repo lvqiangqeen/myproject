@@ -4,13 +4,13 @@
 @using AIYunNet.CMS.Domain.Model
 @model AIYunNet.CMS.Domain.Model.WebBuiding
 @{
-    ViewBag.Title = "buidingStage";
+    ViewBag.Title = "buidingStageByWorker";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     List<string> stagesIDArr = new List<string>();
     List<string> stagesTextArr = new List<string>();
     if (Model != null && !string.IsNullOrWhiteSpace(Model.constructionstageID))
     {
-        stagesIDArr = Model.constructionstageID.Split(',').Where(c=>c!="").ToList();
+        stagesIDArr = Model.constructionstageID.Split(',').Where(c => c != "").ToList();
         stagesTextArr = Model.constructionstage.TrimEnd(',').Split(',').Where(c => c != "").ToList();
     }
     IEnumerable<SelectListItem> workPositionList = ViewBag.workPositionList as IEnumerable<SelectListItem>;
@@ -24,6 +24,7 @@
         Model.Space = demand.buidingSpace;
     }
 }
+
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <link href="~/Content/mui-master/examples/hello-mui/css/mui.picker.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
@@ -33,17 +34,20 @@
     .mui-numbox {
         width: 150px;
     }
+
     .mui-pciker-list {
-    background-color:#ddd;
+        background-color: #ddd;
     }
+
     .mui-input-row label {
-    padding-left: 0px;
-}
-.mui-btn-block {
-    display: initial;
-    width: 155px;
-    padding: 10px 0;
-}
+        padding-left: 0px;
+    }
+
+    .mui-btn-block {
+        display: initial;
+        width: 155px;
+        padding: 10px 0;
+    }
 
 
     .container1 {
@@ -249,18 +253,18 @@
     @Html.HiddenFor(m => m.BuidingID)
 
     @*<ul class="car-details clearfix">
-        <li class="fwfw">服务范围：<em>同城运输</em></li>
-        <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
-        <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
-        <li class="fwdh">电话：<em>18000000000</em></li>
-    </ul>*@
+            <li class="fwfw">服务范围：<em>同城运输</em></li>
+            <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
+            <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
+            <li class="fwdh">电话：<em>18000000000</em></li>
+        </ul>*@
     <div class="min-price">
         <div class="min-price-tit"><h2>上传封面</h2></div>
         <div class="min-price-con">
             <img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:175px;height:175px;" id="thum">
-            <input type="hidden" value="@Model.thumbnailImage" name="thumbnailImage"/>
+            <input type="hidden" value="@Model.thumbnailImage" name="thumbnailImage" />
             <input type="hidden" value="@Model.BuidingImage" name="BuidingImage" />
-            <input type="file" id="ImageUpload" style="display:none;" >
+            <input type="file" id="ImageUpload" style="display:none;">
             <input type="submit" value="上传图片" id="uploadpic" onclick='javascript: $("#ImageUpload").click();'>
 
         </div>
@@ -317,7 +321,7 @@
                     }
                 });
             })
-           
+
         })
     </script>
     <div class="min-price">
@@ -326,7 +330,7 @@
             <label>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
             <div class="mui-numbox">
                 <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-                <input class="mui-input-numbox" type="number" value="@Model.Price" name="Price"/>
+                <input class="mui-input-numbox" type="number" value="@Model.Price" name="Price" />
                 <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
             </div>元
         </div>
@@ -334,7 +338,7 @@
             <label>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：</label>
             <div class="mui-numbox">
                 <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-                <input class="mui-input-numbox" type="number" value="@Model.Space" name="Space"/>
+                <input class="mui-input-numbox" type="number" value="@Model.Space" name="Space" />
                 <button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
             </div>m²
         </div>
@@ -342,36 +346,43 @@
             <label>施工日期：</label>
             @*<input type="text" placeholder="施工开始日期" id="starttime">*@
             <button id='demo4' data-options='{"type":"date"}' class="btn mui-btn mui-btn-block" style="vertical-align: inherit;">选择日期 ...</button>
-            <input type="hidden" value="@Model.StartTime" name="StartTime" id="StartTime"/>
+            <input type="hidden" value="@Model.StartTime" name="StartTime" id="StartTime" />
         </div>
-       <script>
+        <script>
            var html='@Model.StartTime';
            if (html == null || html=="") {
                document.getElementById('demo4').innerHTML = "选择日期 ...";
            } else { document.getElementById('demo4').innerHTML = html; }
-       </script>
+        </script>
+        <div class="min-price-con">
+            <label>阶段选择：</label>
+            <input type="text" placeholder="点击此处选择阶段" id="showTypePicker" value="@Model.constructionstage.Replace(",","")" style="width: 50%;">
+            <input type="hidden" value="@Model.constructionstageID" name="selectedStagesCode" id="selectedStagesCode" />
+            <input type="hidden" value="@Model.constructionstage" name="selectedStagesText" id="selectedStagesText" />
+        </div>
+
     </div>
-    <div class="min-price">
+    @*<div class="min-price">
         <div class="min-price-tit"><h2>确定装修流程</h2></div>
         <ul class="mui-table-view">
             @foreach (SelectListItem item in ViewBag.workPositionList)
             {
-                 string swithid = "stage" + item.Value;
+                string swithid = "stage" + item.Value;
                 <li class="mui-table-view-cell">
                     <span>@item.Text</span>
                     @if (stagesIDArr.Contains(item.Value))
                     {
-                        <div class="mui-switch mui-switch-blue mui-switch-mini mui-active">                          
-                            <input id="@swithid" value="@item.Value" type="hidden" name="selectedStagesCode"/>
+                        <div class="mui-switch mui-switch-blue mui-switch-mini mui-active">
+                            <input id="@swithid" value="@item.Value" type="hidden" name="selectedStagesCode" />
                             <input value="@item.Text" type="hidden" name="selectedStagesText" />
-                            
+
                             <div class="mui-switch-handle"></div>
                         </div>
                     }
                     else
                     {
                         <div class="mui-switch mui-switch-blue mui-switch-mini">
-                            <input id="@swithid" value="@item.Value" type="hidden" name="selectedStagesCode"/>
+                            <input id="@swithid" value="@item.Value" type="hidden" name="selectedStagesCode" />
                             <input value="@item.Text" type="hidden" name="selectedStagesText" />
                             <div class="mui-switch-handle"></div>
                         </div>
@@ -380,18 +391,18 @@
                 </li>
             }
         </ul>
-    </div>
+    </div>*@
 
     @*<div class="min-price">
-        <div class="min-price-tit"><h2>阶段描述</h2></div>
-        <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
-    </div>*@
-    
+            <div class="min-price-tit"><h2>阶段描述</h2></div>
+            <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
+        </div>*@
+
     @if (Model.IsWorkerEnd != 1)
     {
         <a href="javascript:updateStages()" class="order" style="color:white;background-color:#007aff">提交信息</a>
     }
-    
+
     <script>
         (function ($) {
 
@@ -427,7 +438,7 @@
                                  * rs.i 分（minutes 的第二个字母），用法同年
                                  */
 				                //btns.innerText = rs.text;
-				                
+
 				                document.getElementById('demo4').innerHTML = rs.text;
 				                document.getElementById('StartTime').value = rs.text;
 				                /*
@@ -447,19 +458,63 @@
 
 				    }, false);
 				});
+
+
 			})(mui);
+    </script>
+
+    <script>
+    (function ($, doc) {
+        $.init();
+        $.ready(function () {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * param {Object} obj 对象
+             * param {String} param 属性名
+             */
+            var _getParam = function (obj, param) {
+                return obj[param] || '';
+            };
+            //普通示例
+            //普通示例
+            var userPicker = new $.PopPicker();
+            var json = null;
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '/MobileApp/MoblieBuiding/GetStage',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) { //返回json结果
+                    json = data;
+                }
+            });
+            userPicker.setData(json);
+            var showUserPickerButton = doc.getElementById('showTypePicker');
+            var userResult = doc.getElementById('showTypePicker');
+            showUserPickerButton.addEventListener('tap', function (event) {
+                userPicker.show(function (items) {
+                    //userResult.value = JSON.stringify(items[0]);
+                    userResult.value = items[0].text;
+                    document.getElementById("selectedStagesCode").value = items[0].value + ",";
+                    document.getElementById("selectedStagesText").value = items[0].text + ",";
+
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+            //-----------------------------------------
+
+        });
+    })(mui, document);
+
+
     </script>
     <script>
         function updateStages() {
-            var selectedStagesCodelist = $(".mui-active").find("input[name=selectedStagesCode]");
-            var selectedStagesTextlist = $(".mui-active").find("input[name=selectedStagesText]");
-            var selectedStagesCode = "";
-            var selectedStagesText = "";
-            for (var i = 0; i < selectedStagesCodelist.length; i++)
-            {
-                selectedStagesCode += selectedStagesCodelist.eq(i).val() + ",";
-                selectedStagesText += selectedStagesTextlist.eq(i).val() + ",";
-            }
+
+            var selectedStagesCode = $("input[name=selectedStagesCode]").val();
+            var selectedStagesText = $("input[name=selectedStagesText]").val();
             var Price = $("input[name=Price]").val();
             var Space = $("input[name=Space]").val();
             var StartTime = $("input[name=StartTime]").val();
@@ -513,3 +568,5 @@
         }
     </script>
 </div>
+
+

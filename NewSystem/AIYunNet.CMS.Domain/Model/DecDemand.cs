@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 
 namespace AIYunNet.CMS.Domain.Model
 {
@@ -209,6 +210,18 @@ namespace AIYunNet.CMS.Domain.Model
         [NotMapped]
         public string GetUserName { get; set; }
 
+        /// <summary>
+        /// MD5 16位加密 加密后密码为大写
+        /// </summary>
+        /// <param name="ConvertString"></param>
+        /// <returns></returns>
+        public static string GetMd5Str(string ConvertString)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(ConvertString)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
+        }
         public DecDemand()
         {
             ProvinceID = "";
@@ -232,7 +245,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsOver = false;
             IsPublish = false;
             HouseType = "";
-            Guid = System.Guid.NewGuid().ToString();
+            Guid = GetMd5Str(System.Guid.NewGuid().ToString());
             AcceptUserID = 0;
             IsAccept = 0;
         }

@@ -339,17 +339,17 @@
                     if (data.RetCode == 1) {
                         //信息框
                         layer.open({
-                            content: '修改成功！'
+                            content: '发布成功！'
                           , btn: '我知道了'
                             , yes: function ()
                             {
-                                history.go(-1);
+                                self.location = document.referrer;
                                 //window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
                             }
                         });
                     } else {
                         layer.open({
-                            content: '修改失败！'
+                            content: '发布失败！'
                           , btn: '我知道了'
                         });
 

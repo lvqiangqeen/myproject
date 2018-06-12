@@ -16,12 +16,19 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingService buidSer = new WebBuidingService();
         DemandService DemandSer = new DemandService();
         WebBuidingStagesService WebBuidingStagesSer = new WebBuidingStagesService();
+        WebCommonService wCSer = new WebCommonService();
         //是否可以进行下一步
         [HttpPost]
         public int IsCanContinueWork(int BuidingID, int StageID)
         {
             int ret = WebBuidingStagesSer.IsCanContinueWork(BuidingID, StageID);
             return ret;
+        }
+        [HttpPost]
+        public ActionResult GetStage()
+        {
+            List<lookupJson> list = wCSer.GetJson("Buiding_process");
+            return Json(list);
         }
         //案例详情
         // GET: MobileApp/MoblieBuiding
@@ -48,6 +55,32 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         [MobileUserFilter]
         [HttpGet]
         public ActionResult buidingStage(int DemandID = 0, int BuidingID = 0)
+        {
+            IWebCommon commonService = new WebCommonService();
+            List<WebLookup> commonworkPosition = commonService.GetLookupList("Buiding_process");
+            IEnumerable<SelectListItem> workPositionList = commonworkPosition.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            ViewBag.workPositionList = workPositionList;
+
+            WebBuiding buidling = buidSer.GetWebBuidingByDemandID(DemandID);
+            if (BuidingID != 0 && DemandID == 0)
+            {
+                buidling = buidSer.GetWebuidingByID(BuidingID);
+            }
+            if (BuidingID == 0 && DemandID == 0)
+            {
+                buidling = new WebBuiding();
+            }
+
+            if (buidling == null)
+            {
+                buidling = new WebBuiding();
+            }
+            return View(buidling);
+        }
+        //装修工人流程页面
+        [MobileUserFilter]
+        [HttpGet]
+        public ActionResult buidingStageByWorker(int DemandID = 0, int BuidingID = 0)
         {
             IWebCommon commonService = new WebCommonService();
             List<WebLookup> commonworkPosition = commonService.GetLookupList("Buiding_process");

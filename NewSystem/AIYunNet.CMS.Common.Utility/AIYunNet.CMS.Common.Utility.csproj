@@ -51,6 +51,7 @@
     <Compile Include="DownLoadHelper.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="MD5Helper.cs" />
     <Compile Include="Model\ImagePathInfo.cs" />
     <Compile Include="Model\Pagination.cs" />
     <Compile Include="PageParam\PageParams.cs" />

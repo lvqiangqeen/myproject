@@ -305,6 +305,16 @@
                 window.location.href = "/MobileApp/MobileUser/SelectWorkerforDemand?WorkerCategory=装修工长&Guid=@Model.Guid";
             }
         })
+        //手机验证
+        function IsTel(Tel) {
+            var re = new RegExp(/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/);
+            var retu = Tel.match(re);
+            if (retu) {
+                return true;
+            } else {
+                return false;
+            }
+        }
         function updateDemand()
         {
             var ret = 0;
@@ -325,39 +335,50 @@
             var IsPublish = $("input[name=IsPublish]").val() == 1 ? true : false;
             var HouseType = $("input[name=shi]").val() + "室," + $("input[name=ting]").val() + "厅," + $("input[name=chu]").val() + "厨," + $("input[name=wei]").val() + "卫生间," + $("input[name=yang]").val() + "阳台";
             var GetUserID = $("input[name=GetUserID]").val();
-            $.ajax({
-                type: "post",
-                url: "/MobileApp/MobileUser/updateDemandDetail",
-                async:false,
-                data: {
-                    id: id,
-                    buidingname: buidingname,
-                    DemandType: DemandType,
-                    DemandTypeName: DemandTypeName,
-                    ProvinceID: ProvinceID,
-                    GetUserType: "WebUser",
-                    GetUserID: GetUserID,
-                    ProvinceName: ProvinceName,
-                    CityID: CityID,
-                    CityName: CityName,
-                    ownername: ownername,
-                    ownertel: ownertel,
-                    buidingSpace: buidingSpace,
-                    HouseType: HouseType,
-                    OneSentence: OneSentence,
-                    Info: Info,
-                    Guid:"@Model.Guid",
-                    IsPublish: IsPublish,
-                    PublishuserID: "@SessionHelper.Get("UserID")",
-            },
-                success: function (data) {
-                    if (data.RetCode == 1) {
-                        ret = 1;
+            if (!IsTel(ownertel)) {
+                layer.open({
+                    content: '请输入正确的联系方式！'
+                , btn: '我知道了'
+                });
+                ret = 0;
+            } else
+            {
+                $.ajax({
+                    type: "post",
+                    url: "/MobileApp/MobileUser/updateDemandDetail",
+                    async:false,
+                    data: {
+                        id: id,
+                        buidingname: buidingname,
+                        DemandType: DemandType,
+                        DemandTypeName: DemandTypeName,
+                        ProvinceID: ProvinceID,
+                        GetUserType: "WebUser",
+                        GetUserID: GetUserID,
+                        ProvinceName: ProvinceName,
+                        CityID: CityID,
+                        CityName: CityName,
+                        ownername: ownername,
+                        ownertel: ownertel,
+                        buidingSpace: buidingSpace,
+                        HouseType: HouseType,
+                        OneSentence: OneSentence,
+                        Info: Info,
+                        Guid:"@Model.Guid",
+                        IsPublish: IsPublish,
+                        PublishuserID: "@SessionHelper.Get("UserID")",
+                },
+                    success: function (data) {
+                        if (data.RetCode == 1) {
+                            ret = 1;
 
+                        }
                     }
-                }
 
             });
+            }
+
+
             return ret;
         }
     })

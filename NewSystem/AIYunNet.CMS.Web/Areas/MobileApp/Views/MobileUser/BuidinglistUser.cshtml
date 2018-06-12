@@ -37,6 +37,9 @@
     .mui-table-view .mui-media-object.mui-pull-left {
     margin-right: 8px;
 }
+    .mui-table-view .mui-media, .mui-table-view .mui-media-body {
+    background-color: #fff;
+}
 </style>
 <script>
     $("#header").remove();
@@ -56,7 +59,7 @@
                         已竣工
                     </a>
                     <a class="mui-control-item" href="#item4mobile">
-                        已确认
+                        质保中
                     </a>
                 </div>
             </div>
@@ -208,6 +211,10 @@
                             var nowStage = list[item.StageNow + 1];
                             if (list[item.StageNow + 1] == "") {
                                 nowStage = "工程结束";
+                            }
+                            if (item.StageNow == "0")
+                            {
+                                nowStage = list[0];
                             }
                             var progress = 100 * (item.StageNow + 1) / list.length;
                             html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>'
