@@ -208,7 +208,7 @@
                                     + '<div class="mui-table-cell mui-col-xs-10">'
                                     + '<h4 class="mui-ellipsis">' + item.BuidingTitle + '</h4>';
                             var list = item.constructionstage.split(',');
-                            var nowStage = list[item.StageNow + 1];
+                            var nowStage = list[item.StageNow];
                             if (list[item.StageNow + 1] == "") {
                                 nowStage = "工程结束";
                             }

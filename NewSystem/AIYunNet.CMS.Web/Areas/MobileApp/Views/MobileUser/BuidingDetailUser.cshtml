@@ -57,7 +57,7 @@
                             }
                         }
 
-                        @if (item.Workerid != 0)
+                        @*@if (item.Workerid != 0)
                         {
                             WebWorker worker = workerSer.GetWebWorkerByID(item.Workerid);
                             <p style="margin-top:20px;width: 100%;color: #fa4b28;margin-bottom:0px;">装修工人：</p>
@@ -65,7 +65,7 @@
                                 <img class="mui-media-object" src="@AppSettingsHelper.ImgUrl@worker.thumbnailImage" style="width:50px;height:50px;border-radius:50px;">
                                 @worker.WorkerName
                             </div>
-                        }
+                        }*@
                         @if (item.IsUserEnd != 1)
                         {
                             int IsComplete= item.IsComplete?1:0;
