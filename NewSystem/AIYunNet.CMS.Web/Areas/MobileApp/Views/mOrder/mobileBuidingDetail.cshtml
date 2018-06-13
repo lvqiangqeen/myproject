@@ -26,7 +26,9 @@
     <ul class="details-price clearfix">
         <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
         <li>开工日期：@Model.StartTime</li>
-        <div><li style="float:left;width:40%;">类型：@demand.DemandTypeName</li><li style="float:left;width:60%;">户型：@demand.HouseType</li></div>
+        <li>类&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.DemandTypeName</li>
+        <li>户&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.HouseType</li>
+       
     </ul>
     <div class="min-price">
         <div class="min-price-tit"><h2>做工详情</h2></div>
@@ -68,7 +70,7 @@
                         {
                             if (item.IsComplete)
                             {
-                                <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                                <p style="font-size: 20px;color:#007aff;">该阶段项目已完成等待验收中... ...</p>
                             }
                             else
                             {

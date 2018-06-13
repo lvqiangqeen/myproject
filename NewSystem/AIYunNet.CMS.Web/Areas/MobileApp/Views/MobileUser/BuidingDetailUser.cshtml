@@ -26,7 +26,8 @@
     <ul class="details-price clearfix">
         <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
         <li>开工日期：@Model.StartTime</li>
-        <div><li style="float:left;width:40%;">类型：@demand.DemandTypeName</li><li style="float:left;width:60%;">户型：@demand.HouseType</li></div>
+        <li>类&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.DemandTypeName</li>
+        <li>户&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.HouseType</li>
     </ul>
     <div class="min-price">
         <div class="min-price-tit"><h2>做工详情</h2></div>
@@ -34,7 +35,26 @@
             @foreach (WebBuidingStages item in stageslist)
             {
                 <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
+                    @if (item.IsUserEnd == 1)
+                    {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: #009688;color: #009688;"></i>
+                    }
+                    else if (item.IsUserEnd == 2)
+                    {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: red;color: red;"></i>
+                    }
+                    else
+                    {
+                        if (item.IsComplete)
+                        {
+                            <i class="layui-icon layui-timeline-axis" style="background-color: #007aff;color: #007aff;"></i>
+                        }
+                        else
+                        {
+                            <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
+                        }
+                    }
+                    @*<i class="layui-icon layui-timeline-axis"></i>*@
                     <div class="layui-timeline-content layui-text">
                         <h3 class="layui-timeline-title">@item.StageName</h3>
                         @if (item.IsUserEnd == 1)
@@ -49,7 +69,7 @@
                         {
                             if (item.IsComplete)
                             {
-                                <p style="font-size: 20px;color:#009688;">该阶段项目已完成</p>
+                                <p style="font-size: 20px;color:#007aff;">该阶段项目已完成等待验收中... ...</p>
                             }
                             else
                             {
@@ -70,7 +90,7 @@
                         {
                             int IsComplete= item.IsComplete?1:0;
                             <p style="margin-top:10px;">
-                                <button class="layui-btn" onclick="javascript:IsUserEnd(@Model.BuidingID,@item.StageID,@IsComplete);">阶段审核</button>
+                                <button class="layui-btn" onclick="javascript:IsUserEnd(@Model.BuidingID,@item.StageID,@IsComplete);">阶段验收</button>
                             </p>
                         }
 
@@ -92,7 +112,15 @@
                 </li>
             }
             <li class="layui-timeline-item">
-                <i class="layui-icon layui-timeline-axis"></i>
+                @if (Model.IsWorkerEnd == 1)
+                {
+                    <i class="layui-icon layui-timeline-axis" style="background-color: #007aff;color: #007aff;"></i>
+                }
+                else
+                {
+                    <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
+                }
+                @*<i class="layui-icon layui-timeline-axis"></i>*@
                 <div class="layui-timeline-content layui-text">
                     <h3 class="layui-timeline-title">项目竣工</h3>
                     @if (Model.IsWorkerEnd == 1)
@@ -149,7 +177,8 @@
     function IsUserEndStage(buidingID, stageID, IsUserend) {
         $.ajax({
             type: "post",
-            url: "/PeopleCenter/CenterCases/IsUserEndStage",
+            async: false,
+            url: "/MobileApp/MobileUser/IsUserEndStage",
             data: {
                 buidingID: buidingID,
                 stageID: stageID,
@@ -157,7 +186,6 @@
             },
             success: function (data) {
                 if (data.RetCode == 1) {
-                    //$('#stageCaseTable').DataTable().ajax.reload();
                     window.location.href = window.location.href;
                 }
             }

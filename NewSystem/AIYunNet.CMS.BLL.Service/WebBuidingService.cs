@@ -326,6 +326,7 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     old.IsWorkerEnd = 1;
                     old.StageNow = old.StageNow + 1;
+                    old.EndTime = DateTime.Now.ToString();
                     context.SaveChanges();
                     return 1;
                 }

@@ -179,7 +179,7 @@
             var time = function (AddOn) {
                 var a = AddOn
                 var date = new Date(parseInt(a.slice(6)));
-                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日';
+                var result = (date.getFullYear() + 2) + '年' + date.getMonth() + '月' + date.getDate() + '日';
                 return result;
             }
 
@@ -214,8 +214,14 @@
                                 nowStage = "工程结束";
                             }
                             var progress = 100 * (item.StageNow + 1) / list.length;
-                            html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>'
-                                    + '<div style="margin-top: 39px;">'
+                            html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5>';
+                            if (IsWorkerEnd == "1" && IsUserEnd == "1") {
+                                html += '<h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
+                            } else
+                            {
+                                html += '<h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
+                            }
+                            html+='<div style="margin-top: 39px;">'
                                     + '<p class="mui-progressbar mui-progressbar-in" data-progress="' + progress + '"><span></span></p>'
                                     + '<div style="margin-top: 5px;">';
                             var width= 100 * 1/list.length;

@@ -24,6 +24,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 
         #region 装修进度（用户）
         // GET: MobileApp/MobileUser
+        //阶段审核
+        public JsonResult IsUserEndStage(int buidingID, int stageID, int IsUserend)
+        {
+            int ret = 0;
+            ret = stageSer.IsUserEnd(buidingID, stageID, IsUserend);
+            return Json(new { RetCode = ret });
+        }
         public ActionResult BuidinglistUser()
         {
             return View();

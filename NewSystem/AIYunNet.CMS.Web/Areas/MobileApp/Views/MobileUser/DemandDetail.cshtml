@@ -275,7 +275,7 @@
         }
         $("#queren").click(function () {
             var id = $("input[name=id]").val();
-            var success=updateDemand();
+            var success=updateDemand(0);
             if (success == 1)
             {
                 if (id > 0) {
@@ -300,7 +300,7 @@
 
         });
         $("input[name=GetUserName]").click(function () {
-            var success = updateDemand();
+            var success = updateDemand(1);
             if (success == 1) {
                 window.location.href = "/MobileApp/MobileUser/SelectWorkerforDemand?WorkerCategory=装修工长&Guid=@Model.Guid";
             }
@@ -315,9 +315,9 @@
                 return false;
             }
         }
-        function updateDemand()
+        function updateDemand(clickgongren)
         {
-            var ret = 0;
+            var ret = 1;
             var id = $("input[name=id]").val();
             var buidingname = $("input[name=buidingname]").val();
             var DemandType = $("input[name=DemandType]").val();
@@ -341,7 +341,78 @@
                 , btn: '我知道了'
                 });
                 ret = 0;
-            } else
+                return;
+            }
+            if (buidingname == null || buidingname == "")
+            {
+                layer.open({
+                    content: '请输入正确的小区地址！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (OneSentence == null || OneSentence == "") {
+                layer.open({
+                    content: '请输入装修风格！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (ownername == null || ownername == "") {
+                layer.open({
+                    content: '请输入您的姓名！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (CityName == null || CityName == "") {
+                layer.open({
+                    content: '请选择城市！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (buidingSpace == 0 || buidingSpace == "") {
+                layer.open({
+                    content: '请输入房屋面积！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (DemandTypeName == null || DemandTypeName == "") {
+                layer.open({
+                    content: '请选择需求类型！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (Info == null || Info == "") {
+                layer.open({
+                    content: '请简单填写装修内容！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
+            if (clickgongren == 0)
+            {
+                if (GetUserID == 0 || GetUserID == "" || GetUserID == null) {
+                    layer.open({
+                        content: '请选择工人！'
+                        , btn: '我知道了'
+                    });
+                    ret = 0;
+                    return;
+                }
+            }
+
+            if (ret!=0)
             {
                 $.ajax({
                     type: "post",
