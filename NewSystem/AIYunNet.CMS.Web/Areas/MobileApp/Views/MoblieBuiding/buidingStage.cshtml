@@ -247,13 +247,6 @@
 
     <p class="car-description">小区地址：@demand.buidingname</p>
     @Html.HiddenFor(m => m.BuidingID)
-
-    @*<ul class="car-details clearfix">
-        <li class="fwfw">服务范围：<em>同城运输</em></li>
-        <li class="fwqy">服务区域：<em>新站-蜀山</em></li>
-        <li class="fwdz">地址：<em>经开区工业园-新站区</em></li>
-        <li class="fwdh">电话：<em>18000000000</em></li>
-    </ul>*@
     <div class="min-price">
         <div class="min-price-tit"><h2>上传封面</h2></div>
         <div class="min-price-con">
@@ -380,13 +373,7 @@
                 </li>
             }
         </ul>
-    </div>
-
-    @*<div class="min-price">
-        <div class="min-price-tit"><h2>阶段描述</h2></div>
-        <div class="min-price-con"><textarea id="wordContent" rows="5" placeholder="写点什么吧。。。" style="border: 1px solid #555;padding: 10px 15px;width:100%;"></textarea></div>
-    </div>*@
-    
+    </div> 
     @if (Model.IsWorkerEnd != 1)
     {
         <a href="javascript:updateStages()" class="order" style="color:white;background-color:#007aff">提交信息</a>
@@ -467,49 +454,91 @@
             var BuidingID = $("#BuidingID").val();
             var BuidingBrief = $("#BuidingBrief").val();
             var BuidingInfo = $("#BuidingInfo").val();
-            $.ajax({
-                type: "post",
-                url: "/MobileApp/MoblieBuiding/AddOrEditBuidingStages",
-                data: {
-                        Guid: '@Guid',
-                        UserID: '@UserID',
-                        BuidingID: BuidingID,
-                        BuidingTitle: '@demand.buidingname',
-                        BuidingBrief: "",
-                        BuidingInfo: "",
-                        Price: Price,
-                        Space: Space,
-                        ConstructionstageID: selectedStagesCode,
-                        Constructionstage: selectedStagesText,
-                        //ShowOrder: ShowOrder,
-                        //IsHot: IsHot,
-                        //IsTop: IsTop,
-                        BuidingImage: $("input[name=BuidingImage]").val(),
-                        thumbnailImage: $("input[name=thumbnailImage]").val(),
-                        StartTime: StartTime,
-                        DemandID: "@DemandID"
-                },
-                success: function (data) {
-                    if (data.RetCode == 1) {
-                        //信息框
-                        layer.open({
-                            content: '发布成功！'
-                          , btn: '我知道了'
-                            , yes: function () {
-                                history.go(-1);
-                                //window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
-                            }
-                        });
-                    } else {
-                        layer.open({
-                            content: '发布失败！'
-                          , btn: '我知道了'
-                        });
+            var BuidingImage = $("input[name=BuidingImage]").val();
 
-                    }
+            if (BuidingImage == "" || BuidingImage == null) {
+                layer.open({
+                    content: '请上传一张装修图片！'
+                     , btn: '我知道了'
+                });
+                return;
+            }
+            if (Price == "0" || Price == null)
+            {
+                layer.open({
+                    content: '请输入价格！'
+                     , btn: '我知道了'
+                });
+                return;
+            }
+            if (StartTime == "" || StartTime == null) {
+                layer.open({
+                    content: '请确定开工时间！'
+                     , btn: '我知道了'
+                });
+                return;
+            }
+            if (selectedStagesCode == "" || selectedStagesCode == null) {
+                layer.open({
+                    content: '请开启装修流程！'
+                     , btn: '我知道了'
+                });
+                return;
+            }
+
+            //询问框
+            layer.open({
+                content: '装修流程发布之后无法修改，请确认所填信息是否准确！'
+              , btn: ['发布', '再看看']
+              , yes: function (index) {
+
+                  $.ajax({
+                      type: "post",
+                      url: "/MobileApp/MoblieBuiding/AddOrEditBuidingStages",
+                      data: {
+                          Guid: '@Guid',
+                          UserID: '@UserID',
+                          BuidingID: BuidingID,
+                          BuidingTitle: '@demand.buidingname',
+                          BuidingBrief: "",
+                          BuidingInfo: "",
+                          Price: Price,
+                          Space: Space,
+                          ConstructionstageID: selectedStagesCode,
+                          Constructionstage: selectedStagesText,
+                          BuidingImage: $("input[name=BuidingImage]").val(),
+                          thumbnailImage: $("input[name=thumbnailImage]").val(),
+                          StartTime: StartTime,
+                          DemandID: "@DemandID"
+                      },
+                      success: function (data) {
+                          if (data.RetCode == 1) {
+                              //信息框
+                              layer.open({
+                                  content: '发布成功！'
+                                , btn: '我知道了'
+                                  , yes: function () {
+                                      history.go(-1);
+
+                                  }
+                              });
+                          } else {
+                              layer.open({
+                                  content: '发布失败！'
+                                , btn: '我知道了'
+                              });
+
+                          }
+                      }
+
+                  });
+              },
+                no: function (index) {
+                    layer.close(index);
                 }
-
             });
+
+
         }
     </script>
 </div>

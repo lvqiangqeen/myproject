@@ -47,7 +47,9 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             {
                 buidingstage = new WebBuidingStages();
             }
-            ViewBag.buidingstage = buidingstage;
+            List<WebBuidingStages> stageslist = WebBuidingStagesSer.GetWebBuidingStagesListByBuiding(buiding.BuidingID);
+            ViewBag.stageslist = stageslist;
+            //ViewBag.buidingstage = buidingstage;
             ViewBag.demand = demand;
             return View(buiding);
         }

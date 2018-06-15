@@ -63,15 +63,16 @@ namespace AIYunNet.CMS.BLL.Service
             }
 
         }
-
-        public List<WebUser> GetWebUserList()
+        //获取注册用户
+        public List<WebUser> GetWebUserList(string usertype)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                return context.WebUser.Where(su => su.IsDelete == false).OrderByDescending(su => su.AddOn).ToList();
+                return context.WebUser.Where(su => su.IsDelete == false && su.PositionCode== usertype).OrderByDescending(su => su.AddOn).ToList();
             }
         }
 
+        WebWorkerService wokSer = new WebWorkerService();
         public int UpdateWebUser(WebUser newWebUser)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -94,6 +95,10 @@ namespace AIYunNet.CMS.BLL.Service
                     originalUser.InTime = newWebUser.InTime;
                     originalUser.Score = newWebUser.Score;
                     originalUser.InUser = newWebUser.InUser;
+                    if (newWebUser.PositionCode == "WebWorker" || newWebUser.PositionCode == "WebWorkerLeader")
+                    {
+                        wokSer.PassCheckByWorker(newWebUser.UserID, newWebUser.InUser);
+                    }
                     originalUser.IsActivity = newWebUser.IsActivity;
                     originalUser.EditOn = DateTime.Now;
                     context.SaveChanges();

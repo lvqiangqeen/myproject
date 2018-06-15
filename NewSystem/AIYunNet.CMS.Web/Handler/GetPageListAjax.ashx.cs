@@ -223,7 +223,7 @@ namespace AIYunNet.CMS.Web.Handler
                 + ",[IsBuildingCount],[IsApproved],[Stars],"
                 + "Stars/25 as Huang,Stars%25/5 as Ying,Stars%25%5 as Xing");
 
-            SortParameters = string.Format(" FlagDelete=0 {0} {1} {2} {3}",
+            SortParameters = string.Format("IsApproved=1 and FlagDelete=0 {0} {1} {2} {3}",
                 "and CityID='" + mkjcitycode + "'",
                  positionID == "0" || string.IsNullOrEmpty(positionID) ? "" : "and WorkerPositionID='" + positionID + "'",
                 AreasID == "0" || string.IsNullOrEmpty(AreasID) ? "" : "and (AreasID='0' or AreasID like '%" + AreasID + "%')",

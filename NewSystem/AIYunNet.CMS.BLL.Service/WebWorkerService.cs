@@ -12,6 +12,19 @@ namespace AIYunNet.CMS.BLL.Service
     public class WebWorkerService
     {
         /// <summary>
+        /// 通过审核
+        /// </summary>
+        public int PassCheckByWorker(int userid,bool IsApproved)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebWorker work = context.WebWorker.FirstOrDefault(c => c.UserID == userid);
+                work.IsApproved = IsApproved;
+                context.SaveChanges();
+                return 1;
+            }
+        }
+        /// <summary>
         /// 手机端选取工人
         /// </summary>
         public List<WebWorker> mGetWorker(string WorkerName, int PageIndex, int PageSize, string WorkerCategory, string WorkerPositionID)

@@ -21,10 +21,11 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         WebPeopleAuthenticationService AuthenticationService = new WebPeopleAuthenticationService();
         WebPeopleGuarantMoneyService GuarantMoneyService = new WebPeopleGuarantMoneyService();
         WebCommonService webcommonser = new WebCommonService();
+        WebWorkerService workSer = new WebWorkerService();
         // GET: SysAdmin/UsersCenter
-        public ActionResult Userlist()
+        public ActionResult Userlist(string usertype)
         {
-            List<WebUser> userlist = webuserservice.GetWebUserList();
+            List<WebUser> userlist = webuserservice.GetWebUserList(usertype);
             ViewBag.userlist = userlist;
             return View();
         }
@@ -32,9 +33,15 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         public ActionResult AddAndUpdateUser(int userid)
         {
             WebUser webuser = webuserservice.GetWebUserByID(userid);
-            List<WebLookup> weblooktypelist = webcommonser.GetLookupList("people_category");
-            IEnumerable<SelectListItem> typelist = weblooktypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
-            ViewBag.typelist = typelist;
+            //List<WebLookup> weblooktypelist = webcommonser.GetLookupList("people_category");
+            //IEnumerable<SelectListItem> typelist = weblooktypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
+            //ViewBag.typelist = typelist;
+            WebWorker work = new WebWorker();
+            if (webuser.PositionCode != "WebUser")
+            {
+                work= workSer.GetWebWorkerByUserID(userid);
+            }
+            ViewBag.worker = work;
             return View(webuser);
         }
         [HttpPost]

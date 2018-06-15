@@ -53,7 +53,7 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("WorkerLevel")]
         public int WorkerLevel { get; set; }
         /// <summary>
-        /// WorkerMotto
+        ///评价自己
         /// </summary>
         [Column("WorkerMotto")]
         public string WorkerMotto { get; set; }
@@ -188,7 +188,7 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("GoodAtStyleID")]
         public string GoodAtStyleID { get; set; }
         /// <summary>
-        /// GoodAtStyle
+        /// 擅长领域
         /// </summary>
         [Column("GoodAtStyle")]
         public string GoodAtStyle { get; set; }

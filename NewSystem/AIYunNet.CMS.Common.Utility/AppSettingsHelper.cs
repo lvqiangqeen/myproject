@@ -22,6 +22,8 @@ namespace AIYunNet.CMS.Common.Utility
         public static string SMSKey = ConfigurationManager.AppSettings["SMSKey"];
         //短信验证账号
         public static string SMSUid = ConfigurationManager.AppSettings["SMSUid"];
+        
+        
         private static readonly NameValueCollection AppSettings;
 
         static AppSettingsHelper()

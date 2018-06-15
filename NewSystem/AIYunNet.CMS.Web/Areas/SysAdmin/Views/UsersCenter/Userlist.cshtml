@@ -6,11 +6,24 @@
     Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
 
     WebPeopleService webpeopleser = new WebPeopleService();
+    string type = Request["usertype"];
 }
 
 <div class="box">
     <div class="box-header">
-        <h2>用户列表</h2>
+        @if (type == "WebWorkerLeader")
+        {
+            <h2>工长列表</h2>
+        }
+        else if (type == "WebWorker")
+        {
+            <h2>工人列表</h2>
+        }
+        else
+        {
+            <h2>业主列表</h2>
+        }
+        
     </div>
     <div class="box-body" id="userList">
         <table id="userListDt" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
@@ -22,11 +35,11 @@
                     <th>账号</th>
                     <th>真实姓名</th>
                     <th>性别</th>
-                    <th>联系电话</th>
-                    <th>注册类别</th>
+                    <th>联系电话</th>              
                     <th>邮箱</th>
                     <th>注册时间</th>
                     <th>是否被锁</th>
+                    <th>通过审核</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -41,7 +54,6 @@
                             <td>@user.TrueName</td>
                             <td>@user.Sex</td>
                             <td>@user.Telephone</td>
-                            <td>@user.UserType</td>
                             <td>@user.Email</td>
                             <td>@user.AddOn</td>
                             <td>
@@ -55,6 +67,16 @@
                                     @:<span>否</span>
 
                                 }
+                            </td>
+                            <td>
+                            @if (user.InUser)
+                            {
+                                @:<span style="color:red">是</span>
+                            }
+                            else
+                            {
+                                @:<span>否</span>
+                            }
                             </td>
                             <td>
                                 @if (webpeopleser.GetWebPeopleByUserID(user.UserID) != null)
@@ -93,7 +115,7 @@
                 "ordering": true,
                 "info": true,
                 "autoWidth": false,
-                "order": [[7, "desc"]]
+                "order": [[8, "asc"]]
             });
         })
 

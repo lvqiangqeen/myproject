@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
 namespace AIYunNet.CMS.Domain.Model
 {
     [Table("WebUser")]
     public class WebUser
     {
+        public static string Hearder = ConfigurationManager.AppSettings["Hearder"];
         /// <summary>
         /// UserID
         /// </summary>
@@ -68,10 +70,10 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("InIp")]
         public string InIp { get; set; }
         /// <summary>
-        /// InUser
+        /// 是否通过审核
         /// </summary>
         [Column("InUser")]
-        public int InUser { get; set; }
+        public bool InUser { get; set; }
         /// <summary>
         /// IsLock
         /// </summary>
@@ -186,6 +188,8 @@ namespace AIYunNet.CMS.Domain.Model
             ProvinceID = "";
             CityID = "";
             AreasID = "";
+            Img = Hearder;
+            thumbnailImage = Hearder;
         }
 
     }

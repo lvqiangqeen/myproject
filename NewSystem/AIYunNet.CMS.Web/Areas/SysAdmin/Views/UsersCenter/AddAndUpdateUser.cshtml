@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "AddAndUpdateUser";
     Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    WebWorker work = ViewBag.worker;
 }
 
 <div class="box">
@@ -19,11 +20,12 @@
                         <div class="form-horizontal">
                             <div class="form-group" style="display:none">
                                 @Html.HiddenFor(m => m.UserID, new { id = "hidUserID" })
+                                @Html.HiddenFor(m => m.PositionCode, new { id = "PositionCode" })
                             </div>
                             <div class="form-group">
-                                <label for="UserName" class="col-sm-2 control-label">用户名：</label>
+                                <label for="UserName" class="col-sm-2 control-label">账户：</label>
                                 <div class="col-sm-3">
-                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "readonly" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -54,32 +56,129 @@
                             <div class="form-group">
                                 <label for="UserType" class="col-sm-2 control-label">用户类型：</label>
                                 <div class="col-sm-3">
-                                    @Html.DropDownListFor(m => m.UserType, new SelectList(ViewBag.typelist, "Value", "Text"), new { @class = "form-control", id = "UserType" })
+                                    @if (Model.PositionCode == "WebWorkerLeader")
+                                    {
+                                        @:装修工长
+                                    }
+                                    else if (Model.PositionCode == "WebWorker")
+                                    {
+                                        @:装修工人
+                                    }
+                                    else
+                                    {
+                                        @:业主
+                                    }
 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="Telephone" class="col-sm-2 control-label">联系方式：</label>
-                                <div class="col-sm-4">
-                                    @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control" })
+                                <div class="col-sm-3">
+                                    @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control",  @readonly = "readonly" })
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="Address" class="col-sm-2 control-label">街道地址：</label>
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                                <label for="Address" class="col-sm-2 control-label">所在地：</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control"  readonly="readonly" type="text" value="@Model.ProvinceName @Model.CityName">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="Address" class="col-sm-2 control-label">服务地区：</label>
+                                <div class="col-sm-5">
+                                    <input class="form-control"  readonly="readonly" type="text" value="@Model.AreasName">
+                                </div>
+                            </div>
+                            @if (Model.PositionCode == "WebWorkerLeader")
+                            {
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">工作年限：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkYears">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">工程价位：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.PriceName 元每平方米">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">擅长领域：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.GoodAtStyle">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">评价自己：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerMotto">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">个人简介：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerInfo">
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.PositionCode == "WebWorker")
+                            {
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">工作年限：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkYears">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">工种：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerPosition">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">工程价位：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.PriceName 元每平方米">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">擅长领域：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.GoodAtStyle">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">评价自己：</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerMotto">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">个人简介：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerInfo">
+                                    </div>
+                                </div>
+                            }
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">设置：</label>
-                                <div class="col-sm-offset col-sm-4">
-                                    <div class="checkbox col-sm-4">
+                                <div class="col-sm-offset col-sm-5">
+                                    <div class="checkbox col-sm-2">
                                         <label class="checkbox-custom">
                                             @Html.CheckBoxFor(m => m.IsLock)
                                             锁定
                                         </label>
                                     </div>
-
+                                    @if (Model.PositionCode != "WebUser")
+                                    {
+                                        <div class="checkbox col-sm-3">
+                                            <label class="checkbox-custom">
+                                                @Html.CheckBoxFor(m => m.InUser)
+                                                通过审核
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div class="form-group">

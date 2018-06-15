@@ -27,7 +27,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
         #endregion
 
-        #region 个人资料
+        #region 工人工长资料
         public ActionResult PersonData()
         {
             WebUser user = webUserservice.GetWebUserByID(Convert.ToInt32(SessionHelper.Get("UserID")));
@@ -43,8 +43,20 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 
             return View();
         }
+        public ActionResult EditPersonDataShengFen()
+        {
+            return View();
+        }
         [HttpPost]
         public int updatePersonData(string data, string type)
+        {
+            int ret = 0;
+            ret = webUserservice.UpdateWebUserFromMobileBywoker(Convert.ToInt32(SessionHelper.Get("UserID")), data, type);
+            return ret;
+        }
+        //上传身份证件
+        [HttpPost]
+        public int uploadShengfen(string data, string type)
         {
             int ret = 0;
             ret = webUserservice.UpdateWebUserFromMobileBywoker(Convert.ToInt32(SessionHelper.Get("UserID")), data, type);

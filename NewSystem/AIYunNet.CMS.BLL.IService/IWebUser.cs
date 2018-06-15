@@ -13,7 +13,7 @@ namespace AIYunNet.CMS.BLL.IService
         bool IsHaveuserAccount(string userAccount);
         bool ExistUser(string userAccount, string userPwd);
         int UpdateWebUserPassword(string userAccount, string userPwd);
-        List<WebUser> GetWebUserList();
+        List<WebUser> GetWebUserList(string usertype);
         int UpdateWebUser(WebUser WebUser);
         WebUser GetWebUserByAccount(string userAccount, string userPwd);
     }
