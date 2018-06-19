@@ -190,6 +190,11 @@ namespace AIYunNet.CMS.Domain.Model
         [Column("HouseType")]
         public string HouseType { get; set; }
         /// <summary>
+        /// 是否废弃
+        /// </summary>
+        [Column("IsOut")]
+        public bool IsOut { get; set; }
+        /// <summary>
         /// 预接受用户ID
         /// </summary>
         [NotMapped]
@@ -244,6 +249,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsPlan = false;
             IsOver = false;
             IsPublish = false;
+            IsOut = false;
             HouseType = "";
             Guid = GetMd5Str(System.Guid.NewGuid().ToString());
             AcceptUserID = 0;

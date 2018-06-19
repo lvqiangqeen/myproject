@@ -171,6 +171,10 @@ namespace AIYunNet.CMS.Domain.OccaModel
         /// 施工用户名字
         /// </summary>
         public string GetUserName { get; set; }
+        /// <summary>
+        /// 是否废弃
+        /// </summary>
+        public bool IsOut { get; set; }
 
         public Demand()
         {
@@ -194,6 +198,7 @@ namespace AIYunNet.CMS.Domain.OccaModel
             IsPlan = false;
             IsOver = false;
             IsPublish = false;
+            IsOut = false;
             HouseType = "";
             Guid = System.Guid.NewGuid().ToString();
             AcceptUserID = 0;

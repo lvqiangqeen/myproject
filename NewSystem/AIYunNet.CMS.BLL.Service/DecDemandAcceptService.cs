@@ -174,6 +174,7 @@ namespace AIYunNet.CMS.BLL.Service
                                 select new AcceptDemand
                                 {
                                     id = d.id,
+                                    IsOver=d.IsOut,
                                     buidingname = d.buidingname,
                                     ownername = d.ownername,
                                     ownertel = d.ownertel,

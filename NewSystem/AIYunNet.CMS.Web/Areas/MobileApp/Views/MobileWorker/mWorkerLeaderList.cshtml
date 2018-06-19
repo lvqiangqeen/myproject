@@ -131,6 +131,12 @@
         var counter = 1;//计数器
         var pageStart = 1;//开始数据条数
         var Flag=true;
+        function cutStr(str) {
+            if (str.length > 5) {
+                return str.substring(0, 5) + "...";
+            }
+            return str;
+        }
 
         data(pageStart, pageSize);
         function data(pageIndex, PageSize) {
@@ -178,7 +184,7 @@
                             result += '<img src="/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;"/>';
                         }
                         result += '</span></div>'
-                              + '<div class="jbsf-details"><span class="work-type">工长</span><span class="work-ages" style="margin-left: 10px;">' + item.worker.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.worker.AreasName + '">' + item.worker.AreasName + '</span></div>'
+                              + '<div class="jbsf-details"><span class="work-type">工长</span><span class="work-ages" style="margin-left: 10px;">' + item.worker.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.worker.AreasName + '">' + cutStr(item.worker.AreasName) + '</span></div>'
                               + '</div></a></div>';
                     });
 
