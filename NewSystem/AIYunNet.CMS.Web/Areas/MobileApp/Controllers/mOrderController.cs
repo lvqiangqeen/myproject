@@ -29,11 +29,11 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetOrderlist(int isall, int IsAccept, int IsPlan,int PageSize, int CurPage)
+        public ActionResult GetOrderlist(int IsOut, int IsAccept, int IsPlan,int PageSize, int CurPage)
         {
             int count = 0;
             int userid = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<AcceptDemand> list =  AcSer.mGetDemandListByUserID(isall,IsAccept,IsPlan, userid, PageSize, CurPage, out count);
+            List<AcceptDemand> list =  AcSer.mGetDemandListByUserID(IsOut, IsAccept,IsPlan, userid, PageSize, CurPage, out count);
             return Json(list);
         }
 

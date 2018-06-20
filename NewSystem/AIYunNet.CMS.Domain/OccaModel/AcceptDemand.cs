@@ -156,10 +156,15 @@ namespace AIYunNet.CMS.Domain.OccaModel
         /// 是否接受
         /// </summary>
         public int IsAccept { get; set; }
+        /// <summary>
+        /// 是否废弃
+        /// </summary>
+        public bool IsOut { get; set; }
         public AcceptDemand()
         {
             DemandId = 0;
             ProvinceID = "";
+            IsOut = false;
             CityID = "";
             workTime = 0;
             buidingSpace = 0;

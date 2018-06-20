@@ -36,6 +36,6 @@ E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\AIYunNet.CMS.D
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\AIYunNet.CMS.Domain.pdb
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\EntityFramework.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\bin\Debug\EntityFramework.SqlServer.dll
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.csprojResolveAssemblyReference.cache
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.pdb
-E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Domain\obj\Debug\AIYunNet.CMS.Domain.csprojResolveAssemblyReference.cache

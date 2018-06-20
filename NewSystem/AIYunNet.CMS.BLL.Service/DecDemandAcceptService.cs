@@ -30,7 +30,7 @@ namespace AIYunNet.CMS.BLL.Service
                 DecDemandAccept old = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == guid);
                 return old;
             }
-           
+
         }
         public List<DecDemandAccept> GetListByGetUserID(int UserID)
         {
@@ -79,7 +79,7 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                DecDemandAccept old = context.DecDemandAccept.FirstOrDefault(c=>c.DemandGuid== acc.DemandGuid);
+                DecDemandAccept old = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == acc.DemandGuid);
                 if (old != null)
                 {
                     old.IsAccept = acc.IsAccept;
@@ -88,7 +88,7 @@ namespace AIYunNet.CMS.BLL.Service
                     {
                         DecDemand dec = context.DecDemand.FirstOrDefault(c => c.Guid == acc.DemandGuid);
                         dec.GetUserType = "WebUser";
-                        dec.GetUserID = old.GetUserID;                       
+                        dec.GetUserID = old.GetUserID;
                     }
                     context.SaveChanges();
                 }
@@ -104,7 +104,7 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 try
                 {
-                    list = context.DecDemandAccept.Where(c => c.GetUserID == UserID && c.IsAccept==0).ToList();
+                    list = context.DecDemandAccept.Where(c => c.GetUserID == UserID && c.IsAccept == 0).ToList();
                     if (list != null)
                     {
                         ret = list.Count();
@@ -119,7 +119,7 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
         //获取发给工人的需求清单
-        public List<AcceptDemand> GetDemandListByUserID(int UserID,int PageSize,int CurPage,out int count)
+        public List<AcceptDemand> GetDemandListByUserID(int UserID, int PageSize, int CurPage, out int count)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
@@ -146,13 +146,13 @@ namespace AIYunNet.CMS.BLL.Service
                                 IsEnd = d.IsEnd,
                                 IsVerrify = d.IsVerrify,
                                 DemandId = d.id,
-                                DemandType =d.DemandType,
-                                DemandTypeName =d.DemandTypeName,
-                                Guid=d.Guid,
-                                HouseType=d.HouseType,
-                                IsPlan=d.IsPlan,
-                                AcceptUserID=c.GetUserID,
-                                IsAccept=c.IsAccept
+                                DemandType = d.DemandType,
+                                DemandTypeName = d.DemandTypeName,
+                                Guid = d.Guid,
+                                HouseType = d.HouseType,
+                                IsPlan = d.IsPlan,
+                                AcceptUserID = c.GetUserID,
+                                IsAccept = c.IsAccept
                             };
                 count = query.ToList().Count();
                 List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
@@ -161,58 +161,59 @@ namespace AIYunNet.CMS.BLL.Service
         }
 
         //获取发给工人的需求清单手机端
-        public List<AcceptDemand> mGetDemandListByUserID(int isall, int IsAccept, int IsPlan,int UserID, int PageSize, int CurPage, out int count)
+        public List<AcceptDemand> mGetDemandListByUserID(int IsOut, int IsAccept, int IsPlan, int UserID, int PageSize, int CurPage, out int count)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
 
-                    var query = from c in context.DecDemandAccept
-                                from d in context.DecDemand
-                                where c.DemandGuid == d.Guid
-                                && c.GetUserID == UserID && d.IsDelete == false
+                var query = from c in context.DecDemandAccept
+                            from d in context.DecDemand
+                            where c.DemandGuid == d.Guid
+                            && c.GetUserID == UserID && d.IsDelete == false
 
-                                select new AcceptDemand
-                                {
-                                    id = d.id,
-                                    IsOver=d.IsOut,
-                                    buidingname = d.buidingname,
-                                    ownername = d.ownername,
-                                    ownertel = d.ownertel,
-                                    ProvinceID = d.ProvinceID,
-                                    ProvinceName = d.ProvinceName,
-                                    CityID = d.CityID,
-                                    CityName = d.CityName,
-                                    buidingSpace = d.buidingSpace,
-                                    OneSentence = d.OneSentence,
-                                    PublishuserID = d.PublishuserID,
-                                    GetUserID = d.GetUserID,
-                                    GetUserType = d.GetUserType,
-                                    AddOn = d.AddOn,
-                                    IsEnd = d.IsEnd,
-                                    IsVerrify = d.IsVerrify,
-                                    DemandId=d.id,
-                                    DemandType = d.DemandType,
-                                    DemandTypeName = d.DemandTypeName,
-                                    Guid = d.Guid,
-                                    HouseType = d.HouseType,
-                                    IsPlan = d.IsPlan,
-                                    AcceptUserID = c.GetUserID,
-                                    IsAccept = c.IsAccept
-                                };
+                            select new AcceptDemand
+                            {
+                                id = d.id,
+                                IsOut = d.IsOut,
+                                IsOver=d.IsOver,
+                                buidingname = d.buidingname,
+                                ownername = d.ownername,
+                                ownertel = d.ownertel,
+                                ProvinceID = d.ProvinceID,
+                                ProvinceName = d.ProvinceName,
+                                CityID = d.CityID,
+                                CityName = d.CityName,
+                                buidingSpace = d.buidingSpace,
+                                OneSentence = d.OneSentence,
+                                PublishuserID = d.PublishuserID,
+                                GetUserID = d.GetUserID,
+                                GetUserType = d.GetUserType,
+                                AddOn = d.AddOn,
+                                IsEnd = d.IsEnd,
+                                IsVerrify = d.IsVerrify,
+                                DemandId = d.id,
+                                DemandType = d.DemandType,
+                                DemandTypeName = d.DemandTypeName,
+                                Guid = d.Guid,
+                                HouseType = d.HouseType,
+                                IsPlan = d.IsPlan,
+                                AcceptUserID = c.GetUserID,
+                                IsAccept = c.IsAccept
+                            };
                 bool plan = IsPlan == 1 ? true : false;
+                bool isout = IsOut == 1 ? true : false;
                 count = query.ToList().Count();
-                if (isall == 0)
+
+                if (IsAccept == 1)
                 {
-                    if (IsAccept == 1 && !plan)
-                    {
-                        query = query.Where(c => c.IsAccept == IsAccept && c.IsPlan == plan);
-                    }
-                    else
-                    {
-                        query = query.Where(c => c.IsAccept == IsAccept);
-                    }
-                    
-                }           
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout);
+                }
+                else
+                {
+                    query = query.Where(c => c.IsAccept == IsAccept);
+                }
+
+
                 List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
             }
