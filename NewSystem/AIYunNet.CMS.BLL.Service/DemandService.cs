@@ -14,6 +14,20 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class DemandService
     {
+        public int IsOutByGuID(string guid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecDemand model = new DecDemand();
+                if (guid != "")
+                {
+                    model = context.DecDemand.FirstOrDefault(c => c.Guid == guid);
+                }
+                model.IsOut = true;
+                context.SaveChanges();
+                return 1;
+            }
+        }
         public DecDemand GetDecDemandByID(int id)
         {
             using (AIYunNetContext context = new AIYunNetContext())

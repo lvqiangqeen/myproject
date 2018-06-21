@@ -22,6 +22,14 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebWorkerService workSer = new WebWorkerService();
         WebBuidTogetherService TogSer = new WebBuidTogetherService();
         #region 订单
+        //放弃订单
+        [HttpPost]
+        public ActionResult IsOut(string guid)
+        {
+            int ret = 0;
+            ret = deSer.IsOutByGuID(guid);
+            return Json(new { RetCode = ret });
+        }
         // GET: MobileApp/mOrder
         public ActionResult Orderlist()
         {

@@ -97,6 +97,42 @@ white-space: nowrap;
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
 <script>
+    function isout(guid)
+    {
+        //询问框
+        layer.open({
+            content: '放弃订单会同时删除您发布的装修信息，请与业主确认后再删除订单！'
+          , btn: ['再想想', '放弃']
+          , yes: function (index) {
+              
+              location.reload();
+              layer.close(index);
+          },
+          no: function (index) {
+              $.ajax({
+                  type: 'post',
+                  url: '/MobileApp/mOrder/IsOut',
+                  async: false,
+                  dataType: "json",
+                  data: {
+                      guid: guid
+                  },
+                  success: function (data) {
+
+                      if (data.RetCode == 1)
+                      {
+
+                      }
+
+                  }
+              });
+                location.reload();
+                layer.close(index);
+            }
+        });
+    }
+
+
     mui.init();
     (function ($) {
         //阻尼系数
@@ -239,16 +275,16 @@ white-space: nowrap;
                             } else if (item.IsPlan && item.IsAccept == '1') {
                                 if (!item.IsOut)
                                 {
-                                    html += '<span class="my-order-item-red"><a href="">放弃订单</a></span></div></div>';
+                                    html += '<span class="my-order-item-red"><a onclick="isout(' + item.Guid + ')">放弃订单</a></span></div></div>';
                                 }
                               
                             } else if (!item.IsPlan && item.IsAccept == '1')
                             {
                                 if ("@SessionHelper.Get("PositionCode")" == "WebWorker") {
-                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStageByWorker?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a href="">放弃订单</a></span></div></div>';
+                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStageByWorker?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a onclick="isout(' + item.Guid + ')">放弃订单</a></span></div></div>';
                                 } else if ("@SessionHelper.Get("PositionCode")" == "WebWorkerLeader")
                                 {
-                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStage?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a href="">放弃订单</a></span></div></div>';
+                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStage?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a onclick="isout(' + item.Guid + ')">放弃订单</a></span></div></div>';
                                 }
 
                             }
