@@ -326,7 +326,8 @@ namespace AIYunNet.CMS.BLL.Service
                 {
                     old.IsWorkerEnd = 1;
                     old.StageNow = old.StageNow + 1;
-                    old.EndTime = DateTime.Now.ToString();
+                    old.EndTime = DateTime.Now.ToString("yyyy-MM-dd");
+                    old.QualityTime= DateTime.Now.AddYears(2).ToString("yyyy-MM-dd");
                     context.SaveChanges();
                     return 1;
                 }
@@ -346,10 +347,10 @@ namespace AIYunNet.CMS.BLL.Service
                 int IsComplete = context.WebBuidingStages.Where(c => c.IsComplete == false && c.WebBuidingID == buidingID).ToList().Count();
                 int IsNot = context.WebBuidingStages.Where(c => c.IsUserEnd == 2 && c.WebBuidingID == buidingID).ToList().Count();
                 int IsNo = context.WebBuidingStages.Where(c => c.IsUserEnd == 0 && c.WebBuidingID == buidingID).ToList().Count();
-                //if (IsNo != 0)
-                //{
-                //    ret = 4;
-                //}
+                if (IsNo != 0)
+                {
+                    ret = 4;
+                }
                 if (IsNot != 0)
                 {
                     ret = 3;

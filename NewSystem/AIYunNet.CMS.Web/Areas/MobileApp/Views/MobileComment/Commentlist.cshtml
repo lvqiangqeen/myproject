@@ -1,0 +1,54 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@{
+    ViewBag.Title = "Commentlist";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebBuidingService ser = new WebBuidingService();
+
+
+}
+
+<script>
+    var html = "<h1>评价列表</h1>";
+    $("#header").append(html);
+</script>
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<style>
+    .mui-col-xs-2 {
+    width: 27.666667%;
+}
+</style>
+<div class="container" id="container">
+    <div class="mui-content">
+        <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+            @foreach (var item in ViewBag.list as List<WebBuidingCaseComment>)
+            {
+                WebBuiding buiding = ser.GetWebBuidingByGuID(item.Guid);
+                string comstring = "好评";
+                if (item.Score == 1)
+                {
+                    comstring = "差评";
+                }
+                else if (item.Score == 2)
+                {
+                    comstring = "中评";
+                }
+                <li class="mui-table-view-cell">
+                    <div class="mui-table">
+                        <div class="mui-table-cell mui-col-xs-10">
+                            <h4 class="mui-ellipsis">@buiding.BuidingTitle</h4>
+                            <h5>业主评价：@comstring</h5>
+                            <p class="mui-h6 mui-ellipsis">@item.Comment</p>
+                        </div>
+                        <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+                            <span class="mui-h5">@buiding.EndTime</span>
+                        </div>
+                    </div>
+                </li>
+            }
+            
+        </ul>
+    </div>
+    </div>

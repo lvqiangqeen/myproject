@@ -4303,6 +4303,7 @@
     <Content Include="Areas\MobileApp\Views\MobileComment\CommentDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\MoblieBuiding\buidingStageByWorker.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataShengFen.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileComment\Commentlist.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

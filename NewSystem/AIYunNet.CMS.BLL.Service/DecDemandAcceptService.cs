@@ -214,7 +214,7 @@ namespace AIYunNet.CMS.BLL.Service
                 }
 
 
-                List<AcceptDemand> list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                List<AcceptDemand> list = query.OrderByDescending(c=>c.AddOn).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
             }
         }

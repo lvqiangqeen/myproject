@@ -92,39 +92,49 @@
   , btn: '我知道了'
                 });
             } else {
-                $.ajax({
-                    type: "post",
-                    url: "/MobileApp/MobileComment/AddOrEditComment",
-                    data: {
-                        id: id,
-                        Guid: Guid,
-                        PablishUserID: PablishUserID,
-                        GetUserID: GetUserID,
-                        CaseID: CaseID,
-                        CaseType: CaseType,
-                        Score: Score,
-                        Comment: Comment
-                    },
-                    success: function (data) {
-                        if (data.RetCode == 1) {
-                            if ('@IsUserEnd' != null) {
-                                IsUserEnd('@Request["CaseID"]', '@IsUserEnd');
-                            }
 
-                            layer.open({
-                                content: '评价成功'
-                              , btn: '我知道了',
-                                yes:function()
-                                {
-                                    window.location.href ='/MobileApp/MobileUser/BuidingDetailUser?BuidingID='+@Model.CaseID;
-                                }
-                            });
-                            //window.close();
+                layer.open({
+                    content: '是否确认评价？'
+      , btn: ['是', '否']
+      , yes: function (index) {
+          $.ajax({
+              type: "post",
+              url: "/MobileApp/MobileComment/AddOrEditComment",
+              data: {
+                  id: id,
+                  Guid: Guid,
+                  PablishUserID: PablishUserID,
+                  GetUserID: GetUserID,
+                  CaseID: CaseID,
+                  CaseType: CaseType,
+                  Score: Score,
+                  Comment: Comment
+              },
+              success: function (data) {
+                  if (data.RetCode == 1) {
+                      if ('@IsUserEnd' != null) {
+                          IsUserEnd('@Request["CaseID"]', '@IsUserEnd');
+                      }
 
-                        }
+                      layer.open({
+                          content: '评价成功'
+                        , btn: '我知道了',
+                          yes:function()
+                          {
+                              window.location.href ='/MobileApp/MobileUser/BuidingDetailUser?BuidingID='+@Model.CaseID;
+                          }
+                      });
+                      //window.close();
+
+                  }
+              }
+
+          });
+      },no: function (index) {
                     }
-
                 });
+
+
             }
 
 

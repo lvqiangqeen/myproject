@@ -9,6 +9,8 @@
     List<WebBuidingStages> stageslist = ViewBag.stageslist;
     DecDemand demand = ViewBag.demand;
     WebWorkerService workerSer = new WebWorkerService();
+    WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
+    WebBuidingCaseComment coment = comSer.GetWebBuidingCaseCommentByGuid(demand.Guid);
 }
 
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
@@ -22,7 +24,7 @@
 </script>
 <div class="container" id="container">
 
-    <div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>
+    @*<div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>*@
     <ul class="details-price clearfix">
         <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
         <li>开工日期：@Model.StartTime</li>
@@ -108,12 +110,12 @@
                             </p>
                         }
 
-                        <p style="margin-top:10px;">@item.wordContent</p>
+                        <p style="margin-top:10px;font-size: 16px;">@item.wordContent</p>
                         @{
                             List<string> img = new List<string>();
                             if (item.ImgContent != "" && item.ImgContent != null)
                             {
-                                img = item.thumContent.Split('|').Where(c => c != "").ToList();
+                                img = item.ImgContent.Split('|').Where(c => c != "").ToList();
                             }
                                 } 
                         <p style="margin-top:10px;">
@@ -136,7 +138,7 @@
                 }
                 @*<i class="layui-icon layui-timeline-axis"></i>*@
                 <div class="layui-timeline-content layui-text">
-                    <h3 class="layui-timeline-title">项目竣工</h3>
+                    <h3 class="layui-timeline-title">竣工阶段</h3>
                     @if (Model.IsWorkerEnd == 1)
                     {
                         <p style="font-size: 20px;color:#009688;">项目已完成</p>
@@ -145,7 +147,29 @@
                     {
                         <p style="font-size: 20px;">项目未完成</p>
                     }
-                    <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal" id="yanshou">验收评价</button></p>
+                    @if (Model.IsComment != 2)
+                    {
+                        <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal" id="yanshou">验收评价</button></p>
+                    }
+                    @if (Model.IsComment > 0)
+                    {
+                        string comstring = "好评";
+                        if (coment.Score == 1)
+                        {
+                            comstring = "差评";
+                        } else if (coment.Score == 2)
+                        {
+                            comstring = "中评";
+                        }
+
+                        <p style="margin-top:5px;font-size: 16px;color: #333">业主评价：@comstring</p>
+                        <p style="margin-top:5px;font-size: 16px;color: #333">评价详情：@coment.Comment</p>
+                    }
+                    @if (Model.IsUserEnd == 1)
+                    {
+                    <p style="margin-top:5px;font-size: 16px;">质保到期时间：@Model.QualityTime</p>
+                    <p style="margin-top:5px;font-size: 16px;">质保电话：15727322586</p>
+                    }
                 </div>
             </li>
         </ul>

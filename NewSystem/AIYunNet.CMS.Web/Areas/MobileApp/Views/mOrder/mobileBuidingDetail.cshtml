@@ -9,6 +9,8 @@
     List<WebBuidingStages> stageslist= ViewBag.stageslist;
     DecDemand demand = ViewBag.demand;
     WebWorkerService workerSer = new WebWorkerService();
+    WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
+    WebBuidingCaseComment coment = comSer.GetWebBuidingCaseCommentByGuid(demand.Guid);
 
 }
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
@@ -22,7 +24,7 @@
 </script>
 <div class="container" id="container">
 
-    <div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>
+    @*<div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>*@
     <ul class="details-price clearfix">
         <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
         <li>开工日期：@Model.StartTime</li>
@@ -108,6 +110,20 @@
                             }*@                           
                         </p>
 
+                        <p style="margin-top:10px;font-size: 16px;">@item.wordContent</p>
+                        @{
+                            List<string> img = new List<string>();
+                            if (item.ImgContent != "" && item.ImgContent != null)
+                            {
+                                img = item.ImgContent.Split('|').Where(c => c != "").ToList();
+                            }
+                        }
+                        <p style="margin-top:10px;">
+                            @foreach (string ite in img)
+                            {
+                                <img src="@AppSettingsHelper.ImgUrl@ite" style="max-width:100%;margin-top:5px;">
+                            }
+                        </p>
                     </div>
                 </li>
             }
@@ -121,7 +137,7 @@
                     <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
                 }
                 <div class="layui-timeline-content layui-text">
-                    <h3 class="layui-timeline-title">项目竣工</h3>
+                    <h3 class="layui-timeline-title">竣工阶段</h3>
                     @if (Model.IsWorkerEnd == 1)
                     {
                         <p style="font-size: 20px;color:#009688;">项目已完成</p>
@@ -131,6 +147,27 @@
                         <p style="font-size: 20px;">项目未完成</p>
                     }
                     <p style="margin-top:10px;"><button class="layui-btn layui-btn-normal" id="IsWorkerEnd">确认收工</button></p>
+                    @if (Model.IsComment > 0)
+                    {
+                        string comstring = "好评";
+                        if (coment.Score == 1)
+                        {
+                            comstring = "差评";
+                        }
+                        else if (coment.Score == 2)
+                        {
+                            comstring = "中评";
+                        }
+
+                        <p style="margin-top:5px;font-size: 16px;color: #333">业主评价：@comstring</p>
+                        <p style="margin-top:5px;font-size: 16px;color: #333">评价详情：@coment.Comment</p>
+                    }
+                    @if (Model.IsUserEnd == 1)
+                    {
+                        <p style="margin-top:5px;font-size: 16px;">质保到期时间：@Model.QualityTime</p>
+                        <p style="margin-top:5px;font-size: 16px;">质保电话：15727322586</p>
+                    }
+
                 </div>
             </li>
         </ul>
@@ -191,7 +228,6 @@
           , btn: ['是', '否']
           , yes: function (index) {
               IsWorkerEnd(@Model.BuidingID);
-              location.reload();
               layer.close(index);
           },
             no: function (index) {
@@ -204,6 +240,7 @@
     {
         $.ajax({
             type: "post",
+            async: false,
             url: "/MobileApp/MoblieBuiding/IsCanWorkerEnd",
             data: {
                 buidingID: buidingID
@@ -211,13 +248,13 @@
             success: function (data) {
                 if (data.RetCode == 1) {
                     editIsWorkerEnd(buidingID);
-                    window.location.href = window.location.href;
+                    location.reload();
                 } else if (data.RetCode == 2) {
                     layer.open({
                         content: '工序没有全部完成！'
   , btn: ['我知道了']
   , yes: function (index) {
-      location.reload();
+
       layer.close(index);
   }
                     });
@@ -226,16 +263,16 @@
                         content: '部分工序业主没有审核通过！'
 , btn: ['我知道了']
 , yes: function (index) {
-    location.reload();
+
     layer.close(index);
 }
                     });
                 } else if (data.RetCode == 4) {
                     layer.open({
-                        content: '业主没有审核！'
+                        content: '部分工序业主没有审核！'
 , btn: ['我知道了']
 , yes: function (index) {
-    location.reload();
+
     layer.close(index);
 }
                     });
@@ -247,6 +284,7 @@
     function editIsWorkerEnd(buidingID) {
         $.ajax({
             type: "post",
+            async:false,
             url: "/MobileApp/MoblieBuiding/IsWorkerEnd",
             data: {
                 buidingID: buidingID

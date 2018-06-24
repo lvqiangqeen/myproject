@@ -40,6 +40,9 @@
         top: 70%;
         right: 59px;
     }
+    .mui-table-view .mui-media, .mui-table-view .mui-media-body {
+    background-color: #fff;
+}
 </style>
 <script>
     $("#header").remove();
@@ -145,41 +148,46 @@
                                 setTimeout(function () {
                                     var IsAccept = 0;
                                     var IsPlan = 0;
+                                    var IsOut = 0;
                                     if (index == "0") {
                                         IsAccept = 0;
                                         IsPlan = 0;
+                                        IsOut = 0;
                                     } else if (index == "1") {
                                         IsAccept = 1;
                                         IsPlan = 0;
+                                        IsOut = 0;
                                     } else if (index == "2") {
                                         IsAccept = 1;
                                         IsPlan = 1;
+                                        IsOut = 0;
                                     } else{
                                         IsAccept = 2;
                                         IsPlan = 0;
+                                        IsOut = 1;
                                     }
                                     var ul = self.element.querySelector('.mui-table-view');
                                     var bool = false;
                                     if (index == "0") {
-                                        var html = createFragment1(pageIndex1, IsAccept, IsPlan);
-                                        ul.appendChild(createFragment1(pageIndex1, IsAccept, IsPlan));
+                                        var html = createFragment1(pageIndex1, IsAccept, IsPlan, IsOut);
+                                        ul.appendChild(createFragment1(pageIndex1, IsAccept, IsPlan, IsOut));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex1++;
                                     }
                                     else if (index == "1") {
-                                        var html = createFragment1(pageIndex2, IsAccept, IsPlan);
-                                        ul.appendChild(createFragment1(pageIndex2, IsAccept, IsPlan));
+                                        var html = createFragment1(pageIndex2, IsAccept, IsPlan, IsOut);
+                                        ul.appendChild(createFragment1(pageIndex2, IsAccept, IsPlan, IsOut));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex2++;
                                     } else if (index == "2") {
-                                        var html = createFragment1(pageIndex3, IsAccept, IsPlan);
-                                        ul.appendChild(createFragment1(pageIndex3, IsAccept, IsPlan));
+                                        var html = createFragment1(pageIndex3, IsAccept, IsPlan, IsOut);
+                                        ul.appendChild(createFragment1(pageIndex3, IsAccept, IsPlan, IsOut));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex3++;
                                     } else
                                     {
-                                        var html = createFragment1(pageIndex4, IsAccept, IsPlan);
-                                        ul.appendChild(createFragment1(pageIndex4, IsAccept, IsPlan));
+                                        var html = createFragment1(pageIndex4, IsAccept, IsPlan, IsOut);
+                                        ul.appendChild(createFragment1(pageIndex4, IsAccept, IsPlan, IsOut));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex4++;
                                     }
@@ -206,7 +214,7 @@
                     var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
                     return date.getFullYear() + "-" + month + "-" + currentDate;
                 }
-                var createFragment1 = function (pageIndex, IsAccept, IsPlan) {
+                var createFragment1 = function (pageIndex, IsAccept, IsPlan, IsOut) {
                     var fragment = document.createDocumentFragment();
                     var result = "";
                     $.ajax({
@@ -219,6 +227,7 @@
                             PageSize: 10,
                             IsAccept: IsAccept,
                             IsPlan: IsPlan,
+                            IsOut: IsOut
                         },
                         success: function (data) {
 
@@ -253,12 +262,14 @@
                                     html += '<span class="mui-h5" style="color:#007aff;">新需求</span></div></div></a>';
                                 } else if (item.IsAccept == 2) {
                                     html += '<span class="mui-h5" style="color:red;">已拒绝</span></div></div></a>';
+                                } else if (item.IsOut)
+                                {
+                                    html += '<span class="mui-h5" style="color:red;">已放弃</span></div></div></a>';
                                 } else
                                 {
                                     if (IsPlan == 0) {
                                         html += '<span class="mui-h5" style="color:#007aff;">已接受</span></div></div></a>';
-                                    } else
-                                    {
+                                    } else {
                                         html += '<span class="mui-h5" style="color:#009688;">施工中</span></div></div></a>'
                                         + '<a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '" class="mui-btn mui-btn-primary mui-btn-outlined">施工情况</a>';
                                     }

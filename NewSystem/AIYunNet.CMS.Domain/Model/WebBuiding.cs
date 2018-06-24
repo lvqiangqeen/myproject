@@ -151,6 +151,18 @@ namespace AIYunNet.CMS.Domain.Model
         public int IsUserEnd { get; set; }
         [Column("Guid")]
         public string Guid { get; set; }
+        /// <summary>
+        /// 质保到期时间
+        /// </summary>
+        [Column("QualityTime")]
+        public string QualityTime { get; set; }
+        /// <summary>
+        /// 是否已评价0没有1一次2两次
+        /// </summary>
+        [Column("IsComment")]
+        public int IsComment { get; set; }
+        
+
         [NotMapped]
         public string StageNowDesc { get; set; }
         public WebBuiding()
@@ -161,6 +173,7 @@ namespace AIYunNet.CMS.Domain.Model
             ShowOrder = 0;
             AddOn = DateTime.Now;
             EditOn = DateTime.Now;
+            //EndTime=
             FlagDelete = 0;
             PageViewCount = 0;
             CollectCount = 0;
@@ -178,6 +191,7 @@ namespace AIYunNet.CMS.Domain.Model
             constructionstage = "";
             IsWorkerEnd = 0;
             IsUserEnd = 0;
+            IsComment = 0;
         }
 
 

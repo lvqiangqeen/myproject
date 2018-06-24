@@ -13,11 +13,30 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidingCaseCommentService
     {
+        public WebBuidingCaseComment GetWebBuidingCaseCommentByGuid(string guid)
+        {
+            WebBuidingCaseComment com = new WebBuidingCaseComment();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+
+                com = context.WebBuidingCaseComment.FirstOrDefault(c => c.Guid == guid);
+                if (com != null)
+                {
+                    return com;
+                }
+                else
+                {
+                    return new WebBuidingCaseComment();
+                }
+            }
+        }
         public int AddWebBuidingCaseComment(WebBuidingCaseComment comment)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 context.WebBuidingCaseComment.Add(comment);
+                WebBuiding buiding = context.WebBuiding.FirstOrDefault(c => c.Guid == comment.Guid);
+                buiding.IsComment = 1;
                 context.SaveChanges();
                 return 1;
             }
@@ -32,6 +51,8 @@ namespace AIYunNet.CMS.BLL.Service
                 old.Comment = comment.Comment;
                 old.EditOn = DateTime.Now.ToString();
                 old.IsEdit = 1;
+                WebBuiding buiding = context.WebBuiding.FirstOrDefault(c => c.Guid == comment.Guid);
+                buiding.IsComment = 2;
                 context.SaveChanges();
                 return 1;
             }

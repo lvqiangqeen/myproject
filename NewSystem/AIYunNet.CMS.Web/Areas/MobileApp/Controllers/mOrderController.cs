@@ -27,7 +27,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult IsOut(string guid)
         {
             int ret = 0;
-            ret = deSer.IsOutByGuID(guid);
+            int GetUserID= Convert.ToInt32(SessionHelper.Get("UserID"));
+            ret = deSer.IsOutByGuID(GetUserID, guid);
             return Json(new { RetCode = ret });
         }
         // GET: MobileApp/mOrder

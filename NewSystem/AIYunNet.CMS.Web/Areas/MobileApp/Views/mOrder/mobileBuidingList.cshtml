@@ -23,7 +23,7 @@
     }
 
     .mui-table {
-        width: 85%;
+        width: 100%;
     }
 
     .mui-navigate-right:after, .mui-push-right:after {
@@ -204,27 +204,29 @@
                             li.className = 'mui-table-view-cell mui-media';
 
                             var html = '<a class="mui-navigate-right" href="/MobileApp/mOrder/mobileBuidingDetail?BuidingID=' + item.BuidingID + '">'
-                                    + '<img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '">'
+                                   // + '<img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '">'
                                     + '<div class="mui-table mui-media-body">'
                                     + '<div class="mui-table-cell mui-col-xs-10">'
                                     + '<h4 class="mui-ellipsis">' + item.BuidingTitle + '</h4>';
                             var list = item.constructionstage.split(',');
-                            var nowStage = list[item.StageNow + 1];
+                            var nowStage = list[item.StageNow];
                             if (list[item.StageNow + 1] == "") {
                                 nowStage = "工程结束";
                             }
-                            var progress = 100 * (item.StageNow + 1) / list.length;
-                            html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5>';
-                            if (IsWorkerEnd == "1" && IsUserEnd == "1") {
-                                html += '<h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
-                            } else
-                            {
-                                html += '<h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
+                            if (item.StageNow == "0") {
+                                nowStage = list[0];
                             }
-                            html+='<div style="margin-top: 39px;">'
+                            var progress = 100 * (item.StageNow + 1) / list.length;
+                            //html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5>';
+                            if (IsWorkerEnd == "1" && IsUserEnd == "1") {
+                                html += '<div><h5 style="width:50%;float:left;">质保到期日：' + item.QualityTime + '</h5><h5 style="width:50%;float:left;text-align:right;">质保电话：15727322586</h5></div>';
+                            } else {
+                                html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
+                            }
+                            html += '<div style="margin-top: 39px;">'
                                     + '<p class="mui-progressbar mui-progressbar-in" data-progress="' + progress + '"><span></span></p>'
                                     + '<div style="margin-top: 5px;">';
-                            var width= 100 * 1/list.length;
+                            var width = 100 * 1 / list.length;
                             for (var i = 0; i < list.length; i++) {
                                 html += '<div style="float:left;width: ' + width + '%; text-align: center">'
                                      + '<span class="mui-badge mui-badge-primary">' + (i + 1) + '</span></div>';
@@ -232,6 +234,7 @@
 
                             html += '</div></div>'
                              + '</div></div></a>';
+
                             li.innerHTML = html;
                             fragment.appendChild(li);
                         });

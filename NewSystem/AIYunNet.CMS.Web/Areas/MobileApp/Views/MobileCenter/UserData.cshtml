@@ -37,12 +37,25 @@
 
             <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Email')"><span>邮箱</span><em>@Model.Email</em></a></li>
             <li><a href="javascript:void(0);"><span>手机号</span><em>@Model.Telephone</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'TrueName')"><span>真实姓名</span><em>@Model.TrueName</em></a></li>
-            <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Sex')"><span>性别</span><em>@Model.Sex</em></a></li>
-            <li><a href="javascript:void(0)" id="showCityPicker"><span>所在地</span><em id="showCityPickerem">@Model.ProvinceName  @Model.CityName</em><i id="cityid" style="display:none;">@Model.CityID</i></a></li>
+            <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'TrueName')"><span style="color:red;">*</span><span>真实姓名</span><em>@Model.TrueName</em></a></li>
+            <li><a href="javascript:void(0);" onclick="EditPersonDataText(this, 'Sex')"><span style="color:red;">*</span><span>性别</span><em>@Model.Sex</em></a></li>
+            <li><a href="javascript:void(0)" id="showCityPicker"><span style="color:red;">*</span><span>所在地</span><em id="showCityPickerem">@Model.ProvinceName  @Model.CityName</em><i id="cityid" style="display:none;">@Model.CityID</i></a></li>
         </ul>
     </div>
     <script>
+        var TrueName = "@Model.TrueName";
+        var Sex = "@Model.Sex";
+        var CityName = "@Model.CityName";
+        if (TrueName == null || TrueName == "" || Sex == null || Sex == "" || CityName == null || CityName == "") {
+            //自定义标题风格
+            layer.open({
+                title: [
+                  '重要提示',
+                  'background-color: #FF4351; color:#fff;'
+                ]
+              , content: '请完整填写个人资料，标红部分为必填项，资料不完整将无法发布需求。'
+            });
+        }
         $("#uploadpic").click(function () {
             $('#ImageUpload').on('change', function (e) {
                 new html5ImgCompress(e.target.files[0], {

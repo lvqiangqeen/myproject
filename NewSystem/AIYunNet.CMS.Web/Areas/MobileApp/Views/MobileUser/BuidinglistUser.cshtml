@@ -23,7 +23,7 @@
     }
 
     .mui-table {
-        width: 85%;
+        width: 100%;
     }
 
     .mui-navigate-right:after, .mui-push-right:after {
@@ -203,7 +203,7 @@
                             li.className = 'mui-table-view-cell mui-media';
 
                             var html = '<a class="mui-navigate-right" href="/MobileApp/MobileUser/BuidingDetailUser?BuidingID=' + item.BuidingID + '">'
-                                    + '<img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '">'
+                                    //+ '<img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '">'
                                     + '<div class="mui-table mui-media-body">'
                                     + '<div class="mui-table-cell mui-col-xs-10">'
                                     + '<h4 class="mui-ellipsis">' + item.BuidingTitle + '</h4>';
@@ -217,8 +217,12 @@
                                 nowStage = list[0];
                             }
                             var progress = 100 * (item.StageNow + 1) / list.length;
-                            html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>'
-                                    + '<div style="margin-top: 39px;">'
+                            if (IsWorkerEnd == "1" && IsUserEnd == "1") {
+                                html += '<div><h5 style="width:50%;float:left;">质保到期日：' + item.QualityTime + '</h5><h5 style="width:50%;float:left;text-align:right;">质保电话：15727322586</h5></div>';
+                            } else {
+                                html += '<div><h5 style="width:50%;float:left;">当前第' + (item.StageNow + 1) + '阶段：' + nowStage + '</h5><h5 style="width:50%;float:left;text-align:right;">' + item.StartTime + '</h5></div>';
+                            }
+                            html += '<div style="margin-top: 39px;">'
                                     + '<p class="mui-progressbar mui-progressbar-in" data-progress="' + progress + '"><span></span></p>'
                                     + '<div style="margin-top: 5px;">';
                             var width= 100 * 1/list.length;

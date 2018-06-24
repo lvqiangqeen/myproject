@@ -247,7 +247,7 @@
 
     <p class="car-description">小区地址：@demand.buidingname</p>
     @Html.HiddenFor(m => m.BuidingID)
-    <div class="min-price">
+    @*<div class="min-price">
         <div class="min-price-tit"><h2>上传封面</h2></div>
         <div class="min-price-con">
             <img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:175px;height:175px;" id="thum">
@@ -312,7 +312,7 @@
             })
            
         })
-    </script>
+    </script>*@
     <div class="min-price">
         <div class="min-price-tit"><h2>基本信息</h2></div>
         <div class="min-price-con">
@@ -456,13 +456,13 @@
             var BuidingInfo = $("#BuidingInfo").val();
             var BuidingImage = $("input[name=BuidingImage]").val();
 
-            if (BuidingImage == "" || BuidingImage == null) {
-                layer.open({
-                    content: '请上传一张装修图片！'
-                     , btn: '我知道了'
-                });
-                return;
-            }
+            //if (BuidingImage == "" || BuidingImage == null) {
+            //    layer.open({
+            //        content: '请上传一张装修图片！'
+            //         , btn: '我知道了'
+            //    });
+            //    return;
+            //}
             if (Price == "0" || Price == null)
             {
                 layer.open({
@@ -506,8 +506,10 @@
                           Space: Space,
                           ConstructionstageID: selectedStagesCode,
                           Constructionstage: selectedStagesText,
-                          BuidingImage: $("input[name=BuidingImage]").val(),
-                          thumbnailImage: $("input[name=thumbnailImage]").val(),
+                          //BuidingImage: $("input[name=BuidingImage]").val(),
+                          //thumbnailImage: $("input[name=thumbnailImage]").val(),
+                          BuidingImage: "",
+                          thumbnailImage: "",
                           StartTime: StartTime,
                           DemandID: "@DemandID"
                       },

@@ -1,9 +1,16 @@
 ﻿@model AIYunNet.CMS.Domain.Model.WebWorker    
 @using AIYunNet.CMS.Domain.Model
 @using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
 @{
     ViewBag.Title = "mWorkerDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+
+    List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
+    WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
+    list = commerSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 0);
+
+
     string PublishWorkerid = SessionHelper.Get("PositionID");
     string buidingID = Request["buidingID"];
     string StageID = Request["StageID"];
@@ -35,7 +42,7 @@
                 </div>
             </div>
             <div class="worker-bot">
-                <a href="user-evaluation.html">
+                <a href="#">
                     <span>等级：</span>
                     <span>
                         @for (int i = 1; i <= Model.Stars / 25; i++)
@@ -55,10 +62,10 @@
                 </a>
             </div>
             <div class="worker-bot">
-                <a href="user-evaluation.html">
+                <a href="/MobileApp/MobileComment/Commentlist?UserID=@Model.UserID">
                     <span>评价：</span>
                     <span>
-                        50条
+                        @list.Count 条
                     </span>
 
                 </a>
@@ -81,7 +88,17 @@
         </div>
         <div class="mui-content worker-item" style="background-color:#fff">
             <div class="worker-item-tit"><h2>装修案例</h2></div>
-            <ul class="mui-table-view mui-grid-view">
+            <ul class="mui-table-view">
+            @foreach (var item in ViewBag.list as List<WebBuiding>)
+            {
+                <li class="mui-table-view-cell">
+                    <a class="mui-navigate-right" href="/MobileApp/MoblieBuiding/mBuidingDetail?id=@item.BuidingID">
+                        @item.BuidingTitle
+                    </a>
+                </li>
+            }
+            </ul>
+            @*<ul class="mui-table-view mui-grid-view">
                 @foreach (var item in ViewBag.list as List<WebBuiding>)
                 {
                     <li class="mui-table-view-cell mui-media mui-col-xs-6">
@@ -91,7 +108,7 @@
                         </a>
                     </li>
                 }
-            </ul>
+            </ul>*@
         </div>
     </div>
     @if (type == "合作")

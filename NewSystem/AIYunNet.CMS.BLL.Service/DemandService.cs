@@ -14,7 +14,7 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class DemandService
     {
-        public int IsOutByGuID(string guid)
+        public int IsOutByGuID(int GetUserID,string guid)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
@@ -24,6 +24,12 @@ namespace AIYunNet.CMS.BLL.Service
                     model = context.DecDemand.FirstOrDefault(c => c.Guid == guid);
                 }
                 model.IsOut = true;
+                WebBuidingService ser = new WebBuidingService();
+                WebBuiding buiding = ser.GetWebBuidingByGuID(guid);
+                buiding.FlagDelete = 1;
+                buiding.DeleteOn = DateTime.Now;
+                //DecDemandAccept acc = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == guid && c.GetUserID== GetUserID);
+                //acc.IsAccept = 2;
                 context.SaveChanges();
                 return 1;
             }
@@ -73,7 +79,7 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
         //获取用户发布的需求
-        public List<Demand> GetPublishDemandList(int PublicUserID, int PageSize, int IsAccept, int IsPlan, int CurPage, out int count)
+        public List<Demand> GetPublishDemandList(int PublicUserID, int PageSize, int IsAccept, int IsPlan,int IsOut, int CurPage, out int count)
         {
             List<Demand> list = new List<Demand>();
             bool isplan = IsPlan == 1 ? true : false;
@@ -83,10 +89,10 @@ namespace AIYunNet.CMS.BLL.Service
                             from d in context.DecDemand
                             where c.DemandGuid == d.Guid
                             && c.PublicUserID == PublicUserID && d.IsDelete == false
-                            && c.IsAccept== IsAccept && d.IsPlan == isplan
                             select new Demand
                             {
                                 id = d.id,
+                                IsOut=d.IsOut,
                                 buidingname = d.buidingname,
                                 ownername = d.ownername,
                                 ownertel = d.ownertel,
@@ -113,7 +119,21 @@ namespace AIYunNet.CMS.BLL.Service
                                 GetUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName
                             };
                 count = query.ToList().Count();
-                list = query.ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                bool isout = IsOut == 1 ? true : false;
+                if (isout)
+                {
+                    query = query.Where(c => c.IsAccept == 2 || c.IsOut == isout);
+                }
+                else if (IsAccept == 1 && !isout)
+                {
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan == isplan);
+                }
+                else
+                {
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsPlan == isplan);
+                }
+                
+                list = query.OrderByDescending(c => c.AddOn).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
             }
 
             return list;

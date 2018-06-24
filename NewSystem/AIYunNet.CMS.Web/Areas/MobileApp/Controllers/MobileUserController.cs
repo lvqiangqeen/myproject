@@ -67,11 +67,11 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult GetDemandlist(int PageSize, int IsAccept, int IsPlan, int CurPage)
+        public ActionResult GetDemandlist(int PageSize, int IsAccept, int IsPlan,int IsOut, int CurPage)
         {
             int count = 0;
             int PublicUserID = Convert.ToInt32(SessionHelper.Get("UserID"));
-            List<Demand> list = deSer.GetPublishDemandList(PublicUserID, PageSize, IsAccept, IsPlan, CurPage,out count);
+            List<Demand> list = deSer.GetPublishDemandList(PublicUserID, PageSize, IsAccept, IsPlan, IsOut, CurPage,out count);
             return Json(list);
         }
         public ActionResult DemandDetail(int id=0,string Guid="")
