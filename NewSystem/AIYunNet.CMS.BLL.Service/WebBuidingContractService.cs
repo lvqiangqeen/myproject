@@ -23,6 +23,16 @@ namespace AIYunNet.CMS.BLL.Service
                 return constract;
             }
         }
+        public int updateIsPass(string guid, int i)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingContract constract = context.WebBuidingContract.FirstOrDefault(c => c.Guid == guid);
+                constract.IsPass = i;
+                context.SaveChanges();
+                return 1;
+            }
+        }
         public int AddContract(WebBuidingContract constract)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -37,8 +47,12 @@ namespace AIYunNet.CMS.BLL.Service
             using (AIYunNetContext context = new AIYunNetContext())
             {
                 WebBuidingContract old = context.WebBuidingContract.FirstOrDefault(c => c.Guid == constract.Guid);
-
-                    return 1;
+                old.EditOn = DateTime.Now;
+                old.imgcontract = constract.imgcontract;
+                old.thumbnailImage = constract.thumbnailImage;
+                old.filename = constract.filename;
+                context.SaveChanges();
+                return 1;
                 
             }
         }
