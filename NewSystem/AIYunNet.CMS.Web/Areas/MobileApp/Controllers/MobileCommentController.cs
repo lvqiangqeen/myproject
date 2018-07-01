@@ -16,6 +16,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
         WebBuidingService buidingSer = new WebBuidingService();
+
+        public ActionResult BuidingContract(string guid)
+        {
+
+            return View();
+        }
         public ActionResult Commentlist(int UserID = 0)
         {
             List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
