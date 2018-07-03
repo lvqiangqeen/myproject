@@ -32,7 +32,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             
             return View();
         }
-
+        [HttpPost]
+        public ActionResult GetCommentlist(int UserID, int CurPage,int PageSize,int score)
+        {
+            List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
+            list = commerSer.GetCommentlist(UserID, "WebBuiding", score, PageSize, CurPage);
+            return Json(list);
+        }
         // GET: MobileApp/MobileComment
         public ActionResult CommentDetail(int CaseID=0)
         {

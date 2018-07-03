@@ -93,5 +93,15 @@ namespace AIYunNet.CMS.BLL.Service
                 return comm;
             }
         }
+
+        public List<WebBuidingCaseComment> GetCommentlist(int id, string type, int score,int PageSize,int CurPage)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<WebBuidingCaseComment> comm = new List<WebBuidingCaseComment>();
+                comm = context.WebBuidingCaseComment.Where(c => c.GetUserID == id && c.CaseType == type && c.Score == score).OrderByDescending(c => c.AddOn).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                return comm;
+            }
+        }
     }
 }
