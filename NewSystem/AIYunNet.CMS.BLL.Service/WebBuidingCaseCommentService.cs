@@ -103,7 +103,7 @@ namespace AIYunNet.CMS.BLL.Service
                 var com = from c in context.WebBuiding
                           from d in context.WebBuidingCaseComment
                           where c.Guid == d.Guid
-                          && c.FlagDelete == 0 && d.IsDelete == false
+                          && c.FlagDelete == 0 && d.IsDelete == false && c.IsComment>0
                            && d.GetUserID == id && d.CaseType == type && d.Score == score
                           select new BuidingAndComment
                           {
