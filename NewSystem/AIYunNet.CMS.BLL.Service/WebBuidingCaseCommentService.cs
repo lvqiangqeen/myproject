@@ -8,6 +8,7 @@ using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Domain;
 using AIYunNet.CMS.Domain.DataHelper;
 using System.Data;
+using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.BLL.Service
 {
@@ -94,12 +95,27 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
 
-        public List<WebBuidingCaseComment> GetCommentlist(int id, string type, int score,int PageSize,int CurPage)
+        public List<BuidingAndComment> GetCommentlist(int id, string type, int score,int PageSize,int CurPage)
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                List<WebBuidingCaseComment> comm = new List<WebBuidingCaseComment>();
-                comm = context.WebBuidingCaseComment.Where(c => c.GetUserID == id && c.CaseType == type && c.Score == score).OrderByDescending(c => c.AddOn).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                List<BuidingAndComment> comm = new List<BuidingAndComment>();
+                var com = from c in context.WebBuiding
+                          from d in context.WebBuidingCaseComment
+                          where c.Guid == d.Guid
+                          && c.FlagDelete == 0 && d.IsDelete == false
+                           && d.GetUserID == id && d.CaseType == type && d.Score == score
+                          select new BuidingAndComment
+                          {
+                              guid = c.Guid,
+                              BuidingTitle = c.BuidingTitle,
+                              Comment = d.Comment,
+                              EndTime = c.EndTime,
+                              score = d.Score,
+                              AddOn=d.AddOn
+                          };
+
+                comm = com.ToList().OrderByDescending(c => c.AddOn).Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return comm;
             }
         }

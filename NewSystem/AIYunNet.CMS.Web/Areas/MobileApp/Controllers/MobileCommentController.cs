@@ -8,6 +8,7 @@ using AIYunNet.CMS.Web.filter;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Domain.Model;
 using AIYunNet.CMS.Common.Utility;
+using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
@@ -35,7 +36,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         [HttpPost]
         public ActionResult GetCommentlist(int UserID, int CurPage,int PageSize,int score)
         {
-            List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
+            List<BuidingAndComment> list = new List<BuidingAndComment>();
             list = commerSer.GetCommentlist(UserID, "WebBuiding", score, PageSize, CurPage);
             return Json(list);
         }

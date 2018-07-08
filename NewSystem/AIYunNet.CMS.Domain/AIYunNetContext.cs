@@ -24,7 +24,7 @@ namespace AIYunNet.CMS.Domain
         public virtual DbSet<WebNews> WebNews { get; set; }
         public virtual DbSet<WebFriendLink> WebFriendLink { get; set; }
         public virtual DbSet<WebMenu> WebMenu { get; set; }
-        public virtual DbSet<WebImg> WebImg { get; set; }    
+        public virtual DbSet<WebImg> WebImg { get; set; }
         public virtual DbSet<WebFile> WebFile { get; set; }
         public virtual DbSet<WebRecommend> WebRecommend { get; set; }
         public virtual DbSet<WebGoods> WebGoods { get; set; }
