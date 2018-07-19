@@ -55,8 +55,8 @@
             <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandDetail">发布需求</a></li>
             @if (SessionHelper.Get("PositionCode") == "WebUser")
             {
-                <li><a class="my-icon-wddd" href="/MobileApp/MobileUser/BuidinglistUser">装修进度</a></li>
-                <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandList">我的需求</a></li>
+                <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandList">我的订单</a></li>
+                <li><a class="my-icon-wddd" href="/MobileApp/MobileUser/BuidinglistUser">订单进度</a></li>
                 <li><a class="my-icon-yhq" href="/MobileApp/MobileUser/DemandDetail">发布需求</a></li>
             }
             else
@@ -67,7 +67,7 @@
             }
 
         </ul>
-        <ul>
+        <ul style="display:none;">
             <li><a class="my-icon-gsjj" href="#">公司简介</a></li>
             <li><a class="my-icon-bzzx" href="#">帮助中心</a></li>
             <li><a class="my-icon-kfzx" href="#">客服咨询<span class="my-tel">400-000-0000</span></a></li>

@@ -43,7 +43,7 @@
                     <p style="font-size: 20px;color:#009688;">合同签订成功</p>
 
                     <p style="margin-top:10px;">
-                        <button class="layui-btn" onclick="javascript:stageUpdate(50,1);">编写合同</button>
+                        <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">编写合同</button>
 
                     </p>
 
@@ -181,10 +181,14 @@
 </div>
 
 <script>
-    //function worklist(buidingID,StageID)
+    //function updateConstract(buidingID,StageID)
     //{
     //    window.top.location.href = "/MobileApp/mOrder/SelectWorker?WorkerCategory=装修工人&positionID=0&buidingID="+buidingID+"&StageID="+StageID;
     //}
+    function updateConstract(guid)
+    {
+        window.top.location.href = "/MobileApp/MobileComment/BuidingContract?guid=" + guid;
+    }
     function stageUpdate(buidingID,StageID)
     {
         window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID=" + buidingID + "&StageID=" + StageID;

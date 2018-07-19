@@ -17,12 +17,38 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
         WebBuidingService buidingSer = new WebBuidingService();
+        WebBuidingContractService contractSer = new WebBuidingContractService();
 
-        public ActionResult BuidingContract(string guid)
+        public ActionResult BuidingContract(string guid="0")
         {
-
-            return View();
+            WebBuidingContract contract = new WebBuidingContract();
+            if (guid == "0")
+            {
+                contract = new WebBuidingContract();
+            }
+            else
+            {
+                contract = contractSer.GetContractByGuid(guid);
+            }
+            return View(contract);
         }
+
+        [HttpPost]
+        public JsonResult EditBuidingContract(WebBuidingContract contract)
+        {
+            int ret = 0;
+            if (contract.id == 0)
+            {
+                ret = contractSer.AddContract(contract);
+
+            }
+            else
+            {
+                ret = contractSer.updateContract(contract);
+            }
+            return Json(new { RetCode = ret });
+        }
+
         public ActionResult Commentlist(int UserID = 0)
         {
             List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
