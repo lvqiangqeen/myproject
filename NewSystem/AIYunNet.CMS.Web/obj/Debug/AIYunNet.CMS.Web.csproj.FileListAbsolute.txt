@@ -70,3 +70,8 @@ D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Web\bin\zh-Hans\Syst
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Web\obj\Debug\AIYunNet.CMS.Web.csprojResolveAssemblyReference.cache
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Web\obj\Debug\AIYunNet.CMS.Web.dll
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.Web\obj\Debug\AIYunNet.CMS.Web.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Web\bin\Microsoft.Web.Infrastructure.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Web\bin\Microsoft.Web.WebPages.OAuth.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Web\bin\System.Net.Http.Formatting.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Web\bin\System.Web.Http.xml
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.Web\bin\System.Web.Http.WebHost.xml

@@ -4305,6 +4305,7 @@
     <Content Include="Areas\MobileApp\Views\MobileCenter\EditPersonDataShengFen.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileComment\Commentlist.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileComment\BuidingContract.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileComment\BuidingContractByOwner.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

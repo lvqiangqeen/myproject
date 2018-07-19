@@ -1,0 +1,32 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebBuidingContract
+@{
+    ViewBag.Title = "BuidingContractByOwner";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    List<string> list = new List<string>();
+    if (Model.imgcontract != "")
+    {
+        list = Model.imgcontract.Split('|').Where(c => c != "").ToList();
+    }
+}
+<script>
+    var html = "<h1>装修合同</h1>";
+    $("#header").append(html);
+</script>
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<div class="container" id="container">
+
+    <div class="min-price">
+        <div class="min-price-tit"><h2>合同详情</h2></div>
+        <div class="min-price-con">
+            @foreach (string item in list)
+            {
+                <img src="@AppSettingsHelper.ImgUrl@item" style="max-width:100%;margin-top:5px;">
+            }
+        </div>
+    </div>
+</div>
+

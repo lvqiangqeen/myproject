@@ -6,6 +6,12 @@
 @{
     ViewBag.Title = "BuidingContract";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string guid = Request["guid"];
+    List<string> list = new List<string>();
+    if (Model.thumbnailImage != "")
+    {
+        list = Model.thumbnailImage.Split('|').Where(c => c != "").ToList();
+    }
 }
 
 <style>
@@ -128,22 +134,23 @@
     </div>
     <div class="min-price">
         <div class="min-price-tit"><h2>上传合同图片</h2></div>
-        @*<input value="@stage.ImgContent" name="ImgContent" type="hidden" />
-        <input value="@stage.thumContent" name="thumContent" type="hidden" />*@
+        <input value="@Model.id" name="id" type="hidden" />
+        <input value="@Model.imgcontract" name="imgcontract" type="hidden" />
+        <input value="@Model.thumbnailImage" name="thumbnailImage" type="hidden" />
         <!--    照片添加    -->
         <div class="z_photo">
             <div class="z_file">
                 <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
 
             </div>
-            @*@if (thlist.Count > 0)
+            @if (list.Count > 0)
             {
-                foreach (var item in thlist)
+                foreach (var item in list)
                 {
                     <div class="z_addImg"><img src="@AppSettingsHelper.ImgUrl@item"></div>
                 }
 
-            }*@
+            }
         </div>
 
         <!--遮罩层-->
@@ -158,15 +165,31 @@
             </div>
         </div>
     </div>
-    
-    <a href="javascript:updateStage()" class="order" style="color:white;background-color:#007aff">提交合同</a>
+         @if (Model.IsPass == 0)
+         {
+            <a href="javascript:updateConstract()" class="order" style="color:white;background-color:#007aff">提交合同</a>
+         }
+         else if (Model.IsPass == 2)
+         {
+            <div class="min-price">
+                <div class="min-price-tit"><h2>审核结果</h2></div>
+                <div class="min-price-con" style="color:red; font-size:19px;">合同未通过审核</div>
+            </div>
+            <a href="javascript:updateConstract()" class="order" style="color:white;background-color:#007aff">提交合同</a>
+         }
+         else
+         {
+            <div class="min-price">
+                <div class="min-price-tit"><h2>审核结果</h2></div>
+                <div class="min-price-con"  style="color:#009688;font-size:19px;">合同通过审核</div>
+            </div>
+         }
+
     <script>
 			mui.init({
 				swipeBack:true //启用右滑关闭功能
 			});
 			mui('.mui-switch').each(function() { //循环所有toggle
-				//toggle.classList.contains('mui-active') 可识别该toggle的开关状态
-				//this.parentNode.querySelector('span').innerText = '状态：' + (this.classList.contains('mui-active') ? 'true' : 'false');
 				/**
 				 * toggle 事件监听
 				 */
@@ -190,11 +213,6 @@
                 recalc = function() {
                     var clientWidth = docEl.clientWidth;
                     if (!clientWidth) return;
-                    //if (clientWidth >= 640) {
-                    //    docEl.style.fontSize = '100px';
-                    //} else {
-                    //    docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-                    //}
                 };
 
             if (!doc.addEventListener) return;
@@ -266,8 +284,8 @@
                 });
             };
 
-            $("input[name=ImgContent]").val(ImgContent);
-            $("input[name=thumContent]").val(thumContent);
+            $("input[name=imgcontract]").val(ImgContent);
+            $("input[name=thumbnailImage]").val(thumContent);
             //imgRemove();
         };
 
@@ -296,26 +314,27 @@
     </script>
     <script>
 
-        function updateStage()
+        function updateConstract()
         {
-            var IsComplete = $("input[name=IsComplete]").val()=="1"?true:false;
-            var wordContent = $("#wordContent").val();
-            var ImgContent = $("input[name=ImgContent]").val();
-            var thumContent = $("input[name=thumContent]").val();
+            //var IsComplete = $("input[name=IsComplete]").val()=="1"?true:false;
+            var id = $("input[name=id]").val();
+            var imgcontract = $("input[name=imgcontract]").val();
+            var thumbnailImage = $("input[name=thumbnailImage]").val();
             $.ajax({
                 type: "post",
-                url: "/MobileApp/mOrder/mUpdateBuidingStagesInfo",
+                url: "/MobileApp/MobileComment/EditBuidingContract",
                 data: {
-                    wordContent:wordContent,
-                    ImgContent: ImgContent,
-                    thumContent:thumContent,
-				    IsComplete: IsComplete
+                    id: id,
+                    IsPass: '0',
+                    Guid:'@guid',
+                    imgcontract: imgcontract,
+                    thumbnailImage: thumbnailImage
                 },
                 success: function (data) {
                     if (data.RetCode == 1) {
                         //信息框
                         layer.open({
-                            content: '发布成功！'
+                            content: '发布成功！请等待审核。'
                           , btn: '我知道了'
                             , yes: function ()
                             {

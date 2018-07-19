@@ -67,6 +67,7 @@ namespace AIYunNet.CMS.Domain.Model
         {
             AddOn = DateTime.Now;
             EditOn = DateTime.Now;
+            thumbnailImage = "";
             IsDelete = 0;
             IsPass = 0;
         }

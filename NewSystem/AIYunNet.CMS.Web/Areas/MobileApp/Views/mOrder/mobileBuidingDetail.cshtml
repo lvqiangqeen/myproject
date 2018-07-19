@@ -11,6 +11,13 @@
     WebWorkerService workerSer = new WebWorkerService();
     WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
     WebBuidingCaseComment coment = comSer.GetWebBuidingCaseCommentByGuid(demand.Guid);
+    WebBuidingContractService contractSer = new WebBuidingContractService();
+    WebBuidingContract constract = contractSer.GetContractByGuid(demand.Guid);
+    if (constract == null)
+    {
+        constract = new WebBuidingContract();
+    }
+
 
 }
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
@@ -40,13 +47,39 @@
 
                 <div class="layui-timeline-content layui-text">
                     <h3 class="layui-timeline-title">签订合同</h3>
-                    <p style="font-size: 20px;color:#009688;">合同签订成功</p>
+                    @if (constract.id == 0)
+                    {
+                        <p style="font-size: 20px;">合同未上传</p>
+                        <p style="margin-top:10px;">
+                            <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
 
-                    <p style="margin-top:10px;">
-                        <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">编写合同</button>
+                        </p>
+                    }
+                    else
+                    {
+                        if (constract.IsPass == 0)
+                        {
+                            <p style="font-size: 20px;">合同审核中... ...</p>
+                            <p style="margin-top:10px;">
+                                <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
 
-                    </p>
-
+                            </p>
+                        }
+                        else if (constract.IsPass == 2)
+                        {
+                            <p style="font-size: 20px;color:red;">合同未通过审核</p>
+                            <p style="margin-top:10px;">
+                                 <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
+                            </p>
+                        }
+                        else
+                        {
+                            <p style="font-size: 20px;color:#009688;">合同通过审核</p>
+                            <p style="margin-top:10px;">
+                                   <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
+                            </p>
+                        }
+                    }
                 </div>
             </li>
             @foreach (WebBuidingStages item in stageslist)
@@ -191,7 +224,20 @@
     }
     function stageUpdate(buidingID,StageID)
     {
-        window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID=" + buidingID + "&StageID=" + StageID;
+        if ('@constract.IsPass' != 1) {
+            layer.open({
+                content: '合同未通过审核！'
+                , btn: ['我知道了']
+                , yes: function (index) {
+
+                    layer.close(index);
+                }
+            });
+        } else
+        {
+            window.top.location.href = "/MobileApp/mOrder/mobileStageDetail?buidingID=" + buidingID + "&StageID=" + StageID;
+        }
+        
 //        $.ajax({
 //            type: "post",
 //            url: "/MobileApp/MoblieBuiding/IsCanContinueWork",

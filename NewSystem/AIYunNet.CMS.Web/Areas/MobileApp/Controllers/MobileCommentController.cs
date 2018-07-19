@@ -18,7 +18,19 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
         WebBuidingService buidingSer = new WebBuidingService();
         WebBuidingContractService contractSer = new WebBuidingContractService();
-
+        public ActionResult BuidingContractByOwner(string guid = "0")
+        {
+            WebBuidingContract contract = new WebBuidingContract();
+            if (guid == "0")
+            {
+                contract = new WebBuidingContract();
+            }
+            else
+            {
+                contract = contractSer.GetContractByGuid(guid);
+            }
+            return View(contract);
+        }
         public ActionResult BuidingContract(string guid="0")
         {
             WebBuidingContract contract = new WebBuidingContract();

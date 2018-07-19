@@ -11,6 +11,12 @@
     WebWorkerService workerSer = new WebWorkerService();
     WebBuidingCaseCommentService comSer = new WebBuidingCaseCommentService();
     WebBuidingCaseComment coment = comSer.GetWebBuidingCaseCommentByGuid(demand.Guid);
+    WebBuidingContractService contractSer = new WebBuidingContractService();
+    WebBuidingContract constract = contractSer.GetContractByGuid(demand.Guid);
+    if (constract == null)
+    {
+        constract = new WebBuidingContract();
+    }
 }
 
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
@@ -39,13 +45,35 @@
 
                 <div class="layui-timeline-content layui-text">
                     <h3 class="layui-timeline-title">签订合同</h3>
-                    <p style="font-size: 20px;color:#009688;">合同签订成功</p>
+                    @if (constract.id == 0)
+                    {
+                        <p style="font-size: 20px;">合同未上传</p>
+                    }
+                    else
+                    {
+                        if (constract.IsPass == 0)
+                        {
+                            <p style="font-size: 20px;">合同审核中... ...</p>
+                            <p style="margin-top:10px;">
+                                <button class="layui-btn" onclick="javascript: getConstract('@demand.Guid');">查看合同</button>
 
-                    <p style="margin-top:10px;">
-                        <button class="layui-btn" onclick="javascript:stageUpdate(50,1);">查看合同</button>
-
-                    </p>
-
+                            </p>
+                        }
+                        else if (constract.IsPass == 2)
+                        {
+                            <p style="font-size: 20px;color:red;">合同未通过审核</p>
+                            <p style="margin-top:10px;">
+                                <button class="layui-btn" onclick="javascript: getConstract('@demand.Guid');">查看合同</button>
+                            </p>
+                        }
+                        else
+                        {
+                            <p style="font-size: 20px;color:#009688;">合同通过审核</p>
+                            <p style="margin-top:10px;">
+                                <button class="layui-btn" onclick="javascript: getConstract('@demand.Guid');">查看合同</button>
+                            </p>
+                        }
+                    }
                 </div>
             </li>
             @foreach (WebBuidingStages item in stageslist)
@@ -183,10 +211,13 @@
 </div>
 
 <script>
+    function getConstract(guid)
+    {
+        window.top.location.href = "/MobileApp/MobileComment/BuidingContractByOwner?guid=" + guid;
+    }
     function IsUserEnd(buidingID, stageID,IsComplete)
     {
         if (IsComplete==1) {
-
             //询问框
             layer.open({
                 content: '该阶段装修是否让您满意？'
