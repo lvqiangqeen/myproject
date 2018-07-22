@@ -1,0 +1,167 @@
+#main{
+	height: 509px;
+	background-color: #f2f2f2;
+}
+.intro_img{
+	float: left;
+}
+.profile{
+	float: left;
+	border-top: 1px dotted #787575;
+	border-bottom: 1px dotted #787575;
+}
+
+.person{
+	border-bottom: 1px dotted #787575;
+	margin-left: 0px;
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+}
+.name{
+	float: left;
+	margin: 26px 0 17px 36px;	
+}
+.name .p1{
+	background: url(/content/images/icon1_03.jpg) no-repeat 0 6px;
+	padding-right: 44px;
+	float: left;
+}
+.name .p2{
+	background: url(/content/images/icon1_05.jpg) no-repeat 0 6px;
+	float: left;
+}
+.name .p3{
+	background: url(/content/images/icon1_09.jpg) no-repeat 0 10px;
+}
+.name .p4{
+	background: url(/content/images/icon1_11.jpg) no-repeat 0 6px;
+}
+.name p span{
+	padding-left: 24px;
+}
+.email{
+	float: left;
+	text-align: right;
+	margin: 26px 0 0 218px;	
+}
+.email .ensure{
+	margin-bottom: 8px;
+}
+.link_btn{
+	float: right;	
+	margin: 26px 0 17px 190px;
+}
+.link_btn p{
+	width: 117px;
+	height: 32px;
+	line-height: 32px;
+	color: #fff;
+	font-size: 14px;
+	background-color: #ec6813;
+}
+.link_btn .yz{
+	margin-top: 7px;
+	background: url(/content/images/card_54.jpg) #ec6813 no-repeat 14px 8px;
+}
+.link_btn .zx{
+	margin-top: 17px;
+	background: url(/content/images/card_54.jpg) #ec6813 no-repeat 14px 8px;
+}
+.link_btn p span{
+	padding-left: 42px;
+}
+.intro{
+	height: 374px;
+}
+.intro dl{
+	float: left;
+	padding-left: 53px;
+	margin-top: 10px;
+	color: #666;
+}
+.intro dl dt{
+	font-size: 14px;
+	line-height: 24px;
+	
+}
+.intro dl dd{
+	font-size: 12px;
+	line-height: 20px;
+	
+}
+.erweima{
+	float: right;
+	margin-top: 10px;
+}
+
+
+#case .w .case_img li .case_description{
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	width: 265px;
+}
+#case .w .case_img li .case_description dl dt{
+	color: #fefefe;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 43px;
+	background: #de4527;
+	text-align: center;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#case .w .case_img li .case_description dl dd{
+	background: black;
+	height: 118px;
+	padding: 6px 16px 0 36px;
+	line-height: 24px;
+	font-size: 14px;
+    opacity: 0.78;
+    overflow: hidden;
+}
+
+#case .w p{
+	padding-left: 8px;
+	font-size: 18px;
+	line-height: 50px;
+}
+ #case .w .case_img li{
+	margin-bottom: 11px;
+    padding-right: 13px;
+    float: left;
+    position: relative;
+}
+#case > div.w > ul > li:nth-child(4n){
+	padding-right: 0;
+}
+#case .w .case_page{
+	line-height: 292px;
+	text-align: center;
+	padding-bottom: 40px;
+}
+#case .w .case_page span a{
+	color: #000;
+	font-size: 12px;
+	padding: 11px;
+	border-radius: 2px;
+}
+#case .w .case_page span .now{
+	background-color: #ee5500;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

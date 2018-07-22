@@ -1,0 +1,228 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DownLoadList";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+}
+
+<link href="~/Content/design/sheji.download.css" rel="stylesheet" />
+<link href="~/Content/Css/common/pagination.css" rel="stylesheet" />
+<div class="content_width" id="content">
+    <div class="content_width clearfix ">
+        
+        <style type="text/css">
+            body {
+                background: #f2f2f2;
+            }
+            /*内页是窄版*/
+            .index_logo, .top_menu {
+                width: 990px;
+            }
+
+                .index_logo #search_case {
+                    margin-left: 100px !important;
+                }
+        </style>
+        <div class="mx_columns">
+            <ul class="idesigner_subnav" id="news_desc">
+                @foreach (WebLookup item in ViewBag.list)
+                {
+                    <li><a href="javascript:void(0);" hidefocus="true">@item.Description</a><input type="hidden" value="@item.Code"/></li>
+                }
+            </ul>
+            <div class="mx_search" id="">
+                <form method="get" action="http://www.shejiben.com/search.php" target="_blank">
+                    <input type="hidden" name="searchType" value="4" id="mxSearchType">
+                    <div class="select_checked">
+                        <label>找贴图</label>
+                        <em class="arrow_black"></em>
+                        <ul class="select_type" style="display: none;"><li onclick="return SJB.mxSearch.mxSearchFun('3');">找模型</li><li onclick="return SJB.mxSearch.mxSearchFun('5');">找材质</li><li onclick="return SJB.mxSearch.mxSearchFun('6');">找cad</li><li onclick="return SJB.mxSearch.mxSearchFun('11');">找软件</li></ul>
+                    </div>
+                    <label class="default_value">请输入搜索关键词</label>
+                    <input type="text" class="user_txt" name="q">
+                    <input type="submit" class="btn_ok" value="确定">
+                </form>
+            </div>
+        </div>
+
+        <div id="sjb_content" class="w990">
+            <div class="y_weizhi" style="margin-bottom:10px;">
+                <span class="fl">
+                    您的位置：<a href="/Index/HomeIndex">脉空间</a>  &gt; <a href="/Download/DownLoadList">下载专区</a>
+                </span>
+            </div>
+
+            <div class="ileft">
+                <div class="source_list_menu" v-for="item in typeList">
+                    <h2 class="dweizhi"><b class="fsizeb"><a href="javascript:void(0)" class="fontb">{{item.typename}}<input type="hidden" v-bind:value="item.typeid" /></a></b></h2>
+                    <ul class="ul_2 vr_class" style="padding-bottom:10px;">
+                        <li style="width:66px;line-height:20px; height:20px; margin:10px 0 0 12px; " v-for="ite in item.list"><a href="javascript:void(0)" class="secondid">{{ite.name}}<input type="hidden" v-bind:value="ite.id" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mater_r">
+                <p class="dweizhi"><b class="fontb fsizeb"></b></p>
+                <div class="m_more_r">
+                    <div class="dl_border" v-for="item in pageList">
+                        <div class="img_design"><a v-bind:href="'/Download/DownLoadDetail?id='+item.ID" target="_blank"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.thumbnailImage" v-bind:alt="item.title"></a></div>
+                        <div class="img_name"><strong><a v-bind:href="'/Download/DownLoadDetail?id='+item.ID" target="_blank">{{item.title}}</a></strong></div>
+                    </div>
+                    @*<div class="dl_border">
+                        <div class="img_design"><a href="c11030.html" target="_blank"><img src="http://pic.shejiben.com/cad/pic/day_110730/20110730_67c23c03acbffa4ed57f0q0ykclRJMGk_s.jpg" alt="佛山雅居乐"></a></div>
+                        <div class="img_name"><strong><a href="c11030.html" target="_blank">佛山雅居乐</a></strong></div>
+                    </div>*@
+
+                </div>
+                <p class="cl"></p>
+                <div class="page">
+                   
+                        <!-- 页码开始 -->
+                        <div class="M-box1" style="text-align:center;"></div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var typeid = 1;
+        var firstID = 0;
+        var secondID = 0;
+        $("#news_desc").find("li").eq(0).addClass("on");
+        $("#news_desc > li").click(function () {
+            $(this).addClass("on").prevAll("li").removeClass();
+            $(this).nextAll("li").removeClass();
+            typeid = $(".on").find("input").val();
+            firstID = 0;
+            secondID = 0;
+            typeVue.GetTypeList(typeid);
+            noticeVue.GetPageList(1);
+        });
+
+
+        var typeVue = new Vue({
+            el: '.ileft',
+            data: {
+                typeList: []
+            },
+            mounted: function () {
+                this.GetTypeList(1);
+            },
+            methods: {
+                //分页查询
+                GetTypeList: function (typeid) {
+                    var _self = this;
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "/Download/typelist",
+                        data: {
+                            LookupID: typeid
+                        },
+                        success: function (data) {
+                            if (data) {
+                                _self.typeList = data;
+                                Vue.nextTick(function () {
+                                    //样式
+                                    $(".fontb").click(function () {
+                                        typeid = $(".on").find("input").val();
+                                        firstID = $(this).find("input").val();
+                                        secondID = 0;
+                                        noticeVue.GetPageList(1);
+                                    });
+
+                                    $(".secondid").click(function () {
+                                        typeid = $(".on").find("input").val();
+                                        firstID = 0;
+                                        secondID = $(this).find("input").val();
+                                        noticeVue.GetPageList(1);
+                                    });
+                                });
+                            } else {
+                                _self.typeList = [];
+                            }
+                        },
+                        error: function (xhr, type) {
+                            alert('Ajax error!');
+                        }
+                    });
+
+                }
+            }
+        });
+
+        var noticeVue = new Vue({
+            el: '.mater_r',
+            data: {
+                pageList: []
+            },
+            mounted: function () {
+                this.GetPageList(1);
+            },
+            methods: {
+                //分页查询
+                GetPageList: function (pageIndex) {
+                    var _self = this;
+                    var PageSize =25;
+                    $.ajax({
+                        async: false,
+                        type: "post",
+                        url: "../Handler/GetPageListAjax.ashx",
+                        data: {
+                            pageIndex: pageIndex,
+                            PageSize: PageSize,
+                            LookupCode: typeid,
+                            firstID: firstID,
+                            secondID: secondID,
+                            methodname: "GetDecDownLoadList"
+                        },
+                        success: function (data) {
+                            if (data) {
+                                var datajson = eval('(' + data + ')');
+                                _self.pageList = datajson.list;
+                                if (datajson.list != null) {
+                                    //列出页码,jq分页控件
+                                    $('.M-box1').pagination({
+                                        totalData: datajson.recordcount,
+                                        showData: PageSize,
+                                        coping: true,
+                                        current: pageIndex,
+                                        callback: _self.pageselectCallback
+                                    });
+
+                                    Vue.nextTick(function () {
+                                        //样式
+                                        $(".dweizhi > .fontb").empty().html(datajson.title);
+                                    });
+                                } else { _self.pageList = []; $(".dweizhi > .fontb").empty(); }
+
+                                } else {
+                                _self.pageList = [];
+                                $(".fontb").empty();
+                                }
+
+                            
+                        },
+                        error: function (xhr, type) {
+                            alert('Ajax error!');
+                        }
+                    });
+
+                },
+                //分页回调函数
+                pageselectCallback: function (pageIndex) {
+                    var _self = this;
+                    //获取当前页码
+                    _self.GetPageList(pageIndex.getCurrent());
+                }
+
+
+            }
+        });
+    })
+</script>

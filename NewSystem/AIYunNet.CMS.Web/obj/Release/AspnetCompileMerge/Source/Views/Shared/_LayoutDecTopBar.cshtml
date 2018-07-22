@@ -1,0 +1,357 @@
+﻿@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    Layout = null;
+    t_AreaService areaService = new t_AreaService();
+
+
+    List<t_City> list = areaService.GetHotCityList();
+
+    AIYunNet.CMS.BLL.Service.All_NavService Ser = new AIYunNet.CMS.BLL.Service.All_NavService();
+    List<AIYunNet.CMS.Domain.Model.Nav> listNav = Ser.GetAll_NavList();
+
+    WebUserService webuserservice = new WebUserService();
+    WebUser webuser = webuserservice.GetWebUserByAccount(SessionHelper.Get("userName"));
+}
+<style>
+        .nav-first-left{
+            float: left;
+        height: 14px;
+        margin: 8px 0 0;
+        border-right: 1px #ddd solid;
+        }.nav-change, .nav-first-right a:hover {
+        color: #0cb46a;
+    }
+        .icon-coordinate {
+        left: 5px;
+        top: 9px;
+        width: 11px;
+        height: 15px;
+        background-position: -192px -180px;
+    }
+        .iconcity {
+        position: absolute;
+        background-image: url(/Content/design/img/common_bg_s.png);
+        background-image: -webkit-image-set(url(/Content/design/img/common_bg_s.png) 1x,url(/Content/design/img/common_bg_l.png) 2x);
+        font-size: 0;
+    }
+        .nav-first-left .city-switchover {
+        top: 0;
+        left: 0;
+        padding: 0 11px 0 24px;
+        border: 1px solid #f5f5f5;
+        border-top: none;
+        border-bottom: none;
+        overflow: hidden;
+    }
+        .city-option-box {
+        position: absolute;
+        top: 27px;
+        z-index: 7047;
+        width: 406px;
+        height: auto;
+        border: 1px solid #d8d8d8;
+    }
+        .city-option-box {
+        left: 0;
+        background-color: #fff;
+    }
+        .city-option-box .city-option-list {
+        width: 100%;
+        height: 38px;
+        border-bottom: 1px #d8d8d8 solid;
+        background-color: #f4f4f4;
+    }
+        .city-option-box .city-option-list span.on {
+            height: 37px;
+            color: #00af63;
+        border-bottom: 2px #00af63 solid;
+    }
+        .city-option-box .city-option-list span {
+        float: left;
+            width: 60px;
+            height: 38px;
+            margin-right: 2px;
+            line-height: 38px;
+            color: #333;
+        text-align: center;
+            cursor: pointer;
+        }
+        .city-option-box .city-option-hot {
+        margin-left: 26px;
+    }
+    .city-option-ul-box {
+        position: relative;
+    }.city-option-content div ul li.row-end {
+            width: 60px;
+        }
+    .city-option-content div ul {
+            margin:0px;
+        padding: 0;
+        width: 100%;
+    }.city-option-content div ul li {
+        float: left;
+            width: 62px;
+            overflow: hidden;
+            color: #666;
+        text-align: left;
+            height: 28px;
+            line-height: 28px;
+        }.city-option-content div ul li a {
+        font-size: 12px;
+        color: #666;
+    }.city-option-ul-box .city-option-logogram {
+        position: absolute;
+        top: 8px;
+        left: -26px;
+        font-size: 12px;
+        color: #ff4900;
+    }.city-option-content .city-content-warp {
+        padding: 10px 0 6px 36px;
+
+    }.header a, .header-nav a{
+            text-decoration: none;
+            outline: 0;
+            font-family: "Source Han Sans SC","HanHei SC","PingFang SC","Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+            cursor: pointer;
+        }.city-option-content div ul {
+        width: 100%;
+    }
+</style>
+@if (SessionHelper.GetSession("mkjcitycode") != null)
+{
+    <input type="hidden" value="@SessionHelper.GetSession("mkjcitycode").ToString()" id="mkjcitycode" />
+    <input type="hidden" value="@SessionHelper.GetSession("mkjcityname").ToString()" id="mkjcityname" />
+}
+<div class="sjb_new_top_bar" id="sjbNewTopBar">
+    <div class="new_top_bar">
+        <div class="new_top_bar_left">
+            <div class="nav-first-left" style="display: block;">
+                <div class="city-switchover">
+                    <i class="iconcity icon-coordinate"></i>
+                    <span class="nav-city"></span>
+                    <a class="nav-change" href="javascript:void(0);" rel="nofollow">
+                        [切换]
+                    </a>
+                </div>
+                <div class="city-option-box" style="display:none;">
+                    <div class="city-option-list">
+                        <span class="city-option-hot on">热门城市</span>
+                        <!--<span class="city-option-a-e">ABCD</span>
+                        <span class="city-option-f-j">FGHJ</span>
+                        <span class="city-option-k-p">KLMN</span>
+                        <span class="city-option-q-w">QSTW</span>
+                        <span class="city-option-x-z">XYZ</span>-->
+                    </div>
+                    <div class="city-option-content">
+                        <div class="city-hot-content city-content-warp" style="display: block;">
+                            <div class="city-option-ul-box city-option-manage">
+                                <ul class="clearfix">
+                                    @{ int i = 0;}
+                                    @foreach (t_City item in list)
+                                    {
+                                        if ((i + 1) % 6 == 0)
+                                        {
+                                            <li class="row-end"><a href="javascript:void(0);" city_code="@item.cityID" title="@item.city">@item.city</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="javascript:void(0);" city_code="@item.cityID" title="@item.city">@item.city</a></li>
+                                        }
+                                        i++;
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <script>
+                $(function () {
+                    function citybox()
+                    {
+                        $('.city-option-box').show();
+                        $(".city-option-list").find("span").mouseover(function () {
+                            $(this).addClass("on");
+                            $(this).prevAll("span").removeClass("on");
+                            $(this).nextAll("span").removeClass("on");
+                            var index = $(this).index();
+                            $(".city-option-content").find(".city-content-warp").eq(index).show();
+                            $(".city-option-content").find(".city-content-warp").eq(index).prevAll("div").hide();
+                            $(".city-option-content").find(".city-content-warp").eq(index).nextAll("div").hide();
+                        })
+
+                    }
+                    function GetCitySession(mkjcitycode, mkjcityname) {
+                        $.ajax({
+                            async: false,
+                            type: "post",
+                            url: "/Session/GetCitySession",
+                            data: {
+                                mkjcitycode: mkjcitycode,
+                                mkjcityname: mkjcityname
+                            },
+                            success: function (data) {
+                            },
+                            error: function (xhr, type) {
+                                alert('城市改变没有记录。');
+                            }
+                        });
+                    }
+
+                    $(".nav-change").hover(function () {
+                        citybox();
+                    }, function () {
+                    });
+                    $(".nav-city").hover(function () {
+                        $(".city-option-box").hide();
+                    }, function () { });
+                    $(".weixin").hover(function () {
+                        $(".city-option-box").hide();
+                    }, function () { }); 
+                    $(".city-option-box").hover(function () { }, function () {
+                        $(".city-option-box").hide();
+                    });
+                    $(document).click(function () {
+                        $(".city-option-box").hide();
+                    });
+                    $(".city-option-ul-box > .clearfix > li").click(function () {
+                        var cityname = $(this).find("a").html();
+                        //$(".nav-city").html(cityname);
+                        var mkjcitycode = $(this).find("a").attr("city_code");
+                        //$.session.set('mkjcitycode', mkjcitycode);
+                        //$.session.set('mkjcityname', cityname);
+                        GetCitySession(mkjcitycode, cityname);
+                        window.location.reload();
+                    });
+                    var mkjcitycode = $("#mkjcitycode").val();
+                    var cityname = $("#mkjcityname").val();
+                    $(".nav-city").html(cityname);
+                })
+            </script>
+            <div class="weixin halving_line">
+                <span class="ico_weixin_code"></span>
+                <a href="http://www.shejiben.com/weixin" rel="nofollow" target="_blank">脉空间官方微信</a>
+                <div class="weixin_code">
+                    <span class="ico_arrow_top_white"></span>
+                    <a href="http://www.shejiben.com/weixin" target="_blank" rel="nofollow">
+                        <img src="http://img.shejiben.com/my/popularize_center/se_code.png?v=1456423480">
+                    </a>
+                    <span class="msg">扫一扫，加微信<br>更多金币等你拿！</span>
+                </div>
+            </div>
+            <div class="app">
+                <a href="http://www.shejiben.com/app" target="_blank" rel="nofollow">
+                    <span class="ico_app_code"></span>
+                    设计本手机版
+                </a>
+            </div>
+        </div>
+        <div class="new_top_bar_right">
+            @*<div class="login_status" id="nav_login">
+                <a href="/CompanyCenter/CompanyLogin/CompanyLogin" rel="nofollow" class="login">装修公司登录</a>
+            </div>*@
+            <div class="customer_service">
+                <div style="margin-top: 8px;padding: 0 15px 0;border-right: 1px #ddd solid">
+                    <a href="/CompanyCenter/CompanyLogin/CompanyLogin" rel="nofollow" class="login">装修公司登录</a>
+                </div>
+            </div>
+            @if (SessionHelper.Get("userName") == null)
+            {
+                <div class="customer_service">
+                <div style="margin-top: 8px;padding: 0 15px 0;border-right: 1px #ddd solid">
+                    <a href="/PeopleCenter/UserCenter/LoginOn" rel="nofollow" class="register">用户登录</a>
+                </div>
+            </div>
+                
+            }else
+            {
+                <div class="customer_service">
+                    <div class="title">
+                        @if (webuser.NickName == null || webuser.NickName == "")
+                        { @webuser.UserName}
+                        else
+                        {@webuser.NickName }的个人中心
+                        <span class="ico_arrow_bottom_grey"></span>
+                    </div>
+                    <ul>
+                        <li><a href="/PeopleCenter/UserCenter/PeopleCenterIndex" rel="nofollow">进入个人中心</a></li>
+                        <li><a href="/PeopleCenter/UserCenter/LoginOn" rel="nofollow">退出</a></li>
+                    </ul>
+                </div>
+            }
+            <!-- 申请定制设计 -->
+            @*<div class="zb_entrance">
+                <a href="javascript:void(0);" target="_blank" rel="nofollow">申请定制设计</a>
+            </div>*@
+            <!--客服服务 -->
+
+
+            <!--设计师中心 -->
+            <div class="designer_center" style="display:none;">
+                <div class="title">设计师中心<span class="ico_arrow_bottom_grey"></span></div>
+                <ul>
+                    <!-- <li><a href="http://www.shejiben.com/account/register.php">免费入住</a></li> -->
+                    <li><a href="http://www.shejiben.com/order_lobby/" rel="nofollow">接单大厅</a></li>
+                    <li><a href="http://www.shejiben.com/renmai/?from=topbar" rel="nofollow">社交广场</a></li>
+                    <li><a href="http://mx.shejiben.com/?from=topbar" rel="nofollow">模型下载</a></li>
+                    <li><a href="http://www.shejiben.com/about/cooperation.php" rel="nofollow">推广中心</a></li>
+                </ul>
+            </div>
+            <!--网站导航 -->
+            <div class="navigation">
+                <div class="title">网站导航<span class="ico_arrow_bottom_grey"></span></div>
+                <div class="navigation_content">
+                    @foreach (var item in listNav)
+                    {
+                        <ul>
+                            <li class="tit">@item.firstNav.navtitle</li>
+                            @if (item.list.Count > 0)
+                            {
+                                foreach (var ite in item.list)
+                                {
+                                    <li><a href="@ite.url">@ite.navtitle</a></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><a href="@item.firstNav.url">@item.firstNav.navtitle</a></li>
+                            }
+                        </ul>
+                    }
+                    @*<ul>
+                            <li class="tit">设计相关</li>
+                            <li><a href="http://mall.shejiben.com/">逛商品</a></li>
+                            <li><a href="http://www.shejiben.com/news/">设计资讯</a></li>
+                            <li><a href="http://www.shejiben.com/space/">空间谈</a></li>
+                        </ul>
+                        <ul>
+                            <li class="tit">设计师中心</li>
+                            <li><a href="http://www.shejiben.com/my/" rel="nofollow">个人中心</a></li>
+                            <li><a href="http://www.shejiben.com/order_lobby/" rel="nofollow">接单大厅</a></li>
+                            <li><a href="http://www.shejiben.com/renmai/?from=webnav" rel="nofollow">社交广场</a></li>
+                            <li><a href="http://mx.shejiben.com/?from=webnav" rel="nofollow">模型下载</a></li>
+                            <li><a href="http://www.shejiben.com/about/cooperation.php" rel="nofollow">推广中心</a></li>
+                        </ul>*@
+                    @*<ul>
+                            <li class="tit">其他</li>
+                            <li><a href="http://www.shejiben.com/app/" rel="nofollow">设计本App</a><em class="icon icon_hot icon_hot_app"></em></li>
+                            <li><a href="http://www.shejiben.com/about/aboutus.php" rel="nofollow">关于我们</a></li>
+                            <li><a href="http://www.shejiben.com/about/contact.php" rel="nofollow">联系我们</a></li>
+                            <li><a href="http://www.shejiben.com/about/helpcenter.php" rel="nofollow">帮助中心</a></li>
+                            <li><a href="http://www.shejiben.com/about/feedback.php" rel="nofollow" target="_blank">意见反馈</a></li>
+                        </ul>*@
+                </div>
+            </div>
+        </div>
+        <div id="newMessage" class="newMessage">
+            <div class="closeNewMessage" id="closeNewMessage"></div>
+            <div class="messageItem" id="messageItem"></div>
+            <p class="clear"></p>
+        </div>
+    </div>
+</div>

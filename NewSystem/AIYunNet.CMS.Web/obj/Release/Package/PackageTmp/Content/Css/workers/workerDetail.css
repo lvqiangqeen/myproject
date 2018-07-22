@@ -1,0 +1,257 @@
+.workInfo_container{
+	width: 100%;
+	background-color: #F2F2F2;
+	padding-top:48px;
+}
+.workInfo_mian{
+	height: 568px;
+}
+ 
+.workInfo_container .workInfo_mian .workInfoLeft{
+	width: 928px;
+	height: 100%;
+	float: left;
+
+}
+
+.workInfo_container .workInfo_mian .workInfoRight{
+	width: 157px;
+	height: 100%;
+	float: right;
+	background-color: green;
+	background: url(/content/images/wd_qrcode.png) no-repeat;
+}
+
+
+.workInfoLeft_top{
+	height:221px;
+	background-color: #FFFFFF;
+}
+.workInfoLeft_middle{
+	height: 230px;
+	margin-top: 11px;
+	border-top:1px dotted #787575; 
+	border-bottom: 1px dotted #787575;  
+
+}
+.workInfoLeft_bottom{
+	height: 103px;
+}
+.main_info{
+	width: 709px;
+	height: 100%;
+	float: right;
+}
+.workerImg{
+	float: left;
+}
+.workType{
+	padding-left: 42px;
+	line-height: 39px;
+	font-size: 16px;
+	color: #666666;
+}
+.workDesc_title{
+	font-size: 20px;
+	line-height: 45px;
+	color: #636060;
+	font-family: '宋体';
+	font-weight: bold;
+}
+.workDesc_main{
+	font-size: 16px;
+	line-height: 25px;
+	color: #636060;
+	font-family: '微软雅黑';
+}
+
+ .workInfoLeft_bottom img{
+ 	position: relative;
+    left: 680px;
+    top: 22px;
+    z-index: 100;
+ }
+ .card_intro{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.card_intro .type{
+	line-height: 40px;
+	margin-left: 43px;
+	margin-right: 45px;
+	font-size: 14px;
+	border-bottom: 1px dotted #7A7878;
+	font-family: '微软雅黑';
+}
+.card_intro .type .mg{
+	float: left;
+	background: url(/content/images/worktype.png) no-repeat 0 center;
+}
+.card_intro .type .mg span{
+	font-size: 14px;
+	line-height: 22px;
+	color: #666;
+	padding-left: 24px;
+}
+.card_intro .ensure{
+	float: right;
+}
+
+.card_intro .name{
+	line-height: 30px;
+	font-family: '微软雅黑';
+	margin-left: 43px;
+	margin-right: 45px;
+	margin-top: 10px;
+}
+.card_intro .name .p1{
+	float: left;
+	background: url(/content/images/workerName.png) no-repeat 0 6px;
+	padding-right: 44px;
+}
+.card_intro .name .p1 span{
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+	padding-left: 24px;
+}
+.card_intro .name .p2{
+	float: left;
+	font-size: 14px;
+	line-height: 28px;
+	color: #666;
+	padding-left: 24px;
+}
+.card_intro .tel .p3{
+	float: right;
+    line-height: 30px;
+}
+.tel p{
+	display: inline;
+}
+.card_intro .tel{
+	height: 30px;
+	margin-left: 43px;
+	margin-right: 45px;
+	line-height: 30px;
+	font-family: '微软雅黑';
+	background: url(/content/images/mobile.png) no-repeat 0px 4px;
+}
+.card_intro .tel p{
+	font-size: 14px;
+	line-height: 24px;
+	color: #666;
+	padding-left: 26px;
+}
+.card_intro .address{
+	line-height: 30px;
+	font-family: '微软雅黑';
+	margin-left: 43px;	
+	margin-right: 45px;
+}
+.card_intro .address .ad{
+	width: 100%;
+	float: left;
+	background: url(/content/images/location.png) no-repeat 0px 4px;
+}
+.card_intro .address .ad span{
+	font-size: 14px;
+	line-height: 26px;
+	color: #666;
+	padding-left: 26px;
+}
+.card_intro .address .ad_r{
+	float: right;
+}
+.card_intro .ask{
+	width: 140px;
+	height: 40px;
+	background-color: #ec6813;
+	float: right;
+	margin-left: 25px;
+}
+.card_intro  .ask img{
+	float: left;
+	padding-top: 10px;
+	padding-left: 16px;
+}
+.card_intro .ask span{
+	float: left;
+	font-size: 14px;
+	line-height: 40px;
+	color: #fff;
+	padding-left: 7px;
+}
+ div.address  div.ad  .case{
+ 	float: right;
+ }
+ .link_btn{
+ 	margin-right: 24px;
+ 	margin-top: 18px;
+ }
+div.workInfoRight > img{
+    position: relative;
+    top: 60px;
+ }
+ #footer > div.about > div > div.tel p{
+ 	display: block;
+ }
+
+#case .w .case_img li .case_description{
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	width: 265px;
+}
+#case .w .case_img li .case_description dl dt{
+	color: #fefefe;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 43px;
+	background: #de4527;
+	text-align: center;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#case .w .case_img li .case_description dl dd{
+	background: black;
+	height: 118px;
+	padding: 6px 16px 0 36px;
+	line-height: 24px;
+	font-size: 14px;
+    opacity: 0.78;
+    overflow: hidden;
+}
+
+#case .w p{
+	padding-left: 8px;
+	font-size: 18px;
+	line-height: 50px;
+}
+ #case .w .case_img li{
+	margin-bottom: 11px;
+    padding-right: 13px;
+    float: left;
+    position: relative;
+}
+#case > div.w > ul > li:nth-child(4n){
+	padding-right: 0;
+}
+#case .w .case_page{
+	line-height: 292px;
+	text-align: center;
+	padding-bottom: 40px;
+}
+#case .w .case_page span a{
+	color: #000;
+	font-size: 12px;
+	padding: 11px;
+	border-radius: 2px;
+}
+#case .w .case_page span .now{
+	background-color: #ee5500;
+	color: #fff;
+}

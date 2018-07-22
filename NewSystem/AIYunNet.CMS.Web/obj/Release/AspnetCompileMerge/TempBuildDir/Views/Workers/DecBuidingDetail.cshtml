@@ -1,0 +1,221 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecBuidingDetail";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+
+    //装修流程
+    string constructionstage = ViewBag.buiding.constructionstage.ToString();
+    string constructionstageid = ViewBag.buiding.constructionstageID.ToString();
+    List<string> stagelist = new List<string>();
+    List<string> stageidlist = new List<string>();
+    if (constructionstage != "")
+    {
+        stagelist = constructionstage.Split(',').Where(c => c != "").ToList<string>();
+        stageidlist = constructionstageid.Split(',').Where(c => c != "").ToList<string>();
+    }
+    //装修阶段
+    int stageNow = Convert.ToInt32(ViewBag.buiding.StageNow);
+    WebBuidingCaseCommentService Ser = new WebBuidingCaseCommentService();
+    int id = Convert.ToInt32(ViewBag.buiding.BuidingID);
+    WebBuidingCaseComment comment = Ser.GetCommentByTypeAndID("WebBuiding", id);
+    string starclass = "";
+    if (comment != null)
+    {
+        if (comment.Score >= 3)
+        {
+            starclass = "好评";
+        }
+        else if (comment.Score == 2)
+        {
+            starclass = "中评";
+        }
+        else { starclass = "差评"; }
+    }
+}
+<link href="~/Content/design/sheji.workleaderdetail.css" rel="stylesheet" />
+<style>
+
+</style>
+<div class="container">
+    <div class="content clearfix">
+        <div class="global_pie">
+            <ul class="column_list">
+                <li class="location">我的位置：</li>
+                <li>
+                    <a href="/Index/HomeIndex">脉空间</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/workers/DecWorkLeaderList">找工长</a>
+                    <em class="arrow_gray_right"></em>
+                </li>
+                <li>
+                    <a href="/Workers/DecWorkLeaderDetail?WorkerID=@Model.WorkerID">@Model.WorkerName</a>--@ViewBag.buiding.BuidingTitle
+                </li>
+            </ul>
+        </div>
+        <div class="gz-layout clear">
+            @{ Html.RenderPartial("_DecWorkLeader");}       
+            <div class="gz-716-border" style="padding-bottom: 30px;">
+                <div class="tit-w">
+                    <h1>@ViewBag.buiding.BuidingTitle  @ViewBag.buiding.Space 平米</h1><span>阅读量：@ViewBag.buiding.PageViewCount 次</span>
+                </div>
+                <div class="ngz-jl-w clear">
+                    <div class="jl-left">
+                        工长：<span>@Model.WorkerName</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        合同价：<span>@ViewBag.buiding.Price 元</span>&nbsp;&nbsp;&nbsp;&nbsp;装修面积：<span>@ViewBag.buiding.Space m²</span><br />
+                        开工日期：<span>@ViewBag.buiding.StartTime</span>&nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        @*@if (ViewBag.buiding.DemandID != 0)
+                        {
+                            @:监工：<strong>@ViewBag.buiding.superviseName</strong>
+                        }<br>*@
+                        @if (comment != null)
+                        {
+                            @:业主打分：<span style="color:red;">@*<i class="@starclass"></i>*@@starclass</span><br>
+                            @:业主评价：<span>@comment.Comment</span>
+
+                        }
+                    </div>
+                    <div class="jl-right">
+                        <a href="javascript:void(0);" class="J_callVisit btn2" data-userid="@Model.UserID" data-name="@Model.WorkerName">找TA装修</a>
+                        <!--<p>已有<span>0</span>人预约参观</p>-->
+                    </div>
+                    @if (ViewBag.buiding.DemandID != 0)
+                    {
+                        <dl class="ngz-stage">
+                            <dd>
+                                <ul class="c-jd clear">
+                                    @{ int i = 0;}
+                                    @foreach (string item in stagelist)
+                                    {
+                                        if (i <= stageNow)
+                                        {
+                                            <li class="fns"><i></i>@item</li>
+                                        }
+                                        else
+                                        {
+                                            <li><i></i>@item</li>
+                                        }
+                                        i++;
+                                    }
+                                </ul>
+                            </dd>
+                        </dl>
+                                        }
+                                        else
+                                        { <dl class="ngz-stage" style="padding-top: 0px;font-size: 13px;">简介：@ViewBag.buiding.BuidingBrief</dl>
+
+                                        }
+
+
+                </div>
+
+                <div class="ngz-jl-tit clear">
+                    @if (ViewBag.buiding.DemandID != 0)
+                    {
+                        int j = 0;
+                        foreach (string item in stagelist)
+                        {
+                            if (j <= stageNow)
+                            {
+                                if (j == stageNow)
+                                {
+                                    <a class="cur" href="javascript:void(0)">
+                                        @item
+                                        <input type="hidden" value="@stageidlist[j]" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0)">@item<input type="hidden" value="@stageidlist[j]" /></a>
+                                }
+                            }
+                            else
+                            {
+                                break;
+                            }
+                            j++;
+                        }
+                    }
+                    else
+                    {
+                        <a class="cur" href="javascript:void(0)">
+                            工地详情
+                        </a>
+                    }
+
+                </div>
+                <script>
+                    $(function () {
+                        getStageByID();
+                        $(".ngz-jl-tit > a").click(function () {
+                            $(this).addClass("cur").prevAll("a").removeClass();
+                            $(this).nextAll("a").removeClass();
+                            getStageByID();
+                        });
+
+                        function getStageByID() {
+                            var StageID = $(".ngz-jl-tit > .cur").find("input").val();
+                            $.ajax({
+                                async: false,
+                                type: "post",
+                                url: "/Workers/GetStageByID",
+                                data: {
+                                    BuidingID: "@ViewBag.buiding.BuidingID",
+                                    StageID: StageID,
+                                },
+                                success: function (data) {
+                                    if (data) {
+                                        $(".ngz-jl-pic-w").empty();
+                                        $(".ngz-jl-pic-w").append(data.StageContent);
+
+                                    } else {
+                                        $(".ngz-jl-pic-w").empty();
+                                    }
+                                },
+                                error: function (xhr, type) {
+
+                                }
+                            });
+                        }
+                    })
+                </script>
+                <!--监理描述时间及评级-->
+                <!--图片循环-->
+                <div class="ngz-jl-pic-w">
+                    @Html.Raw(ViewBag.buiding.BuidingInfo)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".J_callVisit").click(function () {
+            var peoplename = $(this).attr("data-name");
+            var userid = $(this).attr("data-userid");
+            if ("@SessionHelper.Get("userName")" != "" && "@SessionHelper.Get("userName")" != null) {
+                window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+            } else {
+                layer.open({
+                    type: 2,
+                    scrollbar: false,
+                    title: '登陆',
+                    shadeClose: true,
+                    shade: 0.8,
+                    area: ['330px', '330px'],
+                    content: ['/PeopleCenter/UserCenter/LoinOnButton?UserID=' + userid + '&peoplename=' + peoplename, 'no'],
+                    end: function () {
+                        location.reload();
+                    }
+
+                });
+            }
+
+        })
+    })
+</script>

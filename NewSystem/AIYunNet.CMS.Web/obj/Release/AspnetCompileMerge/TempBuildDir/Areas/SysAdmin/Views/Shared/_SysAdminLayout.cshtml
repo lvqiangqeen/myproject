@@ -1,0 +1,419 @@
+﻿@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.Service
+@{
+    WebCommonService webCommenService = new WebCommonService();
+    List<WebLookup> list = webCommenService.GetLookupListbyRecommend();
+    List<WebLookup> tulist = webCommenService.GetLookupList("Case_DecType");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link href="~/Content/Plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/dist/css/AdminLTE.css" rel="stylesheet" />
+    <link href="~/Content/Css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/dist/css/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/jQueryUI/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/bootstrap3-dialog/css/bootstrap-dialog.min.css" rel="stylesheet" />
+
+    <script src="~/Content/Plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="~/Content/Plugins/jQueryUI/jquery-ui.js"></script>
+    <script src="~/Content/Plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="~/Content/Plugins/dist/js/app.js"></script>
+    <script src="~/Content/Plugins/dist/js/demo.js"></script>
+    <script src="~/Content/Plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/Content/Plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Content/Plugins/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
+    <script src="~/Content/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script src="~/Content/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/SysAdminScript/global.js"></script>
+    <style>
+        .new_button_style {
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        .modal-header {
+            padding: 10px;
+        }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
+<!-- the fixed layout is not compatible with sidebar-mini -->
+<body class="hold-transition skin-blue fixed sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>后台管理系统</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu" style="display:none">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 4 messages</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <img src="" class="img-circle" alt="User Image">
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
+                        </li>
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu" style="display:none">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <li class="dropdown tasks-menu" style="display:none">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-flag-o"></i>
+                                <span class="label label-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 9 tasks</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    Design some buttons
+                                                    <small class="pull-right">20%</small>
+                                                </h3>
+                                                <div class="progress xs">
+                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">20% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    </ul>
+                                </li>
+                                <li class="footer">
+                                    <a href="#">View all tasks</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown tasks-menu" style="padding-top:16px;">
+                            <span class="label label-danger" style="font-size:15px;">@AIYunNet.CMS.Common.Utility.SessionHelper.Get("companyName")</span>
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="/Content/SysImage/icon_09.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@AIYunNet.CMS.Common.Utility.SessionHelper.Get("userAccount")</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header" style="display:none">
+                                    <img src="" class="img-circle" alt="User Image">
+                                    <p>
+                                        Alexander Pierce - Web Developer
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body" style="display:none">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="javascript:OpenChangePasswordDialog()" class="btn btn-default btn-flat">修改密码</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="/SysAdmin/Account/Login" class="btn btn-default btn-flat">退出</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- =============================================== -->
+        <!-- Left side column. contains the sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="treeview" style="padding-left:10px;padding-top:6px;">
+                        <i class="glyphicon glyphicon-inbox" style="color:#ffffff;font-size:25px;margin-left:8px;"></i>
+                        <i class="glyphicon glyphicon-cog" style="color:#ffffff;font-size:25px;margin-left:8px;"></i>
+                    </li>
+                    <li id="menu1" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>首页信息管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            @foreach (var item in list)
+                            {
+                                if (item.Code != "13" && item.Code != "14" && item.Code != "15")
+                                {
+                                    <li><a href="/SysAdmin/Recommend/WebRecommendList?RecommendType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                                }
+                            }
+
+                        </ul>
+                    </li>
+                    <li id="menu2" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>首页顶部和底部信息管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/city/HotCityList"><i class="fa fa-circle-o"></i> 热门城市</a></li>
+                            <li><a href="/SysAdmin/OtherContent/FriendLinkList"><i class="fa fa-circle-o"></i> 友情链接</a></li>
+                            @foreach (var item in list)
+                            {
+                                if (item.Code == "13" || item.Code == "14" || item.Code == "15")
+                                {
+                                    <li><a href="/SysAdmin/Recommend/WebRecommendList?RecommendType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li id="menu3" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>系统管理</span> <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/SysAdmin/ListSysUsers"><i class="fa fa-circle-o"></i>系统用户管理</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 系统权限管理</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu4" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>站点信息</span>
+                            <span class="label label-primary pull-right"></span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i>关键词管理</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 静态页管理</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 授权管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li id="menu5" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>内容管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/ZhuangXiu/WebCompanyList"><i class="fa fa-circle-o"></i> 装修公司</a></li>
+                            <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=设计师"><i class="fa fa-circle-o"></i> 设计师</a></li>
+                            <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=装修工长"><i class="fa fa-circle-o"></i>装修工长</a></li>
+                            <li><a href="/SysAdmin/ZhuangXiu/WebPeopleList?PeopleCategory=装修工人"><i class="fa fa-circle-o"></i> 装修工人</a></li>
+                            <li><a href="/SysAdmin/Lookup/LookupList"><i class="fa fa-circle-o"></i> 所有分类管理</a></li>
+                            <li><a href="/SysAdmin/OtherContent/WebMenuList"><i class="fa fa-circle-o"></i> 栏目管理</a></li>
+
+                            <li><a href="/SysAdmin/OtherContent/WebNewsList"><i class="fa fa-circle-o"></i> 文章管理</a></li>
+                            <li><a href="/SysAdmin/OtherContent/WebFileList"><i class="fa fa-circle-o"></i> 文件管理</a></li>
+                            <li style="display:none;"><a href="#"><i class="fa fa-circle-o"></i> 文件管理</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu6" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>案例和图库</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
+                            @foreach (var item in tulist)
+                            {
+                                <li><a href="/SysAdmin/ImageList/WebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                            }
+                            @foreach (var item in tulist)
+                            {
+                                <li><a href="/SysAdmin/ImageList/DecWebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li id="menu7" class="treeview" style="display:none;">
+                        <a href="#">
+                            <i class="fa fa-cart-plus"></i>
+                            <span>案例和图库</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
+                            <li><a href="/SysAdmin/Goods/GoodsList"><i class="fa fa-circle-o"></i> 商品管理</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu8" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>用户管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 用户访问信息</a></li>
+                            <li><a href="/SysAdmin/UsersCenter/Userlist?usertype=WebUser"><i class="fa fa-circle-o"></i> 业主注册信息<span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a></li>
+                            <li><a href="/SysAdmin/UsersCenter/Userlist?usertype=WebWorker"><i class="fa fa-circle-o"></i> 工人注册信息<span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a></li>
+                            <li><a href="/SysAdmin/UsersCenter/Userlist?usertype=WebWorkerLeader"><i class="fa fa-circle-o"></i> 工长注册信息<span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a></li>
+                            <li><a href="/SysAdmin/UsersCenter/Authenticationlist"><i class="fa fa-circle-o"></i> 用户身份审核申请</a></li>
+                            <li><a href="/SysAdmin/UsersCenter/GuarantMoneylist"><i class="fa fa-circle-o"></i> 用户保证金申请</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 用户留言信息</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu9" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-download"></i>
+                            <span>下载管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/SysAdmin/DownLoadSys/Downloadtype"><i class="fa fa-circle-o"></i>下载分类管理</a></li>
+                            <li><a href="/SysAdmin/DownLoadSys/DownloadList"><i class="fa fa-circle-o"></i>下载资料列表</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu10" class="treeview">
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span>商户管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 商户访问信息</a></li>
+                            <li><a href="/SysAdmin/CompanyUserCenter/CompanyUserList"><i class="fa fa-circle-o"></i> 商户注册信息<span class="pull-right-container"><span class="label label-primary pull-right">4</span></span></a></li>
+                            <li><a href="/SysAdmin/CompanyUserCenter/Authenticationlist"><i class="fa fa-circle-o"></i> 企业认证申请</a></li>
+                            <li><a href="/SysAdmin/CompanyUserCenter/GuarantMoneylist"><i class="fa fa-circle-o"></i> 企业保证金申请</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> 用户留言信息</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- =============================================== -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.3
+            </div>
+            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+            reserved.
+        </footer>
+    </div>
+    <script>
+
+        function OpenChangePasswordDialog() {
+            window.popUp("/SysAdmin/Account/ChangePassword", '修改密码', 'primary', 600, 300, null, false);
+        }
+
+        function storeActiveMenuID(activeMenuID) {
+            var now = new Date();
+            var time = now.getTime();
+            time += 1000 * 60 * 60 * 24 * 30 * 6;
+            var expireTime = new Date(time);
+            var cookieKey = "aiyunnetActiveMenuID";
+            CookieUtil.set(cookieKey, activeMenuID, expireTime);
+        }
+
+        function restoreActiveMenu() {
+            var storedActiveMenuID = CookieUtil.get("aiyunnetActiveMenuID");
+            $("#" + storedActiveMenuID).addClass("active").children("ul").addClass("menu-open").css("display", "block");
+        }
+
+        $(function () {
+            $(".treeview>.treeview-menu>li").click(function () {
+                var activeMenuID = $(this).parent("ul").parent("li").attr("id");
+                storeActiveMenuID(activeMenuID);
+            });
+
+            restoreActiveMenu();
+        });
+    </script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

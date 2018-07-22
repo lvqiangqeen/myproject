@@ -1,0 +1,334 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@model WebBuidingStages
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateBuidingStage</title>
+    <script src="~/Content/design/js/jquery-2.0.3.min.js"></script>
+    <script src="~/Content/design/js/layer.js"></script>
+    <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            background-color: #f9f9f9;
+        }
+
+        .clears {
+            clear: both;
+        }
+        /*messages*/
+        .messages {
+            padding: 15px 0;
+        }
+        .wangEditor-container {
+                        float: left;
+                width: 550px;
+                height: 400px;
+                padding: 5px;
+                border: #ccc 1px solid;
+        }
+            .messages input, .messages select, .messages textarea {
+                margin: 0;
+                padding: 0;
+                background: none;
+                border: 0;
+                font-family: "Microsoft Yahei";
+            }
+
+        .messlist {
+            height: 30px;
+            margin-bottom: 10px;
+        }
+
+            .messlist label {
+                float: left;
+                width: 100px;
+                height: 30px;
+                font-size: 14px;
+                line-height: 30px;
+                text-align: right;
+                padding-right: 10px;
+            }
+
+            .messlist input {
+                float: left;
+                height: 28px;
+                padding-left: 5px;
+                border: #ccc 1px solid;
+            }
+            .messlist.textareas {
+                height: auto;
+            }
+
+            .messlist textarea {
+                float: left;
+                width: 400px;
+                height: 110px;
+                padding: 5px;
+                border: #ccc 1px solid;
+            }
+
+            .messlist.yzms input {
+                width: 100px;
+            }
+
+            .messlist.yzms .yzmimg {
+                float: left;
+                margin-left: 10px;
+            }
+
+        .messsub {
+            padding: 0px 0 0 110px;
+        }
+
+            .messsub input {
+                width: 100px;
+                height: 35px;
+                background: #ddd;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-right: 5px;
+            }
+
+                .messsub input:hover {
+                    background: #f60;
+                    color: #fff;
+                }
+    </style>
+    
+</head>
+<body>
+    <div class="mail">
+
+        <div class="send">
+            <div class="sendbox">
+                <span style="margin-left:50px;">@Model.StageName</span>
+                <form action="#" method="get" class="messages">
+                    <div class="messlist textareas">
+                        <label>发布内容</label>
+                        <div class="xiangqing">
+                            @Html.TextAreaFor(m => m.StageContent, new { @rows = "5", id = "txtStageInfo", placeholder = "请输入描述", @style = "height:400px;max-height:500px;" })
+                            <div class="clears"></div>
+                        </div>
+
+                        
+
+                    </div>
+                    <div class="messlist">
+                        <label>确认完工</label>
+                        @Html.CheckBoxFor(m => m.IsComplete, new { style = "margin: 3px 3px 3px 4px;" })
+                        <div class="clears"></div>
+                    </div>
+                    <div class="messsub">
+                        <input id="btnSave" type="button" value="发布信息" style="background:#00a3eb;color:#fff;" />
+                        @*<input type="reset" value="重填" />*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
+<link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
+<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload-ui.js"></script>
+<script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.iframe-transport.js"></script>
+<script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
+<script>
+		$(function ()
+		{
+			//这段富文本编辑器有问题
+			var editor = new wangEditor('txtStageInfo');
+			// 上传图片
+			editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+			// 配置自定义参数
+			editor.config.uploadParams = {
+				token: 'abcdefg',
+				user: 'wangfupeng1988'
+			};
+			// 设置 headers
+			editor.config.uploadHeaders = {
+				'Accept': 'text/x-json'
+			};
+		    //普通的自定义菜单
+			editor.config.menus = [
+        'bold',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        'img',
+        'undo',
+        'redo',
+        'fullscreen'
+			];
+			editor.create();
+
+			$("#btnSave").click(function ()
+			{
+				updateBuidingStage();
+			});
+
+			InitUploadPlugin();
+		})
+
+		function updateBuidingStageTime()
+		{
+			var timeStageTitle = $("#txtTimeStageTitle").val().trim();
+			if (!timeStageTitle)
+			{
+				alert("标题不能为空");
+				return;
+			}
+			var buidingID = $("#hidBuidingID").val();
+			var timeStageInfo = $("#txtTimeStageInfo").val();
+			var uploadImgs = $("#ImageUrl").val();
+			var uploadThumbnailImage = $("#thumbnailImage").val();
+			var endDate = $("#txtEndDate").val();
+			var sortOrder = $("#txtSorted").val();
+			debugger;
+			$.ajax({
+				type: "post",
+				url: "/PeopleCenter/CenterCases/UpdateBuidingStageTimeInfo",
+				data: {
+					WebBuidingStageID: buidingID,
+					Title: timeStageTitle,
+					TimeStageInfo: timeStageInfo,
+					TimeStageContent: uploadImgs,
+					sortID: sortOrder,
+					endtime: endDate,
+					TimeStageThumContent: uploadThumbnailImage
+				},
+				success: function (ret)
+				{
+				    layer.alert('添加成功', { icon: 6 }, function (index) {
+				        location.reload();
+				        //window.location.href = "/PeopleCenter/CenterCases/BuidingStagesList";
+				    });
+				}
+			});
+		}
+
+		function updateBuidingStage()
+		{
+			var content = $("#txtStageInfo").val();
+			var IsComplete = $("#IsComplete").prop("checked") ? true : false;
+			if (delHtmlTag(content) == "")
+			{
+			    layer.alert('请写点什么吧！',{ icon: 2 });
+			    return false;
+			}
+			$.ajax({
+				type: "post",
+				url: "/PeopleCenter/CenterCases/UpdateBuidingStagesInfo",
+				data: {
+				    ID:'@Model.ID',
+					WebBuidingID: '@Model.WebBuidingID',
+				    StageContent: content,
+				    IsComplete: IsComplete
+				},
+				success: function (data)
+				{
+				    layer.alert('信息修改成功', { icon: 6 }, function (index) {
+				        var parentindex = parent.layer.getFrameIndex(window.name);
+				        parent.layer.close(parentindex);
+				    });
+				}
+			});
+		}
+
+		function InitUploadPlugin()
+		{
+			var jqXHRData = new Array();
+			initFileUpload();
+			$('#BtnUpload').on('click', function ()
+			{
+				if (jqXHRData.length > 0)
+				{
+					for (var i = 0; i < jqXHRData.length; i++)
+					{
+						jqXHRData[i].submit();
+					}
+					return true;
+				} else
+				{
+					return false;
+				}
+			});
+
+			function initFileUpload()
+			{
+				$('#ImageUpload').fileupload({
+					url: '/PeopleCenter/UploadPic/CenterPictrueUpload',
+					dataType: 'json',
+					add: function (e, data)
+					{
+						jqXHRData.push(data);
+					},
+					done: function (event, data)
+					{
+						if (data.result.isUploaded)
+						{
+							var imageUrlStr = $("#ImageUrl").val() + "," + data.result.message;
+							imageUrlStr = imageUrlStr.substr(1, imageUrlStr.length - 1);
+							$("#ImageUrl").val(imageUrlStr);
+
+							var thumbnailImageStr = $("#thumbnailImage").val() + "," + data.result.thumbnailmessage;
+							thumbnailImageStr = thumbnailImageStr.substr(1, thumbnailImageStr.length - 1);
+							$("#thumbnailImage").val(thumbnailImageStr);
+							$("#uploadedImages").append('<tr><td><img src="' + data.result.thumbnailmessage + '"/></td><td><a>删除</a></td></tr>');
+
+						} else
+						{
+							alert(data.result.message);
+						}
+						jqXHRData = [];
+					},
+					fail: function (event, data)
+					{
+						if (data.files[0].error)
+						{
+							alert(data.files[0].error);
+						}
+						jqXHRData = [];
+					},
+					progressall: function (e, data)
+					{
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						//$('#progress .bar').css('width', progress + '%');
+					}
+				});
+			}
+		}
+
+		function HTMLDecode(text)
+		{
+			var temp = document.createElement("div");
+			temp.innerHTML = text;
+			var output = temp.innerText || temp.textContent;
+			temp = null;
+			return output;
+		}
+		function delHtmlTag(str) {
+		    var regex =/<\/?((?!img).)*?\/?>/g; 
+		    return str.replace(regex, "");//去掉所有的html标记
+		}
+</script>

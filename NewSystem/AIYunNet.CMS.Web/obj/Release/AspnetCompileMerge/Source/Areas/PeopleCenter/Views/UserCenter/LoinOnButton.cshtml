@@ -1,0 +1,127 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@{
+    Layout = null;
+    string userid = Request["UserID"];
+    string peoplename = Request["peoplename"];
+}
+<html>
+<head>
+    <script src="~/Content/design/js/jquery-2.0.3.min.js"></script>
+    <link href="~/Content/design/sheji.global.css" rel="stylesheet" />
+    <link href="~/Content/design/layui-layer.css" rel="stylesheet" />
+</head>
+<body style="width:20%;display:block;">
+    <input type="hidden" name="userid" value="@userid"/>
+    <input type="hidden" name="peoplename" value="@peoplename" />
+    <div id="" class="layui-layer-content" style="height: 300px;width:300px;">
+        <div class="login_box login_account" style="display: block;">
+            <div class="tab_name">
+                <ul>
+                    <li class="on">帐号登录</li>
+                    <li class="on" style="display:none;">短信快捷登录</li>
+                </ul>
+                <span class="icon icon_weixin_login" loading="0" clicking="1"></span>
+            </div>
+            <div class="login_wrap">
+                <div class="tab_content tab_content_account" style="display: block;">
+                    <form action="#" method="post" autocomplete="off" id="accountLoginForm">
+                        <input type="text" style="display:none;" />
+                        <input type="password" style="display:none;" />
+                        <div class="box box_name">
+                            <input type="text" name="username" id="username" class="inputText" placeholder="请输入用户名/手机/邮箱" autocomplete="off" />
+                        </div>
+                        <div class="box box_passwd">
+                            <input type="password" name="password" id="password" class="inputText" placeholder="请输入您的密码" autocomplete="off" />
+                        </div>
+                        <div class="box box_auto_login">
+                            <input type="checkbox" />
+                            <label>下次自动登录</label>
+                            <a href="#" target="_blank">忘记密码？</a>
+                        </div>
+                        <input type="button" class="btn submit_button" id="accountLoginBtn" value=" 立即登录" />
+                        <input type="hidden" name="referer" id="referer" value="" />
+                        <input type="hidden" name="httpreferer" id="httpreferer" value="" />
+                        <div class="login_dsf">
+                            <a href="#" title="用QQ登录"><span class="icon icon_qq"></span><em>&nbsp;QQ登录</em></a>
+                            <a href="#" title="用新浪微博登录"><span class="icon icon_weibo"></span><em>&nbsp;微博登录</em></a>
+                            <a href="/PeopleCenter/UserCenter/Register" class="register" target="_blank">免费注册</a>
+                        </div>
+                    </form>
+                </div>
+                <script>
+                    $(function () {
+                        $("#accountLoginBtn").click(function () {
+                            var userAccount = $("input[name=username]").val();
+                            var userPassword = $("input[name=password]").val();
+                            $.ajax({
+                                async: false,
+                                type: "post",
+                                url: "/PeopleCenter/UserCenter/LoginOn",
+                                data: {
+                                    userAccount: userAccount,
+                                    userPassword: userPassword
+                                },
+                                success: function (data) {
+                                    if (data == 200) {
+                                        var userid=$("input[name=userid]").val();
+                                        var peoplename=$("input[name=peoplename]").val();
+                                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                        window.open('/PeopleCenter/CenterDemand/updateAndAddDemand?id=0&UserID=' + userid + '&peoplename=' + peoplename, '_blank');
+                                        parent.layer.close(index); //再执行关闭  
+                                    }
+                                    else if (data == 100) {
+                                        
+                                    }
+                                    else {
+                                        
+                                    }
+                                },
+                                error: function (xhr, type) {
+                                    alert('Ajax error!2');
+                                }
+                            });
+                        });
+                    })
+                </script>
+                <div class="tab_content tab_content_phone" style="display: none;">
+                    <form action="#" method="post" autocomplete="off" id="phoneLoginForm">
+                        <input type="text" style="display:none;" />
+                        <input type="password" style="display:none;" />
+                        <div class="box box_phone">
+                            <input type="text" name="loginPhone" id="phone" class="inputText" placeholder="请输入手机号" autocomplete="off" value="" />
+                        </div>
+                        <div class="box box_code clearfix">
+                            <input type="text" name="phoneCode" id="code" class="inputText" placeholder="请输入您的验证码" autocomplete="off" />
+                            <input type="button" class="btn_get_code" value="发送动态验证码" />
+                            <div class="auth_code" style="display: none;">
+                                <label><img src="http://www.shejiben.com/passport_sem.php" width="93" height="24" id="passport" class="passport" /><span class="changeCode"><a href="javascript:void(0)">换一张</a></span></label>
+                                <label><input type="text" value="" class="authCodeText" id="txt_mathcode" name="txt_mathcode" /><input type="button" class="autoCodeButton" value="确认" id="btn_mathcode" /></label>
+                                <em class="arrow_front"></em>
+                                <em class="arrow_background"></em>
+                            </div>
+                        </div>
+                        <div class="box box_auto_login">
+                            <input type="checkbox" />
+                            <label>下次自动登录</label>
+                            <a href="http://www.shejiben.com/account/login_verify.php" target="_blank">忘记密码？</a>
+                        </div>
+                        <input type="button" class="btn submit_button" id="phoneLoginBtn" value=" 立即登录" />
+                        <input type="hidden" name="referer" id="referer" value="" />
+                        <input type="hidden" name="httpreferer" id="httpreferer" value="" />
+                        <div class="login_dsf" style="display:none;">
+                            <a href="http://www.shejiben.com/loginfromqq/oauth/redirect_to_login.php" title="用QQ登录"><span class="icon icon_qq"></span><em>&nbsp;QQ登录</em></a>
+                            <a href="http://www.shejiben.com/loginfromsina/" title="用新浪微博登录"><span class="icon icon_weibo"></span><em>&nbsp;微博登录</em></a>
+                            <a href="http://www.shejiben.com/account/register.php" class="register">免费注册</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+    

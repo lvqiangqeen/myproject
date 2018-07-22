@@ -81,6 +81,7 @@
     <Compile Include="Areas\PeopleCenter\Controllers\UserCenterController.cs" />
     <Compile Include="Areas\PeopleCenter\PeopleCenterAreaRegistration.cs" />
     <Compile Include="Areas\SysAdmin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\SysAdmin\Controllers\AppWorkerController.cs" />
     <Compile Include="Areas\SysAdmin\Controllers\BaseController.cs" />
     <Compile Include="Areas\SysAdmin\Controllers\CityController.cs" />
     <Compile Include="Areas\SysAdmin\Controllers\CompanyUserCenterController.cs" />
@@ -3909,6 +3910,16 @@
     <Content Include="Content\WorkerApp\pro-list.html" />
     <Content Include="Content\WorkerApp\repair-details.html" />
     <Content Include="Content\WorkerApp\reservation.html" />
+    <Content Include="Content\WorkerApp\updateimages\more.png" />
+    <Content Include="Content\WorkerApp\updateimages\titlecolor.png" />
+    <Content Include="Content\WorkerApp\updateimages\wx.png" />
+    <Content Include="Content\WorkerApp\updateimages\zgs.png" />
+    <Content Include="Content\WorkerApp\updateimages\zgr.png" />
+    <Content Include="Content\WorkerApp\updateimages\zgz.png" />
+    <Content Include="Content\WorkerApp\updateimages\ys.png" />
+    <Content Include="Content\WorkerApp\updateimages\al.png" />
+    <Content Include="Content\WorkerApp\updateimages\zgj.png" />
+    <Content Include="Content\WorkerApp\updateimages\sjs.png" />
     <Content Include="Content\WorkerApp\user-evaluation.html" />
     <Content Include="Content\WorkerApp\worker-details.html" />
     <Content Include="Content\WorkerApp\worker-join.html" />
@@ -4306,6 +4317,7 @@
     <Content Include="Areas\MobileApp\Views\MobileComment\Commentlist.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileComment\BuidingContract.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileComment\BuidingContractByOwner.cshtml" />
+    <Content Include="Areas\SysAdmin\Views\AppWorker\WebBuidingConstractList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

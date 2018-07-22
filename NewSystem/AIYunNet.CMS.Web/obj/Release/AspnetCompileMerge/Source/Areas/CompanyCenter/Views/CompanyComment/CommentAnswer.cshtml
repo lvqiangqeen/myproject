@@ -1,0 +1,101 @@
+﻿@model AIYunNet.CMS.Domain.Model.Z_replyComment
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "CommentAnswer";
+    Layout = "~/Areas/CompanyCenter/Views/Shared/_LayoutCompanyCenter.cshtml";
+    Z_Comment com = ViewBag.com;
+    WebCompanyService webcompanyser = new WebCompanyService();
+    WebCompanyUserService webcomuser = new WebCompanyUserService();
+    string userAcount = SessionHelper.Get("companyUserName");
+    string companyID = SessionHelper.Get("companyID");
+    WebCompanyUser comuer = webcomuser.GetWebCompanyUserByAccount(userAcount);
+    WebCompany webcom = webcompanyser.GetWebCompanyByUserID(comuer.CompanyUserID);
+}
+
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 交流社区管理 <span class="c-gray en">&gt;</span> 回答问题 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    @using (Ajax.BeginForm("AnswerComment", "", new AjaxOptions { HttpMethod = "Post", OnSuccess = "afterSubmit" }, new { id = "form-article-add", @class = "form form-horizontal" }))
+    {
+
+        <input type="hidden" name="id" value="@Model.id" />
+        
+
+        <input type="hidden" name="comment_guid" value="@com.comment_guid" />
+        <input type="hidden" name="from_uname" value="@webcom.CompanyName" />
+        <input type="hidden" name="from_account" value="@userAcount" />
+        <input type="hidden" name="from_uid_type" value="WebCompanyUser" />
+        <input type="hidden" name="thum" value="@webcom.thumbnailImage" />
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red"></span>业主（@com.from_uname）的问题描述：</label>
+            <div class="formControls col-9">
+                @Html.Raw(com.content)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2">回答：</label>
+            <div class="formControls col-10">
+                <textarea id="content" name="content" cols="" rows="" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+                @*<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>*@
+                <button class="btn btn-default radius" type="button" onClick="layer_close();">&nbsp;&nbsp;返回&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts{
+    <script>
+
+        //$("#Returnback").click(function () {
+        //    window.location.href = sessionStorage.getItem('url');
+        //})
+        $(function () {
+            //表单验证
+            $("#form-article-add").Validform({
+                tiptype: 2,
+            });
+
+        })
+
+
+        $(function () {
+            //个人简介
+            var content = "@Model.content";
+            if (content != null && content != "") {
+                $("#content").val(content);
+            }
+        })
+        //提交成功后回调
+        function afterSubmit(ret) {
+            if (ret.retCode == 1) {
+                swal({
+                    title: "修改成功",
+                    text: "是否继续修改信息？",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "是, 继续",
+                    cancelButtonText: "不, 返回",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = window.location.href;
+                    } else {
+                        window.location.href = sessionStorage.getItem('url');
+                    }
+                });
+            } else { alert("修改失败"); }
+        }
+    </script>
+}
+

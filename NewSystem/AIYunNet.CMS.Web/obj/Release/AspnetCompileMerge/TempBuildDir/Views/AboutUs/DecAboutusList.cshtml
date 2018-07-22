@@ -1,0 +1,68 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "DecAboutusList";
+    Layout = "~/Views/Shared/_LayoutDec.cshtml";
+
+}
+<link href="~/Content/design/sheji.about.css" rel="stylesheet" />
+<div class="content_width" id="content">
+    <div class="content_width clearfix ">
+
+        <style type="text/css">
+            /*内页是窄版*/
+            .index_logo, .top_menu {
+                width: 990px;
+            }
+
+                .index_logo #search_case {
+                    margin-left: 100px !important;
+                }
+        </style>
+        <div class="centent">
+            <b class="b1 mt20"></b>
+            <div class="setup">
+                <h4 class="us">@ViewBag.Abouttitle</h4>
+                <div class="help">
+                    <div class="help_title" style="display:none;">
+                        <li id="yz" class="m_on">业主</li>
+                    </div>
+                    <div class="h_yz" id="h_yz">
+                        <div class="question">
+                            @foreach (var item in ViewBag.list as List<WebRecommend>)
+                            {
+                                <div class="question_title">
+                                    <span></span>@item.RecommendName
+                                </div>
+                                <div class="answer">
+                                    @Html.Raw(item.RecommendContent)
+                                    <p class="clear"></p>
+                                    <br>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <p class="u_height"></p>
+                <p class="cl"></p>
+            </div>
+            <b class="b2"></b>
+        </div>
+    </div>
+
+    <!--底部模版 闭合标签配对-->
+    <!--底部模版 闭合标签配对 End-->
+
+</div>
+<script>
+    $(function () {
+        $(".question_title").click(function () {
+            $(this).next(".answer").show();
+            $(this).next(".answer").prevAll(".answer").hide();
+            $(this).next(".answer").nextAll(".answer").hide();
+        })
+    })
+</script>

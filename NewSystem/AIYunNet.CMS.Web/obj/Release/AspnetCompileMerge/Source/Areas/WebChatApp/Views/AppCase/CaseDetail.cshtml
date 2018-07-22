@@ -1,0 +1,78 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebCase
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "CaseDetail";
+    Layout = "~/Areas/WebChatApp/Views/Shared/_Layout.cshtml";
+    IWebPeople webPeopleService = new WebPeopleService();
+    IWebCompany webCompanyService = new WebCompanyService();
+}
+<div class="header-clear"></div>
+<div class="content">
+    <div class="slider-container full-bottom">
+        <div class="homepage-slider" data-snap-ignore="true">
+            <div>
+                <a href="#"><img src="@AppSettingsHelper.thumbnailImage@Model.CaseImageBig" alt="img" style="width:375px;height:211px;"></a>
+            </div>
+        </div>
+    </div>
+    <div class="header-clear"></div>
+    <div class="decoration"></div>
+    <div class="container">
+        <div class="container no-bottom">
+            <h2>@Model.CaseTitle</h2>
+        </div>
+        <ul class="icon-list">
+            @if (Model.CompanyID == 0)
+            {
+                <li class="home-list">无公司信息</li>
+            }
+            else
+            {
+                <li class="home-list">@webCompanyService.GetWebCompanyByID(Model.CompanyID).CompanyName</li>
+            }
+            @if (Model.PeopleID == 0)
+            {
+                <li class="user-list">无设计师信息</li>
+            }
+            else
+            {
+                <li class="user-list">@webPeopleService.GetWebPeopleByID(Model.PeopleID).PeopleName</li>
+            }
+
+            <li class="pencil-list">@Model.CaseBrief</li>
+        </ul>
+        <div class="decoration"></div>
+        <div class="container no-bottom">
+            <h4>案例介绍</h4>
+        </div>
+        <p>
+            @Html.Raw(Model.CaseInfo)
+        </p>
+        <div class="decoration"></div>
+        @*<div class="container no-bottom">
+                <h4>精选评论</h4>
+            </div>
+            <div class="container no-bottom">
+                <em class="speach-left-title">小张:</em>
+                <p class="speach-left blue-bubble">完美的家具设计完美的家具设计完美的家具设计完美的家具设计完美的家具设计完美的家具设计</p>
+                <div class="clear"></div>
+                <em class="speach-right-title">小张:</em>
+                <p class="speach-right blue-bubble">完美的家具设计完美的家具设计完美的家具设计完美的家具设计完美的家具设计</p>
+            </div>
+            <div class="decoration"></div>*@
+
+        @*新闻部分*@
+        @Html.Partial("~/Areas/WebChatApp/Views/AppRecommend/NewsRecommend.cshtml")
+
+        @*推送部分*@
+        @Html.Partial("~/Areas/WebChatApp/views/AppRecommend/CaseRecommend.cshtml")
+    </div>
+</div>
+
+@section Scripts{
+
+}
+

@@ -1,0 +1,214 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@{
+    ViewBag.Title = "Commentlist";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebBuidingService ser = new WebBuidingService();
+    string UserID = Request["UserID"];
+}
+
+<script>
+    //var html = "<h1>评价列表</h1>";
+    //$("#header").append(html);
+    $("#header").remove();
+</script>
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<style>
+    .mui-col-xs-2 {
+    width: 27.666667%;
+}
+    .mui-pull-bottom-wrapper{
+    text-align: center;
+    }
+</style>
+<div class="container" id="container">
+    <div class="mui-content">
+        <div id="slider" class="mui-slider mui-fullscreen">
+            <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <div class="mui-scroll">
+                    <a class="mui-control-item mui-active" href="#item1mobile">
+                        好评
+                    </a>
+                    <a class="mui-control-item" href="#item2mobile">
+                        中评
+                    </a>
+                    <a class="mui-control-item" href="#item3mobile">
+                        差评
+                    </a>
+                </div>
+            </div>
+            <div class="mui-slider-group">
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+                    <div class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
+<script>
+    mui.init();
+    //示例1
+    (function ($) {
+        //阻尼系数
+        var deceleration = mui.os.ios ? 0.003 : 0.0009;
+        $('.mui-scroll-wrapper').scroll({
+
+            bounce: false,
+            indicators: true, //是否显示滚动条
+            deceleration: deceleration
+        });
+        $.ready(function () {
+            //循环初始化所有下拉刷新，上拉加载。
+            var pageIndex1 = 1;
+            var pageIndex2 = 1;
+            var pageIndex3 = 1;
+            $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
+                $(pullRefreshEl).pullToRefresh({
+                    up: {
+                        contentnomore: '没有更多了',
+                        contentrefresh: "正在加载...",
+                        auto: true,
+                        callback: function () {
+                            var self = this;
+                            setTimeout(function () {
+                                var score = 0;
+                                if (index == "0") {
+                                    score = 3;
+                                } else if (index == "1") {
+                                    score = 2;
+                                } else if (index == "2") {
+                                    score = 1;
+                                }
+                                var ul = self.element.querySelector('.mui-table-view');
+                                var bool = false;
+                                if (index == "0") {
+                                    var html = createFragment1(pageIndex1, score);
+                                    ul.appendChild(createFragment1(pageIndex1, score));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex1++;
+                                }
+                                else if (index == "1") {
+                                    var html = createFragment1(pageIndex2, score);
+                                    ul.appendChild(createFragment1(pageIndex2, score));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex2++;
+                                } else if (index == "2") {
+                                    var html = createFragment1(pageIndex3, score);
+                                    ul.appendChild(createFragment1(pageIndex3, score));
+                                    bool = html.childNodes.length == 0 ? true : false;
+                                    pageIndex3++;
+                                }
+                                //自定义颜色示例
+                                mui(".mui-progressbar").each(function () {
+                                    mui(this).progressbar({ progress: this.getAttribute("data-progress") }).show();
+                                });
+                                self.endPullUpToRefresh(bool);
+                            }, 200);
+                        }
+                    }
+                });
+            });
+
+            var time = function (AddOn) {
+                var a = AddOn
+                var date = new Date(parseInt(a.slice(6)));
+                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate() + '日';
+                return result;
+            }
+
+            var createFragment1 = function (pageIndex, score) {
+                var fragment = document.createDocumentFragment();
+                var result = "";
+                $.ajax({
+                    type: 'post',
+                    url: '/MobileApp/MobileComment/GetCommentlist',
+                    async: false,
+                    dataType: "json",
+                    data: {
+                        CurPage: pageIndex,
+                        PageSize: 10,
+                        score: score,
+                        UserID:'@UserID'
+                    },
+                    success: function (data) {
+
+                        $.each(data, function (i, item) {
+                            var li = document.createElement('li');
+                            li.className = 'mui-table-view-cell';
+
+                            var html = '<div class="mui-table">' +
+                            '<div class="mui-table-cell mui-col-xs-10">' +
+                            '<h4 class="mui-ellipsis">' + item.BuidingTitle + '</h4>';
+                            if (score == 1){ html += '<h5>业主评价：差评</h5>'; }
+                            else if (score == 2) { html += '<h5>业主评价：中评</h5>'; }
+                            else { html += '<h5>业主评价：好评</h5>'; }
+                            html += '<p class="mui-h6 mui-ellipsis">' + item.Comment + '</p>' +
+                            '</div>'+
+                            '<div class="mui-table-cell mui-col-xs-2 mui-text-right">'+
+                            '<span class="mui-h5">' + item.EndTime + '</span>';
+                            html += '</div></div>';
+                            li.innerHTML = html;
+                            fragment.appendChild(li);
+                        });
+
+                    }
+                });
+                return fragment;
+            };
+        });
+    })(mui);
+</script>
+@*<div class="container" id="container">
+    <div class="mui-content">
+        <ul class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+            @foreach (var item in ViewBag.list as List<WebBuidingCaseComment>)
+            {
+                WebBuiding buiding = ser.GetWebBuidingByGuID(item.Guid);
+                string comstring = "好评";
+                if (item.Score == 1)
+                {
+                    comstring = "差评";
+                }
+                else if (item.Score == 2)
+                {
+                    comstring = "中评";
+                }
+                <li class="mui-table-view-cell">
+                    <div class="mui-table">
+                        <div class="mui-table-cell mui-col-xs-10">
+                            <h4 class="mui-ellipsis">@buiding.BuidingTitle</h4>
+                            <h5>业主评价：@comstring</h5>
+                            <p class="mui-h6 mui-ellipsis">@item.Comment</p>
+                        </div>
+                        <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+                            <span class="mui-h5">@buiding.EndTime</span>
+                        </div>
+                    </div>
+                </li>
+            }
+            
+        </ul>
+    </div>
+    </div>*@

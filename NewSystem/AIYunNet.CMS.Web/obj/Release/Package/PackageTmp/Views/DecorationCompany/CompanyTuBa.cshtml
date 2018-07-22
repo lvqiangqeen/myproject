@@ -1,0 +1,517 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@model AIYunNet.CMS.Domain.Model.WebCompany
+@{
+    ViewBag.Title = "CompanyTuBa";
+    Layout = "~/Views/Shared/_LayoutDecCompany.cshtml";
+    WebCommonService webCommonService = new WebCommonService();
+    WebCompanyService webCompanyService = new WebCompanyService();
+    WebRecommendService webreser = new WebRecommendService();
+    //轮播图和横幅
+    List<WebRecommend> henglist = webreser.GetWebRecommendByCompany(1,1, Convert.ToInt32(Model.CompanyID));
+    WebRecommend hengfu = new WebRecommend();
+    string hengimg = "";
+    if (henglist.Count() > 0)
+    {
+        hengfu = henglist[0];
+        hengimg = AppSettingsHelper.ImgUrl + hengfu.RecommendImg;
+    }
+    List<WebRecommend> lunbolist = webreser.GetWebRecommendByCompany(2,3, Convert.ToInt32(Model.CompanyID));
+}
+@{ Html.RenderPartial("_CompanyTuBaHead");}
+<link href="~/Content/design/swiper/swiper-3.4.2.min.css" rel="stylesheet" />
+<script src="~/Content/design/swiper/swiper-3.4.2.jquery.min.js"></script>
+<style>
+        .blg_banner {
+        height: 120px;
+        min-width: 980px;
+        _width: 100%;
+        background: url(/Content/design/img/zs_ewnav_new0.jpg) center top no-repeat;
+        margin: 0 auto;
+    }
+</style>
+<div class="blg_banner">
+</div>
+<div class="main_content">
+    <div class="cpy_intro clearfix">
+        <div class="video_part">
+            <!--滚动图-->
+            <div class="swiper-container" id="index_slider">
+                <div class="swiper-button-prev swiper-button-black"></div>
+                <div class="swiper-button-next swiper-button-black"></div>
+                <ul class="banner_slider swiper-wrapper">
+                    @foreach (var item in lunbolist)
+                    {
+                        <li class="swiper-slide" style="background: url(&quot;@AppSettingsHelper.ImgUrl@item.RecommendImg&quot;) center center no-repeat; width: 490px; height: 275px;">
+                            <a href="@item.RecommendUrl" target="_blank" style="display:block;width:100%;height:275px;">&nbsp;</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="slider_mark"></ul>
+            </div>
+        </div>
+        <script>
+            var indexSwiper = new Swiper('#index_slider', {
+                autoplay: 5000,//可选选项，自动滑动
+                prevButton: '.swiper-button-prev',
+                nextButton: '.swiper-button-next',
+            })
+        </script>
+        <div class="cpy_details1 clearfix">
+            <div class="scro_details1 clearfix">
+                <div class="support1">
+                    <ul id="fhot_city">
+                        <li class="clearfix">
+                            <a href="javascript:void(0);" class="support_text1" rel="nofollow" target="_blank"><em class="support_bg1"></em>支持免费量房<span class="gt_gray">&gt;</span></a>
+                        </li>
+
+                        <li class="clearfix">
+                            <a href="javascript:void(0);" class="support_text2" rel="nofollow" target="_blank"><em class="support_bg2"></em>支持满意付款<span class="gt_gray">&gt;</span></a>
+                        </li>
+
+                        <li class="clearfix">
+                            <a href="javascript:void(0);" class="support_text3" rel="nofollow" target="_blank"><em class="support_bg3"></em>支持先行赔付<span class="gt_gray">&gt;</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grade_details1 clearfix">
+                    <!--<div class="score_dtls">
+                        <span class="sco_text1">综合评分</span>
+                        <span class="score1">9.6</span>
+                    </div>-->
+                    <div class="details_r1">
+                        <dl>
+                            <a href="javascript:void(0); " rel="nofollow">
+                                <dt>动态评分</dt>
+                                <dd>
+                                    <span>设计水平</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>							<b>4.8</b>
+                                </dd>
+                                <dd>
+                                    <span>服务态度</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>							<b>4.8</b>
+                                </dd>
+                                <dd>
+                                    <span>施工质量</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>							<b>4.8</b>
+                                </dd>
+                            </a>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="cpy_text">
+                <p class="intro_title">公司简介</p>
+                <p class="intro_text">
+                    @StringHelper.StringTruncat(Model.CompanyInfo,55,"")...<a class="intro_more" href="/DecorationCompany/CompanyTuBaDetail?companyID=@Model.CompanyID" rel="nofollow" target="_blank">更多</a>
+                </p>
+            </div>
+            <div class="order_free clearfix">
+                <input class="order_btn" type="submit" value="申请免费量房服务" onclick="freepopOrder({toid:'478250',s_source:75, ptag:'1_5_2_1'});">
+                <div class="order_hotline">
+                    已有<span class="num1">274829</span>人咨询
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="amount_house clearfix">
+        <div class="amount_l">
+            <div class="team_title">
+                <span class="team_txt">免费量房</span>
+                <span class="vertical_bar"></span>
+                <a class="click_apply apply" href="http://bj.to8to.com/zb/" target="_blank" rel="nofollow">点击申请<span class="gt_green">&gt;</span></a>
+                <a class="order_more" href="http://bj.to8to.com/zb/" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+            </div>
+            <div class="amout_list">
+                <ul class="amt_title clearfix">
+                    <li>业主</li>
+                    <li>区域</li>
+                    <li>户型</li>
+                    <li>面积</li>
+                    <li>预算</li>
+                </ul>
+                <a href="http://bj.to8to.com/zb/" target="_blank">
+                    <ul class="amt_list1 clearfix">
+                        <li>柏(先生)</li>
+                        <li>北京市门头沟区</li>
+                        <li>住宅公寓</li>
+                        <li>58<span class="unit">m<sup>2</sup></span></li>
+                        <li>8-12万</li>
+                    </ul>
+                </a>
+                <a href="http://bj.to8to.com/zb/" target="_blank">
+                    <ul class="amt_list1 clearfix">
+                        <li>赵(先生)</li>
+                        <li>北京市门头沟区</li>
+                        <li>住宅公寓</li>
+                        <li>84<span class="unit">m<sup>2</sup></span></li>
+                        <li>8-12万</li>
+                    </ul>
+                </a>
+                <a href="http://bj.to8to.com/zb/" target="_blank">
+                    <ul class="amt_list1 clearfix">
+                        <li>徐(先生)</li>
+                        <li>北京市西城区</li>
+                        <li>住宅公寓</li>
+                        <li>113<span class="unit">m<sup>2</sup></span></li>
+                        <li>5-8万</li>
+                    </ul>
+                </a>
+                <a href="http://bj.to8to.com/zb/" target="_blank">
+                    <ul class="amt_list1 clearfix">
+                        <li>董先生(先生)</li>
+                        <li>北京市顺义区</li>
+                        <li>住宅公寓</li>
+                        <li>140<span class="unit">m<sup>2</sup></span></li>
+                        <li>12-18万</li>
+                    </ul>
+                </a>
+                <a href="http://bj.to8to.com/zb/" target="_blank">
+                    <ul class="amt_list1 clearfix">
+                        <li>李(女士)</li>
+                        <li>北京市丰台区</li>
+                        <li>住宅公寓</li>
+                        <li>50<span class="unit">m<sup>2</sup></span></li>
+                        <li>8-12万</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+        <div class="amount_r">
+            <div class="r_title clearfix">
+                <span class="title_txt">装修优惠</span>
+                <div class="fix_r">
+                    <a class="amtr_more" href="http://www.to8to.com/zs/478250/news-1-1.html" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+                </div>
+            </div>
+            <div class="active_bg3">
+                <p class="act_title" title="“双十一”优惠活动开始啦~">“双十一”优惠活动开始啦~</p>
+                <p class="validity">有效期：2014-11-04  - 2014-11-30 </p>
+                <div class="act_details">
+                    <p>工程管理费（总工程的8%）全免,2:量房现场预缴设计诚信金600元，直抵工程款1200元的优惠礼</p>
+                </div>
+                <p class="download_after">(发送后，凭优惠短信即可享受此优惠活动)</p>
+                <span class="downto_black">已过期</span>
+            </div>
+        </div>
+    </div>
+    <div class="design_plan">
+        <div class="team_title">
+            <span class="team_txt">装修案例</span>
+            <span class="plan_num1">（@Model.CaseCount）</span>
+            <a href="/DecorationCompany/CompanyTuBaCaseList?companyID=@Model.CompanyID" class="order_more" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+        </div>
+        <div class="blog_main_r">
+            <ul class="clearfix">
+                @foreach (var item in ViewBag.CaseList as List<WebCase>)
+                {
+                    <li>
+                        <a href="/DecorationCompany/CompanyTuBaCaseDetail?caseID=@item.CaseID&companyID=@item.CompanyID" target="_blank">
+                            <img src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" alt="@item.CaseTitle">
+                            <div class="exp">
+                                <div class="exp_t">@item.CaseTitle</div>
+                                <div class="exp_b clearfix">
+                                    <span class="exp_tag">@webCommonService.GetLookupDesc("Case_cost_area", item.CostArea.ToString())<em></em></span>
+                                    <span class="exp_tag">@webCommonService.GetLookupDesc("Case_house_type", item.HouseType.ToString()) <em></em></span>
+                                    <span class="exp_tag">@webCommonService.GetLookupDesc("Case_house_area", item.HouseArea.ToString()) <em></em></span>
+                                    <span class="exp_tag">@webCommonService.GetLookupDesc("Case_style", item.Style.ToString())</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="design_team">
+        <div class="team_title">
+            <span class="team_txt">设计团队</span>
+            <span class="plan_num1">（@webCompanyService.GetPeopleCountbyCompanyID(Model.CompanyID)）</span>
+            <a href="/DecorationCompany/CompanyTuBaDesignerList?companyID=@Model.CompanyID" class="order_more" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+        </div>
+        <div class="team_list">
+            <ul class="clearfix">
+                @foreach (var item in ViewBag.PeopleList as List<WebPeople>)
+                {
+                    <li>
+                        <div class="designer_pic1">
+                            <a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@Model.CompanyID&peopleID=@item.PeopleID" target="_blank"><img src="@AppSettingsHelper.ImgUrl@item.thumbnailImage" alt="@item.PeopleName" width="100" height="100"></a>
+                            <div class="shade"></div>
+                            <div class="designer_cov">
+                            </div>
+                            <a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@Model.CompanyID&peopleID=@item.PeopleID" class="cov_text">
+                                <span>设计方案</span>
+                                <em>@item.CaseCount</em>
+                            </a>
+                        </div>
+                        <p class="designer_name1"><a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@Model.CompanyID&peopleID=@item.PeopleID" target="_blank">@item.PeopleName</a></p>
+                        <p class="job_title"><a href="/DecorationCompany/CompanyTuBaDesignerDetail?companyID=@Model.CompanyID&peopleID=@item.PeopleID" target="_blank">@item.PeoplePosition</a></p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            //样式
+            $(".designer_pic1").hover(function () {
+                $(this).find('.designer_cov').show(30)//.stop(true,true);
+                $(this).find('.cov_text').show(30)//.stop(true,true);
+            }, function () {
+                $(this).find('.designer_cov').hide(30)//.stop(true,true);
+                $(this).find('.cov_text').hide(30)//.stop(true,true);
+            });
+        })
+    </script>
+    <div class="construct_case" style="display:none;">
+        <div class="team_title">
+            <span class="team_txt">装修工地</span>
+            <span class="plan_num1">（1292）</span>
+            <a class="order_more" href="http://www.to8to.com/zs/visit478250/" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+        </div>
+
+        <ul class="case_list">
+            <li class="case_list_item">
+                <div class="case_main clearfix">
+                    <div class="case_pics">
+                        <a href="/zs/478250/732698visit1-display-1.html" target="_blank" rel="nofollow"><img src="http://pic.to8to.com/gongdi_pic/2015/05/19/20150519_fa2ccbbb7669f8c97094vmx4tzrwkwrw_230x230M.jpg" alt="兴隆家园" width="200" height="200"></a>
+                    </div>
+                    <div class="case_details">
+                        <div class="case_name">
+                            <a href="/zs/478250/732698visit1-display-1.html" class="case_details_name">兴隆家园王女士的新家</a>
+                            <span class="zgs_ico_protect"></span>                         <!-- <span class="case_check"><em>365</em>人已查看</span>-->
+                        </div>
+                        <div class="case_tag clearfix">
+                            <span>北京</span>
+                            <span>兴隆家园</span>
+                            <span>2.3万</span>
+                            <span>全包</span>
+                            <span>78m²</span>
+                            <span></span>
+                        </div>
+                        <div class="case_progress">
+                            <ul class="clearfix">
+                                <li class="on_li"><em class="progress_dot"></em>准备开工</li>
+                                <li><em class="progress_dot"></em>水电阶段</li>
+                                <li><em class="progress_dot"></em>泥木阶段</li>
+                                <li><em class="progress_dot"></em>油漆阶段</li>
+                                <li><em class="progress_dot"></em>竣工阶段</li>
+                            </ul>
+                        </div>
+                        <div class="case_info">
+                            <ul class="clearfix">
+                                <li><a class="case_info_lnk" href="/zs/478250/732698visit1-display-1.html#0" rel="nofollow">设计图<span class="case_info_num">0</span></a></li>
+                                <li class="sep"><em></em></li>
+                                <li><a class="case_info_lnk" href="/zs/478250/732698visit1-display-1.html#1" rel="nofollow">施工图<span class="case_info_num">4</span></a></li>
+                                <li class="sep"><em></em></li>
+                                <li><a class="case_info_lnk" href="/zs/478250/732698visit1-display-1.html#2" rel="nofollow">装修日记<span class="case_info_num">0</span></a></li>
+                                <li class="sep"><em></em></li>
+                                <li><a class="case_info_lnk" href="/zs/478250/732698visit1-display-1.html#2" rel="nofollow">业主评价<span class="case_info_num">4</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <input class="case_btn" type="submit" value="免费预约参观" onclick="freeOrderSite({toid:478250,gid:732698, ptag:'1_5_2_4'}, this);return false;">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="comment"  style="display:none;">
+        <div class="team_title">
+            <span class="team_txt">业主点评</span>
+            <span class="plan_num1">（4685）</span>
+            <a class="order_more" href="/zs/yz_dp.php?uid=478250" target="_blank" rel="nofollow">更多<span class="gt_gray">&gt;</span></a>
+        </div>
+        <div class="cmt_details">
+            <ul>
+                <li class="clearfix">
+                    <div class="memb_head1">
+                        李(先生)的新家												
+                        <div class="finish_place">
+
+                            <span class="plot_name"> </span>
+                            <span class="plot_area">90M²</span>                            
+                            <span class="plot_payment">2.35万</span>                            
+                            <span class="plot_style">简约</span>
+
+                        </div>
+                    </div>
+                    <div class="comment_datails1">
+                        <div class="cmt_title1 clearfix">
+                            <div class="ct_dp_left">
+                                <p class="cmt_stage"><span class="chg_color">泥木验收</span></p>
+
+                                <p class="sheji_scro oth clearfix">
+                                    <span>施工：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                                <p class="severce_scro clearfix">
+                                    <span>服务：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                            </div>
+                            <div class="ct_dp_right"><span class="memb_name">L_9551</span></div>
+                        </div>
+                        <p class="cmt_content">工人做活细致认真 工长认真负责</p>
+                        <div class="plot_time">2017-11-16 17:10:41</div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="memb_head1">
+                        徐(女士)的新家												
+                        <div class="finish_place">
+
+                            <span class="plot_name"> </span>
+                            <span class="plot_area">40M²</span>                            
+                            <span class="plot_payment">1.51万</span>                            
+                            <span class="plot_style">简约</span>
+
+                        </div>
+                    </div>
+                    <div class="comment_datails1">
+                        <div class="cmt_title1 clearfix">
+                            <div class="ct_dp_left">
+                                <p class="cmt_stage"><span class="chg_color">泥木验收</span></p>
+
+                                <p class="sheji_scro oth clearfix">
+                                    <span>施工：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                                <p class="severce_scro clearfix">
+                                    <span>服务：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                            </div>
+                            <div class="ct_dp_right"><span class="memb_name">小宝宝的家</span></div>
+                        </div>
+                        <p class="cmt_content">装修是个繁琐的活，互相沟通好是工程顺利结项的基础。目前为止还满意。</p>
+                        <div class="plot_time">2017-11-16 17:06:22</div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="memb_head1">
+                        李(女士)的新家												
+                        <div class="finish_place">
+
+                            <span class="plot_name"> </span>
+                            <span class="plot_area">51M²</span>                            
+                            <span class="plot_payment">1.5万</span>                            
+                            <span class="plot_style"></span>
+
+                        </div>
+                    </div>
+                    <div class="comment_datails1">
+                        <div class="cmt_title1 clearfix">
+                            <div class="ct_dp_left">
+                                <p class="cmt_stage"><span class="chg_color">设计与服务</span></p>
+
+                                <p class="sheji_scro oth clearfix">
+                                    <span>设计：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                                <p class="severce_scro clearfix">
+                                    <span>服务：5</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i>
+                                </p>
+                            </div>
+                            <div class="ct_dp_right"><span class="memb_name">妍色_8656</span></div>
+                        </div>
+                        <p class="cmt_content">现在才刚刚开始～目前还算满意～装修公司可以站在消费者的角度给意见和想法～</p>
+                        <div class="plot_time">2017-11-16 16:18:38</div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="memb_head1">
+                        乔(先生)的新家												
+                        <div class="finish_place">
+
+                            <span class="plot_name"> </span>
+                            <span class="plot_area">87M²</span>                            
+                            <span class="plot_payment">2.29万</span>                            
+                            <span class="plot_style">简约</span>
+
+                        </div>
+                    </div>
+                    <div class="comment_datails1">
+                        <div class="cmt_title1 clearfix">
+                            <div class="ct_dp_left">
+                                <p class="cmt_stage"><span class="chg_color">水电验收</span></p>
+
+                                <p class="sheji_scro oth clearfix">
+                                    <span>施工：3</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_3"></i><i class="ystar_3"></i>
+                                </p>
+                                <p class="severce_scro clearfix">
+                                    <span>服务：3</span>
+                                    <i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_1"></i><i class="ystar_3"></i><i class="ystar_3"></i>
+                                </p>
+                            </div>
+                            <div class="ct_dp_right"><span class="memb_name">George_694</span></div>
+                        </div>
+                        <p class="cmt_content">补充说明一下，水电改造施工进度很快，不需要催，方案定好了很快就施工完毕。</p>
+                        <div class="plot_time">2017-11-16 15:21:49</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="qution_ask"  style="display:none;">
+        <div class="team_title">
+            <span class="team_txt">问答动态</span>
+        </div>
+        <div class="askqst_ctn clearfix">
+            <p class="ask_ctn clearfix">
+                <span class="ask_timer">2017-06-01</span>
+                <span class="answer_ctn">他回答了问题：</span>
+                <a href="http://www.to8to.com/ask/k313480.html" class="ask_chge" target="_blank">2017维修基金缴纳标准是多少</a>
+
+            </p>
+            <p class="awr_ctn clearfix">
+                <span class="ask_dtls">
+                    答：多层100
+                    高层150
+                </span>
+
+            </p>
+        </div>
+        <div class="askqst_ctn clearfix">
+            <p class="ask_ctn clearfix">
+                <span class="ask_timer">2017-05-29</span>
+                <span class="answer_ctn">他回答了问题：</span>
+                <a href="http://www.to8to.com/ask/k105055.html" class="ask_chge" target="_blank">2017十大橱柜品牌有哪些</a>
+
+            </p>
+            <p class="awr_ctn clearfix">
+                <span class="ask_dtls">
+                    答：1：意大利品牌：科宝博洛尼
+                    2：德国品牌：德宝西克曼
+                    3：中国品牌：海尔
+                    4：厦门：金牌橱柜
+                    5: &nbsp;&nbsp;广州：欧派橱柜
+                    6: &nbsp;&nbsp;成都：佳居乐橱柜
+                    7: &nbsp;&nbsp;合肥：志邦
+                    8:方太
+                    9:安泊
+                    10:皮阿诺
+                    目前这些品牌都是不错的
+                </span>
+
+            </p>
+        </div>
+        <div class="askqst_ctn clearfix">
+            <p class="ask_ctn clearfix">
+                <span class="ask_timer">2017-03-23</span>
+                <span class="answer_ctn">他回答了问题：</span>
+                <a href="http://www.to8to.com/ask/k313154.html" class="ask_chge" target="_blank">2017上海天然气价格是多少钱一方？</a>
+
+            </p>
+            <p class="awr_ctn clearfix">
+                <span class="ask_dtls">答：2块5</span>
+
+            </p>
+        </div>
+    </div>
+</div>

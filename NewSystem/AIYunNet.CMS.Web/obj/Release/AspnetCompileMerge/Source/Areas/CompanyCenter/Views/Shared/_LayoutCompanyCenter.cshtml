@@ -1,0 +1,95 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <LINK rel="Bookmark" href="/content/CompanyCenterAdmin/favicon.ico">
+    <LINK rel="Shortcut Icon" href="/content/CompanyCenterAdmin/favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/lib/html5.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/lib/respond.min.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/lib/PIE_IE678.js"></script>
+    <![endif]-->
+
+    <link href="/content/CompanyCenterAdmin/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/content/CompanyCenterAdmin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/content/CompanyCenterAdmin/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+    <link href="/content/CompanyCenterAdmin/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="/content/CompanyCenterAdmin/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>企业管理中心</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    @*<script type="text/javascript" src="/content/CompanyCenterAdmin/lib/jquery/1.9.1/jquery.min.js"></script>*@
+
+    <script src="~/Content/Plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="~/Content/Plugins/jQueryUI/jquery-ui.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/js/H-ui.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/js/H-ui.admin.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.js"></script>
+    <script src="~/Content/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="/content/CompanyCenterAdmin/lib/Validform/5.3.2/Validform.min.js"></script>
+    <script src="~/Content/Plugins/sweetalert/sweetalert.min.js"></script>
+
+    @RenderSection("head", required: false)
+</head>
+<body>
+    @RenderBody()
+
+
+
+    @*<script type="text/javascript">
+        /*资讯-添加*/
+        function article_add(title,url){
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+        /*图片-添加*/
+        function picture_add(title,url){
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+        /*产品-添加*/
+        function product_add(title,url){
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+        /*用户-添加*/
+        function member_add(title,url,w,h){
+            layer_show(title,url,w,h);
+        }
+            </script>
+            <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s)})();
+        var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+            </script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

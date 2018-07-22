@@ -1,0 +1,339 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebCase
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "AddOrEditWebCase";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+    ViewBag.FileElementName = "CaseImageBig";
+    ViewBag.FileValue = Model != null ? Model.CaseImageBig : string.Empty;
+    ViewBag.thumbnailImage = Model != null ? Model.thumbnailImage : string.Empty;
+    ViewBag.width = "380px";
+    ViewBag.height = "280px";
+
+    string peopleID = Request["peopleID"] == null || Request["peopleID"] == "" ? "0" : Request["peopleID"];
+    string caseID = Request["caseID"] == null || Request["caseID"] == "" ? "0" : Request["caseID"];
+    string CompanyID = Request["CompanyID"] == null || Request["CompanyID"] == "" ? "0" : Request["CompanyID"];
+}
+@section Styles{
+    <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+}
+<div class="box">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#caseInfoTab" data-toggle="tab">基本信息</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="caseInfoTab">
+            <div class="panel-body">
+                @using (Ajax.BeginForm("AddOrEditWebCase", new AjaxOptions { HttpMethod = "Post", OnSuccess = "afterAddOrEditWebCase" }))
+                {
+                    <div class="innerLR">
+                        <div class="form-horizontal">
+                            <div class="form-group" style="display:none">
+                                @Html.HiddenFor(m => m.CaseID, new { id = "hidCaseID" })
+                            </div>
+                            <div class="form-group">
+                                <label for="CompanyID" class="col-sm-2 control-label">所属公司：</label>
+                                <div class="col-sm-3">
+
+                                    @Html.DropDownListFor(m => m.CompanyID, new SelectList(ViewBag.Companys, "Value", "Text"), new { @class = "form-control", id = "ddlCompanyID" })
+
+                                </div>
+
+                                <label for="PeopleID" class="col-sm-2 control-label">所属人员：</label>
+                                <div class="col-sm-3">
+
+                                    @Html.DropDownListFor(m => m.PeopleID, new SelectList(ViewBag.Peoples, "Value", "Text"), new { @class = "form-control" })
+
+                                </div>
+
+                               
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="DecType" class="col-sm-2 control-label">装修类型：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.DecType, new SelectList(ViewBag.DectypeaList, "Value", "Text"), new { @class = "form-control", id = "DecType" })
+
+                                </div>
+                            </div>
+                            <script>
+                                $(function(){
+                                    var DecType="@Model.DecType";
+                                    if(DecType=="2")
+                                    {
+                                        $("#jiazhuang").hide();
+                                        $("#gongzhuang").show();
+                                    }
+                                    $("#DecType").change(function(){
+                                        DecType = $(this).val();
+                                        if(DecType=="2")
+                                        {
+                                            $("#jiazhuang").hide();
+                                            $("#gongzhuang").show();
+                                        }else
+                                        {
+                                            $("#jiazhuang").show();
+                                            $("#gongzhuang").hide();
+                                        }
+                                    });
+                                })
+                            </script>
+                            <div class="form-group" id="jiazhuang">
+                                <label for="HouseType" class="col-sm-2 control-label">户型：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.HouseType, new SelectList(ViewBag.HouseTypeList, "Value", "Text"), new { @class = "form-control", id = "HouseType" })
+
+                                </div>
+                                <label for="CostArea" class="col-sm-2 control-label">风格：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.Style, new SelectList(ViewBag.StyleList, "Value", "Text"), new { @class = "form-control", id = "Style" })
+
+                                </div>
+                            </div>
+                            <div class="form-group" id="gongzhuang" style="display:none;">
+                                <label for="GzStyle" class="col-sm-2 control-label">类型：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.GzStyle, new SelectList(ViewBag.GzStyleList, "Value", "Text"), new { @class = "form-control", id = "GzStyle" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="CostArea" class="col-sm-2 control-label">价位：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.CostArea, new SelectList(ViewBag.CostAreaList, "Value", "Text"), new { @class = "form-control", id = "CostArea" })
+
+                                </div>
+                                <label for="HouseArea" class="col-sm-2 control-label">面积：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.HouseArea, new SelectList(ViewBag.HouseAreaList, "Value", "Text"), new { @class = "form-control", id = "HouseArea" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="CaseTitle" class="col-sm-2 control-label">名称：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.CaseTitle, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @Html.Partial("~/Areas/SysAdmin/Views/Shared/_UploadFile.cshtml")
+
+                            <div class="form-group">
+                                <label for="ShowOrder" class="col-sm-2 control-label">显示顺序：</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.ShowOrder, new { @class = "form-control" })
+                                </div>
+                                <label class="col-sm-1 control-label">设置：</label>
+                                <div class="col-sm-offset col-sm-4">
+                                    <div class="checkbox col-sm-4">
+                                        <label class="checkbox-custom">
+                                            @Html.CheckBoxFor(m => m.IsHot)
+                                            热门
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="CompanyInfo" class="col-sm-2 control-label">简介：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextAreaFor(m => m.CaseBrief, new { @class = "col-md-12 form-control", @rows = "5", id = "txtCaseBrief", placeholder = "请输入描述", @style = "height:400px;max-height:500px;" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="CompanyInfo" class="col-sm-2 control-label">内容：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextAreaFor(m => m.CaseInfo, new { @class = "col-md-12 form-control", @rows = "5", id = "txtCaseInfo", placeholder = "请输入描述", @style = "height:400px;max-height:500px;" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary new_button_style">保存</button>
+                                    <button type="reset" class="btn new_button_style">清空</button>
+                                    <a href="/SysAdmin/ZhuangXiu/WebCaseList" class="btn btn-primary new_button_style" id="Returnback">返回</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
+    <script>
+        $("#Returnback").click(function () {
+            window.location.href = sessionStorage.getItem('url');
+        })
+        function afterAddOrEditWebCase(ret) {
+            if (ret.RetCode == 1) {
+                swal({
+                    title: "添加成功",
+                    text: "是否继续添加人员信息？",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "是, 继续",
+                    cancelButtonText: "不, 返回",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = window.location.href;
+                    } else {
+                        window.location.href = sessionStorage.getItem('url');
+                    }
+                });
+            }
+        }
+        $(function () {
+            var editor = new wangEditor('txtCaseBrief');
+
+            // 上传图片
+            editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+            // 配置自定义参数
+            editor.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            // 设置 headers
+            editor.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            //普通的自定义菜单
+            editor.config.menus = [
+        'source',
+        '|',
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+            ];
+            editor.create();
+
+        })
+
+        $(function () {
+            var editor = new wangEditor('txtCaseInfo');
+
+            // 上传图片
+            editor.config.uploadImgUrl = '/SysAdmin/FileUpload/DecUploadFileForEditorByCase';
+
+            // 配置自定义参数
+            editor.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            // 设置 headers
+            editor.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            //普通的自定义菜单
+            editor.config.menus = [
+        'source',
+        '|',
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'link',
+        'unlink',
+        'table',
+        'emotion',
+        '|',
+        'img',
+        'video',
+        'location',
+        'insertcode',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+            ];
+            editor.create();
+
+        })
+
+        $(function (){
+            var CompanyID = '';
+            if(@peopleID =="0" && @caseID =="0"){
+                CompanyID = $("#ddlCompanyID").val();
+                //GetPeopleListByCompany(CompanyID);
+            }
+            $("#ddlCompanyID").change(function(){
+                CompanyID = $(this).val();
+                GetPeopleListByCompany(CompanyID);
+
+            });
+            //根据companyID获取人物列表
+            function GetPeopleListByCompany(CompanyID)
+            {
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "../Zhuangxiu/GetPeopleListByCompany",
+                    data: {
+                        CompanyID: CompanyID
+                    },
+                    success: function (data) {
+                        if (data.RetCode.length) {
+                            var html = '';
+                            $.each(data.RetCode, function (i, item) {
+                                html += "<option value='" + item.PeopleID + "'>" + item.PeopleName + "</option>";
+
+                            });
+                            $("#PeopleID").empty().append(html);
+
+                        } else {
+                            var html = "<option value='0'>暂无装修人员</option>";
+                            $("#PeopleID").empty().append(html);
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!');
+                    }
+                });
+            }
+
+        })
+
+
+
+    </script>
+}

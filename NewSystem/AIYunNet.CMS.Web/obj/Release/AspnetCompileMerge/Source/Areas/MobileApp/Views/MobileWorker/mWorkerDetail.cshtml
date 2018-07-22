@@ -1,0 +1,178 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebWorker    
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "mWorkerDetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+
+    List<WebBuidingCaseComment> list = new List<WebBuidingCaseComment>();
+    WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
+    list = commerSer.GetCommentListByGetUserID(Model.UserID, "WebBuiding", 0);
+
+
+    string PublishWorkerid = SessionHelper.Get("PositionID");
+    string buidingID = Request["buidingID"];
+    string StageID = Request["StageID"];
+    string type= Request["type"];
+}
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script>
+    var html = "<h1>工人详细信息</h1>";
+    $("#header").append(html);
+</script>
+<div class="container" id="container">
+
+    <div class="worker-details">
+
+        <div class="worker-item worker">
+            <div class="worker-top">
+                <div class="worker-top-img"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:80px;height:80px;"></div>
+                <div class="worker-top-txt">
+                    <h2>@Model.WorkerName  </h2>
+                    <span>价位：<em>@Model.PriceName 元/m²</em></span>
+                    @if (Model.WorkerCategory == "装修工人")
+                    {
+                        <span>工种：<em>@Model.WorkerPosition</em></span>
+                    }
+                    <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>
+                    <span>地区：<em>@Model.ProvinceName  @Model.CityName</em></span>
+                    
+                </div>
+            </div>
+            <div class="worker-bot">
+                <a href="#">
+                    <span>等级：</span>
+                    <span>
+                        @for (int i = 1; i <= Model.Stars / 25; i++)
+                        {
+                            <img src="~/Content/imgStar/jinguan.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                        @for (int i = 1; i <= Model.Stars % 25 / 5; i++)
+                        {
+                            <img src="~/Content/imgStar/huangguan.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                        @for (int i = 1; i <= Model.Stars % 5; i++)
+                        {
+                            <img src="~/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;" />
+                        }
+                    </span>
+
+                </a>
+            </div>
+            <div class="worker-bot">
+                <a href="/MobileApp/MobileComment/Commentlist?UserID=@Model.UserID">
+                    <span>评价：</span>
+                    <span>
+                        @list.Count 条
+                    </span>
+
+                </a>
+            </div>
+        </div>
+
+        <div class="worker-item">
+            <div class="worker-item-tit"><h2>服务地区</h2></div>
+            <div class="worker-item-con">@Model.AreasName</div>
+        </div>
+
+        <div class="worker-item">
+            <div class="worker-item-tit"><h2>擅长领域</h2></div>
+            <div class="worker-item-con">@Model.GoodAtStyle</div>
+        </div>
+
+        <div class="worker-item">
+            <div class="worker-item-tit"><h2>个人简介</h2></div>
+            <div class="worker-item-con">@Model.WorkerInfo</div>
+        </div>
+        <div class="mui-content worker-item" style="background-color:#fff">
+            <div class="worker-item-tit"><h2>装修案例</h2></div>
+            <ul class="mui-table-view">
+            @foreach (var item in ViewBag.list as List<WebBuiding>)
+            {
+                <li class="mui-table-view-cell">
+                    <a class="mui-navigate-right" href="/MobileApp/MoblieBuiding/mBuidingDetail?id=@item.BuidingID">
+                        @item.BuidingTitle
+                    </a>
+                </li>
+            }
+            </ul>
+            @*<ul class="mui-table-view mui-grid-view">
+                @foreach (var item in ViewBag.list as List<WebBuiding>)
+                {
+                    <li class="mui-table-view-cell mui-media mui-col-xs-6">
+                        <a href="/MobileApp/MoblieBuiding/mBuidingDetail?id=@item.BuidingID">
+                            <img class="mui-media-object" src="@AppSettingsHelper.ImgUrl@item.thumbnailImage">
+                            <div class="mui-media-body">@item.BuidingTitle</div>
+                        </a>
+                    </li>
+                }
+            </ul>*@
+        </div>
+    </div>
+    @if (type == "合作")
+    {
+        <a href="javascript:workertogether(@Model.WorkerID,'@Model.WorkerName')" class="order" style="color:white;background-color:#007aff">找TA合作</a>
+    }
+    else
+    {
+        <a href="javascript:selectwork(@Model.UserID,'@Model.WorkerName','@Model.WorkerCategory')" class="order">找TA装修</a>
+    }
+
+
+</div>
+<script>
+    function selectwork(GetUserID, GetUserName, WorkerCategory) {  
+        //询问框
+        layer.open({
+            content: '您确定找' + GetUserName + '装修吗？'
+          , btn: ['确认', '再想想']
+          , yes: function (index) {
+              window.top.location.href = "/MobileApp/MobileUser/DemandDetail?Guid=@Request["Guid"]&GetUserID=" + GetUserID + "&GetUserName=" + GetUserName + "&WorkerCategory=" + WorkerCategory;
+          }
+        });
+    }
+    function workertogether(GetWorkerid, workername) {
+        //询问框
+        layer.open({
+            content: '您确定要与' + workername + '合作吗？'
+          , btn: ['确认', '再想想']
+          , yes: function (index) {
+              $.ajax({
+                  type: "post",
+                  url: "/MobileApp/mOrder/SendWorkTogether",
+                  data: {
+                      PublishWorkerid: "@PublishWorkerid",
+                      GetWorkerid: GetWorkerid,
+                      buidingID: "@buidingID",
+                      StageID: "@StageID"
+                  },
+                  success: function (data) {
+                      if (data.RetCode == 1) {
+                          //信息框
+                          layer.open({
+                              content: '您的申请已经成功提交，请等待对方回复！'
+                            , btn: '我知道了',
+                            yes: function ()
+                            {
+                                window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@buidingID";
+                            }
+                          });
+                      } else {
+                          layer.open({
+                              content: '您已经提交了合作申请，不能重复提交！'
+                            , btn: '我知道了',
+                              yes: function () {
+                                  window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@buidingID";
+                              }
+                          });
+
+                      }
+                  }
+
+              });
+          }
+        });
+    }
+</script>

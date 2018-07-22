@@ -1,0 +1,373 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebCase
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "AddandUpdateCenterCase";
+    Layout = "~/Areas/PeopleCenter/Views/Shared/_LayoutCenter.cshtml";
+
+    string userAccount = SessionHelper.Get("userName");
+    string PeopleID = SessionHelper.Get("PositionID");
+
+    IWebCommon webcommenservice = new WebCommonService();
+    //WebCaseService webcaseservice = new WebCaseService();
+
+    //WebCase webcase = webcaseservice.GetWebCaseByID(Model.CaseID);
+    List<WebLookup> stylelist = webcommenservice.GetLookupList("Case_style");
+    List<WebLookup> housetypelist = webcommenservice.GetLookupList("Case_house_type");
+    List<WebLookup> costarealist = webcommenservice.GetLookupList("Case_cost_area");
+    List<WebLookup> housearealist = webcommenservice.GetLookupList("Case_house_area");
+    List<WebLookup> DecTypelist = webcommenservice.GetLookupList("Case_DecType");
+    List<WebLookup> GzStylelist = webcommenservice.GetLookupList("Case_gz_style");
+}
+@section head{
+    <link href="~/Content/Plugins/wangEditor/css/wangEditor.css" rel="stylesheet" />
+}
+<div class="centers_mr">
+    <div class="centers_r_items">
+        <div class="upload-left">
+            <div class="req-push-title"><p class="req-name"><i></i><span>填写案例信息</span></p></div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label"><i>*</i>作品标题</span></div>
+                <div class="tab-r"><input name="CaseTitle" class="form-ipt-txt" placeholder="请简单写出您的标题（5-20个字)" value="@Model.CaseTitle"></div>
+                @*<div class="error-message" style="display: block;"><i class="fa fa-times-circle"></i>需求标题填写错误，5-20字</div>*@
+                <div class="clearfiexd"></div>
+            </div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label">设计类型</span></div>
+                <div class="tab-r">
+                    <select class="ziliao-diqu-ipt" id="DecType">
+                        @foreach (WebLookup lo in DecTypelist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                </div>
+                <div class="clearfiexd"></div>
+            </div>
+            <script>
+                $(function(){
+                    var DecType="@Model.DecType";
+                    if(DecType=="2")
+                    {
+                        $("#jiazhuang").hide();
+                        $("#gongzhuang").show();
+                    }
+                    $("#DecType").change(function(){
+                        DecType = $(this).val();
+                        if(DecType=="2")
+                        {
+                            $("#jiazhuang").hide();
+                            $("#gongzhuang").show();
+                        }else
+                        {
+                            $("#jiazhuang").show();
+                            $("#gongzhuang").hide();
+                        }
+                    });
+                })
+            </script>
+            <div class="form-box-list" id="jiazhuang">
+                <div class="tab-l"><span class="form-box-label">户&nbsp;&nbsp;&nbsp;&nbsp;型</span></div>
+                <div class="tab-r">
+                    <select class="ziliao-diqu-ipt" id="HouseType">
+                        @foreach (WebLookup lo in housetypelist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                    <div class="tab-l"><span class="form-box-label">风&nbsp;&nbsp;&nbsp;&nbsp;格</span></div>
+                    <select class="ziliao-diqu-ipt" id="Style">
+                        @foreach (WebLookup lo in stylelist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                </div>
+                <div class="clearfiexd"></div>
+            </div>
+            <div class="form-box-list" style="display:none;" id="gongzhuang">
+                <div class="tab-l"><span class="form-box-label">类&nbsp;&nbsp;&nbsp;&nbsp;型</span></div>
+                <div class="tab-r">
+                    <select class="ziliao-diqu-ipt" id="GzStyle">
+                        @foreach (WebLookup lo in GzStylelist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                </div>
+                <div class="clearfiexd"></div>
+            </div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label">价&nbsp;&nbsp;&nbsp;&nbsp;位</span></div>
+                <div class="tab-r">
+                    <select class="ziliao-diqu-ipt" id="CostArea">
+                        @foreach (WebLookup lo in costarealist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                    <div class="tab-l"><span class="form-box-label">面&nbsp;&nbsp;&nbsp;&nbsp;积</span></div>
+                    <select class="ziliao-diqu-ipt" id="HouseArea">
+                        @foreach (WebLookup lo in housearealist)
+                        {
+                            <option value="@lo.Code">@lo.Description</option>
+                        }
+                    </select>
+                </div>
+                <div class="clearfiexd"></div>
+            </div>
+            <div  class="form-box-list">
+                <div class="tab-l"><span class="form-box-label">是否置顶</span></div>
+                <input type="checkbox" value="@Model.IsTop" id="IsTop" name="IsTop"/>
+                <span class="form-sm">置顶设计案例可以在首页显示，增加浏览量哦，最多只能显示四个置顶案例。</span>
+            </div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label"><i>*</i>上传图片</span></div>
+                <div class="tab-r">
+                    <div class="upimg">
+                        <img src="@AppSettingsHelper.ImgUrl@Model.CaseImageBig" id="ImgLook" style="width:380px;height:380px;">
+                        <input type='button' value='上传图片' onclick='javascript: $("#ImageUpload").click();' />
+                        <input type="file" name="ImageUpload" id="ImageUpload" multiple style="display:none;" />
+                        <a href="javascript:void(0);" id="BtnUpload" style="color: blue;">更换图片</a>
+                        <span class="form-sm">尺寸大小200PX*200PX；图片大小不超过300K</span>
+                    </div>
+                </div>
+                @*<div class="error-message" style="display: block;"><i class="fa fa-times-circle"></i>请上传缩略图（尺寸：380PX*280PX）</div>*@
+                <div class="clearfiexd"></div>
+                <input type="hidden" name="CaseImageBig" value="@Model.CaseImageBig" id="ImageUrl" />
+                <input type="hidden" name="thumbnailImage" value="@Model.thumbnailImage" id="thumbnailImage" />
+            </div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label"><i>*</i>简单介绍</span></div>
+                <div class="tab-r">
+                    @Html.TextAreaFor(m => m.CaseBrief, new { @class = "form_field", @rows = "5", id = "CaseBrief", placeholder = "请输入描述", @style = "height:400px;max-height:300px;" })
+                </div>
+                <div class="clearfiexd"></div>
+            </div>
+            <div class="form-box-list">
+                <div class="tab-l"><span class="form-box-label"><i>*</i>具体内容</span></div>
+                <div class="tab-r">
+ 
+                    @Html.TextAreaFor(m => m.CaseInfo, new { @class = "form_field", @rows = "5", id = "txtCaseInfo", placeholder = "请输入描述", @style = "height:400px;max-height:500px;" })
+                </div>
+                <div class="ts-message" style="display: block;">图片建议宽度805PX;每张图片不超过500K</div>
+                <div class="clearfiexd"></div>
+            </div>
+            <div class="form-box-list"><a class="btn-submit" href="javascript:void(0)">提交发布</a></div>
+        </div>
+
+
+
+    </div>
+</div>
+@section Scripts{
+    <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Content/Plugins/webupload/jQueryfileupload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload.js"></script>
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.fileupload-ui.js"></script>
+    <script src="~/Content/Plugins/webupload/jQueryfileupload/js/jquery.iframe-transport.js"></script>
+    <script src="~/Content/Plugins/wangEditor/js/wangEditor.js"></script>
+    <script>
+        $(function () {
+            var Istop='@Model.IsTop';
+            if(Istop=='True')
+            {
+                $("input:checkbox[name='IsTop']").prop('checked', true);
+            }
+
+            var PeopleID="@PeopleID";
+            if(PeopleID==0){
+                alert("请补全信息，再发布案例。");
+                window.location.href="/PeopleCenter/UserCenter/PeopleDetail";
+            }
+            //案例详情
+            @*var CaseInfo = "@Model.CaseInfo";
+            if (CaseInfo != null && CaseInfo != "") {
+                $("#CaseInfo").val(CaseInfo);
+            }*@
+            var HouseArea = "@Model.HouseArea";
+            if (HouseArea != null && HouseArea != 0) {
+                $("#HouseArea").val(HouseArea);
+            }
+            var HouseType = "@Model.HouseType";
+            if (HouseType != null && HouseType != 0) {
+                $("#HouseType").val(HouseType);
+            }
+            var Style = "@Model.Style";
+            if (Style != null && Style != 0) {
+                $("#Style").val(Style);
+            }
+            var CostArea = "@Model.CostArea";
+            if (CostArea != null && CostArea != 0) {
+                $("#CostArea").val(CostArea);
+            }
+            var DecType = "@Model.DecType";
+            if (DecType != null && DecType != 0) {
+                $("#DecType").val(DecType);
+            }
+            var GzStyle = "@Model.GzStyle";
+            if (GzStyle != null && GzStyle != 0) {
+                $("#GzStyle").val(GzStyle);
+            }
+            $(".btn-submit").click(function () {
+                var IsTop= false;
+                if($('#IsTop').is(':checked'))
+                {
+                    IsTop=true;
+                }
+                var CaseID = "@Model.CaseID";
+                var CaseTitle = $("input[name=CaseTitle]").val();
+                var HouseArea = $("#HouseArea").val();
+                var HouseType = $("#HouseType").val();
+                var Style = $("#Style").val();
+                var DecType=$("#DecType").val();
+                var GzStyle=$("#GzStyle").val();
+                var CostArea = $("#CostArea").val();
+                var CaseBrief = $("#CaseBrief").val();
+                var CaseInfo = $("#txtCaseInfo").val();
+                var CaseImageBig = $("input[name=CaseImageBig]").val();
+                var thumbnailImage = $("input[name=thumbnailImage]").val();
+                $.ajax({
+                    async: false,
+                    type: "post",
+                    url: "/PeopleCenter/CenterCases/AddandUpdateCenterCase",
+                    data: {
+                        webcase: {
+                            CaseID: CaseID,
+                            CaseTitle: CaseTitle,
+                            HouseArea: HouseArea,
+                            HouseType: HouseType,
+                            Style: Style,
+                            CostArea: CostArea,
+                            IsTop:IsTop,
+                            DecType:DecType,
+                            GzStyle:GzStyle,
+                            CaseBrief: CaseBrief,
+                            CaseInfo: CaseInfo,
+                            CaseImageBig: CaseImageBig,
+                            PeopleID:@PeopleID,
+                            thumbnailImage: thumbnailImage
+                        }
+                    },
+                    success: function (data) {
+                        if (data == 1) {
+                            alert("修改成功！");
+                            window.location.href = "/PeopleCenter/CenterCases/CenterCaselist";
+                        }
+                        else {
+                            alert("修改失败！");
+                        }
+                    },
+                    error: function (xhr, type) {
+                        alert('Ajax error!2');
+                    }
+                });
+            });
+
+
+            var jqXHRData = new Array();
+            initFileUpload();
+            $('#BtnUpload').on('click', function () {
+                if (jqXHRData.length > 0) {
+                    for (var i = 0; i < jqXHRData.length; i++) {
+                        jqXHRData[i].submit();
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            function initFileUpload() {
+                $('#ImageUpload').fileupload({
+                    url: '/PeopleCenter/UploadPic/CenterPictrueUpload',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        jqXHRData.push(data);
+                    },
+                    done: function (event, data) {
+                        if (data.result.isUploaded) {
+                            //$("#ImageUpload").val(data.result.message);
+                            $("#ImageUrl").val(data.result.message);
+                            $("#ImgLook").attr("src", "@AppSettingsHelper.ImgUrl" + data.result.message);
+                            $("#thumbnailImage").val(data.result.thumbnailmessage);
+                        } else {
+                            alert(data.result.message);
+                        }
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    },
+                    progressall: function (e, data) {
+                        var progress = parseInt(data.loaded / data.total * 100, 10);
+                        //$('#progress .bar').css('width', progress + '%');
+                    }
+                });
+            }
+        });
+        $(function () {
+            var editor = new wangEditor('txtCaseInfo');
+
+            // 上传图片
+            editor.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+            // 配置自定义参数
+            editor.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            // 设置 headers
+            editor.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            editor.create();
+
+
+            var editor1 = new wangEditor('CaseBrief');
+
+            // 上传图片
+            editor1.config.uploadImgUrl = '/SysAdmin/FileUpload/UploadFileForEditor';
+
+            // 配置自定义参数
+            editor1.config.uploadParams = {
+                token: 'abcdefg',
+                user: 'wangfupeng1988'
+            };
+            //普通的自定义菜单
+            editor1.config.menus = [
+        'source',
+        '|',
+        'bold',
+        'underline',
+        'italic',
+        'strikethrough',
+        'eraser',
+        'forecolor',
+        'bgcolor',
+        '|',
+        'quote',
+        'fontfamily',
+        'fontsize',
+        'head',
+        'unorderlist',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        '|',
+        'undo',
+        'redo',
+        'fullscreen'
+            ];
+            // 设置 headers
+            editor1.config.uploadHeaders = {
+                'Accept': 'text/x-json'
+            };
+            editor1.create();
+        })
+
+    </script>
+}

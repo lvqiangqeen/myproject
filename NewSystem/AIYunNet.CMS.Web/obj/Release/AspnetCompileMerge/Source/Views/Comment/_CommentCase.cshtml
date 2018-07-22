@@ -1,0 +1,52 @@
+﻿@model AIYunNet.CMS.Domain.Model.Z_Comment
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.BLL.IService;
+@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Web.filter;
+@using AIYunNet.CMS.Common.Utility
+@{
+    Layout = null;
+    string name = "";
+    if (Model.from_uname != "")
+    {
+        name = Model.from_uname;
+    }
+    else
+    {
+        name = Model.from_account;
+    }
+}
+
+<div class="box clearfix">
+    <a class="close" href="javascript:;">×</a>
+    <img class="head" src="@AppSettingsHelper.ImgUrl@Model.thum" alt="" style="border-radius:50%; overflow:hidden;"/>
+    <div class="contentcomment">
+        <div class="main">
+            <p class="txt">
+                <span class="user">@name：</span>@Html.Raw(Model.content)
+            </p>
+        </div>
+        <div class="info clearfix">
+            <span class="time">@Model.addtime</span>
+            <a class="praise" href="javascript:;" >赞</a>
+            <input type="hidden" value="@Model.comment_guid" />
+        </div>
+        @if (Model.ZanCount == 0)
+        {
+            <div class="praises-total" total="0" style="display: none;"></div>
+        }
+        else
+        {
+            <div class="praises-total" total="@Model.ZanCount" style="display: block;">@Model.ZanCount 个人觉得很赞</div>
+        }
+        <div class="comment-list">
+
+        </div>
+        <div class="text-box" style="display:none;">
+            <textarea class="comment" autocomplete="off">评论…</textarea>
+            <button class="btn ">回 复</button>
+            <input type="hidden" class="comment_guid" value="@Model.comment_guid" />
+            <span class="word"><span class="length">0</span>/140</span>
+        </div>
+    </div>
+</div>

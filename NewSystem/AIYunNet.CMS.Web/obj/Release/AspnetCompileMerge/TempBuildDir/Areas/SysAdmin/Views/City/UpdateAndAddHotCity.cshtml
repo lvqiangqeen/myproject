@@ -1,0 +1,128 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@model AIYunNet.CMS.Domain.Model.t_City
+@{
+    ViewBag.Title = "UpdateAndAddHotCity";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
+}
+
+<div class="box">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#caseInfoTab" data-toggle="tab">热门城市</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="caseInfoTab">
+            <div class="panel-body">
+                @using (Ajax.BeginForm("UpdateAndAddHotCity", new AjaxOptions { HttpMethod = "Post", OnSuccess = "afterUpdateAndAddHotCity" }))
+                {
+                    <div class="innerLR">
+                        <div class="form-horizontal">
+                            <div class="form-group" style="display:none">
+                                @*@Html.HiddenFor(m => m.cityID, new { id = "hidcityID" })*@
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="col-sm-2 control-label">城市：</label>
+                                <div class="col-sm-3">
+                                    @Html.DropDownListFor(m => m.father, new SelectList(ViewBag.provinceList, "Value", "Text"), new { @class = "form-control", id = "provinceid" })
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="cityID" class="form-control" id="cityid">
+                                     
+                                    </select>
+                                </div>
+                            </div>
+                            <script>
+                                $(function () {
+                                    var provinceid = $("#provinceid").val();
+                                    getcitylist(provinceid);
+                                    $("#provinceid").change(function () {
+                                        provinceid = $("#provinceid").val();
+                                        getcitylist(provinceid);
+                                    });
+
+
+                                    function getcitylist(provinceid)
+                                    {
+                                        $.ajax({
+                                            async: false,
+                                            type: "post",
+                                            url: "/SysAdmin/city/GetCityListByfather",
+                                            data: {
+                                                father: provinceid
+                                            },
+                                            success: function (data) {
+                                                if (data != null) {
+                                                    var html = '';
+                                                    $.each(data.list, function (i,item) {
+                                                        html += '<option value="' + item.cityID + '">' + item.city + '</option>'
+                                                    });
+                                                    $("#cityid").empty();
+                                                    $("#cityid").append(html);
+                                                    
+                                                }
+                                                else {
+                                                    
+                                                }
+                                            },
+                                            error: function (xhr, type) {
+                                                alert('Ajax error!2');
+                                            }
+                                        });
+                                    }
+                                    
+                                })
+                            </script>
+                            <div class="form-group">
+                                <label for="RecommendUrl" class="col-sm-2 control-label">排序（请输入数字数字越大越靠前）：</label>
+                                <div class="col-sm-8">
+                                    @Html.TextBoxFor(m => m.orderid, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9" style="text-align:center">
+                                    <button type="submit" class="btn btn-primary new_button_style">保存</button>
+                                    <button type="reset" class="btn new_button_style">清空</button>
+                                    <a href="/SysAdmin/city/HotCityList" class="btn btn-primary new_button_style">返回</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+        })
+        function afterUpdateAndAddHotCity(ret) {
+            if (ret.RetCode == 1) {
+                swal({
+                    title: "添加成功",
+                    text: "是否继续添加人员信息？",
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "是, 继续",
+                    cancelButtonText: "不, 返回",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = window.location.href;
+                    }
+                else {
+                        window.location.href = sessionStorage.getItem('url');
+                    }
+                });
+            }
+        }
+    </script>
+}
+
