@@ -12,12 +12,13 @@ using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
-    [MobileUserFilter]
+    
     public class MobileCommentController : Controller
     {
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
         WebBuidingService buidingSer = new WebBuidingService();
         WebBuidingContractService contractSer = new WebBuidingContractService();
+        [MobileUserFilter]
         public ActionResult BuidingContractByOwner(string guid = "0")
         {
             WebBuidingContract contract = new WebBuidingContract();
@@ -31,6 +32,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             }
             return View(contract);
         }
+        [MobileUserFilter]
         public ActionResult BuidingContract(string guid="0")
         {
             WebBuidingContract contract = new WebBuidingContract();
@@ -46,6 +48,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
 
         [HttpPost]
+        [MobileUserFilter]
         public JsonResult EditBuidingContract(WebBuidingContract contract)
         {
             int ret = 0;
@@ -79,6 +82,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(list);
         }
         // GET: MobileApp/MobileComment
+        [MobileUserFilter]
         public ActionResult CommentDetail(int CaseID=0)
         {
             WebBuidingCaseComment comm = new WebBuidingCaseComment();
@@ -91,6 +95,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         }
         //总体审核
         [HttpPost]
+        [MobileUserFilter]
         public JsonResult IsUserEnd(int buidingID, int IsUserend)
         {
             int ret = 0;
@@ -98,6 +103,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(new { RetCode = ret });
         }
         [HttpPost]
+        [MobileUserFilter]
         public JsonResult AddOrEditComment(WebBuidingCaseComment comm)
         {
             int ret = 0;

@@ -1,0 +1,33 @@
+﻿.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+    color: #fff;
+    border: 1px solid #413129;
+    background-color: #413129;
+}
+.mui-btn-outlined.mui-btn-blue, .mui-btn-outlined.mui-btn-primary {
+    color: #413129;
+}
+a {
+    text-decoration: none;
+    color: #413129;
+}
+.my-order-item-btn span {
+    border: 1px solid #413129;
+    color: #413129;
+}
+.my-order-item-btn span.my-order-item-red a, .my-order-item-btn span.my-order-item-jindu a {
+    color: #413129;
+}
+.my-order-item-btn span.my-order-item-red {
+    border: 1px solid #413129;
+    color: #413129;
+}
+.layui-btn {
+    background-color: #413129;
+}
+.min-price-tit h2 {
+    border-left: 2px solid #413129;
+}
+span.cancel {
+    color: #413129;
+    border: 1px solid #413129;
+}

@@ -3768,6 +3768,7 @@
     <Content Include="Content\WorkerApp\car-list.html" />
     <Content Include="Content\WorkerApp\coupons.html" />
     <Content Include="Content\WorkerApp\css\base.css" />
+    <Content Include="Content\WorkerApp\css\buttoncss.css" />
     <Content Include="Content\WorkerApp\css\class.css" />
     <Content Include="Content\WorkerApp\css\common.css" />
     <Content Include="Content\WorkerApp\css\commonbake.css" />
@@ -3910,7 +3911,10 @@
     <Content Include="Content\WorkerApp\pro-list.html" />
     <Content Include="Content\WorkerApp\repair-details.html" />
     <Content Include="Content\WorkerApp\reservation.html" />
+    <Content Include="Content\WorkerApp\updateimages\ding.png" />
+    <Content Include="Content\WorkerApp\updateimages\home.png" />
     <Content Include="Content\WorkerApp\updateimages\more.png" />
+    <Content Include="Content\WorkerApp\updateimages\my.png" />
     <Content Include="Content\WorkerApp\updateimages\titlecolor.png" />
     <Content Include="Content\WorkerApp\updateimages\wx.png" />
     <Content Include="Content\WorkerApp\updateimages\zgs.png" />

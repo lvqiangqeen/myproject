@@ -155,7 +155,7 @@ img {
 	left: 0;
 	height:2rem;
 	line-height:2rem;
-	background-color:#007aff;
+	background-color:#413129;
 	width:100%;
 	display: -moz-box;
 	display: -webkit-box;
@@ -191,8 +191,8 @@ img {
 .footnav li .foot-worker i{background-image:url(../images/worker.png);}
 .footnav li .foot-order i{background-image:url(../images/order.png);}
 .footnav li .my i{background-image:url(../images/my.png);}
-.footnav li.on a span{color:#fa4b28;}
-.footnav li.on .home i{background-image:url(../images/home-on.png);}
-.footnav li.on .foot-worker i{background-image:url(../images/worker-on.png);}
-.footnav li.on .foot-order i{background-image:url(../images/order-on.png);}
-.footnav li.on .my i{background-image:url(../images/my-on.png);}
+.footnav li.on a span{color:#625138;}
+.footnav li.on .home i{background-image:url(../updateimages/home.png);}
+.footnav li.on .foot-worker i{background-image:url(../updateimages/more.png);}
+.footnav li.on .foot-order i{background-image:url(../updateimages/order.png);}
+.footnav li.on .my i{background-image:url(../updateimages/my.png);}

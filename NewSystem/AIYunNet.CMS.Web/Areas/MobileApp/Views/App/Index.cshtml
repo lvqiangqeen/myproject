@@ -1,6 +1,16 @@
-﻿@{
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
     ViewBag.Title = "BuidingContract";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebRecommendService reSer = new WebRecommendService();
+    //装修app轮播
+    List<WebRecommend> listlubo = reSer.GetWebRecommendList(22);
+    //装修app案例
+    List<WebRecommend> listanli = reSer.GetWebRecommendList(23);
+    //装修app案例
+    List<WebRecommend> listxinwen = reSer.GetWebRecommendList(24);
 }
 <script>
     var html = "<h1>脉空间装修基地</h1>";
@@ -12,6 +22,17 @@
     }
     .ind-nav .more {
     background-color: white;
+}
+
+</style>
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<style>
+    .mui-slider .mui-slider-group .mui-slider-item {
+    width: 50%;
+        margin-left: 1px;
+}
+        .ind-item h3.red {
+    color: #413129;
 }
 </style>
 <div class="container" id="container">
@@ -26,9 +47,15 @@
     <div class="banner" id="index-banner">
         <div class="banner-pics">
             <ul class="banner-pics-list OnSale-banner">
-                <li><a href="#"><img src="/content/workerapp/images/ind-banner.jpg" alt="" /></a></li>
-                <li><a href="#"><img src="/content/workerapp/images/ind-banner.jpg" alt="" /></a></li>
-                <li><a href="#"><img src="/content/workerapp/images/ind-banner.jpg" alt="" /></a></li>
+                @{int k = 0;}
+                @foreach (var item in listlubo)
+                {
+                    if (k < 3)
+                    {
+                        <li><a href="@item.RecWechartUrl"><img src="@AppSettingsHelper.ImgUrl@item.RecommendImg" alt="" /></a></li>
+                    }
+                    k++;
+                }
             </ul>
         </div>
         <ul class="banner-tit">
@@ -54,21 +81,21 @@
             <h2>家居装修</h2>
         </div>
         <ul class="clearfix">
-            <li style="background-color: white;"><div><a href="floor-classification.html"><i><img src="~/content/workerapp/updateimages/zgj.png"></i><em>找管家</em></a></div></li>
+            <li style="background-color: white;"><div><a href="floor-classification.html"><i><img src="~/content/workerapp/updateimages/zgj.png"></i><em style="color:black;">找管家</em></a></div></li>
             <li style="background-color: #91887E;"><div><a href="/MobileApp/MobileWorker/mWorkerLeaderList"><i><img src="/content/workerapp/updateimages/zgz.png"></i><em>找工长</em></a></div></li>
             <li style="background-color: #564E48;"><div><a href="/MobileApp/MobileWorker/mWorkerList"><i><img src="/content/workerapp/updateimages/zgr.png"></i><em>找工人</em></a></div></li>
             <li style="background-color: #78664C;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/zgs.png"></i><em>找公司</em></a></div></li>
             <li style="background-color: #968D75;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/sjs.png"></i><em>设计师</em></a></div></li>
-            <li style="background-color: #625138;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/al.png"></i><em>案例赏析</em></a></div></li>
+            <li style="background-color: #625138;"><div><a href="http://m.51must.com/list.aspx?wid=35&cid=165"><i><img src="/content/workerapp/updateimages/al.png"></i><em>案例赏析</em></a></div></li>
             <li style="background-color: #82705C;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/wx.png"></i><em>安装维修</em></a></div></li>
             <li style="background-color: #413129;"><div><a href="add-class.html"><i><img src="/content/workerapp/updateimages/ys.png"></i><em>搬家运输</em></a></div></li>
-            <li style="background-color: white;"><div><a href="javascript:void(0)" class="more"><i><img src="/content/workerapp/updateimages/more.png"></i><em>更多</em></a></div></li>
+            <li style="background-color: white;"><div><a href="javascript:void(0)" class="more"><i><img src="/content/workerapp/updateimages/more.png"></i><em style="color:black;">更多</em></a></div></li>
         </ul>
 
     </div>
     <!--家居安装结束-->
     <!--家居维修开始-->
-    <div class="ind-nav ind-nav2">
+    <div class="ind-nav ind-nav2" style="display:none;">
         <div class="ind-tit">
             <h2>家居维修</h2>
         </div>
@@ -83,26 +110,113 @@
         </ul>
     </div>
     <!--家居维修结束-->
-    <!--二手置换 货运配送开始-->
-    <div class="ind-item">
-        <a href="book-recovery.html">
-            <div class="ind-item-img"><img src="/content/workerapp/images/eszh.png"></div>
-            <div class="ind-item-txt">
-                <h3 class="red">二手置换</h3>
-                <p>二手物品在线评估、预约上门回收</p>
+    <!--新闻-->
+    <div class="ind-nav ind-nav3">
+        <div class="ind-tit">
+            <h2>案例赏析</h2>
+        </div>
+  
+        <div id="slider" class="mui-slider">
+                <div class="mui-slider-group mui-slider-loop">
+                    <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+                    @{ int i = 0;}
+                    @foreach (var item in listanli)
+                    {
+                        if (i < 4)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="mui-slider-item mui-slider-item-duplicate">
+                                    <a href="@item.RecWechartUrl">
+                                        <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg">
+                                        <p class="mui-slider-title">@item.RecommendName</p>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mui-slider-item">
+                                    <a href="@item.RecWechartUrl">
+                                        <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg">
+                                        <p class="mui-slider-title">@item.RecommendName</p>
+                                    </a>
+                                </div>
+                            }
+                        }
+
+                        i++;
+                    }
+                    @{ int j = 0;}
+                    @foreach (var item in listanli)
+                    {
+                        if (j < 2)
+                        {
+                            if (j == 1)
+                            {
+                                <div class="mui-slider-item mui-slider-item-duplicate">
+                                    <a href="@item.RecWechartUrl">
+                                        <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg">
+                                        <p class="mui-slider-title">@item.RecommendName</p>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mui-slider-item">
+                                    <a href="@item.RecWechartUrl">
+                                        <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg">
+                                        <p class="mui-slider-title">@item.RecommendName</p>
+                                    </a>
+                                </div>
+                            }
+                        }
+
+                        j++;
+                    }
+                </div>
+                <div class="mui-slider-indicator mui-text-right" style="display:none;">
+                    <div class="mui-indicator mui-active"></div>
+                    <div class="mui-indicator"></div>
+                    <div class="mui-indicator"></div>
+                    <div class="mui-indicator"></div>
+                </div>
             </div>
-        </a>
+        
     </div>
-    <div class="ind-item">
-        <a href="goods-allocation.html">
-            <div class="ind-item-img"><img src="/content/workerapp/images/hyps.png"></div>
-            <div class="ind-item-txt">
-                <h3 class="green">货运配送</h3>
-                <p>少量搬运及拆装搬家，大件物品同城配送</p>
+    <!--新闻-->
+    <!--二手置换 货运配送开始-->
+    <div class="ind-nav ind-nav4" style="margin-top: 11px;">
+        <div class="ind-tit" style="border-bottom: 1px solid #ededed;">
+            <h2>新闻推送</h2>
+        </div>
+        @foreach (var item in listxinwen)
+        {
+            <div class="ind-item">
+                <a href="@item.RecWechartUrl">
+                    <div class="ind-item-img"><img src="@AppSettingsHelper.ImgUrl@item.thumbnailImage" style="border-radius:8px;"></div>
+                    <div class="ind-item-txt">
+                        <h3 class="red">@item.RecommendName</h3>
+                        <p>@StringHelper.StringTruncat(item.RecommendInfo,16,"...")</p>
+                    </div>
+                </a>
             </div>
-        </a>
+        }
+       
     </div>
     <!--二手置换 货运配送结束-->
 
 </div>
-
+<script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script>
+<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		var slider = mui("#slider");
+		document.getElementById("switch").addEventListener('toggle', function(e) {
+			
+				slider.slider({
+					interval: 0
+				});
+		
+		});
+</script>

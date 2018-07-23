@@ -11,10 +11,13 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
 	public class AppController : Controller
 	{
+        WebRecommendService reSer = new WebRecommendService();
+        WebCommonService comSer = new WebCommonService();
+
 		// GET: MobileApp/App
 		public ActionResult Index()
 		{
-			return View();
+            return View();
 		}
 
 		public ActionResult WorkerList()
