@@ -8,10 +8,12 @@
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     string guid = Request["guid"];
     List<string> list = new List<string>();
+    WebBuidingService buidingSer = new WebBuidingService();
     if (Model.thumbnailImage != "")
     {
         list = Model.thumbnailImage.Split('|').Where(c => c != "").ToList();
     }
+    WebBuiding buiding = buidingSer.GetWebBuidingByGuID(guid);
 }
 
 <style>
@@ -138,6 +140,7 @@
         <input value="@Model.id" name="id" type="hidden" />
         <input value="@Model.imgcontract" name="imgcontract" type="hidden" />
         <input value="@Model.thumbnailImage" name="thumbnailImage" type="hidden" />
+        <input value="@buiding.BuidingTitle" name="filename" type="hidden" />
         <!--    照片添加    -->
         <div class="z_photo">
             <div class="z_file">
@@ -321,13 +324,15 @@
             var id = $("input[name=id]").val();
             var imgcontract = $("input[name=imgcontract]").val();
             var thumbnailImage = $("input[name=thumbnailImage]").val();
+            var filename = $("input[name=filename]").val();
             $.ajax({
                 type: "post",
                 url: "/MobileApp/MobileComment/EditBuidingContract",
                 data: {
                     id: id,
                     IsPass: '0',
-                    Guid:'@guid',
+                    Guid: '@guid',
+                    filename:filename,
                     imgcontract: imgcontract,
                     thumbnailImage: thumbnailImage
                 },

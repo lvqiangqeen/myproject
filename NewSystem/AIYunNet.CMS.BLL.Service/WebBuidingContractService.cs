@@ -42,6 +42,17 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
+        public int DeleteContract(string guid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingContract old = context.WebBuidingContract.FirstOrDefault(c => c.Guid == guid);
+                old.DeleteOn = DateTime.Now;
+                old.IsDelete = 1;
+                context.SaveChanges();
+                return 1;
+            }
+        }
         public int updateContract(WebBuidingContract constract)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -54,6 +65,20 @@ namespace AIYunNet.CMS.BLL.Service
                 context.SaveChanges();
                 return 1;
                 
+            }
+        }
+
+        public List<WebBuidingContract> GetContractList()
+        {
+            List<WebBuidingContract> list = new List<WebBuidingContract>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                list = context.WebBuidingContract.Where(c => c.IsDelete==0).ToList();
+                if (list == null)
+                {
+                    list = new List<WebBuidingContract>();
+                }
+                return list;
             }
         }
     }

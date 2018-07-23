@@ -3,7 +3,7 @@
 @using AIYunNet.CMS.Common.Utility;
 @{
     ViewBag.Title = "WebBuidingConstractList";
-    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
 }
 
 <div class="box">
@@ -17,50 +17,40 @@
                     <th class="text-center">
                         <input id="chkAll" type="checkbox">
                     </th>
-                    <th>账号</th>
-                    <th>公司名称</th>
-                    <th>注册手机号</th>
-                    <th>注册时间</th>
-                    <th>是否被锁</th>
+                    <th>合同编号</th>
+                    <th>创建日期</th>
+                    <th>小区地址</th>
+                    <th>是否通过</th>
                     <th>操作</th>
                 </tr>
             </thead>
             <tbody>
-                @if (ViewBag.webcomUlist != null)
+                @if (ViewBag.list != null)
                 {
-                    foreach (WebCompanyUser user in ViewBag.webcomUlist as List<WebCompanyUser>)
+                    foreach (WebBuidingContract item in ViewBag.list as List<WebBuidingContract>)
                     {
                         <tr>
-                            <td><input class="chkCompany" type="checkbox" value="@user.CompanyUserID"></td>
-                            <td>@user.ComUserName</td>
-                            <td>@user.CompanyName</td>
-                            <td>@user.CompanyPhone</td>
-                            <td>@user.AddOn</td>
+                            <td><input class="chkCompany" type="checkbox" value="@item.id"></td>
+                            <td>@item.Guid</td>
+                            <td>@item.AddOn</td>
+                            <td>@item.filename</td>
                             <td>
-                                @if (user.IsLock)
+                                @if (item.IsPass == 0)
                                 {
-                                    @:<span style="color:red">是</span>
-
-
-
-
+                                    @:<span style="color:black">未审核</span>                                    
+                                }
+                                else if (item.IsPass == 2)
+                                {
+                                    @:<span style="color:red">否</span>                                  
                                 }
                                 else
                                 {
-                                    @:<span>否</span>
-
-
-
-
+                                    @:<span style="color:#246708">是</span>
                                 }
                             </td>
                             <td>
-                                @if (webCompanyser.GetWebCompanyByUserID(user.CompanyUserID) != null)
-                                {
-                                    @:<a class="btn1 btn-stroke" href="/SysAdmin/ZhuangXiu/AddOrEditWebCompany?companyID=@webCompanyser.GetWebCompanyByUserID(user.CompanyUserID).CompanyID" title="公司信息"><i class="fa fa-home"></i></a>&nbsp; &nbsp;
-                                }
-                                <a class="btn1 btn-stroke" href="/SysAdmin/CompanyUserCenter/AddAndEditCompanyUser?UserID=@user.CompanyUserID"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                                <a class="btn1 btn-stroke" href="javascript:deleteUser(@user.CompanyUserID)"><i class="fa fa-trash-o"></i></a>
+                                <a class="btn1 btn-stroke" href="/SysAdmin/AppWorker/updateWebBuidingConstract?guid=@item.Guid"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                <a class="btn1 btn-stroke" href="javascript:deleteUser('@item.Guid')"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                     }
@@ -95,7 +85,7 @@
             });
         })
 
-        function deleteUser(UserID) {
+        function deleteUser(guid) {
 
             swal({
                 title: "你确定?",
@@ -110,8 +100,8 @@
 	function () {
 	    $.ajax({
 	        type: "post",
-	        url: "/SysAdmin/CompanyUserCenter/DeleteWebComUser",
-	        data: { "ComUserID": UserID },
+	        url: "/SysAdmin/AppWorker/deleteContract",
+	        data: { "guid": guid },
 	        success: function (data) {
 	            if (data.RetCode = 1) {
 	                window.location.href = window.location.href;
