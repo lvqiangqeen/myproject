@@ -113,8 +113,9 @@
     }
 </style>
 <script>
-    var html = "<h1>上传阶段信息</h1>";
-    $("#header").append(html);
+    $("title").html("上传阶段信息");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
 </script>
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
@@ -160,14 +161,14 @@
     </div>
     <ul class="car-details clearfix">
         <li class="mui-table-view-cell" style="height: 41px;padding-left: 0rem;">
-            <span style="font-weight: normal;font-size: 0.7rem;border-left: 2px solid #fa4b28;padding-left: 0.25rem;">确认完成</span>
+            <span style="font-weight: normal;font-size: 0.7rem;border-left: 2px solid #413129;padding-left: 0.25rem;">确认完成</span>
             <div class="mui-switch" id="IsComplete">
                 <div class="mui-switch-handle"></div>
                 <input value="@IsComplete" type="hidden" name="IsComplete"/>
             </div>
         </li>
     </ul>
-    <a href="javascript:updateStage()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+    <a href="javascript:updateStage()" class="order" style="color:white;background-color:#413129">提交信息</a>
     <script>
 			mui.init({
 				swipeBack:true //启用右滑关闭功能
@@ -353,6 +354,6 @@
         }
     </script>
 </div>
-
+<link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
 
 

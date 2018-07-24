@@ -13,14 +13,30 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 	{
         WebRecommendService reSer = new WebRecommendService();
         WebCommonService comSer = new WebCommonService();
+        t_AreaService areaSer = new t_AreaService();
 
-		// GET: MobileApp/App
-		public ActionResult Index()
+        // GET: MobileApp/App
+        public ActionResult Index()
 		{
             return View();
 		}
 
-		public ActionResult WorkerList()
+        public ActionResult AreaList()
+        {
+            List<t_City> list = areaSer.GetHotCityList();
+            ViewBag.list = list;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult setSession(string mkjcitycode, string mkjcityname)
+        {
+            int ret= 1;
+            SessionHelper.SetSession("mkjcitycode", mkjcitycode);
+            SessionHelper.SetSession("mkjcityname", mkjcityname);
+            return Json(new { RetCode = ret });
+        }
+        public ActionResult WorkerList()
 		{
 			WebPeopleService peopleService = new WebPeopleService();
             WebWorkerService WorkerService = new WebWorkerService();

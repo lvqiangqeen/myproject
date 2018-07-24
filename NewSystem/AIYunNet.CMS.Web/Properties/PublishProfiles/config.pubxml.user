@@ -69,6 +69,9 @@
     <File Include="Areas/CompanyCenter/Views/web.config">
       <publishTime>05/18/2017 21:47:12</publishTime>
     </File>
+    <File Include="Areas/MobileApp/Views/App/AreaList.cshtml">
+      <publishTime>07/24/2018 12:20:57</publishTime>
+    </File>
     <File Include="Areas/MobileApp/Views/App/BuidingStageInfo.cshtml">
       <publishTime>03/05/2018 08:13:29</publishTime>
     </File>
@@ -82,7 +85,7 @@
       <publishTime>03/26/2018 10:06:44</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/Index.cshtml">
-      <publishTime>07/23/2018 17:02:04</publishTime>
+      <publishTime>07/24/2018 14:15:26</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/PeopleCenter.cshtml">
       <publishTime>03/26/2018 10:06:44</publishTime>
@@ -100,109 +103,109 @@
       <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mLogin/LoginCenter.cshtml">
-      <publishTime>07/23/2018 16:32:21</publishTime>
+      <publishTime>07/24/2018 12:21:11</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mLogin/registCenter.cshtml">
-      <publishTime>07/23/2018 16:32:04</publishTime>
+      <publishTime>07/24/2018 12:21:11</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataAreas.cshtml">
-      <publishTime>07/23/2018 16:39:50</publishTime>
+      <publishTime>07/24/2018 12:21:18</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataShengFen.cshtml">
       <publishTime>06/15/2018 11:25:47</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataText.cshtml">
-      <publishTime>07/23/2018 16:35:00</publishTime>
+      <publishTime>07/24/2018 12:21:26</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/EditUserDataText.cshtml">
-      <publishTime>07/23/2018 16:39:19</publishTime>
+      <publishTime>07/24/2018 12:21:34</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/mPCenter.cshtml">
-      <publishTime>07/23/2018 09:03:06</publishTime>
+      <publishTime>07/24/2018 17:07:43</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/PersonData.cshtml">
-      <publishTime>07/23/2018 16:39:19</publishTime>
+      <publishTime>07/24/2018 12:21:47</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/UserData.cshtml">
-      <publishTime>07/23/2018 16:39:19</publishTime>
+      <publishTime>07/24/2018 12:21:54</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileComment/BuidingContract.cshtml">
-      <publishTime>07/23/2018 16:52:09</publishTime>
+      <publishTime>07/24/2018 12:22:18</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileComment/BuidingContractByOwner.cshtml">
-      <publishTime>07/23/2018 08:37:37</publishTime>
+      <publishTime>07/24/2018 12:22:18</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileComment/CommentDetail.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:22:18</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileComment/Commentlist.cshtml">
-      <publishTime>07/19/2018 16:15:57</publishTime>
+      <publishTime>07/24/2018 12:22:18</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/BuidingDetailUser.cshtml">
-      <publishTime>07/23/2018 16:58:57</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/BuidinglistUser.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/decDemandDetail.cshtml">
-      <publishTime>07/23/2018 16:58:00</publishTime>
+      <publishTime>07/24/2018 16:17:08</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/DemandDetail.cshtml">
-      <publishTime>07/23/2018 16:40:36</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/DemandList.cshtml">
-      <publishTime>07/23/2018 16:56:38</publishTime>
+      <publishTime>07/24/2018 16:14:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/SelectWorkerforDemand.cshtml">
-      <publishTime>05/07/2018 08:19:20</publishTime>
+      <publishTime>07/24/2018 12:22:59</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mupdateWebWorker.cshtml">
-      <publishTime>07/23/2018 16:35:52</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerDetail.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerLeaderList.cshtml">
-      <publishTime>06/20/2018 11:12:56</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerList.cshtml">
-      <publishTime>06/20/2018 11:12:56</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/buidingStage.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/buidingStageByWorker.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/mBuidingDetail.cshtml">
-      <publishTime>07/23/2018 09:07:32</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileBuidingDetail.cshtml">
-      <publishTime>07/23/2018 16:49:18</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileBuidingList.cshtml">
-      <publishTime>06/25/2018 16:45:31</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileStageDetail.cshtml">
-      <publishTime>07/09/2018 08:18:30</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mTogetherBuidingDetail.cshtml">
-      <publishTime>04/27/2018 09:09:19</publishTime>
+      <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mTogetherBuidingList.cshtml">
       <publishTime>05/04/2018 08:39:35</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/OrderDetail.cshtml">
-      <publishTime>05/05/2018 17:35:12</publishTime>
+      <publishTime>07/24/2018 16:44:37</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/Orderlist.cshtml">
-      <publishTime>07/23/2018 16:45:24</publishTime>
+      <publishTime>07/24/2018 15:34:22</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/SelectWorker.cshtml">
-      <publishTime>04/19/2018 10:52:39</publishTime>
+      <publishTime>07/24/2018 10:19:58</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/Shared/_mobileLayout.cshtml">
-      <publishTime>07/23/2018 16:54:51</publishTime>
+      <publishTime>07/24/2018 12:27:56</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/web.config">
       <publishTime>03/05/2018 08:13:30</publishTime>
@@ -336,8 +339,11 @@
     <File Include="Areas/SysAdmin/Views/Account/Login.cshtml">
       <publishTime>02/07/2017 23:21:06</publishTime>
     </File>
+    <File Include="Areas/SysAdmin/Views/AppWorker/updateWebBuidingConstract.cshtml">
+      <publishTime>07/24/2018 08:38:19</publishTime>
+    </File>
     <File Include="Areas/SysAdmin/Views/AppWorker/WebBuidingConstractList.cshtml">
-      <publishTime>07/23/2018 08:37:38</publishTime>
+      <publishTime>07/24/2018 08:38:19</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/City/HotCityList.cshtml">
       <publishTime>01/04/2018 14:45:21</publishTime>
@@ -436,7 +442,7 @@
       <publishTime>04/27/2017 21:59:52</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml">
-      <publishTime>07/23/2018 08:37:38</publishTime>
+      <publishTime>07/24/2018 08:38:19</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Shared/_UploadDesignerImage.cshtml">
       <publishTime>12/28/2017 12:02:14</publishTime>
@@ -568,7 +574,7 @@
       <publishTime>07/23/2018 15:34:38</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>07/23/2018 15:34:40</publishTime>
+      <publishTime>07/24/2018 17:08:42</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
       <publishTime>07/23/2018 15:34:39</publishTime>
@@ -577,16 +583,16 @@
       <publishTime>07/23/2018 08:37:37</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>07/23/2018 17:04:57</publishTime>
+      <publishTime>07/24/2018 17:08:44</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>07/23/2018 17:05:19</publishTime>
+      <publishTime>07/24/2018 17:10:25</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>07/23/2018 17:05:19</publishTime>
+      <publishTime>07/24/2018 17:10:25</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -15454,7 +15460,7 @@
       <publishTime>03/26/2018 14:09:41</publishTime>
     </File>
     <File Include="Content/WorkerApp/css/base.css">
-      <publishTime>07/23/2018 16:22:35</publishTime>
+      <publishTime>07/24/2018 10:23:39</publishTime>
     </File>
     <File Include="Content/WorkerApp/css/buttoncss.css">
       <publishTime>07/23/2018 16:57:30</publishTime>
@@ -15463,7 +15469,7 @@
       <publishTime>03/29/2018 08:29:40</publishTime>
     </File>
     <File Include="Content/WorkerApp/css/common.css">
-      <publishTime>07/23/2018 16:26:47</publishTime>
+      <publishTime>07/24/2018 17:07:01</publishTime>
     </File>
     <File Include="Content/WorkerApp/css/commonbake.css">
       <publishTime>03/26/2018 14:09:41</publishTime>
@@ -15543,6 +15549,9 @@
     <File Include="Content/WorkerApp/images/face-bg.jpg">
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
+    <File Include="Content/WorkerApp/images/face-bg.png">
+      <publishTime>07/24/2018 14:06:30</publishTime>
+    </File>
     <File Include="Content/WorkerApp/images/fwdh.png">
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
@@ -15565,7 +15574,7 @@
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/home.png">
-      <publishTime>03/26/2018 14:09:42</publishTime>
+      <publishTime>07/24/2018 11:10:40</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/hyps.png">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -15640,7 +15649,7 @@
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/my.png">
-      <publishTime>03/26/2018 14:09:42</publishTime>
+      <publishTime>07/24/2018 11:11:32</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/order-details-icon.png">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -15652,7 +15661,7 @@
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/order.png">
-      <publishTime>03/26/2018 14:09:42</publishTime>
+      <publishTime>07/24/2018 11:10:14</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/other-img.jpg">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -15703,7 +15712,7 @@
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/worker.png">
-      <publishTime>03/26/2018 14:09:42</publishTime>
+      <publishTime>07/24/2018 11:11:03</publishTime>
     </File>
     <File Include="Content/WorkerApp/images/wyaz.png">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -15888,6 +15897,9 @@
     <File Include="Content/WorkerApp/reservation.html">
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
+    <File Include="Content/WorkerApp/updateimages/address.png">
+      <publishTime>07/24/2018 09:44:57</publishTime>
+    </File>
     <File Include="Content/WorkerApp/updateimages/al.png">
       <publishTime>07/23/2018 08:37:38</publishTime>
     </File>
@@ -15900,8 +15912,38 @@
     <File Include="Content/WorkerApp/updateimages/more.png">
       <publishTime>07/23/2018 08:37:38</publishTime>
     </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-bzzx.png">
+      <publishTime>07/24/2018 17:02:15</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-fbzb.png">
+      <publishTime>07/24/2018 17:05:08</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-grzl.png">
+      <publishTime>07/24/2018 16:51:34</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-gsjj.png">
+      <publishTime>07/24/2018 17:03:02</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-kfzx.png">
+      <publishTime>07/24/2018 17:00:18</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-wddd.png">
+      <publishTime>07/24/2018 17:03:36</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-zbjl.PNG">
+      <publishTime>07/24/2018 17:07:26</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/my-icon-zxjd.png">
+      <publishTime>07/24/2018 16:54:12</publishTime>
+    </File>
     <File Include="Content/WorkerApp/updateimages/my.png">
       <publishTime>07/23/2018 08:54:00</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/order.png">
+      <publishTime>07/23/2018 14:32:09</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/pre2.png">
+      <publishTime>07/24/2018 08:47:20</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/sjs.png">
       <publishTime>07/23/2018 08:37:38</publishTime>
@@ -15926,6 +15968,9 @@
     </File>
     <File Include="Content/WorkerApp/updateimages/zgz.png">
       <publishTime>07/23/2018 08:37:38</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/updateimages/zgz1.png">
+      <publishTime>07/24/2018 12:34:06</publishTime>
     </File>
     <File Include="Content/WorkerApp/user-evaluation.html">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -15973,7 +16018,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/23/2018 17:05:12</publishTime>
+      <publishTime>07/24/2018 17:10:14</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -16309,7 +16354,7 @@
       <publishTime>01/31/2018 10:49:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/23/2018 15:34:49</publishTime>
+      <publishTime>07/24/2018 12:30:03</publishTime>
     </File>
   </ItemGroup>
 </Project>

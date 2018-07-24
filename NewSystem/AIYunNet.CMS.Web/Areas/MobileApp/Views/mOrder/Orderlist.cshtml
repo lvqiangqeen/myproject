@@ -33,11 +33,19 @@ white-space: nowrap;
 }
 </style>
 <link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
+<style>
+    .mui-bar {
+    background-color: #413129;
+}
+</style>
 <script>
-    var html = "<h1>我的订单</h1>";
-    $("#header").remove();
+    $("title").html("我的订单");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+    $("#header").addClass("mui-bar mui-bar-nav")
+    //$("#header").remove();
 </script>
-<div class="container" id="container">
+@*<div class="container" id="container">*@
     <div class="mui-content">
         <div id="slider" class="mui-slider mui-fullscreen">
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -49,10 +57,10 @@ white-space: nowrap;
                         已接受
                     </a>
                     <a class="mui-control-item" href="#item3mobile">
-                        已放弃
+                        订单进度
                     </a>
                     <a class="mui-control-item" href="#item4mobile">
-                        已拒绝
+                        弃单
                     </a>
                 </div>
             </div>
@@ -94,7 +102,7 @@ white-space: nowrap;
             </div>
         </div>
     </div>
-</div>
+@*</div>*@
 
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
@@ -181,20 +189,20 @@ white-space: nowrap;
                                     isall = 0;
                                     IsAccept = 1;
                                     IsOut = 0;
-                                    IsPlan = 1;
+                                    IsPlan = 0;
 
                                 } else if (index == "2")
                                 {
                                     isall = 0;
                                     IsAccept = 1;
-                                    IsOut = 1;
-                                    IsPlan = 0;
+                                    IsOut = 0;
+                                    IsPlan = 1;
                                 }
                                 else {
                                     isall = 0;
                                     IsAccept = 2;
-                                    IsOut = 0;
-                                    IsPlan = 1;
+                                    IsOut = 1;
+                                    IsPlan = 0;
                                 }
                                 var ul = self.element.querySelector('.mui-table-view');
                                 //ul.appendChild(createFragment(ul, index, 5));
@@ -263,11 +271,15 @@ white-space: nowrap;
                             if (item.IsAccept == '0')
                             {
                                 html += '<span class="my-order-wait-zf">新订单</span>';
-                            } else if (item.IsAccept == '1' && IsOut=='0')
+                            } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan=='0')
                             {
                                 html += '<span class="my-order-wait-zf" style="color:#009688">已接受</span>';
-                            } else if (item.IsAccept == '1' && IsOut == '1')
+
+                            } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan == '1')
                             {
+                                html += '<span class="my-order-wait-zf" style="color:#007aff">施工中</span>';
+                            }
+                            else if (item.IsAccept == '1' && IsOut == '1') {
                                 html += '<span class="my-order-wait-zf" style="color:black;">已放弃</span>';
                             }
                             else if (item.IsAccept == '2') {
@@ -285,7 +297,7 @@ white-space: nowrap;
                             } else if (item.IsPlan && item.IsAccept == '1') {
                                 if (!item.IsOut)
                                 {
-                                    html += '<span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
+                                    html += '<span class="my-order-item-red"><a href="/MobileApp/mOrder/mobileBuidingDetail?Guid=' + item.Guid + '">订单进度</a></span><span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
                                 }
                               
                             } else if (!item.IsPlan && item.IsAccept == '1')

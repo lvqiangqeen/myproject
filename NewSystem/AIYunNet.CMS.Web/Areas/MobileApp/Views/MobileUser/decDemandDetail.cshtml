@@ -19,8 +19,9 @@
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
 <script>
-    var html = "<h1>我的订单</h1>";
-    $("#header").append(html);
+    $("title").html("我的订单");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
 </script>
 <style>
             .fl{
@@ -29,6 +30,9 @@
             white-space: nowrap;/*不换行*/
             text-overflow:ellipsis;/*超出部分文字以...显示*/
         }
+            .mui-checkbox.mui-left label, .mui-radio.mui-left label {
+    padding-left: 5px;
+}
 </style>
 <div class="container" id="container">
 

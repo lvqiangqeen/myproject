@@ -25,9 +25,9 @@
 <link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
 <script>
     $(function () {
-        var title = '@Model.BuidingTitle';
-        var html = "<h1>"+title+"</h1>";
-        $("#header").append(html);
+        $("title").html("@Model.BuidingTitle");
+        //var html = "<h1>AU装修宝</h1>";
+        //$("#header > .back").after(html);
     });
 </script>
 <div class="container" id="container">

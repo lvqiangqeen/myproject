@@ -39,11 +39,17 @@
         .mui-table-view .mui-media, .mui-table-view .mui-media-body {
     background-color: #fff;
 }
+            .mui-bar {
+    background-color: #413129;
+}
 </style>
 <script>
-    $("#header").remove();
+    $("title").html("订单进度");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+    $("#header").addClass("mui-bar mui-bar-nav")
 </script>
-<div class="container" id="container">
+@*<div class="container" id="container">*@
     <div class="mui-content">
         <div id="slider" class="mui-slider mui-fullscreen">
             <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
@@ -96,7 +102,7 @@
             </div>
         </div>
     </div>
-</div>
+@*</div>*@
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
 <script>

@@ -14,7 +14,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <title>装修工长</title>
+    <title></title>
     <link href="~/Content/WorkerApp/css/base.css" rel="stylesheet" />
     <link href="~/Content/WorkerApp/css/common.css" rel="stylesheet" />
     <link href="~/Content/layer.mobile-v2.0/layer_mobile/need/layer.css" rel="stylesheet" />
@@ -26,6 +26,15 @@
     
     <script src="~/Content/WorkerApp/js/TouchSlide.1.1.js"></script>
     <script src="~/Content/layer.mobile-v2.0/layer_mobile/layer.js"></script>
+    <style>
+        .adress {
+background-image: url(/content/WorkerApp/updateimages/address.png);
+    background-size: 120% 100%;
+    padding-right: 1rem;
+    margin: 0 0.625rem 0 0.625rem;
+    display: inline;
+        }
+    </style>
     @*<script src="~/Content/layui/layui.js"></script>*@
 </head>
 <body>
@@ -35,7 +44,17 @@
         <input type="hidden" value="@SessionHelper.GetSession("mkjcityname").ToString()" id="mkjcityname" />
     }
     <header class="header header-save" id="header">
-
+        <a href="javascript:history.go(-1)" target=_self class="back"></a>
+        @if (SessionHelper.GetSession("mkjcityname") == null)
+        {
+            <h1>AU装修宝</h1>
+        }
+        else
+        {
+            <h1>AU装修宝(@SessionHelper.GetSession("mkjcityname").ToString())</h1>
+        }
+       
+        <a href="/MobileApp/App/AreaList" target=_self class="adress"></a>
     </header>
     <!--header-end-->
     @RenderBody()

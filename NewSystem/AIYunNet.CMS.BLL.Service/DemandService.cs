@@ -105,7 +105,7 @@ namespace AIYunNet.CMS.BLL.Service
                                 PublishuserID = d.PublishuserID,
                                 GetUserID = d.GetUserID,
                                 GetUserType = d.GetUserType,
-                                AddOn = d.AddOn,
+                                AddOn = d.EditOn,
                                 IsEnd = d.IsEnd,
                                 IsVerrify = d.IsVerrify,
                                 DemandType = d.DemandType,
@@ -189,6 +189,8 @@ namespace AIYunNet.CMS.BLL.Service
                 DecDemand old = context.DecDemand.Find(DecDemand.id);
                 DecDemandAcceptService ser = new DecDemandAcceptService();
                 DecDemandAccept accold = ser.GetAcceptByGuid(DecDemand.Guid);
+                WebBuidingService buidingSer = new WebBuidingService();
+
                 if (old != null)
                 { 
 
@@ -196,9 +198,10 @@ namespace AIYunNet.CMS.BLL.Service
                     {
                         if (accold != null)
                         {
-                            accold.GetUserID= DecDemand.GetUserID;
-                            accold.PublicUserID= DecDemand.PublishuserID;
-                            accold.IsAccept = 0;
+                            DecDemandAccept oldacc = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == accold.DemandGuid);
+                            oldacc.GetUserID= DecDemand.GetUserID;
+                            oldacc.PublicUserID= DecDemand.PublishuserID;
+                            oldacc.IsAccept = 0;
                         }
                         else
                         {
@@ -226,6 +229,14 @@ namespace AIYunNet.CMS.BLL.Service
                     old.buidingSpace = DecDemand.buidingSpace;
                     old.buidingname = DecDemand.buidingname;
                     old.HouseType = DecDemand.HouseType;
+                    old.IsPlan = false;
+                    old.IsOut = false;
+                    WebBuiding buiding = buidingSer.GetWebBuidingByGuID(DecDemand.Guid);
+                    if (buiding != null)
+                    {
+                        buidingSer.DeleteWebBuiding(buiding.BuidingID);
+                    }
+
                     context.SaveChanges();
                 }
                 return 1;

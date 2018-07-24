@@ -13,8 +13,9 @@
     List<WebRecommend> listxinwen = reSer.GetWebRecommendList(24);
 }
 <script>
-    var html = "<h1>脉空间装修基地</h1>";
-    $("#header").append(html);
+    $("title").html("首页");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
 </script>
 <style>
     .clearfix li{
@@ -81,15 +82,15 @@
             <h2>家居装修</h2>
         </div>
         <ul class="clearfix">
-            <li style="background-color: white;"><div><a href="floor-classification.html"><i><img src="~/content/workerapp/updateimages/zgj.png"></i><em style="color:black;">找管家</em></a></div></li>
-            <li style="background-color: #91887E;"><div><a href="/MobileApp/MobileWorker/mWorkerLeaderList"><i><img src="/content/workerapp/updateimages/zgz.png"></i><em>找工长</em></a></div></li>
+            <li style="background-color: white;border:2px solid #78664C;"><div><a href="floor-classification.html"><i><img src="~/content/workerapp/updateimages/zgj.png"></i><em style="color:black;">找管家</em></a></div></li>
+            <li style="background-color: #91887E;"><div><a href="/MobileApp/MobileWorker/mWorkerLeaderList"><i><img src="/content/workerapp/updateimages/zgz1.png"></i><em>找工长</em></a></div></li>
             <li style="background-color: #564E48;"><div><a href="/MobileApp/MobileWorker/mWorkerList"><i><img src="/content/workerapp/updateimages/zgr.png"></i><em>找工人</em></a></div></li>
             <li style="background-color: #78664C;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/zgs.png"></i><em>找公司</em></a></div></li>
             <li style="background-color: #968D75;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/sjs.png"></i><em>设计师</em></a></div></li>
             <li style="background-color: #625138;"><div><a href="http://m.51must.com/list.aspx?wid=35&cid=165"><i><img src="/content/workerapp/updateimages/al.png"></i><em>案例赏析</em></a></div></li>
             <li style="background-color: #82705C;"><div><a href="floor-classification.html"><i><img src="/content/workerapp/updateimages/wx.png"></i><em>安装维修</em></a></div></li>
             <li style="background-color: #413129;"><div><a href="add-class.html"><i><img src="/content/workerapp/updateimages/ys.png"></i><em>搬家运输</em></a></div></li>
-            <li style="background-color: white;"><div><a href="javascript:void(0)" class="more"><i><img src="/content/workerapp/updateimages/more.png"></i><em style="color:black;">更多</em></a></div></li>
+            <li style="background-color: white;"><div><a href="javascript:void(0)" class="more"><i><img src="/content/workerapp/images/more.png"></i><em style="color:black;">更多</em></a></div></li>
         </ul>
 
     </div>
@@ -187,7 +188,7 @@
     <!--二手置换 货运配送开始-->
     <div class="ind-nav ind-nav4" style="margin-top: 11px;">
         <div class="ind-tit" style="border-bottom: 1px solid #ededed;">
-            <h2>新闻推送</h2>
+            <h2>装修攻略</h2>
         </div>
         @foreach (var item in listxinwen)
         {

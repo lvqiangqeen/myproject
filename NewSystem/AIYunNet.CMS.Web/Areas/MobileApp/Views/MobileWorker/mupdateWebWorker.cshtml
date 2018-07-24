@@ -25,9 +25,9 @@
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.min.js"></script>
 <script>
     $(function () {
-        var title = "@title";
-        var html = "<h1>" + title + "</h1>";
-        $("#header").append(html);
+        $("title").html("@title");
+        //var html = "<h1>AU装修宝</h1>";
+        //$("#header > .back").after(html);
         $(".bnt").click(function () {
             $("button[type=submit]").click();
         })

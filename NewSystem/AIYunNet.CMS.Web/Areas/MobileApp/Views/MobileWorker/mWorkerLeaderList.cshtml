@@ -14,8 +14,9 @@
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
 <link href="~/Content/WorkerApp/css/class.css" rel="stylesheet" />
 <script>
-    var html = "<h1>工长列表</h1>";
-    $("#header").append(html);
+    $("title").html("工长列表");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
 </script>
 <style>
     .mui-scroll-wrapper {
@@ -167,7 +168,7 @@
                     $.each(datajson.list, function (i, item) {
                         result += '<div class="jbsf-item">'
                             + '<a href="/MobileApp/MobileWorker/mWorkerDetail?workerid=' + item.worker.WorkerID + '">'
-                             + '<div class="jbsf-item-img" style="float: left;"><img src="@AppSettingsHelper.ImgUrl' + item.worker.thumbnailImage + '"></div>'
+                             + '<div class="jbsf-item-img" style="float: left;border-radius:8px;"><img src="@AppSettingsHelper.ImgUrl' + item.worker.thumbnailImage + '" style="border-radius:8px;"></div>'
                               + '<div class="jbsf-item-txt" style="float: left;">'
                               + '<h2>' + item.worker.WorkerName + '</h2>'
                               + '<div class="order-total"><span class="work-type">等级：</span><span>';

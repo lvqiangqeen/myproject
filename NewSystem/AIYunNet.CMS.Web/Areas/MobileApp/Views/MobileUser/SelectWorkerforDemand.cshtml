@@ -13,13 +13,16 @@
 }
 
 <script>
-    var html = "<h1>选择装修工人</h1>";
-    $("#header").remove();
+    $("title").html("选择装修工人");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+    $("#header").addClass("mui-bar mui-bar-nav")
 </script>
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
 <script src="~/Content/mui-master/dist/js/mui.js"></script>
 <link href="~/Content/WorkerApp/css/class.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
 <style>
     .mui-pull-bottom-wrapper {
         text-align: center;
@@ -32,8 +35,14 @@
     .mui-content {
         background-color: white;
     }
+                        .mui-bar {
+    background-color: #413129;
+}
+   .pop-shade {
+    background: rgba(0, 0, 0, 0);
+}
 </style>
-<div class="container" id="container">
+@*<div class="container" id="container">*@
     <div class="mui-content" style="background-color: white;">
         <div class="mui-content-padded" style="margin: 5px;">
             <div class="mui-input-row mui-search">
@@ -70,7 +79,7 @@
         <div class="pop-shade hide" style="display: none; height: 100%;margin-top: 60px;"></div>
         <script src="~/Content/WorkerApp/js/class/iscroll-5.1.2.min.js"></script>
         <script src="~/Content/WorkerApp/js/class/slideNav.min.js"></script>
-        <div class="jbsf-group mui-content mui-scroll-wrapper" id="refreshContainer" style="margin-top: 88px;">
+        <div class="jbsf-group mui-content mui-scroll-wrapper" id="refreshContainer" style="margin-top: 132px;">
             <div class="mui-scroll">
                 <div class="mui-table-view mui-table-view-chevron">
 
@@ -79,7 +88,7 @@
 
         </div>
     </div>
-</div>
+@*</div>*@
 <script type="text/javascript">
     function workerby(GetUserID, GetUserName, WorkerCategory) {
         window.top.location.href = "/MobileApp/MobileUser/DemandDetail?Guid=@Guid&GetUserID=" + GetUserID + "&GetUserName=" + GetUserName + "&WorkerCategory=" + WorkerCategory;
@@ -146,9 +155,9 @@
                     $.each(datajson, function (i, item) {
                         result += '<div class="jbsf-item">'
                             + '<div style="width: 100%;">'
-                             + '<a class="jbsf-item-img" style="float: left;width:20%;" href="/MobileApp/MobileWorker/mWorkerDetail?Guid=@Request["Guid"]&workerid=' + item.WorkerID + '"><img src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '"></a>'
+                             + '<a class="jbsf-item-img" style="float: left;width:20%;border-radius:8px;" href="/MobileApp/MobileWorker/mWorkerDetail?Guid=@Request["Guid"]&workerid=' + item.WorkerID + '"><img src="@AppSettingsHelper.ImgUrl' + item.thumbnailImage + '" style="border-radius:8px;"></a>'
                               + '<div class="jbsf-item-txt" style="float: left;width:80%;">'
-                              + '<h2>' + item.WorkerName + '</h2>'
+                              + '<h2>' + item.WorkerName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + item.CityName + '</h2>'
                               + '<div class="order-total"><span class="work-type">等级：</span>' + item.Stars + '<span style="float: right;"></span><button type="button" style="float:right;" class="mui-btn mui-btn-primary" onclick="javascript:workerby(' + item.UserID + ',\'' + item.WorkerName + '\',\'' + item.WorkerCategory + '\')">找TA装修</button></div>';
                         if (WorkerCategory == "装修工长") {
                             result += '<div class="jbsf-details" style="margin-top: 10px;"><span class="work-type">装修工长';
@@ -157,7 +166,7 @@
                             result +=  '<div class="jbsf-details" style="margin-top: 10px;"><span class="work-type">' + item.WorkerPosition;
                         }
 
-                        result += '</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.AreasName + '">' + item.CityName + '</span></div>'
+                        result += '</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '</span></div>'
                               + '</div></div></div>';
                     });
 

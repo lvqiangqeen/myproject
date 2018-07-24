@@ -3771,7 +3771,6 @@
     <Content Include="Content\WorkerApp\css\buttoncss.css" />
     <Content Include="Content\WorkerApp\css\class.css" />
     <Content Include="Content\WorkerApp\css\common.css" />
-    <Content Include="Content\WorkerApp\css\commonbake.css" />
     <Content Include="Content\WorkerApp\details.html" />
     <Content Include="Content\WorkerApp\floor-classification.html" />
     <Content Include="Content\WorkerApp\goods-allocation.html" />
@@ -3860,6 +3859,7 @@
     <Content Include="Content\WorkerApp\images\yinlian.png" />
     <Content Include="Content\WorkerApp\images\ymaz.png" />
     <Content Include="Content\WorkerApp\images\zhifubao.png" />
+    <Content Include="Content\WorkerApp\images\face-bg.png" />
     <Content Include="Content\WorkerApp\index.html" />
     <Content Include="Content\WorkerApp\integral.html" />
     <Content Include="Content\WorkerApp\jiabang-worker.html" />
@@ -3911,10 +3911,21 @@
     <Content Include="Content\WorkerApp\pro-list.html" />
     <Content Include="Content\WorkerApp\repair-details.html" />
     <Content Include="Content\WorkerApp\reservation.html" />
+    <Content Include="Content\WorkerApp\updateimages\address.png" />
     <Content Include="Content\WorkerApp\updateimages\ding.png" />
     <Content Include="Content\WorkerApp\updateimages\home.png" />
     <Content Include="Content\WorkerApp\updateimages\more.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-bzzx.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-fbzb.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-grzl.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-gsjj.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-kfzx.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-wddd.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-zbjl.PNG" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-zxjd.png" />
     <Content Include="Content\WorkerApp\updateimages\my.png" />
+    <Content Include="Content\WorkerApp\updateimages\order.png" />
+    <Content Include="Content\WorkerApp\updateimages\pre2.png" />
     <Content Include="Content\WorkerApp\updateimages\titlecolor.png" />
     <Content Include="Content\WorkerApp\updateimages\wx.png" />
     <Content Include="Content\WorkerApp\updateimages\zgs.png" />
@@ -3924,6 +3935,7 @@
     <Content Include="Content\WorkerApp\updateimages\al.png" />
     <Content Include="Content\WorkerApp\updateimages\zgj.png" />
     <Content Include="Content\WorkerApp\updateimages\sjs.png" />
+    <Content Include="Content\WorkerApp\updateimages\zgz1.png" />
     <Content Include="Content\WorkerApp\user-evaluation.html" />
     <Content Include="Content\WorkerApp\worker-details.html" />
     <Content Include="Content\WorkerApp\worker-join.html" />
@@ -4323,6 +4335,7 @@
     <Content Include="Areas\MobileApp\Views\MobileComment\BuidingContractByOwner.cshtml" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\WebBuidingConstractList.cshtml" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\updateWebBuidingConstract.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\AreaList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

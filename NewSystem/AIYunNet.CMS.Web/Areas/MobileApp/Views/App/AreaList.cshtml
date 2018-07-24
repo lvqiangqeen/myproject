@@ -1,0 +1,56 @@
+﻿@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service;
+@{
+    ViewBag.Title = "AreaList";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+
+<link href="~/Content/mui-master/examples/hello-mui/css/mui.min.css" rel="stylesheet" />
+<style>
+                    .mui-bar {
+    background-color: #413129;
+}
+</style>
+<script>
+    $("title").html("开放城市");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+    $("#header").addClass("mui-bar mui-bar-nav")
+</script>
+<div class="mui-content">
+    <div id='list' class="mui-indexed-list">
+        <div class="mui-indexed-list-inner">
+            <ul class="mui-table-view">
+                @foreach (var item in ViewBag.list as List<t_City>)
+                {
+                    <li data-value="@item.cityID" class="mui-table-view-cell mui-indexed-list-item" onclick="topage('@item.cityID','@item.city')">@item.city</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    function topage(mkjcitycode, mkjcityname)
+    {
+        var mkjcitycode = mkjcitycode;
+        var mkjcityname = mkjcityname;
+        $.ajax({
+            type: 'post',
+            url: '/MobileApp/App/setSession',
+            async: false,
+            dataType: "json",
+            data: {
+                mkjcitycode: mkjcitycode,
+                mkjcityname: mkjcityname
+            },
+            success: function (data) {
+                if (data.RetCode == '1') {
+                    window.location.href = "/MobileApp/App/Index";
+                }
+
+
+            }
+        });
+    }
+</script>

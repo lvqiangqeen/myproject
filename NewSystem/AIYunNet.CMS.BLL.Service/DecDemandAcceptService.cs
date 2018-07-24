@@ -188,7 +188,7 @@ namespace AIYunNet.CMS.BLL.Service
                                 PublishuserID = d.PublishuserID,
                                 GetUserID = d.GetUserID,
                                 GetUserType = d.GetUserType,
-                                AddOn = d.AddOn,
+                                AddOn = d.EditOn,
                                 IsEnd = d.IsEnd,
                                 IsVerrify = d.IsVerrify,
                                 DemandId = d.id,
@@ -204,11 +204,19 @@ namespace AIYunNet.CMS.BLL.Service
                 bool isout = IsOut == 1 ? true : false;
                 count = query.ToList().Count();
 
-                if (IsAccept == 1)
+                if (IsAccept == 1 && !isout && !plan)
                 {
-                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout);
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan== plan);
                 }
-                else
+                else if (IsAccept == 2 && isout)
+                {
+                    query = query.Where(c => c.IsAccept == IsAccept || c.IsOut == isout);
+                }
+                else if (IsAccept == 1 && plan && !isout)
+                {
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan== plan);
+                }
+                else if(IsAccept==0)
                 {
                     query = query.Where(c => c.IsAccept == IsAccept);
                 }
