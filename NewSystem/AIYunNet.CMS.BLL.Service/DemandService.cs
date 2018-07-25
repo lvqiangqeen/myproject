@@ -85,10 +85,8 @@ namespace AIYunNet.CMS.BLL.Service
             bool isplan = IsPlan == 1 ? true : false;
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                var query = from c in context.DecDemandAccept
-                            from d in context.DecDemand
-                            where c.DemandGuid == d.Guid
-                            && c.PublicUserID == PublicUserID && d.IsDelete == false
+                var query = from d in context.DecDemand
+                            where d.PublishuserID == PublicUserID && d.IsDelete == false
                             select new Demand
                             {
                                 id = d.id,
@@ -113,9 +111,9 @@ namespace AIYunNet.CMS.BLL.Service
                                 Guid = d.Guid,
                                 HouseType = d.HouseType,
                                 IsPlan = d.IsPlan,
-                                AcceptUserID = c.GetUserID,
-                                IsAccept = c.IsAccept,
-                                AcceptUserName = context.WebWorker.FirstOrDefault(w => w.UserID == c.GetUserID).WorkerName,
+                                AcceptUserID = d.GetUserID,
+                                IsAccept = d.IsAccept,
+                                AcceptUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName,
                                 GetUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName
                             };
                 count = query.ToList().Count();
@@ -173,8 +171,8 @@ namespace AIYunNet.CMS.BLL.Service
                     DecDemandAcceptService ser = new DecDemandAcceptService();
                     ser.AddDecDemandAccept(acc);
                 }
-
-                DecDemand.GetUserID = 0;
+                DecDemand.IsAccept = 0;
+                DecDemand.GetUserID = DecDemand.GetUserID;
                 DecDemand.GetUserType = "";
                 context.DecDemand.Add(DecDemand);
                 context.SaveChanges();
@@ -214,7 +212,10 @@ namespace AIYunNet.CMS.BLL.Service
                         }
 
                     }
-                old.ownername = DecDemand.ownername;
+                    old.IsAccept = 0;
+                    old.GetUserID= DecDemand.GetUserID;
+
+                    old.ownername = DecDemand.ownername;
                     old.ownertel = DecDemand.ownertel;
                     old.ProvinceID = DecDemand.ProvinceID;
                     old.ProvinceName = DecDemand.ProvinceName;

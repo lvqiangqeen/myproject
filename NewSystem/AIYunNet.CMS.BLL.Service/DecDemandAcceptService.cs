@@ -83,15 +83,13 @@ namespace AIYunNet.CMS.BLL.Service
                 if (old != null)
                 {
                     old.IsAccept = acc.IsAccept;
-
-                    if (acc.IsAccept == 1)
-                    {
-                        DecDemand dec = context.DecDemand.FirstOrDefault(c => c.Guid == acc.DemandGuid);
-                        dec.GetUserType = "WebUser";
-                        dec.GetUserID = old.GetUserID;
-                    }
-                    context.SaveChanges();
                 }
+                DecDemand dec = context.DecDemand.FirstOrDefault(c => c.Guid == acc.DemandGuid);
+                dec.GetUserType = "WebUser";
+                dec.GetUserID = old.GetUserID;
+                dec.IsAccept = acc.IsAccept;
+                context.SaveChanges();
+
                 return 1;
             }
         }
@@ -166,16 +164,14 @@ namespace AIYunNet.CMS.BLL.Service
             using (AIYunNetContext context = new AIYunNetContext())
             {
 
-                var query = from c in context.DecDemandAccept
-                            from d in context.DecDemand
-                            where c.DemandGuid == d.Guid
-                            && c.GetUserID == UserID && d.IsDelete == false
+                var query = from d in context.DecDemand
+                            where d.GetUserID == UserID && d.IsDelete == false
 
                             select new AcceptDemand
                             {
                                 id = d.id,
                                 IsOut = d.IsOut,
-                                IsOver=d.IsOver,
+                                IsOver = d.IsOver,
                                 buidingname = d.buidingname,
                                 ownername = d.ownername,
                                 ownertel = d.ownertel,
@@ -197,8 +193,8 @@ namespace AIYunNet.CMS.BLL.Service
                                 Guid = d.Guid,
                                 HouseType = d.HouseType,
                                 IsPlan = d.IsPlan,
-                                AcceptUserID = c.GetUserID,
-                                IsAccept = c.IsAccept
+                                AcceptUserID = d.GetUserID,
+                                IsAccept = d.IsAccept
                             };
                 bool plan = IsPlan == 1 ? true : false;
                 bool isout = IsOut == 1 ? true : false;
@@ -206,7 +202,7 @@ namespace AIYunNet.CMS.BLL.Service
 
                 if (IsAccept == 1 && !isout && !plan)
                 {
-                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan== plan);
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan == plan);
                 }
                 else if (IsAccept == 2 && isout)
                 {
@@ -214,15 +210,15 @@ namespace AIYunNet.CMS.BLL.Service
                 }
                 else if (IsAccept == 1 && plan && !isout)
                 {
-                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan== plan);
+                    query = query.Where(c => c.IsAccept == IsAccept && c.IsOut == isout && c.IsPlan == plan);
                 }
-                else if(IsAccept==0)
+                else if (IsAccept == 0)
                 {
                     query = query.Where(c => c.IsAccept == IsAccept);
                 }
 
 
-                List<AcceptDemand> list = query.OrderByDescending(c=>c.AddOn).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+                List<AcceptDemand> list = query.OrderByDescending(c => c.AddOn).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
                 return list;
             }
         }

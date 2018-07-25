@@ -17,16 +17,16 @@
         yang = housetypelist[4];
     }
     int IsPublish = Model.IsPublish == true ? 1 : 0;
-    DecDemandAccept acc = new DecDemandAccept();
-    DecDemandAcceptService accSer = new DecDemandAcceptService();
+    //DecDemandAccept acc = new DecDemandAccept();
+   // DecDemandAcceptService accSer = new DecDemandAcceptService();
     WebWorkerService workSer = new WebWorkerService();
-    acc = accSer.GetAcceptByGuid(Model.Guid);
+    //acc = accSer.GetAcceptByGuid(Model.Guid);
 
     int GetUserID = Request["GetUserID"]==null || Request["GetUserID"]=="" ? 0:Convert.ToInt32(Request["GetUserID"]);
     string GetUserName = Request["GetUserName"] == null || Request["GetUserName"] == "" ? "" : Request["GetUserName"]+"("+ Request["WorkerCategory"] + ")";
-    if (acc != null && GetUserID==0)
+    if (Model.GetUserID != 0 && GetUserID==0)
     {
-        GetUserID = acc.GetUserID;
+        GetUserID = Model.GetUserID;
         GetUserName = workSer.GetWebWorkerByUserID(GetUserID).WorkerName+ "("+workSer.GetWebWorkerByUserID(GetUserID).WorkerCategory+")";
 
     }
@@ -65,6 +65,7 @@
     //var html = "<h1>AU装修宝</h1>";
     //$("#header > .back").after(html);
 </script>
+
 <div class="container" id="container">
     <div class="mui-content">
         <div class="mui-content-padded" style="margin: 5px;">
@@ -96,11 +97,11 @@
                 </div>
                 <div class="mui-input-row" style="line-height:35px;">
                     <label>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
-                    <input class="mui-input-numbox" type="number" value="@shi" name="shi" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />室
-                    <input class="mui-input-numbox" type="number" value="@ting" name="ting" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />厅
-                    <input class="mui-input-numbox" type="number" value="@chu" name="chu" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />厨
-                    <input class="mui-input-numbox" type="number" value="@wei" name="wei" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />卫
-                    <input class="mui-input-numbox" type="number" value="@yang" name="yang" style="background-color: #efeff4;width: 25px;float: initial;height: 32px;" />阳台
+                    <input class="mui-input-numbox" type="number" value="@shi" name="shi" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />室
+                    <input class="mui-input-numbox" type="number" value="@ting" name="ting" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />厅
+                    <input class="mui-input-numbox" type="number" value="@chu" name="chu" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />厨
+                    <input class="mui-input-numbox" type="number" value="@wei" name="wei" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />卫
+                    <input class="mui-input-numbox" type="number" value="@yang" name="yang" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />阳台
                 </div>
                 <div class="mui-input-row">
                     <label>所&nbsp;&nbsp;在&nbsp;&nbsp;地</label>
@@ -123,15 +124,22 @@
                     </script>
                 </div>
                     <div class="mui-input-row">
-                        <label>发送谁</label>
-                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName">
+                        <label><span style="color:red;">*</span>找谁做工</label>
+                        <button type="button" class="mui-btn" id="qu" style="width:15%;padding:0px;line-height:2;color:red;margin-right:5px;vertical-align: middle;">删除</button>
+                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName" style="width:45%;line-height:2;">
                         <input type="hidden" value="@GetUserID" name="GetUserID" />
+                        
                     </div>
-
+                <script>
+                    $("#qu").click(function () {
+                        $("input[name=GetUserName]").val('');
+                        $("input[name=GetUserID]").val('');
+                    })
+                </script>
 
                 <div class="mui-input-row">
 
-                    <label>发布的到大厅</label>
+                    <label>发布到大厅</label>
 
                     <div class="mui-switch" id="IsPublish">
                         <div class="mui-switch-handle"></div>
@@ -404,16 +412,23 @@
             }
             if (clickgongren == 0)
             {
-                if (GetUserID == 0 || GetUserID == "" || GetUserID == null) {
+                if (GetUserID == 0 && !IsPublish) {
                     layer.open({
-                        content: '请选择工人！'
+                        content: '请选择工人或选择发布到需求大厅！否则无法看到您发布信息！'
                         , btn: '我知道了'
                     });
                     ret = 0;
                     return;
                 }
             }
-
+            if (GetUserID != 0 && IsPublish) {
+                layer.open({
+                    content: '选择工人和选择发布到需求大厅，只能选择一种方式发布！'
+                    , btn: '我知道了'
+                });
+                ret = 0;
+                return;
+            }
             if (ret!=0)
             {
                 $.ajax({

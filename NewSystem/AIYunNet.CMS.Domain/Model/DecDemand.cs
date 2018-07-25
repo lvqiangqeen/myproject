@@ -207,7 +207,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// <summary>
         /// 是否接受
         /// </summary>
-        [NotMapped]
+        [Column("IsAccept")]
         public int IsAccept { get; set; }
         /// <summary>
         /// 施工用户名字

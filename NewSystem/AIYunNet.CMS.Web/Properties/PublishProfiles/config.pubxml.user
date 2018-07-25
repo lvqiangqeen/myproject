@@ -85,7 +85,7 @@
       <publishTime>03/26/2018 10:06:44</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/Index.cshtml">
-      <publishTime>07/24/2018 14:15:26</publishTime>
+      <publishTime>07/25/2018 15:17:14</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/App/PeopleCenter.cshtml">
       <publishTime>03/26/2018 10:06:44</publishTime>
@@ -121,7 +121,7 @@
       <publishTime>07/24/2018 12:21:34</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/mPCenter.cshtml">
-      <publishTime>07/24/2018 17:07:43</publishTime>
+      <publishTime>07/25/2018 16:10:14</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/PersonData.cshtml">
       <publishTime>07/24/2018 12:21:47</publishTime>
@@ -151,7 +151,7 @@
       <publishTime>07/24/2018 16:17:08</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/DemandDetail.cshtml">
-      <publishTime>07/24/2018 12:24:33</publishTime>
+      <publishTime>07/25/2018 17:33:58</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileUser/DemandList.cshtml">
       <publishTime>07/24/2018 16:14:33</publishTime>
@@ -166,10 +166,10 @@
       <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerLeaderList.cshtml">
-      <publishTime>07/24/2018 12:24:33</publishTime>
+      <publishTime>07/25/2018 08:49:06</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerList.cshtml">
-      <publishTime>07/24/2018 12:24:33</publishTime>
+      <publishTime>07/25/2018 08:49:49</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/buidingStage.cshtml">
       <publishTime>07/24/2018 12:24:33</publishTime>
@@ -571,28 +571,28 @@
       <publishTime>05/23/2017 19:54:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>07/23/2018 15:34:38</publishTime>
+      <publishTime>07/25/2018 17:34:26</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>07/24/2018 17:08:42</publishTime>
+      <publishTime>07/25/2018 17:34:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>07/23/2018 15:34:39</publishTime>
+      <publishTime>07/25/2018 17:34:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>07/23/2018 08:37:37</publishTime>
+      <publishTime>07/25/2018 17:34:26</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>07/24/2018 17:08:44</publishTime>
+      <publishTime>07/25/2018 17:34:28</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>07/24/2018 17:10:25</publishTime>
+      <publishTime>07/25/2018 17:34:45</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>07/24/2018 17:10:25</publishTime>
+      <publishTime>07/25/2018 17:34:45</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -15474,6 +15474,15 @@
     <File Include="Content/WorkerApp/css/commonbake.css">
       <publishTime>03/26/2018 14:09:41</publishTime>
     </File>
+    <File Include="Content/WorkerApp/css/listcss.css">
+      <publishTime>07/25/2018 11:32:16</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/pic3-favor.png">
+      <publishTime>07/25/2018 09:02:55</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/css/trip_list_02.jpg">
+      <publishTime>07/25/2018 11:20:15</publishTime>
+    </File>
     <File Include="Content/WorkerApp/details.html">
       <publishTime>03/26/2018 14:09:41</publishTime>
     </File>
@@ -15904,13 +15913,13 @@
       <publishTime>07/23/2018 08:37:38</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/ding.png">
-      <publishTime>07/23/2018 08:54:04</publishTime>
+      <publishTime>07/24/2018 11:05:29</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/home.png">
-      <publishTime>07/23/2018 08:53:56</publishTime>
+      <publishTime>07/24/2018 11:05:55</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/more.png">
-      <publishTime>07/23/2018 08:37:38</publishTime>
+      <publishTime>07/24/2018 12:28:55</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/my-icon-bzzx.png">
       <publishTime>07/24/2018 17:02:15</publishTime>
@@ -15937,10 +15946,10 @@
       <publishTime>07/24/2018 16:54:12</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/my.png">
-      <publishTime>07/23/2018 08:54:00</publishTime>
+      <publishTime>07/24/2018 11:06:37</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/order.png">
-      <publishTime>07/23/2018 14:32:09</publishTime>
+      <publishTime>07/24/2018 11:05:29</publishTime>
     </File>
     <File Include="Content/WorkerApp/updateimages/pre2.png">
       <publishTime>07/24/2018 08:47:20</publishTime>
@@ -16018,7 +16027,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/24/2018 17:10:14</publishTime>
+      <publishTime>07/25/2018 17:34:39</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -16354,7 +16363,7 @@
       <publishTime>01/31/2018 10:49:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/24/2018 12:30:03</publishTime>
+      <publishTime>07/25/2018 15:27:01</publishTime>
     </File>
   </ItemGroup>
 </Project>
