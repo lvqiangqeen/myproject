@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="All_NavService.cs" />
     <Compile Include="DecDemandAcceptService.cs" />
+    <Compile Include="DecTenderService.cs" />
     <Compile Include="DemandService.cs" />
     <Compile Include="DownLoadService.cs" />
     <Compile Include="OtherService.cs" />

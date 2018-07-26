@@ -58,6 +58,7 @@
     <Compile Include="Model\All_Nav.cs" />
     <Compile Include="Model\DecDemand.cs" />
     <Compile Include="Model\DecDemandAccept.cs" />
+    <Compile Include="Model\DecTender.cs" />
     <Compile Include="Model\DownLoad.cs" />
     <Compile Include="Model\DownLoadType.cs" />
     <Compile Include="Model\PeopleJian.cs" />

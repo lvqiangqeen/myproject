@@ -64,6 +64,7 @@
     <Compile Include="Areas\MobileApp\Controllers\mLoginController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCommentController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\MobileTendersController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileUserController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileWorkerController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MoblieBuidingController.cs" />
@@ -3913,6 +3914,7 @@
     <Content Include="Content\WorkerApp\reservation.html" />
     <Content Include="Content\WorkerApp\updateimages\address.png" />
     <Content Include="Content\WorkerApp\updateimages\ding.png" />
+    <Content Include="Content\WorkerApp\updateimages\GjIndex.jpg" />
     <Content Include="Content\WorkerApp\updateimages\home.png" />
     <Content Include="Content\WorkerApp\updateimages\more.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-bzzx.png" />
@@ -4336,6 +4338,8 @@
     <Content Include="Areas\SysAdmin\Views\AppWorker\WebBuidingConstractList.cshtml" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\updateWebBuidingConstract.cshtml" />
     <Content Include="Areas\MobileApp\Views\App\AreaList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\GJIndex.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileTenders\TenderList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

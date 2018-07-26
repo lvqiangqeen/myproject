@@ -20,7 +20,11 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 		{
             return View();
 		}
+        public ActionResult GJIndex()
+        {
 
+            return View();
+        }
         public ActionResult AreaList()
         {
             List<t_City> list = areaSer.GetHotCityList();

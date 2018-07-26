@@ -61,7 +61,7 @@
     }
 </style>
 <script>
-    $("title").html("需求信息");
+    $("title").html("招标信息");
     //var html = "<h1>AU装修宝</h1>";
     //$("#header > .back").after(html);
 </script>
@@ -72,23 +72,23 @@
             <form class="mui-input-group">
                 <input type="hidden" value="@Model.id" name="id">
                 <div class="mui-input-row">
-                    <label>小区地址</label>
+                    <label><span style="color:red;">*</span>小区地址</label>
                     <input type="text" value="@Model.buidingname" placeholder="填写小区地址" name="buidingname">
                 </div>
                 <div class="mui-input-row">
-                    <label>您的姓名</label>
+                    <label><span>&nbsp;&nbsp;</span>您的姓名</label>
                     <input type="text" value="@Model.ownername" placeholder="填写您的姓名" name="ownername">
                 </div>
                 <div class="mui-input-row">
-                    <label>联系方式</label>
+                    <label><span style="color:red;">*</span>联系方式</label>
                     <input type="text" value="@Model.ownertel" placeholder="填写联系方式" name="ownertel">
                 </div>
                 <div class="mui-input-row">
-                    <label>装修风格</label>
+                    <label><span>&nbsp;&nbsp;</span>装修风格</label>
                     <input type="text" value="@Model.OneSentence" placeholder="填写装修风格" name="OneSentence">
                 </div>
                 <div class="mui-input-row">
-                    <label>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积</label>
+                    <label><span style="color:red;">*</span>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积</label>
                     <div class="mui-numbox">
                         <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
                         <input class="mui-input-numbox" type="number" value="@Model.buidingSpace" name="buidingSpace" />
@@ -96,7 +96,7 @@
                     </div>m²
                 </div>
                 <div class="mui-input-row" style="line-height:35px;">
-                    <label>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+                    <label><span>&nbsp;&nbsp;</span>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
                     <input class="mui-input-numbox" type="number" value="@shi" name="shi" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />室
                     <input class="mui-input-numbox" type="number" value="@ting" name="ting" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />厅
                     <input class="mui-input-numbox" type="number" value="@chu" name="chu" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />厨
@@ -104,7 +104,7 @@
                     <input class="mui-input-numbox" type="number" value="@yang" name="yang" style="background-color: #efeff4;width: 36px;float: initial;height: 26px;" />阳台
                 </div>
                 <div class="mui-input-row">
-                    <label>所&nbsp;&nbsp;在&nbsp;&nbsp;地</label>
+                    <label><span style="color:red;">*</span>所&nbsp;&nbsp;在&nbsp;&nbsp;地</label>
                     <input type="text" placeholder="点击此处选择城市" id="showCityPicker" value="@Model.ProvinceName @Model.CityName">
                     <input type="hidden" value="@Model.CityID" name="CityID" id="CityID" />
                     <input type="hidden" value="@Model.CityName" name="CityName" id="CityName" />
@@ -112,7 +112,7 @@
                     <input type="hidden" value="@Model.ProvinceName" name="ProvinceName" id="ProvinceName" />
                 </div>
                 <div class="mui-input-row">
-                    <label>需求类型</label>
+                    <label><span style="color:red;">*</span>需求类型</label>
                     <input type="text" placeholder="点击此处选择需求类型" id="showTypePicker" value="@Model.DemandTypeName">
                     <input type="hidden" value="@Model.DemandType" name="DemandType" id="DemandType" />
                     <input type="hidden" value="@Model.DemandTypeName" name="DemandTypeName" id="DemandTypeName" />
@@ -124,9 +124,9 @@
                     </script>
                 </div>
                     <div class="mui-input-row">
-                        <label><span style="color:red;">*</span>找谁做工</label>
-                        <button type="button" class="mui-btn" id="qu" style="width:15%;padding:0px;line-height:2;color:red;margin-right:5px;vertical-align: middle;">删除</button>
-                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName" style="width:45%;line-height:2;">
+                        <label>找谁做工</label>
+                        <button type="button" class="mui-btn" id="qu" style="width:15%;padding:0px;line-height:2;color:red;margin-right:30px;vertical-align: middle;">删除</button>
+                        <input type="text" value="@GetUserName" placeholder="点击选择工人" name="GetUserName" style="width:33%;line-height:2;">
                         <input type="hidden" value="@GetUserID" name="GetUserID" />
                         
                     </div>
@@ -362,22 +362,22 @@
                 ret = 0;
                 return;
             }
-            if (OneSentence == null || OneSentence == "") {
-                layer.open({
-                    content: '请输入装修风格！'
-                    , btn: '我知道了'
-                });
-                ret = 0;
-                return;
-            }
-            if (ownername == null || ownername == "") {
-                layer.open({
-                    content: '请输入您的姓名！'
-                    , btn: '我知道了'
-                });
-                ret = 0;
-                return;
-            }
+            //if (OneSentence == null || OneSentence == "") {
+            //    layer.open({
+            //        content: '请输入装修风格！'
+            //        , btn: '我知道了'
+            //    });
+            //    ret = 0;
+            //    return;
+            //}
+            //if (ownername == null || ownername == "") {
+            //    layer.open({
+            //        content: '请输入您的姓名！'
+            //        , btn: '我知道了'
+            //    });
+            //    ret = 0;
+            //    return;
+            //}
             if (CityName == null || CityName == "") {
                 layer.open({
                     content: '请选择城市！'
@@ -402,14 +402,14 @@
                 ret = 0;
                 return;
             }
-            if (Info == null || Info == "") {
-                layer.open({
-                    content: '请简单填写装修内容！'
-                    , btn: '我知道了'
-                });
-                ret = 0;
-                return;
-            }
+            //if (Info == null || Info == "") {
+            //    layer.open({
+            //        content: '请简单填写装修内容！'
+            //        , btn: '我知道了'
+            //    });
+            //    ret = 0;
+            //    return;
+            //}
             if (clickgongren == 0)
             {
                 if (GetUserID == 0 && !IsPublish) {
