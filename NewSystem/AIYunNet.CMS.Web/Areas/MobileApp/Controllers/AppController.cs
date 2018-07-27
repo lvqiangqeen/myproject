@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AIYunNet.CMS.Common.Utility;
+using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
@@ -14,6 +15,9 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebRecommendService reSer = new WebRecommendService();
         WebCommonService comSer = new WebCommonService();
         t_AreaService areaSer = new t_AreaService();
+        DemandService DeSer = new DemandService();
+        DecTenderService tenSer = new DecTenderService();
+
 
         // GET: MobileApp/App
         public ActionResult Index()
@@ -24,6 +28,27 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
 
             return View();
+        }
+        public ActionResult TenderList()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult GetDemandlist(int type,string cityid, int PageSize, int CurPage)
+        {
+            int count = 0;
+            List<Demand> list = DeSer.GetTingDemandList(type, cityid, PageSize, CurPage,out count);
+            return Json(list);
+        }
+
+        public ActionResult TenderDetail(string guid)
+        {
+
+            DecDemand demand = DeSer.GetDecDemandByGuID(guid);
+            List<DecTender> list = tenSer.GetDecTenderList(guid);
+            ViewBag.list = list;
+            return View(demand);
         }
         public ActionResult AreaList()
         {

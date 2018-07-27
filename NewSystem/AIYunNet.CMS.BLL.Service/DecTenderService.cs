@@ -14,6 +14,21 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class DecTenderService
     {
+        public List<DecTender> GetDecTenderList(string guid)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                List<DecTender> list = new List<DecTender>();
+
+                list = context.DecTender.Where(c=>c.Guid== guid && c.IsDelete==0).ToList();
+                if (list == null)
+                {
+                    list = new List<DecTender>();
+                }
+                
+                return list;
+            }
+        }
         public DecTender GetDecTenderByID(int id)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -31,8 +46,16 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                context.DecTender.Add(DecTender);
-                context.SaveChanges();
+                try
+                {
+                    context.DecTender.Add(DecTender);
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+
+                }
+
                 return 1;
             }
         }
@@ -50,6 +73,24 @@ namespace AIYunNet.CMS.BLL.Service
                     old.perInfo = DecTender.perInfo;
                     old.perName = DecTender.perName;
                     old.perPhone = DecTender.perPhone;
+                    old.EditOn = DateTime.Now;
+                    //old.UserID = DecTender.UserID;
+                    context.SaveChanges();
+                }
+                return 1;
+            }
+        }
+
+        public int DeleteDecTender(int id)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecTender old = context.DecTender.Find(id);
+
+                if (old != null)
+                {
+                    old.IsDelete = 1;
+                    old.DelOn = DateTime.Now;
                     //old.UserID = DecTender.UserID;
                     context.SaveChanges();
                 }

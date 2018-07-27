@@ -238,7 +238,7 @@
         border-right: 1px solid #ddd;
     }
 </style>
-
+<link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
 <script>
     $("title").html("编写流程");
     //var html = "<h1>AU装修宝</h1>";
@@ -316,7 +316,7 @@
     </script>*@
     <div class="min-price">
         <div class="min-price-tit"><h2>基本信息</h2></div>
-        <div class="min-price-con">
+        <div class="min-price-con" style="display:none;">
             <label>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：</label>
             <div class="mui-numbox">
                 <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
@@ -377,7 +377,7 @@
     </div> 
     @if (Model.IsWorkerEnd != 1)
     {
-        <a href="javascript:updateStages()" class="order" style="color:white;background-color:#007aff">提交信息</a>
+        <a href="javascript:updateStages()" class="order" style="color:white;background-color:#413129">提交信息</a>
     }
     
     <script>
@@ -464,14 +464,14 @@
             //    });
             //    return;
             //}
-            if (Price == "0" || Price == null)
-            {
-                layer.open({
-                    content: '请输入价格！'
-                     , btn: '我知道了'
-                });
-                return;
-            }
+            //if (Price == "0" || Price == null)
+            //{
+            //    layer.open({
+            //        content: '请输入价格！'
+            //         , btn: '我知道了'
+            //    });
+            //    return;
+            //}
             if (StartTime == "" || StartTime == null) {
                 layer.open({
                     content: '请确定开工时间！'

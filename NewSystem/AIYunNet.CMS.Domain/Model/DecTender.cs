@@ -50,6 +50,18 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("Addon")]
         public DateTime Addon { get; set; }
+        /// <summary>
+        /// EditOn
+        /// </summary>
+        [Column("EditOn")]
+        public DateTime EditOn { get; set; }
+        /// <summary>
+        /// DelOn
+        /// </summary>
+        [Column("DelOn")]
+        public DateTime? DelOn { get; set; }
+        [Column("IsDelete")]
+        public int IsDelete { get; set; }
         public DecTender()
         {
             Addon = DateTime.Now;
@@ -59,6 +71,8 @@ namespace AIYunNet.CMS.Domain.Model
             perName = "";
             UserID = 0;
             Guid = "";
+            EditOn = DateTime.Now;
+            IsDelete = 0;
         }
     }
 }

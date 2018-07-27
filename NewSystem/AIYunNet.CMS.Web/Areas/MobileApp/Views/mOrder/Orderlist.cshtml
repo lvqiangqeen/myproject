@@ -114,7 +114,7 @@ white-space: nowrap;
             content: '放弃订单会同时删除您发布的装修信息，请与业主确认后再放弃订单！'
           , btn: ['再想想', '放弃']
           , yes: function (index) {
-              
+
               location.reload();
               layer.close(index);
           },
@@ -241,7 +241,7 @@ white-space: nowrap;
             {
                 var a = AddOn
                 var date = new Date(parseInt(a.slice(6)));
-                var result = date.getFullYear() + '年' + date.getMonth() + '月' + date.getDate()+'日';
+                var result = date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate()+'日';
                 return result;
             }
 
@@ -293,21 +293,22 @@ white-space: nowrap;
                             + '<div class="my-order-item-btn">'
                                 + '<div class="pos-r">'
                                     + '<span class="my-order-item-red"><a href="/MobileApp/mOrder/OrderDetail?guid=' + item.Guid + '">查看订单</a></span>';
-                            if (item.IsAccept == '2') {
-                            } else if (item.IsPlan && item.IsAccept == '1') {
-                                if (!item.IsOut)
-                                {
-                                    html += '<span class="my-order-item-red"><a href="/MobileApp/mOrder/mobileBuidingDetail?Guid=' + item.Guid + '">订单进度</a></span><span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
-                                }
-                              
-                            } else if (!item.IsPlan && item.IsAccept == '1')
-                            {
+                            if (item.IsAccept == '0') {
+                            } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan == '0') {
                                 if ("@SessionHelper.Get("PositionCode")" == "WebWorker") {
                                     html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStageByWorker?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
                                 } else if ("@SessionHelper.Get("PositionCode")" == "WebWorkerLeader")
                                 {
                                     html += '<span class="my-order-item-red"><a href="/MobileApp/MoblieBuiding/buidingStage?DemandID=' + item.DemandId + '&Guid=' + item.Guid + '">发布流程</a></span><span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
                                 }
+
+                            } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan == '1') {
+                                html += '<span class="my-order-item-red"><a href="/MobileApp/mOrder/mobileBuidingDetail?Guid=' + item.Guid + '">订单进度</a></span><span class="my-order-item-red"><a onclick="isout(\'' + item.Guid + '\')">放弃订单</a></span></div></div>';
+                            }
+                            else if (item.IsAccept == '1' && IsOut == '1') {
+
+                            }
+                            else if (item.IsAccept == '2') {
 
                             }
 

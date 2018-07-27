@@ -24,12 +24,12 @@ namespace AIYunNet.CMS.BLL.Service
                     model = context.DecDemand.FirstOrDefault(c => c.Guid == guid);
                 }
                 model.IsOut = true;
-                WebBuidingService ser = new WebBuidingService();
-                WebBuiding buiding = ser.GetWebBuidingByGuID(guid);
-                buiding.FlagDelete = 1;
-                buiding.DeleteOn = DateTime.Now;
-                //DecDemandAccept acc = context.DecDemandAccept.FirstOrDefault(c => c.DemandGuid == guid && c.GetUserID== GetUserID);
-                //acc.IsAccept = 2;
+                WebBuiding buiding = context.WebBuiding.FirstOrDefault(c => c.Guid== guid);
+
+                if (buiding != null)
+                {
+                    context.WebBuiding.Remove(buiding);
+                }
                 context.SaveChanges();
                 return 1;
             }
@@ -77,6 +77,54 @@ namespace AIYunNet.CMS.BLL.Service
                     return list;
                 }
             }
+        }
+        public List<Demand> GetTingDemandList(int type,string cityid, int PageSize, int CurPage, out int count)
+        {
+            List<Demand> list = new List<Demand>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                var query = from d in context.DecDemand
+                            where d.DemandType == type && d.IsDelete == false && d.GetUserID==0 
+                            && d.IsAccept==0 
+                            select new Demand
+                            {
+                                id = d.id,
+                                IsOut = d.IsOut,
+                                buidingname = d.buidingname,
+                                ownername = d.ownername,
+                                ownertel = d.ownertel,
+                                ProvinceID = d.ProvinceID,
+                                ProvinceName = d.ProvinceName,
+                                CityID = d.CityID,
+                                CityName = d.CityName,
+                                buidingSpace = d.buidingSpace,
+                                OneSentence = d.OneSentence,
+                                PublishuserID = d.PublishuserID,
+                                GetUserID = d.GetUserID,
+                                GetUserType = d.GetUserType,
+                                AddOn = d.EditOn,
+                                IsEnd = d.IsEnd,
+                                IsVerrify = d.IsVerrify,
+                                DemandType = d.DemandType,
+                                DemandTypeName = d.DemandTypeName,
+                                Guid = d.Guid,
+                                HouseType = d.HouseType,
+                                IsPlan = d.IsPlan,
+                                AcceptUserID = d.GetUserID,
+                                IsAccept = d.IsAccept,
+                                AcceptUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName,
+                                GetUserName = context.WebWorker.FirstOrDefault(w => w.UserID == d.GetUserID).WorkerName
+                            };
+                if (cityid != "" && cityid!=null)
+                {
+                    query = query.Where(c => c.CityID == cityid);
+                }
+                count = query.ToList().Count();
+
+                list = query.OrderByDescending(c => c.AddOn).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+            }
+
+            return list;
         }
         //获取用户发布的需求
         public List<Demand> GetPublishDemandList(int PublicUserID, int PageSize, int IsAccept, int IsPlan,int IsOut, int CurPage, out int count)

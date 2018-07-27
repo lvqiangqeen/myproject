@@ -21,6 +21,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebBuidingStagesService stageSer = new WebBuidingStagesService();
         WebWorkerService workSer = new WebWorkerService();
         WebBuidTogetherService TogSer = new WebBuidTogetherService();
+        DecTenderService tenSer = new DecTenderService();
         #region 订单
         //放弃订单
         [HttpPost]
@@ -165,6 +166,38 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             int workerid = Convert.ToInt32(SessionHelper.Get("PositionID"));
             List<BuidTogether> list = TogSer.GetmTogetherList(IsAccept, IsComplete, workerid, PageSize, CurPage,out count);
             return Json(list);
+        }
+        #endregion
+
+        #region 投标
+        public ActionResult TenderlistByWorker()
+        {
+            return View();
+        }
+
+        public ActionResult TenderDetailByWorker(int id=0)
+        {
+            DecTender tender = new DecTender();
+            if (id != 0)
+            {
+                tender = tenSer.GetDecTenderByID(id);
+            }
+            
+            return View(tender);
+        }
+
+        public ActionResult AddorEditTender(DecTender tender)
+        {
+            int ret = 0;
+            if (tender.id != 0)
+            {
+                ret = tenSer.UpdateDecTender(tender);
+            }
+            else
+            {
+                ret = tenSer.AddDecTender(tender);
+            }
+            return Json(new { RetCode = ret });
         }
         #endregion
     }

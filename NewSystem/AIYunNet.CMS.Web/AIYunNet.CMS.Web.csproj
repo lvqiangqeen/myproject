@@ -3928,6 +3928,8 @@
     <Content Include="Content\WorkerApp\updateimages\my.png" />
     <Content Include="Content\WorkerApp\updateimages\order.png" />
     <Content Include="Content\WorkerApp\updateimages\pre2.png" />
+    <Content Include="Content\WorkerApp\updateimages\tbdt.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-tbjl.png" />
     <Content Include="Content\WorkerApp\updateimages\titlecolor.png" />
     <Content Include="Content\WorkerApp\updateimages\wx.png" />
     <Content Include="Content\WorkerApp\updateimages\zgs.png" />
@@ -4340,6 +4342,10 @@
     <Content Include="Areas\MobileApp\Views\App\AreaList.cshtml" />
     <Content Include="Areas\MobileApp\Views\App\GJIndex.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileTenders\TenderList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\TenderlistByWorker.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\TenderList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\TenderDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\TenderDetailByWorker.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

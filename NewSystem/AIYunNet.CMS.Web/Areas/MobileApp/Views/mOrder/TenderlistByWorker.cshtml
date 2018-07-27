@@ -1,6 +1,6 @@
 ﻿@using AIYunNet.CMS.Common.Utility;
 @{
-    ViewBag.Title = "DemandList";
+    ViewBag.Title = "Tenderlist";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
 }
 
@@ -24,10 +24,6 @@
         text-align: center;
     }
 
-    .mui-table {
-        width: 85%;
-    }
-
     .mui-navigate-right:after, .mui-push-right:after {
         /* right: 15px; */
         content: '';
@@ -41,99 +37,110 @@
         top: 70%;
         right: 59px;
     }
-    .mui-table-view .mui-media, .mui-table-view .mui-media-body {
-    background-color: #fff;
-}
-    .mui-btn-outlined.mui-btn-blue, .mui-btn-outlined.mui-btn-primary {
-    color: #413129;
-}
-    .mui-btn-blue, .mui-btn-primary, input[type=submit] {
-    border: 1px solid #413129;
 
-}
-                    .mui-bar {
-    background-color: #413129;
-}
+    .mui-table-view .mui-media, .mui-table-view .mui-media-body {
+        background-color: #fff;
+    }
+
+    .mui-btn-outlined.mui-btn-blue, .mui-btn-outlined.mui-btn-primary {
+        color: #413129;
+    }
+
+    .mui-btn-blue, .mui-btn-primary, input[type=submit] {
+        border: 1px solid #413129;
+    }
+
+    .mui-bar {
+        background-color: #413129;
+    }
 </style>
 <script>
-    $("title").html("招标记录");
+    $("title").html("投标记录");
     //var html = "<h1>AU装修宝</h1>";
     //$("#header > .back").after(html);
     $("#header").addClass("mui-bar mui-bar-nav")
 </script>
-@*<div class="container" id="container">*@
-    <div class="mui-content">
-        <div id="slider" class="mui-slider mui-fullscreen">
-            <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-                <div class="mui-scroll">
-                    <a class="mui-control-item mui-active" href="#item1mobile">
-                        待接受
-                    </a>
-                    <a class="mui-control-item" href="#item2mobile">
-                        已接受
-                    </a>
-                    <a class="mui-control-item" href="#item3mobile">
-                        装修进度
-                    </a>
-                    <a class="mui-control-item" href="#item4mobile">
-                        已拒绝
-                    </a>
+<div class="mui-content">
+    <div id="slider" class="mui-slider mui-fullscreen">
+        <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <div class="mui-scroll">
+                <a class="mui-control-item mui-active" href="#item1mobile">
+                    待接受
+                </a>
+                <a class="mui-control-item" href="#item2mobile">
+                    已接受
+                </a>
+                <a class="mui-control-item" href="#item3mobile">
+                    装修进度
+                </a>
+                <a class="mui-control-item" href="#item4mobile">
+                    已拒绝
+                </a>
+            </div>
+        </div>
+        <div class="mui-slider-group">
+            <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                <div id="scroll1" class="mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view">
+                            <li class="mui-table-view-cell" style="background-color: white;">
+                                <div class="mui-table">
+                                    <div class="mui-table-cell mui-col-xs-10">
+                                        <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
+                                        <h5>申请人：李四</h5>
+                                        <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+                                    </div>
+                                    <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+                                        <span class="mui-h5">12:25</span>
+                                        <h5>申请人：李四</h5>
+                                        <h5>申请人：李四</h5>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mui-table-view-cell">
+                                <div class="mui-table">
+                                    <div class="mui-table-cell mui-col-xs-10">
+                                        <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
+                                        <h5>申请人：李四</h5>
+                                        <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+                                    </div>
+                                    <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+                                        <span class="mui-h5">12:25</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="mui-slider-group">
-                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-                    <div id="scroll1" class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view">
-                                @*<li class="mui-table-view-cell mui-media">
-                                        <a class="mui-navigate-right" href="/MobileApp/mOrder/mobileBuidingDetail?BuidingID=37">
-                                            <div class="mui-table mui-media-body">
-                                                <div class="mui-table-cell mui-col-xs-10">
-                                                    <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-                                                    <h5>合作人（工长）：李四</h5>
-                                                    <h5>合作阶段：装修阶段</h5>
-                                                </div>
-                                                <div class="mui-table-cell mui-col-xs-2 mui-text-right">
-                                                    <span class="mui-h5" style="color:red;">已拒绝</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <a class="mui-btn mui-btn-primary mui-btn-outlined">
-                                            操作
-                                        </a>
-                                    </li>*@
-                            </ul>
-                        </div>
+            <div id="item2mobile" class="mui-slider-item mui-control-content">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view"></ul>
                     </div>
                 </div>
-                <div id="item2mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view"></ul>
-                        </div>
+            </div>
+            <div id="item3mobile" class="mui-slider-item mui-control-content">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view"></ul>
                     </div>
                 </div>
-                <div id="item3mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view"></ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="item4mobile" class="mui-slider-item mui-control-content">
-                    <div class="mui-scroll-wrapper">
-                        <div class="mui-scroll">
-                            <ul class="mui-table-view"></ul>
-                        </div>
+            </div>
+            <div id="item4mobile" class="mui-slider-item mui-control-content">
+                <div class="mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                        <ul class="mui-table-view"></ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@*</div>*@
+</div>
+
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
-<script>
+@*<script>
         mui.init();
         //示例1
         (function ($) {
@@ -280,14 +287,14 @@
                                 } else{
                                     html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">查看招标</a></span>';
                                 }
-                                       
+
                                 if (item.IsAccept == '2') {
                                 } else if (item.IsPlan && item.IsAccept == '1') {
                                     if (!item.IsOut)
                                     {
                                         html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '">工程进度</a></div></div>';
                                     }
-                              
+
                                 } else if (!item.IsPlan && item.IsAccept == '1')
                                 {
 
@@ -295,61 +302,11 @@
                                 li.innerHTML = html;
                                 fragment.appendChild(li);
                             });
-
-
-
-                            //$.each(data, function (i, item) {
-                            //    var li = document.createElement('li');
-                            //    li.className = 'mui-table-view-cell mui-media';
-                            //    var html = "";
-                            //    if (item.IsAccept == 1 || item.IsPlan == 1) {
-                            //        html = '<a class="mui-navigate-right" href="/MobileApp/MobileUser/decDemandDetail?id=' + item.id + '">';
-                            //    } else
-                            //    {
-                            //        html = '<a class="mui-navigate-right" href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">';
-                            //    }
-                                
-
-                            //       html += '<div class="mui-table mui-media-body">'
-                            //            + '<div class="mui-table-cell mui-col-xs-10">'
-                            //            + '<h4 class="mui-ellipsis">' + item.buidingname + '</h4>';
-                            //    if (item.IsAccept == 1) {
-                            //        html += '<h5>施工者：' + item.GetUserName + '</h5>';
-                            //    } else
-                            //    {
-                            //        var AcceptUserName = item.AcceptUserName == null ? '未选择' : item.AcceptUserName;
-                            //        html += '<h5>接收人：' + AcceptUserName + '</h5>'
-                            //    }
-                                      
-                            //    html += '<h5>发布日：' + ChangeDateFormat(item.AddOn) + '</h5>'
-                            //            + '</div>'
-                            //            + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">';
-                            //    if (item.IsAccept == 0)
-                            //    {
-                            //        html += '<span class="mui-h5" style="color:#007aff;">新需求</span></div></div></a>';
-                            //    } else if (item.IsAccept == 2) {
-                            //        html += '<span class="mui-h5" style="color:red;">已拒绝</span></div></div></a>';
-                            //    } else if (item.IsOut)
-                            //    {
-                            //        html += '<span class="mui-h5" style="color:red;">已放弃</span></div></div></a>';
-                            //    } else
-                            //    {
-                            //        if (IsPlan == 0) {
-                            //            html += '<span class="mui-h5" style="color:#007aff;">已接受</span></div></div></a>';
-                            //        } else {
-                            //            html += '<span class="mui-h5" style="color:#009688;">施工中</span></div></div></a>'
-                            //            + '<a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '" class="mui-btn mui-btn-primary mui-btn-outlined">施工情况</a>';
-                            //        }
-                            //    }
-                            //    li.innerHTML = html;
-                            //    fragment.appendChild(li);
-                            //});
-
                         }
                     });
                     return fragment;
                 };
             });
         })(mui);
-</script>
+</script>*@
 

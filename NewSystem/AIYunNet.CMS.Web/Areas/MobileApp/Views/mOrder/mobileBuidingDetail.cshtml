@@ -34,7 +34,13 @@
 
     @*<div class="details-img"><img src="@AppSettingsHelper.ImgUrl@Model.BuidingImage"></div>*@
     <ul class="details-price clearfix">
-        <li><em>@Model.Price</em>元<em style="margin-left:15px;">@Model.Space</em>平米</li>
+        <li>
+            @if (Model.Price != 0)
+            {
+                @:<em>@Model.Price</em>元
+            }
+        <em style="margin-left:15px;">@Model.Space</em>平米
+        </li>
         <li>开工日期：@Model.StartTime</li>
         <li>类&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.DemandTypeName</li>
         <li>户&nbsp;&nbsp;&nbsp;&nbsp;型：@demand.HouseType</li>
