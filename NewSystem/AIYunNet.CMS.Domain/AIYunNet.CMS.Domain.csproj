@@ -102,6 +102,7 @@
     <Compile Include="OccaModel\BuidingAndComment.cs" />
     <Compile Include="OccaModel\BuidTogether.cs" />
     <Compile Include="OccaModel\Demand.cs" />
+    <Compile Include="OccaModel\Tender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

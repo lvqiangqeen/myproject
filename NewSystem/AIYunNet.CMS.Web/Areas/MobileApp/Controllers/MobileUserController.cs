@@ -12,6 +12,7 @@ using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
+    [AllSessionFilter]
     [MobileUserFilter]
     public class MobileUserController : Controller
     {

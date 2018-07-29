@@ -4346,6 +4346,7 @@
     <Content Include="Areas\MobileApp\Views\App\TenderList.cshtml" />
     <Content Include="Areas\MobileApp\Views\App\TenderDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\TenderDetailByWorker.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\gonglueList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

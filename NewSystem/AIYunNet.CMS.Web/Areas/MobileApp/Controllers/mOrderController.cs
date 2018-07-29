@@ -174,7 +174,14 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult GetTenderlistByWorker(int IsAccept,int PageSize, int CurPage)
+        {
+            int count = 0;
+            int userid = Convert.ToInt32(SessionHelper.Get("UserID"));
+            List<Tender> list = tenSer.GetTenderList(userid, IsAccept,PageSize, CurPage, out count);
+            return Json(list);
+        }
         public ActionResult TenderDetailByWorker(int id=0)
         {
             DecTender tender = new DecTender();

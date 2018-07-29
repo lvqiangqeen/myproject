@@ -53,6 +53,9 @@
     .mui-bar {
         background-color: #413129;
     }
+    .mui-col-xs-10 {
+    width: 50.333333%;
+}
 </style>
 <script>
     $("title").html("投标记录");
@@ -65,16 +68,13 @@
         <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
             <div class="mui-scroll">
                 <a class="mui-control-item mui-active" href="#item1mobile">
-                    待接受
+                    待中标
                 </a>
                 <a class="mui-control-item" href="#item2mobile">
-                    已接受
+                    已中标
                 </a>
                 <a class="mui-control-item" href="#item3mobile">
-                    装修进度
-                </a>
-                <a class="mui-control-item" href="#item4mobile">
-                    已拒绝
+                    未中标
                 </a>
             </div>
         </div>
@@ -83,32 +83,19 @@
                 <div id="scroll1" class="mui-scroll-wrapper">
                     <div class="mui-scroll">
                         <ul class="mui-table-view">
-                            <li class="mui-table-view-cell" style="background-color: white;">
+                            @*<li class="mui-table-view-cell" style="background-color: white;">
                                 <div class="mui-table">
                                     <div class="mui-table-cell mui-col-xs-10">
                                         <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-                                        <h5>申请人：李四</h5>
+                                        <h5>申请日期：2018年11月01日</h5>
                                         <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
                                     </div>
                                     <div class="mui-table-cell mui-col-xs-2 mui-text-right">
-                                        <span class="mui-h5">12:25</span>
-                                        <h5>申请人：李四</h5>
-                                        <h5>申请人：李四</h5>
+                                        <span class="mui-h5">500000元</span>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="mui-table-view-cell">
-                                <div class="mui-table">
-                                    <div class="mui-table-cell mui-col-xs-10">
-                                        <h4 class="mui-ellipsis">信息化推进办公室张彦合同付款信息化</h4>
-                                        <h5>申请人：李四</h5>
-                                        <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
-                                    </div>
-                                    <div class="mui-table-cell mui-col-xs-2 mui-text-right">
-                                        <span class="mui-h5">12:25</span>
-                                    </div>
-                                </div>
-                            </li>
+                            </li>*@
+
                         </ul>
                     </div>
                 </div>
@@ -127,20 +114,13 @@
                     </div>
                 </div>
             </div>
-            <div id="item4mobile" class="mui-slider-item mui-control-content">
-                <div class="mui-scroll-wrapper">
-                    <div class="mui-scroll">
-                        <ul class="mui-table-view"></ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.js"></script>
 <script src="~/Content/mui-master/examples/hello-mui/js/mui.pullToRefresh.material.js"></script>
-@*<script>
+<script>
         mui.init();
         //示例1
         (function ($) {
@@ -157,7 +137,6 @@
                 var pageIndex1 = 1;
                 var pageIndex2 = 1;
                 var pageIndex3 = 1;
-                var pageIndex4 = 1;
                 $.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function (index, pullRefreshEl) {
                     $(pullRefreshEl).pullToRefresh({
                         up: {
@@ -168,49 +147,30 @@
                                 var self = this;
                                 setTimeout(function () {
                                     var IsAccept = 0;
-                                    var IsPlan = 0;
-                                    var IsOut = 0;
                                     if (index == "0") {
                                         IsAccept = 0;
-                                        IsPlan = 0;
-                                        IsOut = 0;
                                     } else if (index == "1") {
                                         IsAccept = 1;
-                                        IsPlan = 0;
-                                        IsOut = 0;
                                     } else if (index == "2") {
-                                        IsAccept = 1;
-                                        IsPlan = 1;
-                                        IsOut = 0;
-                                    } else{
                                         IsAccept = 2;
-                                        IsPlan = 0;
-                                        IsOut = 1;
-                                    }
+                                    } 
                                     var ul = self.element.querySelector('.mui-table-view');
                                     var bool = false;
                                     if (index == "0") {
-                                        var html = createFragment1(pageIndex1, IsAccept, IsPlan, IsOut);
-                                        ul.appendChild(createFragment1(pageIndex1, IsAccept, IsPlan, IsOut));
+                                        var html = createFragment1(pageIndex1, IsAccept);
+                                        ul.appendChild(createFragment1(pageIndex1, IsAccept));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex1++;
-                                    }
-                                    else if (index == "1") {
-                                        var html = createFragment1(pageIndex2, IsAccept, IsPlan, IsOut);
-                                        ul.appendChild(createFragment1(pageIndex2, IsAccept, IsPlan, IsOut));
+                                    }else if (index == "1") {
+                                        var html = createFragment1(pageIndex2, IsAccept);
+                                        ul.appendChild(createFragment1(pageIndex2, IsAccept));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex2++;
                                     } else if (index == "2") {
-                                        var html = createFragment1(pageIndex3, IsAccept, IsPlan, IsOut);
-                                        ul.appendChild(createFragment1(pageIndex3, IsAccept, IsPlan, IsOut));
+                                        var html = createFragment1(pageIndex3, IsAccept);
+                                        ul.appendChild(createFragment1(pageIndex3, IsAccept));
                                         bool = html.childNodes.length == 0 ? true : false;
                                         pageIndex3++;
-                                    } else
-                                    {
-                                        var html = createFragment1(pageIndex4, IsAccept, IsPlan, IsOut);
-                                        ul.appendChild(createFragment1(pageIndex4, IsAccept, IsPlan, IsOut));
-                                        bool = html.childNodes.length == 0 ? true : false;
-                                        pageIndex4++;
                                     }
                                     //自定义颜色示例
                                     mui(".mui-progressbar").each(function () {
@@ -235,70 +195,44 @@
                     var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
                     return date.getFullYear() + "-" + month + "-" + currentDate;
                 }
-                var createFragment1 = function (pageIndex, IsAccept, IsPlan, IsOut) {
+                var createFragment1 = function (pageIndex, IsAccept) {
                     var fragment = document.createDocumentFragment();
                     var result = "";
                     $.ajax({
                         type: 'post',
-                        url: '/MobileApp/MobileUser/GetDemandlist',
+                        url: '/MobileApp/mOrder/GetTenderlistByWorker',
                         async: false,
                         dataType: "json",
                         data: {
                             CurPage: pageIndex,
                             PageSize: 10,
-                            IsAccept: IsAccept,
-                            IsPlan: IsPlan,
-                            IsOut: IsOut
+                            IsAccept: IsAccept
                         },
                         success: function (data) {
                             $.each(data, function (i, item) {
                                 var li = document.createElement('li');
                                 li.className = 'my-order-item mui-table-view-cell';
 
-                                var html= '<div class="my-order-item-tit clearfix">'
-                                    + '<h3 class="line-limit-length">招标编号：' + item.Guid + '</h3>'
-                                if (item.IsAccept == '0')
+                                var html = '<li class="mui-table-view-cell" style="background-color: white;">'
+                                + '<div class="mui-table">'
+                                    + '<div class="mui-table-cell mui-col-xs-10">'
+                                        + '<h4 class="mui-ellipsis">' + item.Buidingname + '</h4>'
+                                        + '<h5>申请日期：' + time(item.Addon) + '</h5>'
+                                        + '<p class="mui-h6 mui-ellipsis">' + item.perInfo + '</p>'
+                                    + '</div>'
+                                    + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">'+ '<span class="mui-h5">';
+                                if(IsAccept==0)
                                 {
-                                    html += '<span class="my-order-wait-zf">新招标</span>';
-                                } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan=='0')
+                                    html += '<h5 style="color:#fa4b28">待中标</h5>'
+                                }else if(IsAccept==1)
                                 {
-                                    html += '<span class="my-order-wait-zf" style="color:#009688">已接受</span>';
-
-                                } else if (item.IsAccept == '1' && IsOut == '0' && IsPlan == '1')
-                                {
-                                    html += '<span class="my-order-wait-zf" style="color:#007aff">施工中</span>';
+                                    html += '<h5 style="color:#009688">已中标</h5>'
+                                }else{
+                                    html += '<h5>未中标</h5>'
                                 }
-                                else if (item.IsAccept == '1' && IsOut == '1') {
-                                    html += '<span class="my-order-wait-zf" style="color:black;">已放弃</span>';
-                                }
-                                else if (item.IsAccept == '2') {
-                                    html += '<span class="my-order-wait-zf" style="color:red;">已拒绝</span>';
-                                }
-                                html += '</div>'
-                                + '<div class="my-order-item-txt">'
-                                    + '<div class="my-order-time">' + time(item.AddOn) + '</div>'
-                                    + '<div class="my-order-address">' + item.CityName + ' ' + item.buidingname + '</div>'
-                                + '</div>'
-                                + '<div class="my-order-item-btn">'
-                                    + '<div class="pos-r">';
-
-                                if (item.IsAccept == 1 && IsOut==0) {
-                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/decDemandDetail?id=' + item.id + '">查看招标</a></span>';
-                                } else{
-                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">查看招标</a></span>';
-                                }
-
-                                if (item.IsAccept == '2') {
-                                } else if (item.IsPlan && item.IsAccept == '1') {
-                                    if (!item.IsOut)
-                                    {
-                                        html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '">工程进度</a></div></div>';
-                                    }
-
-                                } else if (!item.IsPlan && item.IsAccept == '1')
-                                {
-
-                                }
+                                html +='<span class="mui-h5">' + item.Price + '元</span></div>'
+                                + '</div>';
+                                    
                                 li.innerHTML = html;
                                 fragment.appendChild(li);
                             });
@@ -308,5 +242,5 @@
                 };
             });
         })(mui);
-</script>*@
+</script>
 

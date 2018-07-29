@@ -1,0 +1,99 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "gonglueList";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebRecommendService reSer = new WebRecommendService();
+    //装修app攻略
+    List<WebRecommend> listgonglue = reSer.GetWebRecommendList(25);
+}
+
+<script>
+    $("title").html("装修攻略");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+</script>
+<style>
+    #trip_list .view .cont {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 15px 15px 5px 15px;
+        background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5));
+        background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0,0,0,0)), color-stop(1,rgba(0,0,0,0.5)));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='rgba(0,0,0,0)', endColorstr='rgba(0,0,0,0.5)', GradientType='0');
+    }
+
+    #trip_list .view .pic .num {
+        float: left;
+    }
+
+        #trip_list .view .pic .num p {
+            color: white;
+            font-size: 12px;
+        }
+
+    .am-tabs-bd .am-tab-panel * {
+        -webkit-user-drag: none;
+    }
+
+    #trip_list .view .pic .num span {
+        color: white;
+        font-size: 14px;
+        margin-right: 5px;
+    }
+
+    #trip_list .view {
+        margin-bottom: 10px;
+    }
+
+        #trip_list .view .pic {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+        }
+</style>
+
+<div class="container" id="container">
+    <div class="ind-nav ind-nav4">
+        <div class="ind-tit" style="border-bottom: 1px solid #ededed;">
+            <h2 style="float:left;">装修攻略</h2>
+        </div>
+        <div id="trip_list" style="width:100%;overflow:hidden;">
+            <div class="am-tabs" data-am-tabs="">
+                <div class="am-tabs-bd" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                    <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                        <ul style="height: auto;">
+                            @foreach (var item in listgonglue)
+                            {
+                                <li class="view" style="width: 100%;height: auto;" onclick="topagegonglue('@item.RecWechartUrl')">
+                                    <div class="pic">
+                                        <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg" />
+                                        <div class="cont">
+                                            <div class="num">
+                                                <p style="font-size: 16px;">@item.RecommendName</p>
+                                                <p sstyle="white-space: nowrap;">@StringHelper.StringTruncat(item.RecommendInfo, 50, "...")</p>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        function topagegonglue(url)
+        {
+            window.location.href = url;
+        }
+</script>
+

@@ -11,6 +11,7 @@ using AIYunNet.CMS.Common.Utility;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
+    [AllSessionFilter]
     public class MoblieBuidingController : Controller
     {
         WebBuidingService buidSer = new WebBuidingService();

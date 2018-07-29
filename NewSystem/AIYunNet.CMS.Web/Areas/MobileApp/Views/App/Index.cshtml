@@ -12,7 +12,7 @@
     //装修app新闻
     List<WebRecommend> listxinwen = reSer.GetWebRecommendList(24);
     //装修app攻略
-    List<WebRecommend> listgonglue = reSer.GetWebRecommendList(25);
+    List<WebRecommend> listgonglue = reSer.GetWebRecommendList(25,4);
 }
 <script>
     $("title").html("首页");
@@ -39,8 +39,11 @@
         color: #413129;
     }
 </style>
-<div class="container" id="container">
 
+<div class="container" id="container">
+    <div class="mui-indexed-list-search mui-input-row mui-search" style="margin-top: 3px;">
+        <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索" style="margin-bottom: 3px;">
+    </div>
     @*<div class="header-bot-item">
             <em>铜陵</em>
             <h2>家帮网</h2>
@@ -115,6 +118,23 @@
     </div>
     <!--家居维修结束-->
     <!--新闻-->
+    <style>
+        .mui-slider-title {
+    color: white;
+    font-size: 22px;
+    line-height: 46px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 46px;
+    margin-bottom: 88px;
+    text-align: center;
+    text-indent: 12px;
+    opacity: 0.5;
+    background-color: #000;
+}
+    </style>
     <div class="ind-nav ind-nav3">
         <div class="ind-tit">
             <h2>案例赏析</h2>
@@ -185,9 +205,9 @@
     </div>
     <!--新闻-->
     <div class="ind-nav ind-nav4" style="margin-top: 11px;">
-        <div class="ind-tit" style="border-bottom: 1px solid #ededed;">
+        <div class="ind-tit" style="border-bottom: 1px solid #ededed;height: 2rem;">
             <h2 style="float:left;">装修攻略</h2>
-            <div style="float:right;font-size: 14px;line-height: 2rem;margin-right: 8px;">更多</div>
+            <div style="float:right;font-size: 14px;line-height: 2rem;margin-right: 8px;" onclick="topagegonglue('/MobileApp/App/gonglueList')">更多</div>
         </div>
         <div id="trip_list" style="width:100%;overflow:hidden;">
             <div class="am-tabs" data-am-tabs="">
@@ -259,8 +279,9 @@
     </style>
     <!--二手置换 货运配送开始-->
     <div class="ind-nav ind-nav5" style="margin-top: 11px;">
-        <div class="ind-tit" style="border-bottom: 1px solid #ededed;">
-            <h2>装修新闻</h2>
+        <div class="ind-tit" style="border-bottom: 1px solid #ededed;height: 2rem;">
+            <h2 style="float:left;">装修新闻</h2>
+            <div style="float:right;font-size: 14px;line-height: 2rem;margin-right: 8px;" onclick="topagegonglue('/MobileApp/App/gonglueList')">更多</div>
         </div>
         <div class="swiper-container favor-list">
 
@@ -269,7 +290,7 @@
                 <a href="@item.RecWechartUrl">
                     <dl>
                         <dt>
-                            <img src="@AppSettingsHelper.ImgUrl@item.thumbnailImage" style="height:120px;width:160px;" />
+                            <img src="@AppSettingsHelper.ImgUrl@item.RecommendImg" style="height:120px;width:160px;" />
                             @*<span></span>*@
                         </dt>
                         <dd>

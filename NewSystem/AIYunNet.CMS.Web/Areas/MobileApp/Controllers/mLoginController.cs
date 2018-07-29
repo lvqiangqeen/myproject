@@ -13,6 +13,7 @@ using System.Security.Cryptography;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
+    [AllSessionFilter]
     public class mLoginController : Controller
     {
         WebUserService webUserservice = new WebUserService();

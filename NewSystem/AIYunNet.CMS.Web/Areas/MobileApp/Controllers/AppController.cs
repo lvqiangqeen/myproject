@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AIYunNet.CMS.Web.filter;
 using AIYunNet.CMS.Common.Utility;
 using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
-	public class AppController : Controller
+    [AllSessionFilter]
+    public class AppController : Controller
 	{
         WebRecommendService reSer = new WebRecommendService();
         WebCommonService comSer = new WebCommonService();
@@ -27,6 +29,10 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult GJIndex()
         {
 
+            return View();
+        }
+        public ActionResult gonglueList()
+        {
             return View();
         }
         public ActionResult TenderList()

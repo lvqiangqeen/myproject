@@ -48,15 +48,25 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 try
                 {
-                    context.DecTender.Add(DecTender);
-                    context.SaveChanges();
+                    DecTender tender = context.DecTender.FirstOrDefault(c => c.Guid == DecTender.Guid && c.UserID == DecTender.UserID);
+                    if (tender == null)
+                    {
+                        context.DecTender.Add(DecTender);
+                        context.SaveChanges();
+                        return 1;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
+
                 }
                 catch (Exception e)
                 {
 
                 }
 
-                return 1;
+                return 0;
             }
         }
 
@@ -73,6 +83,7 @@ namespace AIYunNet.CMS.BLL.Service
                     old.perInfo = DecTender.perInfo;
                     old.perName = DecTender.perName;
                     old.perPhone = DecTender.perPhone;
+                    old.Price = DecTender.Price;
                     old.EditOn = DateTime.Now;
                     //old.UserID = DecTender.UserID;
                     context.SaveChanges();
@@ -96,6 +107,36 @@ namespace AIYunNet.CMS.BLL.Service
                 }
                 return 1;
             }
+        }
+
+        public List<Tender> GetTenderList(int UserID,int IsAccept, int PageSize, int CurPage, out int count)
+        {
+            List<Tender> list = new List<Tender>();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                var query = from d in context.DecDemand
+                            from c in context.DecTender
+                            where d.Guid == c.Guid && c.IsDelete == 0 && c.UserID== UserID && c.IsAccept== IsAccept
+                            select new Tender
+                            {
+                                id = c.id,
+                                Guid = c.Guid,
+                                IsAccept = c.IsAccept,
+                                UserID= UserID,
+                                perName=c.perName,
+                                perInfo=c.perInfo,
+                                perPhone=c.perPhone,
+                                Price=c.Price,
+                                Buidingname=d.buidingname,
+                                Buidingspace=d.buidingSpace,
+                                Addon=c.EditOn
+                            };
+                count = query.ToList().Count();
+
+                list = query.OrderByDescending(c => c.Addon).ToList().Skip(PageSize * (CurPage - 1)).Take(PageSize * CurPage).ToList();
+            }
+
+            return list;
         }
     }
 }

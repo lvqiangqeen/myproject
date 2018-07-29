@@ -3,68 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography;
 
-namespace AIYunNet.CMS.Domain.Model
+namespace AIYunNet.CMS.Domain.OccaModel
 {
-    [Table("DecTender")]
-    public class DecTender
+    public class Tender
     {
-        [Key]
-        [Column("id")]
         public int id { get; set; }
         /// <summary>
         /// Guid
         /// </summary>
-        [Column("Guid")]
         public string Guid { get; set; }
         /// <summary>
         /// 投标者ID
         /// </summary>
-        [Column("UserID")]
         public int UserID { get; set; }
         /// <summary>
         /// 投标者姓名
         /// </summary>
-        [Column("perName")]
         public string perName { get; set; }
         /// <summary>
         /// perPhone
         /// </summary>
-        [Column("perPhone")]
         public string perPhone { get; set; }
         /// <summary>
         /// perInfo
         /// </summary>
-        [Column("perInfo")]
         public string perInfo { get; set; }
         /// <summary>
         /// 是否被业主接受0未看1接受2未接受
         /// </summary>
-        [Column("IsAccept")]
         public int IsAccept { get; set; }
         /// <summary>
         /// Addon
         /// </summary>
-        [Column("Addon")]
         public DateTime Addon { get; set; }
         /// <summary>
         /// EditOn
         /// </summary>
-        [Column("EditOn")]
         public DateTime EditOn { get; set; }
         /// <summary>
         /// DelOn
-        /// </summary>
-        [Column("DelOn")]
         public DateTime? DelOn { get; set; }
-        [Column("IsDelete")]
         public int IsDelete { get; set; }
-        [Column("Price")]
         public double Price { get; set; }
-        public DecTender()
+        public string Buidingname { get; set; }
+        public double Buidingspace { get; set; }
+        public Tender()
         {
             Addon = DateTime.Now;
             IsAccept = 0;
@@ -76,6 +60,8 @@ namespace AIYunNet.CMS.Domain.Model
             EditOn = DateTime.Now;
             IsDelete = 0;
             Price = 0;
+            Buidingname = "";
+            Buidingspace = 0;
         }
     }
 }

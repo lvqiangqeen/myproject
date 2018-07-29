@@ -11,6 +11,8 @@ using AIYunNet.CMS.Common.Utility;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
+    [AllSessionFilter]
+    [MobileUserFilter]
     public class MobileTendersController : Controller
     {
         // GET: MobileApp/MobileTenders

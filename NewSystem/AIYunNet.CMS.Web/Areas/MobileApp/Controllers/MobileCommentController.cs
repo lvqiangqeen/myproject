@@ -12,7 +12,7 @@ using AIYunNet.CMS.Domain.OccaModel;
 
 namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
 {
-    
+    [AllSessionFilter]
     public class MobileCommentController : Controller
     {
         WebBuidingCaseCommentService commerSer = new WebBuidingCaseCommentService();
