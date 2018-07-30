@@ -86,7 +86,7 @@ namespace AIYunNet.CMS.BLL.Service
                 }
                 DecDemand dec = context.DecDemand.FirstOrDefault(c => c.Guid == acc.DemandGuid);
                 dec.GetUserType = "WebUser";
-                dec.GetUserID = old.GetUserID;
+                dec.GetUserID = acc.GetUserID;
                 dec.IsAccept = acc.IsAccept;
                 context.SaveChanges();
 
