@@ -174,6 +174,16 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
+        public ActionResult WorkerTenderDetail(string guid)
+        {
+            DecDemand demand = deSer.GetDecDemandByGuID(guid);
+            ViewBag.demand = demand;
+            int userid = Convert.ToInt32(SessionHelper.Get("UserID"));
+            DecTender tender = tenSer.GetTender(guid, userid);
+            ViewBag.tender = tender;
+            return View();
+        }
+
         [HttpPost]
         public ActionResult GetTenderlistByWorker(int IsAccept,int PageSize, int CurPage)
         {
@@ -192,7 +202,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             
             return View(tender);
         }
-
+        [HttpPost]
         public ActionResult AddorEditTender(DecTender tender)
         {
             int ret = 0;
@@ -204,6 +214,22 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             {
                 ret = tenSer.AddDecTender(tender);
             }
+            return Json(new { RetCode = ret });
+        }
+
+        public ActionResult deleteTender(int id)
+        {
+            int ret = 0;
+
+            ret = tenSer.DeleteDecTender(id);
+
+            return Json(new { RetCode = ret });
+        }
+
+        public ActionResult selectworkerbytenderid(int id)
+        {
+            int ret = 0;
+            ret=tenSer.SelectWorker(id);
             return Json(new { RetCode = ret });
         }
         #endregion

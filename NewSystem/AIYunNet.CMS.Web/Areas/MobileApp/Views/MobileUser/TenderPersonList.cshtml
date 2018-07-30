@@ -4,10 +4,9 @@
 @using AIYunNet.CMS.BLL.IService
 @using AIYunNet.CMS.Domain.Model
 @{
-    ViewBag.Title = "DemandDetail";
+    ViewBag.Title = "TenderPersonList";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     WebWorkerService wSer = new WebWorkerService();
-
 }
 
 <link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
@@ -51,8 +50,7 @@
             {
                 WebWorker worker = wSer.GetWebWorkerByUserID(item.UserID);
                 <li class="mui-table-view-cell mui-media">
-                    <a class="mui-navigate-right" href="/MobileApp/MobileWorker/mWorkerDetail?workerid=@worker.WorkerID">
-                        @*/MobileApp/App/TenderDetailByUser?guid=@Model.Guid&userid=@worker.UserID&workerid=@worker.WorkerID*@
+                    <a class="mui-navigate-right" href="/MobileApp/MobileUser/TenderDetailByUser?guid=@Model.Guid&userid=@worker.UserID&workerid=@worker.WorkerID">
                         <img class="mui-media-object mui-pull-left" src="@AppSettingsHelper.ImgUrl@worker.thumbnailImage">
                         <div class="mui-media-body" style="width:60%;float:left">
                             @item.perName
@@ -72,8 +70,9 @@
         </ul>
 
     </div>
-    <a class="pay" href="/MobileApp/mOrder/TenderDetailByWorker?guid=@Model.Guid">我要投标</a>
+    @*<a class="pay" href="/MobileApp/mOrder/TenderDetailByWorker?guid=@Model.Guid">我要投标</a>*@
     <!--order-confirm-end-->
 
 </div>
+
 

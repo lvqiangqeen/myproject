@@ -7,8 +7,8 @@
     ViewBag.Title = "OrderDetail";
     Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
     string guid = Request["guid"];
-    DecDemandAcceptService accSer = new DecDemandAcceptService();
-    DecDemandAccept acc = accSer.GetAcceptByGuid(guid);
+    //DecDemandAcceptService accSer = new DecDemandAcceptService();
+    //DecDemandAccept acc = accSer.GetAcceptByGuid(guid);
     string GetUserID = SessionHelper.Get("UserID");
     WebWorker worker = new WebWorker();
     WebWorkerService worSer = new WebWorkerService();
@@ -36,7 +36,7 @@
             <li><h2>户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</h2><span>@Model.HouseType</span></li>
             <li><h2>小区地址</h2><span>@Model.buidingname</span></li>
             <li><h2>业主姓名</h2><span>@Model.ownername</span></li>
-            @if (acc.IsAccept == 1)
+            @if (Model.IsAccept == 1)
             {
                 <li><h2>联系方式</h2><span>@Model.ownertel</span></li>
             }
@@ -49,7 +49,7 @@
             }
            
             <li>
-                @if (acc.IsAccept == 0)
+                @if (Model.IsAccept == 0)
                 {
 
                     <div class="mui-input-row mui-radio mui-left">
@@ -62,7 +62,7 @@
                     </div>
 
                 }
-                else if (acc.IsAccept == 1)
+                else if (Model.IsAccept == 1)
                 {
                     <div class="mui-input-row mui-radio mui-left">
                         <label style="color:#009688">已接受</label>
@@ -79,7 +79,7 @@
 
 
         </ul>
-        @if (acc.IsAccept == 0)
+        @if (Model.IsAccept == 0)
         {
             <a class="pay" href="#">确认</a>
         }
@@ -91,7 +91,7 @@
 </div>
 <script>
     $(function () {
-        var isacc = '@acc.IsAccept';
+        var isacc = '@Model.IsAccept';
         $("input[name=IsAccept][value=" + isacc + "]").attr("checked", "true");
         $(".pay").click(function () {
             var isaccept = $("input[name='IsAccept']:checked").val();

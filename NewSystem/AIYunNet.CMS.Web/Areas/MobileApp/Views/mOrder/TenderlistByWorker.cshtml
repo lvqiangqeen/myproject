@@ -195,6 +195,10 @@
                     var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
                     return date.getFullYear() + "-" + month + "-" + currentDate;
                 }
+                function toPage(url)
+                {
+                    window.location.href = url;
+                }
                 var createFragment1 = function (pageIndex, IsAccept) {
                     var fragment = document.createDocumentFragment();
                     var result = "";
@@ -213,7 +217,7 @@
                                 var li = document.createElement('li');
                                 li.className = 'my-order-item mui-table-view-cell';
 
-                                var html = '<li class="mui-table-view-cell" style="background-color: white;">'
+                                var html = '<a class="mui-table-view-cell" style="background-color: white;" href="/MobileApp/mOrder/WorkerTenderDetail?guid=' + item.Guid + '">'
                                 + '<div class="mui-table">'
                                     + '<div class="mui-table-cell mui-col-xs-10">'
                                         + '<h4 class="mui-ellipsis">' + item.Buidingname + '</h4>'

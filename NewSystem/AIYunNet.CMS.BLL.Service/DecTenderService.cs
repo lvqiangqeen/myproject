@@ -14,6 +14,40 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class DecTenderService
     {
+        //选他装修
+        public int SelectWorker(int id)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                DecTender tender = new DecTender();
+                DemandService denSer = new DemandService();
+                tender = context.DecTender.Find(id);
+                if (tender != null)
+                {
+                    tender.IsAccept = 1;
+                    DecDemand demand = context.DecDemand.FirstOrDefault(c => c.Guid == tender.Guid);
+                    demand.IsAccept = 0;
+                    demand.GetUserID = tender.UserID;
+                    demand.GetUserType = "WebUser";
+                    demand.EditOn = DateTime.Now;
+                    List<DecTender> list = context.DecTender.Where(c => c.Guid == tender.Guid && c.UserID != tender.UserID).ToList();
+                    if (list != null)
+                    {
+                        foreach(var item in list)
+                        {
+                            item.IsAccept = 2;
+                            item.EditOn= DateTime.Now;
+                        }
+                    }
+                    context.SaveChanges();
+                    return 1;
+                }else
+                {
+                    return 0;
+                }
+                
+            }
+        }
         public List<DecTender> GetDecTenderList(string guid)
         {
             using (AIYunNetContext context = new AIYunNetContext())
@@ -48,7 +82,7 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 try
                 {
-                    DecTender tender = context.DecTender.FirstOrDefault(c => c.Guid == DecTender.Guid && c.UserID == DecTender.UserID);
+                    DecTender tender = context.DecTender.FirstOrDefault(c => c.Guid == DecTender.Guid && c.UserID == DecTender.UserID && c.IsDelete == 0);
                     if (tender == null)
                     {
                         context.DecTender.Add(DecTender);
@@ -108,7 +142,19 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
-
+        public DecTender GetTender(string guid,int UserID)
+        {
+            DecTender tender = new DecTender();
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                tender = context.DecTender.FirstOrDefault(c => c.Guid == guid && c.UserID == UserID && c.IsDelete == 0);
+                if (tender == null)
+                {
+                    tender = new DecTender();
+                }
+            }
+            return tender;
+        }
         public List<Tender> GetTenderList(int UserID,int IsAccept, int PageSize, int CurPage, out int count)
         {
             List<Tender> list = new List<Tender>();

@@ -22,6 +22,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebCommonService wCSer = new WebCommonService();
         WebWorkerService workSer = new WebWorkerService();
         WebBuidTogetherService TogSer = new WebBuidTogetherService();
+        DecTenderService tenSer = new DecTenderService();
 
         #region 装修进度（用户）
         // GET: MobileApp/MobileUser
@@ -59,6 +60,22 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             int userid = Convert.ToInt32(SessionHelper.Get("UserID"));
             List<WebBuiding> list = buidSer.mGetBListByUser(userid, IsWorkerEnd, IsUserEnd, PageSize, CurPage);
             return Json(list);
+        }
+        #endregion
+        #region 投标列表
+        public ActionResult TenderPersonList(string guid)
+        {
+            DecDemand demand = deSer.GetDecDemandByGuID(guid);
+            List<DecTender> list = tenSer.GetDecTenderList(guid);
+            ViewBag.list = list;
+            return View(demand);
+        }
+
+        public ActionResult TenderDetailByUser(string guid, int userid, int workerid)
+        {
+            DecTender tender = tenSer.GetTender(guid, userid);
+            ViewBag.tender = tender;
+            return View();
         }
         #endregion
 

@@ -293,14 +293,17 @@
                                 } else{
                                     html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">查看招标</a></span>';
                                 }
-                                       
+                                if (item.IsAccept == '0' && item.GetUserID==0)
+                                {
+                                    html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/TenderPersonList?guid=' + item.Guid + '">投标情况</a></span>';
+                                }
                                 if (item.IsAccept == '2') {
                                 } else if (item.IsPlan && item.IsAccept == '1') {
                                     if (!item.IsOut)
                                     {
                                         html += '<span class="my-order-item-red"><a href="/MobileApp/MobileUser/BuidingDetailUser?Guid=' + item.Guid + '">工程进度</a></div></div>';
                                     }
-                              
+
                                 } else if (!item.IsPlan && item.IsAccept == '1')
                                 {
 
@@ -321,7 +324,7 @@
                             //    {
                             //        html = '<a class="mui-navigate-right" href="/MobileApp/MobileUser/DemandDetail?id=' + item.id + '">';
                             //    }
-                                
+
 
                             //       html += '<div class="mui-table mui-media-body">'
                             //            + '<div class="mui-table-cell mui-col-xs-10">'
@@ -333,7 +336,7 @@
                             //        var AcceptUserName = item.AcceptUserName == null ? '未选择' : item.AcceptUserName;
                             //        html += '<h5>接收人：' + AcceptUserName + '</h5>'
                             //    }
-                                      
+
                             //    html += '<h5>发布日：' + ChangeDateFormat(item.AddOn) + '</h5>'
                             //            + '</div>'
                             //            + '<div class="mui-table-cell mui-col-xs-2 mui-text-right">';

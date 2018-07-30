@@ -8,14 +8,11 @@
 <script>
     $(function () {
         var title = "";
-        if ("@SessionHelper.Get("PositionCode")"=="WebUser")
-        {
+        if ("@SessionHelper.Get("PositionCode")" == "WebUser") {
             title = "业主中心";
-        }else if("@SessionHelper.Get("PositionCode")"=="WebWorkerLeader")
-        {
+        } else if ("@SessionHelper.Get("PositionCode")" == "WebWorkerLeader") {
             title = "工长中心";
-        }else
-        {
+        } else {
             title = "工人中心";
         }
         $("title").html(title);
@@ -51,31 +48,41 @@
             }
 
         </ul>
-        <ul>
-            @*<li><a class="my-icon-zxjd" href="/MobileApp/MobileUser/BuidinglistUser">工程进度</a></li>*@
-            @*<li><a class="my-icon-zbjl" href="/MobileApp/MobileUser/DemandList">招标记录</a></li>
-            <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>*@            
-            @if (SessionHelper.Get("PositionCode") == "WebUser")
+
+        @*<li><a class="my-icon-zxjd" href="/MobileApp/MobileUser/BuidinglistUser">工程进度</a></li>*@
+        @*<li><a class="my-icon-zbjl" href="/MobileApp/MobileUser/DemandList">招标记录</a></li>
+            <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>*@
+        @if (SessionHelper.Get("PositionCode") == "WebUser")
             {
-                <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>              
+            <ul>
+                <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>
                 <li><a class="my-icon-zxjd" href="/MobileApp/MobileUser/BuidinglistUser">工程进度</a></li>
                 <li><a class="my-icon-zbjl" href="/MobileApp/MobileUser/DemandList">招标记录</a></li>
-            }
-            else
-            {
-                <li><a class="my-icon-wddd" href="/MobileApp/mOrder/Orderlist">我的订单</a></li>
-                <li><a class="my-icon-zxjd" href="/MobileApp/mOrder/mobileBuidingList">订单进度</a></li>
-                <li><a class="my-icon-zbjl" href="/MobileApp/MobileUser/DemandList">招标记录</a></li>
-                <li><a class="my-icon-tbjl" href="/MobileApp/mOrder/TenderlistByWorker">投标记录</a></li>
-                <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>
-                //<li><a class="my-icon-wdjf" href="/MobileApp/mOrder/mTogetherBuidingList">我的合作项目</a></li>
-            }
-
+            </ul>
+        }
+        else
+        {   <ul>
+            <li><a class="my-icon-wddd" href="/MobileApp/mOrder/Orderlist">我的订单</a></li>
+            <li><a class="my-icon-zxjd" href="/MobileApp/mOrder/mobileBuidingList">订单进度</a></li>
         </ul>
+        <ul>
+            <li><a class="my-icon-zbjl" href="/MobileApp/MobileUser/DemandList">招标记录</a></li>
+            <li><a class="my-icon-fbzb" href="/MobileApp/MobileUser/DemandDetail">发布招标</a></li>
+        </ul>
+        <ul>
+            <li><a class="my-icon-tbdt" href="/MobileApp/App/TenderList">我要投标</a></li>
+            <li><a class="my-icon-tbjl" href="/MobileApp/mOrder/TenderlistByWorker">投标记录</a></li>
+        </ul>
+            
+            
+        
+        }
+
+
         <ul>
 
             <li><a class="my-icon-gsjj" href="#">公司简介</a></li>
-        
+
             <li><a class="my-icon-bzzx" href="#">帮助中心</a></li>
             <li><a class="my-icon-kfzx" href="#">客服咨询<span class="my-tel">400-000-0000</span></a></li>
         </ul>

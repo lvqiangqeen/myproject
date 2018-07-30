@@ -3922,14 +3922,15 @@
     <Content Include="Content\WorkerApp\updateimages\my-icon-grzl.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-gsjj.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-kfzx.png" />
+    <Content Include="Content\WorkerApp\updateimages\my-icon-tbdt.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-wddd.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-zbjl.PNG" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-zxjd.png" />
     <Content Include="Content\WorkerApp\updateimages\my.png" />
     <Content Include="Content\WorkerApp\updateimages\order.png" />
     <Content Include="Content\WorkerApp\updateimages\pre2.png" />
-    <Content Include="Content\WorkerApp\updateimages\tbdt.png" />
     <Content Include="Content\WorkerApp\updateimages\my-icon-tbjl.png" />
+    <Content Include="Content\WorkerApp\updateimages\tbdt1.png" />
     <Content Include="Content\WorkerApp\updateimages\titlecolor.png" />
     <Content Include="Content\WorkerApp\updateimages\wx.png" />
     <Content Include="Content\WorkerApp\updateimages\zgs.png" />
@@ -4347,6 +4348,10 @@
     <Content Include="Areas\MobileApp\Views\App\TenderDetail.cshtml" />
     <Content Include="Areas\MobileApp\Views\mOrder\TenderDetailByWorker.cshtml" />
     <Content Include="Areas\MobileApp\Views\App\gonglueList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mOrder\WorkerTenderDetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\TenderDetailByUser.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\TenderPersonList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileUser\TenderDetailByUser.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

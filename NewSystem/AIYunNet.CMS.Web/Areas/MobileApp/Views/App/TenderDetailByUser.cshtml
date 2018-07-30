@@ -1,0 +1,87 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "TenderDetailByUser";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    string workerid = Request["workerid"];
+    DecTender tender = ViewBag.tender;
+}
+
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/buttoncss.css" rel="stylesheet" />
+<script>
+    $("title").html("投标信息");
+</script>
+<style>
+    ul.order-cancel-list li:last-child {
+        height: 2rem;
+        line-height: 1rem;
+        padding: 0.3rem 0.5rem;
+        border-top: 0px solid #e5e5e5;
+    }
+</style>
+<div class="container" id="container">
+
+    <div class="order-confirm">
+        <div class="order-num" style="border-left: 3px solid #413129;margin-bottom: 0.1rem;"><span class="fl">投标信息：</span><span class="fr state" style="display:none;">等待支付</span></div>
+        <ul class="order-confirm-list clearfix order-cancel-list">
+            <li><h2>工人姓名</h2><span>@tender.perName</span></li>
+            <li><h2>联系方式</h2><span>@tender.perPhone</span></li>
+            <li><h2>工程预算</h2><span>@tender.Price 元</span></li>
+            <li>
+                <h2>是否中标</h2>
+                @if (tender.IsAccept == 0)
+            {
+                    <span>等待业主决策。。。</span>
+                }
+                else if (tender.IsAccept == 1)
+                {
+                    <span style="color:#009688;">已中标</span>
+                }
+                else
+                {<span style="color:red;">未中标</span> }
+            </li>
+        </ul>
+        <div class="min-price">
+            <div class="min-price-tit" style="padding: 0.2rem 0;"><h2>投标简述</h2></div>
+            <div style="padding-bottom: 16px;">
+                @tender.perInfo
+            </div>
+        </div>
+
+        <a class="pay" href="/MobileApp/MobileWorker/mWorkerDetail?workerid=@workerid">查看工人信息</a>
+        <a class="pay" style="background-color:#009688" onclick="selectworker(@tender.id)">选TA装修</a>
+        
+        <span class="cancel" onclick="javascript:history.go(-1)">返回</span>
+    </div>
+    <!--order-confirm-end-->
+
+</div>
+<script>
+    function selectworker(id)
+    {
+        $.ajax({
+            type: 'post',
+            url: '/MobileApp/mOrder/selectworkerbytenderid',
+            async: false,
+            dataType: "json",
+            data: {
+                id:id
+            },
+            success: function (data) {
+                if (data.RetCode == '1') {
+                    layer.open({
+                        content: '选择成功，请等待工人发布装修计划开始动工！'
+                        , btn: '我知道了', yes: function (index, layero) {
+                            //按钮【按钮一】的回调
+                            history.go(-1);
+                        }
+                    });
+                }
+
+
+            }
+        });
+    }
+</script>

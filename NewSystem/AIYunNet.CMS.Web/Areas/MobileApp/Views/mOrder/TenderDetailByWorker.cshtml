@@ -84,7 +84,7 @@
                     <button type="button" class="mui-btn mui-btn-danger" id="quxiao">取消</button>
                     <script>
                         $("#quxiao").click(function () {
-                            window.location.href = "/MobileApp/App/TenderList";
+                            history.go(-1);
                         });
                     </script>
                 </div>
@@ -104,13 +104,11 @@
             return false;
         }
     }
-    if("@SessionHelper.Get("PositionCode")"=="WebUser")
-    {
+    if ("@SessionHelper.Get("PositionCode")" == "WebUser") {
         layer.open({
             content: '您是业主不能投标！'
             , btn: '我知道了'
-            , function()
-            {
+            , function() {
                 history.go(-1);
             }
         });
@@ -122,8 +120,7 @@
         var perPhone = $("input[name=perPhone]").val();
         var Price = $("input[name=Price]").val();
         var Info = $("#textarea").val();
-        if("@SessionHelper.Get("PositionCode")"=="WebUser")
-        {
+        if ("@SessionHelper.Get("PositionCode")" == "WebUser") {
             layer.open({
                 content: '您是业主不能投标！'
     , btn: '我知道了'
@@ -144,7 +141,7 @@
             });
             return;
         }
-        if (Price==0) {
+        if (Price == 0) {
             layer.open({
                 content: '请输入工程预算！'
             , btn: '我知道了'
@@ -156,32 +153,37 @@
             url: "/MobileApp/mOrder/AddorEditTender",
             async: false,
             data: {
-                id:id,
+                id: id,
                 Guid: Guid,
                 perName: perName,
                 perPhone: perPhone,
-                Price:Price,
+                Price: Price,
                 perInfo: Info,
-                UserID:'@SessionHelper.Get("UserID")'
+                UserID: '@SessionHelper.Get("UserID")'
             },
             success: function (data) {
                 if (data.RetCode == 1) {
                     layer.open({
                         content: '投标成功请等待业主回复！'
-                        , btn: '我知道了', yes: function ()
-                        {
+                        , btn: '我知道了', yes: function () {
+                            //从个人中心的投标信息修改
+                            if ('@Request["type"]' == "1") {
+                                window.location.href = '/MobileApp/mOrder/WorkerTenderDetail?guid=@Model.Guid';
+                            } else {
+                                window.location.href = '/MobileApp/App/TenderDetail?guid=@guid';
+                            }
                             history.go(-1);
+
                         }
                     });
                 } else if (data.RetCode == 2) {
                     layer.open({
                         content: '您已经投过此标，不能重复投标！'
-                    , btn: '我知道了',yes: function() {
+                    , btn: '我知道了', yes: function () {
                         history.go(-1);
                     }
                     });
-                } else
-                {
+                } else {
                     layer.open({
                         content: '投标失败！'
                         , btn: '我知道了'
