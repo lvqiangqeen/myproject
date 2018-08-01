@@ -1,0 +1,527 @@
+﻿/**
+ * ********************************************
+ * Description   : 案例模块css，包括案例首页/列表页/详情页/搜索页，修改后注意注意测试案例模块的其他页面
+ * Create time   : 2017-04-25
+ * Last modified : 2017-04-25 
+ * Modify Man    : shejiben
+ * ********************************************
+ */
+
+.more{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    border-top: 1px #f1f1f1 solid;
+}
+.more i{
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    margin:0 0 -3px 6px;
+    border-top: solid 1px #333;
+    border-right: solid 1px #333;
+    -webkit-transform: rotate(45deg);
+    vertical-align: 3px;
+}
+.works-type{
+    position: absolute;
+    top: 0;
+    left: 90px;
+    color: #fff;
+}
+.works-type p{
+    height: 44px;
+    line-height: 46px;
+    font-size: 16px;
+}
+.works-type p:after{
+    content: " ";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #fff;
+    margin:0 0 2px 5px;
+}
+.works-type .type{
+    position: absolute;
+    background: #19191b;
+    left: 0;
+    width: 100px;
+    height: 88px;
+    text-align: center;
+    border-radius: 8px;
+    opacity: 0.95;
+    display: none; 
+    z-index: 9999;
+    padding: 0 5px;
+}
+.works-type .type:before{
+    position: absolute;
+    top: -6px;
+    left: 28px;
+    content: " ";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #19191b;
+}
+.works-type .type a{
+    width: 100%;
+    display: inline-block;
+    line-height: 44px;
+    color: #fff;
+}
+.works-type .type .home{
+    border-bottom: 1px solid #666;
+}
+.works-type .type .on{
+    color: #999;
+}
+.case-index-tuji h1 ,.case-list h1,.hot-tag h1,.case-list-like h1{
+    font-size: 16px;
+    color: #000;
+    padding: 13px 0 15px 10px; 
+}
+/* 导航 */
+.case-nav i{
+    background: url(//img.shejiben.com/shejiben_img/wap/case/sprite.png) no-repeat; 
+    background-size: 58px;
+}
+.case-nav {
+  background: #fff;
+}
+.case-nav li {
+    float: left;
+    width: 33.3%;
+    height: 120px;
+    text-align: center;
+}
+.case-nav li a {
+    text-decoration: none;
+}
+.case-nav li h1 {
+    padding-top: 6px;
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+}
+.case-nav li i{
+    width: 58px;
+    height: 58px;
+    margin: 20px auto 0;
+    display: block;
+}
+.case-nav li .icon-case-jiexi{
+    background-position: 0 0;
+}
+.case-nav li .icon-case-home{
+    background-position: 0px -79px;
+}
+.case-nav li .icon-case-public{
+    background-position: 0 -157px;
+}
+/* 案例解析推荐 */
+.case-index-tuji{
+    margin-top: 10px;
+    background: #fff;
+}
+.case-index-tuji ul li{
+    position: relative;
+    width: 100%;
+}
+.case-index-tuji ul li a{
+    width: auto;
+    display: block;
+    margin: 0 10px 10px;
+}
+/* 家装/工装案例 */
+.case-list{
+    margin-top: 10px;
+    background: #fff;
+}
+.case-list ul li{
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.case-list ul li a{
+    width: 100%;
+    display: block;
+}
+.case-list ul li .head{
+    position: absolute;
+    bottom: 73px;
+    left: 50%;
+    margin-left: -30px;
+    width: 60px;
+    height: 60px;
+    display: block;
+}
+.case-list ul li .head img{
+    width: 60px;
+    height: 60px;
+    display: block;
+    border: 2px #fff solid;
+    border-radius: 30px; 
+}
+.case-list ul li .name{
+    margin: 32px 0 10px;
+    height: 20px;
+    display: block;
+    font-size: 12px;
+    line-height: 20px;
+    color: #999;
+    text-align: center;
+}
+.case-list ul li .title{
+    margin: 0;
+    height: 20px;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+}
+.case-list .case-pic{
+    position: relative;
+    height: 0;
+    padding: 28.34% 0; 
+    overflow: hidden;
+}
+.case-list .case-pic img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.case-list-home ul li .head{
+    bottom: 93px;
+}
+.case-list-home .parameter{
+    padding: 5px 10px 0;
+    display: block;
+    text-align: center;
+} 
+.case-list-home .parameter label{
+    padding:0 5px 0 4px;
+    height: 16px;
+    display: inline-block;
+    color: #999;
+    line-height: 16px;
+    font-size: 12px;
+}
+.case-list-home .parameter i{
+    width: 1px;
+    height: 12px;
+    background: #999;
+    display: inline-block;
+    margin-bottom: -2px;
+    -webkit-transform: rotate(15deg);
+}
+
+/*热点*/
+.hot{    
+    position: relative;
+    height: 0;
+    padding:25.35% 0; 
+    overflow: hidden;
+}
+.hot img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.case-list-home{
+    margin-top: 0;
+}
+/*案例列表页筛选框*/
+.filter {
+    position: relative;
+    display: block;
+    border-top: solid 1px #E3E3E3;
+    background: #fff;
+}
+.filter .tab{
+    border-bottom: solid 1px #E3E3E3;  
+}
+.filter .tab li {
+  position: relative;
+  float: left;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  color: #666;
+  border-right: solid 1px #E3E3E3;
+}
+.filter-case-home .tab li{
+  width: 25%;  
+}
+.filter-case-public .tab li{
+  width: 33.3%;  
+}
+.filter .tab li.on{
+    color: #dd4f50;
+}
+.filter .tab .no-border{
+    border: none;
+}
+.filter .tab li a {
+    width: 100%;
+    display: block;
+}
+.filter .tab li a.active {
+  color: #dd4f50;
+}
+.filter .tab li i {
+  height: 6px;
+  width: 6px;
+  margin:0 0 0 5px;
+  display: inline-block;
+  content: ' ';
+  -webkit-transform: rotate(45deg);
+}
+.filter .tab li .icon-arrow{
+    margin-bottom: 3px;
+    border: none;
+    border-bottom: solid 1px #666;
+    border-right: solid 1px #666;
+}
+.filter .tab li.on .icon-arrow {
+    margin-bottom: 0;
+    border: none;
+    border-top: solid 1px #dd4f50;
+    border-left: solid 1px #dd4f50;
+}
+.filter-select {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: #fff;
+    border-top: solid 1px #E3E3E3;
+}
+.filter-select li {
+  height: 44px;
+  line-height: 44px;
+  border-bottom: solid 1px #E3E3E3;
+  text-align: center;
+}
+.filter-select li a {
+  color: #666 !important;
+  display: block;
+}
+.filter-select li a.active {
+  background: #e3e3e3;
+  color: #d03939 !important;
+}
+.filter-select {
+  padding-bottom: 15px;
+}
+.filter-select li {
+  border: solid 1px #e3e3e3;
+  border-radius: 17px;
+  width: 30%;
+  margin-top: 15px;
+  float: left;
+  margin-left: 2.5%;
+  height: 34px;
+  line-height: 32px;
+  text-align: center;
+}
+.filter-select li.on{
+    border-color:#dd4f50;
+}
+.filter-select li.on a{
+    color:#dd4f50 !important;
+}
+.filter .mask{
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: #000;
+    opacity: 0.7;
+    z-index: 4;
+}
+
+/*猜你喜欢*/
+.case-list-like{
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+}
+.case-list-like ul li{
+    width: 30.6%;
+    margin: 0 0 0 2%;
+    float: left;
+}
+.case-list-like ul li .pic{ 
+    display: block;
+}
+.case-list-like ul li img{
+    width: 100%;
+    height: auto;
+}
+.case-list-like ul li .tag{
+    margin:10px 0 20px;
+    display: block;
+    width: 120%;
+    height: 20px;
+}
+.case-list-like ul li .tag a{
+    max-width: 80%;
+    margin-right: 2px;
+    float: left;
+    height: 18px;
+    padding: 0 2px;
+    display: inline-block;
+    line-height: 18px;
+    background: #F1F1F1;
+    color: #5a6f7a;
+    font-size: 12px;
+}
+.case-detail-pic{
+    margin-bottom: 10px;
+    background: #fff;
+}
+.case-detail-pic .case-cover{
+    width: 100%;
+}
+.case-detail-pic .title{
+    padding: 0 10px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 24px;
+}
+.case-detail-pic .parameter{
+    padding: 15px 10px 15px;
+    display: block;
+    text-align: center;
+} 
+.case-detail-pic .parameter label{
+    padding:0 5px 0 4px;
+    height: 16px;
+    display: inline-block;
+    color: #999;
+    line-height: 16px;
+    font-size: 12px;
+}
+.case-detail-pic .parameter i{
+    width: 1px;
+    height: 12px;
+    background: #999;
+    display: inline-block;
+    margin-bottom: -2px;
+    -webkit-transform: rotate(15deg);
+}
+.case-detail-pic .description{
+    position: relative;
+    border: 1px #e3e3e3 solid;
+    margin: 25px 2% 10px;
+    border-radius: 4px;
+}
+.case-detail-pic .description .column{
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 0 10px;
+    background: #fff;
+
+}
+.case-detail-pic .description .column{
+    color: #999;
+    font-size: 12px;
+}
+.case-detail-pic .description .column label{
+    padding-right: 5px;
+    font-size: 16px;
+    color: #666;
+}
+.case-detail-pic .description p{
+    padding: 15px 10px 10px;
+    line-height: 26px;
+}
+.case-detail-pic .pic{
+    width: 96%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+.case-detail-pic .pic img{ 
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+.case-detail-pic .pic p{ 
+    line-height: 26px;
+}
+
+.float-yuyue{
+    max-width: 640px;
+    position: fixed;
+    bottom: 0;
+    height: 46px;
+    width: 100%;
+    background: #333;
+}
+.float-yuyue img{
+    margin: 8px 10px 0;
+    float: left;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: 1px #fff solid;
+    border-radius: 30px;
+}
+.float-yuyue p{
+    max-width: 130px;
+    float: left;
+    line-height: 46px;
+    color: #fff;
+}
+.float-yuyue .btn-yuyue{
+    width: 120px;
+    height: 46px;
+    display: block;
+    float: right;
+    text-align: center;
+    color: #fff;
+    line-height: 46px;
+    background: #dd4f50;
+}
+.tumax-img-box{
+    width: 96%;
+    margin: 0 auto;
+    padding: 0 0;
+    position: relative;
+    text-align: center;
+}
+.tumax-img-box a{ 
+    display: block;    
+}
+.tumax-img-box span{
+    display: inline-block;
+    width: 100px;
+    height: 38px;
+    background: url(//img.shejiben.com/shejiben_img/wap/images/h5_tumax_btn.png);
+    background-size: contain;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -19px;
+    display: none;
+}
+.tumax-img-box img.lazy {
+    width: 100%;
+    height: 15.5rem;
+}
+

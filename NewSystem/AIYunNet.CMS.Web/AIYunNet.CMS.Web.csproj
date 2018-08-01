@@ -61,6 +61,7 @@
     <Compile Include="Areas\CompanyCenter\Controllers\CompanyVerifyController.cs" />
     <Compile Include="Areas\CompanyCenter\Controllers\UpPicCompanyController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\AppController.cs" />
+    <Compile Include="Areas\MobileApp\Controllers\mAticleController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\mLoginController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCenterController.cs" />
     <Compile Include="Areas\MobileApp\Controllers\MobileCommentController.cs" />
@@ -3770,6 +3771,8 @@
     <Content Include="Content\WorkerApp\coupons.html" />
     <Content Include="Content\WorkerApp\css\base.css" />
     <Content Include="Content\WorkerApp\css\buttoncss.css" />
+    <Content Include="Content\WorkerApp\css\case\case.css" />
+    <Content Include="Content\WorkerApp\css\case\global.css" />
     <Content Include="Content\WorkerApp\css\class.css" />
     <Content Include="Content\WorkerApp\css\common.css" />
     <Content Include="Content\WorkerApp\details.html" />
@@ -4352,6 +4355,7 @@
     <Content Include="Areas\MobileApp\Views\App\TenderDetailByUser.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\TenderPersonList.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\TenderDetailByUser.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mAticle\AticleIndex.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

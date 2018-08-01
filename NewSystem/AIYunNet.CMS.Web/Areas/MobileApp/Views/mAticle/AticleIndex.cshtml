@@ -1,0 +1,73 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@model WebCase
+@{
+    ViewBag.Title = "AticleIndex";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebCommonService webCommen = new WebCommonService();
+}
+
+<script>
+    $("title").html('@Model.CaseTitle');
+</script>
+<link href="~/Content/WorkerApp/css/case/global.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/case/case.css" rel="stylesheet" />
+<div class="container" id="container">
+    <article class="case-detail-pic">
+        <img class="case-cover" src="@AppSettingsHelper.ImgUrl@Model.CaseImageBig" alt="@Model.CaseTitle">
+        <h1 class="title">@Model.CaseTitle</h1>
+        <span class="parameter">
+            @if (Model.DecType == 1)
+            {
+                <label>@webCommen.GetLookupDesc("Case_house_type", Model.HouseType.ToString())</label><i></i>
+                <label>@webCommen.GetLookupDesc("Case_style", Model.Style.ToString())</label><i></i>
+            }
+            else
+            {
+                <label>@webCommen.GetLookupDesc("Case_gz_style", Model.GzStyle.ToString())</label><i></i>
+            }
+
+            <label>@webCommen.GetLookupDesc("Case_house_area", Model.HouseArea.ToString())</label><i></i>
+            <label>@webCommen.GetLookupDesc("Case_cost_area", Model.CostArea.ToString())</label>
+        </span>
+        <div class="description">
+            <span class="column"><label>案例简介</label>CASE DESCRIPTION</span>
+            @Html.Raw(Model.CaseBrief)
+        </div>
+        <div class="pic">
+            @Html.Raw(Model.CaseInfo)
+        </div>
+
+    </article>
+    <section class="case-list-like">
+        <h1>猜你喜欢</h1>
+        <ul class="clearfix">
+            @foreach (WebCase item in ViewBag.caselist)
+            {
+                <li>
+                    <a href="/MobileApp/mAticle/AticleIndex?id=@item.CaseID" class="pic">
+                        <img class="lazy" src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" data-original="@AppSettingsHelper.ImgUrl@item.CaseImageBig" alt="@item.CaseTitle" style="display: inline;">
+                    </a>
+                    <span class="tag">
+                        @if (Model.DecType == 1)
+                        {
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_house_type", Model.HouseType.ToString())</a>
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_style", Model.Style.ToString())</a>
+
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_gz_style", Model.GzStyle.ToString())</a>
+                        }
+                    </span>
+
+                </li>
+            }
+
+
+        </ul>
+        <a href="#" class="more">查看更多案例<i></i></a>
+    </section>
+</div>

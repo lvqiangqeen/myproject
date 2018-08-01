@@ -21,7 +21,7 @@
             <thead>
                 <tr class="header-style" role="row">
                     <th class="text-center">
-                        <input id="chkAll" type="checkbox">
+                        id
                     </th>
                     <th>名称</th>
                     <th>简介</th>
@@ -41,7 +41,7 @@
                 @foreach (WebCase webCase in ViewBag.WebCaseList as List<WebCase>)
                 {
                     <tr>
-                        <td><input class="chkWebCase" type="checkbox" value="@webCase.CaseID"></td>
+                        <td>@webCase.CaseID</td>
                         <td>@webCase.CaseTitle</td>
                         <td>@StringHelper.StringTruncat(webCase.CaseBrief,16,"...")</td>
                         @if (webCase.CompanyID == 0)
