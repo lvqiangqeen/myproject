@@ -24,7 +24,7 @@
                         id
                     </th>
                     <th>名称</th>
-                    <th>简介</th>
+                    <th>微信地址</th>
                     <th>所属公司</th>
                     <th>所属人员</th>
                     <th>图片个数</th>
@@ -43,7 +43,7 @@
                     <tr>
                         <td>@webCase.CaseID</td>
                         <td>@webCase.CaseTitle</td>
-                        <td>@StringHelper.StringTruncat(webCase.CaseBrief,16,"...")</td>
+                        <td>http://mkj.51must.com/MobileApp/mAticle/AticleIndex?id=@webCase.CaseID</td>
                         @if (webCase.CompanyID == 0)
                         {
                             <td>无装修公司</td>

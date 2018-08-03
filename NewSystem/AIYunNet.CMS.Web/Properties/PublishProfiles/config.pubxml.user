@@ -118,7 +118,7 @@
       <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mAticle/AticleIndex.cshtml">
-      <publishTime>08/01/2018 15:22:50</publishTime>
+      <publishTime>08/02/2018 09:22:43</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mLogin/LoginCenter.cshtml">
       <publishTime>07/24/2018 12:21:11</publishTime>
@@ -421,7 +421,7 @@
       <publishTime>04/27/2017 17:29:12</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/ImageList/AddOrEditWebCaseImg.cshtml">
-      <publishTime>02/02/2018 16:23:08</publishTime>
+      <publishTime>08/02/2018 16:44:05</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/ImageList/AddOrEditWebImg.cshtml">
       <publishTime>12/06/2017 14:46:12</publishTime>
@@ -436,7 +436,7 @@
       <publishTime>12/06/2017 15:27:21</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Lookup/AddLookup.cshtml">
-      <publishTime>01/02/2018 16:08:02</publishTime>
+      <publishTime>08/02/2018 16:52:25</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Lookup/LookupList.cshtml">
       <publishTime>12/01/2017 10:45:18</publishTime>
@@ -478,7 +478,7 @@
       <publishTime>04/27/2017 21:59:52</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml">
-      <publishTime>07/24/2018 08:38:19</publishTime>
+      <publishTime>08/02/2018 16:34:03</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/Shared/_UploadDesignerImage.cshtml">
       <publishTime>12/28/2017 12:02:14</publishTime>
@@ -607,28 +607,28 @@
       <publishTime>05/23/2017 19:54:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>07/30/2018 15:29:36</publishTime>
+      <publishTime>08/02/2018 16:53:29</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>07/30/2018 16:57:29</publishTime>
+      <publishTime>08/02/2018 16:53:30</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>07/30/2018 15:29:36</publishTime>
+      <publishTime>08/02/2018 16:53:29</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>07/30/2018 15:29:35</publishTime>
+      <publishTime>08/02/2018 16:53:29</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>08/01/2018 15:30:05</publishTime>
+      <publishTime>08/02/2018 16:53:31</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>08/01/2018 15:30:53</publishTime>
+      <publishTime>08/02/2018 16:57:03</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>08/01/2018 15:30:53</publishTime>
+      <publishTime>08/02/2018 16:57:03</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -6910,7 +6910,7 @@
       <publishTime>03/05/2018 08:13:30</publishTime>
     </File>
     <File Include="Content/design/sheji.download.css">
-      <publishTime>01/30/2018 13:31:33</publishTime>
+      <publishTime>08/02/2018 16:56:26</publishTime>
     </File>
     <File Include="Content/design/sheji.footer.css">
       <publishTime>11/29/2017 09:00:34</publishTime>
@@ -15810,8 +15810,14 @@
     <File Include="Content/WorkerApp/js/common.js">
       <publishTime>03/26/2018 14:09:42</publishTime>
     </File>
+    <File Include="Content/WorkerApp/js/css/fsgallery.css">
+      <publishTime>08/01/2018 17:40:00</publishTime>
+    </File>
     <File Include="Content/WorkerApp/js/exif.js">
       <publishTime>03/26/2018 14:09:42</publishTime>
+    </File>
+    <File Include="Content/WorkerApp/js/fs_forse.js">
+      <publishTime>08/01/2018 17:54:50</publishTime>
     </File>
     <File Include="Content/WorkerApp/js/iosOverlay.js">
       <publishTime>03/26/2018 14:09:42</publishTime>
@@ -16084,7 +16090,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/01/2018 15:30:45</publishTime>
+      <publishTime>08/02/2018 16:56:54</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -16420,7 +16426,7 @@
       <publishTime>01/31/2018 10:49:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/01/2018 15:30:10</publishTime>
+      <publishTime>08/02/2018 09:24:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

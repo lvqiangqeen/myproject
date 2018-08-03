@@ -12,8 +12,15 @@
 <script>
     $("title").html('@Model.CaseTitle');
 </script>
+<style>
+    .fs_gallery{
+        margin-top: 46px;
+    }
+</style>
+<link href="~/Content/WorkerApp/js/css/fsgallery.css" rel="stylesheet" />
 <link href="~/Content/WorkerApp/css/case/global.css" rel="stylesheet" />
 <link href="~/Content/WorkerApp/css/case/case.css" rel="stylesheet" />
+<script src="~/Content/WorkerApp/js/fs_forse.js"></script>
 <div class="container" id="container">
     <article class="case-detail-pic">
         <img class="case-cover" src="@AppSettingsHelper.ImgUrl@Model.CaseImageBig" alt="@Model.CaseTitle">
@@ -36,7 +43,7 @@
             <span class="column"><label>案例简介</label>CASE DESCRIPTION</span>
             @Html.Raw(Model.CaseBrief)
         </div>
-        <div class="pic">
+        <div class="pic" id="fileDisplay">
             @Html.Raw(Model.CaseInfo)
         </div>
 
@@ -71,3 +78,8 @@
         <a href="#" class="more">查看更多案例<i></i></a>
     </section>
 </div>
+<script>
+
+
+    
+</script>

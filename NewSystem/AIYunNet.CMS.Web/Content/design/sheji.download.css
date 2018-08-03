@@ -1319,7 +1319,7 @@ div.jqi .jqimessage .field input.error{ width: 150px; border: solid 1px #ff0000;
 div.software_share_qq {padding-top:3px !important;*padding-top:0px !important;}
 
 /***模型下载公用tab切换***/
-.mx_columns ul{ width: 600px; float:left;}
+.mx_columns ul{ width: 657px; float:left;}
 .idesigner_subnav li{ float:left; margin-right:2px;}
 .idesigner_subnav a{ float: left; height: 29px; width: 100px; background: url("http://img.shejiben.com/front_end/bg/works_tuijian.gif") no-repeat scroll 0 0 transparent;color: #333;font-size: 14px;line-height: 29px;   margin-right: 1px;text-align: center;}
 .idesigner_subnav .on a{background: url("http://img.shejiben.com/front_end/bg/works_tuijian.gif") no-repeat scroll 0 -39px transparent;color: #FFF;height: 39px;}

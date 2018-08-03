@@ -300,10 +300,10 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="/SysAdmin/ZhuangXiu/WebCaseList"><i class="fa fa-circle-o"></i> 装修案例</a></li>
-                            @foreach (var item in tulist)
+                            @*@foreach (var item in tulist)
                             {
                                 <li><a href="/SysAdmin/ImageList/WebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>
-                            }
+                            }*@
                             @foreach (var item in tulist)
                             {
                                 <li><a href="/SysAdmin/ImageList/DecWebImageList?DecType=@item.Code"><i class="fa fa-circle-o"></i> @item.Description</a></li>

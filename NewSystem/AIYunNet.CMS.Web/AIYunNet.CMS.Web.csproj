@@ -3870,7 +3870,9 @@
     <Content Include="Content\WorkerApp\js\class\iscroll-5.1.2.min.js" />
     <Content Include="Content\WorkerApp\js\class\slideNav.min.js" />
     <Content Include="Content\WorkerApp\js\common.js" />
+    <Content Include="Content\WorkerApp\js\css\fsgallery.css" />
     <Content Include="Content\WorkerApp\js\exif.js" />
+    <Content Include="Content\WorkerApp\js\fs_forse.js" />
     <Content Include="Content\WorkerApp\js\iosOverlay.js" />
     <Content Include="Content\WorkerApp\js\jquery.min.js" />
     <Content Include="Content\WorkerApp\js\mui.min.js" />

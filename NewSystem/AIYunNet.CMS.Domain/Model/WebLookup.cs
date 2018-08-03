@@ -37,6 +37,7 @@ namespace AIYunNet.CMS.Domain.Model
         public WebLookup()
         {
             Display = 1;
+            Code = "1";
         }
     }
 }
