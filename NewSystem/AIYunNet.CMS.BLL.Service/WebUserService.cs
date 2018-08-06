@@ -188,6 +188,7 @@ namespace AIYunNet.CMS.BLL.Service
         }
 
 
+
         t_AreaService areaSer = new t_AreaService();
         //在手机端修改user
         public int UpdateWebUserFromMobileBywoker(int id, string data, string type)

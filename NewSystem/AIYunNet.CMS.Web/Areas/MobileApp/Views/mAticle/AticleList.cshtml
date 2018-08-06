@@ -1,0 +1,197 @@
+﻿@using AIYunNet.CMS.Common.Utility;
+@using AIYunNet.CMS.BLL.Service
+@using AIYunNet.CMS.BLL.IService
+@using AIYunNet.CMS.Domain.Model
+@{
+    ViewBag.Title = "AticleList";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebCommonService comSer = new WebCommonService();
+    string Style = Request["Style"] == null || Request["Style"] == "" ? "0" : Request["Style"].ToString();
+    string HouseType = Request["HouseType"] == null || Request["HouseType"] == "" ? "0" : Request["HouseType"].ToString();
+    string HouseArea = Request["HouseArea"] == null || Request["HouseArea"] == "" ? "0" : Request["HouseArea"].ToString();
+    string CostArea = Request["CostArea"] == null || Request["CostArea"] == "" ? "0" : Request["CostArea"].ToString();
+    List<WebLookup> liststyle = comSer.GetLookupList("Case_style");
+    List<WebLookup> Case_house_typelist = comSer.GetLookupList("Case_house_type");
+    List<WebLookup> Case_cost_arealist = comSer.GetLookupList("Case_cost_area");
+    List<WebLookup> Case_house_arealist = comSer.GetLookupList("Case_house_area");
+}
+<link href="~/Content/mui-master/dist/css/mui.min.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/case/case.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/case/global.css" rel="stylesheet" />
+<script src="~/Content/WorkerApp/css/case/lazyload.js"></script>
+<script src="~/Content/WorkerApp/css/case/case.js"></script>
+<script src="~/Content/mui-master/dist/js/mui.js"></script>
+<script>
+    $("title").html("装修案例");
+    //var html = "<h1>AU装修宝</h1>";
+    //$("#header > .back").after(html);
+
+</script>
+<div class="container" id="container">
+    <div class="mui-indexed-list-search mui-input-row mui-search" style="margin-top: 3px;">
+        <input type="search" class="mui-input-clear mui-indexed-list-search-input" placeholder="搜索" style="margin-bottom: 3px;">
+    </div>
+    <section class="filter filter-case-home">
+        <ul class="tab clearfix">
+            <li>风格<i class="icon-arrow"></i></li>
+            <li>户型<i class="icon-arrow"></i></li>
+            <li>造价<i class="icon-arrow"></i></li>
+            <li>面积<i class="icon-arrow"></i></li>
+        </ul>
+
+        <ul class="filter-select clearfix" style="display:none;">
+            <li id="style_0"><a href="/MobileApp/mAticle/AticleList?Style=0&HouseType=@Request["HouseType"]&HouseArea=@Request["HouseArea"]&CostArea=@Request["CostArea"]">全部</a></li>
+            @foreach (var item in liststyle)
+            {
+                <li id="style_@item.Code"><a href="/MobileApp/mAticle/AticleList?Style=@item.Code&HouseType=@Request["HouseType"]&HouseArea=@Request["HouseArea"]&CostArea=@Request["CostArea"]">@item.Description</a></li>
+            }
+        </ul>
+        <ul class="filter-select clearfix" style="display:none;">
+            <li id="Case_house_type_0"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=0&HouseArea=@Request["HouseArea"]&CostArea=@Request["CostArea"]">全部</a></li>
+            @foreach (var item in Case_house_typelist)
+            {
+                <li  id="Case_house_type_@item.Code"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=@item.Code&HouseArea=@Request["HouseArea"]&CostArea=@Request["CostArea"]">@item.Description</a></li>
+            }
+        </ul>
+        <ul class="filter-select clearfix" style="display:none;">
+            <li id="Case_cost_area_0"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=@Request["HouseType"]&HouseArea=@Request["HouseArea"]&CostArea=0">全部</a></li>
+            @foreach (var item in Case_cost_arealist)
+            {
+                <li id="Case_cost_area_@item.Code"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=@Request["HouseType"]&HouseArea=@Request["HouseArea"]&CostArea=@item.Code">@item.Description</a></li>
+            }
+        </ul>
+        <ul class="filter-select clearfix" style="display:none;">
+            <li id="Case_house_area_0"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=@Request["HouseType"]&HouseArea=0&CostArea=@Request["CostArea"]">全部</a></li>
+            @foreach (var item in Case_house_arealist)
+            {
+                <li id="Case_house_area_@item.Code"><a href="/MobileApp/mAticle/AticleList?Style=@Request["Style"]&HouseType=@Request["HouseType"]&HouseArea=@item.Code&CostArea=@Request["CostArea"]">@item.Description</a></li>
+            }
+        </ul>
+        <div class="mask" style="display:none;"></div>
+    </section>
+    <section class="case-list case-list-home">
+        <!--分类下拉列表js引入-->
+        <script src="~/Content/WorkerApp/js/class/iscroll-5.1.2.min.js"></script>
+        <script src="~/Content/WorkerApp/js/class/slideNav.min.js"></script>
+        <!--分类下拉列表结束-->
+        <!--内容列表-->
+        <div class="jbsf-group mui-content mui-scroll-wrapper" id="refreshContainer" style="margin-top:130px;">
+            <div class="mui-scroll">
+                <ul class="mui-table-view mui-table-view-chevron"></ul>
+            </div>
+
+        </div>
+    </section>
+</div>
+<script>
+            $("#style_@Style").addClass("on");
+            $("#Case_house_type_@HouseType").addClass("on");
+            $("#Case_cost_area_@CostArea").addClass("on");
+            $("#Case_house_area_@HouseArea").addClass("on");
+</script>
+<script type="text/javascript">
+
+    (function () {
+
+        //上拉加载下拉刷新
+        mui.init({
+            pullRefresh: {
+                container: '#refreshContainer',
+                up: {
+                    contentrefresh: '正在加载...',
+                    callback: pullupRefresh
+                }
+            }
+        });
+        //加载更多
+        var pageSize = 10;//每页显示条数
+        var counter = 1;//计数器
+        var pageStart = 1;//开始数据条数
+        var Flag = true;
+        function cutStr(str) {
+            if (str.length > 5) {
+                return str.substring(0, 5) + "...";
+            }
+            return str;
+        }
+        data(pageStart, pageSize);
+        function data(pageIndex, PageSize) {
+            //业务
+            var result = "";
+            $.ajax({
+                type: 'post',
+                url: '/Handler/GetPageListAjax.ashx',
+                async: false,
+                dataType: "json",
+                data: {
+                    pageIndex: pageIndex,
+                    PageSize: PageSize,
+                    styleid: '@Style',
+                    housetypeid: '@HouseType',
+                    costareaid: '@CostArea',
+                    houseareaid: '@HouseArea',
+                    methodname: "GetDecCaseList"
+                },
+                success: function (data) {
+                    var datajson = data;
+                    Flag = datajson.list == null || datajson.list == undefined || datajson.list == '';
+                    //判断是否有返回值 当没有返回值的时候就为空，则代表没有更多数据了
+                    console.log(Flag);
+                    if (Flag == false) {
+                        counter++;
+                    }
+                    $.each(datajson.list, function (i, item) {
+                        result += '<li>'
+                            + '<a href="/MobileApp/mAticle/AticleIndex?id=' + item.webcase.CaseID + '" class="case-pic">'
+                             + '<img class="lazy" src="@AppSettingsHelper.ImgUrl' + item.webcase.CaseImageBig + '" data-original="@AppSettingsHelper.ImgUrl' + item.webcase.CaseImageBig + '" alt="' + item.webcase.CaseTitle + '" style="display: block;">'
+                            + '</a>';
+
+                        if (item.webcase.PeopleID == 0) {
+                            result += '<a class="head" href="#">'
+                            + '<img class="lazy" src="@AppSettingsHelper.ImgUrl' + item.company.thumbnailImage + '" alt="' + item.company.CompanyName + '" data-original="@AppSettingsHelper.ImgUrl' + item.company.thumbnailImage + '" alt="' + item.company.CompanyName + '" style="display: block;">'
+                            + '</a>'
+                            + '<a class="name" href="#">' + item.company.CompanyName + '</a>';
+                        } else {
+                            result += '<a class="head" href="#">'
+                            + '<img class="lazy" src="@AppSettingsHelper.ImgUrl' + item.designer.thumbnailImage + '" alt="' + item.designer.PeopleName + '" data-original="@AppSettingsHelper.ImgUrl' + item.designer.thumbnailImage + '" alt="' + item.designer.PeopleName + '" style="display: block;">'
+                            + '</a>'
+                            + '<a class="name" href="#">' + item.designer.PeopleName + '</a>';
+                        }
+
+                        result += '<a class="title ect" href="/MobileApp/mAticle/AticleIndex?id=' + item.webcase.CaseID + '">' + item.webcase.CaseTitle + '</a>'
+                        + '<span class="parameter">'
+                            + '<label>' + item.webcase.StyleName + '</label><i></i>'
+                            + '<label>' + item.webcase.HouseTypeName + '</label><i></i>'
+                            + '<label>' + item.webcase.CostAreaName + '</label><i></i>'
+                            + '<label>' + item.webcase.HouseAreaName + '</label>'
+                        + '</span>'
+                    + '</li>';
+                    });
+
+                    jQuery(result).insertBefore('#refreshContainer .mui-scroll .mui-table-view');
+                    //注意：此处属于异步获取DOM 在列表中的所有事件应放在此处，防止dom节点获取失败。
+                    pageStart++;
+                    mui('#refreshContainer').on('tap', 'a', function () {
+                        window.top.location.href = this.href;
+                    });
+
+                }
+            }
+        );
+
+        }
+        /**
+         * 上拉加载具体业务实现
+         */
+        function pullupRefresh() {
+            setTimeout(function () {
+                mui('#refreshContainer').pullRefresh().endPullupToRefresh((Flag)); //参数为true代表没有更多数据了。
+                data(pageStart, pageSize);
+            }, 200);
+        }
+    })();
+    mui('body').on('click', 'a', function () {
+        window.top.location.href = this.href;
+    });
+
+</script>

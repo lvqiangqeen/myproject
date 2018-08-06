@@ -158,5 +158,22 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             }
         }
         #endregion
+
+        public ActionResult forgetPassword()
+        {
+            return View();
+        }
+        public ActionResult mewPassword(string userAccount)
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public JsonResult updatePwd(string userAccount, string userPassword)
+        {
+            string pwd = FormsAuthentication.HashPasswordForStoringInConfigFile(userPassword, "md5");
+            int ret = webUserservice.UpdateWebUserPassword(userAccount, pwd);
+            return Json(new { RetCode = ret});
+        }
     }
 }

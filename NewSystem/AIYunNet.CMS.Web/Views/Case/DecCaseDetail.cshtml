@@ -184,7 +184,7 @@
                         @foreach (WebCase item in ViewBag.caselist)
                         {
                             <div class="otherCaseList">
-                                <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@item.DecType"><img src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" width="320" height="320" alt="@item.CaseTitle"></a>
+                                <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@item.DecType"><img src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" width="320" height="221" alt="@item.CaseTitle"></a>
                                 <div class="caseName">@item.CaseTitle</div>
                             </div>
                         }

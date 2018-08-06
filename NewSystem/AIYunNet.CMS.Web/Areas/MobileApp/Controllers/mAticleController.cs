@@ -16,12 +16,20 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         WebCaseService caseSer = new WebCaseService();
 
         // GET: MobileApp/mAticle
-        public ActionResult AticleIndex(int id=68)
+        public ActionResult AticleIndex(int id)
         {
             WebCase webcase = caseSer.GetWebCaseByID(id);
             List<WebCase> caselist = caseSer.GetHotWebCaseList(3, webcase.DecType);
             ViewBag.caselist = caselist;
             return View(webcase);
+        }
+
+        public ActionResult AticleList()
+        {
+            //WebCase webcase = caseSer.GetWebCaseByID(id);
+            //List<WebCase> caselist = caseSer.GetHotWebCaseList(3, webcase.DecType);
+            //ViewBag.caselist = caselist;
+            return View();
         }
     }
 }

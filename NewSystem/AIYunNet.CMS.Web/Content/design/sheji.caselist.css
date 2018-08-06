@@ -13,7 +13,7 @@ html,body{ background: #f5f5f5;}
 .no-result{margin-bottom: 20px;width: 1180px;height: 120px;text-align: center;line-height: 120px;color: #646464;font-size: 16px;background: #fff;}
 .case-banner{ width: 1180px;padding-bottom: 20px; float: left;}
 .case-list-box{width:1210px;margin-top:10px;position: relative;}
-.case-list{width:282px; height: 408px;  float:left;margin:0 17px 20px 0;background:#fff; display: block;}
+.case-list{width:282px; height: 315px;  float:left;margin:0 17px 20px 0;background:#fff; display: block;}
 .case-list-hot{
     position: relative;
 }

@@ -19,7 +19,7 @@
 </style>
 <link href="~/Content/WorkerApp/js/css/fsgallery.css" rel="stylesheet" />
 <link href="~/Content/WorkerApp/css/case/global.css" rel="stylesheet" />
-<link href="~/Content/WorkerApp/css/case/case.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/case/casedetail.css" rel="stylesheet" />
 <script src="~/Content/WorkerApp/js/fs_forse.js"></script>
 <div class="container" id="container">
     <article class="case-detail-pic">
@@ -58,15 +58,15 @@
                         <img class="lazy" src="@AppSettingsHelper.ImgUrl@item.CaseImageBig" data-original="@AppSettingsHelper.ImgUrl@item.CaseImageBig" alt="@item.CaseTitle" style="display: inline;">
                     </a>
                     <span class="tag">
-                        @if (Model.DecType == 1)
+                        @if (item.DecType == 1)
                         {
-                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_house_type", Model.HouseType.ToString())</a>
-                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_style", Model.Style.ToString())</a>
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_house_type", item.HouseType.ToString())</a>
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_style", item.Style.ToString())</a>
 
                         }
                         else
                         {
-                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_gz_style", Model.GzStyle.ToString())</a>
+                            <a href="javascript:void(0);" class="ect">@webCommen.GetLookupDesc("Case_gz_style", item.GzStyle.ToString())</a>
                         }
                     </span>
 
@@ -75,7 +75,7 @@
 
 
         </ul>
-        <a href="#" class="more">查看更多案例<i></i></a>
+        <a href="/MobileApp/mAticle/AticleList" class="more">查看更多案例<i></i></a>
     </section>
 </div>
 <script>

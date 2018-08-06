@@ -3772,7 +3772,10 @@
     <Content Include="Content\WorkerApp\css\base.css" />
     <Content Include="Content\WorkerApp\css\buttoncss.css" />
     <Content Include="Content\WorkerApp\css\case\case.css" />
+    <Content Include="Content\WorkerApp\css\case\case.js" />
+    <Content Include="Content\WorkerApp\css\case\casedetail.css" />
     <Content Include="Content\WorkerApp\css\case\global.css" />
+    <Content Include="Content\WorkerApp\css\case\lazyload.js" />
     <Content Include="Content\WorkerApp\css\class.css" />
     <Content Include="Content\WorkerApp\css\common.css" />
     <Content Include="Content\WorkerApp\details.html" />
@@ -4358,6 +4361,9 @@
     <Content Include="Areas\MobileApp\Views\MobileUser\TenderPersonList.cshtml" />
     <Content Include="Areas\MobileApp\Views\MobileUser\TenderDetailByUser.cshtml" />
     <Content Include="Areas\MobileApp\Views\mAticle\AticleIndex.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mAticle\AticleList.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mLogin\forgetPassword.cshtml" />
+    <Content Include="Areas\MobileApp\Views\mLogin\mewPassword.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
