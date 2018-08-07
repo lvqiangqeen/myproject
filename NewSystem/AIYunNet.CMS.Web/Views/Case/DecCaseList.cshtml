@@ -25,6 +25,9 @@
         .fiter .fiter_line .list {
     width: 1045px;
 }
+        .case-info > span{
+            padding: 0 3px;
+        }
 </style>
 <div class="container">
     <div class="content clearfix">
@@ -148,15 +151,15 @@
                         <a href="/Case/DecCaseDetail?CaseID=@item.CaseID&DecType=@DecType" target="_blank" alt="@item.CaseTitle" class="title ect">@item.CaseTitle</a>
                         @if (DecType == 1)
                         {
-                            <span class="space cut-line">@webCommen.GetLookupDesc("Case_house_type", item.HouseType.ToString())</span>
-                            <span class="style cut-line">@webCommen.GetLookupDesc("Case_style", item.Style.ToString())</span>
+                            <span class="space cut-line" style="padding: 0 3px;">@webCommen.GetLookupDesc("Case_house_type", item.HouseType.ToString())</span>
+                            <span class="style cut-line" style="padding: 0 3px;">@webCommen.GetLookupDesc("Case_style", item.Style.ToString())</span>
                         }
                         else
                         {
-                            <span class="style cut-line">@webCommen.GetLookupDesc("Case_gz_style", item.GzStyle.ToString())</span>
+                            <span class="style cut-line" style="padding: 0 3px;">@webCommen.GetLookupDesc("Case_gz_style", item.GzStyle.ToString())</span>
                         }
-                        <span class="area cut-line">@webCommen.GetLookupDesc("Case_house_area", item.HouseArea.ToString())</span>
-                        <span class="price">@webCommen.GetLookupDesc("Case_cost_area", item.CostArea.ToString())</span>
+                        <span class="area cut-line" style="padding: 0 3px;">@webCommen.GetLookupDesc("Case_house_area", item.HouseArea.ToString())</span>
+                        <span class="price" style="padding: 0 3px;">@webCommen.GetLookupDesc("Case_cost_area", item.CostArea.ToString())</span>
                     </div>
                     @if (item.CompanyID != 0)
                     {
@@ -180,15 +183,15 @@
                     <a v-bind:href="'/Case/DecCaseDetail?CaseID='+item.webcase.CaseID +'&DecType=@DecType'" target="_blank" alt="item.webcase.CaseTitle" class="title ect">{{item.webcase.CaseTitle}}</a>
                     @if (DecType == 1)
                     {
-                        <span class="space cut-line">{{item.webcase.HouseTypeName}}</span>
-                        <span class="style cut-line">{{item.webcase.StyleName}}</span>
+                        <span class="space cut-line" style="padding: 0 3px;">{{item.webcase.HouseTypeName}}</span>
+                        <span class="style cut-line" style="padding: 0 3px;">{{item.webcase.StyleName}}</span>
                     }
                     else
                     {
-                        <span class="space cut-line">{{item.webcase.GzStyleName}}</span>
+                        <span class="space cut-line" style="padding: 0 3px;">{{item.webcase.GzStyleName}}</span>
                     }   
-                    <span class="area cut-line">{{item.webcase.HouseAreaName}}</span>
-                    <span class="price">{{item.webcase.CostAreaName}}</span>
+                    <span class="area cut-line" style="padding: 0 3px;">{{item.webcase.HouseAreaName}}</span>
+                    <span class="price" style="padding: 0 3px;">{{item.webcase.CostAreaName}}</span>
                 </div>
                 <div class="case-sjs" v-if="item.company.CompanyID!== 0">
                     <div class="head float_l"><img v-bind:src="'@AppSettingsHelper.ImgUrl'+item.company.thumbnailImage" alt="item.company.CompanyName" width="22" height="22"></div>
