@@ -377,13 +377,24 @@
                     },
                     success: function (data) {
                         if (data == 1) {
-                            layer.open({
-                                content: '注册成功请登陆'
-, btn: '我知道了', yes: function ()
-{
+                            if (PositionCode == "WebUser")
+                            {
+                                layer.open({
+                                    content: '注册成功请登录！'
+, btn: '我知道了', yes: function () {
     window.location.href = "/MobileApp/mLogin/LoginCenter";
 }
-                            });
+                                });
+                            } else
+                            {
+                                layer.open({
+                                    content: '注册成功，请补全资料并等待管理员审核，否则无法显示您的信息！'
+, btn: '我知道了', yes: function () {
+    window.location.href = "/MobileApp/mLogin/LoginCenter";
+}
+                                });
+                            }
+ 
                             
                         }
                         else {
