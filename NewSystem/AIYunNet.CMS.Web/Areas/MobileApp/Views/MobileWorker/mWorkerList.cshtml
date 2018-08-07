@@ -7,7 +7,13 @@
     string AreasID = Request["AreasID"];
     string positionID = Request["positionID"];
     string mkjcitycode = Request["mkjcitycode"];
-    string SortOrder= " Stars " + Request["SortOrder"]+",";
+    string sorttype = Request["sorttype"] == null ? "0" : "1";
+    string SortOrder = " Stars " + Request["SortOrder"] + ",";
+    if (sorttype == "1")
+    {
+        SortOrder = " PriceName " + Request["SortOrder"] + ",";
+    }
+
     string gongzhong = Request["gongzhong"]==null?"工种": Request["gongzhong"];
     string AreasName = Request["AreasName"] == null ? SessionHelper.GetSession("mkjcityname").ToString() : Request["AreasName"];
 }
@@ -40,7 +46,7 @@
         <div class="mall-cate-box">
             <ul class="mall-cate">
                 <li class=""><a id="AreasName" href="javascript:void(0);" data-type="category">@AreasName</a></li>
-                <li class=""><a href="javascript:void(0);" data-type="district">等级</a></li>
+                <li class=""><a href="javascript:void(0);" data-type="district">排序</a></li>
                 @*<li class=""><a href="javascript:void(0);" data-type="sort">接单数</a></li>*@
                 <li class=""><a id="gongzhong" href="javascript:void(0);" data-type="screen">@gongzhong</a></li>
             </ul>
@@ -66,8 +72,10 @@
             <div class="sort-wrapper">
                 <div class="sort-view">
                     <div>
-                        <section class="select"><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=desc"><span>从高到底</span></a></section>
-                        <section><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=asc"><span>从低到高</span></a></section>
+                        <section class="select"><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=desc"><span>等级从高到底</span></a></section>
+                        <section><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=asc"><span>等级从低到高</span></a></section>
+                        <section><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=desc&sorttype=1"><span>价格从高到底</span></a></section>
+                        <section><a href="/MobileApp/MobileWorker/mWorkerList?AreasName=@AreasName&AreasID=@AreasID&positionID=@positionID&gongzhong=@gongzhong&SortOrder=asc&sorttype=1"><span>价格从低到高</span></a></section>
                     </div>
                     <i class="m-down hide" style="display: none;"></i>
                 </div>
@@ -190,7 +198,7 @@
                             result += '<img src="/Content/imgStar/zuanshi.gif" style="width:16px;height:16px;float: left;"/>';
                         }
                         result += '</span></div>'
-                              + '<div class="jbsf-details"><span class="work-type">' + item.WorkerPosition + '</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.AreasName + '">' + cutStr(item.AreasName) + '</span></div>'
+                              + '<div class="jbsf-details"><span class="work-type">' + item.WorkerPosition + '</span><span class="work-money" style="margin-left: 10px;">' + item.PriceName + '元</span><span class="work-ages" style="margin-left: 10px;">' + item.WorkYears + '工龄</span><span class="worker-address" style="margin-left: 10px;" title="' + item.AreasName + '">' + cutStr(item.AreasName) + '</span></div>'
                               + '</div></a></div>';
                     });
 

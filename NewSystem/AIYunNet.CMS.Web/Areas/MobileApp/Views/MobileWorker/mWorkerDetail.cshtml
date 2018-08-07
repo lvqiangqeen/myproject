@@ -32,9 +32,9 @@
                 <div class="worker-top-img"><img src="@AppSettingsHelper.ImgUrl@Model.thumbnailImage" style="width:80px;height:80px;"></div>
                 <div class="worker-top-txt">
                     <h2>@Model.WorkerName  </h2>
-                    <span>价位：<em>@Model.PriceName 元/m²</em></span>
                     @if (Model.WorkerCategory == "装修工人")
                     {
+                        <span>价位：<em>@Model.PriceName 元</em></span>
                         <span>工种：<em>@Model.WorkerPosition</em></span>
                     }
                     <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>

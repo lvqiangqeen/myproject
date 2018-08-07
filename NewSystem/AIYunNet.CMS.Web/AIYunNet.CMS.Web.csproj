@@ -3852,6 +3852,7 @@
     <Content Include="Content\WorkerApp\images\user-img.jpg" />
     <Content Include="Content\WorkerApp\images\weixin.png" />
     <Content Include="Content\WorkerApp\images\work-ages.png" />
+    <Content Include="Content\WorkerApp\images\work-money.png" />
     <Content Include="Content\WorkerApp\images\work-type.png" />
     <Content Include="Content\WorkerApp\images\worker-address.png" />
     <Content Include="Content\WorkerApp\images\worker-img.jpg" />

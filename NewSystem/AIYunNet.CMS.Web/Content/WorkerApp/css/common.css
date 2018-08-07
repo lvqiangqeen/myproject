@@ -325,6 +325,9 @@ span.cancel{ color:#ff731c; background-color:transparent; border:1px solid #ff73
 .jbsf-item .jbsf-item-txt .order-total,.jbsf-item .jbsf-item-txt .jbsf-details{ height:1rem; line-height:1rem;}
 .jbsf-item .jbsf-item-txt .order-total span,.jbsf-item .jbsf-item-txt .jbsf-details span{display: inline-block; vertical-align: middle; color:#777777; font-size:0.6rem; }
 .jbsf-item .jbsf-item-txt .order-total .sa_star{ margin-right:0.5rem; }
+.jbsf-details .work-money {
+    background-image: url(../images/work-money.png);
+}
 .jbsf-details .work-type{ background-image:url(../images/work-type.png);}
 .jbsf-details .work-ages{ background-image:url(../images/work-ages.png);}
 .jbsf-details .worker-address{ background-image:url(../images/worker-address.png);}
