@@ -225,6 +225,7 @@
             var ImgContent = "";
             var thumContent = "";
             //遍历获取到得图片文件
+            $(".z_photo").append("<div id='tishi'>图片上传中请稍后。。。</div>")
             for (var i = 0; i < fileList.length; i++) {
                 
                 var imgUrl = window.URL.createObjectURL(file.files[i]);
@@ -234,7 +235,7 @@
                 var imgAdd = document.createElement("div");
                 imgAdd.setAttribute("class", "z_addImg");
                 imgAdd.appendChild(img);
-                
+                imgContainer.appendChild(imgAdd);
 
                 var data = new FormData();
                 data.append('file', file.files[i]);
@@ -253,16 +254,11 @@
                     cache: false,
                     traditional: true,
                     data: data,
-                    beforeSend: function (XMLHttpRequest) {
-                        $(".z_photo").append("<div id='tishi'>正在上传图片请等待。。。</div><img id='loding' src='/content/workerApp/updateimages/timg.gif' style='width:100px;height:100px;'/>"); //在后台返回success之前显示loading图标
-                    },
                     success: function (data) {
 
                         if (data.isUploaded) {
 
-                            $("#tishi").remove();
-                            $("#loding").remove();
-                            imgContainer.appendChild(imgAdd);
+                            
                             ImgContent += data.message + "|";
                             thumContent += data.thumbnailmessage + "|";
                            
@@ -282,7 +278,7 @@
 
                 });
             };
-            
+            $("#tishi").remove();
             $("input[name=ImgContent]").val(ImgContent);
             $("input[name=thumContent]").val(thumContent);
             //imgRemove();
