@@ -133,7 +133,7 @@
       <publishTime>08/06/2018 16:22:45</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mLogin/registCenter.cshtml">
-      <publishTime>08/06/2018 15:57:57</publishTime>
+      <publishTime>08/07/2018 17:30:53</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileCenter/EditPersonDataAreas.cshtml">
       <publishTime>07/24/2018 12:21:18</publishTime>
@@ -199,31 +199,31 @@
       <publishTime>08/07/2018 16:14:24</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerDetail.cshtml">
-      <publishTime>08/07/2018 16:19:42</publishTime>
+      <publishTime>08/08/2018 17:00:34</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerLeaderList.cshtml">
       <publishTime>07/30/2018 08:32:13</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MobileWorker/mWorkerList.cshtml">
-      <publishTime>08/07/2018 17:04:53</publishTime>
+      <publishTime>08/08/2018 16:51:29</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/buidingStage.cshtml">
       <publishTime>07/27/2018 15:49:38</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/buidingStageByWorker.cshtml">
-      <publishTime>07/27/2018 15:49:25</publishTime>
+      <publishTime>08/08/2018 16:55:32</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/MoblieBuiding/mBuidingDetail.cshtml">
       <publishTime>07/27/2018 15:36:24</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileBuidingDetail.cshtml">
-      <publishTime>07/27/2018 15:38:52</publishTime>
+      <publishTime>08/08/2018 11:30:06</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileBuidingList.cshtml">
       <publishTime>07/24/2018 12:24:33</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mobileStageDetail.cshtml">
-      <publishTime>07/24/2018 12:24:33</publishTime>
+      <publishTime>08/08/2018 17:23:31</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/mOrder/mTogetherBuidingDetail.cshtml">
       <publishTime>07/24/2018 12:24:33</publishTime>
@@ -250,7 +250,7 @@
       <publishTime>07/30/2018 11:42:09</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/Shared/_mobileLayout.cshtml">
-      <publishTime>07/24/2018 12:27:56</publishTime>
+      <publishTime>08/08/2018 10:00:49</publishTime>
     </File>
     <File Include="Areas/MobileApp/Views/web.config">
       <publishTime>03/05/2018 08:13:30</publishTime>
@@ -517,7 +517,7 @@
       <publishTime>05/16/2017 17:04:23</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/UsersCenter/AddAndUpdateUser.cshtml">
-      <publishTime>06/14/2018 17:18:02</publishTime>
+      <publishTime>08/08/2018 14:13:51</publishTime>
     </File>
     <File Include="Areas/SysAdmin/Views/UsersCenter/Authenticationlist.cshtml">
       <publishTime>05/16/2017 15:16:55</publishTime>
@@ -616,28 +616,28 @@
       <publishTime>05/23/2017 19:54:27</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.IService.dll">
-      <publishTime>08/02/2018 16:53:29</publishTime>
+      <publishTime>08/08/2018 17:28:03</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.BLL.Service.dll">
-      <publishTime>08/06/2018 16:23:50</publishTime>
+      <publishTime>08/08/2018 17:28:05</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Common.Utility.dll">
-      <publishTime>08/02/2018 16:53:29</publishTime>
+      <publishTime>08/08/2018 17:28:04</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Domain.dll">
-      <publishTime>08/02/2018 16:53:29</publishTime>
+      <publishTime>08/08/2018 17:28:02</publishTime>
     </File>
     <File Include="bin/AIYunNet.CMS.Web.dll">
-      <publishTime>08/07/2018 17:11:13</publishTime>
+      <publishTime>08/08/2018 17:28:06</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/05/2017 11:30:31</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>08/07/2018 17:12:18</publishTime>
+      <publishTime>08/08/2018 17:29:37</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>08/07/2018 17:12:18</publishTime>
+      <publishTime>08/08/2018 17:29:37</publishTime>
     </File>
     <File Include="bin/Dos.ORM.dll">
       <publishTime>02/07/2017 23:10:18</publishTime>
@@ -6795,6 +6795,9 @@
     <File Include="Content/design/img/ico-bg.png">
       <publishTime>01/17/2018 08:51:00</publishTime>
     </File>
+    <File Include="Content/design/img/logo.png">
+      <publishTime>08/08/2018 09:47:49</publishTime>
+    </File>
     <File Include="Content/design/img/mx_button.gif">
       <publishTime>01/24/2018 14:23:23</publishTime>
     </File>
@@ -6895,13 +6898,13 @@
       <publishTime>02/26/2018 08:28:55</publishTime>
     </File>
     <File Include="Content/design/sheji.about.css">
-      <publishTime>01/02/2018 11:45:23</publishTime>
+      <publishTime>08/08/2018 10:25:11</publishTime>
     </File>
     <File Include="Content/design/sheji.casedetail.css">
-      <publishTime>12/06/2017 16:50:18</publishTime>
+      <publishTime>08/08/2018 10:21:20</publishTime>
     </File>
     <File Include="Content/design/sheji.caselist.css">
-      <publishTime>08/07/2018 14:00:34</publishTime>
+      <publishTime>08/08/2018 10:21:09</publishTime>
     </File>
     <File Include="Content/design/sheji.companylist.css">
       <publishTime>12/29/2017 17:07:55</publishTime>
@@ -6913,25 +6916,25 @@
       <publishTime>02/01/2018 11:19:56</publishTime>
     </File>
     <File Include="Content/design/sheji.designerindex.css">
-      <publishTime>02/06/2018 17:12:44</publishTime>
+      <publishTime>08/08/2018 10:24:41</publishTime>
     </File>
     <File Include="Content/design/sheji.designerlist.css">
-      <publishTime>03/05/2018 08:13:30</publishTime>
+      <publishTime>08/08/2018 10:24:41</publishTime>
     </File>
     <File Include="Content/design/sheji.download.css">
-      <publishTime>08/02/2018 16:56:26</publishTime>
+      <publishTime>08/08/2018 10:25:11</publishTime>
     </File>
     <File Include="Content/design/sheji.footer.css">
-      <publishTime>11/29/2017 09:00:34</publishTime>
+      <publishTime>08/08/2018 10:20:10</publishTime>
     </File>
     <File Include="Content/design/sheji.global.css">
-      <publishTime>02/26/2018 08:28:55</publishTime>
+      <publishTime>08/08/2018 10:23:16</publishTime>
     </File>
     <File Include="Content/design/sheji.header.css">
-      <publishTime>03/19/2018 08:15:24</publishTime>
+      <publishTime>08/08/2018 10:18:03</publishTime>
     </File>
     <File Include="Content/design/sheji.index.css">
-      <publishTime>11/30/2017 13:39:28</publishTime>
+      <publishTime>08/08/2018 10:18:50</publishTime>
     </File>
     <File Include="Content/design/sheji.workerbuidingdetail.css">
       <publishTime>03/29/2018 11:04:54</publishTime>
@@ -16081,7 +16084,7 @@
       <publishTime>01/24/2018 15:30:03</publishTime>
     </File>
     <File Include="favicon.ico">
-      <publishTime>02/07/2017 23:10:17</publishTime>
+      <publishTime>08/08/2018 09:47:55</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -16111,7 +16114,7 @@
       <publishTime>04/04/2017 16:24:36</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/07/2018 17:12:06</publishTime>
+      <publishTime>08/08/2018 17:28:55</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/04/2017 16:24:27</publishTime>
@@ -16360,7 +16363,7 @@
       <publishTime>10/25/2017 20:01:33</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDec.cshtml">
-      <publishTime>03/21/2018 16:19:29</publishTime>
+      <publishTime>08/08/2018 09:58:57</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutDecCompany.cshtml">
       <publishTime>12/01/2017 16:04:35</publishTime>
@@ -16447,7 +16450,7 @@
       <publishTime>01/31/2018 10:49:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/07/2018 17:11:20</publishTime>
+      <publishTime>08/08/2018 16:57:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

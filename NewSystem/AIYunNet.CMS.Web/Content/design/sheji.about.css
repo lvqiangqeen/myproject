@@ -62,8 +62,8 @@ input,textarea{outline: none;}
 .fedback_con .f_z .fedback_from .contact label{float: left;font-size: 18px;color: #666;}
 .fedback_con .f_z .fedback_from .contact .contact_txt{float: left;width: 200px;height: 38px;border:solid 1px #e3e3e3;margin-right: 15px;text-indent: 10px;font-size: 18px;color: #666;}
 .fedback_con .f_z .fedback_from .contact em{float: left;font-size: 14px;color:#999;font-style: normal;}
-.fedback_con .f_z .fedback_from .contact_btn{display: block;width: 150px;height: 40px;background: #dd4f50;border-radius: 3px;font-size: 18px;color: #fff;border:none;margin: 0 auto;cursor: pointer;}
-.fedback_con .f_z .fedback_from .msg_error{ color: #dd4f50; position: absolute;font-size: 12px;top:427px;left:493px;}
+.fedback_con .f_z .fedback_from .contact_btn{display: block;width: 150px;height: 40px;background: #9ec918;border-radius: 3px;font-size: 18px;color: #fff;border:none;margin: 0 auto;cursor: pointer;}
+.fedback_con .f_z .fedback_from .msg_error{ color: #9ec918; position: absolute;font-size: 12px;top:427px;left:493px;}
 .feed_back_cg{display:inline;float:left;height:115px;margin:150px 0 0px 100px; padding:0 0 80px 100px; line-height:34px; color:#666;font-size: 16px;text-align: center;}
 .feed_back_cg b{ font-size:35px; color:#999;font-size: "";}
-.feed_back_cg .f_cg{ width:170px; height:40px; float:left; margin-top:5px;font-size: 16px;background: #dd4f50;text-align: center;color: #fff;text-align: center;text-decoration: none;line-height: 40px;border-radius: 3px;margin-left: 92px;}
+.feed_back_cg .f_cg{ width:170px; height:40px; float:left; margin-top:5px;font-size: 16px;background: #9ec918;text-align: center;color: #fff;text-align: center;text-decoration: none;line-height: 40px;border-radius: 3px;margin-left: 92px;}

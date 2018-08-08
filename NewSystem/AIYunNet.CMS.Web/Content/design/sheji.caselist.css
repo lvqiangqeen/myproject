@@ -6,7 +6,7 @@ html,body{ background: #f5f5f5;}
 .fiter .fiter_line .column{font-size:14px;color:#333333;font-weight:bold;float:left;}
 .fiter .fiter_line .list{float:left;width:828px;height: auto; color:#555;white-space: nowrap;}
 .fiter .fiter_line .list a{float:left;padding:0px 5px;margin: 0 14px 5px; height:25px;text-align:left; line-height:25px;}
-.fiter .fiter_line .list .onselect{border-radius:5px;background:#dd4f50;color: #fff;}
+.fiter .fiter_line .list .onselect{border-radius:5px;background:#9ec918;color: #fff;}
 .fiter .fiter_line .list a span, .fiter .fiter-line .list a em{float:left;}
 
 /*æ¡ˆä¾‹åˆ—è¡¨*/
@@ -57,7 +57,7 @@ html,body{ background: #f5f5f5;}
 .userInfoFrame .info{float:right;width:185px;height: 100px;}
 .userInfoFrame .info ul li{color:#999999;line-height:22px;}
 .userInfoFrame .info .name{color:#333333;font-size:14px;font-family:'å¾®è½¯é›…é»‘';line-height:25px;height:25px;overflow:hidden;word-break:break-all;}
-.userInfoFrame .info .price span{color:#dd4f50;}
+.userInfoFrame .info .price span{color:#9ec918;}
 .userInfoFrame .info .rank{margin:5px 0 12px;}
 .userInfoFrame .info .rank a{ display: block;}
 .userInfoFrame .info .rank span{ margin-right: 5px;}
@@ -67,7 +67,7 @@ html,body{ background: #f5f5f5;}
 .reservation:hover{background:#f77071;color: #fff;}
 .userInfoFrame .reserveBtn{float:left;}
 .userInfoFrame .btn .followBtn{padding:0 15px;border:1px solid #e6e6e6;float:right;margin-top:5px;color:#999;line-height: 24px;}
-.userInfoFrame .btn .followBtn:hover{color:#dd4f50;}
+.userInfoFrame .btn .followBtn:hover{color:#9ec918;}
 .userInfoFrame .btn .followBtn span{font-size:16px;}
 .userInfoFrame .sharp{position:absolute;top:192px;left:25px;width:13px;height:9px;background:url(http://img.shejiben.com/front_new/bg/newworks_bg.gif?20140430) no-repeat -56px -171px;}
 

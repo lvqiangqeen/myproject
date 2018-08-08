@@ -183,6 +183,7 @@ namespace AIYunNet.CMS.Domain.Model
             IsActivity = false;
             AddOn = DateTime.Now;
             EditOn = DateTime.Now;
+            NickName = "AU装修宝";
             PositionID = 0;
             PositionType = 0;
             ProvinceID = "";

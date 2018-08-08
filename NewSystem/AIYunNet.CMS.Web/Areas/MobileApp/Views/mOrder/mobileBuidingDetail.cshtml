@@ -50,7 +50,25 @@
         <div class="min-price-tit"><h2>做工详情</h2></div>
         <ul class="layui-timeline">
             <li class="layui-timeline-item">
-                <i class="layui-icon layui-timeline-axis" style="background-color: #009688;color: #009688;"></i>
+                @if (constract.id == 0)
+                {
+                    <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
+                }
+                else
+                {
+                    if (constract.IsPass == 0)
+                    {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
+                    }
+                    else if (constract.IsPass == 2)
+                    {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: red;color: red;"></i>
+                    }
+                    else
+                    {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: #009688;color: #009688;"></i>
+                    }
+                }
 
                 <div class="layui-timeline-content layui-text">
                     <h3 class="layui-timeline-title">签订合同</h3>

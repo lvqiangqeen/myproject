@@ -21,7 +21,7 @@
 .new_top_bar_left .weixin .weixin_code .msg{width: 105px;margin: 0 auto;display: block;text-align: center; padding-bottom: 10px;}
 .new_top_bar_left .weixin:hover .weixin_code{ display: block;}
 .new_top_bar_left .link_index{ float: left; margin: 8px 0 0 15px;}
-.new_top_bar_left a:hover{ color: #dd4f50;}
+.new_top_bar_left a:hover{ color: #9ec918;}
 
 .new_top_bar_right{ width: auto; float: right;}
 .new_top_bar_right .login_status,.new_top_bar_right .customer_service,.new_top_bar_right .designer_center,.new_top_bar_right .navigation{ height: 30px;  cursor: pointer;}
@@ -34,7 +34,7 @@
 .new_top_bar_right .login_status .login,.new_top_bar_right .login_status .register{ padding-right: 15px; margin-top: 8px;display: inline-block; float: left;}
 .new_top_bar_right .login_status .register{border-right: 1px #ddd solid; }
 .new_top_bar_right .zb_entrance{ float: left;width: 92px;height: 14px;border-right: 1px #ddd solid;margin: 7px 2px 0 5px;padding-right: 5px; position: relative;}
-.new_top_bar_right .zb_entrance a{position: absolute;top:-4px;left: 0;width:92px; height: 24px;line-height: 24px;text-align: center;border-radius: 4px;color: #fff;display: block; background: #dd4f50;}
+.new_top_bar_right .zb_entrance a{position: absolute;top:-4px;left: 0;width:92px; height: 24px;line-height: 24px;text-align: center;border-radius: 4px;color: #fff;display: block; background: #9ec918;}
 .new_top_bar_right .zb_entrance a:hover{background: #f77071; color: #fff;}
 .new_top_bar_right .customer_service{ float: left;}
 .new_top_bar_right .designer_center{ float: left;}
@@ -59,7 +59,7 @@
 .navigation .navigation_content ul li .icon_hot_demand{top: -20px; left: 60px; *left:35px;}
 .navigation .navigation_content  ul li .icon_hot_app{top: -20px; left: 57px; *left:33px;}
 .new_top_bar_right .navigation:hover .navigation_content{ display: block;}
-.new_top_bar_right a:hover{ color: #dd4f50;}
+.new_top_bar_right a:hover{ color: #9ec918;}
 
 /*æ–°å¤´éƒ¨æ˜¾ç¤ºæ¶ˆæ¯start*/
 .sjb_new_top_bar .newMessage {position:absolute;width:170px;border:1px solid #333;top:31px;background:#fff;display:none;right:0px;z-index:1100;}
@@ -74,13 +74,14 @@
 /*å¤´éƒ¨log \ æœç´¢æ */
 .top_search{ background: #fff;}
 .index_logo{ width: 990px; height:36px; padding:30px 0; margin: 0 auto;}
-.index_logo .logo{ width: 236px; height: 35px; float: left; background:url(http://img.shejiben.com/global.png?20160326) -3px -3px; display: block; }
+
+.index_logo .logo{ width: 236px; height: 46px; float: left; background:url(/Content/design/img/logo.png) -3px -3px; display: block; }
 .index_logo .or{ width: auto; float: left; line-height: 36px; padding: 0 20px; font-size: 14px; color: #999;}
-.index_logo .edit{ width: 120px; float: left; height: 36px; line-height: 36px; line-height: 36px; background: #dd4f50; color: #fff; font-size: 14px; text-align: center; }
+.index_logo .edit{ width: 120px; float: left; height: 36px; line-height: 36px; line-height: 36px; background: #9ec918; color: #fff; font-size: 14px; text-align: center; }
 .wrap_top_menu a:hover{text-decoration: none;}
 
 /*æœç´¢*/
-.index_logo #search_case { width:460px; margin-left: 118px; height: 32px; float: left; border: 2px #dd4f50 solid; border-right:0; background: #fff; position: relative;}
+.index_logo #search_case { width:460px; margin-left: 118px; height: 32px; float: left; border: 2px #9ec918 solid; border-right:0; background: #fff; position: relative;}
 .index_logo .header_upload_button{float:left;margin:40px 0px 0px 80px;}
 .index_logo .header_upload_button span{color:red;font-size:16px;font-weight: bold}
 .index_logo .header_upload_button a{font-size:12px;}
@@ -97,7 +98,7 @@
 .index_logo #s_zsj a{ display:block;padding:0px 8px;}
 .index_logo #s_zsj .search_tags{height:25px;line-height:25px;}
 .index_logo #s_zsj a:hover { background:#e4e4e4;color:#df3132;text-decoration:none;}
-.index_logo form .submit{width: 80px; float: right; text-align: center; color: #fff; line-height: 32px; border: 0; cursor: pointer; outline: none; background: #dd4f50; height: 32px;font-size: 14px;}
+.index_logo form .submit{width: 80px; float: right; text-align: center; color: #fff; line-height: 32px; border: 0; cursor: pointer; outline: none; background: #9ec918; height: 32px;font-size: 14px;}
 .index_logo #search_case .icon_search{width: 12px; height: 10px; margin: 10px 3px 0 10px; display:block; position: absolute; top:1px; left: 94px; background:url(http://img.shejiben.com/index/sprite.png?20160326) -311px -9px;}
 
 /*å¤´éƒ¨èœå•*/
@@ -105,10 +106,10 @@
 .top_menu{ width: 990px; height: 40px; margin:0 auto; position: relative; z-index: 110;}
 .top_menu li{ width: auto; height: 40px; line-height: 40px; text-align: center; padding: 0 35px 0 35px; float: left; display: inline-block; position: relative; z-index:100;}
 .top_menu li a{ height: 40px; display:inline-block; color: #fff; font-size: 14px; font-weight: bold; }
-.top_menu li.cur{ background: #dd4f50;}
-.top_menu li:hover{background: #dd4f50;}
+.top_menu li.cur{ background: #9ec918;}
+.top_menu li:hover{background: #9ec918;}
 .top_menu li:hover a{ color: #fff;}
-.top_menu li .inner_menu{ width: 100%; height: auto; background: #dd4f50; position: absolute; top: 40px; left: 0; z-index: 100; display: none;}
+.top_menu li .inner_menu{ width: 100%; height: auto; background: #9ec918; position: absolute; top: 40px; left: 0; z-index: 100; display: none;}
 .top_menu li .inner_menu a{ width: 100%; height: 40px; display: block; line-height: 40px; font-weight:normal;}
 .top_menu li:hover .inner_menu{ display: block;}
 .top_menu li:hover .inner_menu a:hover{ background: #D04142;}

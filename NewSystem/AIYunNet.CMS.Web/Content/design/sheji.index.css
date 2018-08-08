@@ -10,8 +10,8 @@ ul.module_list li .icon ,.content_designers ul.tab_name li em,.designers_list .p
 .column .column_content .column_name em{ margin-left: 5px; width: 7px; height: 12px; display: inline-block; background-position: -342px -45px; }
 .column .column_content .column_list{ width: 262px; height: 81px; overflow: hidden; padding-bottom: 5px;}
 .column .column_content .column_list a{ padding: 0 30px 12px 0; height: 16px; line-height: 16px; width: auto; display:block; float: left;color: #666; min-width: 24px; zoom:1 }
-.column .column_content .column_list a:hover{color:#dd4f50;}
-.column .column_content .column_list a.red{ color: #dd4f50;}
+.column .column_content .column_list a:hover{color:#9ec918;}
+.column .column_content .column_list a.red{ color: #9ec918;}
 .column_inner { position: absolute; left:280px; top:0; z-index: -1; height: auto; border: 1px #eee solid;  display: none; padding-bottom:0;  }
 .column_inner .column_content { border: none;}
 
@@ -37,22 +37,22 @@ ul.module_list li .icon_answer{ width: 50px; margin-left: 42px; background-posit
 ul.module_list li .icon_trade{ width: 41px; margin-left: 32px; background-position:-173px -4px; }
 ul.module_list li .module_words{ width: 187px; float: left; margin-left: 15px;}
 ul.module_list li .module_words a{ width: 100%; display: block; font-size: 18px; height: 18px; line-height: 18px; color: #333; font-family:'微软雅黑'; margin-bottom:10px;  }
-ul.module_list li .module_words a:hover{ color: #dd4f50;}
+ul.module_list li .module_words a:hover{ color: #9ec918;}
 ul.module_list li .module_words label{ color: #999;}
 
 .column_index { width: 1180px; height: auto; margin: 0 auto; margin-top: 60px;}
 .column_index .column_name{ width:100%; height: auto; border-bottom: 1px #eee solid; padding-bottom: 15px;}
 .column_index .column_name p{ width: auto; height: 24px; line-height: 24px; float: left; font-family:'微软雅黑'; cursor: pointer; color: #333; font-size: 24px; margin-right: 30px; }
-.column_index .column_name p.cur{ color: #dd4f50;}
+.column_index .column_name p.cur{ color: #9ec918;}
 .column_index .column_name label {width: auto; float: right; padding-top: 12px;}
 .column_index .column_name label a{ width: auto; float: left; margin-left: 20px; color: #999;}
-.column_index .column_name label a:hover{ color: #dd4f50;}
+.column_index .column_name label a:hover{ color: #9ec918;}
 .content_designers { width: 100%; height: 285px; overflow: hidden; position: relative; margin-top: 20px;}
 .content_designers ul.tab_name{ width: 158px; position: absolute; left: 0; top: 0; border: 1px #eee solid; border-bottom: 0; z-index: 10; background: #fff; }
 .content_designers ul.tab_name li{ width: 158px; height: 70px; cursor: pointer; line-height: 70px; color: #666; font-size: 14px; text-indent: 45px; border-bottom: 1px #eee solid;}
 .content_designers ul.tab_name li em{width: 10px; height: 10px; margin:0 0 -2px 16px; display: inline-block;background-position:-297px -7px; }
 .designers_list{ width: 1020px; float: right;}
-.content_designers ul.tab_name li.cur{ color: #dd4f50; border-left:3px #dd4f50 solid; text-indent: 43px; margin-left: -1px; }
+.content_designers ul.tab_name li.cur{ color: #9ec918; border-left:3px #9ec918 solid; text-indent: 43px; margin-left: -1px; }
 .content_designers ul.tab_name li.cur em{background-position: -316px -7px; }
 .content_designers .designers_detail{position: absolute; right: -20px; width: 1020px;}
 .designers_list .scroll_content{width: 100%;height: 184px;overflow: hidden;position: relative;left: 0px;top: 0px;}
@@ -89,7 +89,7 @@ ul.module_list li .module_words label{ color: #999;}
 .designers_list .swiper-container-s04 ul.designers_list_bottom li .img img{ width: 100%;}
 .column_new_content{height:305px;overflow: hidden;}
 .designers_list_01{ width: 1020px;}
-.column_index .check_more{ width: 180px; height: 40px; display: block; background: #dd4f50; margin: 0 auto; margin-top:30px; line-height: 40px; text-align: center; color: #fff; font-size: 14px; border-radius: 3px; }
+.column_index .check_more{ width: 180px; height: 40px; display: block; background: #9ec918; margin: 0 auto; margin-top:30px; line-height: 40px; text-align: center; color: #fff; font-size: 14px; border-radius: 3px; }
 .column_index .check_more:hover{ background: #f77071;}
 .column_index .check_more em.arrow{ width: auto; height: 16px; line-height: 14px; display: inline-block; font-family: '宋体'; margin-left:5px; font-size: 16px;}
 
@@ -102,7 +102,7 @@ ul.module_list li .module_words label{ color: #999;}
 .index_case_list ul li .small_img{ width: 60px; height: 60px; position: absolute; top: 250px; left: 110px;}
 .index_case_list ul li .small_img img {width: 60px; height: 60px; border-radius:30px; border: 1px #fff solid;}
 .index_case_list ul li a,.index_case_list ul li span{ width: 100%; height: 12px; display: block;  text-align: center;}
-.index_case_list ul li a:hover{color: #dd4f50;}
+.index_case_list ul li a:hover{color: #9ec918;}
 .index_case_list ul li .title{height: 14px;padding-top: 40px; color: #333;}
 .index_case_list ul li .name{ padding: 8px 0 20px; color: #999;}
 
@@ -137,12 +137,12 @@ ul.index_pic_list li .title{ width: 240px; height: 18px; display: block; padding
 .index_original_list{ width: 1179px; height: 239px; overflow: hidden; border-right:1px #eee solid; border-bottom:1px #eee solid; }
 .index_original_list .column_name{ width: 224px; height: 239px; float: left; line-height: 239px; text-align: center; color: #fff; font-size: 26px; font-family:'微软雅黑'; margin-right: 14px; padding: 0; position: relative; }
 .index_original_list .column_name em{ width: 10px; height: 17px; display: block; position: absolute; z-index: 10; right: 0; top:110px; background-position: -367px -11px;}
-.index_original_list .red{ background: #dd4f50;}
+.index_original_list .red{ background: #9ec918;}
 .index_original_list .green{ background: #54bda6;}
 .index_original_list .original_detail{ width: 210px; height: 210px; float: left; margin:20px 0 0 20px;}
 .index_original_list .original_detail img{ width: 210px; height: 174px;}
 .index_original_list .original_detail .title{ width: 100%; display: block; color: #666; margin-top: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
-.index_original_list .original_detail .title:hover{color: #dd4f50;}
+.index_original_list .original_detail .title:hover{color: #9ec918;}
 
 /* 最新回答 */
 .index_news_list{ width: 102%; margin: 30px 0 80px;}
@@ -152,7 +152,7 @@ ul.index_pic_list li .title{ width: 240px; height: 18px; display: block; padding
 .index_news_list .news_info .news_list img{ width: 60px; height: 60px; border-radius:30px; float: left; margin-top: 20px; }
 .index_news_list .news_info .news_list .news_msg{ width:260px; float: left; height: 60px; margin:20px 0 0 20px;}
 .index_news_list .news_info .news_list a,.news_title{ font-size: 14px; height: 16px; display: block; color: #333; padding: 10px 0 14px;}
-.index_news_list .news_info .news_list a:hover{ color: #dd4f50;}
+.index_news_list .news_info .news_list a:hover{ color: #9ec918;}
 .index_news_list .news_info .news_list .news_title a { display: inline; padding: 0;}
 .index_news_list .news_info .news_list .answer{ width:180px; float: left; color: #999; overflow: hidden; white-space: nowrap; text-overflow: ellipsis}
 .index_news_list .news_info .news_list .last_time{width:64px; text-align: right; float: right; font-size: 12px;}

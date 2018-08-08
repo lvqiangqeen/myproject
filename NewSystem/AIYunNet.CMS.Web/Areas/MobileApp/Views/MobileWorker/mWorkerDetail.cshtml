@@ -36,11 +36,22 @@
                     {
                         <span>价位：<em>@Model.PriceName 元</em></span>
                         <span>工种：<em>@Model.WorkerPosition</em></span>
+                        
                     }
+                    
                     <span style="display: block;">工龄：<em>@Model.WorkYears</em></span>
                     <span>地区：<em>@Model.ProvinceName  @Model.CityName</em></span>
                     
                 </div>
+            </div>
+            <div class="worker-bot">
+                <a href="#">
+                    <span>联系方式：</span>
+                    <span>
+                        @Model.WorkerPhone
+                    </span>
+
+                </a>
             </div>
             <div class="worker-bot">
                 <a href="#">

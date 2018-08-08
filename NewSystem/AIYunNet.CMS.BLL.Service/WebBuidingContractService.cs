@@ -61,6 +61,7 @@ namespace AIYunNet.CMS.BLL.Service
                 old.EditOn = DateTime.Now;
                 old.imgcontract = constract.imgcontract;
                 old.thumbnailImage = constract.thumbnailImage;
+                old.IsPass = 0;
                 old.filename = constract.filename;
                 context.SaveChanges();
                 return 1;

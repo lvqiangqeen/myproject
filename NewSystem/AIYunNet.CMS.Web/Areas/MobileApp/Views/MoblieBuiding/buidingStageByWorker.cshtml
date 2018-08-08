@@ -516,48 +516,64 @@
             var BuidingID = $("#BuidingID").val();
             var BuidingBrief = $("#BuidingBrief").val();
             var BuidingInfo = $("#BuidingInfo").val();
-            $.ajax({
-                type: "post",
-                url: "/MobileApp/MoblieBuiding/AddOrEditBuidingStages",
-                data: {
-                        Guid: '@Guid',
-                        UserID: '@UserID',
-                        BuidingID: BuidingID,
-                        BuidingTitle: '@demand.buidingname',
-                        BuidingBrief: "",
-                        BuidingInfo: "",
-                        Price: Price,
-                        Space: Space,
-                        ConstructionstageID: selectedStagesCode,
-                        Constructionstage: selectedStagesText,
-                        BuidingImage: "",
-                        thumbnailImage: "",
-                        //BuidingImage: $("input[name=BuidingImage]").val(),
-                        //thumbnailImage: $("input[name=thumbnailImage]").val(),
-                        StartTime: StartTime,
-                        DemandID: "@DemandID"
-                },
-                success: function (data) {
-                    if (data.RetCode == 1) {
-                        //信息框
-                        layer.open({
-                            content: '发布成功！'
-                          , btn: '我知道了'
-                            , yes: function () {
-                                history.go(-1);
-                                //window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
-                            }
-                        });
-                    } else {
-                        layer.open({
-                            content: '发布失败！'
-                          , btn: '我知道了'
-                        });
+            if (StartTime == "" || StartTime == null) {
+                layer.open({
+                    content: '请确定开工时间！'
+                     , btn: '我知道了'
+                });
+                return;
+            }
 
-                    }
-                }
+            //询问框
+            layer.open({
+                content: '装修流程发布之后无法修改，请确认所填信息是否准确！'
+              , btn: ['发布', '再看看']
+              , yes: function (index) {
+                  $.ajax({
+                      type: "post",
+                      url: "/MobileApp/MoblieBuiding/AddOrEditBuidingStages",
+                      data: {
+                          Guid: '@Guid',
+                          UserID: '@UserID',
+                          BuidingID: BuidingID,
+                          BuidingTitle: '@demand.buidingname',
+                          BuidingBrief: "",
+                          BuidingInfo: "",
+                          Price: Price,
+                          Space: Space,
+                          ConstructionstageID: selectedStagesCode,
+                          Constructionstage: selectedStagesText,
+                          BuidingImage: "",
+                          thumbnailImage: "",
+                          //BuidingImage: $("input[name=BuidingImage]").val(),
+                          //thumbnailImage: $("input[name=thumbnailImage]").val(),
+                          StartTime: StartTime,
+                          DemandID: "@DemandID"
+                      },
+                      success: function (data) {
+                          if (data.RetCode == 1) {
+                              //信息框
+                              layer.open({
+                                  content: '发布成功！'
+                                , btn: '我知道了'
+                                  , yes: function () {
+                                      history.go(-1);
+                                      //window.location.href = "/MobileApp/mOrder/mobileBuidingDetail?BuidingID=@Model.BuidingID";
+                                  }
+                              });
+                          } else {
+                              layer.open({
+                                  content: '发布失败！'
+                                , btn: '我知道了'
+                              });
 
-            });
+                          }
+                      }
+
+                  });
+              }
+            })
+
         }
     </script>
 </div>
