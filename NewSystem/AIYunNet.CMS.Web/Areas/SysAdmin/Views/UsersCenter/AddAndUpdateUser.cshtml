@@ -5,6 +5,12 @@
     ViewBag.Title = "AddAndUpdateUser";
     Layout = "~/Areas/SysAdmin/Views/Shared/_SysAdminLayout.cshtml";
     WebWorker work = ViewBag.worker;
+    if (Model.UserID == 0)
+    {
+        Model.AreasID = "0";
+        Model.AreasName = "全城";
+    }
+
 }
 
 <div class="box">
@@ -20,12 +26,18 @@
                         <div class="form-horizontal">
                             <div class="form-group" style="display:none">
                                 @Html.HiddenFor(m => m.UserID, new { id = "hidUserID" })
-                                @Html.HiddenFor(m => m.PositionCode, new { id = "PositionCode" })
+                               
                             </div>
                             <div class="form-group">
                                 <label for="UserName" class="col-sm-2 control-label">账户：</label>
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="UserName" class="col-sm-2 control-label">密码：</label>
+                                <div class="col-sm-3">
+                                    <input type="password" value="" name="Password" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -56,19 +68,11 @@
                             <div class="form-group">
                                 <label for="UserType" class="col-sm-2 control-label">用户类型：</label>
                                 <div class="col-sm-3">
-                                    @if (Model.PositionCode == "WebWorkerLeader")
-                                    {
-                                        @:装修工长
-                                    }
-                                    else if (Model.PositionCode == "WebWorker")
-                                    {
-                                        @:装修工人
-                                    }
-                                    else
-                                    {
-                                        @:业主
-                                    }
-
+                                    <select class="form-control"  id="PositionCode" name="PositionCode">
+                                        <option value="WebWorkerLeader">装修工长</option>
+                                        <option value="WebWorker">装修工人</option>
+                                        <option value="WebUser">业主</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -77,16 +81,79 @@
                                     @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control"})
                                 </div>
                             </div>
+                            @*地区*@
                             <div class="form-group">
-                                <label for="Address" class="col-sm-2 control-label">所在地：</label>
+                                <label for="city" class="col-sm-2 control-label">城市：</label>
                                 <div class="col-sm-3">
-                                    <input class="form-control"  readonly="readonly" type="text" value="@Model.ProvinceName @Model.CityName">
+                                    @Html.DropDownListFor(m => m.ProvinceID, new SelectList(ViewBag.provinceList, "Value", "Text"), new { @class = "form-control", id = "ProvinceID" })
                                 </div>
+                                <input type="hidden" value="@Model.ProvinceName" name="ProvinceName" />
+                                <div class="col-sm-3">
+                                    <select name="CityID" class="form-control" id="cityid"></select>
+                                </div>
+                                <input type="hidden" value="@Model.CityName" name="CityName" />
                             </div>
+                            <script>
+                                $(function () {
+                                    $("#PositionCode").val("@Model.PositionCode");
+                                    
+
+                                    var provinceid = $("#ProvinceID").val();
+                                    var ProvinceName = $("#ProvinceID").find("option:selected").text();
+
+                                    getcitylist(provinceid);
+                                    $("#ProvinceID").change(function () {
+                                        provinceid = $("#ProvinceID").val();
+                                        ProvinceName = $("#ProvinceID").find("option:selected").text();
+                                        getcitylist(provinceid);
+                                        $("input[name='ProvinceName']").val(ProvinceName);
+                                        var CityName = $("#cityid  option:selected").text();
+                                        var CityID = $("#cityid  option:selected").val();
+                                        $("input[name='CityName']").val(CityName);
+                                    });
+                                    $("#cityid").val("@Model.CityID");
+                                    var cityid = $("#cityid  option:selected").val();
+                                    $("#cityid").change(function () {
+                                        var CityName = $("#cityid  option:selected").text();
+                                        var CityID = $("#cityid  option:selected").val();
+                                        $("input[name='CityName']").val(CityName);
+                                    });
+
+                                    function getcitylist(provinceid) {
+                                        $.ajax({
+                                            async: false,
+                                            type: "post",
+                                            url: "/SysAdmin/city/GetCityListByfather",
+                                            data: {
+                                                father: provinceid
+                                            },
+                                            success: function (data) {
+                                                if (data != null) {
+                                                    var html = '';
+                                                    $.each(data.list, function (i, item) {
+                                                        html += '<option value="' + item.cityID + '">' + item.city + '</option>'
+                                                    });
+                                                    $("#cityid").empty();
+                                                    $("#cityid").append(html);
+
+                                                }
+                                                else {
+
+                                                }
+                                            },
+                                            error: function (xhr, type) {
+                                                alert('Ajax error!2');
+                                            }
+                                        });
+                                    }
+
+                                })
+                            </script>
                             <div class="form-group">
                                 <label for="Address" class="col-sm-2 control-label">服务地区：</label>
                                 <div class="col-sm-5">
-                                    <input class="form-control"  readonly="readonly" type="text" value="@Model.AreasName">
+                                    <input  type="hidden" name="AreasID" value="@Model.AreasID">
+                                    <input class="form-control"  readonly="readonly" type="text" name="AreasName" value="@Model.AreasName">
                                 </div>
                             </div>
                             @if (Model.PositionCode == "WebWorkerLeader")
@@ -94,31 +161,37 @@
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">工作年限：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkYears">
+                                        <select class="form-control" id="WorkYearsID" name="WorkYearsID">
+                                            @foreach (var iten in ViewBag.workyearslist as List<WebLookup>)
+                                            {
+                                                <option value="@iten.Code">@iten.Description</option>
+                                            }
+                                        </select>
+                                     
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">工程价位：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.PriceName 元每平方米">
+                                        <input class="form-control" name="PriceName" type="text" value="@work.PriceName">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">擅长领域：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.GoodAtStyle">
+                                        <input class="form-control"  type="text" value="@work.GoodAtStyle" name="GoodAtStyle">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">评价自己：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerMotto">
+                                        <input class="form-control" name="WorkerMotto" type="text" value="@work.WorkerMotto">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">个人简介：</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerInfo">
+                                        <input class="form-control" name="WorkerInfo" type="text" value="@work.WorkerInfo">
                                     </div>
                                 </div>
                             }
@@ -127,37 +200,48 @@
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">工作年限：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkYears">
+                                        <select class="form-control" id="WorkYearsID" name="WorkYearsID">
+                                            @foreach (var iten in ViewBag.workyearslist as List<WebLookup>)
+                                            {
+                                                <option value="@iten.Code">@iten.Description</option>
+                                            }
+                                        </select>
+
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">工种：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerPosition">
+                                        <select class="form-control" id="WorkerPositionID" name="WorkerPositionID">
+                                            @foreach (var iten in ViewBag.workPositionList as List<WebLookup>)
+                                            {
+                                                <option value="@iten.Code">@iten.Description</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">工程价位：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.PriceName 元每平方米">
+                                        <input class="form-control" name="PriceName" type="text" value="@work.PriceName">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">擅长领域：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.GoodAtStyle">
+                                        <input class="form-control" name="GoodAtStyle" type="text" value="@work.GoodAtStyle">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">评价自己：</label>
                                     <div class="col-sm-3">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerMotto">
+                                        <input class="form-control" name="WorkerMotto" type="text" value="@work.WorkerMotto">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="Address" class="col-sm-2 control-label">个人简介：</label>
                                     <div class="col-sm-8">
-                                        <input class="form-control" readonly="readonly" type="text" value="@work.WorkerInfo">
+                                        <input class="form-control" name="WorkerInfo" type="text" value="@work.WorkerInfo">
                                     </div>
                                 </div>
                             }
@@ -183,7 +267,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-9" style="text-align:center">
-                                    <button type="submit" class="btn btn-primary new_button_style">保存</button>
+                                    <button type="submit" class="btn btn-primary new_button_style" id="bao">保存</button>
                                     <button type="reset" class="btn new_button_style">清空</button>
                                     <a class="btn btn-primary new_button_style" id="Returnback">返回</a>
                                 </div>
@@ -207,6 +291,71 @@
 
 
         })
+        $("input[name=WorkYearsID]").val('@work.WorkYearsID');
+        $("input[name=WorkerPositionID]").val("@work.WorkerPositionID");
+        $("#bao").click(function () {
+            var UserID = '@Model.UserID';
+            var UserName = $("input[name=UserName]").val();
+            var Password = $("input[name=Password]").val();
+            var NickName = $("input[name=NickName]").val();
+            var TrueName = $("input[name=TrueName]").val();
+            var Email = $("input[name=Email]").val();
+            var Sex = $("input[name='Sex']:checked").val();
+            var PositionCode = $("#PositionCode").val();
+            var Telephone = $("input[name=Telephone]").val();
+            var ProvinceID = $("input[name=ProvinceID]").val();
+            var ProvinceName = $("input[name=ProvinceName]").val();
+            var CityID = $("input[name=CityID]").val();
+            var CityName = $("input[name=CityName]").val();
+            var AreasID = $("input[name=AreasID]").val();
+            var AreasName = $("input[name=AreasName]").val();
+            var WorkYearsID = $("input[name=WorkYearsID]").val();
+            var WorkYears = $("input[name=WorkYearsID]").find("option:selected").text();
+            var PriceName = $("input[name=PriceName]").val();
+            var GoodAtStyle = $("input[name=GoodAtStyle]").val();
+            var WorkerMotto = $("input[name=WorkerMotto]").val();
+            var WorkerInfo = $("input[name=WorkerInfo]").val();
+            var WorkerPositionID = $("input[name=WorkerPositionID]").val();
+            var WorkerPosition = $("input[name=WorkerPositionID]").find("option:selected").text();
+            var IsLock = $("input[name=IsLock]").val();
+            var InUser = $("input[name=InUser]").val();
+            $.ajax({
+                async: false,
+                type: "post",
+                url: "/SysAdmin/city/GetAreasListByfather",
+                data: {
+                    father: cityid
+                },
+                success: function (data) {
+                    if (data != null) {
+                        var html = '';
+                        html = '<div class="checkbox col-sm-1">'
+                            + '<label class="checkbox-custom">'
+                            + '<input id="allarea" type="checkbox" value="" />全城'
+                             + '</label></div>';
+                        $.each(data.list, function (i, item) {
+                            html += '<div class="checkbox col-sm-1">'
+                                + '<label class="checkbox-custom">'
+                                + '<input name="areaidList" id="areaid' + item.areaID + '" type="checkbox" value="' + item.areaID + '" />'
+                                + '<input type="hidden" name="areanameList" value="' + item.area + '" />'
+                                + item.area
+                                + '</label>'
+                                + '</div>';
+                        });
+                        $("#arealist").empty();
+                        $("#arealist").append(html);
+                        selectAllarea();
+                    }
+                    else {
+
+                    }
+                },
+                error: function (xhr, type) {
+                    alert('Ajax error!2');
+                }
+            });
+        })
+
 
         function afterAddAndUpdateUser(ret) {
             if (ret.retCode == 1) {

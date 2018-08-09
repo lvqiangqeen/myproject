@@ -49,64 +49,68 @@
     <div class="min-price">
         <div class="min-price-tit"><h2>做工详情</h2></div>
         <ul class="layui-timeline">
-            <li class="layui-timeline-item">
-                @if (constract.id == 0)
-                {
-                    <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
-                }
-                else
-                {
-                    if (constract.IsPass == 0)
-                    {
-                        <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
-                    }
-                    else if (constract.IsPass == 2)
-                    {
-                        <i class="layui-icon layui-timeline-axis" style="background-color: red;color: red;"></i>
-                    }
-                    else
-                    {
-                        <i class="layui-icon layui-timeline-axis" style="background-color: #009688;color: #009688;"></i>
-                    }
-                }
-
-                <div class="layui-timeline-content layui-text">
-                    <h3 class="layui-timeline-title">签订合同</h3>
+            @if (SessionHelper.Get("PositionCode") == "WebWorkerLeader")
+            {
+                <li class="layui-timeline-item">
                     @if (constract.id == 0)
-                    {
-                        <p style="font-size: 20px;">合同未上传</p>
-                        <p style="margin-top:10px;">
-                            <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
-
-                        </p>
+                {
+                        <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
                     }
                     else
                     {
                         if (constract.IsPass == 0)
                         {
-                            <p style="font-size: 20px;">合同审核中... ...</p>
-                            <p style="margin-top:10px;">
-                                <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
-
-                            </p>
+                            <i class="layui-icon layui-timeline-axis" style="background-color: #999999;color: #999999;"></i>
                         }
                         else if (constract.IsPass == 2)
                         {
-                            <p style="font-size: 20px;color:red;">合同未通过审核</p>
+                            <i class="layui-icon layui-timeline-axis" style="background-color: red;color: red;"></i>
+                        }
+                        else
+                        {
+                            <i class="layui-icon layui-timeline-axis" style="background-color: #009688;color: #009688;"></i>
+                        }
+                    }
+
+                    <div class="layui-timeline-content layui-text">
+                        <h3 class="layui-timeline-title">签订合同</h3>
+                        @if (constract.id == 0)
+                        {
+                            <p style="font-size: 20px;">合同未上传</p>
                             <p style="margin-top:10px;">
-                                 <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
+                                <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
+
                             </p>
                         }
                         else
                         {
-                            <p style="font-size: 20px;color:#009688;">合同通过审核</p>
-                            <p style="margin-top:10px;">
-                                   <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
-                            </p>
+                            if (constract.IsPass == 0)
+                            {
+                                <p style="font-size: 20px;">合同审核中... ...</p>
+                                <p style="margin-top:10px;">
+                                    <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
+
+                                </p>
+                            }
+                            else if (constract.IsPass == 2)
+                            {
+                                <p style="font-size: 20px;color:red;">合同未通过审核</p>
+                                <p style="margin-top:10px;">
+                                    <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">上传合同</button>
+                                </p>
+                            }
+                            else
+                            {
+                                <p style="font-size: 20px;color:#009688;">合同通过审核</p>
+                                <p style="margin-top:10px;">
+                                    <button class="layui-btn" onclick="javascript: updateConstract('@demand.Guid');">查看合同</button>
+                                </p>
+                            }
                         }
-                    }
-                </div>
-            </li>
+                    </div>
+                </li>
+            }
+            
             @foreach (WebBuidingStages item in stageslist)
             {
                 <li class="layui-timeline-item">
@@ -249,7 +253,7 @@
     }
     function stageUpdate(buidingID,StageID)
     {
-        if ('@constract.IsPass' != 1) {
+        if ('@constract.IsPass' != 1 && '@SessionHelper.Get("PositionCode")' == 'WebWorkerLeader') {
             layer.open({
                 content: '合同未通过审核！'
                 , btn: ['我知道了']

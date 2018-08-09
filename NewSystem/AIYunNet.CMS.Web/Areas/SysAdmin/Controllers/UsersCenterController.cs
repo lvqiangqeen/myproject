@@ -12,6 +12,8 @@ using AIYunNet.CMS.BLL.IService;
 using AIYunNet.CMS.BLL.Service;
 using AIYunNet.CMS.Common.Utility;
 using AIYunNet.CMS.Domain.Model;
+using AIYunNet.CMS.Domain.OccaModel;
+using System.Web.Security;
 
 namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
 {
@@ -22,6 +24,8 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         WebPeopleGuarantMoneyService GuarantMoneyService = new WebPeopleGuarantMoneyService();
         WebCommonService webcommonser = new WebCommonService();
         WebWorkerService workSer = new WebWorkerService();
+        t_AreaService areaService = new t_AreaService();
+        WebCommonService commonService = new WebCommonService();
         // GET: SysAdmin/UsersCenter
         public ActionResult Userlist(string usertype)
         {
@@ -32,6 +36,18 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         [HttpGet]
         public ActionResult AddAndUpdateUser(int userid)
         {
+            //省份
+            IEnumerable<SelectListItem> provinceList = null;
+            List<t_Province> common = areaService.GetProvinceList();
+            provinceList = common.Select(com => new SelectListItem { Value = com.provinceID.ToString(), Text = com.province });
+            ViewBag.provinceList = provinceList;
+            //工作年限
+            List<WebLookup> workyearlist = commonService.GetLookupList("people_workyear");
+            ViewBag.workyearslist = workyearlist;
+            //工人职位
+            List<WebLookup> commonworkPosition = commonService.GetLookupList("People_workers_position");       
+            ViewBag.workPositionList = commonworkPosition;
+
             WebUser webuser = webuserservice.GetWebUserByID(userid);
             //List<WebLookup> weblooktypelist = webcommonser.GetLookupList("people_category");
             //IEnumerable<SelectListItem> typelist = weblooktypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
@@ -43,6 +59,74 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             }
             ViewBag.worker = work;
             return View(webuser);
+        }
+        [HttpPost]
+        public ActionResult AddAndUpdateUserAndWorkerModel(UserAndWorkerModel model)
+        {
+            string workercategory = "";
+            if(model.PositionCode== "WebWorkerLeader")
+            {
+                workercategory = "装修工长";
+            }
+            else if (model.PositionCode == "WebWorker")
+            {
+                workercategory = "装修工人";
+            }
+            int result = 0;
+            WebUser user = new WebUser()
+            {
+                UserID = model.UserID,
+                UserName=model.UserName,
+                Password= FormsAuthentication.HashPasswordForStoringInConfigFile(model.Password, "md5"),
+                NickName =model.NickName,
+                TrueName=model.TrueName,
+                Email=model.Email,
+                Sex=model.Sex,
+                PositionCode=model.PositionCode,
+                Telephone=model.Telephone,
+                ProvinceID=model.ProvinceID,
+                ProvinceName=model.ProvinceName,
+                CityID=model.CityID,
+                CityName=model.CityName,
+                AreasID=model.AreasID,
+                AreasName=model.AreasName,
+                IsLock=model.IsLock,
+                InUser=model.InUser
+            };
+            WebWorker worker = new WebWorker()
+            {
+                WorkerName=model.TrueName,
+                WorkerCategory= workercategory,
+                WorkerPhone=model.Telephone,
+                WorkerMail=model.Email,
+                WorkerInfo=model.WorkerInfo,
+                WorkerMotto=model.WorkerMotto,
+                ProvinceID=model.ProvinceID,
+                ProvinceName=model.ProvinceName,
+                CityID=model.CityID,
+                CityName=model.CityName,
+                AreasID=model.AreasID,
+                AreasName=model.AreasName,
+                WorkYearsID=model.WorkYearsID,
+                WorkYears=model.WorkYears,
+                PriceName=model.PriceName,
+                GoodAtStyle=model.GoodAtStyle,
+                WorkerPositionID=model.WorkerPositionID,
+                WorkerPosition=model.WorkerPosition
+
+            };
+            if (model != null && model.UserID > 0)
+            {
+                result = webuserservice.UpdateWebUser(user);
+                WebUser webu = webuserservice.GetWebUserByAccount(model.UserName);
+                worker.UserID = webu.UserID;
+                result = workSer.UpdateWebWorkerFromCenter(worker);
+            }
+            else
+            {
+
+            }
+            return Json(new { retCode = result }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult AddAndUpdateUser(WebUser webuser)
