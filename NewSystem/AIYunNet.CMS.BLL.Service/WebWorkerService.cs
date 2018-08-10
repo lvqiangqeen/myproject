@@ -151,6 +151,24 @@ namespace AIYunNet.CMS.BLL.Service
             }
         }
         /// <summary>
+        /// 修改
+        /// </summary>
+        public int UpdateWebWorker(WebWorker webworker)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebWorker originalPeople = context.WebWorker.Find(webworker.WorkerID);
+                if (originalPeople != null)
+                {
+
+                    context.SaveChanges();
+                }
+                return 1;
+            }
+        }
+
+
+        /// <summary>
         /// 从个人中心修改
         /// </summary>
         public int UpdateWebWorkerFromCenter(WebWorker webworker)
