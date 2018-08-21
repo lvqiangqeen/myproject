@@ -45,7 +45,7 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             List<WebLookup> workyearlist = commonService.GetLookupList("people_workyear");
             ViewBag.workyearslist = workyearlist;
             //工人职位
-            List<WebLookup> commonworkPosition = commonService.GetLookupList("People_workers_position");       
+            List<WebLookup> commonworkPosition = commonService.GetLookupList("workers_position");       
             ViewBag.workPositionList = commonworkPosition;
 
             WebUser webuser = webuserservice.GetWebUserByID(userid);
@@ -53,9 +53,15 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             //IEnumerable<SelectListItem> typelist = weblooktypelist.Select(com => new SelectListItem { Value = com.Code.ToString(), Text = com.Description });
             //ViewBag.typelist = typelist;
             WebWorker work = new WebWorker();
-            if (webuser.PositionCode != "WebUser")
+            if (webuser != null)
             {
-                work= workSer.GetWebWorkerByUserID(userid);
+                if (webuser.PositionCode != "WebUser")
+                {
+                    work = workSer.GetWebWorkerByUserID(userid);
+                }
+            }else
+            {
+                webuser = new WebUser();
             }
             ViewBag.worker = work;
             return View(webuser);
@@ -73,25 +79,32 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
                 workercategory = "装修工人";
             }
             int result = 0;
+
+            string Password = "";
+            if (model.Password != null)
+            {
+                Password = FormsAuthentication.HashPasswordForStoringInConfigFile(model.Password, "md5");
+            }
+
             WebUser user = new WebUser()
             {
                 UserID = model.UserID,
-                UserName=model.UserName,
-                Password= FormsAuthentication.HashPasswordForStoringInConfigFile(model.Password, "md5"),
-                NickName =model.NickName,
-                TrueName=model.TrueName,
-                Email=model.Email,
-                Sex=model.Sex,
-                PositionCode=model.PositionCode,
-                Telephone=model.Telephone,
-                ProvinceID=model.ProvinceID,
-                ProvinceName=model.ProvinceName,
-                CityID=model.CityID,
-                CityName=model.CityName,
-                AreasID=model.AreasID,
-                AreasName=model.AreasName,
-                IsLock=model.IsLock,
-                InUser=model.InUser
+                UserName = model.UserName,
+                Password = Password,
+                NickName = model.NickName,
+                TrueName = model.TrueName,
+                Email = model.Email,
+                Sex = model.Sex,
+                PositionCode = model.PositionCode,
+                Telephone = model.Telephone,
+                ProvinceID = model.ProvinceID,
+                ProvinceName = model.ProvinceName,
+                CityID = model.CityID,
+                CityName = model.CityName,
+                AreasID = model.AreasID,
+                AreasName = model.AreasName,
+                IsLock = model.IsLock,
+                InUser = model.InUser
             };
             WebWorker worker = new WebWorker()
             {
@@ -112,7 +125,8 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
                 PriceName=model.PriceName,
                 GoodAtStyle=model.GoodAtStyle,
                 WorkerPositionID=model.WorkerPositionID,
-                WorkerPosition=model.WorkerPosition
+                WorkerPosition=model.WorkerPosition,
+                IsApproved=model.InUser
 
             };
             if (model != null && model.UserID > 0)
@@ -124,6 +138,10 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             }
             else
             {
+                result = webuserservice.AddWebUser(user);
+                WebUser webu= webuserservice.GetWebUserByAccount(model.UserName);
+                worker.UserID = webu.UserID;
+                result = workSer.AddWebWorker(worker);
 
             }
             return Json(new { retCode = result }, JsonRequestBehavior.AllowGet);

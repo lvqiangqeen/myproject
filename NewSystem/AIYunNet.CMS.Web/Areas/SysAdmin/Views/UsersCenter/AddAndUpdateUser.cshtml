@@ -10,7 +10,11 @@
         Model.AreasID = "0";
         Model.AreasName = "全城";
     }
-
+    string PositionCode = Request["usertype"];
+    if (PositionCode != null)
+    {
+        Model.PositionCode = PositionCode;
+    }
 }
 
 <div class="box">
@@ -20,8 +24,7 @@
     <div class="tab-content">
         <div class="tab-pane fade in active" id="caseInfoTab">
             <div class="panel-body">
-                @using (Ajax.BeginForm("AddAndUpdateUser", new AjaxOptions { HttpMethod = "Post", OnSuccess = "afterAddAndUpdateUser" }))
-                {
+
                     <div class="innerLR">
                         <div class="form-horizontal">
                             <div class="form-group" style="display:none">
@@ -29,7 +32,7 @@
                                
                             </div>
                             <div class="form-group">
-                                <label for="UserName" class="col-sm-2 control-label">账户：</label>
+                                <label for="UserName" class="col-sm-2 control-label">账户(联系方式)：</label>
                                 <div class="col-sm-3">
                                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
                                 </div>
@@ -75,12 +78,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="Telephone" class="col-sm-2 control-label">联系方式：</label>
-                                <div class="col-sm-3">
-                                    @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control"})
-                                </div>
-                            </div>
+
                             @*地区*@
                             <div class="form-group">
                                 <label for="city" class="col-sm-2 control-label">城市：</label>
@@ -250,7 +248,7 @@
                                 <div class="col-sm-offset col-sm-5">
                                     <div class="checkbox col-sm-2">
                                         <label class="checkbox-custom">
-                                            @Html.CheckBoxFor(m => m.IsLock)
+                                            <input type="checkbox" value="true" name="IsLock" id="IsLock"/>
                                             锁定
                                         </label>
                                     </div>
@@ -258,7 +256,7 @@
                                     {
                                         <div class="checkbox col-sm-3">
                                             <label class="checkbox-custom">
-                                                @Html.CheckBoxFor(m => m.InUser)
+                                                <input type="checkbox" value="true" name="InUser" id="InUser"/>
                                                 通过审核
                                             </label>
                                         </div>
@@ -275,7 +273,7 @@
 
                         </div>
                     </div>
-                }
+                
             </div>
         </div>
     </div>
@@ -291,8 +289,16 @@
 
 
         })
-        $("input[name=WorkYearsID]").val('@work.WorkYearsID');
-        $("input[name=WorkerPositionID]").val("@work.WorkerPositionID");
+        $("#WorkYearsID").val('@work.WorkYearsID');
+        $("#WorkerPositionID").val("@work.WorkerPositionID");
+        if ('@Model.IsLock'=='True')
+        {
+            $("input[name='IsLock']").prop('checked', true);
+        }
+        if ('@Model.InUser' == 'True')
+        {
+            $("input[name='InUser']").prop('checked', true);
+        }
         $("#bao").click(function () {
             var UserID = '@Model.UserID';
             var UserName = $("input[name=UserName]").val();
@@ -302,84 +308,93 @@
             var Email = $("input[name=Email]").val();
             var Sex = $("input[name='Sex']:checked").val();
             var PositionCode = $("#PositionCode").val();
-            var Telephone = $("input[name=Telephone]").val();
-            var ProvinceID = $("input[name=ProvinceID]").val();
+            var Telephone = $("input[name=UserName]").val();
+            var ProvinceID = $("#ProvinceID option:selected").val();
             var ProvinceName = $("input[name=ProvinceName]").val();
-            var CityID = $("input[name=CityID]").val();
+            var CityID = $("#cityid option:selected").val();
             var CityName = $("input[name=CityName]").val();
             var AreasID = $("input[name=AreasID]").val();
             var AreasName = $("input[name=AreasName]").val();
-            var WorkYearsID = $("input[name=WorkYearsID]").val();
-            var WorkYears = $("input[name=WorkYearsID]").find("option:selected").text();
+            var WorkYearsID = $("#WorkYearsID option:selected").val();
+            var WorkYears = $("#WorkYearsID option:selected").text();
             var PriceName = $("input[name=PriceName]").val();
             var GoodAtStyle = $("input[name=GoodAtStyle]").val();
             var WorkerMotto = $("input[name=WorkerMotto]").val();
             var WorkerInfo = $("input[name=WorkerInfo]").val();
-            var WorkerPositionID = $("input[name=WorkerPositionID]").val();
-            var WorkerPosition = $("input[name=WorkerPositionID]").find("option:selected").text();
-            var IsLock = $("input[name=IsLock]").val();
-            var InUser = $("input[name=InUser]").val();
+            var WorkerPositionID = $("#WorkerPositionID option:selected").val();
+            var WorkerPosition = $("#WorkerPositionID option:selected").text();
+            var IsLock = false;
+            if ($("#IsLock").get(0).checked)
+            {
+                IsLock = true;
+            }
+
+            var InUser = false;
+            if ($("#InUser").get(0).checked) {
+                InUser = true;
+            }
+
             $.ajax({
                 async: false,
                 type: "post",
-                url: "/SysAdmin/city/GetAreasListByfather",
+                url: "/SysAdmin/UsersCenter/AddAndUpdateUserAndWorkerModel",
                 data: {
-                    father: cityid
+                    UserID: UserID,
+                    UserName: UserName,
+                    Password: Password,
+                    NickName: NickName,
+                    TrueName: TrueName,
+                    Email: Email,
+                    Sex: Sex,
+                    PositionCode: PositionCode,
+                    Telephone: Telephone,
+                    ProvinceID: ProvinceID,
+                    ProvinceName: ProvinceName,
+                    CityID: CityID,
+                    CityName: CityName,
+                    AreasID: AreasID,
+                    AreasName: AreasName,
+                    WorkYearsID: WorkYearsID,
+                    WorkYears: WorkYears,
+                    PriceName: PriceName,
+                    GoodAtStyle: GoodAtStyle,
+                    WorkerMotto: WorkerMotto,
+                    WorkerInfo: WorkerInfo,
+                    WorkerPositionID: WorkerPositionID,
+                    WorkerPosition: WorkerPosition,
+                    IsLock: IsLock,
+                    InUser: InUser
+
                 },
                 success: function (data) {
-                    if (data != null) {
-                        var html = '';
-                        html = '<div class="checkbox col-sm-1">'
-                            + '<label class="checkbox-custom">'
-                            + '<input id="allarea" type="checkbox" value="" />全城'
-                             + '</label></div>';
-                        $.each(data.list, function (i, item) {
-                            html += '<div class="checkbox col-sm-1">'
-                                + '<label class="checkbox-custom">'
-                                + '<input name="areaidList" id="areaid' + item.areaID + '" type="checkbox" value="' + item.areaID + '" />'
-                                + '<input type="hidden" name="areanameList" value="' + item.area + '" />'
-                                + item.area
-                                + '</label>'
-                                + '</div>';
+                    if (data.retCode == 1) {
+                        swal({
+                            title: "添加成功",
+                            text: "是否继续添加人员信息？",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "是, 继续",
+                            cancelButtonText: "不, 返回",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                        function (isConfirm) {
+                            var url = sessionStorage.getItem('url');
+                            if (isConfirm) {
+                                window.location.href = window.location.href;
+                            } else {
+                                window.location.href = url;
+                            }
                         });
-                        $("#arealist").empty();
-                        $("#arealist").append(html);
-                        selectAllarea();
                     }
-                    else {
 
-                    }
                 },
                 error: function (xhr, type) {
                     alert('Ajax error!2');
                 }
             });
         })
-
-
-        function afterAddAndUpdateUser(ret) {
-            if (ret.retCode == 1) {
-                swal({
-                    title: "添加成功",
-                    text: "是否继续添加人员信息？",
-                    type: "success",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "是, 继续",
-                    cancelButtonText: "不, 返回",
-                    closeOnConfirm: false,
-                    closeOnCancel: false
-                },
-                function (isConfirm) {
-                    var url = sessionStorage.getItem('url');
-                    if (isConfirm) {
-                        window.location.href = window.location.href;
-                    } else {
-                        window.location.href = url;
-                    }
-                });
-            }
-        }
 
 
     </script>

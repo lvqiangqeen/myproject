@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
 namespace AIYunNet.CMS.Domain.Model
 {
     [Table("WebWorker")]
     public class WebWorker
     {
+        public static string Hearder = ConfigurationManager.AppSettings["Hearder"];
         /// <summary>
         /// WorkerID
         /// </summary>
@@ -235,6 +237,8 @@ namespace AIYunNet.CMS.Domain.Model
         public int Xing { get; set; }
         public WebWorker()
         {
+            WorkerImage = Hearder;
+            thumbnailImage = Hearder;
             PageViewCount = 0;
             CollectCount = 0;
             BuildingCount = 0;

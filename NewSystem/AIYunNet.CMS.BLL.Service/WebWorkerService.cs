@@ -185,8 +185,12 @@ namespace AIYunNet.CMS.BLL.Service
                         originalPeople.WorkerMail = webworker.WorkerMail;
                         originalPeople.WorkerName = webworker.WorkerName;
                         originalPeople.WorkerPhone = webworker.WorkerPhone;
-                        originalPeople.WorkerImage = webworker.WorkerImage;
-                        originalPeople.thumbnailImage = webworker.thumbnailImage == null ? "" : webworker.thumbnailImage;
+                        if (webworker.WorkerImage != "/UploadFiles/hearder.jpg")
+                        {
+                            originalPeople.WorkerImage = webworker.WorkerImage;
+                            originalPeople.thumbnailImage = webworker.thumbnailImage == null ? "" : webworker.thumbnailImage;
+                        }
+
                         originalPeople.ProvinceID = webworker.ProvinceID;
                         originalPeople.ProvinceName = webworker.ProvinceName;
                         originalPeople.CityID = webworker.CityID;
