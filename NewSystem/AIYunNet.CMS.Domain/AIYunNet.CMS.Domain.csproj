@@ -70,6 +70,7 @@
     <Compile Include="Model\t_Province.cs" />
     <Compile Include="Model\t_rms_region.cs" />
     <Compile Include="Model\WebBuiding.cs" />
+    <Compile Include="Model\WebBuidingCase.cs" />
     <Compile Include="Model\WebBuidingCaseComment.cs" />
     <Compile Include="Model\WebBuidingContract.cs" />
     <Compile Include="Model\WebBuidingStages.cs" />

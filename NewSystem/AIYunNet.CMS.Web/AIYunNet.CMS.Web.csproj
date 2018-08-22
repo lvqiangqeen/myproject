@@ -3771,6 +3771,8 @@
     <Content Include="Content\WorkerApp\car-list.html" />
     <Content Include="Content\WorkerApp\coupons.html" />
     <Content Include="Content\WorkerApp\css\base.css" />
+    <Content Include="Content\WorkerApp\css\buidingcase\articledetail.css" />
+    <Content Include="Content\WorkerApp\css\buidingcase\footlist.css" />
     <Content Include="Content\WorkerApp\css\buttoncss.css" />
     <Content Include="Content\WorkerApp\css\case\case.css" />
     <Content Include="Content\WorkerApp\css\case\case.js" />
@@ -4366,6 +4368,9 @@
     <Content Include="Areas\MobileApp\Views\mAticle\AticleList.cshtml" />
     <Content Include="Areas\MobileApp\Views\mLogin\forgetPassword.cshtml" />
     <Content Include="Areas\MobileApp\Views\mLogin\mewPassword.cshtml" />
+    <Content Include="Areas\MobileApp\Views\MobileWorker\mBuidingCaseDetail.cshtml" />
+    <Content Include="Content\WorkerApp\css\buidingcase\aticle.min.css" />
+    <Content Include="Areas\SysAdmin\Views\AppWorker\buidingcaseList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -4495,6 +4500,7 @@
     <Folder Include="Content\CompanyCenterAdmin\template\product\" />
     <Folder Include="Content\CompanyCenterAdmin\template\shop\" />
     <Folder Include="Content\mobileapp\progress\css\onlinebusinesshall\newexpand\image\" />
+    <Folder Include="Content\WorkerApp\NewFolder1\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Session\" />
   </ItemGroup>

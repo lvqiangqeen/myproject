@@ -1,0 +1,77 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebBuidingCase
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "mBuidingCaseDetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    List<string> list = new List<string>();
+    if (Model.textimg != "")
+    {
+        list = Model.textimg.Split('|').Where(c => c != "").ToList();
+    }
+
+}
+<link href="~/Content/WorkerApp/css/buidingcase/articledetail.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/buidingcase/aticle.min.css" rel="stylesheet" />
+@*<link href="~/Content/WorkerApp/css/buidingcase/footlist.css" rel="stylesheet" />*@
+
+<div class="container" id="container">
+    <section class="zx-wrap zxfs-wrap" style="margin-top: 0px;background-color: white;">
+        <section class="detailFr_msg">
+            <h1 style="position: relative;">@Model.title</h1>
+            <p class="timeslink">              
+            </p>
+            <article class="news-content" style="max-height: inherit;">
+                <div>
+                    <p>@Model.info</p>
+                    <p>
+                        @foreach(string item in list)
+                        {
+                            <img src="@AppSettingsHelper.ImgUrl@item"/>
+                        }
+                    </p>
+                </div>
+                <p style="font-size: 18px;color: #333;">上述内容来自用户自行上传或互联网，如有版权问题，请联系zxcq@corp.to8to.com 。</p>
+
+            </article>
+            <!--分享-->
+                     
+        </section>
+    </section>
+
+    <section class="news-list-pic" style="height:-webkit-fill-available;">
+        <h1>家居美图推荐</h1>
+        <a href="//m.to8to.com/xiaoguotu/c10044257.html" class="pic-list">
+            <span class="pic">
+                <img src="//pic.to8to.com/smallcase/2018/03/06/20180306152918-032bc292_r.jpg" alt="领略古典美感的家居">
+                <i></i>
+                <p>9张</p>
+            </span>
+            <p class="title">领略古典美感的家居</p>
+        </a>
+        <a href="//m.to8to.com/xiaoguotu/c10044256.html" class="pic-list">
+            <span class="pic">
+                <img src="//pic.to8to.com/smallcase/2014/07/10/20140710101511-8a4c72b3_r.jpg" alt="古典奢华精美家居">
+                <i></i>
+                <p>8张</p>
+            </span>
+            <p class="title">古典奢华精美家居</p>
+        </a>
+        <a href="//m.to8to.com/xiaoguotu/c10044255.html" class="pic-list">
+            <span class="pic">
+                <img src="//pic.to8to.com/smallcase/2014/07/10/20140710101511-8a4c72b3_r.jpg" alt="现代简约沙榆配白卧室空间">
+                <i></i>
+                <p>5张</p>
+            </span>
+            <p class="title">现代简约沙榆配白卧室空间</p>
+        </a>
+        <a href="//m.to8to.com/xiaoguotu/c10044254.html" class="pic-list">
+            <span class="pic">
+                <img src="//pic.to8to.com/smallcase/2017/11/09/20171109102737-5b1f3720_r.jpg" alt="古典时尚新中式">
+                <i></i>
+                <p>9张</p>
+            </span>
+            <p class="title">古典时尚新中式</p>
+        </a>
+    </section>
+</div>

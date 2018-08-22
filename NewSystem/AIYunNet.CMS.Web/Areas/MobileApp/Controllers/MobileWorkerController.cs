@@ -15,6 +15,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
     {
         WebWorkerService workerSer = new WebWorkerService();
         WebBuidingService buidSer = new WebBuidingService();
+        WebBuidingCaseService buidcaseSer = new WebBuidingCaseService();
         WebCommonService wCSer = new WebCommonService();
         t_AreaService t_AreaService = new t_AreaService();
         // GET: MobileApp/MobileWorker
@@ -40,6 +41,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             WebWorker worker = workerSer.GetWebWorkerByID(workerid);
             List<WebBuiding> list = buidSer.moblieGetWebBuidingList(workerid, 4);
+            List<WebBuidingCase> caselist = buidcaseSer.GetBuidingCaseListByWorkerID(workerid, 4);
+            ViewBag.caselist = caselist;
             ViewBag.list = list;
             return View(worker);
         }
@@ -64,5 +67,12 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             return Json(list);
         }
         #endregion
+
+
+        public ActionResult mBuidingCaseDetail(int id = 0)
+        {
+            WebBuidingCase buidingcase = buidcaseSer.GetBuidingCaseByID(id);
+            return View(buidingcase);
+        }
     }
 }

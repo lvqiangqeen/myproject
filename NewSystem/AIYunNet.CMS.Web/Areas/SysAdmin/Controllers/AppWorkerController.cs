@@ -19,6 +19,7 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
     public class AppWorkerController : BaseController
     {
         WebBuidingContractService conSer = new WebBuidingContractService();
+        WebBuidingCaseService buidingcase = new WebBuidingCaseService();
 
         // GET: SysAdmin/AppWorker
         public ActionResult WebBuidingConstractList()
@@ -48,5 +49,13 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             ret = conSer.DeleteContract(guid);
             return Json(new { RetCode = ret });
         }
+
+        public ActionResult buidingcaseList()
+        {
+            List<WebBuidingCase> list = buidingcase.GetBuidingCaseList();
+            ViewBag.list = list;
+            return View();
+        }
+
     }
 }

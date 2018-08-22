@@ -60,6 +60,7 @@
     <Compile Include="SysAdminUserService.cs" />
     <Compile Include="t_AreaService.cs" />
     <Compile Include="WebBuidingCaseCommentService.cs" />
+    <Compile Include="WebBuidingCaseService.cs" />
     <Compile Include="WebBuidingContractService.cs" />
     <Compile Include="WebBuidingService.cs" />
     <Compile Include="WebBuidingStagesService.cs" />

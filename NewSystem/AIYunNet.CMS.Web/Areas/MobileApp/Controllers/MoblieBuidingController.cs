@@ -141,5 +141,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
             ret = buidSer.IsCanWorkerEnd(buidingID);
             return Json(new { RetCode = ret });
         }
+
+
+
     }
 }

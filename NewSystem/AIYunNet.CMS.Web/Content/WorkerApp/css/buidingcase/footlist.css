@@ -1,0 +1,147 @@
+﻿.news-content {
+    padding: 10px;
+    line-height: 24px;
+    font-size: 16px;
+    text-align: justify;
+    padding-bottom: 15px;
+   overflow: hidden;
+}
+
+.news-content h5 {
+    margin-top: 30px;
+    display: block;
+    background-color: #fff;
+    border: solid 1px #e3e3e3;
+    text-align: center;
+    height: 38px;
+    line-height: 38px;
+    margin-bottom: 10px;
+}
+
+.news-content h5 span {
+    position: relative;
+}
+
+.news-content h5 span:after {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    display: block;
+    content: ' ';
+    -webkit-transform: rotate(45deg);
+    border-bottom: solid 1px #5c6368;
+    border-right: solid 1px #5c6368;
+    top: 4px;
+    right: -15px;
+}
+
+.news-content div {
+    height: 260px;
+    overflow: hidden;
+    padding-bottom: 25px;
+}
+
+.news-show-all {
+    height: auto !important
+}
+
+.news-footer-list {
+    padding: 10px;
+}
+
+.news-footer-list h1 {
+    font-size: 17px;
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+
+.news-footer-list li {
+    border-bottom: solid 1px #e3e3e3;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 10px 0;
+}
+
+.news-footer-list li figure {
+    width: 25.16129%;
+    max-height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-footer-list li figure span {
+    position: absolute;
+    left: 0;
+    top: -1px;
+}
+
+.news-footer-list li figure span img {
+    height: 20px;
+}
+
+.news-footer-list li div {
+    margin-left: 15px;
+    width: 70.32258%;
+    font-size: 12px;
+    position: relative;
+    min-height: 50px;
+}
+
+.news-footer-list li div h2 {
+    margin-top: 4px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    height: 44px;
+    line-height: 22px;
+    font-size: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.news-footer-list li div a {
+    display: block;
+    position: relative;
+    min-height: 62px;
+    margin-top: 1px;
+}
+
+.news-footer-list li div p {
+    color: #888;
+    position: relative;
+    font-size: 14px;
+    top: -3px;
+}
+strong{font-weight:bold !important}
+strong span{font-weight:bold !important}
+
+.news-content p {
+  text-indent: 2em;
+  padding-bottom: 15px;
+}
+
+font{
+    color: rgb(51, 51, 51);
+    display: inline;
+    font-family: 'Microsoft YaHei', 微软雅黑, 黑体, 宋体, 'Microsoft JhengHei', 华文细黑, STHeiti, MingLiu;
+    font-size: 16px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    height: auto;
+    line-height: 24px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    text-indent: 28px;
+}
+
+.news-content p a {
+    color: #14bf76;
+}
