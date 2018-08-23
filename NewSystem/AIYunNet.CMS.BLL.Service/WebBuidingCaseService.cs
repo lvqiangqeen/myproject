@@ -11,6 +11,7 @@ namespace AIYunNet.CMS.BLL.Service
 {
     public class WebBuidingCaseService
     {
+
         public WebBuidingCase GetBuidingCaseByID(int id)
         {
             WebBuidingCase buidingcse = new WebBuidingCase();
@@ -111,7 +112,7 @@ namespace AIYunNet.CMS.BLL.Service
                 oldcase.title = buidingcase.title;
                 oldcase.info = buidingcase.info;
                 oldcase.headimg = buidingcase.headimg;
-                oldcase.headthum = buidingcase.headthum;
+                oldcase.thumbnailImage = buidingcase.thumbnailImage;
                 oldcase.textimg = buidingcase.textimg;
                 oldcase.textthumbnailImage = buidingcase.textthumbnailImage;
                 oldcase.sorting = buidingcase.sorting;
@@ -130,6 +131,16 @@ namespace AIYunNet.CMS.BLL.Service
                 return 1;
             }
         }
-
+        public int deleteBuidingCase(int id)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                WebBuidingCase ca = context.WebBuidingCase.Find(id);
+                ca.DeleteOn = DateTime.Now;
+                ca.IsDelete = 1;
+                context.SaveChanges();
+                return 1;
+            }
+        }
     }
 }

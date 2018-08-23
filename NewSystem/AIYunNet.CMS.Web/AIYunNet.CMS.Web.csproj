@@ -4371,6 +4371,7 @@
     <Content Include="Areas\MobileApp\Views\MobileWorker\mBuidingCaseDetail.cshtml" />
     <Content Include="Content\WorkerApp\css\buidingcase\aticle.min.css" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\buidingcaseList.cshtml" />
+    <Content Include="Areas\SysAdmin\Views\AppWorker\updateAndaddbuidingcase.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

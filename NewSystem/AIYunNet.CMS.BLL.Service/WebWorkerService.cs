@@ -114,7 +114,7 @@ namespace AIYunNet.CMS.BLL.Service
             List<WebWorker> list = new List<WebWorker>();
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                list = context.WebWorker.Where(c => c.WorkerCategory == "装修工长" && c.FlagDelete == 0).ToList();
+                list = context.WebWorker.Where(c =>c.FlagDelete == 0).ToList();
                 return list;
             }
         }

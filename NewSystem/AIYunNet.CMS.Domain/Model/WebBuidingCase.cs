@@ -44,7 +44,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// headthum
         /// </summary>
         [Column("headthum")]
-        public string headthum { get; set; }
+        public string thumbnailImage { get; set; }
         /// <summary>
         /// info
         /// </summary>
@@ -95,7 +95,7 @@ namespace AIYunNet.CMS.Domain.Model
             AddOn = DateTime.Now;
             EditOn = DateTime.Now;
             headimg = BuidingCaseHearder;
-            headthum = BuidingCaseHearder;
+            thumbnailImage = BuidingCaseHearder;
             textimg = "";
             textthumbnailImage = "";
         }
