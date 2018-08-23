@@ -43,7 +43,7 @@ namespace AIYunNet.CMS.Domain.Model
         /// <summary>
         /// headthum
         /// </summary>
-        [Column("headthum")]
+        [Column("thumbnailImage")]
         public string thumbnailImage { get; set; }
         /// <summary>
         /// info
@@ -85,7 +85,8 @@ namespace AIYunNet.CMS.Domain.Model
         /// </summary>
         [Column("sorting")]
         public int sorting { get; set; }
-
+        [Column("Address")]
+        public string Address { get; set; }
         public WebBuidingCase()
         {
             WorkerID = 0;
@@ -98,6 +99,7 @@ namespace AIYunNet.CMS.Domain.Model
             thumbnailImage = BuidingCaseHearder;
             textimg = "";
             textthumbnailImage = "";
+            Address = "";
         }
     }
 }

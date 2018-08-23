@@ -21,6 +21,7 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         WebBuidingContractService conSer = new WebBuidingContractService();
         WebBuidingCaseService buidingcase = new WebBuidingCaseService();
         WebWorkerService workerSer = new WebWorkerService();
+        WebCaseService caSer = new WebCaseService();
 
         // GET: SysAdmin/AppWorker
         public ActionResult WebBuidingConstractList()
@@ -80,23 +81,33 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             }else
             {
                 model= buidingcase.GetBuidingCaseByID(id);
-            }
                 
+            }
+   
             return View(model);
         }
         [HttpPost]
-        public JsonResult updateAndaddbuidingcase(WebBuidingCase webca)
+        [ValidateInput(false)]
+        public JsonResult AddOrEditBuidingCase(WebBuidingCase webca)
         {
             WebWorker worker = workerSer.GetWebWorkerByID(webca.WorkerID);
             int ret = 0;
-            string[] list = ImageHelper.GetHvtImgUrls(webca.textimg);
-            string thum = "";
 
-            foreach(string item in list)
+            string[] list = null;
+            string thum = "";
+            if (webca.textimg==""|| webca.textimg == null)
             {
-                thum = item + "|";
+
+            }else
+            {
+                list = ImageHelper.GetHvtImgUrls(webca.textimg);
+                foreach (string item in list)
+                {
+                    thum += item + "|";
+                }
+                webca.textthumbnailImage = thum;
+                
             }
-            webca.textthumbnailImage = thum;
             webca.UserID = worker.UserID;
             if (webca.id == 0)
             {

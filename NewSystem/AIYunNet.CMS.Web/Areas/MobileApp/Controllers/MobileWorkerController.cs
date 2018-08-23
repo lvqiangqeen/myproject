@@ -72,6 +72,8 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult mBuidingCaseDetail(int id = 0)
         {
             WebBuidingCase buidingcase = buidcaseSer.GetBuidingCaseByID(id);
+            List<WebBuidingCase> buidingcaselist = buidcaseSer.GetBuidingCaseListByWorkerID(buidingcase.WorkerID);
+            ViewBag.buidingcaselist = buidingcaselist;
             return View(buidingcase);
         }
     }

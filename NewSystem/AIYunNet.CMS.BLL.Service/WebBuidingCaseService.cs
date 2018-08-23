@@ -111,6 +111,7 @@ namespace AIYunNet.CMS.BLL.Service
                 WebBuidingCase oldcase = context.WebBuidingCase.Find(buidingcase.id);
                 oldcase.title = buidingcase.title;
                 oldcase.info = buidingcase.info;
+                oldcase.Address = buidingcase.Address;
                 oldcase.headimg = buidingcase.headimg;
                 oldcase.thumbnailImage = buidingcase.thumbnailImage;
                 oldcase.textimg = buidingcase.textimg;

@@ -88,7 +88,6 @@ D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debu
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.csprojResolveAssemblyReference.cache
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.dll
 D:\BaiduNetdiskDownload\我的项目\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.pdb
-E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.csprojResolveAssemblyReference.cache
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.BLL.Service.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.BLL.Service.pdb
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.BLL.IService.dll
@@ -101,5 +100,6 @@ E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\ImageProc
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.BLL.IService.pdb
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.Common.Utility.pdb
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\bin\Debug\AIYunNet.CMS.Domain.pdb
+E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.csprojResolveAssemblyReference.cache
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.dll
 E:\我的项目\myproject\NewSystem\AIYunNet.CMS.BLL.Service\obj\Debug\AIYunNet.CMS.BLL.Service.pdb
