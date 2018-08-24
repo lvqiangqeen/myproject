@@ -1,0 +1,120 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "GLlist";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebMenuService MSer = new WebMenuService();
+    List<WebMenu> qlist = MSer.GetWebMenuListByParentName("装修前");
+    List<WebMenu> zlist = MSer.GetWebMenuListByParentName("装修中");
+    List<WebMenu> hlist = MSer.GetWebMenuListByParentName("装修后");
+    string pname = Request["pname"];
+    string name = Request["name"];
+    string typeid= Request["typeid"];
+
+}
+<link href="~/Content/WorkerApp/css/zxlc/commonGLlist.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/zxlc/zxgllist.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/zxlc/zxgllty.css" rel="stylesheet" />
+<script src="~/Content/WorkerApp/js/zxgl/iscroll-probe.js"></script>
+<script src="~/Content/WorkerApp/js/zxgl/zxlcList.min.js"></script>
+<script>
+    $("title").html("装修攻略");
+</script>
+<div class="container" id="container">
+    <section class="zxlc-list-wrap top-banner-remove mar-95">
+        <section class="zxlc-list-hd-wrap">
+            <div class="zxlc-list-hd">
+                @if (typeid != null)
+                {
+                    <h2><span>@pname</span>-<span>@name</span></h2>
+                }
+                else
+                {
+                    <h2><span>装修流程</span></h2>
+                }
+               
+                <a class="zxlc-btn" href="#">选装修阶段</a>
+            </div>
+            <div class="zxlc-list-bd">
+                <div class="scroll-wrapper zxlc-list-conditions-scroll-wrapper">
+                    <ul class="zxlc-list-conditions" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+                        <li class="zxlc-phase active-zxlc-phase">
+                            <h3 class="zxlc-phase-name">装修前</h3>
+                            <ul class="zxlc-steps" style="height: 181px;">
+                                @foreach (var item in qlist)
+                                {
+                                    <li class="zxlc-step-name">
+                                        <a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">
+                                            <h4>
+                                                <p> @item.WebMenuName</p>
+                                            </h4>
+                                        </a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                        <li class="zxlc-phase">
+                            <h3 class="zxlc-phase-name">装修中</h3>
+                            <ul class="zxlc-steps" style="height: 289px;">
+                                @foreach (var item in zlist)
+                                {
+                                    <li class="zxlc-step-name">
+                                        <a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">
+                                            <h4>
+                                                <p> @item.WebMenuName</p>
+                                            </h4>
+                                        </a>
+                                    </li>
+
+                                }                              
+                            </ul>
+                        </li>
+                        <li class="zxlc-phase">
+                            <h3 class="zxlc-phase-name">装修后</h3>
+                            <ul class="zxlc-steps" style="height: 109px;">
+                                @foreach (var item in hlist)
+                                {
+                                    <li class="zxlc-step-name">
+                                        <a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">
+                                            <h4>
+                                                <p> @item.WebMenuName</p>
+                                            </h4>
+                                        </a>
+                                    </li>
+
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="zx_notebook zx_notebook2">
+            <ul class="xzx_select_book">
+                @foreach (var item in ViewBag.list as List<WebNews>)
+                {
+                    <li>
+                        <a href="/MobileApp/App/GLdetail?id=@item.ContentID" class="clearfix">
+                            <figure>
+                                <img alt="@item.Title" src="@AppSettingsHelper.ImgUrl@item.thumbnailImage" class="lazy" data-original="@AppSettingsHelper.ImgUrl@item.thumbnailImage" style="display: inline;">
+                            </figure>
+                            <div>
+                                <h1>@item.Title
+                                </h1>
+                                <p>@item.Summary</p>
+                            </div>
+                        </a>
+                    </li>
+                }
+
+
+            </ul>
+        </section>
+
+        
+    </section>
+
+    </div>

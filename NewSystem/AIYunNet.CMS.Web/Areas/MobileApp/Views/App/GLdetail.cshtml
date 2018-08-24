@@ -1,0 +1,46 @@
+﻿@model AIYunNet.CMS.Domain.Model.WebNews
+@using AIYunNet.CMS.Domain.Model
+@using AIYunNet.CMS.Common.Utility
+@{
+    ViewBag.Title = "GLdetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+}
+
+<link href="~/Content/WorkerApp/css/buidingcase/articledetail.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/buidingcase/aticle.min.css" rel="stylesheet" />
+
+<div class="container" id="container">
+    <section class="zx-wrap zxfs-wrap" style="margin-top: 0px;background-color: white;">
+        <section class="detailFr_msg">
+            <h1 style="position: relative;">@Model.Title</h1>
+            <p class="timeslink">
+                @Model.SubTitle
+            </p>
+            <article class="news-content" style="max-height: inherit;">
+                <div>
+                    <p style="font-size: 18px;color: #333;">@Html.Raw(Model.Description)</p>
+                </div>
+                <p style="font-size: 18px;color: #333;">上述内容来自用户自行上传或互联网，如有版权问题，请联系客服人员 。</p>
+
+            </article>
+            <!--分享-->
+
+        </section>
+    </section>
+
+    @*<section class="news-list-pic" style="height:-webkit-fill-available;">
+        <h1>其他装修案例</h1>
+        @foreach (WebBuidingCase item in ViewBag.buidingcaselist as List<WebBuidingCase>)
+        {
+            int count = item.textthumbnailImage.ToCharArray().Count(x => x == '|');
+            <a href="/MobileApp/MobileWorker/mBuidingCaseDetail?id=@item.id" class="pic-list">
+                <span class="pic">
+                    <img src="@AppSettingsHelper.ImgUrl@item.headimg" alt="@item.title">
+                    <i></i>
+                    <p>@count 张</p>
+                </span>
+                <p class="title">@item.title</p>
+            </a>
+        }
+    </section>*@
+</div>

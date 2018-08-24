@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="UserName" class="col-sm-2 control-label">密码：</label>
+                                <label for="UserName" class="col-sm-2 control-label">密码(如果不需要修改密码请不要填写)：</label>
                                 <div class="col-sm-3">
                                     <input type="password" value="" name="Password" />
                                 </div>
@@ -152,6 +152,12 @@
                                 <div class="col-sm-5">
                                     <input  type="hidden" name="AreasID" value="@Model.AreasID">
                                     <input class="form-control"  readonly="readonly" type="text" name="AreasName" value="@Model.AreasName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Address" class="col-sm-2 control-label">籍贯：</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" name="Address" type="text" value="@work.Address">
                                 </div>
                             </div>
                             @if (Model.PositionCode == "WebWorkerLeader")
@@ -323,6 +329,7 @@
             var WorkerInfo = $("input[name=WorkerInfo]").val();
             var WorkerPositionID = $("#WorkerPositionID option:selected").val();
             var WorkerPosition = $("#WorkerPositionID option:selected").text();
+            var Address = $("input[name=Address]").val();
             var IsLock = false;
             if ($("#IsLock").get(0).checked)
             {
@@ -363,7 +370,8 @@
                     WorkerPositionID: WorkerPositionID,
                     WorkerPosition: WorkerPosition,
                     IsLock: IsLock,
-                    InUser: InUser
+                    InUser: InUser,
+                    Address: Address
 
                 },
                 success: function (data) {

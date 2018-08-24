@@ -114,7 +114,7 @@ namespace AIYunNet.CMS.BLL.Service
         {
             using (AIYunNetContext context = new AIYunNetContext())
             {
-                return context.WebMenu.Where(wn => wn.FlagDelete == 0 && wn.ParentName == parentname).ToList();
+                return context.WebMenu.Where(wn => wn.FlagDelete == 0 && wn.ParentName == parentname).OrderBy(c=>c.WebMenuID).ToList();
             }
         }
 

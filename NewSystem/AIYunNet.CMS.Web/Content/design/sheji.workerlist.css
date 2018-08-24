@@ -24,6 +24,7 @@ a {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 280px;
+    height: 28px;
 }
 .recommend-tittle {
     padding-top: 8px;

@@ -1,0 +1,297 @@
+﻿.scroll-wrapper {
+  position: relative;
+}
+
+.zxlc-list-hd-wrap {
+  background-color: #fff;
+  position: relative;
+}
+
+.zxlc-list-hd {
+  position: relative;
+}
+
+.zxlc-list-hd h2 {
+  font-size: 16px;
+  color: #666666;
+  height: 44px;
+  line-height: 44px;
+  margin-right: 95px;
+  padding: 0 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.zxlc-list-hd .zxlc-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  width: 95px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  background-color: #e05b5b;
+}
+
+.zxlc-list-bd {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: 150%;
+  border-top: 1px solid #ececec;
+  z-index: 2;
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    left: 150%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    left: 150%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slideOut {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation: slideIn 300ms forwards ;
+  -o-animation: slideIn 300ms forwards ;
+  animation: slideIn 300ms forwards ;
+}
+
+.slideOut {
+  -webkit-animation: slideOut 300ms forwards ;
+  -o-animation: slideOut 300ms forwards ;
+  animation: slideOut 300ms forwards ;
+}
+
+.active-zxlc-list-bd {
+  left: 0;
+}
+
+.zxlc-list-conditions-scroll-wrapper {
+  height: 100%;
+  margin-left: 23.4375%;
+  background-color: #fff;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zxlc-phase-name {
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  color: #333333;
+  padding: 0 10px;
+  border-bottom: 1px solid #ececec;
+  position: relative;
+  background-color: #fff;
+}
+.zxfs-list-wrap .zxlc-phase-name{
+  height: 0;
+  border: 0;  
+}
+.zxfs-list-wrap .zxlc-phase-name.fixed{
+  display: none;
+}
+.zxlc-phase-name:after,
+.zxlc-phase-name::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 19px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #7c7c7c;
+  border-left: 2px solid #7c7c7c;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.active-zxlc-phase .zxlc-phase-name:after,
+.zxlc-phase-name.fixed:after,
+.active-zxlc-phase .zxlc-phase-name::after {
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
+  top:14px;
+}
+
+.zxfs-list-wrap .active-zxlc-phase .zxlc-phase-name:after,
+.zxfs-list-wrap .zxlc-phase-name.fixed:after,
+.zxfs-list-wrap .active-zxlc-phase .zxlc-phase-name::after{
+  display: none;
+}
+
+.zxlc-phase-name.fixed {
+  position: fixed;
+  top: 91px;
+  left: 23.4375%;
+  right: 0;
+  z-index: 200;
+}
+
+.zxlc-steps {
+  border-bottom: 1px solid #ececec;
+  display: none;
+  position: relative;
+  background-color: #f0f4f5;
+}
+
+.zxlc-phase.active-zxlc-phase:last-of-type .zxlc-steps {
+  border-bottom: 0;
+}
+
+.active-zxlc-phase .zxlc-steps {
+  display: block;
+}
+
+.zxlc-steps .zxlc-step-name {
+  /*width: 66px;*/
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+  color: #666666;
+  background-color: #f0f4f5;
+  /* border-right: 1px solid #e3e3e3; */
+  /*border-top: 1px solid #f0f4f5;*/
+  /*border-bottom: 1px solid #f0f4f5;*/
+  /*text-align: center;*/
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 0px;
+  display: block;
+}
+
+.zxlc-types-scroll-wrapper {
+  display: none;
+  position: absolute;
+  left: 66px;
+  top: 0;
+  right: 0;
+  overflow: auto;
+  bottom: 0;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+}
+
+.active-zxlc-step .zxlc-types-scroll-wrapper {
+  display: block;
+  -webkit-overflow-scrolling: touch;
+}
+/* 选材手册 */
+.xcsc-list-wrap .zxlc-steps .zxlc-step-name{
+  width: 102px;
+}
+.xcsc-list-wrap .zxlc-types-scroll-wrapper{
+  left: 102px;
+}
+/* 装修风水 */
+.zxfs-list-wrap .zxlc-steps .zxlc-step-name{
+  width: 104px;
+}
+.zxfs-list-wrap .zxlc-types-scroll-wrapper{
+  left: 104px;
+}
+.active-zxlc-styep {
+  background-color: #fff;
+  color: #666666; 
+  /* border-top: 1px solid #e3e3e3; */
+  /* border-bottom: 1px solid #e3e3e3; */
+  /* border-right: 0; */
+  /*line-height: 35px;*/
+}
+.active-zxlc-styep p{
+  margin-left: 12px;
+
+}
+.zxlc-step-name p{
+  margin-left: 12px;
+}
+
+.zxlc-steps > li:first-of-type .zxlc-step-name {
+  border-top: 0;
+}
+
+.zxlc-steps > li:last-of-type .zxlc-step-name {
+  border-bottom: 0;
+}
+
+.zxlc-overflow-steps > li:last-of-type .zxlc-step-name {
+  border-bottom: 1px solid #e3e3e3;
+}
+.zxlc-types li{
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.zxlc-types li a {
+  font-size: 14px;
+  color: #888888;
+}
+
+.zxlc-types .active-zxlc-type a {
+  color: #128e5f;
+}
+
+.zxlc-types a:active,
+.zxlc-types a:focus {
+  color: #34c083;
+}
+

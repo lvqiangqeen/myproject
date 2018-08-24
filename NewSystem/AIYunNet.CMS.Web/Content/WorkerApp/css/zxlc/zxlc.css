@@ -1,0 +1,158 @@
+﻿.zxlc-index-wrap {
+  max-width: 640px;
+  margin: auto;
+  background-color: #f7f7f7;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; }
+
+.zxlc-index-wrap a:active, .zxlc-index-wrap a:focus {
+  color: #34c083; }
+
+.zxlc-index-img-wrap, .zxlc-index-step {
+  position: relative; }
+
+.zxlc-index-img-wrap img, .zxlc-index-step-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto; }
+
+.zxlc-index-banner {
+  padding: 20.3125% 0; }
+
+.zxlc-index-step > h2, .zxlc-index-step > li, .zxlc-index-step ul li {
+  position: absolute; }
+
+.zxlc-index-step1 {
+  padding: 64.0625% 0;
+  background-color: #fff; }
+
+.zxlc-index-step2 {
+  padding: 96.875% 0;
+  background-color: #fafafa; }
+
+.zxlc-index-step3 {
+  padding: 47.8125% 0;
+  background-color: #fff; }
+
+.zxlc-index-step > h2 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f4f5f7;
+  width: 77.5%; }
+
+.zxlc-index-step > h2 em {
+  font-size: 20px;
+  line-height: 22px;
+  color: #333333;
+  font-weight: bold;
+  margin-left: -10px; }
+
+.zxlc-index-step > h2 span {
+  font-size: 12px;
+  color: #333;
+  line-height: 14px; }
+
+.zxlc-index-step ul h3 {
+  font-size: 16px;
+  line-height: 18px;
+  color: #333333;
+  border-bottom: 1px solid #333;
+  float: left;
+  margin-bottom: 3px; }
+
+.zxlc-index-step ul p {
+  font-size: 12px;
+  line-height: 14px;
+  color: #999999;
+  clear: both; }
+
+.posLeft h3, #step1-h h3, #step1-1 h3, #step1-3 h3, #step1-5 h3, #step2-1 h3, #step2-3 h3, #step2-5 h3, #step2-7 h3, #step3-2 h3 {
+  float: left;
+  text-align: left; }
+
+.posLeft p, #step1-h p, #step1-1 p, #step1-3 p, #step1-5 p, #step2-1 p, #step2-3 p, #step2-5 p, #step2-7 p, #step3-2 p {
+  text-align: left; }
+
+.posRight h3, #step1-2 h3, #step1-4 h3, #step2-h h3, #step2-2 h3, #step2-4 h3, #step2-6 h3, #step2-8 h3, #step3-h h3, #step3-1 h3 {
+  float: right;
+  text-align: right; }
+
+.posRight p, #step1-2 p, #step1-4 p, #step2-h p, #step2-2 p, #step2-4 p, #step2-6 p, #step2-8 p, #step3-h p, #step3-1 p {
+  text-align: right; }
+
+#step1-h {
+  top: 7.20461%;
+  left: 18.4375%; }
+
+#step1-1 {
+  top: 17.57925%;
+  left: 23.75%; }
+
+#step1-2 {
+  top: 33.86167%;
+  right: 24.53125%; }
+
+#step1-3 {
+  top: 50.43228%;
+  left: 23.75%; }
+
+#step1-4 {
+  top: 66.28242%;
+  right: 24.53125%; }
+
+#step1-5 {
+  top: 83.57349%;
+  left: 23.75%; }
+
+#step2-h {
+  top: 4.57038%;
+  right: 4.6875%;
+  text-align: left; }
+
+#step2-1 {
+  top: 13.80256%;
+  left: 24.53125%; }
+
+#step2-2 {
+  top: 24.22303%;
+  right: 23.75%; }
+
+#step2-3 {
+  top: 34.73492%;
+  left: 24.53125%; }
+
+#step2-4 {
+  top: 45.70384%;
+  right: 23.75%; }
+
+#step2-5 {
+  top: 56.21572%;
+  left: 24.53125%; }
+
+#step2-6 {
+  top: 66.72761%;
+  right: 23.75%; }
+
+#step2-7 {
+  top: 77.69653%;
+  left: 24.53125%; }
+
+#step2-8 {
+  top: 88.20841%;
+  right: 24.53125%; }
+
+#step3-h {
+  top: 7.84314%;
+  right: 18.75%;
+  text-align: right; }
+
+#step3-1 {
+  top: 24.34641%;
+  right: 24.53125%; }
+
+#step3-2 {
+  top: 44.93464%;
+  left: 40.625%; }
+

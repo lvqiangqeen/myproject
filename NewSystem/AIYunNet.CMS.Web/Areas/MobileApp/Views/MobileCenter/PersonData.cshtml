@@ -50,6 +50,7 @@
 
             <li><a href="javascript:void(0)" id="showCityPicker"><span style="color:red;">*</span><span>所在地</span><em id="showCityPickerem">@Model.ProvinceName  @Model.CityName</em><i id="cityid" style="display:none;">@Model.CityID</i></a></li>
             <li><a href="javascript:void(0);" onclick="EditPersonDataArea(this, 'AreasID')"><span style="color:red;">*</span><span>服务地区</span><em id="Areas">@Model.AreasName</em><i id="AreasID" style="display:none;">@Model.AreasID</i></a></li>
+            <li><a href="javascript:void(0);" onclick="EditWorkerDataText(this, 'Address')"><span style="color:red;">*</span><span>籍贯</span><em>@worker.Address</em></a></li>
             @if (SessionHelper.Get("PositionCode") == "WebWorker")
             {
                 <li><a href="javascript:void(0);" id='showPositionPicker'><span style="color:red;">*</span><span>工种</span><em id="showPositionPickerem">@worker.WorkerPosition</em></a></li>
@@ -70,9 +71,10 @@
         var WorkerPosition = "@worker.WorkerPosition";
         var WorkYears = "@worker.WorkYears";
         var PriceName = "@worker.PriceName";
+        var Address="@worker.Address";
 
         if ("@SessionHelper.Get("PositionCode")" == "WebWorker") {
-            if (TrueName == null || TrueName == "" || Sex == null || Sex == "" || CityName == null || CityName == "" || WorkYears == null || WorkYears == "" || PriceName == null || PriceName == "" || WorkerPosition == null || WorkerPosition == "")
+            if (TrueName == null || TrueName == "" || Sex == null || Sex == "" || CityName == null || CityName == "" || WorkYears == null || WorkYears == "" || PriceName == null || PriceName == "" || WorkerPosition == null || WorkerPosition == "" || Address==null || Address=="")
             {
                 //自定义标题风格
                 layer.open({
@@ -85,7 +87,7 @@
             }
         } else if ("@SessionHelper.Get("PositionCode")" == "WebWorkerLeader")
         {
-            if (TrueName == null || TrueName == "" || Sex == null || Sex == "" || CityName == null || CityName == "" || WorkYears == null || WorkYears == "" || PriceName == 0 || PriceName == "") {
+            if (TrueName == null || TrueName == "" || Sex == null || Sex == "" || CityName == null || CityName == "" || WorkYears == null || WorkYears == "" || PriceName == 0 || PriceName == "" || Address == null || Address == "") {
                 //自定义标题风格
                 layer.open({
                     title: [

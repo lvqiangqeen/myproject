@@ -177,7 +177,14 @@ namespace AIYunNet.CMS.BLL.Service
             {
                 if (webworker != null)
                 {
-                    WebWorker originalPeople = context.WebWorker.Find(webworker.WorkerID);
+                    WebWorker originalPeople = new WebWorker();
+                    if (webworker.WorkerID != 0)
+                    {
+                        originalPeople = context.WebWorker.Find(webworker.WorkerID);
+                    }else
+                    {
+                        originalPeople = context.WebWorker.FirstOrDefault(c=>c.UserID== webworker.UserID);
+                    }
                     if (originalPeople != null)
                     {
                         originalPeople.EditOn = DateTime.Now;
@@ -197,6 +204,8 @@ namespace AIYunNet.CMS.BLL.Service
                         originalPeople.CityName = webworker.CityName;
                         originalPeople.AreasID = webworker.AreasID;
                         originalPeople.AreasName = webworker.AreasName;
+                        originalPeople.PriceName = webworker.PriceName;
+                        originalPeople.Address = webworker.Address;
                         context.SaveChanges();
                     }
                 }
@@ -288,6 +297,9 @@ namespace AIYunNet.CMS.BLL.Service
                             break;
                         case "WorkerInfo":
                             originalWorker.WorkerInfo = data;
+                            break;
+                        case "Address":
+                            originalWorker.Address = data;
                             break;
                         default:
 

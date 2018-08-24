@@ -126,7 +126,8 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
                 GoodAtStyle=model.GoodAtStyle,
                 WorkerPositionID=model.WorkerPositionID,
                 WorkerPosition=model.WorkerPosition,
-                IsApproved=model.InUser
+                IsApproved=model.InUser,
+                Address= model.Address
 
             };
             if (model != null && model.UserID > 0)

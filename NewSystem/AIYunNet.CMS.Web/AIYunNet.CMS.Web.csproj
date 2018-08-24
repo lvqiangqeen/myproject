@@ -3781,6 +3781,15 @@
     <Content Include="Content\WorkerApp\css\case\lazyload.js" />
     <Content Include="Content\WorkerApp\css\class.css" />
     <Content Include="Content\WorkerApp\css\common.css" />
+    <Content Include="Content\WorkerApp\css\zxlc\commen.css" />
+    <Content Include="Content\WorkerApp\css\zxlc\commonGLlist.css" />
+    <Content Include="Content\WorkerApp\css\zxlc\img\zxlc-idx-banner.png" />
+    <Content Include="Content\WorkerApp\css\zxlc\img\zxlc-idx-setp1.png" />
+    <Content Include="Content\WorkerApp\css\zxlc\img\zxlc-idx-setp2.png" />
+    <Content Include="Content\WorkerApp\css\zxlc\img\zxlc-idx-setp3.png" />
+    <Content Include="Content\WorkerApp\css\zxlc\zxgllist.css" />
+    <Content Include="Content\WorkerApp\css\zxlc\zxgllty.css" />
+    <Content Include="Content\WorkerApp\css\zxlc\zxlc.css" />
     <Content Include="Content\WorkerApp\details.html" />
     <Content Include="Content\WorkerApp\floor-classification.html" />
     <Content Include="Content\WorkerApp\goods-allocation.html" />
@@ -3894,6 +3903,7 @@
     <Content Include="Content\WorkerApp\js\mui\js\mui.zoom.js" />
     <Content Include="Content\WorkerApp\js\TouchSlide.1.1.js" />
     <Content Include="Content\WorkerApp\js\upload_img.js" />
+    <Content Include="Content\WorkerApp\js\zxgl\iscroll-probe.js" />
     <Content Include="Content\WorkerApp\login.html" />
     <Content Include="Content\WorkerApp\Login\css\gongyong.css" />
     <Content Include="Content\WorkerApp\Login\images\sousuo.png" />
@@ -4372,6 +4382,10 @@
     <Content Include="Content\WorkerApp\css\buidingcase\aticle.min.css" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\buidingcaseList.cshtml" />
     <Content Include="Areas\SysAdmin\Views\AppWorker\updateAndaddbuidingcase.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\gongluedetail.cshtml" />
+    <Content Include="Areas\MobileApp\Views\App\GLlist.cshtml" />
+    <Content Include="Content\WorkerApp\js\zxgl\zxlcList.min.js" />
+    <Content Include="Areas\MobileApp\Views\App\GLdetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

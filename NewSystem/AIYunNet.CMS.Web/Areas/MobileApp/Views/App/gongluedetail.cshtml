@@ -1,0 +1,93 @@
+﻿@using AIYunNet.CMS.BLL.Service;
+@using AIYunNet.CMS.Domain.Model;
+@using AIYunNet.CMS.Common.Utility;
+@{
+    ViewBag.Title = "gongluedetail";
+    Layout = "~/Areas/MobileApp/Views/Shared/_mobileLayout.cshtml";
+    WebMenuService MSer = new WebMenuService();
+    List<WebMenu> qlist = MSer.GetWebMenuListByParentName("装修前");
+    List<WebMenu> zlist = MSer.GetWebMenuListByParentName("装修中");
+    List<WebMenu> hlist = MSer.GetWebMenuListByParentName("装修后");
+}
+<link href="~/Content/WorkerApp/css/zxlc/commen.css" rel="stylesheet" />
+<link href="~/Content/WorkerApp/css/zxlc/zxlc.css" rel="stylesheet" />
+<style>
+    a{
+            display: inline;
+    }
+</style>
+<script>
+    $("title").html("装修攻略");
+</script>
+<div class="container" id="container">
+    <section class="zxlc-index-wrap">
+        <section class="zxlc-index-img-wrap zxlc-index-banner">
+            <img src="~/Content/WorkerApp/css/zxlc/img/zxlc-idx-banner.png" width="640" height="260"/>
+        </section>
+        <ul>
+            <li class="zxlc-index-step zxlc-index-step1">
+                <img class="zxlc-index-step-bg" src="~/Content/WorkerApp/css/zxlc/img/zxlc-idx-setp1.png" width="640" height="696"/>
+                <h2 id="step1-h"><em>「装修前」</em><span>约10-15天</span></h2>
+                <ul>
+                    @{ int i = 1;}
+                    @foreach (var item in qlist)
+                    {
+                        <li id="step1-@i">
+                            <h3><a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">@i.@item.WebMenuName</a></h3>
+                            <p>@item.EnglishName</p>
+                        </li>
+                        i++;
+                    }
+
+                </ul>
+                <a class="overlay-link overlay-link1-1" href="//m.to8to.com/yezhu/fangchan/"></a>
+                <a class="overlay-link overlay-link1-2" href="//m.to8to.com/yezhu/shoufang/"></a>
+                <a class="overlay-link overlay-link1-3" href="//m.to8to.com/yezhu/sheji/"></a>
+                <a class="overlay-link overlay-link1-4" href="//m.to8to.com/yezhu/yusuan/"></a>
+                <a class="overlay-link overlay-link1-5" href="//m.to8to.com/yezhu/hetong/"></a>
+            </li>
+            <a name="zxing"></a>
+            <li class="zxlc-index-step zxlc-index-step2">
+                <img class="zxlc-index-step-bg" src="~/Content/WorkerApp/css/zxlc/img/zxlc-idx-setp2.png" width="640" height="1094"/>
+                <h2 id="step2-h"><em>「装修中」</em><span>约30-45天</span></h2>
+                <ul>
+                    @{ int j = 1;}
+                    @foreach (var item in zlist)
+                    {
+                        <li id="step2-@j">
+                            <h3><a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">@j.@item.WebMenuName</a></h3>
+                            <p>@item.EnglishName</p>
+                        </li>
+                        j++;
+                    }
+                </ul>
+                <a class="overlay-link overlay-link2-1" href="//m.to8to.com/yezhu/cailiao/"></a>
+                <a class="overlay-link overlay-link2-2" href="//m.to8to.com/yezhu/chaigai/"></a>
+                <a class="overlay-link overlay-link2-3" href="//m.to8to.com/yezhu/shuidian/"></a>
+                <a class="overlay-link overlay-link2-4" href="//m.to8to.com/yezhu/fangshui/"></a>
+                <a class="overlay-link overlay-link2-5" href="//m.to8to.com/yezhu/niwa/"></a>
+                <a class="overlay-link overlay-link2-6" href="//m.to8to.com/yezhu/mugong/"></a>
+                <a class="overlay-link overlay-link2-7" href="//m.to8to.com/yezhu/youqi/"></a>
+                <a class="overlay-link overlay-link2-8" href="//m.to8to.com/yezhu/jungong/"></a>
+            </li>
+            <li class="zxlc-index-step zxlc-index-step3">
+                <img class="zxlc-index-step-bg" src="~/Content/WorkerApp/css/zxlc/img/zxlc-idx-setp3.png" width="640" height="612"/>
+                <h2 id="step3-h"><em><a name="zxsuff">「装修后」</a></em><span>约5-10天</span></h2>
+                <ul>
+                    @{ int k = 1;}
+                    @foreach (var item in hlist)
+                    {
+                        <li id="step3-@k">
+                            <h3><a href="/MobileApp/App/GLlist?typeid=@item.WebMenuID&name=@item.WebMenuName&pname=@item.ParentName">@k.@item.WebMenuName</a></h3>
+                            <p>@item.EnglishName</p>
+                        </li>
+                        k++;
+                    }
+                </ul>
+                <a class="overlay-link overlay-link3-1" href="//m.to8to.com/yezhu/ruanzhuang/"></a>
+                <a class="overlay-link overlay-link3-2" href="//m.to8to.com/yezhu/ruzhu/"></a>
+            </li>
+        </ul>
+    </section>
+
+</div>

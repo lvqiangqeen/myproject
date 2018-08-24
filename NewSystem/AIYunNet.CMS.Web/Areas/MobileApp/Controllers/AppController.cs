@@ -19,7 +19,7 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         t_AreaService areaSer = new t_AreaService();
         DemandService DeSer = new DemandService();
         DecTenderService tenSer = new DecTenderService();
-
+        WebNewsService newSer = new WebNewsService();
 
         // GET: MobileApp/App
         public ActionResult Index()
@@ -34,6 +34,25 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         public ActionResult gonglueList()
         {
             return View();
+        }
+        public ActionResult gongluedetail()
+        {
+            return View();
+        }
+        public ActionResult GLlist(int typeid=18)
+        {
+            List<WebNews> list = newSer.GetWebNewsListByMenuID(typeid);
+            ViewBag.list = list;
+            return View();
+        }
+        public ActionResult GLdetail(int id=0)
+        {
+            WebNews news = new WebNews();
+            if (id != 0)
+            {
+                news = newSer.GetWebNewsByID(id);
+            }
+            return View(news);
         }
         public ActionResult TenderList()
         {
