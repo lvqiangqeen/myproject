@@ -39,9 +39,16 @@ namespace AIYunNet.CMS.Web.Areas.MobileApp.Controllers
         {
             return View();
         }
-        public ActionResult GLlist(int typeid=18)
+        public ActionResult GLlist(int typeid=18,int paretid=0)
         {
-            List<WebNews> list = newSer.GetWebNewsListByMenuID(typeid);
+            List<WebNews> list = new List<WebNews>();
+            if (paretid != 0)
+            {
+                list = newSer.GetWebNewsListByParentID(paretid);
+            }else
+            {
+                list = newSer.GetWebNewsListByMenuID(typeid);
+            }
             ViewBag.list = list;
             return View();
         }

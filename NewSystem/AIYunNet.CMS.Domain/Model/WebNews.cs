@@ -265,12 +265,15 @@ namespace AIYunNet.CMS.Domain.Model
 
         [Column("CollectCount")]
         public int CollectCount { get; set; }
+        [Column("ParentID")]
+        public int ParentID { get; set; }
         public WebNews()
         {
             CollectCount = 0;
             PageViewCount = 0;
             FlagDelete = 0;
             Sequence = 0;
+            ParentID = 0;
             CreatedDate = DateTime.Now;
         }
     }

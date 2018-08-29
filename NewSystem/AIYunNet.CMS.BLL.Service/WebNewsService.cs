@@ -46,6 +46,13 @@ namespace AIYunNet.CMS.BLL.Service
                 return context.WebNews.Where(wn => wn.ClassID == menuID && wn.FlagDelete == 0).ToList();
             }
         }
+        public List<WebNews> GetWebNewsListByParentID(int ParentID)
+        {
+            using (AIYunNetContext context = new AIYunNetContext())
+            {
+                return context.WebNews.Where(wn => wn.ParentID == ParentID && wn.FlagDelete == 0).ToList();
+            }
+        }
         /// <summary>
         /// 首页获取置首装修新闻列表
         /// </summary>
@@ -118,6 +125,7 @@ namespace AIYunNet.CMS.BLL.Service
                     originalNews.thumbnailImage = webNews.thumbnailImage;
                     originalNews.Title = webNews.Title;
                     originalNews.TotalComment = webNews.TotalComment;
+                    originalNews.ParentID = webNews.ParentID;
                     context.SaveChanges();
                     return 1;
                 }

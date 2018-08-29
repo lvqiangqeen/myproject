@@ -97,6 +97,17 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
         public ActionResult AddOrEditWebMenu(int menuID)
         {
             List<WebMenu> menuList = webMenuService.GetWebMenuList();
+            WebMenu rootMenu = new WebMenu()
+            {
+                EnglishName = "All",
+                IsDisplay = false,
+                ParentID = 0,
+                ParentName = "一级栏目",
+                WebMenuName = "一级栏目",
+                AddOn = DateTime.Now,
+                FlagDelete = 0
+            };
+            menuList.Add(rootMenu);
             IEnumerable<SelectListItem> parentMenus = menuList.Select(m => new SelectListItem { Value = m.WebMenuID.ToString(), Text = m.WebMenuName });
             ViewBag.ParentMenus = parentMenus;
             WebMenu menu = webMenuService.GetMenuByID(menuID);
@@ -155,7 +166,12 @@ namespace AIYunNet.CMS.Web.Areas.SysAdmin.Controllers
             ViewBag.ParentMenus = parentMenus;
             return View(news);
         }
-
+        [HttpPost]
+        public int getParentIDbyClassID(int id)
+        {
+            WebMenu menu = webMenuService.GetMenuByID(id);
+            return menu.ParentID;
+        }
         [HttpPost]
         [ValidateInput(false)]
         public JsonResult AddOrEditWebNews1(WebNews news)

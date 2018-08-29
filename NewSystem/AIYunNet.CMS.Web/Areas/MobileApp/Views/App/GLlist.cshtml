@@ -11,6 +11,7 @@
     string pname = Request["pname"];
     string name = Request["name"];
     string typeid= Request["typeid"];
+    string paretid = Request["paretid"];
 
 }
 <link href="~/Content/WorkerApp/css/zxlc/commonGLlist.css" rel="stylesheet" />
@@ -25,15 +26,17 @@
     <section class="zxlc-list-wrap top-banner-remove mar-95">
         <section class="zxlc-list-hd-wrap">
             <div class="zxlc-list-hd">
-                @if (typeid != null)
+                @if (typeid != null && paretid==null)
                 {
                     <h2><span>@pname</span>-<span>@name</span></h2>
                 }
-                else
+                else if(paretid!=null)
                 {
-                    <h2><span>装修流程</span></h2>
+                    <h2><span>@pname</span></h2>
                 }
-               
+                else
+                {<h2><span>装修攻略</span></h2> }
+
                 <a class="zxlc-btn" href="#">选装修阶段</a>
             </div>
             <div class="zxlc-list-bd">
